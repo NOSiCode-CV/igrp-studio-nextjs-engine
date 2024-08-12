@@ -1,0 +1,27 @@
+import { AppConfig } from './interfaces/AppInterface';
+import { RenderContext } from './interfaces/RenderContext';
+import { createAppDirectories } from './modules/baseApp/createAppDirectories';
+import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
+import { ERROR_MESSAGE } from './utils/constants';
+import { checkIfDirectoryIsEmpty } from './utils/helpers';
+
+export const newApp = async (baseConfig: AppConfig, basePath: string) => {
+  if (!baseConfig) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+  if (!basePath) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+
+  if(!(await checkIfDirectoryIsEmpty(basePath)))
+    throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
+
+  await saveBaseAppFileConfig(baseConfig, basePath);
+
+  const context: RenderContext = {
+    resourceConfig: undefined, // On base API, there is no specific config.
+    basePath,
+    baseConfig
+  }
+
+  /**
+   * Creates the folder structure needed for the APP.
+   */
+  await createAppDirectories(context);
+};

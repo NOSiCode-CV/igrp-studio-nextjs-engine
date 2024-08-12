@@ -1,0 +1,41 @@
+{
+  "name": "nextjs-engine",
+  "version": "1.0.0",
+  "description": "The NextJS engine application allows to create a new NextJS application",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.nosi.cv:igrp-3_0/nextjs-engine.git"
+  },
+  "keywords": [
+    "NextJS",
+    "Engine",
+    "Frontend",
+    "Wayvant",
+    "TypeScript"
+  ],
+  "author": "Wayvant",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "ts-loader": "^9.5.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "^9.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "handlebars": "^4.7.8",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.4"
+  },
+  "type": "commonjs"
+}
