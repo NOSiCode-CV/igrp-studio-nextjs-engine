@@ -15,7 +15,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  // await fs.rm(OUTPUT_DIR, { recursive: true });
+  await fs.rm(OUTPUT_DIR, { recursive: true });
   await fs.rm(NON_EMPTY_DIRECTORY, { recursive: true });
 });
 

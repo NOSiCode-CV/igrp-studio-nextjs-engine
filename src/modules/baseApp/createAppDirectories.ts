@@ -1,8 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { RenderContext } from '../../interfaces/RenderContext';
-import { AppConfig } from '../../interfaces/AppInterface';
 import { DIRECTORIES } from '../../utils/constants';
+import { RenderContext } from '../../interfaces/RenderContext';
 
 export const createAppDirectories = async (context: RenderContext) => {
   const directories = getDirectoriesToCreate(context.basePath);

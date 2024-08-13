@@ -10,6 +10,29 @@ export const COMMON_FILES = {
   BASE_APP: 'baseApp.json',
 }
 
+export const TEMPLATES = {
+  CONFIG_GITIGNORE: 'config/gitignore.hbs',
+  CONFIG_GITLABCIYAML: 'config/gitlabciyaml.hbs',
+  CONFIG_DOCKERIGNORE: 'config/dockerignore.hbs',
+
+  CONFIG_TS_CONFIG: 'config/tsconfig.hbs',
+  CONFIG_PACKGE_JSON: 'config/package.json.hbs',
+  CONFIG_README: 'config/readme.hbs',
+  CONFIG_NEXT_CONFIG: 'config/next_config.mjs.hbs',
+  CONFIG_NEXT_ENV: 'config/next-env.hbs',
+}
+
+export const CONFIG_FILES = [
+  {template: TEMPLATES.CONFIG_GITIGNORE,        output: '.gitignore'},
+  {template: TEMPLATES.CONFIG_DOCKERIGNORE,     output: '.dockerignore'},
+  {template: TEMPLATES.CONFIG_NEXT_ENV,         output: 'next-env.d.ts'},
+  {template: TEMPLATES.CONFIG_NEXT_CONFIG,      output: 'next.config.mjs'},
+  {template: TEMPLATES.CONFIG_GITLABCIYAML,     output: 'gitlab-ci.yaml'},
+  {template: TEMPLATES.CONFIG_PACKGE_JSON,      output: 'package.json'},
+  {template: TEMPLATES.CONFIG_README,           output: 'README.md'},
+  {template: TEMPLATES.CONFIG_TS_CONFIG,        output: 'tsconfig.json'}
+]
+
 export const DIRECTORIES = {
   APP: 'src/app',
   API: 'src/api',
