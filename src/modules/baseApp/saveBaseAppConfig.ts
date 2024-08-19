@@ -1,6 +1,6 @@
 import path from 'path';
 import { saveToFile } from '../common/saveToFile';
-import { AppConfig } from '../../interfaces/AppInterface';
+import { AppConfig } from '../../interfaces/types';
 import { COMMON_FILES, DIRECTORIES } from '../../utils/constants';
 
 export const saveBaseAppFileConfig = async (baseConfig: AppConfig, basePath: string) => {

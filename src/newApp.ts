@@ -1,13 +1,17 @@
-import { AppConfig } from './interfaces/AppInterface';
-import { RenderContext } from './interfaces/RenderContext';
+import { AppConfig } from './interfaces/types';
+import { RenderContext } from './interfaces/types';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
+import { appConfigValidate } from './schema/baseApp';
 import { ERROR_MESSAGE } from './utils/constants';
 import { checkIfDirectoryIsEmpty } from './utils/helpers';
 
 export const newApp = async (baseConfig: AppConfig, basePath: string) => {
-  if (!baseConfig) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+  const isBaseCofigValid = appConfigValidate(baseConfig);
+
+  if (!isBaseCofigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+  
   if (!basePath) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
   if(!(await checkIfDirectoryIsEmpty(basePath)))

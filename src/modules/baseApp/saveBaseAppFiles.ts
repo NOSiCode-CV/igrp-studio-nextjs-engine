@@ -1,29 +1,73 @@
 import path from 'path';
+import fs from 'fs-extra';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
-import { RenderContext } from '../../interfaces/RenderContext';
-import { COMMON_FILES, CONFIG_FILES, DIRECTORIES, ERROR_MESSAGE } from '../../utils/constants';
+import { RenderContext } from '../../interfaces/types';
+import {
+  COMMON_FILES,
+  CONFIGS,
+  DIRECTORIES,
+  ERROR_MESSAGE,
+  TEMPLATES,
+  CONFIG_FILES,
+  PACKAGE_JSON
+} from '../../utils/constants';
+import { appConfigValidate } from '../../schema/baseApp';
 
+export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
 
 export const saveFileConfig = async (context: RenderContext) => {
   const baseAppFiles = generateBaseAppFiles(context);
-  await saveBaseAppFiles(baseAppFiles, context);
+  const baseConfigFiles = generateConfigFiles(context);
+
+  await saveBaseAppFiles(baseAppFiles, baseConfigFiles, context);
 };
 
 const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
-  if (!context.baseConfig || !context.baseConfig.type || !context.baseConfig.appName)
-    throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
-  return [];
+  const isBaseCofigValid = appConfigValidate(context.baseConfig);
+
+  if (!isBaseCofigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+
+  const mainPath = path.join(context.basePath, DIRECTORIES.APP);
+
+  return [
+    { output: mainPath, template: TEMPLATES.CONFIG_PAGE, name: COMMON_FILES.PAGE_TSX },
+    { output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX }
+  ];
 };
 
-const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, context: RenderContext) => {
+const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
+  return [
+    {src: path.join(CONFIGS, CONFIG_FILES.README), dest: path.join(context.basePath, CONFIG_FILES.README)},
+    {src: path.join(CONFIGS, CONFIG_FILES.NEXTENV), dest: path.join(context.basePath, CONFIG_FILES.NEXTENV)},
+    {src: path.join(CONFIGS, CONFIG_FILES.TSCONFIG), dest: path.join(context.basePath, CONFIG_FILES.TSCONFIG)},
+    {src: path.join(CONFIGS, CONFIG_FILES.GITIGNORE), dest: path.join(context.basePath, CONFIG_FILES.GITIGNORE)},
+    {src: path.join(CONFIGS, CONFIG_FILES.NEXTCONFIG), dest: path.join(context.basePath, CONFIG_FILES.NEXTCONFIG)},
+    {src: path.join(CONFIGS, CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, CONFIG_FILES.GITLABCIYAML)},
+    {src: path.join(CONFIGS, CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, CONFIG_FILES.DOCKERIGNORE)}
+  ]
+}
+
+const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE_CONFIG_FILES, context: RenderContext) => {
+
   await Promise.all(
-    CONFIG_FILES.map(async (file) => {
+    baseFiles.map(async (file) => {
       const template = await renderTemplate(file.template, context);
-      const outputPath = path.join(context.basePath, file.output);
+      const outputPath = path.join(file.output, file.name);
       await saveToFile(template, outputPath);
     }),
   );
+
+  await Promise.all(
+    baseConfigFiles.map(async file => {
+      await fs.copyFile(file.src, file.dest);
+    })
+  )
+
+  const template = await renderTemplate(PACKAGE_JSON.template, context)
+  const outputPath = path.join(context.basePath, PACKAGE_JSON.output)
+  await saveToFile(template, outputPath);
+
 };

@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { AppConfig } from '../../interfaces/AppInterface';
+import { AppConfig } from '../../interfaces/types';
 import { COMMON_FILES, DIRECTORIES, ERROR_MESSAGE } from '../../utils/constants';
 
 
