@@ -1,19 +1,25 @@
 import React from "react"
-import { Col, Row, Form, Container } from "reactstrap"
-import FormInput from '../fields/InputForm';
+import { Row, Form, Card, CardBody, Col } from "reactstrap"
+import { FormInput } from "../fields/InputForm"
 
 export const FormLayout = (props: any) => {
+  const { config, btnConfig } = props
   return (
-    <React.Fragment>
-      <Container fluid>
-        <Col xxl={6}>
-          <Form>
-            <Row>
-              <FormInput props = {props}/>
-            </Row>
-          </Form>
-        </Col>
-      </Container>
-    </React.Fragment>
+    <Card className="mt-3">
+      <CardBody>
+        <Form>
+          <Row>
+            {config.map((field: any, index: number) => <FormInput key={index} config={field}/>)}
+            <Col md={12}>
+              <div className="text-end">
+                <button type="submit" className="btn btn-primary">
+                  {btnConfig}
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </Form>          
+      </CardBody>
+    </Card>
   )
 }

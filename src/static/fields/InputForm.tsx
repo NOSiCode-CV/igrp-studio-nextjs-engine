@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Input, Label } from "reactstrap";
 
-const FormInput = (props: any) => {
+export const FormInput = (props: any) => {
   const {
     colSize,
     name,
@@ -9,8 +9,8 @@ const FormInput = (props: any) => {
     type,
     maxLength,
     minLength,
-    placeholder = `Enter your ${label.toLowerCase()}`
-  } = props.config;
+    placeholder
+  } = props;
 
   return (
     <React.Fragment>
@@ -33,4 +33,3 @@ const FormInput = (props: any) => {
   );
 };
 
-export default FormInput;

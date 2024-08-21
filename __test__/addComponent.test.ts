@@ -16,8 +16,8 @@ const appConfig: AppConfig = {
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'Form',
-  path: 'form',
+  pageName: 'Invoices',
+  path: 'invoices',
   components: [],
 };
 
@@ -26,18 +26,68 @@ const component: Component = {
     {
       Col: [
         {
-          colSize: 12,
-          componentName: 'Form Layout',
-          type: 'form',
+          colSize: 6,
+          componentName: 'FormLayout',
+          type: 'Form',
           attributes: [],
+          submitBtnText: 'send',
           fields: [
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'firstname', label: 'First Name', maxLength: 10, minLength: 2,
+                type: 'text', name: 'firstNameinput', label: 'First Name', maxLength: 10, minLength: 2,
+                placeholder:"Enter your firstname",
                 colSize: 6
               },
-            }
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'text', name: 'lastNameinput', label: 'Last Name', maxLength: 10, minLength: 2,
+                placeholder:"Enter your lastname",
+                colSize: 6
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'text', name: 'compnayNameinput', label: 'Company Name', maxLength: 50, minLength: 2,
+                placeholder:"Enter company name",
+                colSize: 12
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'tel', name: 'phonenumberInput', label: 'Phone Number', maxLength: 15, minLength: 9,
+                placeholder:"+(245) 451 45123",
+                colSize: 6
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'email', name: 'emailidInput', label: 'Email Address', maxLength: 50, minLength: 2,
+                placeholder:"example@gamil.com",
+                colSize: 6
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'text', name: 'address1ControlTextarea', label: 'Address', maxLength: 50, minLength: 2,
+                placeholder:"Address 1",
+                colSize: 12
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'text', name: 'citynameInput', label: 'City', maxLength: 50, minLength: 2,
+                placeholder:"Enter your city",
+                colSize: 6
+              },
+            },
           ]
         }
       ]

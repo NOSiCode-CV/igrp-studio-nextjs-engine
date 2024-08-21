@@ -24,6 +24,7 @@ interface ColumnLayout {
   colSize: number;
   componentName: string;
   type: string;
+  submitBtnText?: string,
   attributes: string[];
   fields?: Field[];
 }
@@ -42,6 +43,7 @@ interface FieldConfig {
   max?: number;
   min?: number;
   colSize: number
+  placeholder?: string
 }
 
 export type RenderContext<T = undefined> = {

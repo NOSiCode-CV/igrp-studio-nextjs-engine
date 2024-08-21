@@ -11,8 +11,8 @@ const appConfig: AppConfig = {
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'Form',
-  path: 'form',
+  pageName: 'Invoices',
+  path: 'invoices',
   components: [],
 };
 

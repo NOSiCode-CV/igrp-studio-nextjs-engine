@@ -1,31 +1,42 @@
 'use client'
 
 import React from 'react'
-import { Col, Row } from 'reactstrap'
+import { Col, Row, Container } from 'reactstrap'
+
 {{#each resourceConfig.components}}
-{{#each this.Row}}
-{{#each this.Col}}
-{{!-- import{ {{capitalize this.type}} } from '../../components/{{this.type}}' --}}
-{{/each}}
-{{/each}}
+  {{#each this.Row}}
+    {{#each this.Col}}
+      import { {{this.componentName}} } from '@/static/components/{{this.componentName}}'
+    {{/each}}
+  {{/each}}
 {{/each}}
 
-export default function {{resourceConfig.pageName}}() {
+export default function {{resourceConfig.pageName}}(props: any) {
   {{#if resourceConfig.components}}
+
   return (
-    <Row>
-      {{#each resourceConfig.components}}
-      {{#each this.Row}}
-      {{#each this.Col}}
-      <Col xxl={{this.props}}>
-        <{{capitalize this.type}} />
-      </Col>
-      {{/each}}
-      {{/each}}
-      {{/each}}
-    </Row>
+    <React.Fragment>
+      <Container fluid>
+        <Row>
+          {{#each resourceConfig.components}}
+          {{#each this.Row}}
+          {{#each this.Col}}
+          <Col xxl={ {{this.colSize}} }>
+            <{{this.componentName}} config={[
+              {{#each this.fields}}
+              {{{json this.config}}}{{#if @last}}{{else}},{{/if}}
+              {{/each}}
+              
+            ]}btnConfig="{{this.submitBtnText}}"/>
+          </Col>
+          {{/each}}
+          {{/each}}
+          {{/each}}
+        </Row>
+      </Container>
+    </React.Fragment>
   )
   {{else}}
-  return null
+    return null
   {{/if}}
 }

@@ -12,7 +12,7 @@ export const updateAndRenderPage = async (component: Component, context: RenderC
     resourceConfig: updatedPageConfig
   } 
 
-  console.log(updatedPageConfig)
+  console.log(updateContext)
 
   await generatePage(updateContext);
 };
