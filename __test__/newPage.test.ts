@@ -11,14 +11,14 @@ const appConfig: AppConfig = {
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'Forms',
-  path: 'forms',
+  pageName: 'Form',
+  path: 'form',
   components: [],
 };
 
 beforeAll(async () => {
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  await newApp(appConfig, OUTPUT_DIR);
+  // await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  // await newApp(appConfig, OUTPUT_DIR);
 });
 
 afterAll(async () => {

@@ -1,12 +1,14 @@
 import path, { dirname } from 'path';
 import fs from 'fs-extra';
-import { DIRECTORIES, VELZON_SRC } from '../../utils/constants';
+import { DIRECTORIES, STATIC_SRC, VELZON_SRC } from '../../utils/constants';
 import { RenderContext } from '../../interfaces/types';
 
 export const createAppDirectories = async (context: RenderContext) => {
   const directories = getDirectoriesToCreate(context.basePath);
   saveAppDirectories(directories);
   copyVelzonStyles(context.basePath);
+  copyStaticFolder(context.basePath);
+  
 };
 
 const getDirectoriesToCreate = (basePath: string) => {
@@ -28,4 +30,8 @@ const saveAppDirectories = async (directories: string[]) => {
 
 const copyVelzonStyles = (basePath: string) => {
   fs.cpSync(VELZON_SRC, path.join(basePath, DIRECTORIES.ASSETS), { recursive: true });
+};
+
+const copyStaticFolder = (basePath: string) => {
+  fs.cpSync(STATIC_SRC, path.join(basePath, DIRECTORIES.STATIC), { recursive: true });
 };

@@ -1,5 +1,31 @@
+'use client'
 
+import React from 'react'
+import { Col, Row } from 'reactstrap'
+{{#each resourceConfig.components}}
+{{#each this.Row}}
+{{#each this.Col}}
+{{!-- import{ {{capitalize this.type}} } from '../../components/{{this.type}}' --}}
+{{/each}}
+{{/each}}
+{{/each}}
 
 export default function {{resourceConfig.pageName}}() {
-  return <h1>{{resourceConfig.pageName}} page</h1>
+  {{#if resourceConfig.components}}
+  return (
+    <Row>
+      {{#each resourceConfig.components}}
+      {{#each this.Row}}
+      {{#each this.Col}}
+      <Col xxl={{this.props}}>
+        <{{capitalize this.type}} />
+      </Col>
+      {{/each}}
+      {{/each}}
+      {{/each}}
+    </Row>
+  )
+  {{else}}
+  return null
+  {{/if}}
 }

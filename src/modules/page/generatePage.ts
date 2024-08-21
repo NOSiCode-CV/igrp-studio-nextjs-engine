@@ -2,7 +2,7 @@ import { PageConfig, RenderContext } from '../../interfaces/types';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
-import { getPageDir, getApiPath } from '../../utils/helpers';
+import { getPageDir } from '../../utils/helpers';
 
 export const generatePage = async (context: RenderContext<PageConfig>) => {
   const page = await renderPage(context);

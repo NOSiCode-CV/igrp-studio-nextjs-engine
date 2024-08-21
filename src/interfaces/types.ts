@@ -1,6 +1,6 @@
 export interface AppConfig {
-  type: 'baseApp',
-  appName: string
+  type: 'baseApp';
+  appName: string;
 }
 
 export interface PageConfig {
@@ -8,12 +8,44 @@ export interface PageConfig {
   id?: number;
   pageName: string;
   path: string;
-  components?: string []
+  components?: Component[];
 }
 
+
+export interface Component {
+  Row: RowLayout[]
+}
+
+interface RowLayout {
+  Col: ColumnLayout[]
+}
+
+interface ColumnLayout {
+  colSize: number;
+  componentName: string;
+  type: string;
+  attributes: string[];
+  fields?: Field[];
+}
+
+interface Field {
+  type: string;
+  config: FieldConfig
+}
+
+interface FieldConfig {
+  type: string,
+  name: string;
+  label?: string,
+  maxLength?: number;
+  minLength?: number;
+  max?: number;
+  min?: number;
+  colSize: number
+}
 
 export type RenderContext<T = undefined> = {
-  resourceConfig: T
-  basePath: string
-  baseConfig?: AppConfig
-}
+  resourceConfig: T;
+  basePath: string;
+  baseConfig?: AppConfig;
+};

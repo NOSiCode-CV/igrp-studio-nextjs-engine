@@ -6,6 +6,7 @@ export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo Fernando/Downloads/non_empt
 export const TEMPLATE_DIR = path.join(__dirname, '../../src/templates');
 
 export const VELZON_SRC = path.join(__dirname, '../velzon/assets');
+export const STATIC_SRC = path.join(__dirname, '../static');
 
 export const CONFIGS = path.join(__dirname, '../configs');
 
@@ -57,6 +58,7 @@ export const DIRECTORIES = {
   PUBLIC: 'public',
   PAGES: 'src/app/pages',
   STUDIO: 'public/studio',
+  STATIC: 'src/static'
 };
 
 export const ERROR_MESSAGE = {
