@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Label } from "reactstrap";
 
-export const Select = (props: any) => {
+export const FormSelect = (props: any) => {
   console.log(props.config)
   const {
     colSize,

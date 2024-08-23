@@ -4,11 +4,11 @@ import React from 'react'
 import { Col, Row, Container } from 'reactstrap'
 
 {{#each resourceConfig.components}}
-  {{#each this.Row}}
-    {{#each this.Col}}
-      import { {{this.componentName}} } from '@/static/components/{{this.componentName}}'
-    {{/each}}
-  {{/each}}
+{{#each this.Row}}
+{{#each this.Col}}
+import { {{this.componentName}} } from '@/static/components/{{this.componentName}}/{{this.componentName}}'
+{{/each}}
+{{/each}}
 {{/each}}
 
 export default function {{resourceConfig.pageName}}(props: any) {
@@ -22,12 +22,19 @@ export default function {{resourceConfig.pageName}}(props: any) {
           {{#each this.Row}}
           {{#each this.Col}}
           <Col xxl={ {{this.colSize}} }>
-            <{{this.componentName}} config={[
-              {{#each this.fields}}
-              {{{json this.config}}}{{#if @last}}{{else}},{{/if}}
-              {{/each}}
-              
-            ]}btnConfig="{{this.submitBtnText}}"/>
+            <{{this.componentName}} 
+              config={
+                {{#if (gt (length this.fields) 1)}}
+                [
+                  {{#each this.fields}}
+                  {{{json this.config}}}{{#if @last}}{{else}},{{/if}}
+                  {{/each}}
+                ]
+                {{else}}
+                {{{json this.fields.[0].config}}}
+                {{/if}}
+              }
+            />
           </Col>
           {{/each}}
           {{/each}}

@@ -1,6 +1,6 @@
 import React from "react"
 import { Row, Form, Card, CardBody, Col } from "reactstrap"
-import { InputForm } from "../fields/InputForm"
+import { InputForm } from "../../fields/InputForm"
 
 export const FormLayout = (props: any) => {
   const { config, btnConfig } = props

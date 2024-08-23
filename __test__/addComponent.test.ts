@@ -1,18 +1,15 @@
 import fs from 'fs-extra';
 import { newApp } from '../src/newApp';
-import { newPage } from '../src/newPage'; 
+import { newPage } from '../src/newPage';
 import { OUTPUT_DIR } from '../src/utils/constants';
 import { PageConfig, Component, AppConfig } from '../src/interfaces/types';
 import { addComponentToPageConfig } from '../src/modules/components/addComponentToPageConfig';
 import { addComponentToPage as addComponentToPage } from '../src/addComponentToPage';
 
-
-
 const appConfig: AppConfig = {
   type: 'baseApp',
   appName: 'NextAppTest',
 };
-
 
 const pageConfig: PageConfig = {
   type: 'page',
@@ -35,64 +32,118 @@ const component: Component = {
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'firstNameinput', label: 'First Name', maxLength: 10, minLength: 2,
-                placeholder:"Enter your firstname",
-                colSize: 6
+                type: 'text',
+                name: 'firstNameinput',
+                label: 'First Name',
+                maxLength: 10,
+                minLength: 2,
+                placeholder: 'Enter your firstname',
+                colSize: 6,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'lastNameinput', label: 'Last Name', maxLength: 10, minLength: 2,
-                placeholder:"Enter your lastname",
-                colSize: 6
+                type: 'text',
+                name: 'lastNameinput',
+                label: 'Last Name',
+                maxLength: 10,
+                minLength: 2,
+                placeholder: 'Enter your lastname',
+                colSize: 6,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'compnayNameinput', label: 'Company Name', maxLength: 50, minLength: 2,
-                placeholder:"Enter company name",
-                colSize: 12
+                type: 'text',
+                name: 'compnayNameinput',
+                label: 'Company Name',
+                maxLength: 50,
+                minLength: 2,
+                placeholder: 'Enter company name',
+                colSize: 12,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'tel', name: 'phonenumberInput', label: 'Phone Number', maxLength: 15, minLength: 9,
-                placeholder:"+(245) 451 45123",
-                colSize: 6
+                type: 'tel',
+                name: 'phonenumberInput',
+                label: 'Phone Number',
+                maxLength: 15,
+                minLength: 9,
+                placeholder: '+(245) 451 45123',
+                colSize: 6,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'email', name: 'emailidInput', label: 'Email Address', maxLength: 50, minLength: 2,
-                placeholder:"example@gamil.com",
-                colSize: 6
+                type: 'email',
+                name: 'emailidInput',
+                label: 'Email Address',
+                maxLength: 50,
+                minLength: 2,
+                placeholder: 'example@gamil.com',
+                colSize: 6,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'address1ControlTextarea', label: 'Address', maxLength: 50, minLength: 2,
-                placeholder:"Address 1",
-                colSize: 12
+                type: 'text',
+                name: 'address1ControlTextarea',
+                label: 'Address',
+                maxLength: 50,
+                minLength: 2,
+                placeholder: 'Address 1',
+                colSize: 12,
               },
             },
             {
               type: 'FormInput',
               config: {
-                type: 'text', name: 'citynameInput', label: 'City', maxLength: 50, minLength: 2,
-                placeholder:"Enter your city",
-                colSize: 6
+                type: 'text',
+                name: 'citynameInput',
+                label: 'City',
+                maxLength: 50,
+                minLength: 2,
+                placeholder: 'Enter your city',
+                colSize: 6,
+              },
+            },
+            {
+              type: 'FormInput',
+              config: {
+                type: 'select',
+                name: 'ForminputState',
+                label: 'State',
+                colSize: 6,
+              },
+            },
+          ],
+        },
+        {
+          colSize: 6,
+          componentName: 'FormSelect',
+          type: 'FormSelect',
+          attributes: [],
+          fields:[
+            {
+              type: 'FormInput',
+              config: {
+                type: 'select',
+                name: 'ForminputState',
+                label: 'Country',
+                colSize: 6,
               },
             },
           ]
         }
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 };
 
 beforeEach(async () => {
@@ -100,9 +151,7 @@ beforeEach(async () => {
   // await newApp(appConfig, OUTPUT_DIR);
 });
 
-
 it('should create a new page', async () => {
-  await addComponentToPage(pageConfig, component, OUTPUT_DIR)
+  await addComponentToPage(pageConfig, component, OUTPUT_DIR);
   // await newPage(pageConfig, OUTPUT_DIR)
 });
-

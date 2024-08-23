@@ -14,6 +14,14 @@ Handlebars.registerHelper('json', function(context) {
 
 Handlebars.registerHelper('toProps', function(context) {
   return `{${JSON.stringify(context)}}`
-})
+});
+
+Handlebars.registerHelper('length', function (array) {
+  return array.length;
+});
+
+Handlebars.registerHelper('gt', function (a, b) {
+  return a > b;
+});
 
 export { Handlebars };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Input, Label } from "reactstrap";
-import { Select } from "../components/Select";
+import { FormSelect } from "../components/FormSelect/FormSelect";
 
 export const InputForm = (props: any) => {
   const {
@@ -15,7 +15,7 @@ export const InputForm = (props: any) => {
 
   return (
     <React.Fragment>
-      {type === 'select'? (<Select config = {props.config} />) 
+      {type === 'select'? (<FormSelect config = {props.config} />) 
       :
       (
         <Col md={colSize}>
