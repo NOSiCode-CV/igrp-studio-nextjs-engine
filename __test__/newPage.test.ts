@@ -1,8 +1,10 @@
 import fs from 'fs-extra';
 import { newApp } from '../src/newApp';
-import { OUTPUT_DIR } from '../src/utils/constants';
-import { AppConfig, PageConfig } from '../src/interfaces/types';
 import { newPage } from '../src/newPage';
+import { AppConfig, PageConfig } from '../src/interfaces/types';
+
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/nextjs_projects_test';
+export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo Fernando/Downloads/non_empty';
 
 const appConfig: AppConfig = {
   type: 'baseApp',

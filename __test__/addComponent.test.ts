@@ -1,10 +1,10 @@
 import fs from 'fs-extra';
 import { newApp } from '../src/newApp';
 import { newPage } from '../src/newPage';
-import { OUTPUT_DIR } from '../src/utils/constants';
 import { PageConfig, Component, AppConfig } from '../src/interfaces/types';
 import { addComponentToPageConfig } from '../src/modules/components/addComponentToPageConfig';
 import { addComponentToPage as addComponentToPage } from '../src/addComponentToPage';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/nextjs_projects_test';
 
 const appConfig: AppConfig = {
   type: 'baseApp',
@@ -141,8 +141,8 @@ const component: Component = {
             },
           ]
         }
-      ],
-    },
+      ]
+    }
   ],
 };
 

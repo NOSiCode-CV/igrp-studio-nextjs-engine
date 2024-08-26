@@ -1,14 +1,20 @@
 import path from 'path';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/nextjs_projects_test';
-export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo Fernando/Downloads/non_empty';
+export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
-export const TEMPLATE_DIR = path.join(__dirname, '../../src/templates');
+export const VELZON_SRC = path.join(__dirname, '../../public/velzon/assets');
 
-export const VELZON_SRC = path.join(__dirname, '../velzon/assets');
 export const STATIC_SRC = path.join(__dirname, '../static');
 
-export const CONFIGS = path.join(__dirname, '../configs');
+export const CONFIGS = path.join(__dirname, '../../public/configs');
+
+// export const TEMPLATE_DIR = path.join(__dirname, '../../src/templates');
+
+// export const VELZON_SRC = path.join(__dirname, '../velzon/assets');
+
+// export const STATIC_SRC = path.join(__dirname, '../static');
+
+// export const CONFIGS = path.join(__dirname, '../configs');
 
 export const PATTERNS = {
   NOT_EMPTY: "^.+$",
