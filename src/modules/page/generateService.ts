@@ -2,7 +2,7 @@ import { PageConfig, RenderContext } from '../../interfaces/types';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
-import { getPageDir, getApiPath } from '../../utils/helpers';
+import { getApiPath } from '../../utils/helpers';
 
 export const generateService = async (context: RenderContext<PageConfig>) => {
   const sercice = await renderService(context);

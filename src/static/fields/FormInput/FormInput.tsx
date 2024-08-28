@@ -1,8 +1,21 @@
 import React from "react";
 import { Col, Input, Label } from "reactstrap";
-import { FormSelect } from "../components/FormSelect/FormSelect";
+import { FormSelect } from "@/static/components/FormSelect/FormSelect";
+import { InputType } from "reactstrap/types/lib/Input";
 
-export const InputForm = (props: any) => {
+export type FormInputConfig = {
+ 
+  colSize: number,
+  name: string,
+  label: string,
+  type: InputType,
+  maxLength: number,
+  minLength: number
+  placeholder: string
+  
+}
+
+export const FormInput = (props: {config: FormInputConfig}) => {
   const {
     colSize,
     name,

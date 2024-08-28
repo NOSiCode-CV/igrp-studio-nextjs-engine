@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Label } from "reactstrap";
+import { SelectService } from "@/services/FormSelect/selectService";
 
 export const FormSelect = (props: any) => {
-  console.log(props.config)
-  const {
-    colSize,
-    name,
-    label
-  } = props.config
+
+  const { colSize, name, label } = props.config
+
+  const [ options, setOptions ]  =useState<{value: string, label: string}[]>([]);
+
+  useEffect(() => {
+    const fetchOptions = async () =>{
+      const result = await SelectService.getOptions()
+      setOptions(result);
+    }
+
+    fetchOptions()
+  }, [])
   return (
     <React.Fragment>
       <Col md={colSize}>
@@ -22,7 +30,9 @@ export const FormSelect = (props: any) => {
             data-choices-sorting="true"
           >
             <option value="">Choose...</option>
-            <option>...</option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
 
           </select>
         </div>

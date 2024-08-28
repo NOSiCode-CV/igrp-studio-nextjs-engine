@@ -2,8 +2,7 @@ import fs from 'fs-extra';
 import { RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
-import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
-
+import { COMMON_FILES, DIRECTORIES, EXTENSIONS, STATIC_SRC } from './constants';
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 

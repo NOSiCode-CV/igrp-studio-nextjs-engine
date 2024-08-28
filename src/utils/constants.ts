@@ -8,6 +8,8 @@ export const STATIC_SRC = path.join(__dirname, '../static');
 
 export const CONFIGS = path.join(__dirname, '../../public/configs');
 
+export const SERVICES_SRC = path.join(__dirname, '../services');
+
 // export const TEMPLATE_DIR = path.join(__dirname, '../../src/templates');
 
 // export const VELZON_SRC = path.join(__dirname, '../velzon/assets');
@@ -64,7 +66,9 @@ export const DIRECTORIES = {
   PUBLIC: 'public',
   PAGES: 'src/app/pages',
   STUDIO: 'public/studio',
-  STATIC: 'src/static'
+  COMPONENTS: 'src/static/components',
+  FIELDS: 'src/static/fields',
+  SERVICES: 'src/services'
 };
 
 export const ERROR_MESSAGE = {

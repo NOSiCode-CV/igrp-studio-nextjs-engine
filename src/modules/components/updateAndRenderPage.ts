@@ -2,6 +2,7 @@ import { generatePage } from '../page/generatePage';
 import { Component, PageConfig } from '../../interfaces/types';
 import { RenderContext } from '../../interfaces/types';
 import { addComponentToPageConfig } from './addComponentToPageConfig';
+import { saveComponent } from './saveComponent';
 
 export const updateAndRenderPage = async (component: Component, context: RenderContext<PageConfig>) => {
   
@@ -10,9 +11,9 @@ export const updateAndRenderPage = async (component: Component, context: RenderC
   const updateContext: RenderContext<PageConfig> = {
     ...context,
     resourceConfig: updatedPageConfig
-  } 
+  }
 
-  console.log(updateContext)
+  saveComponent(component, context.basePath)
 
   await generatePage(updateContext);
 };
