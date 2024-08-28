@@ -23,7 +23,7 @@ export default function {{resourceConfig.pageName}}(props: any) {
           {{#each this.Col}}
           <Col xxl={ {{this.colSize}} }>
             <{{this.componentName}} 
-              config={
+              fields={
                 {{#if (gt (length this.fields) 1)}}
                 [
                   {{#each this.fields}}

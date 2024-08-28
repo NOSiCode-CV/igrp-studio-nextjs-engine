@@ -1,15 +1,36 @@
 import React from "react"
 import { Row, Form, Card, CardBody, Col } from "reactstrap"
-import { FormInput, FormInputConfig } from "@/static/fields/FormInput/FormInput"
+import { FormInput, FormInputProps } from "@/static/fields/FormInput/FormInput"
+import { FormSelect } from "../FormSelect/FormSelect"
+import { InputType } from "reactstrap/types/lib/Input"
 
-export const FormLayout = (props: any) => {
-  const { config } = props
+export type FormLayoutProps = {
+  fields: ({
+    type: InputType
+  } &
+  FormInputProps)[]
+}
+
+export interface GeneralFormInputProps {
+  type: InputType
+}
+
+export const FormLayout = (props: FormLayoutProps) => {
+  const {  fields } = props
   return (
     <Card className="mt-3">
       <CardBody>
         <Form>
           <Row>
-            {config.map((field: FormInputConfig, index: number) => <FormInput key={index} config={field}/>)}
+            {
+              fields.map((field: GeneralFormInputProps, index: number) => 
+                ( 
+                  field.type === 'select' ? 
+                  <FormSelect key = {index} config = {field} />  :
+                  <FormInput key={index} config={field}/>
+                )
+              )
+            } 
             <Col md={12}>
               <div className="text-end">
                 <button type="submit" className="btn btn-primary">
