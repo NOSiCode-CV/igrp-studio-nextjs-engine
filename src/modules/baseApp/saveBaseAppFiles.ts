@@ -17,6 +17,10 @@ import { appConfigValidate } from '../../schema/baseApp';
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
 
+/**
+ * 
+ * @param context 
+ */
 export const saveFileConfig = async (context: RenderContext) => {
   const baseAppFiles = generateBaseAppFiles(context);
   const baseConfigFiles = generateConfigFiles(context);
@@ -26,18 +30,23 @@ export const saveFileConfig = async (context: RenderContext) => {
 
 const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
 
-  const isBaseCofigValid = appConfigValidate(context.baseConfig);
+  const isBaseConfigValid = appConfigValidate(context.baseConfig);
 
-  if (!isBaseCofigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+  if (!isBaseConfigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
   const mainPath = path.join(context.basePath, DIRECTORIES.APP);
 
   return [
-    { output: mainPath, template: TEMPLATES.CONFIG_PAGE, name: COMMON_FILES.PAGE_TSX },
+    // { output: mainPath, template: TEMPLATES.CONFIG_PAGE, name: COMMON_FILES.PAGE_TSX },
     { output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX }
   ];
 };
 
+/**
+ * 
+ * @param context 
+ * @returns 
+ */
 const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
   return [
     {src: path.join(CONFIGS, CONFIG_FILES.README), dest: path.join(context.basePath, CONFIG_FILES.README)},
@@ -51,7 +60,6 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
 }
 
 const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE_CONFIG_FILES, context: RenderContext) => {
-
   await Promise.all(
     baseFiles.map(async (file) => {
       const template = await renderTemplate(file.template, context);
@@ -69,5 +77,4 @@ const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE
   const template = await renderTemplate(PACKAGE_JSON.template, context)
   const outputPath = path.join(context.basePath, PACKAGE_JSON.output)
   await saveToFile(template, outputPath);
-
 };

@@ -2,9 +2,14 @@ import { generatePage } from '../page/generatePage';
 import { Component, PageConfig } from '../../interfaces/types';
 import { RenderContext } from '../../interfaces/types';
 import { addComponentToPageConfig } from './addComponentToPageConfig';
-import { saveComponent } from './saveComponent';
+import { generateService } from '../page/generateService';
 
-export const updateAndRenderPage = async (component: Component, context: RenderContext<PageConfig>) => {
+/**
+ * 
+ * @param component 
+ * @param context 
+ */
+export const updateAndRenderPage = async (component: Component[], context: RenderContext<PageConfig>) => {
   
   const updatedPageConfig = await addComponentToPageConfig(component, context);
 
@@ -13,8 +18,7 @@ export const updateAndRenderPage = async (component: Component, context: RenderC
     resourceConfig: updatedPageConfig
   }
 
-  saveComponent(component, context.basePath)
-
   await generatePage(updateContext);
+  await generateService(updateContext)
 };
 

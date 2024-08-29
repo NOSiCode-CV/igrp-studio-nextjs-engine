@@ -2,6 +2,11 @@ import fs from 'fs-extra';
 import { dirname } from 'path';
 import { ERROR_MESSAGE } from '../../utils/constants';
 
+/**
+ * 
+ * @param content 
+ * @param outputPath 
+ */
 export const saveToFile = async (content: string, outputPath: string) => {
   if (!content) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
   if (!outputPath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;

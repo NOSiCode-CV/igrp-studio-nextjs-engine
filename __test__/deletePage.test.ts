@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
-import { newPage } from '../src/index';
+import { deletePage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo\ Fernando/Downloads/laste';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/laste';
 export const NON_EMPTY_DIRECTORY = '';
 
 const pageConfig: PageConfig = {
@@ -20,9 +20,8 @@ afterAll(async () => {
   // await fs.rm(OUTPUT_DIR, { recursive: true });
 });
 
-describe('Page module',() =>{
-  it('should save the page configuration file', async()=> {
-    await newPage(pageConfig, OUTPUT_DIR);
-  })
-
-})
+describe('Page module', () => {
+  it('should save the page configuration file', async () => {
+    await deletePage(pageConfig, OUTPUT_DIR);
+  });
+});

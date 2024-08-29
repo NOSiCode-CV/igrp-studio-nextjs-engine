@@ -1,3 +1,31 @@
 
+{{#if resourceConfig.components}}
+import { IpageService } from '@/app/pages/{{toLowerCase resourceConfig.pageName}}/page'
 
-export const {{toLowerCase resourceConfig.pageName}} = () => {}
+{{#each resourceConfig.components}}
+{{#each this.Row}}
+{{#each this.Col}}
+const {{toLowerCase this.componentName}}{{@key}}Action = () => {}
+
+const {{toLowerCase this.componentName}}{{@key}}Populate = () => {}
+{{/each}}
+{{/each}}
+{{/each}}
+
+export const {{capitalize resourceConfig.pageName}}Service: IpageService = {
+  {{#each resourceConfig.components}}
+  {{#each this.Row}}
+  {{#each this.Col}}
+  {{toLowerCase this.componentName}}{{@key}}: {
+    action: {{toLowerCase this.componentName}}{{@key}}Action,
+    populate: {{toLowerCase this.componentName}}{{@key}}Populate
+  }{{#if @last}}{{else}},{{/if}}
+  {{/each}}
+  {{/each}}
+  {{/each}}
+}
+{{else}}
+export const {{capitalize resourceConfig.pageName}}Service = () => {}
+{{/if}}
+
+

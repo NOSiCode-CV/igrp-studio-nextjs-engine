@@ -3,7 +3,11 @@ import fs from 'fs-extra';
 import { AppConfig } from '../../interfaces/types';
 import { COMMON_FILES, DIRECTORIES, ERROR_MESSAGE } from '../../utils/constants';
 
-
+/**
+ * 
+ * @param basePath 
+ * @returns 
+ */
 export const baseAppCOnfig = async (basePath: string): Promise<AppConfig> => {
   const appConfig = await fs.readJson(path.join(basePath, DIRECTORIES.IGRPSTUDIO, COMMON_FILES.BASE_APP));
   

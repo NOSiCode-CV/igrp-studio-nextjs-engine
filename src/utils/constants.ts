@@ -1,26 +1,16 @@
 import path from 'path';
 
-export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
-
-export const VELZON_SRC = path.join(__dirname, '../../public/velzon/assets');
-
-export const STATIC_SRC = path.join(__dirname, '../static');
 
 export const CONFIGS = path.join(__dirname, '../../public/configs');
+export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
-export const SERVICES_SRC = path.join(__dirname, '../services');
-
-// export const TEMPLATE_DIR = path.join(__dirname, '../../src/templates');
-
-// export const VELZON_SRC = path.join(__dirname, '../velzon/assets');
-
-// export const STATIC_SRC = path.join(__dirname, '../static');
-
+//Uncomment the following exports when building the application
+// export const TEMPLATE_DIR = path.join(__dirname, '../templates');
 // export const CONFIGS = path.join(__dirname, '../configs');
 
 export const PATTERNS = {
   NOT_EMPTY: "^.+$",
-  NO_SPACE_AND_HYPHEN: "^[^\\s-]+$"
+  NO_SPACE_AND_HYPHEN: "^[^\\s]+$"
 }
 
 export const COMMON_FILES = {
@@ -56,19 +46,14 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 
 export const DIRECTORIES = {
   APP: 'src/app',
-  API: 'src/api',
+  SERVICES: 'src/services',
   ASSETS: 'src/assets',
-  BOOTSTRAP: 'libs/bootstrap',
   DESIGN_SYSTEM: 'design-system',
-  IGRPSTUDIO: '.igrpstudio',
-  IGRPSTUDIO_PAGES: '.igrpstudio/pages',
-  LIBS: 'libs',
   PUBLIC: 'public',
   PAGES: 'src/app/pages',
   STUDIO: 'public/studio',
-  COMPONENTS: 'src/static/components',
-  FIELDS: 'src/static/fields',
-  SERVICES: 'src/services'
+  IGRPSTUDIO: '.igrpstudio',
+  IGRPSTUDIO_PAGES: '.igrpstudio/pages',
 };
 
 export const ERROR_MESSAGE = {

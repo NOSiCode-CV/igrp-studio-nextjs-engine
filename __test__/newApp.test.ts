@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { newApp } from '../src/newApp';
+import { newApp } from '../src/index';
 import { AppConfig } from '../src/interfaces/types';
 import { ERROR_MESSAGE } from '../src/utils/constants';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo\ Fernando/Downloads/nextjs_projects_test';
+export const OUTPUT_DIR = 'C:/Users/Eduardo\ Fernando/Downloads/laste';
 export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo\ Fernando/Downloads/non_empty';
 
 const baseConfig: AppConfig = {
@@ -29,7 +29,7 @@ describe('Create new nextjs application module', () => {
       ERROR_MESSAGE.INVALID_APP_CONFIG,
     );
   });
-  //To run this test, provide an non-empty directory
+  // To run this test, provide an non-empty directory
   test('Should fail because the output path is non-empty', async () => {
     expect(async () => await newApp(baseConfig, NON_EMPTY_DIRECTORY)).rejects.toEqual(
       ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE,
