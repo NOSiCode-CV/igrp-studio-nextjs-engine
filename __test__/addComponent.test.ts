@@ -2,12 +2,12 @@ import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo\ Fernando/Downloads/laste';
+export const OUTPUT_DIR = '';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'Invoices',
-  path: 'invoices',
+  pageName: 'test',
+  path: 'test',
   components: [],
 };
 
@@ -50,11 +50,7 @@ const components: Component [] = [
             ],
           }
         ]
-      }
-    ],
-  },
-  {
-    Row: [
+      },
       {
         Col: [
           {
@@ -62,7 +58,7 @@ const components: Component [] = [
             componentName: 'FormLayout',
             type: 'Form',
             attributes: [],
-            submitBtnText: 'Send',
+            submitBtnText: 'send',
             fields: [
               {
                 type: 'FormInput',
@@ -94,8 +90,7 @@ const components: Component [] = [
       }
     ],
   }
-]
-;
+];
 
 beforeEach(async () => {
   await fs.mkdir(OUTPUT_DIR, { recursive: true });

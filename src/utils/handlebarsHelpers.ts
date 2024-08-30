@@ -24,4 +24,10 @@ Handlebars.registerHelper('gt', function (a, b) {
   return a > b;
 });
 
+Handlebars.registerHelper('unique', function(array){
+  return array.filter(onlyUnique);
+})
+
+const onlyUnique = (value:any, index:any, array: any) => array.indexOf(value) === index
+
 export { Handlebars };

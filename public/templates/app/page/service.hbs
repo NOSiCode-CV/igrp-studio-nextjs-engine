@@ -2,24 +2,24 @@
 {{#if resourceConfig.components}}
 import { IpageService } from '@/app/pages/{{toLowerCase resourceConfig.pageName}}/page'
 
-{{#each resourceConfig.components}}
-{{#each this.Row}}
-{{#each this.Col}}
-const {{toLowerCase this.componentName}}{{@key}}Action = () => {}
+{{#each resourceConfig.components }}
+{{#each this.Row as |component index|}}
+{{#each component.Col}}
+const {{toLowerCase this.componentName}}{{index}}Action = () => {}
+const {{toLowerCase this.componentName}}{{index}}Populate = () => {}
 
-const {{toLowerCase this.componentName}}{{@key}}Populate = () => {}
 {{/each}}
 {{/each}}
 {{/each}}
 
 export const {{capitalize resourceConfig.pageName}}Service: IpageService = {
-  {{#each resourceConfig.components}}
-  {{#each this.Row}}
-  {{#each this.Col}}
-  {{toLowerCase this.componentName}}{{@key}}: {
-    action: {{toLowerCase this.componentName}}{{@key}}Action,
-    populate: {{toLowerCase this.componentName}}{{@key}}Populate
-  }{{#if @last}}{{else}},{{/if}}
+  {{#each resourceConfig.components }}
+  {{#each this.Row as |component index|}}
+  {{#each component.Col}}
+  {{toLowerCase this.componentName}}{{index}}: {
+    action: {{toLowerCase this.componentName}}{{index}}Action,
+    populate: {{toLowerCase this.componentName}}{{index}}Populate
+  },{{#if @last}}{{else}},{{/if}}
   {{/each}}
   {{/each}}
   {{/each}}

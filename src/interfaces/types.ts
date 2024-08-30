@@ -19,7 +19,7 @@ interface RowLayout {
   Col: ColumnLayout[];
 }
 
-interface ColumnLayout {
+export interface ColumnLayout {
   colSize: number;
   componentName: string;
   type: string;
@@ -49,4 +49,5 @@ export type RenderContext<T = undefined> = {
   resourceConfig: T;
   basePath: string;
   baseConfig?: AppConfig;
+  velzonImports?:string [];
 };

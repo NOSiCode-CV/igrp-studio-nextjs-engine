@@ -20,3 +20,5 @@ export const addComponentToPageConfig = async (components: Component[], context:
 
   return pageConfig;
 };
+
+

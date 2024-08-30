@@ -6,7 +6,6 @@ import { RenderContext } from '../../interfaces/types';
 export const createAppDirectories = async (context: RenderContext) => {
   const directories = getDirectoriesToCreate(context.basePath);
   saveAppDirectories(directories);
-  // copyVelzonStyles(context.basePath);
 };
 
 const getDirectoriesToCreate = (basePath: string) => {
@@ -26,7 +25,4 @@ const saveAppDirectories = async (directories: string[]) => {
   await Promise.all(directories.map((dir) => fs.mkdir(dir, { recursive: true })));
 };
 
-// const copyVelzonStyles = (basePath: string) => {
-//   fs.cpSync(VELZON_SRC, path.join(basePath, DIRECTORIES.ASSETS), { recursive: true });
-// };
 

@@ -5,24 +5,23 @@ import { Col, Row, Container } from 'reactstrap'
 import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
 
 {{#if resourceConfig.components}}
-{{#each resourceConfig.components}}
-import {
-{{#each this.Row}}
-{{#each this.Col}}
- {{this.componentName}}{{#if @last}}{{else}},{{/if}} 
-{{/each}}
-{{/each}}
-} from 'nosi-velzon-ts'
-{{/each}}
 
-{{#each resourceConfig.components}}
-{{#each this.Row}}
-{{#each this.Col}}
-export type {{capitalize this.componentName}}{{@key}}Config = [
+{{#if  (gt (length velzonImports) 0)}}
+import{
+{{#each velzonImports}}
+  {{this}}{{#if @last}}{{else}},{{/if}}
+{{/each}}
+}from 'nosi-velzon-ts'
+{{/if}}
+
+{{#each resourceConfig.components as |component index|}}
+{{#each this.Row as |component index|}}
+{{#each component.Col}}
+export type {{capitalize this.componentName}}{{index}}Config = [
   {{#each this.fields}}
   {
     type: {{../this.componentName}}Fields,
-    config:{{../this.componentName}}FieldsProps,
+    config:{{this.type}}Props,
   }{{#if @last}}{{else}},{{/if}} 
   {{/each}}
 ]
@@ -31,10 +30,10 @@ export type {{capitalize this.componentName}}{{@key}}Config = [
 {{/each}}
 
 export type IpageService = {
-  {{#each resourceConfig.components}}
-  {{#each this.Row}}
-  {{#each this.Col}}
-  {{toLowerCase this.componentName}}{{@key}}: {
+  {{#each resourceConfig.components as |component index|}}
+  {{#each this.Row as |component index|}}
+  {{#each component.Col}}
+  {{toLowerCase this.componentName}}{{index}}: {
     action?: {{capitalize this.componentName}}ActionFunction,
     populate?: {{capitalize this.componentName}}PopulateFunction
   }{{#if @last}}{{else}},{{/if}}
@@ -49,10 +48,10 @@ export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: IpageService = {{capitalize resourceConfig.pageName}}Service;
 
-  {{#each resourceConfig.components}}
-  {{#each this.Row}}
-  {{#each this.Col}}
-  const {{toLowerCase this.componentName}}Fields: {{capitalize this.componentName}}Props<{{capitalize this.componentName}}{{@key}}Config> = {
+  {{#each resourceConfig.components as |component index|}}
+  {{#each this.Row as |component index|}}
+  {{#each component.Col}}
+  const {{toLowerCase this.componentName}}Fields{{index}}: {{capitalize this.componentName}}Props<{{capitalize this.componentName}}{{index}}Config> = {
     fields: [
       {{#each this.fields}}
       {{{json this}}}{{#if @last}}{{else}},{{/if}}
@@ -69,21 +68,21 @@ export default function {{resourceConfig.pageName}}() {
   return (
     <React.Fragment>
       <Container fluid>
+        {{#each resourceConfig.components as |component index|}}
         <Row>
-          {{#each resourceConfig.components}}
-          {{#each this.Row}}
-          {{#each this.Col}}
+        {{#each this.Row as |component index|}}
+          {{#each component.Col}}
           <Col xxl={ {{this.colSize}} }>
             <{{this.componentName}} 
-              populate = {service.{{toLowerCase this.componentName}}{{@key}}.populate}
-              action = {service.{{toLowerCase this.componentName}}{{@key}}.action}
-              fields = { {{toLowerCase this.componentName}}Fields.fields}
+              populate = {service.{{toLowerCase this.componentName}}{{index}}.populate}
+              action = {service.{{toLowerCase this.componentName}}{{index}}.action}
+              fields = { {{toLowerCase this.componentName}}Fields{{index}}.fields}
             />
           </Col>
           {{/each}}
-          {{/each}}
-          {{/each}}
+        {{/each}}
         </Row>
+        {{/each}}
       </Container>
     </React.Fragment>
   )

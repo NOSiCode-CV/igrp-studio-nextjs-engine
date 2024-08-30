@@ -4,8 +4,8 @@ import { newApp } from '../src/index';
 import { AppConfig } from '../src/interfaces/types';
 import { ERROR_MESSAGE } from '../src/utils/constants';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo\ Fernando/Downloads/laste';
-export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo\ Fernando/Downloads/non_empty';
+export const OUTPUT_DIR = '';
+export const NON_EMPTY_DIRECTORY = '';
 
 const baseConfig: AppConfig = {
   type: 'baseApp',

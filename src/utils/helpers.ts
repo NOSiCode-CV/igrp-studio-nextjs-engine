@@ -3,6 +3,7 @@ import { RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
+
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 
@@ -14,12 +15,14 @@ export const getPageDir = (context: RenderContext<PageConfig>) =>
     COMMON_FILES.PAGE_TSX,
   );
 
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export const getPageServiceFilePath = (context: RenderContext<PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.SERVICES,
     `${context.resourceConfig.pageName}`.toLowerCase(),
-    `${context.resourceConfig.pageName}${COMMON_FILES.SERVICE}`,
+    `${capitalize(context.resourceConfig.pageName)}${COMMON_FILES.SERVICE}`,
   );
   
 export const getPageConfigPath = (context: RenderContext<PageConfig>) =>
@@ -42,3 +45,5 @@ export const getPagePath = (context: RenderContext<PageConfig>) =>
     DIRECTORIES.PAGES,
     `${context.resourceConfig.pageName}`.toLowerCase(),
   );
+
+export const onlyUnique = (value:any, index:any, array: any) => array.indexOf(value) === index
