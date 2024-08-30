@@ -3,9 +3,15 @@ import { dirname } from 'path';
 import { ERROR_MESSAGE } from '../../utils/constants';
 
 /**
+ * Saves the provided content to a file at the specified output path.
  * 
- * @param content 
- * @param outputPath 
+ * @async
+ * @function saveToFile
+ * @param {string} content - The content to be saved in the file. Must be a string.
+ * @param {string} outputPath - The full path where the file will be saved.
+ * 
+ * @throws {Error} Throws an error if the content or output path is invalid. Error messages are defined in `ERROR_MESSAGE`.
+ *  
  */
 export const saveToFile = async (content: string, outputPath: string) => {
   if (!content) throw ERROR_MESSAGE.INVALID_APP_CONFIG;

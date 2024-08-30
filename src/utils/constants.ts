@@ -1,12 +1,12 @@
 import path from 'path';
 
-
-export const CONFIGS = path.join(__dirname, '../../public/configs');
-export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+//Comment the following exports when building the application
+// export const CONFIGS = path.join(__dirname, '../../public/configs');
+// export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
 //Uncomment the following exports when building the application
-// export const TEMPLATE_DIR = path.join(__dirname, '../templates');
-// export const CONFIGS = path.join(__dirname, '../configs');
+export const TEMPLATE_DIR = path.join(__dirname, './templates');
+export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
   NOT_EMPTY: "^.+$",
@@ -32,7 +32,17 @@ export const TEMPLATES = {
   SERVICE: 'app/page/service.hbs'
 };
 
-export const CONFIG_FILES = {
+export const SRC_CONFIG_FILES = {
+  DOCKERIGNORE: 'dockerignore_template',
+  GITIGNORE: 'gitignore_template',
+  README: 'README.md',
+  NEXTCONFIG: 'next.config.mjs',
+  NEXTENV: 'nextenv_template',
+  GITLABCIYAML: 'gitlab-ci.yaml',
+  TSCONFIG: 'tsconfig.json'
+};
+
+export const DST_CONFIG_FILES ={
   DOCKERIGNORE: '.dockerignore',
   GITIGNORE: '.gitignore',
   README: 'README.md',
@@ -40,7 +50,7 @@ export const CONFIG_FILES = {
   NEXTENV: 'next-env.d.ts',
   GITLABCIYAML: 'gitlab-ci.yaml',
   TSCONFIG: 'tsconfig.json'
-};
+}
 
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
 

@@ -12,14 +12,27 @@ import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { AppConfig, RenderContext, Component, PageConfig } from './interfaces/types';
 
 /**
+ * Initializes a new application by validating configuration, checking directory status,
+ * and creating necessary files and folders.
+ * 
+ * @async
+ * @function newApp
+ * @param {AppConfig} baseConfig - The base configuration object for the application.
+ * @param {string} basePath - The base path where the application directories and files will be created.
+ * 
+ * @throws {Error} Throws an error if:
+ * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
+ * - The base path is not provided (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
+ * - The base path directory is not empty (`ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE`).
+ * 
+ * @returns {Promise<void>} A promise that resolves when the application has been successfully initialized.
  *
- * @param baseConfig
- * @param basePath
  */
 export const newApp = async (baseConfig: AppConfig, basePath: string) => {
-  const isBaseCofigValid = appConfigValidate(baseConfig);
+  
+  const isBaseConfigValid = appConfigValidate(baseConfig);
 
-  if (!isBaseCofigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
+  if (!isBaseConfigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
@@ -28,18 +41,18 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
   await saveBaseAppFileConfig(baseConfig, basePath);
 
   const context: RenderContext = {
-    resourceConfig: undefined, // On base API, there is no specific config.
+    resourceConfig: undefined, // No specific config for base API
     basePath,
     baseConfig,
   };
 
   /**
-   * Creates the folder structure needed for the APP.
+   * Creates the folder structure needed for the application.
    */
   await createAppDirectories(context);
 
   /**
-   * Creates the configuration files
+   * Creates the configuration files based on the provided context.
    */
   await saveFileConfig(context);
 };
@@ -49,6 +62,7 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
  * @param pageConfig
  * @param basePath
  */
+
 export const newPage = async (pageConfig: PageConfig, basePath: string) => {
   if (!pageConfig.pageName || !pageConfig.path || !pageConfig.type)
     throw ERROR_MESSAGE.INVALID_PAGE_CONFIG;
@@ -91,6 +105,7 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
  * @param component
  * @param basePath
  */
+
 export const addComponentToPage = async (
   pageConfig: PageConfig,
   components: Component[],

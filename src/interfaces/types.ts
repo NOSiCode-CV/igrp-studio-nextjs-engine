@@ -5,7 +5,6 @@ export interface AppConfig {
 
 export interface PageConfig {
   type: 'page';
-  id?: number;
   pageName: string;
   path: string;
   components?: Component[];

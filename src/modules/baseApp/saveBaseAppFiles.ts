@@ -9,8 +9,9 @@ import {
   DIRECTORIES,
   ERROR_MESSAGE,
   TEMPLATES,
-  CONFIG_FILES,
-  PACKAGE_JSON
+  SRC_CONFIG_FILES,
+  PACKAGE_JSON,
+  DST_CONFIG_FILES
 } from '../../utils/constants';
 import { appConfigValidate } from '../../schema/baseApp';
 
@@ -24,6 +25,8 @@ export type BASE_API_FILES = { output: string; template: string; name: string }[
 export const saveFileConfig = async (context: RenderContext) => {
   const baseAppFiles = generateBaseAppFiles(context);
   const baseConfigFiles = generateConfigFiles(context);
+
+  console.log(baseConfigFiles)
 
   await saveBaseAppFiles(baseAppFiles, baseConfigFiles, context);
 };
@@ -49,13 +52,13 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
  */
 const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
   return [
-    {src: path.join(CONFIGS, CONFIG_FILES.README), dest: path.join(context.basePath, CONFIG_FILES.README)},
-    {src: path.join(CONFIGS, CONFIG_FILES.NEXTENV), dest: path.join(context.basePath, CONFIG_FILES.NEXTENV)},
-    {src: path.join(CONFIGS, CONFIG_FILES.TSCONFIG), dest: path.join(context.basePath, CONFIG_FILES.TSCONFIG)},
-    {src: path.join(CONFIGS, CONFIG_FILES.GITIGNORE), dest: path.join(context.basePath, CONFIG_FILES.GITIGNORE)},
-    {src: path.join(CONFIGS, CONFIG_FILES.NEXTCONFIG), dest: path.join(context.basePath, CONFIG_FILES.NEXTCONFIG)},
-    {src: path.join(CONFIGS, CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, CONFIG_FILES.GITLABCIYAML)},
-    {src: path.join(CONFIGS, CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, CONFIG_FILES.DOCKERIGNORE)}
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.README), dest: path.join(context.basePath, DST_CONFIG_FILES.README)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTENV), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTENV)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.TSCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.TSCONFIG)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTCONFIG)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, DST_CONFIG_FILES.GITLABCIYAML)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERIGNORE)}
   ]
 }
 
