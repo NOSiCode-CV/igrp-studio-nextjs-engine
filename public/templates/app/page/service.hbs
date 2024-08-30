@@ -1,31 +1,15 @@
 
-{{#if resourceConfig.components}}
-import { IpageService } from '@/app/pages/{{toLowerCase resourceConfig.pageName}}/page'
+import { I{{toLowerCase resourceConfig.pageName}}Service } from '@/app/pages/{{toLowerCase resourceConfig.pageName}}/page'
 
-{{#each resourceConfig.components }}
-{{#each this.Row as |component index|}}
-{{#each component.Col}}
-const {{toLowerCase this.componentName}}{{index}}Action = () => {}
-const {{toLowerCase this.componentName}}{{index}}Populate = () => {}
+/**
+* This is the service that will be inject in to the {{resourceConfig.pageName}} page, 
+* you have to implemented this method if you want to use this
+*
+* To ensure that every method your are implemented remove the partial and typscript will provide a script verification
+*/
+export const {{capitalize resourceConfig.pageName}}Service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {
 
-{{/each}}
-{{/each}}
-{{/each}}
-
-export const {{capitalize resourceConfig.pageName}}Service: IpageService = {
-  {{#each resourceConfig.components }}
-  {{#each this.Row as |component index|}}
-  {{#each component.Col}}
-  {{toLowerCase this.componentName}}{{index}}: {
-    action: {{toLowerCase this.componentName}}{{index}}Action,
-    populate: {{toLowerCase this.componentName}}{{index}}Populate
-  },{{#if @last}}{{else}},{{/if}}
-  {{/each}}
-  {{/each}}
-  {{/each}}
 }
-{{else}}
-export const {{capitalize resourceConfig.pageName}}Service = () => {}
-{{/if}}
+
 
 

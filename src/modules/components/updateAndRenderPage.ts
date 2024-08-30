@@ -1,8 +1,7 @@
 import { generatePage } from '../page/generatePage';
-import { ColumnLayout, Component, PageConfig } from '../../interfaces/types';
+import { Component, PageConfig } from '../../interfaces/types';
 import { RenderContext } from '../../interfaces/types';
 import { addComponentToPageConfig } from './addComponentToPageConfig';
-import { generateService } from '../page/generateService';
 
 /**
  * 
@@ -21,7 +20,6 @@ export const updateAndRenderPage = async (components: Component[], context: Rend
   }  
 
   await generatePage(updateContext);
-  await generateService(updateContext)
 };
 
 const uniquesImports = (components: Component[]) => {

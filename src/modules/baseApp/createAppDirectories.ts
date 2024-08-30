@@ -50,6 +50,5 @@ const getDirectoriesToCreate = (basePath: string): string[] => {
  * @returns - A promise that resolves when all directories have been created.
  */
 const saveAppDirectories = async (directories: string[]) => {
-  // Create each directory recursively if it doesn't already exist
   await Promise.all(directories.map((dir) => fs.mkdir(dir, { recursive: true })));
 };

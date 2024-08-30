@@ -29,7 +29,9 @@ export type {{capitalize this.componentName}}{{index}}Config = [
 {{/each}}
 {{/each}}
 
-export type IpageService = {
+{{/if}}
+
+export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each resourceConfig.components as |component index|}}
   {{#each this.Row as |component index|}}
   {{#each component.Col}}
@@ -41,7 +43,7 @@ export type IpageService = {
   {{/each}}
   {{/each}}
 }
-{{/if}}
+
 
 
 export default function {{resourceConfig.pageName}}() {

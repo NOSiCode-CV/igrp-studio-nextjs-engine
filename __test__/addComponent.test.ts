@@ -101,6 +101,3 @@ it('should create a new page', async () => {
   pageConfig.components = components
   await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });
-
-
-

@@ -2,8 +2,7 @@ import fs from 'fs-extra';
 import { newPage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = '';
-export const NON_EMPTY_DIRECTORY = '';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
 
 const pageConfig: PageConfig = {
   type: 'page',

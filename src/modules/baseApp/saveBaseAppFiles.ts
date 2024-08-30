@@ -26,8 +26,6 @@ export const saveFileConfig = async (context: RenderContext) => {
   const baseAppFiles = generateBaseAppFiles(context);
   const baseConfigFiles = generateConfigFiles(context);
 
-  console.log(baseConfigFiles)
-
   await saveBaseAppFiles(baseAppFiles, baseConfigFiles, context);
 };
 
@@ -40,7 +38,6 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
   const mainPath = path.join(context.basePath, DIRECTORIES.APP);
 
   return [
-    // { output: mainPath, template: TEMPLATES.CONFIG_PAGE, name: COMMON_FILES.PAGE_TSX },
     { output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX }
   ];
 };
