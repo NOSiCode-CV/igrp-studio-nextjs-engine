@@ -29,15 +29,6 @@ const uniquesImports = (components: Component[]) => {
     comp.Row.forEach(row => {
       row.Col.forEach(col => {
         componentsToImport.push(col.componentName);
-        if (col.fields && col.fields.length > 0) {
-          col.fields.forEach(field => {
-            componentsToImport.push(`${field.type}Props`);
-          });
-        }
-        componentsToImport.push(`${col.componentName}Fields`);
-        componentsToImport.push(`${col.componentName}Props`);
-        componentsToImport.push(`${col.componentName}ActionFunction`);
-        componentsToImport.push(`${col.componentName}PopulateFunction`);
       });
     });
   });

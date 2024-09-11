@@ -13,10 +13,13 @@ import { ERROR_MESSAGE } from '../../utils/constants';
  * @throws {Error} Throws an error if the content or output path is invalid. Error messages are defined in `ERROR_MESSAGE`.
  *  
  */
-export const saveToFile = async (content: string, outputPath: string) => {
+export const saveToFile = async (content: string, outputPath: string, override: boolean = true) => {
   if (!content) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
   if (!outputPath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+  if (!override && (await fs.pathExists(outputPath))) return
 
   await fs.mkdir(dirname(outputPath), {recursive: true});
+
   await fs.writeFile(outputPath, content, 'utf-8');
+
 };

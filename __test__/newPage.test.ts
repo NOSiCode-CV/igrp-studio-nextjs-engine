@@ -6,8 +6,8 @@ export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'test',
-  path: 'test',
+  pageName: 'user',
+  path: 'users',
   components: [],
 };
 

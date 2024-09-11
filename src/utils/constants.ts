@@ -9,8 +9,9 @@ export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 // export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
-  NOT_EMPTY: "^.+$",
-  NO_SPACE_AND_HYPHEN: "^[^\\s]+$"
+  VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
+  VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[a-zA-Z0-9_ ]+$"
+
 }
 
 export const COMMON_FILES = {
@@ -25,7 +26,7 @@ export const EXTENSIONS = {
 }
 
 export const TEMPLATES = {
-  CONFIG_PAGE: 'config/page.hbs',
+  WELCOME_PAGE: 'config/page.hbs',
   CONFIG_LAYOUT: 'config/layout.hbs',
   CONFIG_PACKGE_JSON: 'config/package.json.hbs',
   PAGE: 'app/page/page.hbs',
@@ -39,7 +40,8 @@ export const SRC_CONFIG_FILES = {
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'nextenv_template',
   GITLABCIYAML: 'gitlab-ci.yaml',
-  TSCONFIG: 'tsconfig.json'
+  TSCONFIG: 'tsconfig.json',
+  NPMRC: 'npmrc_template',
 };
 
 export const DST_CONFIG_FILES ={
@@ -49,7 +51,8 @@ export const DST_CONFIG_FILES ={
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'next-env.d.ts',
   GITLABCIYAML: 'gitlab-ci.yaml',
-  TSCONFIG: 'tsconfig.json'
+  TSCONFIG: 'tsconfig.json',
+  NPMRC: '.npmrc'
 }
 
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
@@ -76,3 +79,8 @@ export const ERROR_MESSAGE = {
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again'
 };
+
+export const FIELD_TYPES = ['text', 'number'] as const;
+export const COMPONENTS_NAMES = ['FormLayout'] as const
+export const COMPONENTS_TYPES = ['Form'] as const
+

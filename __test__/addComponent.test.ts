@@ -2,12 +2,12 @@ import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = '';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'test',
-  path: 'test',
+  pageName: 'user',
+  path: 'user',
   components: [],
 };
 
@@ -17,79 +17,74 @@ const components: Component [] = [
       {
         Col: [
           {
-            colSize: 6,
             componentName: 'FormLayout',
-            type: 'Form',
-            attributes: [],
-            submitBtnText: 'send',
+            config: {
+              title: 'Form Test',
+              colSize: 6
+            },
             fields: [
               {
-                type: 'FormInput',
+                type: 'TextInput',
                 config: {
                   type: 'text',
-                  name: 'firstNameinput',
+                  name: 'firstName',
                   label: 'First Name',
-                  maxLength: 10,
-                  minLength: 2,
                   placeholder: 'Enter your first name',
                   colSize: 6,
                 },
               },
               {
-                type: 'FormInput',
+                type: 'NumberInput',
                 config: {
-                  type: 'text',
-                  name: 'lastNameinput',
-                  label: 'Last Name',
-                  maxLength: 10,
-                  minLength: 2,
-                  placeholder: 'Enter your last name',
+                  type: 'number',
+                  name: 'age',
+                  label: 'Age',
+                  placeholder: 'Enter your age',
                   colSize: 6,
                 },
-              },
-            ],
-          }
-        ]
-      },
-      {
-        Col: [
-          {
-            colSize: 6,
-            componentName: 'FormLayout',
-            type: 'Form',
-            attributes: [],
-            submitBtnText: 'send',
-            fields: [
-              {
-                type: 'FormInput',
-                config: {
-                  type: 'text',
-                  name: 'firstNameinput',
-                  label: 'First Name',
-                  maxLength: 10,
-                  minLength: 2,
-                  placeholder: 'Enter your first name',
-                  colSize: 6,
-                },
-              },
-              {
-                type: 'FormInput',
-                config: {
-                  type: 'text',
-                  name: 'lastNameinput',
-                  label: 'Last Name',
-                  maxLength: 10,
-                  minLength: 2,
-                  placeholder: 'Enter your last name',
-                  colSize: 6,
-                },
-              },
+              }
             ],
           }
         ]
       }
-    ],
-  }
+    ]
+  },
+  // {
+  //   Row: [
+  //     {
+  //       Col: [
+  //         {
+  //           colSize: 6,
+  //           componentName: 'FormLayout',
+  //           type: 'Form',
+  //           submitBtnText: 'send form',
+  //           fields: [
+  //             {
+  //               type: 'FormInput',
+  //               config: {
+  //                 type: 'text',
+  //                 name: 'firstNameinput',
+  //                 label: 'Company Name',
+  //                 placeholder: 'Enter your first name',
+  //                 colSize: 6,
+  //               },
+  //             },
+  //             {
+  //               type: 'FormInput',
+  //               config: {
+  //                 type: 'number',
+  //                 name: 'age',
+  //                 label: 'Company number',
+  //                 placeholder: 'Enter your age',
+  //                 colSize: 6,
+  //               },
+  //             }
+  //           ],
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ];
 
 beforeEach(async () => {

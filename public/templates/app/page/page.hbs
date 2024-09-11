@@ -11,75 +11,64 @@ import{
 {{#each velzonImports}}
   {{this}}{{#if @last}}{{else}},{{/if}}
 {{/each}}
-}from 'nosi-velzon-ts'
+}from '@igrp/nosi-velzon-ts'
 {{/if}}
 
 {{#each resourceConfig.components as |component index|}}
-{{#each this.Row as |component index|}}
-{{#each component.Col}}
-export type {{capitalize this.componentName}}{{index}}Config = [
+{{#each component.Row}}
+{{#each this.Col}}
+type I{{capitalize this.componentName}}{{@index}}Fields = {
   {{#each this.fields}}
-  {
-    type: {{../this.componentName}}Fields,
-    config:{{this.type}}Props,
-  }{{#if @last}}{{else}},{{/if}} 
+  {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
   {{/each}}
-]
+}
 {{/each}}
 {{/each}}
 {{/each}}
 
 {{/if}}
-
 export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each resourceConfig.components as |component index|}}
-  {{#each this.Row as |component index|}}
-  {{#each component.Col}}
-  {{toLowerCase this.componentName}}{{index}}: {
-    action?: {{capitalize this.componentName}}ActionFunction,
-    populate?: {{capitalize this.componentName}}PopulateFunction
-  }{{#if @last}}{{else}},{{/if}}
+  {{#each component.Row}}
+  {{#each this.Col}}
+  form{{@index}}: {{this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}Fields>['service']{{#if @last}}{{else}},{{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
 }
 
-
-
 export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
-  const service: IpageService = {{capitalize resourceConfig.pageName}}Service;
+  const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
 
   {{#each resourceConfig.components as |component index|}}
-  {{#each this.Row as |component index|}}
-  {{#each component.Col}}
-  const {{toLowerCase this.componentName}}Fields{{index}}: {{capitalize this.componentName}}Props<{{capitalize this.componentName}}{{index}}Config> = {
-    fields: [
+  {{#each component.Row}}
+  {{#each this.Col}}
+  const Form{{index}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.componentName}}{{index}}Fields> = {
+    service: service?.form{{@index}},
+    fields: {
       {{#each this.fields}}
-      {{{json this}}}{{#if @last}}{{else}},{{/if}}
+      {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
       {{/each}}
-    ]
+    },
+    config: {{{json this.config}}}
   };
   {{#each this.fields}}
-  
   {{/each}}
   {{/each}}
   {{/each}}
   {{/each}}
+
 
   return (
     <React.Fragment>
       <Container fluid>
         {{#each resourceConfig.components as |component index|}}
         <Row>
-        {{#each this.Row as |component index|}}
-          {{#each component.Col}}
-          <Col xxl={ {{this.colSize}} }>
-            <{{this.componentName}} 
-              populate = {service.{{toLowerCase this.componentName}}{{index}}.populate}
-              action = {service.{{toLowerCase this.componentName}}{{index}}.action}
-              fields = { {{toLowerCase this.componentName}}Fields{{index}}.fields}
-            />
+        {{#each component.Row }}
+          {{#each this.Col}}
+          <Col xxl={ {{this.config.colSize}} }>
+            <{{this.componentName}}.{{this.componentName}} {...Form{{@index}}Props}/>
           </Col>
           {{/each}}
         {{/each}}

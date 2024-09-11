@@ -6,11 +6,15 @@ import { ajvInstance } from '../utils/ajv-instance';
 const appConfigSchema: JSONSchemaType<AppConfig> = {
   type: 'object',
   properties: {
-    type: { type: 'string', const: 'baseApp' },
+    type: { 
+      type: 'string', 
+      const: 'baseApp',
+      errorMessage: "The app config type attribute must be 'baseApp'."
+    },
     appName: {
       type: 'string',
-      minLength: 3,
-      pattern: PATTERNS.NO_SPACE_AND_HYPHEN,
+      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
+      errorMessage: 'The application name must only contain letters and must not have spaces or special characters.'
     },
   },
   required: ['type', 'appName'],

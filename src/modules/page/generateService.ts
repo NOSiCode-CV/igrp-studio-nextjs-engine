@@ -12,7 +12,7 @@ export const generateService = async (context: RenderContext<PageConfig>) => {
   const service = await renderService(context);
   const pageServicePath = getPageServiceFilePath(context);
   
-  await saveToFile(service, pageServicePath);
+  await saveToFile(service, pageServicePath, false);
 };
 
 /**
