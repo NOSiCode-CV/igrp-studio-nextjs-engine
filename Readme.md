@@ -203,7 +203,7 @@ export const UserService: IuserService = {
 
 ![Application Preview](./assets/populateForm.png)
 
-#### Delte Page
+#### Delete Page
 You can delete the page you created using the following example:
 ```ts
 import { deletePage } from '@igrp/nextjs-engine';
