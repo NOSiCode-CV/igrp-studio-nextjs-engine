@@ -1,13 +1,14 @@
-'use client'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Col, Container, Row } from "reactstrap"
 
-import { Col, Row } from "reactstrap"
-
-export default function Page(){
+export default function Page() {
   return (
-    <Row>
-      <Col>
-        <h2>Welcome to NOSi</h2>
-      </Col>
-    </Row>
-  )
+    <Container fluid className="d-flex vh-100">
+      <Row className="justify-content-center align-items-center w-100">
+        <Col className="d-flex justify-content-center">
+          <h1 className="text-center">Welcome to {{baseConfig.appName}}</h1>
+        </Col>
+      </Row>
+    </Container>
+  );
 }

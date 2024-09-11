@@ -55,7 +55,7 @@ const configSchema: JSONSchemaType<ComponentConfig> ={
       type: 'string',
       nullable: true,
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
-      errorMessage: 'The submit button text attribute must only contain alphanumeric and must not have spaces or special characters.'
+      errorMessage: 'The title attribute must only contain alphanumeric and must not have spaces or special characters.'
     },
     submitBtnText: { 
       type: 'string',
@@ -73,7 +73,6 @@ const configSchema: JSONSchemaType<ComponentConfig> ={
   additionalProperties: false
 }
 
-
 const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
   type: 'object',
   properties: {  
@@ -84,8 +83,8 @@ const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
     config: {
       type: 'object',
       nullable: true,
-      items: configSchema,
-      errorMessage: 'The column config is not correct'
+      properties: configSchema.properties,
+      errorMessage: 'One or more fields in the component configuration are incorrect. Please check it'
     },
     fields: {
       type: 'array',

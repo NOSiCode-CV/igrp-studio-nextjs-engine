@@ -49,42 +49,6 @@ const components: Component [] = [
       }
     ]
   },
-  // {
-  //   Row: [
-  //     {
-  //       Col: [
-  //         {
-  //           colSize: 6,
-  //           componentName: 'FormLayout',
-  //           type: 'Form',
-  //           submitBtnText: 'send form',
-  //           fields: [
-  //             {
-  //               type: 'FormInput',
-  //               config: {
-  //                 type: 'text',
-  //                 name: 'firstNameinput',
-  //                 label: 'Company Name',
-  //                 placeholder: 'Enter your first name',
-  //                 colSize: 6,
-  //               },
-  //             },
-  //             {
-  //               type: 'FormInput',
-  //               config: {
-  //                 type: 'number',
-  //                 name: 'age',
-  //                 label: 'Company number',
-  //                 placeholder: 'Enter your age',
-  //                 colSize: 6,
-  //               },
-  //             }
-  //           ],
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 ];
 
 beforeEach(async () => {

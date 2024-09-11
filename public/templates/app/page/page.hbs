@@ -1,5 +1,9 @@
 'use client'
 
+{{#if resourceConfig.components}}
+{{else}}
+import 'bootstrap/dist/css/bootstrap.min.css';
+{{/if}}
 import React from 'react'
 import { Col, Row, Container } from 'reactstrap'
 import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
@@ -15,9 +19,9 @@ import{
 {{/if}}
 
 {{#each resourceConfig.components as |component index|}}
-{{#each component.Row}}
-{{#each this.Col}}
-type I{{capitalize this.componentName}}{{@index}}Fields = {
+{{#each component.Row as |rows indexRow|}}
+{{#each rows.Col}}
+type I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields = {
   {{#each this.fields}}
   {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
   {{/each}}
@@ -29,9 +33,9 @@ type I{{capitalize this.componentName}}{{@index}}Fields = {
 {{/if}}
 export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each resourceConfig.components as |component index|}}
-  {{#each component.Row}}
-  {{#each this.Col}}
-  form{{@index}}: {{this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{#each component.Row as |rows indexRow|}}
+  {{#each rows.Col}}
+  form{{@index}}{{indexRow}}: {{this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields>['service']{{#if @last}}{{else}},{{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -42,10 +46,10 @@ export default function {{resourceConfig.pageName}}() {
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
 
   {{#each resourceConfig.components as |component index|}}
-  {{#each component.Row}}
-  {{#each this.Col}}
-  const Form{{index}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.componentName}}{{index}}Fields> = {
-    service: service?.form{{@index}},
+  {{#each component.Row as |rows indexRow|}}
+  {{#each rows.Col}}
+  const Form{{@index}}{{indexRow}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields> = {
+    service: service?.form{{@index}}{{indexRow}},
     fields: {
       {{#each this.fields}}
       {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
@@ -65,10 +69,10 @@ export default function {{resourceConfig.pageName}}() {
       <Container fluid>
         {{#each resourceConfig.components as |component index|}}
         <Row>
-        {{#each component.Row }}
-          {{#each this.Col}}
+        {{#each component.Row as |rows indexRow|}}
+          {{#each rows.Col}}
           <Col xxl={ {{this.config.colSize}} }>
-            <{{this.componentName}}.{{this.componentName}} {...Form{{@index}}Props}/>
+            <{{this.componentName}}.{{this.componentName}} {...Form{{@index}}{{indexRow}}Props}/>
           </Col>
           {{/each}}
         {{/each}}
@@ -78,6 +82,16 @@ export default function {{resourceConfig.pageName}}() {
     </React.Fragment>
   )
   {{else}}
-    return null
+  return (
+    <Container fluid className="d-flex vh-100">
+      <Row className="justify-content-center align-items-center w-100">
+        <Col xl={12} className="d-flex justify-content-center">
+          <p className="text-center" style={ { fontSize: 35 } }>
+            Your components will be displayed here
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  )
   {{/if}}
 }
