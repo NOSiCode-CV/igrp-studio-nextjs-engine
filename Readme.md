@@ -40,9 +40,9 @@ You can find all test files in the test directory
 ## Examples of use as a package:
 
 ### Install the package:
-
+In your project 
 ```bash
-yarn add nextjs-engine@1.0.2 --registry=https://sonatype.nosi.cv/repository/npm-group/
+yarn add @igrp/nextjs-engine@0.0.1 --registry=https://sonatype.nosi.cv/repository/npm-group/
 ```
 
 ### Using the Package:
@@ -53,14 +53,14 @@ The following example demonstrates how to initialize and set up a base structure
 
 
 ```typescript
-import { newApp } from 'nextjs-engine';
-import { AppConfig } from 'nextjs-engine/dist/interfaces/types';
+import { newApp } from '@igrp/nextjs-engine';
+import { AppConfig } from '@igrp/nextjs-engine/dist/interfaces/types';
 
-const basePath = 'your path where the application will be created';
+const basePath = 'Path where the application will be created';
 
 const appConfig: AppConfig = {
   type: 'baseApp',
-  appName: 'nosi-frontend',
+  appName: 'appTest',
 };
 
 const createApp = async () => {
@@ -74,15 +74,30 @@ const createApp = async () => {
 
 createApp();
 ```
+Open a terminal in the generated application root directory or use a code editor with an integrated terminal. Then, run the following command to install all the project dependencies:
+```bash
+yarn
+```
+Once the dependencies are installed, run the following command to start the application in development mode:
+```bash
+yarn run dev
+```
+If all went well, the application will be running at the following URL:
+```bash
+http://localhost:3000
+```
+Open that address in your browser and you should see the welcome page, similar to the one shown in the image below.
+![Application Preview](./assets/welcomePage.png)
+
 - #### add Page to the Application
 ```ts
-import { newPage } from 'nextjs-engine';
-import { PageConfig } from 'nextjs-engine/dist/interfaces/types';
+import { newPage } from '@igrp/nextjs-engine';
+import { PageConfig } from '@igrp/nextjs-engine/dist/interfaces/types';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'pageTest',
-  path: 'test',
+  pageName: 'user',
+  path: 'users',
   components: [],
 };
 
@@ -97,63 +112,63 @@ const createPage = async () => {
 
 createPage();
 ```
+After running the above code, you can view the created page by navigating to the following URL in your browser:
+```bash
+http://localhost:3000/pages/user
+```
+![Application Preview](./assets/newPage.png)
 
 #### Add Components to the Page
 ```ts
-import { addComponentToPage } from 'nextjs-engine';
-import { PageConfig, Component } from 'nextjs-engine/dist/interfaces/types';
+import { addComponentToPage } from '@igrp/nextjs-engine';
+import { PageConfig, Component } from '@igrp/nextjs-engine/dist/interfaces/types';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'pageTest',
-  path: 'test',
+  pageName: 'user',
+  path: 'users',
+  components: [],
 };
 
-const components: Component[] = [
+const components: Component [] = [
   {
     Row: [
       {
         Col: [
           {
-            colSize: 6,
             componentName: 'FormLayout',
-            type: 'Form',
-            attributes: [],
-            submitBtnText: 'send',
+            config: {
+              title: 'Form Test',
+              colSize: 6
+            },
             fields: [
               {
-                type: 'FormInput',
+                type: 'TextInput',
                 config: {
                   type: 'text',
-                  name: 'firstNameinput',
+                  name: 'firstName',
                   label: 'First Name',
-                  maxLength: 10,
-                  minLength: 2,
                   placeholder: 'Enter your first name',
                   colSize: 6,
                 },
               },
               {
-                type: 'FormInput',
+                type: 'NumberInput',
                 config: {
-                  type: 'text',
-                  name: 'lastNameinput',
-                  label: 'Last Name',
-                  maxLength: 10,
-                  minLength: 2,
-                  placeholder: 'Enter your last name',
+                  type: 'number',
+                  name: 'age',
+                  label: 'Age',
+                  placeholder: 'Enter your age',
                   colSize: 6,
                 },
-              },
+              }
             ],
-          },
-        ],
-      },
-    ],
+          }
+        ]
+      }
+    ]
   },
 ];
-
-const basePath = 'C:/Users/Eduardo Fernando/Documents/Wayvant/Proyecto Cabo Verde/Engines/test/app-nosi';
 
 const addComponent = async () => {
   try {
@@ -167,41 +182,36 @@ const addComponent = async () => {
 addComponent();
 
 ```
-## Run the Application
-After generating the application and adding pages and components, follow these steps from the root directory of the application:
+You should now see the new components added, such as the form shown in the image in the next section.
+![Application Preview](./assets/componentPage.png)
 
-1. Install the project dependencies:
-```bash
-yarn
-```
-2. Add the required nosi-velzon-ts package:
-```bash
-yarn add nosi-velzon-ts@1.0.2 --registry=https://sonatype.nosi.cv/repository/npm-group/
-```
-3. Start the development server
-```bash
-yarn run dev
-```
-4. Once the server is running, open your browser and navigate to the following URL:
-```bash
-localhost:3000/pages/pageTest
-```
-If you have followed all the steps correctly, you should see something like this in your browser:
+The form inputs are initially empty. To populate them with test data or any other data, it is necessary to implement the interface methods in the generated service.
 
+### Implementacion del servicio:
+Follow the steps below to implement the service logic in the form:
+1. Update the UserService.ts file located in services/user/UserService.ts with the following code:
+```ts
+export const UserService: IuserService = {
+  form00: {
+    populate: () => ({firstName:'NOSi', age:30}),
+    action: (vals) => console.log(vals)
+  }
+}
+```
+- Now, when you load the form, the First Name and Age fields should be pre-filled with the data provided by the service (firstName: 'NOSi' and age: 30).
+- When you click the Submit button, the current values ​​of the form will be printed to the console.
 
-![Application Preview](./assets/application_preview.png)
-
+![Application Preview](./assets/populateForm.png)
 
 #### Delte Page
 You can delete the page you created using the following example:
 ```ts
-import { deletePage } from 'nextjs-engine';
-import { PageConfig } from 'nextjs-engine/dist/interfaces/types';
+import { deletePage } from '@igrp/nextjs-engine';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'pageTest',
-  path: 'test',
+  pageName: 'user',
+  path: 'users',
   components: [],
 };
 
@@ -219,49 +229,59 @@ removePage();
 
 ### Types and Interfaces
 ```ts
-AppConfig {
+export interface AppConfig {
   type: 'baseApp';
   appName: string;
 }
 
-PageConfig {
+export interface PageConfig {
   type: 'page';
   pageName: string;
   path: string;
   components?: Component[];
 }
 
-Component {
+export interface Component {
   Row: RowLayout[];
 }
 
-RowLayout {
+export interface RowLayout {
   Col: ColumnLayout[];
+  
 }
 
-ColumnLayout {
-  colSize: number;
-  componentName: string;
-  type: string;
-  submitBtnText?: string;
-  attributes: string[];
+export interface ColumnLayout {
+  config?: ComponentConfig,
+  componentName: ComponentNames;
   fields?: Field[];
 }
 
-Field {
+export interface Field {
   type: string;
   config: FieldConfig;
 }
 
-FieldConfig {
-  type: string;
+export interface ComponentConfig {
+  title?: string
+  colSize?: number,
+  submitBtnText?: string;
+}
+
+export interface FieldConfig {
+  type: FieldTypes;
   name: string;
   label?: string;
-  maxLength?: number;
-  minLength?: number;
-  max?: number;
-  min?: number;
-  colSize: number;
+  colSize?: number;
   placeholder?: string;
 }
+
+export type RenderContext<T = undefined> = {
+  resourceConfig: T;
+  basePath: string;
+  baseConfig?: AppConfig;
+  velzonImports?: string[];
+};
+
 ```
+## End
+#### To read more valuable information about the NextJS Engine, we recommend taking a look at its corresponding documentation.
