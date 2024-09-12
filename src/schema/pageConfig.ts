@@ -73,9 +73,15 @@ const configSchema: JSONSchemaType<ComponentConfig> ={
   additionalProperties: false
 }
 
+
 const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
   type: 'object',
-  properties: {  
+  properties: { 
+    id: {
+      type: 'string',
+      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
+      errorMessage: 'The id attribute must only contain alphanumeric and must not have spaces or special characters and must be unique.'
+    },
     componentName: { 
       type: 'string',
       errorMessage: `Component name only must be one of ${COMPONENTS_NAMES}`
@@ -93,7 +99,7 @@ const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
       errorMessage: 'The fields array must contain a valid field configuration'
     }
   },
-  required: ['componentName'],
+  required: ['componentName', 'id'],
   additionalProperties: false
 };
 

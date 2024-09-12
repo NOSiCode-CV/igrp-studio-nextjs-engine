@@ -42,7 +42,7 @@ You can find all test files in the test directory
 ### Install the package:
 In your project 
 ```bash
-yarn add @igrp/nextjs-engine@0.0.1 --registry=https://sonatype.nosi.cv/repository/npm-group/
+yarn add @igrp/nextjs-engine@0.0.2 --registry=https://sonatype.nosi.cv/repository/npm-group/
 ```
 
 ### Using the Package:

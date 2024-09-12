@@ -22,6 +22,7 @@ export interface RowLayout {
 }
 
 export interface ColumnLayout {
+  id: string,
   config?: ComponentConfig,
   componentName: ComponentNames;
   fields?: Field[];

@@ -21,7 +21,7 @@ import{
 {{#each resourceConfig.components as |component index|}}
 {{#each component.Row as |rows indexRow|}}
 {{#each rows.Col}}
-type I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields = {
+type I{{capitalize this.id}}Fields = {
   {{#each this.fields}}
   {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
   {{/each}}
@@ -35,7 +35,7 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each resourceConfig.components as |component index|}}
   {{#each component.Row as |rows indexRow|}}
   {{#each rows.Col}}
-  form{{@index}}{{indexRow}}: {{this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  form{{capitalize this.id}}: {{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -48,8 +48,8 @@ export default function {{resourceConfig.pageName}}() {
   {{#each resourceConfig.components as |component index|}}
   {{#each component.Row as |rows indexRow|}}
   {{#each rows.Col}}
-  const Form{{@index}}{{indexRow}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.componentName}}{{@index}}{{indexRow}}Fields> = {
-    service: service?.form{{@index}}{{indexRow}},
+  const Form{{capitalize this.id}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
+    service: service?.form{{capitalize this.id}},
     fields: {
       {{#each this.fields}}
       {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
@@ -72,7 +72,7 @@ export default function {{resourceConfig.pageName}}() {
         {{#each component.Row as |rows indexRow|}}
           {{#each rows.Col}}
           <Col xxl={ {{this.config.colSize}} }>
-            <{{this.componentName}}.{{this.componentName}} {...Form{{@index}}{{indexRow}}Props}/>
+            <{{this.componentName}}.{{this.componentName}} {...Form{{capitalize this.id}}Props}/>
           </Col>
           {{/each}}
         {{/each}}
