@@ -40,9 +40,9 @@ You can find all test files in the test directory
 ## Examples of use as a package:
 
 ### Install the package:
-In your project 
-```bash
-yarn add @igrp/nextjs-engine@0.0.2 --registry=https://sonatype.nosi.cv/repository/npm-group/
+In your project:
+```
+yarn add @igrp/nextjs-engine@0.0.3 --registry=https://sonatype.nosi.cv/repository/npm-group/
 ```
 
 ### Using the Package:

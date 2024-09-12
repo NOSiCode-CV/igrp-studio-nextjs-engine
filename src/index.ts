@@ -11,7 +11,6 @@ import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { AppConfig, RenderContext, Component, PageConfig } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
-import logger from './utils/logger';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -31,7 +30,6 @@ import logger from './utils/logger';
  *
  */
 export const newApp = async (baseConfig: AppConfig, basePath: string) => {
-  logger.info('Validating the configuration file...');
 
   const isBaseConfigValid = appConfigValidate(baseConfig);
 
@@ -41,7 +39,7 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
 
   if (!(await checkIfDirectoryIsEmpty(basePath))) throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
 
-  logger.info('Saving the configuration file...');
+ 
   await saveBaseAppFileConfig(baseConfig, basePath);
 
   const context: RenderContext = {
@@ -50,20 +48,17 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
     baseConfig,
   };
 
-  logger.info('Creating the application directories...');
+
 
   /**
    * Creates the folder structure needed for the application.
    */
   await createAppDirectories(context);
 
-  logger.info('Generating the default application files...');
   /**
    * Creates the configuration files based on the provided context.
    */
   await saveFileConfig(context);
-
-  logger.info('Application generated with success');
 
 };
 
@@ -74,7 +69,6 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
  */
 
 export const newPage = async (pageConfig: PageConfig, basePath: string) => {
-  logger.info('Validating the configuration file...');
 
   const isPageConfigValid = pageConfigValidate(pageConfig);
 
@@ -83,17 +77,15 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  logger.info('Saving the configuration file...');
+ 
   await savePageConfig(pageConfig, basePath);
 
   const context: RenderContext<PageConfig> = {
     resourceConfig: pageConfig,
     basePath: basePath,
   };
-  logger.info('Generating the page');
-  await generatePage(context);
-  logger.info('Page generated');
   
+  await generatePage(context);
   await generateService(context);
 
 };
@@ -104,7 +96,6 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
  * @param basePath 
  */
 export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
-  logger.info('Validating the configuration file...');
   const isPageConfigValid = pageConfigValidate(pageConfig);
 
   if (!isPageConfigValid && pageConfigValidate.errors) 
@@ -118,7 +109,6 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
   }
 
   await deletePageConfig(context)
-  logger.info('Page deleted');
 };
 
 /**
@@ -127,10 +117,7 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
  * @param component
  * @param basePath
  */
-
 export const addComponentToPage = async (pageConfig: PageConfig, components: Component[], basePath: string) => {
-  logger.info('Validating the configuration file');
-
   const isPageConfigValid = pageConfigValidate(pageConfig);
 
   if (!isPageConfigValid && pageConfigValidate.errors) 
@@ -142,7 +129,5 @@ export const addComponentToPage = async (pageConfig: PageConfig, components: Com
     resourceConfig: pageConfig,
     basePath: basePath,
   };
-  logger.info('Refreshing the page')
   await updateAndRenderPage(components, context);
-  logger.info('Added components')
 };

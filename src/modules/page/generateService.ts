@@ -3,8 +3,6 @@ import { renderTemplate } from '../common/renderTemplate';
 import { getPageServiceFilePath } from '../../utils/helpers';
 import { ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
 import { PageConfig, RenderContext } from '../../interfaces/types';
-import logger from '../../utils/logger';
-
 /** 
 * Renders a service file for a page based on the configuration provided in the context.
 *
@@ -17,9 +15,7 @@ export const generateService = async (context: RenderContext<PageConfig>) => {
   const service = await renderService(context);
   const pageServicePath = getPageServiceFilePath(context);
   
-  logger.info('Generating service');
   await saveToFile(service, pageServicePath, false);
-  logger.info('Service generated');
 };
 
 /**

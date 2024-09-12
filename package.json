@@ -1,6 +1,6 @@
 {
   "name": "@igrp/nextjs-engine",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The NextJS engine application allows to create a new NextJS application",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -36,15 +36,13 @@
     "react-dom": "^18.3.1",
     "react-select": "^5.8.0",
     "reactstrap": "^9.2.2",
-    "ts-loader": "^9.5.1",
-    "winston": "^3.14.2"
+    "ts-loader": "^9.5.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.2.0",
     "@types/react": "^18.3.4",
-    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^8.0.1",
     "@typescript-eslint/parser": "^8.0.1",
     "cross-env": "^7.0.3",
