@@ -21,7 +21,7 @@ const components: Component [] = [
             id: 'userData',
             config: {
               title: 'Form Test',
-              colSize: 6
+              colSize: 12
             },
             fields: [
               {
@@ -31,7 +31,7 @@ const components: Component [] = [
                   name: 'firstName',
                   label: 'First Name',
                   placeholder: 'Enter your first name',
-                  colSize: 6,
+                  colSize: 4,
                 },
               },
               {

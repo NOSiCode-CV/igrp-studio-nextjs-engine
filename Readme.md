@@ -138,6 +138,7 @@ const components: Component [] = [
           {
             componentName: 'FormLayout',
             config: {
+              id: 'userData', 
               title: 'Form Test',
               colSize: 6
             },
@@ -192,7 +193,7 @@ Follow the steps below to implement the service logic in the form:
 1. Update the UserService.ts file located in services/user/UserService.ts with the following code:
 ```ts
 export const UserService: IuserService = {
-  form00: {
+  formUserData: {
     populate: () => ({firstName:'NOSi', age:30}),
     action: (vals) => console.log(vals)
   }
@@ -251,6 +252,7 @@ export interface RowLayout {
 }
 
 export interface ColumnLayout {
+  id: string,
   config?: ComponentConfig,
   componentName: ComponentNames;
   fields?: Field[];
