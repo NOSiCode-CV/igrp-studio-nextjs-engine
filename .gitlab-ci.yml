@@ -1,7 +1,7 @@
 stages:
   - build
-build_package_dev:
-  image: node
+build_packagedev:
+  image: next
   stage: build
   only:
     - master
@@ -9,3 +9,6 @@ build_package_dev:
     - npm install
     - npm run build
     - npm publish --registry=https://sonatype.nosi.cv/repository/igrp/
+  artifacts:
+    paths:
+      - .next/
