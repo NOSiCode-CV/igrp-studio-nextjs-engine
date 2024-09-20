@@ -1,7 +1,7 @@
 stages:
   - build
 build_packagedev:
-  image: node:lts
+  image: node:slim
   stage: build
   only:
     - master
