@@ -18,7 +18,7 @@ const components: Component [] = [
         Col: [
           {
             componentName: 'FormLayout',
-            id: 'userData',
+            id: 'FormDataEmployer',
             config: {
               title: 'Form Test',
               colSize: 12
