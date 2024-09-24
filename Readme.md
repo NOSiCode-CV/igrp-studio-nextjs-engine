@@ -42,7 +42,7 @@ You can find all test files in the test directory
 ### Install the package:
 In your project:
 ```
-yarn add @igrp/nextjs-engine@0.0.3 --registry=https://sonatype.nosi.cv/repository/npm-group/
+yarn add @igrp/nextjs-engine@0.0.5 --registry=https://sonatype.nosi.cv/repository/npm-group/
 ```
 
 ### Using the Package:
@@ -136,35 +136,40 @@ const components: Component [] = [
       {
         Col: [
           {
-            componentName: 'FormLayout',
-            config: {
-              id: 'userData', 
-              title: 'Form Test',
-              colSize: 6
-            },
-            fields: [
+            id: 'col_nihdj',
+            components:[
               {
-                type: 'TextInput',
-                config: {
-                  type: 'text',
-                  name: 'firstName',
-                  label: 'First Name',
-                  placeholder: 'Enter your first name',
-                  colSize: 6,
+                id:"company",
+                componentName:'FormLayout',
+                config:{
+                  title:"Form Test",
+                  colSize:6,
                 },
-              },
-              {
-                type: 'NumberInput',
-                config: {
-                  type: 'number',
-                  name: 'age',
-                  label: 'Age',
-                  placeholder: 'Enter your age',
-                  colSize: 6,
-                },
+                fields:[
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'firstName',
+                      label: 'First Name',
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
+                    },
+                  },
+                  {
+                    type: 'NumberInput',
+                    config: {
+                      type: 'number',
+                      name: 'age',
+                      label: 'Age',
+                      placeholder: 'Enter your age',
+                      colSize: 6,
+                    },
+                  }
+                ]
               }
-            ],
-          }
+            ]
+          },
         ]
       }
     ]
@@ -230,6 +235,8 @@ removePage();
 
 ### Types and Interfaces
 ```ts
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constants';
+
 export interface AppConfig {
   type: 'baseApp';
   appName: string;
@@ -252,10 +259,15 @@ export interface RowLayout {
 }
 
 export interface ColumnLayout {
-  id: string,
-  config?: ComponentConfig,
-  componentName: ComponentNames;
-  fields?: Field[];
+  id: string;
+  components?: ColumnComponent[]; 
+}
+
+export interface ColumnComponent {
+  id: string;
+  componentName: ComponentNames
+  config: ColumnConfig;
+  fields?: Field[]; 
 }
 
 export interface Field {
@@ -263,10 +275,9 @@ export interface Field {
   config: FieldConfig;
 }
 
-export interface ComponentConfig {
-  title?: string
-  colSize?: number,
-  submitBtnText?: string;
+export interface ColumnConfig {
+  title?: string;
+  colSize: number;
 }
 
 export interface FieldConfig {
@@ -283,6 +294,11 @@ export type RenderContext<T = undefined> = {
   baseConfig?: AppConfig;
   velzonImports?: string[];
 };
+
+
+export type FieldTypes = (typeof FIELD_TYPES)[number];
+export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
+export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 
 ```
 ## End

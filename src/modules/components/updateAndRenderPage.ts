@@ -28,7 +28,9 @@ const uniquesImports = (components: Component[]) => {
   components.forEach(comp => {
     comp.Row.forEach(row => {
       row.Col.forEach(col => {
-        componentsToImport.push(col.componentName);
+        col.components?.forEach(component => {
+          componentsToImport.push(component.componentName);
+        })
       });
     });
   });

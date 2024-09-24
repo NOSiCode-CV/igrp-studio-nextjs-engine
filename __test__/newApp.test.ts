@@ -1,8 +1,6 @@
-import path from 'path';
 import fs from 'fs-extra';
 import { newApp } from '../src/index';
 import { AppConfig } from '../src/interfaces/types';
-import { ERROR_MESSAGE } from '../src/utils/constants';
 
 export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
 export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo Fernando/Downloads/myapp';

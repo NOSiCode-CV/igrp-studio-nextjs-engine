@@ -22,10 +22,15 @@ export interface RowLayout {
 }
 
 export interface ColumnLayout {
-  id: string,
-  config?: ComponentConfig,
-  componentName: ComponentNames;
-  fields?: Field[];
+  id: string;
+  components?: ColumnComponent[]; 
+}
+
+export interface ColumnComponent {
+  id: string;
+  componentName: ComponentNames
+  config: ColumnConfig;
+  fields?: Field[]; 
 }
 
 export interface Field {
@@ -33,10 +38,9 @@ export interface Field {
   config: FieldConfig;
 }
 
-export interface ComponentConfig {
-  title?: string
-  colSize?: number,
-  submitBtnText?: string;
+export interface ColumnConfig {
+  title?: string;
+  colSize: number;
 }
 
 export interface FieldConfig {
@@ -53,6 +57,7 @@ export type RenderContext<T = undefined> = {
   baseConfig?: AppConfig;
   velzonImports?: string[];
 };
+
 
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];

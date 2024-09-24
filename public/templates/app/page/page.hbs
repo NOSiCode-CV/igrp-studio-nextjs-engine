@@ -18,9 +18,10 @@ import{
 }from '@igrp/nosi-velzon-ts'
 {{/if}}
 
-{{#each resourceConfig.components as |component index|}}
-{{#each component.Row as |rows indexRow|}}
-{{#each rows.Col}}
+{{#each resourceConfig.components}}
+{{#each Row}}
+{{#each Col }}
+{{#each components}}
 type I{{capitalize this.id}}Fields = {
   {{#each this.fields}}
   {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
@@ -29,13 +30,16 @@ type I{{capitalize this.id}}Fields = {
 {{/each}}
 {{/each}}
 {{/each}}
+{{/each}}
 
 {{/if}}
 export type I{{toLowerCase resourceConfig.pageName}}Service = {
-  {{#each resourceConfig.components as |component index|}}
-  {{#each component.Row as |rows indexRow|}}
-  {{#each rows.Col}}
-  form{{capitalize this.id}}: {{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{#each resourceConfig.components}}
+  {{#each Row }}
+  {{#each Col}}
+  {{#each components}}
+  {{toLowerCase this.id}}: {{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{/each}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -45,11 +49,12 @@ export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
 
-  {{#each resourceConfig.components as |component index|}}
-  {{#each component.Row as |rows indexRow|}}
-  {{#each rows.Col}}
-  const Form{{capitalize this.id}}Props: {{capitalize this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
-    service: service?.form{{capitalize this.id}},
+  {{#each resourceConfig.components}}
+  {{#each Row}}
+  {{#each Col}}
+  {{#each components}}
+  const {{capitalize this.id}}Props: {{this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
+    service: service?.{{toLowerCase this.id}},
     fields: {
       {{#each this.fields}}
       {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
@@ -62,18 +67,21 @@ export default function {{resourceConfig.pageName}}() {
   {{/each}}
   {{/each}}
   {{/each}}
+  {{/each}}
 
 
   return (
     <React.Fragment>
       <Container fluid>
-        {{#each resourceConfig.components as |component index|}}
+        {{#each resourceConfig.components}}
         <Row>
-        {{#each component.Row as |rows indexRow|}}
-          {{#each rows.Col}}
-          <Col xxl={ {{this.config.colSize}} }>
-            <{{this.componentName}}.{{this.componentName}} {...Form{{capitalize this.id}}Props}/>
+        {{#each Row}}
+          {{#each Col}}
+          {{#each components}}
+          <Col lg={ {{this.config.colSize}} }>
+            <{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props}/>
           </Col>
+          {{/each}}
           {{/each}}
         {{/each}}
         </Row>

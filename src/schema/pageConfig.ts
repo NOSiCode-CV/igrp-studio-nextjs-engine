@@ -1,16 +1,16 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { PageConfig, Component, FieldConfig, ColumnLayout, RowLayout, Field, ComponentConfig } from '../interfaces/types';
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES, PATTERNS } from '../utils/constants';
+import { PageConfig, ColumnComponent, FieldConfig, ColumnLayout, RowLayout, Field, Component, ColumnConfig } from '../interfaces/types';
+import { COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
-
+// Schema para FieldConfig
 const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
   type: 'object',
   properties: {
     type: {
       type: "string",
       enum: FIELD_TYPES,
-      errorMessage: `Field type only must be on of ${FIELD_TYPES}`
+      errorMessage: `Field type must be one of ${FIELD_TYPES}`
     },
     name: {
       type: "string",
@@ -26,19 +26,18 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
     colSize: {
       type: "number",
       nullable: true,
-      errorMessage: `The number attribute must only contain number and must not have spaces or special characters.`
+      errorMessage: `The colSize attribute must be a number.`
     },
     placeholder: {
       type: "string",
       nullable: true
     },
-
   },
   required: ['type', 'name'],
   additionalProperties: false
 };
 
-
+// Schema para Field
 const fieldSchema: JSONSchemaType<Field> = {
   type: 'object',
   properties: {
@@ -48,95 +47,107 @@ const fieldSchema: JSONSchemaType<Field> = {
   required: ['type', 'config'],
 };
 
-const configSchema: JSONSchemaType<ComponentConfig> ={
+// Schema para ConlumnConfig
+const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
   type: 'object',
   properties: {
-    title: { 
+    title: {
       type: 'string',
       nullable: true,
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
-      errorMessage: 'The title attribute must only contain alphanumeric and must not have spaces or special characters.'
+      errorMessage: 'The title attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
-    submitBtnText: { 
-      type: 'string',
-      nullable: true,
-      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
-      errorMessage: 'The submit button text attribute must only contain alphanumeric and must not have spaces or special characters.'
-    },
-    colSize: { 
-      type: 'number', 
-      nullable: true,
-      errorMessage: 'Col size must by a number'
+    colSize: {
+      type: 'number',
+      errorMessage: 'The colSize attribute must be a number.'
     },
   },
-  required: [],
+  required: ['colSize'],
   additionalProperties: false
-}
+};
 
-
-const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
+// Schema para ColumnComponent (los componentes anidados dentro de las columnas)
+const columnComponentSchema: JSONSchemaType<ColumnComponent> = {
   type: 'object',
-  properties: { 
+  properties: {
     id: {
       type: 'string',
-      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
-      errorMessage: 'The id attribute must only contain alphanumeric and must not have spaces or special characters and must be unique.'
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
-    componentName: { 
+    componentName: {
       type: 'string',
+      enum: COMPONENTS_NAMES,
       errorMessage: `Component name only must be one of ${COMPONENTS_NAMES}`
     },
-    config: {
-      type: 'object',
-      nullable: true,
-      properties: configSchema.properties,
-      errorMessage: 'One or more fields in the component configuration are incorrect. Please check it'
-    },
+    config: columnConfigSchema,
     fields: {
       type: 'array',
       nullable: true,
       items: fieldSchema,
-      errorMessage: 'The fields array must contain a valid field configuration'
+      errorMessage: 'The fields array must contain valid field configurations.'
     }
   },
-  required: ['componentName', 'id'],
+  required: ['id', 'componentName'],
   additionalProperties: false
 };
 
+// Schema para ColumnLayout (las columnas que contienen componentes)
+const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    components: {
+      type: 'array',
+      nullable: true,
+      items: columnComponentSchema,
+      errorMessage: 'Components array must contain valid component configurations.'
+    }
+  },
+  required: ['id'],
+  additionalProperties: false
+};
 
+// Schema para RowLayout (las filas que contienen columnas)
 const rowLayoutSchema: JSONSchemaType<RowLayout> = {
   type: 'object',
   properties: {
     Col: {
       type: 'array',
       items: columnLayoutSchema,
-      errorMessage: 'Invalid Col configuration'
+      errorMessage: 'Invalid Col configuration.'
     }
   },
   required: ['Col'],
   additionalProperties: false
 };
 
-
+// Schema para Component (los componentes que contienen filas)
 const componentSchema: JSONSchemaType<Component> = {
   type: 'object',
   properties: {
     Row: {
       type: 'array',
-      items: rowLayoutSchema
+      items: rowLayoutSchema,
+      errorMessage: 'Invalid Row configuration.'
     }
   },
   required: ['Row'],
+  additionalProperties: false
 };
 
-
+// Schema para PageConfig (la configuración de la página)
 const pageConfigSchema: JSONSchemaType<PageConfig> = {
   type: 'object',
   properties: {
     type: {
       type: "string",
       const: "page",
-      errorMessage: "The Page type must be 'page'",
+      errorMessage: "The Page type must be 'page'.",
     },
     pageName: {
       type: "string",
@@ -152,7 +163,7 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       type: 'array',
       nullable: true,
       items: componentSchema,
-      errorMessage: 'Components array must contain a valid configuration',
+      errorMessage: 'Components array must contain valid configurations.'
     }
   },
   required: ['type', 'pageName', 'path'],

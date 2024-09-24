@@ -17,39 +17,44 @@ const components: Component [] = [
       {
         Col: [
           {
-            componentName: 'FormLayout',
-            id: 'FormDataEmployer',
-            config: {
-              title: 'Form Test',
-              colSize: 12
-            },
-            fields: [
+            id: 'col_nihdj',
+            components:[
               {
-                type: 'TextInput',
-                config: {
-                  type: 'text',
-                  name: 'firstName',
-                  label: 'First Name',
-                  placeholder: 'Enter your first name',
-                  colSize: 4,
+                id:"company",
+                componentName:'FormLayout',
+                config:{
+                  title:"Form Test",
+                  colSize:6,
                 },
-              },
-              {
-                type: 'NumberInput',
-                config: {
-                  type: 'number',
-                  name: 'age',
-                  label: 'Age',
-                  placeholder: 'Enter your age',
-                  colSize: 6,
-                },
+                fields:[
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'firstName',
+                      label: 'First Name',
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
+                    },
+                  },
+                  {
+                    type: 'NumberInput',
+                    config: {
+                      type: 'number',
+                      name: 'age',
+                      label: 'Age',
+                      placeholder: 'Enter your age',
+                      colSize: 6,
+                    },
+                  }
+                ]
               }
-            ],
-          }
+            ]
+          },
         ]
       }
     ]
-  },
+  }
 ];
 
 beforeEach(async () => {
