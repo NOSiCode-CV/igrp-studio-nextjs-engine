@@ -21,7 +21,7 @@ sonarqube_scan:
   stage: test
   image: sonarsource/sonar-scanner-cli:latest
   script:
-    - sonar-scanner -Dsonar.projectKey=my_node_project_key
+    - sonar-scanner -Dsonar.projectKey=nextjs_engine_key
   only:
     - master
 
