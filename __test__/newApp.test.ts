@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { newApp } from '../src/index';
 import { AppConfig } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/frontend';
 export const NON_EMPTY_DIRECTORY = 'C:/Users/Eduardo Fernando/Downloads/myapp';
 
 const baseConfig: AppConfig = {

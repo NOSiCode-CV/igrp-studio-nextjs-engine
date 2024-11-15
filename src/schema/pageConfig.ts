@@ -57,12 +57,54 @@ const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage: 'The title attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
+    showTitle: {
+      type:'boolean',
+      nullable: true,
+      errorMessage: 'The showTitle attribute must be true or false.'
+    },
+
     colSize: {
       type: 'number',
+      nullable: true,
       errorMessage: 'The colSize attribute must be a number.'
     },
+    pageSize: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The pageSize attribute must be a number.'
+    },
+    isPagination: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isPagination attribute must be true or false.'
+    },
+    isGlobalFilter: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isGlobalFilter attribute must be true or false.'
+    },
+    SearchPlaceholder: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The SearchPlaceholder attribute must be a string.'
+    },
+    isSortable: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isSortable attribute must be true or false.'
+    },
+    actionTitle: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The actionTitle attribute must be a string.'
+    },
+    servrSsidePagination: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The servrSsidePagination attribute must be true or false.'
+    }
   },
-  required: ['colSize'],
+  required: [],
   additionalProperties: false
 };
 
@@ -101,6 +143,10 @@ const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
+    colSize: {
+      type: 'number',
+      errorMessage: 'The colSize attribute must be a number.'
+    },
     components: {
       type: 'array',
       nullable: true,
@@ -108,7 +154,7 @@ const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
       errorMessage: 'Components array must contain valid component configurations.'
     }
   },
-  required: ['id'],
+  required: ['id', 'colSize'],
   additionalProperties: false
 };
 

@@ -11,9 +11,8 @@ import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLow
 {{#if resourceConfig.components}}
 
 {{#if  (gt (length velzonImports) 0)}}
-import{
-{{#each velzonImports}}
-  {{this}}{{#if @last}}{{else}},{{/if}}
+import{ {{#each velzonImports}}
+  IGRP_{{this}}{{#if @last}}{{else}},{{/if}}
 {{/each}}
 }from '@igrp/nosi-velzon-ts'
 {{/if}}
@@ -22,10 +21,9 @@ import{
 {{#each Row}}
 {{#each Col }}
 {{#each components}}
-type I{{capitalize this.id}}Fields = {
-  {{#each this.fields}}
-  {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
-  {{/each}}
+type I{{capitalize this.id}}Fields = { {{#if (eq this.componentName 'FormLayout')}}{{#each this.fields}}
+  {{this.config.name}}: IGRP_{{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}}{{/each}}
+  {{/if}}
 }
 {{/each}}
 {{/each}}
@@ -38,7 +36,7 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each Row }}
   {{#each Col}}
   {{#each components}}
-  {{toLowerCase this.id}}: {{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{toLowerCase this.id}}: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -48,19 +46,20 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
 export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
-
+  
   {{#each resourceConfig.components}}
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
-  const {{capitalize this.id}}Props: {{this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
-    service: service?.{{toLowerCase this.id}},
-    fields: {
-      {{#each this.fields}}
-      {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
-      {{/each}}
-    },
-    config: {{{json this.config}}}
+  const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
+  service: service?.{{toLowerCase this.id}},
+  fields: {{{ field-helper this }}},
+  {{!-- fields: {
+    {{#each this.fields}}
+    {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
+    {{/each}}
+  }, --}}
+  config: {{{json this.config}}}
   };
   {{#each this.fields}}
   {{/each}}
@@ -69,19 +68,18 @@ export default function {{resourceConfig.pageName}}() {
   {{/each}}
   {{/each}}
 
-
   return (
     <React.Fragment>
       <Container fluid>
         {{#each resourceConfig.components}}
         <Row>
         {{#each Row}}
-          {{#each Col}}
+        {{#each Col}}
+          <Col lg={ {{this.colSize}} }>
           {{#each components}}
-          <Col lg={ {{this.config.colSize}} }>
-            <{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props}/>
-          </Col>
+            <IGRP_{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props}/>
           {{/each}}
+          </Col>
           {{/each}}
         {{/each}}
         </Row>

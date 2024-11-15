@@ -2,31 +2,32 @@ import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/myapp';
+export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/frontend';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'user',
+  pageName: 'pokemon',
+  path: 'pokemon',
   components: [],
 };
 
-const components: Component [] = [
+const components: Component[] = [
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            components:[
+            colSize: 6,
+            components: [
               {
-                id:"company",
-                componentName:'FormLayout',
-                config:{
-                  title:"Form Test",
-                  colSize:6,
+                id: 'company',
+                componentName: 'FormLayout',
+                config: {
+                  title: 'Form Test',
+                  showTitle: false,
                 },
-                fields:[
+                fields: [
                   {
                     type: 'TextInput',
                     config: {
@@ -46,15 +47,40 @@ const components: Component [] = [
                       placeholder: 'Enter your age',
                       colSize: 6,
                     },
-                  }
-                ]
-              }
-            ]
+                  },
+                ],
+              },
+            ],
           },
-        ]
-      }
-    ]
-  }
+          {
+            id: 'col_2',
+            colSize: 6,
+            components: [
+              {
+                id: 'tablecomponent',
+                componentName: 'TableComponent',
+                config: {
+                  title: 'Pokemon Table',
+                  showTitle: true,
+                  pageSize: 5,
+                  isPagination: true,
+                  isGlobalFilter: true,
+                  SearchPlaceholder: 'Search Pokemon',
+                  isSortable: true,
+                  actionTitle: 'Actions',
+                  servrSsidePagination: true,
+                },
+                fields: [
+                  { header: 'Name', accessorKey: 'name', enableColumnFilter: true },
+                  { header: 'Url', accessorKey: 'url', enableColumnFilter: true },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 beforeEach(async () => {
@@ -63,6 +89,6 @@ beforeEach(async () => {
 });
 
 it('should create a new page', async () => {
-  pageConfig.components = components
+  pageConfig.components = components;
   await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });

@@ -18,11 +18,13 @@ export interface Component {
 
 export interface RowLayout {
   Col: ColumnLayout[];
-  
 }
+
+
 
 export interface ColumnLayout {
   id: string;
+  colSize: number;
   components?: ColumnComponent[]; 
 }
 
@@ -30,7 +32,7 @@ export interface ColumnComponent {
   id: string;
   componentName: ComponentNames
   config: ColumnConfig;
-  fields?: Field[]; 
+  fields?: Field[] | TableFields[]; 
 }
 
 export interface Field {
@@ -40,7 +42,21 @@ export interface Field {
 
 export interface ColumnConfig {
   title?: string;
-  colSize: number;
+  showTitle?: boolean,
+  colSize?: number;
+  pageSize?: number, 
+  isPagination?: boolean, 
+  isGlobalFilter?: boolean,
+  SearchPlaceholder?: string,
+  isSortable?: boolean,
+  actionTitle?: string,
+  servrSsidePagination?: boolean
+}
+
+export interface TableFields {
+  header?: string;
+  accessorKey?: string;
+  enableColumnFilter?: boolean;
 }
 
 export interface FieldConfig {
