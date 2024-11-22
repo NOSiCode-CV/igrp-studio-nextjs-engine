@@ -1,5 +1,30 @@
 stages:
+  - test
   - build
+variables:
+  SONAR_SCANNER_OPTS: "-Xmx1024m"
+
+test:
+  stage: test
+  image: node:slim
+  script:
+    - npm install
+    - npm run test -- --coverage
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 1 day
+  only:
+    - master
+
+sonarqube_scan:
+  stage: test
+  image: sonarsource/sonar-scanner-cli:latest
+  script:
+    - sonar-scanner -Dsonar.projectKey=nextjs_engine_key
+  only:
+    - master
+
 build_packagedev:
   image: node:slim
   stage: build
@@ -9,6 +34,3 @@ build_packagedev:
     - npm install
     - npm run build
     - npm publish --registry=https://sonatype.nosi.cv/repository/igrp/
-      #  artifacts:
-      # paths:
-      # - .next/

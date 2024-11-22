@@ -9,7 +9,7 @@
     "/dist"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "tsc && vite build",
     "start": "tsc && vite"
   },
