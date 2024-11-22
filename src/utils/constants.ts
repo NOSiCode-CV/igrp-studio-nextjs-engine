@@ -81,6 +81,6 @@ export const ERROR_MESSAGE = {
 };
 
 export const FIELD_TYPES = ['text', 'number'] as const;
-export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent'] as const
+export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button'] as const
 export const COMPONENTS_TYPES = ['Form', 'Table'] as const
 

@@ -1,18 +1,19 @@
 'use client'
 
 {{#if resourceConfig.components}}
+import * as yup from 'yup';
 {{else}}
 import 'bootstrap/dist/css/bootstrap.min.css';
 {{/if}}
-import React from 'react'
+import React, { useRef } from 'react'
 import { Col, Row, Container } from 'reactstrap'
 import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
 
 {{#if resourceConfig.components}}
 
 {{#if  (gt (length velzonImports) 0)}}
-import{ {{#each velzonImports}}
-  IGRP_{{this}}{{#if @last}}{{else}},{{/if}}
+import{ {{#each velzonImports}}IGRP_{{this}}{{#if @last}}{{else}},
+{{/if}}
 {{/each}}
 }from '@igrp/nosi-velzon-ts'
 {{/if}}
@@ -36,7 +37,12 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each Row }}
   {{#each Col}}
   {{#each components}}
+  {{#if (eq this.componentName 'Button')}}
+  {{#if this.target}}
+  {{this.target}}: (data?: Record<string, unknown>) => void;{{/if}}
+  {{else}}
   {{toLowerCase this.id}}: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -51,17 +57,44 @@ export default function {{resourceConfig.pageName}}() {
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
+  {{#if (eq this.componentName 'FormLayout')}}
+  const {{this.id}}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {{/if}}
   const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
+  {{#if (eq this.componentName 'Button')}}
+    {{#if  (gt (length ../../../../formRefs) 0)}}
+    formRefs: {
+      {{#each ../../../../formRefs}}
+      {{this}}: {{this}}Ref,
+      {{/each}}
+    },
+    {{/if}}
+    serviceAction: {{#if this.target}}service.{{this.target}}{{else}}(() => {}){{/if}},
+    config: {{{json this.config}}},
+  {{else}}
   service: service?.{{toLowerCase this.id}},
-  fields: {{{ field-helper this }}},
-  {{!-- fields: {
-    {{#each this.fields}}
-    {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
-    {{/each}}
-  }, --}}
+  fields: {{{field-helper this}}},
   config: {{{json this.config}}}
-  };
-  {{#each this.fields}}
+  {{#if this.validation}},
+  actions: (cell: any) => {
+    return (
+      <React.Fragment>
+        {{#each this.actions}}
+        <IGRP_Button
+          icon={'{{this.config.icon}}'}
+          buttonColor={'{{this.config.color}}'}
+          {{target-helper this.config}}
+        />
+        {{/each}}
+      </React.Fragment>
+    )
+  }
+  {{/if}}
+    
+  {{/if}}
+  
+  }
+  {{#each this.fields }}
+    {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -77,7 +110,11 @@ export default function {{resourceConfig.pageName}}() {
         {{#each Col}}
           <Col lg={ {{this.colSize}} }>
           {{#each components}}
-            <IGRP_{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props}/>
+            {{#if (eq this.componentName 'Button')}}
+            <IGRP_{{this.componentName}} {...{{capitalize this.id}}Props} />
+            {{else}}
+            <IGRP_{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props} {{#if (eq this.componentName 'FormLayout')}}ref={ {{this.id}}Ref }{{/if}}/>
+            {{/if}}
           {{/each}}
           </Col>
           {{/each}}

@@ -1,5 +1,6 @@
-import { Component } from '@/interfaces/types';
 import * as Handlebars from 'handlebars'
+import { json } from 'stream/consumers';
+
 
 Handlebars.registerHelper('toLowerCase', (str: string) => {
   return str.toLowerCase();
@@ -38,17 +39,76 @@ Handlebars.registerHelper('component-name-helper', function (component: any) {
 });
 
 Handlebars.registerHelper('field-helper', function (component: any) {
-  console.log(component.componentName)
   if (component.componentName === 'FormLayout') {
     let fields :any = {};
     component.fields.map((field: any) => {
-      fields[field.config.name] = field
+      fields[field.config.name] = transformValidation(field);
     });
     return JSON.stringify(fields);
   } else{
     return JSON.stringify(component.fields);
   }
 });
+
+Handlebars.registerHelper('target-helper', function (action: any) {
+  if (action.target) {
+    if (action.target.startsWith('remove') || action.target.startsWith('delete')) {
+      return new Handlebars.SafeString(`values={cell.row.original.id}`);
+    }
+    return new Handlebars.SafeString(`values={cell.row.original}`);
+  }
+});
+
+Handlebars.registerHelper('import-actions-type', function (components: any) {
+  let imports: string[] = [];
+  components.forEach((component: any) => {
+    component.Row.forEach((row: any) => {
+      row.Col.forEach((col: any) => {
+        col.components.forEach((cp: any) => {
+          if (cp.actions) {
+            cp.actions.forEach((action: any) => {
+              imports.push(`import { ${action.type} } from 'reactstrap';`);
+            });
+          }
+        });
+      });
+    });
+  });
+  // Eliminar duplicados y retornar como texto plano
+  return Array.from(new Set(imports)).join('\n');
+});
+
+Handlebars.registerHelper('yup-validation', function (c: any) {
+  if (c.validation) {
+    const type = c.config.type === 'text' ? 'string' : c.config.type;
+    let validation = c.validation;
+    let yupValidation = `yup.${type}()`;
+
+    if (c.config.required) {
+      yupValidation += `.required('${validation.requiredMessage || 'This field is required'}')`;
+    }
+
+    if (validation.minLeng) {
+      yupValidation += `.min(${validation.minLeng}, '${validation.errorMinLeng}')`;
+    }
+    if (validation.maxLeng) {
+      yupValidation += `.max(${validation.maxLeng}, '${validation.errorMaxLeng}')`;
+    }
+    return removeQuotes(yupValidation)
+  } return
+    
+});
+
+
+function transformValidation(field: any) {
+  const { validation, ...rest } = field; // Excluye 'validation' del objeto
+  return rest;
+}
+
+function removeQuotes(jsonString: any) {
+  return jsonString.replace(/"yup\.string\([^)]*\)"/g, (match: string | any[]) => match.slice(1, -1));
+}
+
 
 
 export { Handlebars };

@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/frontend';
+export const OUTPUT_DIR = '';
 
 const pageConfig: PageConfig = {
   type: 'page',
@@ -34,9 +34,11 @@ const components: Component[] = [
                       type: 'text',
                       name: 'firstName',
                       label: 'First Name',
+                      required: true,
                       placeholder: 'Enter your first name',
                       colSize: 4,
                     },
+                    validation: { minLeng: 3, errorMinLeng: 'Min 3 characters', maxLeng: 10, errorMaxLeng: 'Max 10 characters' },
                   },
                   {
                     type: 'NumberInput',
@@ -44,37 +46,36 @@ const components: Component[] = [
                       type: 'number',
                       name: 'age',
                       label: 'Age',
-                      placeholder: 'Enter your age',
-                      colSize: 6,
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
                     },
-                  },
+                    validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
+                  }
                 ],
-              },
+              }
             ],
           },
+        ],
+      },
+    ],
+  },
+  {
+    Row: [
+      {
+        Col: [
           {
-            id: 'col_2',
+            id: 'buttoncomponent',
             colSize: 6,
             components: [
               {
-                id: 'tablecomponent',
-                componentName: 'TableComponent',
+                id:'button',
+                componentName: 'Button',
+                target:'sendData',
                 config: {
-                  title: 'Pokemon Table',
-                  showTitle: true,
-                  pageSize: 5,
-                  isPagination: true,
-                  isGlobalFilter: true,
-                  SearchPlaceholder: 'Search Pokemon',
-                  isSortable: true,
-                  actionTitle: 'Actions',
-                  servrSsidePagination: true,
-                },
-                fields: [
-                  { header: 'Name', accessorKey: 'name', enableColumnFilter: true },
-                  { header: 'Url', accessorKey: 'url', enableColumnFilter: true },
-                ],
-              },
+                  buttonText: 'Submit',
+                  buttonColor: 'btn-primary',
+                }
+              }
             ],
           },
         ],
