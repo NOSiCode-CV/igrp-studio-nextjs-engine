@@ -18,29 +18,80 @@ export interface Component {
 
 export interface RowLayout {
   Col: ColumnLayout[];
-  
 }
+
+
 
 export interface ColumnLayout {
   id: string;
+  colSize: number;
   components?: ColumnComponent[]; 
 }
 
 export interface ColumnComponent {
   id: string;
+  formRefs?: any;
+  values?: any;
+  serviceAction?: any;
+  target?: string;
   componentName: ComponentNames
   config: ColumnConfig;
-  fields?: Field[]; 
+  fields?: Field[] | TableFields[]; 
+  actions?: IAction[]
 }
 
 export interface Field {
   type: string;
   config: FieldConfig;
+  validation?: {
+    minLeng?: number;
+    maxLeng?: number;
+    errorMinLeng?: string;
+    errorMaxLeng?: string;
+    requiredMessage?: string;
+  };
 }
+
+export interface IAction {
+  type: "Button"| "Link";
+  config: IActionConfig;
+}
+
+export interface IActionConfig {
+  icon?: string;
+  label?: string;
+  target?: string;
+  color?: string;
+}
+
+export interface IButton {
+  formRefs?: any;
+  serviceAction?: (data: Record<string, any>) => void;
+  buttonText?: string;
+  buttonColor?: string;
+  values?: any;
+  icon?: string;
+};
 
 export interface ColumnConfig {
   title?: string;
-  colSize: number;
+  showTitle?: boolean,
+  colSize?: number;
+  pageSize?: number, 
+  isPagination?: boolean, 
+  isGlobalFilter?: boolean,
+  SearchPlaceholder?: string,
+  isSortable?: boolean,
+  actionTitle?: string,
+  servrSsidePagination?: boolean,
+  buttonText?: string,
+  buttonColor?: string,
+}
+
+export interface TableFields {
+  header?: string;
+  accessorKey?: string;
+  enableColumnFilter?: boolean;
 }
 
 export interface FieldConfig {
@@ -48,6 +99,7 @@ export interface FieldConfig {
   name: string;
   label?: string;
   colSize?: number;
+  required?: boolean;
   placeholder?: string;
 }
 
@@ -56,6 +108,7 @@ export type RenderContext<T = undefined> = {
   basePath: string;
   baseConfig?: AppConfig;
   velzonImports?: string[];
+  formRefs?: string[];
 };
 
 

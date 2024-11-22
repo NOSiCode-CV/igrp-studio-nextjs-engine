@@ -1,12 +1,12 @@
 import path from 'path';
 
 //Comment the following exports when building the application
-// export const CONFIGS = path.join(__dirname, '../../public/configs');
-// export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+export const CONFIGS = path.join(__dirname, '../../public/configs');
+export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
 //Uncomment the following exports when building the application
-export const TEMPLATE_DIR = path.join(__dirname, './templates');
-export const CONFIGS = path.join(__dirname, './configs');
+// export const TEMPLATE_DIR = path.join(__dirname, './templates');
+// export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -81,6 +81,6 @@ export const ERROR_MESSAGE = {
 };
 
 export const FIELD_TYPES = ['text', 'number'] as const;
-export const COMPONENTS_NAMES = ['FormLayout'] as const
-export const COMPONENTS_TYPES = ['Form'] as const
+export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button'] as const
+export const COMPONENTS_TYPES = ['Form', 'Table'] as const
 

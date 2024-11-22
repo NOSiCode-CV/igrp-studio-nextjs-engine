@@ -1,19 +1,19 @@
 'use client'
 
 {{#if resourceConfig.components}}
+import * as yup from 'yup';
 {{else}}
 import 'bootstrap/dist/css/bootstrap.min.css';
 {{/if}}
-import React from 'react'
+import React, { useRef } from 'react'
 import { Col, Row, Container } from 'reactstrap'
 import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
 
 {{#if resourceConfig.components}}
 
 {{#if  (gt (length velzonImports) 0)}}
-import{
-{{#each velzonImports}}
-  {{this}}{{#if @last}}{{else}},{{/if}}
+import{ {{#each velzonImports}}IGRP_{{this}}{{#if @last}}{{else}},
+{{/if}}
 {{/each}}
 }from '@igrp/nosi-velzon-ts'
 {{/if}}
@@ -22,10 +22,9 @@ import{
 {{#each Row}}
 {{#each Col }}
 {{#each components}}
-type I{{capitalize this.id}}Fields = {
-  {{#each this.fields}}
-  {{this.config.name}}: {{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}} 
-  {{/each}}
+type I{{capitalize this.id}}Fields = { {{#if (eq this.componentName 'FormLayout')}}{{#each this.fields}}
+  {{this.config.name}}: IGRP_{{../this.componentName}}.Field.{{this.type}}{{#if @last}}{{else}},{{/if}}{{/each}}
+  {{/if}}
 }
 {{/each}}
 {{/each}}
@@ -38,7 +37,12 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each Row }}
   {{#each Col}}
   {{#each components}}
-  {{toLowerCase this.id}}: {{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{#if (eq this.componentName 'Button')}}
+  {{#if this.target}}
+  {{this.target}}: (data?: Record<string, unknown>) => void;{{/if}}
+  {{else}}
+  {{toLowerCase this.id}}: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
@@ -48,27 +52,54 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
 export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
-
+  
   {{#each resourceConfig.components}}
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
-  const {{capitalize this.id}}Props: {{this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
-    service: service?.{{toLowerCase this.id}},
-    fields: {
-      {{#each this.fields}}
-      {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
+  {{#if (eq this.componentName 'FormLayout')}}
+  const {{this.id}}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {{/if}}
+  const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
+  {{#if (eq this.componentName 'Button')}}
+    {{#if  (gt (length ../../../../formRefs) 0)}}
+    formRefs: {
+      {{#each ../../../../formRefs}}
+      {{this}}: {{this}}Ref,
       {{/each}}
     },
-    config: {{{json this.config}}}
-  };
-  {{#each this.fields}}
+    {{/if}}
+    serviceAction: {{#if this.target}}service.{{this.target}}{{else}}(() => {}){{/if}},
+    config: {{{json this.config}}},
+  {{else}}
+  service: service?.{{toLowerCase this.id}},
+  fields: {{{field-helper this}}},
+  config: {{{json this.config}}}
+  {{#if this.validation}},
+  actions: (cell: any) => {
+    return (
+      <React.Fragment>
+        {{#each this.actions}}
+        <IGRP_Button
+          icon={'{{this.config.icon}}'}
+          buttonColor={'{{this.config.color}}'}
+          {{target-helper this.config}}
+        />
+        {{/each}}
+      </React.Fragment>
+    )
+  }
+  {{/if}}
+    
+  {{/if}}
+  
+  }
+  {{#each this.fields }}
+    {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}
   {{/each}}
   {{/each}}
   {{/each}}
   {{/each}}
   {{/each}}
-
 
   return (
     <React.Fragment>
@@ -76,12 +107,16 @@ export default function {{resourceConfig.pageName}}() {
         {{#each resourceConfig.components}}
         <Row>
         {{#each Row}}
-          {{#each Col}}
+        {{#each Col}}
+          <Col lg={ {{this.colSize}} }>
           {{#each components}}
-          <Col lg={ {{this.config.colSize}} }>
-            <{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props}/>
-          </Col>
+            {{#if (eq this.componentName 'Button')}}
+            <IGRP_{{this.componentName}} {...{{capitalize this.id}}Props} />
+            {{else}}
+            <IGRP_{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props} {{#if (eq this.componentName 'FormLayout')}}ref={ {{this.id}}Ref }{{/if}}/>
+            {{/if}}
           {{/each}}
+          </Col>
           {{/each}}
         {{/each}}
         </Row>
