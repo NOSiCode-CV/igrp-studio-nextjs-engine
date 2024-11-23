@@ -11,7 +11,7 @@ const baseConfig: AppConfig = {
 };
 
 beforeEach(async () => {
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  // await fs.mkdir(OUTPUT_DIR, { recursive: true });
 });
 
 
