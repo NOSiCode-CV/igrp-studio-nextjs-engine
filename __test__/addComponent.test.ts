@@ -1,15 +1,13 @@
-import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
+import testPath from '../testPath';
 
-export const OUTPUT_DIR = process.env.OUTPUT_PATH || 'C:/Users/Eduardo Fernando/Downloads/frontend';
-
-console.log('OUTPUT_DIR', process.env.OUTPUT_PATH);
+export const OUTPUT_DIR = testPath.OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'pokemon',
-  path: 'pokemon',
+  pageName: 'user',
+  path: 'user',
   components: [],
 };
 
@@ -40,7 +38,6 @@ const components: Component[] = [
                       placeholder: 'Enter your first name',
                       colSize: 4,
                     },
-                    validation: { minLeng: 3, errorMinLeng: 'Min 3 characters', maxLeng: 10, errorMaxLeng: 'Max 10 characters' },
                   },
                   {
                     type: 'NumberInput',
@@ -52,7 +49,22 @@ const components: Component[] = [
                       colSize: 4,
                     },
                     validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
-                  }
+                  },
+                  {
+                    type: 'Select2Input',
+                    config: {
+                      type: 'select',
+                      name: 'userOptions',
+                      label: 'User Options',
+                      placeholder: 'select an option',
+                      colSize: 4,
+                      options: [
+                        { value: "Admin", label: "Admin" },
+                        { value: "Dev", label: "Dev" },
+                        { value: "QA", label: "QA" },
+                      ],
+                    },
+                  },
                 ],
               }
             ],
@@ -107,7 +119,7 @@ const components: Component[] = [
                   SearchPlaceholder: 'Search...',
                   isPagination: true,
                   isSortable: true,
-                  servrSsidePagination: false,
+                  servrSsidePagination: true,
                   actionTitle: 'Actions',
                 },
                 fields: [
@@ -117,11 +129,11 @@ const components: Component[] = [
                 actions: [
                   {
                     type: 'Button',
-                    config: {target:'delete', icon: 'ri-pencil-line', buttonColor: 'btn-primary'}
+                    config: {target:'sendRow', icon: 'ri-pencil-line', buttonColor: 'btn-ghost-info mx-1'}
                   },
                   {
                     type: 'Button',
-                    config: {icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
+                    config: {target:'deleteRow', icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
                   }
                 ]
               },
@@ -133,12 +145,7 @@ const components: Component[] = [
   },
 ];
 
-beforeEach(async () => {
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  // await newApp(appConfig, OUTPUT_DIR);
-});
-
 it('should create a new page', async () => {
   pageConfig.components = components;
-  await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });

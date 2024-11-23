@@ -1,6 +1,6 @@
 import path from 'path';
 
-//Comment the following exports when building the application
+// Comment the following exports when building the application
 // export const CONFIGS = path.join(__dirname, '../../public/configs');
 // export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
@@ -80,7 +80,7 @@ export const ERROR_MESSAGE = {
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again'
 };
 
-export const FIELD_TYPES = ['text', 'number'] as const;
-export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button'] as const
+export const FIELD_TYPES = ['text', 'number', 'select2', 'select'] as const;
+export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button',] as const
 export const COMPONENTS_TYPES = ['Form', 'Table'] as const
 

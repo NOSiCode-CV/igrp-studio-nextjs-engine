@@ -56,6 +56,11 @@ Handlebars.registerHelper('field-helper', function (component: any) {
   }
 });
 
+Handlebars.registerHelper('isValidation', function (field: any) {
+  console.log('field', field);
+  return field.validation || field.config.required? true : false;
+});
+
 Handlebars.registerHelper('target-helper', function (action: any) {
   if (action.target) {
     if (action.target.startsWith('remove') || action.target.startsWith('delete')) {
@@ -85,22 +90,23 @@ Handlebars.registerHelper('import-actions-type', function (components: any) {
 });
 
 Handlebars.registerHelper('yup-validation', function (c: any) {
-  if (c.validation) {
+  if (c.validation || c.config.required) {
     const type = c.config.type === 'text' ? 'string' : c.config.type;
     let validation = c.validation;
-    let yupValidation = `yup.${type}()`;
+    let yupValidation = type !=='select'? `yup.${type}()` : ``;
 
     if (c.config.required) {
-      yupValidation += `.required('${validation.requiredMessage || 'This field is required'}')`;
+      yupValidation += `.required('${validation && validation.requiredMessage? validation.requiredMessage: 'This field is required'}')`;
     }
-
-    if (validation.minLeng) {
-      yupValidation += `.min(${validation.minLeng}, '${validation.errorMinLeng}')`;
+    if (validation) {
+      if (validation.minLeng) {
+        yupValidation += `.min(${validation.minLeng}, '${validation.errorMinLeng}')`;
+      }
+      if (validation.maxLeng) {
+        yupValidation += `.max(${validation.maxLeng}, '${validation.errorMaxLeng}')`;
+      }
     }
-    if (validation.maxLeng) {
-      yupValidation += `.max(${validation.maxLeng}, '${validation.errorMaxLeng}')`;
-    }
-    return removeQuotes(yupValidation)
+      return removeQuotes(yupValidation)
   } return
     
 });
