@@ -157,10 +157,15 @@ const actionConfigSchema: JSONSchemaType<IActionConfig> = {
       nullable: true,
       errorMessage: 'The target attribute must be a string.'
     },
-    color: {
+    buttonColor: {
       type: 'string',
       nullable: true,
       errorMessage: 'The color attribute must be a string.'
+    },
+    buttonText: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The text attribute must be a string.'
     }
   },
   required: [],

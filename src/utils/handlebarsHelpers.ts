@@ -11,6 +11,12 @@ Handlebars.registerHelper('capitalize', (str: string) => {
 });
 
 Handlebars.registerHelper('json', function(context) {
+  //TODO remove target from json
+  if(context.target){
+    const { target, ...rest } = context;
+    return JSON.stringify(rest);
+  }
+
   return JSON.stringify(context);
 });
 

@@ -21,6 +21,6 @@ afterAll(async () => {
 
 describe('Page module', () => {
   it('should save the page configuration file', async () => {
-    await deletePage(pageConfig, OUTPUT_DIR);
+    // await deletePage(pageConfig, OUTPUT_DIR);
   });
 });

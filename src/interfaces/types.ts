@@ -59,9 +59,9 @@ export interface IAction {
 
 export interface IActionConfig {
   icon?: string;
-  label?: string;
+  buttonText?: string;
   target?: string;
-  color?: string;
+  buttonColor?: string;
 }
 
 export interface IButton {
