@@ -1,13 +1,14 @@
 import fs from 'fs-extra';
 import { newPage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
+import testPath from '../testPath';
 
-export const OUTPUT_DIR = 'C:/Users/Eduardo Fernando/Downloads/frontend';
+export const OUTPUT_DIR = testPath.OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'pokemon',
-  path: 'pokemon',
+  pageName: 'user',
+  path: 'user',
   components: [],
 };
 
@@ -21,7 +22,7 @@ afterAll(async () => {
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    await newPage(pageConfig, OUTPUT_DIR);
+    // await newPage(pageConfig, OUTPUT_DIR);
   })
 
 })

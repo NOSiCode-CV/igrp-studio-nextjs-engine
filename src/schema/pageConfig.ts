@@ -37,6 +37,26 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
       nullable: true,
       errorMessage: `The required attribute must be true or false.`
     },
+    options: {
+      type: "array",
+      nullable: true,
+      items: {
+        type: "object",
+        properties: {
+          label: {
+            type: "string",
+            errorMessage: `The label attribute must be a string.`
+          },
+          value: {
+            type: "string",
+            errorMessage: `The value attribute must be a string.`
+          }
+        },
+        required: ["label", "value"],
+        additionalProperties: false
+      },
+      errorMessage: `The options attribute must be an array.`
+    }
   },
   required: ['type', 'name'],
   additionalProperties: false

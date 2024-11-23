@@ -137,21 +137,23 @@ const components: Component [] = [
         Col: [
           {
             id: 'col_nihdj',
-            components:[
+            colSize: 6,
+            components: [
               {
-                id:"company",
-                componentName:'FormLayout',
-                config:{
-                  title:"Form Test",
-                  colSize:6,
+                id: 'company',
+                componentName: 'FormLayout',
+                config: {
+                  title: 'Form Test',
+                  showTitle: false,
                 },
-                fields:[
+                fields: [
                   {
                     type: 'TextInput',
                     config: {
                       type: 'text',
                       name: 'firstName',
                       label: 'First Name',
+                      required: true,
                       placeholder: 'Enter your first name',
                       colSize: 4,
                     },
@@ -162,17 +164,98 @@ const components: Component [] = [
                       type: 'number',
                       name: 'age',
                       label: 'Age',
-                      placeholder: 'Enter your age',
-                      colSize: 6,
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
                     },
+                    validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
+                  },
+                  {
+                    type: 'Select2Input',
+                    config: {
+                      type: 'select',
+                      name: 'userOptions',
+                      label: 'User Options',
+                      placeholder: 'select an option',
+                      colSize: 4,
+                    },
+                  },
+                ],
+              }
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // add button component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id:'button',
+                componentName: 'Button',
+                target:'sendData',
+                config: {
+                  buttonText: 'Submit',
+                  buttonColor: 'btn-primary',
+                }
+              }
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // add table component
+  {
+    Row: [
+      {
+        Col: [
+          {
+              id: 'col_2',
+            colSize: 6,
+            components: [
+              {
+                id: 'tablecomponent',
+                componentName: 'TableComponent',
+                config: {
+                  title: 'Pokemons',
+                  showTitle: true,
+                  pageSize: 5,
+                  isGlobalFilter: true,
+                  SearchPlaceholder: 'Search...',
+                  isPagination: true,
+                  isSortable: true,
+                  servrSsidePagination: true,
+                  actionTitle: 'Actions',
+                },
+                fields: [
+                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
+                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                ],
+                actions: [
+                  {
+                    type: 'Button',
+                    config: {target:'sendRow', icon: 'ri-pencil-line', buttonColor: 'btn-ghost-info mx-1'}
+                  },
+                  {
+                    type: 'Button',
+                    config: {target:'deleteRow', icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
                   }
                 ]
-              }
-            ]
+              },
+            ],
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
 ];
 
@@ -188,26 +271,83 @@ const addComponent = async () => {
 addComponent();
 
 ```
-You should now see the new components added, such as the form shown in the image in the next section.
-![Application Preview](./assets/componentPage.png)
-
-The form inputs are initially empty. To populate them with test data or any other data, it is necessary to implement the interface methods in the generated service.
 
 ### Implementacion del servicio:
 Follow the steps below to implement the service logic in the form:
 1. Update the UserService.ts file located in services/user/UserService.ts with the following code:
 ```ts
+
+import { IuserService } from '@/app/pages/user/page'
+
+/**
+* This is the service that will be inject in to the user page, 
+* you have to implemented this method if you want to use this
+*
+* To ensure that every method your are implemented remove the partial and typscript will provide a script verification
+*/
+
+interface IPokemon {
+  count: number,
+  results: {
+    name: string,
+    url: string
+  }[]
+}
 export const UserService: IuserService = {
-  formUserData: {
-    populate: () => ({firstName:'NOSi', age:30}),
-    action: (vals) => console.log(vals)
+  company: {
+    populate: () => ({
+      firstName: '',
+      age: 25,
+      userOptions: null
+    })
+  },
+
+  tablecomponent: {
+    populate: async (page?: number, size?: number, globalFilter?: string, orderBy?: any, direction?: any) => {
+      const params = new URLSearchParams()
+
+      if (page !== undefined) {
+        params.append("offset", page.toString())
+      }
+
+      if (size !== undefined) {
+        params.append("limit", String(size))
+      }
+
+      if (globalFilter) {
+        params.append("search", globalFilter)
+      }
+
+      if (orderBy !== undefined && orderBy !== null) {
+        params.append("orderBy", orderBy)
+        params.append("direction", direction || 'asc')
+      }
+
+      const url = `https://pokeapi.co/api/v2/pokemon?${params.toString()}`
+
+      const response = await fetch(url)
+      const data: IPokemon = await response.json()
+      return {
+        rows: data.results,
+        rowCount: data.count
+      }
+    },
+  },
+  
+  sendData: function (data?: Record<string, unknown>): void {
+    console.log(data)
+  },
+
+  deleteRow: function (data?: Record<string, any>): void {
+    console.log('Deleting... ', data)
+  },
+  sendRow: function (data?: Record<string, any>): void {
+    console.log('Sending... ', data)
   }
 }
 ```
-- Now, when you load the form, the First Name and Age fields should be pre-filled with the data provided by the service (firstName: 'NOSi' and age: 30).
-- When you click the Submit button, the current values ​​of the form will be printed to the console.
-
-![Application Preview](./assets/populateForm.png)
+You should now see the new components added, such as the form and the table shown in the image in the next section.
+![Application Preview](./assets/componentPage.png)
 
 #### Delete Page
 You can delete the page you created using the following example:
@@ -255,29 +395,78 @@ export interface Component {
 
 export interface RowLayout {
   Col: ColumnLayout[];
-  
 }
 
 export interface ColumnLayout {
   id: string;
+  colSize: number;
   components?: ColumnComponent[]; 
 }
 
 export interface ColumnComponent {
   id: string;
+  formRefs?: any;
+  values?: any;
+  serviceAction?: any;
+  target?: string;
   componentName: ComponentNames
   config: ColumnConfig;
-  fields?: Field[]; 
+  fields?: Field[] | TableFields[]; 
+  actions?: IAction[]
 }
 
 export interface Field {
   type: string;
   config: FieldConfig;
+  validation?: {
+    minLeng?: number;
+    maxLeng?: number;
+    errorMinLeng?: string;
+    errorMaxLeng?: string;
+    requiredMessage?: string;
+  };
 }
+
+export interface IAction {
+  type: "Button"| "Link";
+  config: IActionConfig;
+}
+
+export interface IActionConfig {
+  icon?: string;
+  buttonText?: string;
+  target?: string;
+  buttonColor?: string;
+}
+
+export interface IButton {
+  formRefs?: any;
+  serviceAction?: (data: Record<string, any>) => void;
+  buttonText?: string;
+  buttonColor?: string;
+  values?: any;
+  icon?: string;
+};
 
 export interface ColumnConfig {
   title?: string;
-  colSize: number;
+  showTitle?: boolean,
+  colSize?: number;
+  pageSize?: number, 
+  isPagination?: boolean, 
+  isGlobalFilter?: boolean,
+  SearchPlaceholder?: string,
+  isSortable?: boolean,
+  actionTitle?: string,
+  servrSsidePagination?: boolean,
+  buttonText?: string,
+  buttonColor?: string,
+}
+
+export interface TableFields {
+  header?: string;
+  accessorKey?: string;
+  enableColumnFilter?: boolean;
 }
 
 export interface FieldConfig {
@@ -285,7 +474,12 @@ export interface FieldConfig {
   name: string;
   label?: string;
   colSize?: number;
+  required?: boolean;
   placeholder?: string;
+  options?: {
+    value: string;
+    label: string;
+  }[];
 }
 
 export type RenderContext<T = undefined> = {
@@ -293,13 +487,12 @@ export type RenderContext<T = undefined> = {
   basePath: string;
   baseConfig?: AppConfig;
   velzonImports?: string[];
+  formRefs?: string[];
 };
-
 
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
-
 ```
 ## End
 #### To read more valuable information about the NextJS Engine, we recommend taking a look at its corresponding documentation.

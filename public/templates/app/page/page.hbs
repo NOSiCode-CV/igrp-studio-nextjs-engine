@@ -42,6 +42,15 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{this.target}}: (data?: Record<string, unknown>) => void;{{/if}}
   {{else}}
   {{toLowerCase this.id}}: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{#if (eq this.componentName 'TableComponent')}}
+  {{#if this.actions}}
+  {{#each this.actions}}
+  {{#if this.config.target}}
+  {{this.config.target}}: ((data?: Record<string, any>) => void);
+  {{/if}}
+  {{/each}}
+  {{/if}}
+  {{/if}}
   {{/if}}
   {{/each}}
   {{/each}}
@@ -81,7 +90,7 @@ export default function {{resourceConfig.pageName}}() {
         {{#each this.actions}}
         <IGRP_Button
           {{#if this.config.target}}
-          {{#if (eq this.config.target 'delete')}}values={cell.row.original.name}{{else}}values={cell.row.original}{{/if}}
+          {{#if (eq this.config.target 'delete')}}values={cell.row.original.id}{{else}}values={cell.row.original}{{/if}}
           serviceAction={service.{{this.config.target}} }
           {{/if}}
           config={ 
@@ -99,7 +108,9 @@ export default function {{resourceConfig.pageName}}() {
   }
   {{#each this.fields }}
   {{#if (eq ../componentName 'FormLayout')}}
+    {{#if  (isValidation this)}}
     {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}
+    {{/if}}
   {{/if}}
   {{/each}}
   {{/each}}

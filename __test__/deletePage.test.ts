@@ -2,7 +2,9 @@ import fs from 'fs-extra';
 import { deletePage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = '';
+import testPath from '../testPath';
+
+export const OUTPUT_DIR = testPath.OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',

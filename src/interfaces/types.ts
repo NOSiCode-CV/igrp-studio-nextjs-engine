@@ -101,6 +101,10 @@ export interface FieldConfig {
   colSize?: number;
   required?: boolean;
   placeholder?: string;
+  options?: {
+    value: string;
+    label: string;
+  }[];
 }
 
 export type RenderContext<T = undefined> = {
