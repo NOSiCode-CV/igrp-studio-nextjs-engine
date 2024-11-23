@@ -16,6 +16,7 @@ bower_components/
 
 # Environment variables
 .env
+testPath.ts
 
 # Build directories
 dist/
