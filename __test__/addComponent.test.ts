@@ -2,7 +2,9 @@ import fs from 'fs-extra';
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
 
-export const OUTPUT_DIR = '';
+export const OUTPUT_DIR = process.env.OUTPUT_PATH || 'C:/Users/Eduardo Fernando/Downloads/frontend';
+
+console.log('OUTPUT_DIR', process.env.OUTPUT_PATH);
 
 const pageConfig: PageConfig = {
   type: 'page',
@@ -59,6 +61,8 @@ const components: Component[] = [
       },
     ],
   },
+
+  // add button component
   {
     Row: [
       {
@@ -76,6 +80,51 @@ const components: Component[] = [
                   buttonColor: 'btn-primary',
                 }
               }
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // add table component
+  {
+    Row: [
+      {
+        Col: [
+          {
+              id: 'col_2',
+            colSize: 6,
+            components: [
+              {
+                id: 'tablecomponent',
+                componentName: 'TableComponent',
+                config: {
+                  title: 'Pokemons',
+                  showTitle: true,
+                  pageSize: 5,
+                  isGlobalFilter: true,
+                  SearchPlaceholder: 'Search...',
+                  isPagination: true,
+                  isSortable: true,
+                  servrSsidePagination: false,
+                  actionTitle: 'Actions',
+                },
+                fields: [
+                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
+                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                ],
+                actions: [
+                  {
+                    type: 'Button',
+                    config: {target:'delete', icon: 'ri-pencil-line', buttonColor: 'btn-primary'}
+                  },
+                  {
+                    type: 'Button',
+                    config: {icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
+                  }
+                ]
+              },
             ],
           },
         ],

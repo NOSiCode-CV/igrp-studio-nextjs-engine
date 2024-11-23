@@ -74,16 +74,20 @@ export default function {{resourceConfig.pageName}}() {
   service: service?.{{toLowerCase this.id}},
   fields: {{{field-helper this}}},
   config: {{{json this.config}}}
-  {{#if this.validation}},
+  {{#if this.actions}},
   actions: (cell: any) => {
     return (
       <React.Fragment>
         {{#each this.actions}}
         <IGRP_Button
-          icon={'{{this.config.icon}}'}
-          buttonColor={'{{this.config.color}}'}
-          {{target-helper this.config}}
-        />
+          {{#if this.config.target}}
+          {{#if (eq this.config.target 'delete')}}values={cell.row.original.name}{{else}}values={cell.row.original}{{/if}}
+          serviceAction={service.{{this.config.target}} }
+          {{/if}}
+          config={ 
+            {{{json this.config}}} 
+          }
+          />
         {{/each}}
       </React.Fragment>
     )
@@ -94,7 +98,9 @@ export default function {{resourceConfig.pageName}}() {
   
   }
   {{#each this.fields }}
+  {{#if (eq ../componentName 'FormLayout')}}
     {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}
+  {{/if}}
   {{/each}}
   {{/each}}
   {{/each}}
