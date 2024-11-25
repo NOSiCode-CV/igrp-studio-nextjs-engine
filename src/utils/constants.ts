@@ -80,7 +80,24 @@ export const ERROR_MESSAGE = {
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again'
 };
 
-export const FIELD_TYPES = ['text', 'number', 'select2', 'select'] as const;
+export const FIELD_TYPES = ['text',
+  'number',
+  'select2',
+  'select',
+  'password',
+  'color',
+  'date',
+  'checkbox',
+  'switch',
+  'radio',
+  'file',
+  'tel',
+  'range',
+  'time',
+  'date',
+  'color',
+  'select',
+  'button',] as const;
 export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button',] as const
 export const COMPONENTS_TYPES = ['Form', 'Table'] as const
 
