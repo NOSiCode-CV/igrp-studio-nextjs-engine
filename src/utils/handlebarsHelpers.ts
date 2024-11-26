@@ -61,12 +61,7 @@ Handlebars.registerHelper('isValidation', function (field: any) {
 });
 
 Handlebars.registerHelper('target-helper', function (action: any) {
-  if (action.target) {
-    if (action.target.startsWith('remove') || action.target.startsWith('delete')) {
-      return new Handlebars.SafeString(`values={cell.row.original.id}`);
-    }
-    return new Handlebars.SafeString(`values={cell.row.original}`);
-  }
+  return new Handlebars.SafeString(`values={cell.row.original}`);
 });
 
 Handlebars.registerHelper('import-actions-type', function (components: any) {

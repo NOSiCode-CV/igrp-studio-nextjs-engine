@@ -68,47 +68,52 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
 export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
-  
+  {{!-- Declaring form references --}}
   {{#each resourceConfig.components}}
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
   {{#if (eq this.componentName 'FormLayout')}}
   const {{this.id}}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {{/if}}
+  {{/each}}{{!-- end each components --}}
+  {{/each}} {{!-- end each Col --}}
+  {{/each}} {{!-- end each Row --}}
+  {{/each}} {{!-- end each resourcesConfig.components --}}
+  {{!-- end declaring form refences --}}
+
+  {{#each resourceConfig.components}}
+  {{#each Row}}
+  {{#each Col}}
+  {{#each components}}
   const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
-  {{#if (eq this.componentName 'Button')}}
-    {{#if  (gt (length ../../../../formRefs) 0)}}
+  {{#if (eq this.componentName 'Button')}}{{#if  (gt (length ../../../../formRefs) 0)}}
     formRefs: {
       {{#each ../../../../formRefs}}
       {{this}}: {{this}}Ref,
       {{/each}}
-    },
-    {{/if}}
+    },{{/if}}
     serviceAction: service.{{this.id}},
     config: {{{json this.config}}},
   {{else}}
-  service: service?.{{toLowerCase this.id}},
-  fields: {{{field-helper this}}},
-  config: {{{json this.config}}}
-  {{#if this.actions}},
-  actions: (cell: any) => {
-    return (
-      <React.Fragment>
-        {{#each this.actions}}
-        <IGRP_Button
-          {{#if this.config.target}}
-          {{#if (eq this.config.target 'delete')}}values={cell.row.original.id}{{else}}values={cell.row.original}{{/if}}
-          serviceAction={service.{{this.config.target}} }
-          {{/if}}
-          config={ 
-            {{{json this.config}}} 
-          }
-          />
-        {{/each}}
-      </React.Fragment>
-    )
-  }
-  {{/if}} {{/if}}  
+    service: service?.{{toLowerCase this.id}},
+    fields: {{{field-helper this}}},
+    config: {{{json this.config}}}{{#if this.actions}},
+    actions: (cell: any) => {
+      return (
+        <React.Fragment>
+          {{#each this.actions}}
+          <IGRP_Button
+            values={cell.row.original}
+            serviceAction={service.{{this.id}} }           
+            config={ 
+              {{{json this.config}}} 
+            }
+            />
+          {{/each}}
+        </React.Fragment>
+      )
+    }
+    {{/if}} {{/if}}  
   }
   {{#each this.fields }}
   {{#if (eq ../componentName 'FormLayout')}}{{#if  (isValidation this)}} {{!-- check validation fields --}}

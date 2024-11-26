@@ -12,13 +12,14 @@ const pageConfig: PageConfig = {
 };
 
 const components: Component[] = [
+  // add form component
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
                 id: 'company',
@@ -32,8 +33,8 @@ const components: Component[] = [
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'firstName',
-                      label: 'First Name',
+                      name: 'name',
+                      label: 'Name',
                       required: true,
                       placeholder: 'Enter your first name',
                       colSize: 4,
@@ -59,8 +60,8 @@ const components: Component[] = [
                     type: 'Select2Input',
                     config: {
                       type: 'select',
-                      name: 'userOptions',
-                      label: 'User Options',
+                      name: 'role',
+                      label: 'User Role',
                       placeholder: 'select an option',
                       colSize: 4,
                       options: [
@@ -87,31 +88,6 @@ const components: Component[] = [
       },
     ],
   },
-
-  // add button component
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'buttoncomponent',
-            colSize: 6,
-            components: [
-              {
-                id: 'actionButton',
-                componentName: 'Button',
-                config: {
-                  buttonText: 'Submit',
-                  buttonColor: 'btn-primary',
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
   // add table component
   {
     Row: [
@@ -119,7 +95,7 @@ const components: Component[] = [
         Col: [
           {
             id: 'col_2',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
                 id: 'tablecomponent',
@@ -142,24 +118,37 @@ const components: Component[] = [
                 ],
                 actions: [
                   {
-                    id:'sendRow',
-                    type: 'Button',
-                    config: {
-                      target: 'sendRow',
-                      icon: 'ri-pencil-line',
-                      buttonColor: 'btn-ghost-info mx-1',
-                    },
-                  },
-                  {
                     id:'deleteRow',
                     type: 'Button',
                     config: {
-                      target: 'deleteRow',
                       icon: 'ri-delete-bin-5-line',
                       buttonColor: 'btn-ghost-danger mx-1',
                     },
                   },
                 ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  // add button component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'actionButton',
+                componentName: 'Button',
+                config: {
+                  buttonText: 'Submit',
+                  buttonColor: 'btn-primary',
+                },
               },
             ],
           },
