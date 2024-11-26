@@ -36,22 +36,29 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
   {{#each resourceConfig.components}}
   {{#each Row }}
   {{#each Col}}
-  {{#each components}}
+  {{#each components}} 
   {{#if (eq this.componentName 'Button')}}
-  {{#if this.target}}
-  {{this.target}}: (data?: Record<string, unknown>) => void;{{/if}}
+  {{this.id}}: (data?: Record<string, unknown>) => void;
   {{else}}
   {{toLowerCase this.id}}: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields>['service']{{#if @last}}{{else}},{{/if}}
+  {{!-- Declaring button action inside table --}}
   {{#if (eq this.componentName 'TableComponent')}}
   {{#if this.actions}}
   {{#each this.actions}}
-  {{#if this.config.target}}
-  {{this.config.target}}: ((data?: Record<string, any>) => void);
-  {{/if}}
+  {{this.id}}: ((data?: Record<string, any>) => void);
   {{/each}}
   {{/if}}
   {{/if}}
+  {{!-- End declare button action inside table --}} 
   {{/if}}
+  {{!-- Declaring button action inside form --}}
+  {{#if (eq this.componentName 'FormLayout')}}
+  {{#each this.fields}}
+  {{#if (eq this.type 'IGRP_ButtonInput')}}
+  {{this.config.name}}:(data: Record<string, unknown>) => void;
+  {{/if}}{{/each}}
+  {{/if}}
+  {{!-- End declare button action inside form --}}  
   {{/each}}
   {{/each}}
   {{/each}}
@@ -61,56 +68,60 @@ export type I{{toLowerCase resourceConfig.pageName}}Service = {
 export default function {{resourceConfig.pageName}}() {
   {{#if resourceConfig.components}}
   const service: I{{toLowerCase resourceConfig.pageName}}Service = {{capitalize resourceConfig.pageName}}Service;
-  
+  {{!-- Declaring form references --}}
   {{#each resourceConfig.components}}
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
   {{#if (eq this.componentName 'FormLayout')}}
   const {{this.id}}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {{/if}}
+  {{/each}}{{!-- end each components --}}
+  {{/each}} {{!-- end each Col --}}
+  {{/each}} {{!-- end each Row --}}
+  {{/each}} {{!-- end each resourcesConfig.components --}}
+  {{!-- end declaring form refences --}}
+
+  {{#each resourceConfig.components}}
+  {{#each Row}}
+  {{#each Col}}
+  {{#each components}}
   const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
-  {{#if (eq this.componentName 'Button')}}
-    {{#if  (gt (length ../../../../formRefs) 0)}}
+  {{#if (eq this.componentName 'Button')}}{{#if  (gt (length ../../../../formRefs) 0)}}
     formRefs: {
       {{#each ../../../../formRefs}}
       {{this}}: {{this}}Ref,
       {{/each}}
-    },
-    {{/if}}
-    serviceAction: {{#if this.target}}service.{{this.target}}{{else}}(() => {}){{/if}},
+    },{{/if}}
+    serviceAction: service.{{this.id}},
     config: {{{json this.config}}},
   {{else}}
-  service: service?.{{toLowerCase this.id}},
-  fields: {{{field-helper this}}},
-  config: {{{json this.config}}}
-  {{#if this.actions}},
-  actions: (cell: any) => {
-    return (
-      <React.Fragment>
-        {{#each this.actions}}
-        <IGRP_Button
-          {{#if this.config.target}}
-          {{#if (eq this.config.target 'delete')}}values={cell.row.original.id}{{else}}values={cell.row.original}{{/if}}
-          serviceAction={service.{{this.config.target}} }
-          {{/if}}
-          config={ 
-            {{{json this.config}}} 
-          }
-          />
-        {{/each}}
-      </React.Fragment>
-    )
-  }
-  {{/if}}
-    
-  {{/if}}
-  
+    service: service?.{{toLowerCase this.id}},
+    fields: {{{field-helper this}}},
+    config: {{{json this.config}}}{{#if this.actions}},
+    actions: (cell: any) => {
+      return (
+        <React.Fragment>
+          {{#each this.actions}}
+          <IGRP_Button
+            values={cell.row.original}
+            serviceAction={service.{{this.id}} }           
+            config={ 
+              {{{json this.config}}} 
+            }
+            />
+          {{/each}}
+        </React.Fragment>
+      )
+    }
+    {{/if}} {{/if}}  
   }
   {{#each this.fields }}
-  {{#if (eq ../componentName 'FormLayout')}}
-    {{#if  (isValidation this)}}
-    {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}
-    {{/if}}
+  {{#if (eq ../componentName 'FormLayout')}}{{#if  (isValidation this)}} {{!-- check validation fields --}}
+  {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}{{/if}}{{!-- end check validation fields --}}
+  {{#if (eq this.type 'IGRP_ButtonInput')}}{{!-- set formRef and serviceAction to the button field --}}
+  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = { {{../id}}Form: {{../id}}Ref };
+  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.serviceAction =service.{{this.config.name}};
+  {{/if}}{{!-- end set formRef and serviceAction to the button field --}}
   {{/if}}
   {{/each}}
   {{/each}}

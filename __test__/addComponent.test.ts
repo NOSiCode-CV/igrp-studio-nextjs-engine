@@ -1,24 +1,25 @@
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
-import testPath from '../testPath';
+import {OUTPUT_TEST} from '../testPath';
 
-export const OUTPUT_DIR = testPath.OUTPUT_TEST;
+export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'user',
+  pageName: 'test',
+  path: 'test',
   components: [],
 };
 
 const components: Component[] = [
+  // add form component
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
                 id: 'company',
@@ -32,8 +33,8 @@ const components: Component[] = [
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'firstName',
-                      label: 'First Name',
+                      name: 'name',
+                      label: 'Name',
                       required: true,
                       placeholder: 'Enter your first name',
                       colSize: 4,
@@ -48,65 +49,53 @@ const components: Component[] = [
                       placeholder: 'Enter your first name',
                       colSize: 4,
                     },
-                    validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
+                    validation: {
+                      minLeng: 13,
+                      errorMinLeng: 'Min 13',
+                      maxLeng: 100,
+                      errorMaxLeng: 'Max 100',
+                    },
                   },
                   {
                     type: 'Select2Input',
                     config: {
                       type: 'select',
-                      name: 'userOptions',
-                      label: 'User Options',
+                      name: 'role',
+                      label: 'User Role',
                       placeholder: 'select an option',
                       colSize: 4,
                       options: [
-                        { value: "Admin", label: "Admin" },
-                        { value: "Dev", label: "Dev" },
-                        { value: "QA", label: "QA" },
+                        { value: 'Admin', label: 'Admin' },
+                        { value: 'Dev', label: 'Dev' },
+                        { value: 'QA', label: 'QA' },
                       ],
                     },
                   },
+                  {
+                    type: 'IGRP_ButtonInput',
+                    config: {
+                      type: 'button',
+                      name: 'personalSubmitButton',
+                      label: 'Save',
+                      colSize: 6,
+                    },
+                  },
                 ],
-              }
+              },
             ],
           },
         ],
       },
     ],
   },
-
-  // add button component
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'buttoncomponent',
-            colSize: 6,
-            components: [
-              {
-                id:'button',
-                componentName: 'Button',
-                target:'sendData',
-                config: {
-                  buttonText: 'Submit',
-                  buttonColor: 'btn-primary',
-                }
-              }
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
   // add table component
   {
     Row: [
       {
         Col: [
           {
-              id: 'col_2',
-            colSize: 6,
+            id: 'col_2',
+            colSize: 12,
             components: [
               {
                 id: 'tablecomponent',
@@ -119,23 +108,47 @@ const components: Component[] = [
                   SearchPlaceholder: 'Search...',
                   isPagination: true,
                   isSortable: true,
-                  servrSsidePagination: true,
+                  servrSsidePagination: false,
                   actionTitle: 'Actions',
                 },
                 fields: [
                   { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
-                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                  { header: 'Age', accessorKey: 'age', enableColumnFilter: false },
+                  { header: 'Role', accessorKey: 'role', enableColumnFilter: false },
                 ],
                 actions: [
                   {
+                    id:'deleteRow',
                     type: 'Button',
-                    config: {target:'sendRow', icon: 'ri-pencil-line', buttonColor: 'btn-ghost-info mx-1'}
+                    config: {
+                      icon: 'ri-delete-bin-5-line',
+                      buttonColor: 'btn-ghost-danger mx-1',
+                    },
                   },
-                  {
-                    type: 'Button',
-                    config: {target:'deleteRow', icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
-                  }
-                ]
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  // add button component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'actionButton',
+                componentName: 'Button',
+                config: {
+                  buttonText: 'Submit',
+                  buttonColor: 'btn-primary',
+                },
               },
             ],
           },
@@ -147,5 +160,5 @@ const components: Component[] = [
 
 it('should create a new page', async () => {
   pageConfig.components = components;
-  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+  await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });

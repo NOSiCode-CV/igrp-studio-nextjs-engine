@@ -1,3 +1,1 @@
-export default {
-  OUTPUT_TEST: '',
-}
+export const OUTPUT_TEST= '';

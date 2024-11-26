@@ -10,7 +10,7 @@ import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { AppConfig, RenderContext, Component, PageConfig } from './interfaces/types';
-import { pageConfigValidate } from './schema/pageConfig';
+// import { pageConfigValidate } from './schema/pageConfig';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -96,10 +96,10 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
  * @param basePath 
  */
 export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
-  const isPageConfigValid = pageConfigValidate(pageConfig);
+  // const isPageConfigValid = pageConfigValidate(pageConfig);
 
-  if (!isPageConfigValid && pageConfigValidate.errors) 
-    throw pageConfigValidate.errors;
+  // if (!isPageConfigValid && pageConfigValidate.errors) 
+  //   throw pageConfigValidate.errors;
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 

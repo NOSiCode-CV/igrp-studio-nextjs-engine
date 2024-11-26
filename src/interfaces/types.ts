@@ -53,6 +53,7 @@ export interface Field {
 }
 
 export interface IAction {
+  id: string;
   type: "Button"| "Link";
   config: IActionConfig;
 }
@@ -101,6 +102,8 @@ export interface FieldConfig {
   colSize?: number;
   required?: boolean;
   placeholder?: string;
+  buttonColor?: string;
+  buttonText?: string;
   options?: {
     value: string;
     label: string;

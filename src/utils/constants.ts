@@ -98,6 +98,6 @@ export const FIELD_TYPES = ['text',
   'color',
   'select',
   'button',] as const;
-export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button',] as const
+export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button', 'IGRP_ButtonInput'] as const
 export const COMPONENTS_TYPES = ['Form', 'Table'] as const
 
