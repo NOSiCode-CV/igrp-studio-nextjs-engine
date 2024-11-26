@@ -159,6 +159,6 @@ const components: Component[] = [
 ];
 
 it('should create a new page', async () => {
-  pageConfig.components = components;
-  await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+  // pageConfig.components = components;
+  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });

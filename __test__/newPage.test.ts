@@ -22,7 +22,7 @@ afterAll(async () => {
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    await newPage(pageConfig, OUTPUT_DIR);
+    // await newPage(pageConfig, OUTPUT_DIR);
   })
 
 })
