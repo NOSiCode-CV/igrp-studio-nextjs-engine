@@ -57,7 +57,6 @@ Handlebars.registerHelper('field-helper', function (component: any) {
 });
 
 Handlebars.registerHelper('isValidation', function (field: any) {
-  console.log('field', field);
   return field.validation || field.config.required? true : false;
 });
 

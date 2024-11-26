@@ -1,13 +1,13 @@
 import { addComponentToPage } from '../src/index';
 import { PageConfig, Component } from '../src/interfaces/types';
-import testPath from '../testPath';
+import {OUTPUT_TEST} from '../testPath';
 
-export const OUTPUT_DIR = testPath.OUTPUT_TEST;
+export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'user',
+  pageName: 'test',
+  path: 'test',
   components: [],
 };
 
@@ -48,7 +48,12 @@ const components: Component[] = [
                       placeholder: 'Enter your first name',
                       colSize: 4,
                     },
-                    validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
+                    validation: {
+                      minLeng: 13,
+                      errorMinLeng: 'Min 13',
+                      maxLeng: 100,
+                      errorMaxLeng: 'Max 100',
+                    },
                   },
                   {
                     type: 'Select2Input',
@@ -59,14 +64,23 @@ const components: Component[] = [
                       placeholder: 'select an option',
                       colSize: 4,
                       options: [
-                        { value: "Admin", label: "Admin" },
-                        { value: "Dev", label: "Dev" },
-                        { value: "QA", label: "QA" },
+                        { value: 'Admin', label: 'Admin' },
+                        { value: 'Dev', label: 'Dev' },
+                        { value: 'QA', label: 'QA' },
                       ],
                     },
                   },
+                  {
+                    type: 'IGRP_ButtonInput',
+                    config: {
+                      type: 'button',
+                      name: 'personalSubmitButton',
+                      label: 'Save',
+                      colSize: 6,
+                    },
+                  },
                 ],
-              }
+              },
             ],
           },
         ],
@@ -84,14 +98,13 @@ const components: Component[] = [
             colSize: 6,
             components: [
               {
-                id:'button',
+                id: 'actionButton',
                 componentName: 'Button',
-                target:'sendData',
                 config: {
                   buttonText: 'Submit',
                   buttonColor: 'btn-primary',
-                }
-              }
+                },
+              },
             ],
           },
         ],
@@ -105,7 +118,7 @@ const components: Component[] = [
       {
         Col: [
           {
-              id: 'col_2',
+            id: 'col_2',
             colSize: 6,
             components: [
               {
@@ -119,23 +132,34 @@ const components: Component[] = [
                   SearchPlaceholder: 'Search...',
                   isPagination: true,
                   isSortable: true,
-                  servrSsidePagination: true,
+                  servrSsidePagination: false,
                   actionTitle: 'Actions',
                 },
                 fields: [
                   { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
-                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                  { header: 'Age', accessorKey: 'age', enableColumnFilter: false },
+                  { header: 'Role', accessorKey: 'role', enableColumnFilter: false },
                 ],
                 actions: [
                   {
+                    id:'sendRow',
                     type: 'Button',
-                    config: {target:'sendRow', icon: 'ri-pencil-line', buttonColor: 'btn-ghost-info mx-1'}
+                    config: {
+                      target: 'sendRow',
+                      icon: 'ri-pencil-line',
+                      buttonColor: 'btn-ghost-info mx-1',
+                    },
                   },
                   {
+                    id:'deleteRow',
                     type: 'Button',
-                    config: {target:'deleteRow', icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
-                  }
-                ]
+                    config: {
+                      target: 'deleteRow',
+                      icon: 'ri-delete-bin-5-line',
+                      buttonColor: 'btn-ghost-danger mx-1',
+                    },
+                  },
+                ],
               },
             ],
           },
@@ -147,5 +171,5 @@ const components: Component[] = [
 
 it('should create a new page', async () => {
   pageConfig.components = components;
-  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+  await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 });

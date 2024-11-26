@@ -1,14 +1,14 @@
 import fs from 'fs-extra';
 import { newPage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
-import testPath from '../testPath';
+import {OUTPUT_TEST} from '../testPath';
 
-export const OUTPUT_DIR = testPath.OUTPUT_TEST;
+export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'user',
+  pageName: 'test',
+  path: 'test',
   components: [],
 };
 
@@ -22,7 +22,7 @@ afterAll(async () => {
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    // await newPage(pageConfig, OUTPUT_DIR);
+    await newPage(pageConfig, OUTPUT_DIR);
   })
 
 })

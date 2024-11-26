@@ -56,6 +56,16 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
         additionalProperties: false
       },
       errorMessage: `The options attribute must be an array.`
+    },
+    buttonColor: {
+      type: "string",
+      nullable: true,
+      errorMessage: `The buttonColor attribute must be a string.`
+    },
+    buttonText: {
+      type: "string",
+      nullable: true,
+      errorMessage: `The buttonText attribute must be a string.`
     }
   },
   required: ['type', 'name'],
@@ -194,6 +204,11 @@ const actionConfigSchema: JSONSchemaType<IActionConfig> = {
 const actionSchema: JSONSchemaType<IAction> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
     type: {
       type: 'string',
       errorMessage: 'The type attribute must be a string.'
