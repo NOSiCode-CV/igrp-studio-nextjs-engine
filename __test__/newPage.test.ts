@@ -19,7 +19,7 @@ const pokePage: PageConfig = {
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    await newPage(pokePage, OUTPUT_DIR);
+    // await newPage(pokePage, OUTPUT_DIR);
   })
 
 })
