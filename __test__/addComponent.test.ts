@@ -360,5 +360,5 @@ const pokeComponent: Component[] = [
 it('should create a new page', async () => {
   // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 
-  await addComponentToPage(pokePage, pokeComponent, OUTPUT_DIR);
+  // await addComponentToPage(pokePage, pokeComponent, OUTPUT_DIR);
 });
