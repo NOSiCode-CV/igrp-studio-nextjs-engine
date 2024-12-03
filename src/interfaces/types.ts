@@ -54,7 +54,7 @@ export interface Field {
 
 export interface IAction {
   id: string;
-  type: "Button"| "Link";
+  type: "Button"| "Link" | "IGRP_ButtonInput";
   config: IActionConfig;
 }
 
@@ -62,14 +62,15 @@ export interface IActionConfig {
   icon?: string;
   buttonText?: string;
   target?: string;
-  buttonColor?: string;
+  className?: string;
+  color?: string
 }
 
 export interface IButton {
   formRefs?: any;
   serviceAction?: (data: Record<string, any>) => void;
   buttonText?: string;
-  buttonColor?: string;
+  className?: string;
   values?: any;
   icon?: string;
 };
@@ -86,7 +87,7 @@ export interface ColumnConfig {
   actionTitle?: string,
   servrSsidePagination?: boolean,
   buttonText?: string,
-  buttonColor?: string,
+  className?: string,
 }
 
 export interface TableFields {
@@ -102,7 +103,8 @@ export interface FieldConfig {
   colSize?: number;
   required?: boolean;
   placeholder?: string;
-  buttonColor?: string;
+  color?: string;
+  className?: string,
   buttonText?: string;
   options?: {
     value: string;

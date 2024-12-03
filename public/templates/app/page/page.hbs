@@ -119,7 +119,7 @@ export default function {{resourceConfig.pageName}}() {
   {{#if (eq ../componentName 'FormLayout')}}{{#if  (isValidation this)}} {{!-- check validation fields --}}
   {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}{{/if}}{{!-- end check validation fields --}}
   {{#if (eq this.type 'IGRP_ButtonInput')}}{{!-- set formRef and serviceAction to the button field --}}
-  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = { {{../id}}Form: {{../id}}Ref };
+  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = { {{../id}}: {{../id}}Ref };
   {{capitalize ../id}}Props.fields.{{this.config.name}}.config.serviceAction =service.{{this.config.name}};
   {{/if}}{{!-- end set formRef and serviceAction to the button field --}}
   {{/if}}

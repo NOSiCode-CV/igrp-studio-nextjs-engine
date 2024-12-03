@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import { newPage } from '../src/index';
 import { PageConfig } from '../src/interfaces/types';
 import {OUTPUT_TEST} from '../testPath';
@@ -11,18 +10,16 @@ const pageConfig: PageConfig = {
   path: 'test',
   components: [],
 };
-
-beforeAll(async () => {
-  // await fs.mkdir(OUTPUT_DIR, { recursive: true });
-});
-
-afterAll(async () => {
-  // await fs.rm(OUTPUT_DIR, { recursive: true });
-});
+const pokePage: PageConfig = {
+  type: 'page',
+  pageName: 'pokemon',
+  path: 'pokemon',
+  components: [],
+};
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    // await newPage(pageConfig, OUTPUT_DIR);
+    await newPage(pokePage, OUTPUT_DIR);
   })
 
 })
