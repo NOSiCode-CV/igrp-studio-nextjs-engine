@@ -11,21 +11,28 @@ const pageConfig: PageConfig = {
   components: [],
 };
 
+const pokePage: PageConfig = {
+  type: 'page',
+  pageName: 'pokemon',
+  path: 'pokemon',
+  components: [],
+};
+
 const components: Component[] = [
-  // add form component
+  // add personal info form component 
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 12,
+            colSize: 6,
             components: [
               {
-                id: 'company',
+                id: 'personalInfo',
                 componentName: 'FormLayout',
                 config: {
-                  title: 'Form Test',
+                  title: 'Personal Info',
                   showTitle: false,
                 },
                 fields: [
@@ -57,29 +64,25 @@ const components: Component[] = [
                     },
                   },
                   {
-                    type: 'Select2Input',
-                    config: {
-                      type: 'select',
-                      name: 'role',
-                      label: 'User Role',
-                      placeholder: 'select an option',
-                      colSize: 4,
-                      options: [
-                        { value: 'Admin', label: 'Admin' },
-                        { value: 'Dev', label: 'Dev' },
-                        { value: 'QA', label: 'QA' },
-                      ],
-                    },
-                  },
-                  {
                     type: 'IGRP_ButtonInput',
                     config: {
                       type: 'button',
-                      name: 'personalSubmitButton',
+                      name: 'formButton',
                       label: 'Save',
                       colSize: 6,
+                      className: 'btn-info mb-2 mx-2',
                     },
                   },
+                  // {
+                  //   type: 'IGRP_ButtonInput',
+                  //   config: {
+                  //     type: 'button',
+                  //     name: 'clearForm',
+                  //     label: 'Cancel',
+                  //     colSize: 6,
+                  //     className: 'btn-danger mb-2 mx-2'
+                  //   },
+                  // },
                 ],
               },
             ],
@@ -88,7 +91,103 @@ const components: Component[] = [
       },
     ],
   },
-  // add table component
+  // add company form component 
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'col_nihdj',
+            colSize: 6,
+            components: [
+              {
+                id: 'companyInfo',
+                componentName: 'FormLayout',
+                config: {
+                  title: 'Company Info',
+                  showTitle: false,
+                },
+                fields: [
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'company',
+                      label: 'Company',
+                      required: true,
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
+                    },
+                  },
+                  {
+                    type: 'SelectInput',
+                    config: {
+                      type: 'select',
+                      name: 'city',
+                      label: 'City',
+                      options: [
+                        { value: 'Madrid', label: 'Madrid' },
+                        { value: 'Luanda', label: 'Luanda' },
+                        { value: 'Praia', label: 'Praia' },
+                      ],
+                      colSize: 4,
+                    }
+                  },
+                  // {
+                  //   type: 'Select2Input',
+                  //   config: {
+                  //     type: 'select',
+                  //     name: 'role',
+                  //     label: 'User Role',
+                  //     placeholder: 'select an option',
+                  //     colSize: 4,
+                  //     options: [
+                  //       { value: 'Admin', label: 'Admin' },
+                  //       { value: 'Dev', label: 'Dev' },
+                  //       { value: 'QA', label: 'QA' },
+                  //     ],
+                  //   },
+                  // },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+   // add submit and clear button component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'pageButotn',
+                componentName: 'Button',
+                config: {
+                  buttonText: 'Enviar',
+                  className: 'btn-info mb-2 mx-2',
+                },
+              },
+              // {
+              //   id: 'clearButton',
+              //   componentName: 'Button',
+              //   config: {
+              //     buttonText: 'Cancel',
+              //     className: 'btn-danger mb-2 mx-2',
+              //   },
+              // },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  // add cliente side table component
   {
     Row: [
       {
@@ -101,7 +200,7 @@ const components: Component[] = [
                 id: 'tablecomponent',
                 componentName: 'TableComponent',
                 config: {
-                  title: 'Pokemons',
+                  title: 'Members',
                   showTitle: true,
                   pageSize: 5,
                   isGlobalFilter: true,
@@ -114,15 +213,25 @@ const components: Component[] = [
                 fields: [
                   { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
                   { header: 'Age', accessorKey: 'age', enableColumnFilter: false },
-                  { header: 'Role', accessorKey: 'role', enableColumnFilter: false },
+                  { header: 'City', accessorKey: 'city', enableColumnFilter: false },
+                  { header: 'Company', accessorKey: 'company', enableColumnFilter: false },
                 ],
                 actions: [
+                  {
+                    id:'editRow',
+                    type: 'Button',
+                    config: {
+                      icon: 'ri-pencil-fill',
+                      color: 'info',
+                      className: 'btn-ghost-info',
+                    },
+                  },
                   {
                     id:'deleteRow',
                     type: 'Button',
                     config: {
                       icon: 'ri-delete-bin-5-line',
-                      buttonColor: 'btn-ghost-danger mx-1',
+                      className: 'btn-ghost-danger',
                     },
                   },
                 ],
@@ -133,22 +242,58 @@ const components: Component[] = [
       },
     ],
   },
-  // add button component
+
+];
+const pokeComponent: Component[] = [
+  // add pokemon form component 
   {
     Row: [
       {
         Col: [
           {
-            id: 'buttoncomponent',
+            id: 'col_nihdj',
             colSize: 6,
             components: [
               {
-                id: 'actionButton',
-                componentName: 'Button',
+                id: 'pokemonInfo',
+                componentName: 'FormLayout',
                 config: {
-                  buttonText: 'Submit',
-                  buttonColor: 'btn-primary',
+                  title: 'Add Pokemon',
+                  showTitle: false,
                 },
+                fields: [
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'name',
+                      label: 'Name',
+                      required: true,
+                      placeholder: 'Enter the pokemon name',
+                      colSize: 6,
+                    },
+                  },
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'url',
+                      label: 'Url',
+                      placeholder: 'Enter the pokemon url',
+                      colSize: 6,
+                    }
+                  },
+                  {
+                    type: 'IGRP_ButtonInput',
+                    config: {
+                      type: 'button',
+                      name: 'formButton',
+                      label: 'Save',
+                      colSize: 6,
+                      className: 'btn-info mb-2 mx-2',
+                    },
+                  }
+                ],
               },
             ],
           },
@@ -156,9 +301,64 @@ const components: Component[] = [
       },
     ],
   },
+  // add server side table component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'col_2',
+            colSize: 6,
+            components: [
+              {
+                id: 'pokemonTable',
+                componentName: 'TableComponent',
+                config: {
+                  title: 'Pokemons',
+                  showTitle: true,
+                  pageSize: 5,
+                  isGlobalFilter: true,
+                  SearchPlaceholder: 'Search...',
+                  isPagination: true,
+                  isSortable: true,
+                  servrSsidePagination: true,
+                  actionTitle: 'Actions',
+                },
+                fields: [
+                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
+                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                ],
+                actions: [
+                  {
+                    id:'editPokemon',
+                    type: 'Button',
+                    config: {
+                      icon: 'ri-pencil-fill',
+                      color: 'info',
+                      className: 'btn-ghost-info',
+                    },
+                  },
+                  {
+                    id:'removePokemon',
+                    type: 'Button',
+                    config: {
+                      icon: 'ri-delete-bin-5-line',
+                      className: 'btn-ghost-danger',
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
 ];
 
 it('should create a new page', async () => {
-  // pageConfig.components = components;
   // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+
+  await addComponentToPage(pokePage, pokeComponent, OUTPUT_DIR);
 });
