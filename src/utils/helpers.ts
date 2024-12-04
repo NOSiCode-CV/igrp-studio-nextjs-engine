@@ -47,3 +47,14 @@ export const getPagePath = (context: RenderContext<PageConfig>) =>
   );
 
 export const onlyUnique = (value:any, index:any, array: any) => array.indexOf(value) === index
+
+export const loadConfig = async function<T> (basePath: string): Promise<T[]> {
+  if (!(await fs.pathExists(basePath))) {
+    return [];
+  }
+  
+  const files = (await fs.readdir(basePath))
+    .filter(f => f.endsWith('.json'))
+    .map(f => fs.readJSON(path.join(basePath,f)));
+  return await Promise.all<T>(files);
+}

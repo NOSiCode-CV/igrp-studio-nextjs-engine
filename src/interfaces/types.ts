@@ -20,12 +20,10 @@ export interface RowLayout {
   Col: ColumnLayout[];
 }
 
-
-
 export interface ColumnLayout {
   id: string;
   colSize: number;
-  components?: ColumnComponent[]; 
+  components?: ColumnComponent[];
 }
 
 export interface ColumnComponent {
@@ -34,10 +32,10 @@ export interface ColumnComponent {
   values?: any;
   serviceAction?: any;
   target?: string;
-  componentName: ComponentNames
+  componentName: ComponentNames;
   config: ColumnConfig;
-  fields?: Field[] | TableFields[]; 
-  actions?: IAction[]
+  fields?: Field[] | TableFields[];
+  actions?: IAction[];
 }
 
 export interface Field {
@@ -54,7 +52,7 @@ export interface Field {
 
 export interface IAction {
   id: string;
-  type: "Button"| "Link" | "IGRP_ButtonInput";
+  type: 'Button' | 'Link' | 'IGRP_ButtonInput';
   config: IActionConfig;
 }
 
@@ -63,7 +61,7 @@ export interface IActionConfig {
   buttonText?: string;
   target?: string;
   className?: string;
-  color?: string
+  color?: string;
 }
 
 export interface IButton {
@@ -73,21 +71,21 @@ export interface IButton {
   className?: string;
   values?: any;
   icon?: string;
-};
+}
 
 export interface ColumnConfig {
   title?: string;
-  showTitle?: boolean,
+  showTitle?: boolean;
   colSize?: number;
-  pageSize?: number, 
-  isPagination?: boolean, 
-  isGlobalFilter?: boolean,
-  SearchPlaceholder?: string,
-  isSortable?: boolean,
-  actionTitle?: string,
-  servrSsidePagination?: boolean,
-  buttonText?: string,
-  className?: string,
+  pageSize?: number;
+  isPagination?: boolean;
+  isGlobalFilter?: boolean;
+  SearchPlaceholder?: string;
+  isSortable?: boolean;
+  actionTitle?: string;
+  servrSsidePagination?: boolean;
+  buttonText?: string;
+  className?: string;
 }
 
 export interface TableFields {
@@ -104,11 +102,23 @@ export interface FieldConfig {
   required?: boolean;
   placeholder?: string;
   color?: string;
-  className?: string,
+  className?: string;
   buttonText?: string;
   options?: {
     value: string;
     label: string;
+  }[];
+}
+
+export interface PageMetaCOnfig {
+  type: "UI"; //aplication type
+  url: string; // application url
+  description: string; //aplication description
+  resourceItems?: {
+    name: string; // page name
+    url: string; //page path,
+    resourceItemType: 'PAGE';
+    description: string; // page description
   }[];
 }
 
@@ -119,7 +129,6 @@ export type RenderContext<T = undefined> = {
   velzonImports?: string[];
   formRefs?: string[];
 };
-
 
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
