@@ -44,7 +44,7 @@ const components: Component[] = [
                       label: 'Name',
                       required: true,
                       placeholder: 'Enter your first name',
-                      colSize: 4,
+                      colSize: 6,
                     },
                   },
                   {
@@ -54,7 +54,7 @@ const components: Component[] = [
                       name: 'age',
                       label: 'Age',
                       placeholder: 'Enter your first name',
-                      colSize: 4,
+                      colSize: 6,
                     },
                     validation: {
                       minLeng: 13,
@@ -64,25 +64,34 @@ const components: Component[] = [
                     },
                   },
                   {
+                    type: 'CheckboxInput',
+                    config: {
+                      type: 'checkbox',
+                      name: 'smoker',
+                      label: 'Smoker',
+                      colSize: 12,
+                    }
+                  },
+                  {
                     type: 'IGRP_ButtonInput',
                     config: {
                       type: 'button',
                       name: 'formButton',
-                      label: 'Save',
-                      colSize: 6,
-                      className: 'btn-info mb-2 mx-2',
+                      label: 'Save this',
+                      colSize: 2,
+                      className: 'btn-info mb-2 mt-2',
                     },
                   },
-                  // {
-                  //   type: 'IGRP_ButtonInput',
-                  //   config: {
-                  //     type: 'button',
-                  //     name: 'clearForm',
-                  //     label: 'Cancel',
-                  //     colSize: 6,
-                  //     className: 'btn-danger mb-2 mx-2'
-                  //   },
-                  // },
+                  {
+                    type: 'IGRP_ButtonInput',
+                    config: {
+                      type: 'button',
+                      name: 'pageButton',
+                      label: 'Save All',
+                      colSize: 2,
+                      className: 'btn-success mb-2 mt-2'
+                    },
+                  },
                 ],
               },
             ],
@@ -125,6 +134,7 @@ const components: Component[] = [
                       type: 'select',
                       name: 'city',
                       label: 'City',
+                      required: true,
                       options: [
                         { value: 'Madrid', label: 'Madrid' },
                         { value: 'Luanda', label: 'Luanda' },
@@ -133,21 +143,20 @@ const components: Component[] = [
                       colSize: 4,
                     }
                   },
-                  // {
-                  //   type: 'Select2Input',
-                  //   config: {
-                  //     type: 'select',
-                  //     name: 'role',
-                  //     label: 'User Role',
-                  //     placeholder: 'select an option',
-                  //     colSize: 4,
-                  //     options: [
-                  //       { value: 'Admin', label: 'Admin' },
-                  //       { value: 'Dev', label: 'Dev' },
-                  //       { value: 'QA', label: 'QA' },
-                  //     ],
-                  //   },
-                  // },
+                  {
+                    type: 'PhoneNumberInput',
+                    config: {
+                      type: 'tel',
+                      name: 'phone',
+                      label: 'Pone Number',
+                      required: true,
+                      colSize: 4,
+                    },
+                    validation: {
+                      requiredMessage: 'Phone Number is required'
+                    },
+                  },
+                  
                 ],
               },
             ],
@@ -156,37 +165,39 @@ const components: Component[] = [
       },
     ],
   },
-   // add submit and clear button component
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'buttoncomponent',
-            colSize: 6,
-            components: [
-              {
-                id: 'pageButotn',
-                componentName: 'Button',
-                config: {
-                  buttonText: 'Enviar',
-                  className: 'btn-info mb-2 mx-2',
-                },
-              },
-              // {
-              //   id: 'clearButton',
-              //   componentName: 'Button',
-              //   config: {
-              //     buttonText: 'Cancel',
-              //     className: 'btn-danger mb-2 mx-2',
-              //   },
-              // },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+  // add submit and clear button component
+
+  // {
+  //   Row: [
+  //     {
+  //       Col: [
+  //         {
+  //           id: 'buttoncomponent',
+  //           colSize: 6,
+  //           components: [
+  //             {
+  //               id: 'pageButotn',
+  //               componentName: 'Button',
+  //               config: {
+  //                 buttonText: 'Enviar',
+  //                 className: 'btn-info mb-2 mx-2',
+  //               },
+  //             },
+  //             // {
+  //             //   id: 'clearButton',
+  //             //   componentName: 'Button',
+  //             //   config: {
+  //             //     buttonText: 'Cancel',
+  //             //     className: 'btn-danger mb-2 mx-2',
+  //             //   },
+  //             // },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+
   // add cliente side table component
   {
     Row: [
@@ -211,10 +222,12 @@ const components: Component[] = [
                   actionTitle: 'Actions',
                 },
                 fields: [
-                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
-                  { header: 'Age', accessorKey: 'age', enableColumnFilter: false },
-                  { header: 'City', accessorKey: 'city', enableColumnFilter: false },
-                  { header: 'Company', accessorKey: 'company', enableColumnFilter: false },
+                  { header: "Name", accessorKey: "name", enableColumnFilter: false },
+                  { header: "Age", accessorKey: "age", enableColumnFilter: false },
+                  { header: "Tel", accessorKey: "phone", enableColumnFilter: false },
+                  { header: "Smoker", accessorKey: "smoker", enableColumnFilter: false },
+                  { header: "City", accessorKey: "city", enableColumnFilter: false },
+                  { header: "Company", accessorKey: "company", enableColumnFilter: false },
                 ],
                 actions: [
                   {

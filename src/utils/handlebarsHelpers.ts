@@ -11,12 +11,6 @@ Handlebars.registerHelper('capitalize', (str: string) => {
 });
 
 Handlebars.registerHelper('json', function(context) {
-  //TODO remove target from json
-  if(context.target){
-    const { target, ...rest } = context;
-    return JSON.stringify(rest);
-  }
-
   return JSON.stringify(context);
 });
 
@@ -84,10 +78,12 @@ Handlebars.registerHelper('import-actions-type', function (components: any) {
 });
 
 Handlebars.registerHelper('yup-validation', function (c: any) {
+  const stringTypes = ['text', 'tel', 'select']
   if (c.validation || c.config.required) {
-    const type = c.config.type === 'text' ? 'string' : c.config.type;
+    const type = stringTypes.includes(c.config.type) ? 'string' : c.config.type;
     let validation = c.validation;
-    let yupValidation = type !=='select'? `yup.${type}()` : ``;
+    // let yupValidation = type ==='select'? `yup.string()` : `yup.${type}()`;
+    let yupValidation = `yup.${type}()`;
 
     if (c.config.required) {
       yupValidation += `.required('${validation && validation.requiredMessage? validation.requiredMessage: 'This field is required'}')`;
