@@ -2,6 +2,7 @@ import path from 'path';
 import { saveToFile } from '../common/saveToFile';
 import { PageConfig } from '../../interfaces/types';
 import { DIRECTORIES, EXTENSIONS } from '../../utils/constants';
+import { updateMeta } from '../pageMeta/addMetaPage';
 
 /**
  * Saves the page configuration to a JSON file in the specified directory.
@@ -25,4 +26,5 @@ export const savePageConfig = async (pageConfig: PageConfig, basePath: string) =
   );
   
   await saveToFile(JSON.stringify(pageConfig), pageConfigOutputPath);
+  await updateMeta(basePath)
 };

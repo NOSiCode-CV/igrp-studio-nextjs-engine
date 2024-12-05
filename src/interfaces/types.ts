@@ -110,7 +110,7 @@ export interface FieldConfig {
   }[];
 }
 
-export interface PageMetaCOnfig {
+export interface PageMetaConfig {
   type: "UI"; //aplication type
   url: string; // application url
   description: string; //aplication description

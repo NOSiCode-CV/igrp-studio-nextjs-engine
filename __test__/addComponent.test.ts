@@ -244,6 +244,7 @@ const components: Component[] = [
   },
 
 ];
+
 const pokeComponent: Component[] = [
   // add pokemon form component 
   {

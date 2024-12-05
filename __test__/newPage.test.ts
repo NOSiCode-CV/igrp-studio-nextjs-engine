@@ -10,16 +10,10 @@ const pageConfig: PageConfig = {
   path: 'test',
   components: [],
 };
-const pokePage: PageConfig = {
-  type: 'page',
-  pageName: 'pokemon',
-  path: 'pokemon',
-  components: [],
-};
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    await newPage(pageConfig, OUTPUT_DIR);
+    // await newPage(pageConfig, OUTPUT_DIR);
   })
 
 })

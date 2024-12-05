@@ -9,7 +9,7 @@ import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
-import { AppConfig, RenderContext, Component, PageConfig, PageMetaCOnfig } from './interfaces/types';
+import { AppConfig, RenderContext, Component, PageConfig, PageMetaConfig } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 // import { pageConfigValidate } from './schema/pageConfig';
 
@@ -61,7 +61,7 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
    */
   await saveFileConfig(context);
 
-  const pageMetaConfig: PageMetaCOnfig = {
+  const pageMetaConfig: PageMetaConfig = {
     type: 'UI',
     url: "",
     description: 'Web description', //it's because when creating a web application doesn't includ the description
