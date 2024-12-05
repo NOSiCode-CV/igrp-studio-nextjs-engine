@@ -16,9 +16,10 @@ export const PATTERNS = {
 
 export const COMMON_FILES = {
   BASE_APP: 'baseApp.json',
+  PAGES_META: 'pagesMeta.json',
   PAGE_TSX: 'page.tsx',
   LAYOUT_TSX: 'layout.tsx',
-  SERVICE: 'Service.ts'
+  SERVICE: 'Service.ts',
 };
 
 export const EXTENSIONS = {
