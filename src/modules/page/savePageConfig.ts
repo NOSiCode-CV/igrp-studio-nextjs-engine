@@ -2,7 +2,7 @@ import path from 'path';
 import { saveToFile } from '../common/saveToFile';
 import { PageConfig } from '../../interfaces/types';
 import { DIRECTORIES, EXTENSIONS } from '../../utils/constants';
-import { updateMeta } from '../pageMeta/addMetaPage';
+import { updateMeta } from '../pageMeta/updatePageMeta';
 
 /**
  * Saves the page configuration to a JSON file in the specified directory.
