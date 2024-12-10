@@ -32,6 +32,14 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
       type: "string",
       nullable: true
     },
+    applyToAllForms: {
+      type: "boolean",
+      nullable: true
+    },
+    refreshTable: {
+      type: "boolean",
+      nullable: true
+    },
     required: {
       type: "boolean",
       nullable: true,
@@ -71,6 +79,12 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
       type: "string",
       nullable: true,
       errorMessage: `The buttonText attribute must be a string.`
+    },
+    targetForms: {
+      type: "array",
+      items: {type: "string"},
+      nullable: true,
+      errorMessage: `The buttonText attribute must be a string.`
     }
   },
   required: ['type', 'name'],
@@ -108,6 +122,20 @@ const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
       nullable: true,
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage: 'The title attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    applyToAllForms: {
+      type: "boolean",
+      nullable: true
+    },
+    refreshTable: {
+      type: "boolean",
+      nullable: true
+    },
+    targetForms: {
+      type: "array",
+      items: {type: "string"},
+      nullable: true,
+      errorMessage: `The buttonText attribute must be a string.`
     },
     showTitle: {
       type:'boolean',
@@ -164,7 +192,7 @@ const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
       type: 'string',
       nullable: true,
       errorMessage: 'The buttonColor attribute must be a string.'
-    }
+    },
   },
   required: [],
   additionalProperties: false
@@ -204,6 +232,11 @@ const actionConfigSchema: JSONSchemaType<IActionConfig> = {
     },
     buttonText: {
       type: 'string',
+      nullable: true,
+      errorMessage: 'The text attribute must be a string.'
+    },
+    refreshTable: {
+      type: 'boolean',
       nullable: true,
       errorMessage: 'The text attribute must be a string.'
     }

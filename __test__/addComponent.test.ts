@@ -19,6 +19,32 @@ const pokePage: PageConfig = {
 };
 
 const components: Component[] = [
+  // add out side form button 
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'outsideButton',
+                componentName: 'Button',
+                config: {
+                  applyToAllForms: true,
+                  refreshTable: true,
+                  buttonText: 'Enviar',
+                  className: 'btn-info mb-2 mx-2',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   // add personal info form component 
   {
     Row: [
@@ -26,7 +52,7 @@ const components: Component[] = [
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
                 id: 'personalInfo',
@@ -64,19 +90,12 @@ const components: Component[] = [
                     },
                   },
                   {
-                    type: 'CheckboxInput',
-                    config: {
-                      type: 'checkbox',
-                      name: 'smoker',
-                      label: 'Smoker',
-                      colSize: 12,
-                    }
-                  },
-                  {
                     type: 'IGRP_ButtonInput',
                     config: {
                       type: 'button',
                       name: 'formButton',
+                      targetForms:['personalInfo'],
+                      refreshTable: false,
                       label: 'Save this',
                       colSize: 2,
                       className: 'btn-info mb-2 mt-2',
@@ -87,6 +106,8 @@ const components: Component[] = [
                     config: {
                       type: 'button',
                       name: 'pageButton',
+                      applyToAllForms: true,
+                      refreshTable: true,            
                       label: 'Save All',
                       colSize: 2,
                       className: 'btn-success mb-2 mt-2'
@@ -100,14 +121,14 @@ const components: Component[] = [
       },
     ],
   },
-  // add company form component 
+  // // add company form component 
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
                 id: 'companyInfo',
@@ -165,40 +186,8 @@ const components: Component[] = [
       },
     ],
   },
-  // add submit and clear button component
-
-  // {
-  //   Row: [
-  //     {
-  //       Col: [
-  //         {
-  //           id: 'buttoncomponent',
-  //           colSize: 6,
-  //           components: [
-  //             {
-  //               id: 'pageButotn',
-  //               componentName: 'Button',
-  //               config: {
-  //                 buttonText: 'Enviar',
-  //                 className: 'btn-info mb-2 mx-2',
-  //               },
-  //             },
-  //             // {
-  //             //   id: 'clearButton',
-  //             //   componentName: 'Button',
-  //             //   config: {
-  //             //     buttonText: 'Cancel',
-  //             //     className: 'btn-danger mb-2 mx-2',
-  //             //   },
-  //             // },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-
-  // add cliente side table component
+ 
+  // // add cliente side table component
   {
     Row: [
       {
@@ -219,7 +208,7 @@ const components: Component[] = [
                   isPagination: true,
                   isSortable: true,
                   servrSsidePagination: false,
-                  actionTitle: 'Actions',
+                  actionTitle: 'Actions'
                 },
                 fields: [
                   { header: "Name", accessorKey: "name", enableColumnFilter: false },
@@ -243,6 +232,7 @@ const components: Component[] = [
                     id:'deleteRow',
                     type: 'Button',
                     config: {
+                      refreshTable: true,
                       icon: 'ri-delete-bin-5-line',
                       className: 'btn-ghost-danger',
                     },

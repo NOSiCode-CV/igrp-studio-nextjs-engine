@@ -62,6 +62,7 @@ export interface IActionConfig {
   target?: string;
   className?: string;
   color?: string;
+  refreshTable?: boolean
 }
 
 export interface IButton {
@@ -86,6 +87,9 @@ export interface ColumnConfig {
   servrSsidePagination?: boolean;
   buttonText?: string;
   className?: string;
+  applyToAllForms?: boolean;
+  targetForms?: string[],
+  refreshTable?: boolean
 }
 
 export interface TableFields {
@@ -104,6 +108,9 @@ export interface FieldConfig {
   color?: string;
   className?: string;
   buttonText?: string;
+  targetForms?: string[];
+  applyToAllForms?: boolean;
+  refreshTable?: boolean
   options?: {
     value: string;
     label: string;

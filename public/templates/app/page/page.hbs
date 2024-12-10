@@ -5,7 +5,7 @@ import * as yup from 'yup';
 {{else}}
 import 'bootstrap/dist/css/bootstrap.min.css';
 {{/if}}
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Row, Container } from 'reactstrap'
 import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
 
@@ -75,36 +75,70 @@ export default function {{resourceConfig.pageName}}() {
   {{#each components}}
   {{#if (eq this.componentName 'FormLayout')}}
   const {{this.id}}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {{/if}}
+  {{#if (eq this.componentName 'TableComponent')}}
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    updateTable()
+  },[])
+
+  const updateTable = async () => {
+    if (service.{{this.id}} && service.{{this.id}}.populate) {
+      const fakeData = (await service.{{this.id}}.populate()).rows
+      setData([...fakeData])
+    }
+  }
+  {{#if this.actions}}
+  {{#each this.actions}}{{#if this.config.refreshTable}}
+  const handle{{capitalize this.id}} = (data: any) => {
+    service.{{this.id}}(data);
+    updateTable();
+  }
+  {{/if}}{{/each}}
+  {{/if}}{{/if}}
   {{/each}}{{!-- end each components --}}
   {{/each}} {{!-- end each Col --}}
   {{/each}} {{!-- end each Row --}}
   {{/each}} {{!-- end each resourcesConfig.components --}}
   {{!-- end declaring form refences --}}
 
+
   {{#each resourceConfig.components}}
   {{#each Row}}
   {{#each Col}}
   {{#each components}}
   const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
-  {{#if (eq this.componentName 'Button')}}{{#if  (gt (length ../../../../formRefs) 0)}}
+  {{#if (eq this.componentName 'Button')}}
+    {{#if this.config.applyToAllForms}}
     formRefs: {
       {{#each ../../../../formRefs}}
       {{this}}: {{this}}Ref,
       {{/each}}
-    },{{/if}}
-    serviceAction: service.{{this.id}},
+    },{{/if}}{{#if this.config.targetForms}} formRefs: { {{#each this.config.targetForms}}
+    {{this}}: {{this}}Ref,
+    {{/each}} }, {{/if}}
+    serviceAction: {{#if this.config.refreshTable}} async(data) => {
+      service.{{this.id}}(data)
+      updateTable()
+    },{{else}}service.{{this.id}},{{/if}}
     config: {{{json this.config}}},
   {{else}}
     service: service?.{{toLowerCase this.id}},
     fields: {{{field-helper this}}},
-    config: {{{json this.config}}}{{#if this.actions}},
+    config: {{{json this.config }}}{{#if this.actions}},
     actions: (cell: any) => {
       return (
         <React.Fragment>
           {{#each this.actions}}
           <IGRP_Button
             values={cell.row.original}
-            serviceAction={service.{{this.id}} }           
+            serviceAction={ {{#if this.config.refreshTable}}() => {
+              handle{{capitalize this.id}}(cell.row.original)
+            }
+              {{else}}
+              service.{{this.id}}
+              {{/if}}
+            }           
             config={ 
               {{{json this.config}}} 
             }
@@ -112,15 +146,32 @@ export default function {{resourceConfig.pageName}}() {
           {{/each}}
         </React.Fragment>
       )
-    }
-    {{/if}} {{/if}}  
+    }{{/if}}{{/if}}  
   }
+  {{#if  (eq this.componentName 'TableComponent')}}
+  {{capitalize this.id}}Props.config.data = data
+  {{/if}}
   {{#each this.fields }}
   {{#if (eq ../componentName 'FormLayout')}}{{#if  (isValidation this)}} {{!-- check validation fields --}}
   {{capitalize ../id}}Props.fields.{{this.config.name}}.validation = {{{yup-validation this}}}{{/if}}{{!-- end check validation fields --}}
   {{#if (eq this.type 'IGRP_ButtonInput')}}{{!-- set formRef and serviceAction to the button field --}}
-  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = { {{../id}}: {{../id}}Ref };
-  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.serviceAction =service.{{this.config.name}};
+  {{#if this.config.targetForms }}{{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = {
+    {{#each this.config.targetForms}}
+    {{this}}: {{this}}Ref,
+    {{/each}} 
+  }
+  {{/if}}
+  {{#if this.config.applyToAllForms }}{{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = {
+    {{#each ../../../../../formRefs}}
+    {{this}}: {{this}}Ref,
+    {{/each}}
+  }
+  {{/if}}{{#if this.config.refreshTable}}
+  {{capitalize ../id}}Props.fields.{{this.config.name}}.config.serviceAction = async(data) => {
+    service.{{this.config.name}}(data),
+    updateTable()
+  };
+  {{else}}{{capitalize ../id}}Props.fields.{{this.config.name}}.config.serviceAction = service.{{this.config.name}}{{/if}}
   {{/if}}{{!-- end set formRef and serviceAction to the button field --}}
   {{/if}}
   {{/each}}
