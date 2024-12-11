@@ -18,6 +18,8 @@ export const COMMON_FILES = {
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
   PAGE_TSX: 'page.tsx',
+  MAIN_LAYOUT_TSX: 'MainLayout.tsx',
+  MAIN_LAYOUT_CSS: 'MainLayout.module.css',
   LAYOUT_TSX: 'layout.tsx',
   SERVICE: 'Service.ts',
 };
@@ -31,7 +33,9 @@ export const TEMPLATES = {
   CONFIG_LAYOUT: 'config/layout.hbs',
   CONFIG_PACKGE_JSON: 'config/package.json.hbs',
   PAGE: 'app/page/page.hbs',
-  SERVICE: 'app/page/service.hbs'
+  SERVICE: 'app/page/service.hbs',
+  MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
+  MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
 };
 
 export const SRC_CONFIG_FILES = {
@@ -61,6 +65,7 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 export const DIRECTORIES = {
   APP: 'src/app',
   SERVICES: 'src/services',
+  LAYOUTS: 'src/layouts',
   ASSETS: 'src/assets',
   DESIGN_SYSTEM: 'design-system',
   PUBLIC: 'public',

@@ -1,4 +1,6 @@
 import '@igrp/nosi-velzon-ts/assets/themes'
+import MainLayout from '@/layouts/MainLayout';
+import '@igrp/navbar-sidebar-library/dist/index.css';
 
 export default function RootLayout({
   children,
@@ -8,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body >
-        {children}
+         <MainLayout>{children}</MainLayout>
       </body>
     </html>
   );

@@ -1,0 +1,45 @@
+'use client';
+
+import React from 'react';
+import { CustomNavbar, CustomSidebar, SidebarProvider } from '@igrp/navbar-sidebar-library';
+import styles from './MainLayout.module.css';
+
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
+{{!-- this line should be removed when generating the real project --}}
+const userToken = 'fSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQ'
+
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+
+  const translations = {
+    home: 'Home',
+    settings: 'Settings',
+    logOut: 'Log Out',
+    accessManagement: 'Access Management',
+    users: 'Users',
+    departments: 'Departments',
+    appsManagement: 'Apps Management'
+  };
+
+  return (
+    <SidebarProvider>
+      <>
+      <CustomNavbar/>
+        <div className={`d-flex ${styles.container}`}>
+          <CustomSidebar
+            userToken={userToken} 
+            translations={translations}
+            userRoles={['client-admin']} {{!-- it must be removed or update with the real array roles --}}            
+          />
+          <div className={`${styles.content}`}>
+            {children} 
+          </div>
+        </div>
+      </>
+    </SidebarProvider>
+  );
+};
+
+export default MainLayout;
