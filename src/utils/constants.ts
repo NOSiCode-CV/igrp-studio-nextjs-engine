@@ -47,6 +47,7 @@ export const SRC_CONFIG_FILES = {
   GITLABCIYAML: 'gitlab-ci.yaml',
   TSCONFIG: 'tsconfig.json',
   NPMRC: 'npmrc_template',
+  LOCAL_ENV: 'local_env'
 };
 
 export const DST_CONFIG_FILES ={
@@ -57,7 +58,8 @@ export const DST_CONFIG_FILES ={
   NEXTENV: 'next-env.d.ts',
   GITLABCIYAML: 'gitlab-ci.yaml',
   TSCONFIG: 'tsconfig.json',
-  NPMRC: '.npmrc'
+  NPMRC: '.npmrc',
+  ENV: '.env.local'
 }
 
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
