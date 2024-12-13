@@ -14,13 +14,20 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-
   return (
     <SidebarProvider>
       <>
-      <CustomNavbar/>
+        <CustomNavbar 
+          NEXT_PUBLIC_BASE_IGRP_UI_URL={process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL || ''} 
+          NEXT_PUBLIC_APP_MANAGER_API={process.env.NEXT_PUBLIC_APP_MANAGER_API || ''} 
+          NEXT_PUBLIC_USER_MANAGER_API={process.env.NEXT_PUBLIC_USER_MANAGER_API || ''} 
+        />
         <div className={`d-flex ${styles.container}`}>
-          <CustomSidebar/>
+          <CustomSidebar
+            appId='1' //it will be replaced
+            NEXT_PUBLIC_BASE_IGRP_UI_URL={process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL || ''} 
+            NEXT_PUBLIC_APP_MANAGER_API={process.env.NEXT_PUBLIC_APP_MANAGER_API || ''}
+          />
           <div className={`${styles.content}`}>
             {children} 
           </div>
