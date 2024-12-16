@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 /**
 * the follow import will be replaced in the engine from
 * @igrp/navbar-sidebar-library 
@@ -14,6 +15,23 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+    const [isTokenChecked, setIsTokenChecked] = useState(false);
+
+  useEffect(() => {
+    const token = Cookies.get('userToken');
+    
+    if (!token) {
+      const logoutUrl = process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL + "/logout";
+      window.location.href = logoutUrl;
+    } else {
+      setIsTokenChecked(true);
+    }
+  }, []);
+
+  if (!isTokenChecked) {
+    return null;
+  }
+
   return (
     <SidebarProvider>
       <>
