@@ -16,6 +16,10 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage: 'The application name must only contain letters and must not have spaces or special characters.'
     },
+    description: {
+      type: 'string',
+      nullable: true,
+    },
   },
   required: ['type', 'appName'],
   additionalProperties: false,

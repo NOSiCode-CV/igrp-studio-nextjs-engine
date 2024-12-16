@@ -64,7 +64,7 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
   const pageMetaConfig: PageMetaConfig = {
     type: 'UI',
     url: "",
-    description: 'Web description', //it's because when creating a web application doesn't includ the description
+    description: baseConfig.description ||'Web description',
     resourceItems: []
   }
   

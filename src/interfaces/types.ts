@@ -3,6 +3,7 @@ import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constan
 export interface AppConfig {
   type: 'baseApp';
   appName: string;
+  description?: string
 }
 
 export interface PageConfig {
