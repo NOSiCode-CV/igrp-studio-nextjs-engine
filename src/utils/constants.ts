@@ -94,7 +94,6 @@ export const FIELD_TYPES = ['text',
   'select',
   'password',
   'color',
-  'date',
   'checkbox',
   'switch',
   'radio',
@@ -103,8 +102,6 @@ export const FIELD_TYPES = ['text',
   'range',
   'time',
   'date',
-  'color',
-  'select',
   'button',] as const;
 export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button', 'IGRP_ButtonInput'] as const
 export const COMPONENTS_TYPES = ['Form', 'Table'] as const
