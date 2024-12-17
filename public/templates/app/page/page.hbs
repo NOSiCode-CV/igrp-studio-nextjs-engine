@@ -128,7 +128,7 @@ export default function {{resourceConfig.pageName}}() {
       return (
         <React.Fragment>
           {{#each this.actions}}
-          <IGRP_Button
+          <IGRP_Button._Button
             values={cell.row.original}
             serviceAction={ {{#if this.config.refreshTable}}() => {
               handle{{capitalize this.id}}(cell.row.original)
@@ -188,7 +188,7 @@ export default function {{resourceConfig.pageName}}() {
           <Col lg={ {{this.colSize}} }>
           {{#each components}}
             {{#if (eq this.componentName 'Button')}}
-            <IGRP_{{this.componentName}} {...{{capitalize this.id}}Props} />
+            <IGRP_{{this.componentName}}._Button {...{{capitalize this.id}}Props} />
             {{else}}
             <IGRP_{{this.componentName}}.{{this.componentName}} {...{{capitalize this.id}}Props} {{#if (eq this.componentName 'FormLayout')}}ref={ {{this.id}}Ref }{{/if}}/>
             {{/if}}
