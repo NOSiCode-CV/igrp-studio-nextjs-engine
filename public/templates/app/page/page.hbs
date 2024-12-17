@@ -107,14 +107,14 @@ export default function {{resourceConfig.pageName}}() {
   {{#each components}}
   const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<{{component-name-helper this}}> = {
   {{#if (eq this.componentName 'Button')}}
-    {{#if this.config.applyToAllForms}}
+    {{#if (applyToAll this.config)}}
     formRefs: {
       {{#each ../../../../formRefs}}
       {{this}}: {{this}}Ref,
       {{/each}}
-    },{{/if}}{{#if this.config.targetForms}} formRefs: { {{#each this.config.targetForms}}
+    },{{else}}{{#if (action-type this.config)}} formRefs: { {{#each this.config.targetForms}}
     {{this}}: {{this}}Ref,
-    {{/each}} }, {{/if}}
+    {{/each}} }, {{/if}}{{/if}}
     serviceAction: {{#if this.config.refreshTable}} async(data) => {
       service.{{this.id}}(data)
       updateTable()
@@ -159,7 +159,7 @@ export default function {{resourceConfig.pageName}}() {
     {{/each}} 
   }
   {{/if}}
-  {{#if this.config.applyToAllForms }}{{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = {
+  {{#if (applyToAll this.config) }}{{capitalize ../id}}Props.fields.{{this.config.name}}.config.formRefs = {
     {{#each ../../../../../formRefs}}
     {{this}}: {{this}}Ref,
     {{/each}}

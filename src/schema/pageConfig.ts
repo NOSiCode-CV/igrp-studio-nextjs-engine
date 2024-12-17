@@ -85,7 +85,12 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
       items: {type: "string"},
       nullable: true,
       errorMessage: `The buttonText attribute must be a string.`
-    }
+    },
+    actionType: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The action attribute must be a string.'
+    },
   },
   required: ['type', 'name'],
   additionalProperties: false
@@ -193,10 +198,16 @@ const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
       nullable: true,
       errorMessage: 'The buttonColor attribute must be a string.'
     },
+    actionType: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The action attribute must be a string.'
+    },
   },
   required: [],
   additionalProperties: false
 };
+
 const actionConfigSchema: JSONSchemaType<IActionConfig> = {
   type: 'object',
   properties: {
@@ -210,7 +221,7 @@ const actionConfigSchema: JSONSchemaType<IActionConfig> = {
       nullable: true,
       errorMessage: 'The label attribute must be a string.'
     },
-    action: {
+    actionType: {
       type: 'string',
       nullable: true,
       errorMessage: 'The action attribute must be a string.'

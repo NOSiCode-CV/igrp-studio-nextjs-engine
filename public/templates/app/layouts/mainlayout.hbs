@@ -42,7 +42,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         />
         <div className={`d-flex ${styles.container}`}>
           <CustomSidebar
-            appId='1' //it will be replaced
+            appId={process.env.NEXT_PUBLIC_APP_ID || ''} 
             NEXT_PUBLIC_BASE_IGRP_UI_URL={process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL || ''} 
             NEXT_PUBLIC_APP_MANAGER_API={process.env.NEXT_PUBLIC_APP_MANAGER_API || ''}
           />

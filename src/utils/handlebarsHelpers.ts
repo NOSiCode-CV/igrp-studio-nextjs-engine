@@ -101,6 +101,13 @@ Handlebars.registerHelper('yup-validation', function (c: any) {
     
 });
 
+Handlebars.registerHelper('action-type', function(config: any) {
+  return ['submit', 'submitAll'].includes(config?.actionType) || config.targetForms?.length > 0;
+})
+
+Handlebars.registerHelper('applyToAll', function(config: any) {
+  return config?.actionType === 'submitAll' || config?.applyToAllForms;
+})
 
 function transformValidation(field: any) {
   const { validation, ...rest } = field; // Excluye 'validation' del objeto

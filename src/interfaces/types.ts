@@ -63,7 +63,8 @@ export interface IActionConfig {
   target?: string;
   className?: string;
   color?: string;
-  refreshTable?: boolean
+  refreshTable?: boolean;
+  actionType?: string // right now only submit and submitAll are acepted
 }
 
 export interface IButton {
@@ -73,6 +74,7 @@ export interface IButton {
   className?: string;
   values?: any;
   icon?: string;
+  actionType: string // right now only submit and submitAll are acepted
 }
 
 export interface ColumnConfig {
@@ -88,9 +90,10 @@ export interface ColumnConfig {
   servrSsidePagination?: boolean;
   buttonText?: string;
   className?: string;
-  applyToAllForms?: boolean;
-  targetForms?: string[],
-  refreshTable?: boolean
+  applyToAllForms?: boolean; 
+  targetForms?: string[], 
+  refreshTable?: boolean,
+  actionType?: string // right now only submit and submitAll are acepted
 }
 
 export interface TableFields {
@@ -109,6 +112,7 @@ export interface FieldConfig {
   color?: string;
   className?: string;
   buttonText?: string;
+  actionType?: string;
   targetForms?: string[];
   applyToAllForms?: boolean;
   refreshTable?: boolean
