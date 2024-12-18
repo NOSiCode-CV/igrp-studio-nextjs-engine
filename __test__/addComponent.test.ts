@@ -19,31 +19,6 @@ const pokePage: PageConfig = {
 };
 
 const components: Component[] = [
-  // add out side form button 
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'buttoncomponent',
-            colSize: 6,
-            components: [
-              {
-                id: 'outsideButton',
-                componentName: 'Button',
-                config: {
-                  applyToAllForms: true,
-                  refreshTable: true,
-                  buttonText: 'Enviar',
-                  className: 'btn-info mb-2 mx-2',
-                },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
 
   // add personal info form component 
   {
@@ -95,8 +70,9 @@ const components: Component[] = [
                       type: 'button',
                       name: 'formButton',
                       targetForms:['personalInfo'],
+                      actionType: 'submit',
                       refreshTable: false,
-                      label: 'Save this',
+                      label: 'Personal',
                       colSize: 2,
                       className: 'btn-info mb-2 mt-2',
                     },
@@ -106,9 +82,10 @@ const components: Component[] = [
                     config: {
                       type: 'button',
                       name: 'pageButton',
-                      applyToAllForms: true,
-                      refreshTable: true,            
-                      label: 'Save All',
+                      targetForms:['companyInfo'],
+                      actionType: 'alert',
+                      refreshTable: false,            
+                      label: 'Company',
                       colSize: 2,
                       className: 'btn-success mb-2 mt-2'
                     },
@@ -121,6 +98,33 @@ const components: Component[] = [
       },
     ],
   },
+  // add out side form button 
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'outsideButton',
+                componentName: 'Button',
+                config: {
+                  applyToAllForms: true,
+                  refreshTable: false,
+                  actionType: 'submitAll',
+                  buttonText: 'Enviar',
+                  className: 'btn-info mb-2 mx-2',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   // // add company form component 
   {
     Row: [
@@ -186,7 +190,7 @@ const components: Component[] = [
       },
     ],
   },
- 
+
   // // add cliente side table component
   {
     Row: [
@@ -362,7 +366,7 @@ const pokeComponent: Component[] = [
 ];
 
 it('should create a new page', async () => {
-  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+  await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 
   // await addComponentToPage(pokePage, pokeComponent, OUTPUT_DIR);
 });
