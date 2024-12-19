@@ -47,7 +47,10 @@ export const SRC_CONFIG_FILES = {
   GITLABCIYAML: 'gitlab-ci.yaml',
   TSCONFIG: 'tsconfig.json',
   NPMRC: 'npmrc_template',
-  LOCAL_ENV: 'local_env'
+  LOCAL_ENV: 'local_env',
+  ES: 'es',
+  PT: 'pt',
+  EN: 'en',
 };
 
 export const DST_CONFIG_FILES ={
@@ -59,7 +62,10 @@ export const DST_CONFIG_FILES ={
   GITLABCIYAML: 'gitlab-ci.yaml',
   TSCONFIG: 'tsconfig.json',
   NPMRC: '.npmrc',
-  ENV: '.env.local'
+  ENV: '.env.local',
+  ES: 'messages/es.json',
+  PT: 'messages/pt.json',
+  EN: 'messages/en.json',
 }
 
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
@@ -74,6 +80,7 @@ export const DIRECTORIES = {
   PAGES: 'src/app/pages',
   STUDIO: 'public/studio',
   IGRPSTUDIO: '.igrpstudio',
+  MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
 };
 

@@ -5,12 +5,27 @@ import Cookies from 'js-cookie';
 import {SidebarProvider, CustomNavbar, CustomSidebar} from "@igrp/navbar-library"
 import styles from './MainLayout.module.css';
 
+import en from '../../messages/en.json';
+import pt from '../../messages/pt.json';
+import es from '../../messages/es.json';
+
+const getTranslations = (locale: string | undefined) => {
+  switch (locale) {
+    case 'pt':
+      return pt;
+    case 'es':
+      return es;
+    default:
+      return en;
+  }
+};
+
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-    const [isTokenChecked, setIsTokenChecked] = useState(false);
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get('userToken');
@@ -27,16 +42,26 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return null;
   }
 
+  const currentLocale = Cookies.get('NEXT_LOCALE');
+  const translations = getTranslations(currentLocale);
+
   return (
     <SidebarProvider>
       <>
-        <CustomNavbar 
+        <CustomNavbar
+          translations={ {
+            RecentAppsDropdown: translations.RecentAppsDropdown,
+            ProfileDropdown: translations.ProfileDropdown
+          } }
           NEXT_PUBLIC_BASE_IGRP_UI_URL={process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL || ''} 
           NEXT_PUBLIC_APP_MANAGER_API={process.env.NEXT_PUBLIC_APP_MANAGER_API || ''} 
           NEXT_PUBLIC_USER_MANAGER_API={process.env.NEXT_PUBLIC_USER_MANAGER_API || ''} 
         />
         <div className={`d-flex ${styles.container}`}>
           <CustomSidebar
+            translations={ {
+              Sidebar: translations.Sidebar,
+            } }
             appId={process.env.NEXT_PUBLIC_APP_ID || ''} 
             NEXT_PUBLIC_BASE_IGRP_UI_URL={process.env.NEXT_PUBLIC_BASE_IGRP_UI_URL || ''} 
             NEXT_PUBLIC_APP_MANAGER_API={process.env.NEXT_PUBLIC_APP_MANAGER_API || ''}

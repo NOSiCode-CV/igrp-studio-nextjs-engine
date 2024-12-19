@@ -109,6 +109,14 @@ Handlebars.registerHelper('applyToAll', function(config: any) {
   return config?.actionType === 'submitAll' || config?.applyToAllForms;
 })
 
+Handlebars.registerHelper('default', function() {
+  const translations = {
+    RecentAppsDropdown: "translations.RecentAppsDropdown",
+    ProfileDropdown: "translations.ProfileDropdown"
+  }
+  return removeQuotes(translations)
+})
+
 function transformValidation(field: any) {
   const { validation, ...rest } = field; // Excluye 'validation' del objeto
   return rest;

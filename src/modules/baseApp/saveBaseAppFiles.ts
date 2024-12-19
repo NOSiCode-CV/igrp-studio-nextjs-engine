@@ -53,6 +53,9 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
  */
 const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
   return [
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.EN), dest: path.join(context.basePath, DST_CONFIG_FILES.EN)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.ES), dest: path.join(context.basePath, DST_CONFIG_FILES.ES)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.PT), dest: path.join(context.basePath, DST_CONFIG_FILES.PT)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.NPMRC), dest: path.join(context.basePath, DST_CONFIG_FILES.NPMRC)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.LOCAL_ENV), dest: path.join(context.basePath, DST_CONFIG_FILES.ENV)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.README), dest: path.join(context.basePath, DST_CONFIG_FILES.README)},
