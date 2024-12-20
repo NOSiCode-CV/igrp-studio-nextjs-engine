@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Retrieve person object",
+        "methods": ["GET"],
+        "path": "people/getPerson",
+        "permission": "person-viewer"
+    },
+    {
+        "name": "Create a new person",
+        "methods": ["POST"],
+        "path": "people/createPerson",
+        "permission": "person-creator"
+    }
+]
