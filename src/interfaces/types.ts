@@ -64,7 +64,14 @@ export interface IActionConfig {
   className?: string;
   color?: string;
   refreshTable?: boolean;
-  actionType?: string // right now only submit and submitAll are acepted
+  actionType?: string,
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
 }
 
 export interface IButton {
@@ -74,7 +81,15 @@ export interface IButton {
   className?: string;
   values?: any;
   icon?: string;
-  actionType: string // right now only submit and submitAll are acepted
+  actionType: string,
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
+  
 }
 
 export interface ColumnConfig {
@@ -93,7 +108,14 @@ export interface ColumnConfig {
   applyToAllForms?: boolean; 
   targetForms?: string[], 
   refreshTable?: boolean,
-  actionType?: string // right now only submit and submitAll are acepted
+  actionType?: string
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
 }
 
 export interface TableFields {
@@ -115,6 +137,13 @@ export interface FieldConfig {
   actionType?: string;
   targetForms?: string[];
   applyToAllForms?: boolean;
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
   refreshTable?: boolean
   options?: {
     value: string;

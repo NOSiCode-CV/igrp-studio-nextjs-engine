@@ -91,6 +91,34 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
       nullable: true,
       errorMessage: 'The action attribute must be a string.'
     },
+    alertTitle: {
+      type: 'string',
+      nullable: true,
+    },
+    alertMessage: {
+      type: 'string',
+      nullable: true,
+    },
+    alertIcon: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
   },
   required: ['type', 'name'],
   additionalProperties: false
@@ -203,6 +231,34 @@ const columnConfigSchema: JSONSchemaType<ColumnConfig> = {
       nullable: true,
       errorMessage: 'The action attribute must be a string.'
     },
+    alertTitle: {
+      type: 'string',
+      nullable: true,
+    },
+    alertMessage: {
+      type: 'string',
+      nullable: true,
+    },
+    alertIcon: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
   },
   required: [],
   additionalProperties: false
@@ -250,7 +306,35 @@ const actionConfigSchema: JSONSchemaType<IActionConfig> = {
       type: 'boolean',
       nullable: true,
       errorMessage: 'The text attribute must be a string.'
-    }
+    },
+    alertTitle: {
+      type: 'string',
+      nullable: true,
+    },
+    alertMessage: {
+      type: 'string',
+      nullable: true,
+    },
+    alertIcon: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonLabel: {
+      type: 'string',
+      nullable: true,
+    },
+    alertConfirmButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
+    alertCancelButtonClass: {
+      type: 'string',
+      nullable: true,
+    },
   },
   required: [],
   additionalProperties: false
