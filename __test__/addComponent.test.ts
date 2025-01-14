@@ -6,8 +6,8 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'test',
-  path: 'test',
+  pageName: 'form',
+  path: 'form',
   components: [],
 };
 
@@ -64,59 +64,33 @@ const components: Component[] = [
                       errorMaxLeng: 'Max 100',
                     },
                   },
-                  {
-                    type: 'IGRP_ButtonInput',
-                    config: {
-                      type: 'button',
-                      name: 'formButton',
-                      targetForms:['personalInfo'],
-                      actionType: 'submit',
-                      refreshTable: false,
-                      label: 'Personal',
-                      colSize: 2,
-                      className: 'btn-info mb-2 mt-2',
-                    },
-                  },
-                  {
-                    type: 'IGRP_ButtonInput',
-                    config: {
-                      type: 'button',
-                      name: 'pageButton',
-                      targetForms:['companyInfo'],
-                      actionType: 'alert',
-                      refreshTable: false,            
-                      label: 'Company',
-                      colSize: 2,
-                      className: 'btn-success mb-2 mt-2'
-                    },
-                  },
+                  // {
+                  //   type: 'IGRP_ButtonInput',
+                  //   config: {
+                  //     type: 'button',
+                  //     name: 'formButton',
+                  //     targetForms:['personalInfo'],
+                  //     actionType: 'submit',
+                  //     refreshTable: false,
+                  //     label: 'Personal',
+                  //     colSize: 2,
+                  //     className: 'btn-info mb-2 mt-2',
+                  //   },
+                  // },
+                  // {
+                  //   type: 'IGRP_ButtonInput',
+                  //   config: {
+                  //     type: 'button',
+                  //     name: 'pageButton',
+                  //     targetForms:['companyInfo'],
+                  //     actionType: 'alert',
+                  //     refreshTable: false,            
+                  //     label: 'Company',
+                  //     colSize: 2,
+                  //     className: 'btn-success mb-2 mt-2'
+                  //   },
+                  // },
                 ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  // add out side form button 
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'buttoncomponent',
-            colSize: 6,
-            components: [
-              {
-                id: 'outsideButton',
-                componentName: 'Button',
-                config: {
-                  applyToAllForms: true,
-                  refreshTable: false,
-                  actionType: 'submitAll',
-                  buttonText: 'Enviar',
-                  className: 'btn-info mb-2 mx-2',
-                },
               },
             ],
           },
@@ -191,6 +165,33 @@ const components: Component[] = [
     ],
   },
 
+  // add page button
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'buttoncomponent',
+            colSize: 6,
+            components: [
+              {
+                id: 'pageButton',
+                componentName: 'Button',
+                config: {
+                  applyToAllForms: true,
+                  refreshTable: true,
+                  actionType: 'submitAll',
+                  buttonText: 'Enviar',
+                  className: 'btn-info mb-2 mx-2',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   // // add cliente side table component
   {
     Row: [
@@ -218,7 +219,6 @@ const components: Component[] = [
                   { header: "Name", accessorKey: "name", enableColumnFilter: false },
                   { header: "Age", accessorKey: "age", enableColumnFilter: false },
                   { header: "Tel", accessorKey: "phone", enableColumnFilter: false },
-                  { header: "Smoker", accessorKey: "smoker", enableColumnFilter: false },
                   { header: "City", accessorKey: "city", enableColumnFilter: false },
                   { header: "Company", accessorKey: "company", enableColumnFilter: false },
                 ],
@@ -239,6 +239,7 @@ const components: Component[] = [
                       refreshTable: true,
                       icon: 'ri-delete-bin-5-line',
                       className: 'btn-ghost-danger',
+                      actionType: 'alert'
                     },
                   },
                 ],

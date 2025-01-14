@@ -42,7 +42,7 @@ You can find all test files in the test directory
 ### Install the package:
 In your project:
 ```
-yarn add @igrp/nextjs-engine@0.0.5 --registry=https://sonatype.nosi.cv/repository/npm-group/
+yarn add @igrp/nextjs-engine@latest --registry=https://sonatype.nosi.cv/repository/npm-group/
 ```
 
 ### Using the Package:
@@ -96,8 +96,8 @@ import { PageConfig } from '@igrp/nextjs-engine/dist/interfaces/types';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'users',
+  pageName: 'form',
+  path: 'form',
   components: [],
 };
 
@@ -125,25 +125,27 @@ import { PageConfig, Component } from '@igrp/nextjs-engine/dist/interfaces/types
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'users',
+  pageName: 'form',
+  path: 'form',
   components: [],
 };
 
-const components: Component [] = [
+const components: Component[] = [
+
+  // add personal info form component 
   {
     Row: [
       {
         Col: [
           {
             id: 'col_nihdj',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
-                id: 'company',
+                id: 'personalInfo',
                 componentName: 'FormLayout',
                 config: {
-                  title: 'Form Test',
+                  title: 'Personal Info',
                   showTitle: false,
                 },
                 fields: [
@@ -151,11 +153,11 @@ const components: Component [] = [
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'firstName',
-                      label: 'First Name',
+                      name: 'name',
+                      label: 'Name',
                       required: true,
                       placeholder: 'Enter your first name',
-                      colSize: 4,
+                      colSize: 6,
                     },
                   },
                   {
@@ -165,22 +167,83 @@ const components: Component [] = [
                       name: 'age',
                       label: 'Age',
                       placeholder: 'Enter your first name',
+                      colSize: 6,
+                    },
+                    validation: {
+                      minLeng: 13,
+                      errorMinLeng: 'Min 13',
+                      maxLeng: 100,
+                      errorMaxLeng: 'Max 100',
+                    },
+                  }
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  
+  // // add company form component 
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'col_nihdj',
+            colSize: 12,
+            components: [
+              {
+                id: 'companyInfo',
+                componentName: 'FormLayout',
+                config: {
+                  title: 'Company Info',
+                  showTitle: true,
+                },
+                fields: [
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'company',
+                      label: 'Company',
+                      required: true,
+                      placeholder: 'Enter your first name',
                       colSize: 4,
                     },
-                    validation: { minLeng: 13, errorMinLeng: 'Min 13', maxLeng: 100, errorMaxLeng: 'Max 100' },
                   },
                   {
-                    type: 'Select2Input',
+                    type: 'SelectInput',
                     config: {
                       type: 'select',
-                      name: 'userOptions',
-                      label: 'User Options',
-                      placeholder: 'select an option',
+                      name: 'city',
+                      label: 'City',
+                      required: true,
+                      options: [
+                        { value: 'Madrid', label: 'Madrid' },
+                        { value: 'Luanda', label: 'Luanda' },
+                        { value: 'Praia', label: 'Praia' },
+                      ],
+                      colSize: 4,
+                    }
+                  },
+                  {
+                    type: 'PhoneNumberInput',
+                    config: {
+                      type: 'tel',
+                      name: 'phone',
+                      label: 'Pone Number',
+                      required: true,
                       colSize: 4,
                     },
+                    validation: {
+                      requiredMessage: 'Phone Number is required'
+                    },
                   },
+                  
                 ],
-              }
+              },
             ],
           },
         ],
@@ -188,7 +251,7 @@ const components: Component [] = [
     ],
   },
 
-  // add button component
+  // add pageButton
   {
     Row: [
       {
@@ -198,58 +261,15 @@ const components: Component [] = [
             colSize: 6,
             components: [
               {
-                id:'button',
+                id: 'pageButton',
                 componentName: 'Button',
-                target:'sendData',
                 config: {
-                  buttonText: 'Submit',
-                  buttonColor: 'btn-primary',
-                }
-              }
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
-  // add table component
-  {
-    Row: [
-      {
-        Col: [
-          {
-              id: 'col_2',
-            colSize: 6,
-            components: [
-              {
-                id: 'tablecomponent',
-                componentName: 'TableComponent',
-                config: {
-                  title: 'Pokemons',
-                  showTitle: true,
-                  pageSize: 5,
-                  isGlobalFilter: true,
-                  SearchPlaceholder: 'Search...',
-                  isPagination: true,
-                  isSortable: true,
-                  servrSsidePagination: true,
-                  actionTitle: 'Actions',
+                  applyToAllForms: true,
+                  refreshTable: true, //you need to set it true if you want refresh the table after the action type is executed
+                  actionType: 'submitAll',
+                  buttonText: 'Enviar',
+                  className: 'btn-info mb-2 mx-2',
                 },
-                fields: [
-                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
-                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
-                ],
-                actions: [
-                  {
-                    type: 'Button',
-                    config: {target:'sendRow', icon: 'ri-pencil-line', buttonColor: 'btn-ghost-info mx-1'}
-                  },
-                  {
-                    type: 'Button',
-                    config: {target:'deleteRow', icon: 'ri-delete-bin-5-line', buttonColor: 'btn-ghost-danger mx-1'}
-                  }
-                ]
               },
             ],
           },
@@ -257,6 +277,66 @@ const components: Component [] = [
       },
     ],
   },
+
+  // // add clienteside table component
+  {
+    Row: [
+      {
+        Col: [
+          {
+            id: 'col_2',
+            colSize: 12,
+            components: [
+              {
+                id: 'tablecomponent',
+                componentName: 'TableComponent',
+                config: {
+                  title: 'Members',
+                  showTitle: true,
+                  pageSize: 5,
+                  isGlobalFilter: true,
+                  SearchPlaceholder: 'Search...',
+                  isPagination: true,
+                  isSortable: true,
+                  servrSsidePagination: false,
+                  actionTitle: 'Actions'
+                },
+                fields: [
+                  { header: "Name", accessorKey: "name", enableColumnFilter: false },
+                  { header: "Age", accessorKey: "age", enableColumnFilter: false },
+                  { header: "Tel", accessorKey: "phone", enableColumnFilter: false },
+                  { header: "City", accessorKey: "city", enableColumnFilter: false },
+                  { header: "Company", accessorKey: "company", enableColumnFilter: false },
+                ],
+                actions: [
+                  {
+                    id:'editRow',
+                    type: 'Button',
+                    config: {
+                      icon: 'ri-pencil-fill',
+                      color: 'info',
+                      className: 'btn-ghost-info',
+                    },
+                  },
+                  {
+                    id:'deleteRow',
+                    type: 'Button',
+                    config: {
+                      refreshTable: true,
+                      icon: 'ri-delete-bin-5-line',
+                      className: 'btn-ghost-danger',
+                      actionType: 'alert'
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
 ];
 
 const addComponent = async () => {
@@ -277,74 +357,57 @@ Follow the steps below to implement the service logic in the form:
 1. Update the UserService.ts file located in services/user/UserService.ts with the following code:
 ```ts
 
-import { IuserService } from '@/app/pages/user/page'
+import { IformService } from "@/app/pages/form/page";
 
 /**
-* This is the service that will be inject in to the user page, 
-* you have to implemented this method if you want to use this
-*
-* To ensure that every method your are implemented remove the partial and typscript will provide a script verification
-*/
+ * This is the service that will be inject in to the form page,
+ * you have to implemented this method if you want to use this
+ *
+ * To ensure that every method your are implemented remove the partial and typscript will provide a script verification
+ */
 
-interface IPokemon {
-  count: number,
-  results: {
-    name: string,
-    url: string
-  }[]
-}
-export const UserService: IuserService = {
-  company: {
+let companyData = [];
+
+export const FormService: IformService = {
+  personalinfo: {
     populate: () => ({
-      firstName: '',
-      age: 25,
-      userOptions: null
+      name: null,
+      age: null
     })
   },
 
+  companyinfo: {
+    populate: () => ({
+      company: null,
+      city: null,
+      phone: null,
+    })
+  },
+ 
   tablecomponent: {
-    populate: async (page?: number, size?: number, globalFilter?: string, orderBy?: any, direction?: any) => {
-      const params = new URLSearchParams()
-
-      if (page !== undefined) {
-        params.append("offset", page.toString())
-      }
-
-      if (size !== undefined) {
-        params.append("limit", String(size))
-      }
-
-      if (globalFilter) {
-        params.append("search", globalFilter)
-      }
-
-      if (orderBy !== undefined && orderBy !== null) {
-        params.append("orderBy", orderBy)
-        params.append("direction", direction || 'asc')
-      }
-
-      const url = `https://pokeapi.co/api/v2/pokemon?${params.toString()}`
-
-      const response = await fetch(url)
-      const data: IPokemon = await response.json()
-      return {
-        rows: data.results,
-        rowCount: data.count
-      }
-    },
+    populate: async () => {
+     return {
+      rows: companyData,
+      rowsCount: companyData.length
+     }
+    }
   },
   
-  sendData: function (data?: Record<string, unknown>): void {
-    console.log(data)
+  pageButton: function (data: any): void {
+    companyData = [...companyData, { id: getId(), ...data.personalInfo, ...data.companyInfo }]
   },
 
-  deleteRow: function (data?: Record<string, any>): void {
-    console.log('Deleting... ', data)
+  deleteRow: (data: any) => companyData = companyData.filter((c) => c.id !== data.id),
+
+  editRow: function (data?: Record<string, any>): void {
+    console.log(data);
   },
-  sendRow: function (data?: Record<string, any>): void {
-    console.log('Sending... ', data)
-  }
-}
+};
+
+const getId = () => {
+  const lastId = companyData.length > 0 ? companyData[companyData.length - 1].id : '0';
+  return (Number(lastId) + 1).toString();
+};
 ```
 You should now see the new components added, such as the form and the table shown in the image in the next section.
 ![Application Preview](./assets/componentPage.png)
@@ -356,8 +419,8 @@ import { deletePage } from '@igrp/nextjs-engine';
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'user',
-  path: 'users',
+  pageName: 'form',
+  path: 'form',
   components: [],
 };
 
@@ -380,6 +443,7 @@ import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constan
 export interface AppConfig {
   type: 'baseApp';
   appName: string;
+  description?: string
 }
 
 export interface PageConfig {
@@ -400,7 +464,7 @@ export interface RowLayout {
 export interface ColumnLayout {
   id: string;
   colSize: number;
-  components?: ColumnComponent[]; 
+  components?: ColumnComponent[];
 }
 
 export interface ColumnComponent {
@@ -409,10 +473,10 @@ export interface ColumnComponent {
   values?: any;
   serviceAction?: any;
   target?: string;
-  componentName: ComponentNames
+  componentName: ComponentNames;
   config: ColumnConfig;
-  fields?: Field[] | TableFields[]; 
-  actions?: IAction[]
+  fields?: Field[] | TableFields[];
+  actions?: IAction[];
 }
 
 export interface Field {
@@ -428,7 +492,8 @@ export interface Field {
 }
 
 export interface IAction {
-  type: "Button"| "Link";
+  id: string;
+  type: 'Button' | 'Link' | 'IGRP_ButtonInput';
   config: IActionConfig;
 }
 
@@ -436,31 +501,62 @@ export interface IActionConfig {
   icon?: string;
   buttonText?: string;
   target?: string;
-  buttonColor?: string;
+  className?: string;
+  color?: string;
+  refreshTable?: boolean;
+  actionType?: string, //All buttons must have an action type, indicating the action you want to happen when the button is clicked.
+  // Use the following properties in the config of the button to customize the information in the dialog alert. It's work only when the action type is 'alert'
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
 }
 
 export interface IButton {
   formRefs?: any;
   serviceAction?: (data: Record<string, any>) => void;
   buttonText?: string;
-  buttonColor?: string;
+  className?: string;
   values?: any;
   icon?: string;
-};
+  actionType: string,
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
+  
+}
 
 export interface ColumnConfig {
   title?: string;
-  showTitle?: boolean,
+  showTitle?: boolean;
   colSize?: number;
-  pageSize?: number, 
-  isPagination?: boolean, 
-  isGlobalFilter?: boolean,
-  SearchPlaceholder?: string,
-  isSortable?: boolean,
-  actionTitle?: string,
-  servrSsidePagination?: boolean,
-  buttonText?: string,
-  buttonColor?: string,
+  pageSize?: number;
+  isPagination?: boolean;
+  isGlobalFilter?: boolean;
+  SearchPlaceholder?: string;
+  isSortable?: boolean;
+  actionTitle?: string;
+  servrSsidePagination?: boolean;
+  buttonText?: string;
+  className?: string;
+  applyToAllForms?: boolean; 
+  targetForms?: string[], 
+  refreshTable?: boolean,
+  actionType?: string
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
 }
 
 export interface TableFields {
@@ -476,9 +572,35 @@ export interface FieldConfig {
   colSize?: number;
   required?: boolean;
   placeholder?: string;
+  color?: string;
+  className?: string;
+  buttonText?: string;
+  actionType?: string;
+  targetForms?: string[];
+  applyToAllForms?: boolean;
+  alertTitle?: string;
+  alertMessage?: string;
+  alertIcon?: string;
+  alertConfirmButtonLabel?: string;
+  alertCancelButtonLabel?: string;
+  alertConfirmButtonClass?: string;
+  alertCancelButtonClass?: string;
+  refreshTable?: boolean
   options?: {
     value: string;
     label: string;
+  }[];
+}
+
+export interface PageMetaConfig {
+  type: "UI"; //aplication type
+  url: string; // application url
+  description: string; //aplication description
+  resourceItems?: {
+    name: string; // page name
+    url: string; //page path,
+    resourceItemType: 'PAGE';
+    description: string; // page description
   }[];
 }
 
