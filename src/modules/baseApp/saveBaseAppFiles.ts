@@ -37,12 +37,16 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
 
   const mainPath = path.join(context.basePath, DIRECTORIES.APP);
   const mainLayoutPath = path.join(context.basePath, DIRECTORIES.LAYOUTS)
+  const kubernetesPath = path.join(context.basePath, 'k8s');
 
   return [
     { output: mainPath, template: TEMPLATES.WELCOME_PAGE, name: COMMON_FILES.PAGE_TSX },
     { output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX },
     { output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT, name: COMMON_FILES.MAIN_LAYOUT_TSX },
     { output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT_CSS, name: COMMON_FILES.MAIN_LAYOUT_CSS },
+    { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
+    { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
+    { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S}
   ];
 };
 

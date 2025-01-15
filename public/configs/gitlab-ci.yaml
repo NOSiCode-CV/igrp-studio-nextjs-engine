@@ -8,13 +8,16 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
   DOCKER_HOST: tcp://docker:2375
-  KUBECONFIG: "/kube/config"
+  KUBECONFIG: "/tmp/kubeconfig"
   KUBE_NAMESPACE: "p2" 
   API_URL: "https://user-manager-dev.inss.gw/identity/resources" 
-  APPLICATION_NAME: "application-1"
-  HOME_URL: "wayvant-test.com/" 
+  APPLICATION_NAME: "application-1"  
+  HOME_URL: "nextjs-api-dev-test.nosi.cv/" 
   RESOURCE_NAME: "p2" 
   RESOURCE_DESCRIPTION: "staff 1" 
+  REGISTRY_USERNAME: "bittor.vpn"
+  REGISTRY_PASSWORD: "Bh1030_1812#"
+  REGISTRY_URL: "registry.nosi.cv"
 stages:
   - setup
   - build
@@ -27,6 +30,7 @@ setup:
   image: alpine:latest
   script:
     - |
+      echo "Configurando el entorno..."
       # Esto es un ejemplo, pero la idea es leer variables que vengan del usuario (ej. $CUSTOM_KUBE_NAMESPACE)
       # Si el usuario no define una variable, se usa el valor por defecto
       export KUBE_NAMESPACE_FINAL="${CUSTOM_KUBE_NAMESPACE:-$KUBE_NAMESPACE}"
@@ -37,7 +41,7 @@ setup:
       export RESOURCE_DESCRIPTION_FINAL="${CUSTOM_RESOURCE_DESCRIPTION:-$RESOURCE_DESCRIPTION}"
 
       # Leemos el contenido del archivo paths.json
-      export PATHS_JSON=$(cat paths.json)
+      export PATHS_JSON=$(cat .igrpstudio/baseApi.json)
 
       echo "KUBE_NAMESPACE_FINAL: $KUBE_NAMESPACE_FINAL"
       echo "API_URL_FINAL: $API_URL_FINAL"
@@ -45,7 +49,7 @@ setup:
       echo "HOME_URL_FINAL: $HOME_URL_FINAL"
       echo "RESOURCE_NAME_FINAL: $RESOURCE_NAME_FINAL"
       echo "RESOURCE_DESCRIPTION_FINAL: $RESOURCE_DESCRIPTION_FINAL"
-      echo "PATHS_JSON: $PATHS_JSON" # Verificamos que el contenido se cargó correctamente
+      echo "PATHS_JSON: $PATHS_JSON" 
 
       TMP_FILE=$(mktemp)
       printf 'KUBE_NAMESPACE_FINAL="%s"\n' "$KUBE_NAMESPACE_FINAL" >> "$TMP_FILE"
@@ -54,9 +58,9 @@ setup:
       printf 'HOME_URL_FINAL="%s"\n' "$HOME_URL_FINAL" >> "$TMP_FILE"
       printf 'RESOURCE_NAME_FINAL="%s"\n' "$RESOURCE_NAME_FINAL" >> "$TMP_FILE"
       printf 'RESOURCE_DESCRIPTION_FINAL="%s"\n' "$RESOURCE_DESCRIPTION_FINAL" >> "$TMP_FILE"
-      printf 'PATHS_JSON="%s"\n' "$PATHS_JSON" >> "$TMP_FILE"  # Guardamos la variable en el archivo variables.env
+      printf 'PATHS_JSON="%s"\n' "$PATHS_JSON" >> "$TMP_FILE"  
       
-      cat "$TMP_FILE" > variables.env 
+      cat "$TMP_FILE" > variables.env # Sustituye el contenido
       rm "$TMP_FILE"
   artifacts:
     paths:
@@ -64,29 +68,26 @@ setup:
 
 build:
   stage: build
-  only:
-    - dev
   script:
     - source variables.env
-    - docker login $REGISTRY_URL -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD"
-    - docker build -t $REGISTRY_URL/$REGISTRY_PROJECT/igrp-studio:$CI_PIPELINE_ID .
-    - docker tag $REGISTRY_URL/$REGISTRY_PROJECT/igrp-studio:$CI_PIPELINE_ID $REGISTRY_URL/$REGISTRY_PROJECT/igrp-studio:$RESOURCE_NAME_FINAL
-    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/igrp-studio:$CI_PIPELINE_ID
-    - docker push $REGISTRY_URL/$REGISTRY_PROJECT/igrp-studio:$RESOURCE_NAME_FINAL
-
+    - docker login -u "$REGISTRY_USERNAME" -p "$REGISTRY_PASSWORD" $REGISTRY_URL
+    - docker build -t $REGISTRY_URL/bittortest/nextjs-api:$CI_PIPELINE_ID .
+    - docker tag $REGISTRY_URL/bittortest/nextjs-api:$CI_PIPELINE_ID $REGISTRY_URL/bittortest/nextjs-api:demo
+    - docker push $REGISTRY_URL/bittortest/nextjs-api:$CI_PIPELINE_ID
+    - docker push $REGISTRY_URL/bittortest/nextjs-api:demo
+  only:
+    - dev
 deploy:
   stage: deploy
   image: bitnami/kubectl:latest
   needs: [setup]
   script:
     - source variables.env
-    - apk add --no-cache gettext 
     - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
-    - envsubst < ./k8s/deployment.yaml > ./k8s/deployment-substituted.yaml 
-    - kubectl apply -f ./k8s/deployment-substituted.yaml -n $KUBE_NAMESPACE_FINAL
-    - kubectl rollout status deployment/igrp-studio -n $KUBE_NAMESPACE_FINAL
-  only:
-    - dev
+    - kubectl apply -f ./k8s/deployment.yaml -n $KUBE_NAMESPACE_FINAL
+    - kubectl apply -f ./k8s/service.yaml -n $KUBE_NAMESPACE_FINAL
+    - kubectl apply -f ./k8s/ingress.yaml -n $KUBE_NAMESPACE_FINAL
+    - kubectl rollout status deployment/spring-engine -n $KUBE_NAMESPACE_FINAL
 
 build_json:
   stage: buildjson
@@ -96,6 +97,7 @@ build_json:
     - source variables.env
     - apk add jq
     - |
+      export PATHS_JSON=$(cat .igrpstudio/baseApi.json | jq -c .)
       PATHS="$PATHS_JSON"
       echo "Paths obtenidos: ${PATHS}"
 
@@ -119,13 +121,11 @@ build_json:
   artifacts:
     paths:
       - payload.json
-  only:
-    - dev
 
 deploy_resource:
   stage: deployjson
   image: alpine/curl
-  needs: [build_json, setup] # dependecia del stage setup
+  needs: [build_json, setup] 
   script:
     - source variables.env
     - |
@@ -133,5 +133,5 @@ deploy_resource:
         -H "Content-Type: application/json" \
         -d @payload.json \
         "$API_URL_FINAL"
-  only:
-    - dev
+  
+

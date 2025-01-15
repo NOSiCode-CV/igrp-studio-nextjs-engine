@@ -39,7 +39,8 @@ const getDirectoriesToCreate = (basePath: string): string[] => {
     path.join(basePath, DIRECTORIES.MESSAGES),
     path.join(basePath, DIRECTORIES.SERVICES),
     path.join(basePath, DIRECTORIES.IGRPSTUDIO),
-    path.join(basePath, DIRECTORIES.DESIGN_SYSTEM)
+    path.join(basePath, DIRECTORIES.DESIGN_SYSTEM),
+    path.join(basePath, DIRECTORIES.KUBERNETES),
   ];
 };
 
