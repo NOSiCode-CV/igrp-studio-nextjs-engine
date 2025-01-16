@@ -6,15 +6,15 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'form',
-  path: 'form',
+  pageName: 'formulario',
+  path: 'formulario',
   components: [],
 };
 
-const pokePage: PageConfig = {
+const regPage: PageConfig = {
   type: 'page',
-  pageName: 'pokemon',
-  path: 'pokemon',
+  pageName: 'registros',
+  path: 'registros',
   components: [],
 };
 
@@ -30,38 +30,70 @@ const components: Component[] = [
             colSize: 12,
             components: [
               {
-                id: 'personalInfo',
+                id: 'utente',
                 componentName: 'FormLayout',
                 config: {
-                  title: 'Personal Info',
-                  showTitle: false,
+                  title: 'Identificação do Utente',
+                  showTitle: true,
                 },
                 fields: [
                   {
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'name',
-                      label: 'Name',
+                      name: 'docId',
+                      label: 'Documento de Identificação',
                       required: true,
-                      placeholder: 'Enter your first name',
+                      placeholder: 'BI / Passaporte / Cartão de Residência ou Visto de trabalho / Carta de condução',
                       colSize: 6,
                     },
                   },
                   {
-                    type: 'NumberInput',
+                    type: 'TextInput',
                     config: {
-                      type: 'number',
-                      name: 'age',
-                      label: 'Age',
-                      placeholder: 'Enter your first name',
+                      type: 'text',
+                      name: 'nome',
+                      label: 'Nome',
+                      required: true,
+                      placeholder: 'Seu nome completo',
                       colSize: 6,
                     },
+                  },
+                  {
+                    type: 'SelectInput',
+                    config: {
+                      type: 'select',
+                      name: 'sexo',
+                      label: 'Sexo',
+                      required: true,
+                      options: [
+                        { value: 'M', label: 'Masculino' },
+                        { value: 'F', label: 'Femenino' }
+                      ],
+                      colSize: 4,
+                    }
+                  },
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'nacionalidad',
+                      label: 'Nacionalidad',
+                      required: false,
+                      colSize: 4,
+                    },
+                  },
+                  {
+                    type: 'PhoneNumberInput',
+                    config: {
+                      type: 'tel',
+                      name: 'telemovel',
+                      label: 'Telemóvel',
+                      placeholder: 'Enter your first name',
+                      colSize: 4,
+                    },
                     validation: {
-                      minLeng: 13,
-                      errorMinLeng: 'Min 13',
-                      maxLeng: 100,
-                      errorMaxLeng: 'Max 100',
+                      requiredMessage: 'Phone Number is required'
                     },
                   },
                   // {
@@ -109,53 +141,74 @@ const components: Component[] = [
             colSize: 12,
             components: [
               {
-                id: 'companyInfo',
+                id: 'curso',
                 componentName: 'FormLayout',
                 config: {
-                  title: 'Company Info',
-                  showTitle: false,
+                  title: 'Curso e IES',
+                  showTitle: true,
                 },
                 fields: [
                   {
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'company',
-                      label: 'Company',
+                      name: 'instituicao',
+                      label: 'Instituição',
                       required: true,
-                      placeholder: 'Enter your first name',
-                      colSize: 4,
+                      placeholder: 'Instituição de Ensino Superior',
+                      colSize: 6,
+                    },
+                  },
+                  {
+                    type: 'TextInput',
+                    config: {
+                      type: 'text',
+                      name: 'curso',
+                      label: 'Curso',
+                      required: true,
+                      placeholder: 'Curso',
+                      colSize: 6,
                     },
                   },
                   {
                     type: 'SelectInput',
                     config: {
                       type: 'select',
-                      name: 'city',
-                      label: 'City',
+                      name: 'grau',
+                      label: 'Grau Académico',
                       required: true,
                       options: [
-                        { value: 'Madrid', label: 'Madrid' },
-                        { value: 'Luanda', label: 'Luanda' },
-                        { value: 'Praia', label: 'Praia' },
+                        { value: 'Licenciado(a)', label: 'Licenciado(a)'},
+                        { value: 'Mestre', label: 'Mestre'},
+                        { value: 'Doutor', label: 'Doutor'}
                       ],
                       colSize: 4,
                     }
                   },
                   {
-                    type: 'PhoneNumberInput',
+                    type: 'Select2Input',
                     config: {
-                      type: 'tel',
-                      name: 'phone',
-                      label: 'Pone Number',
+                      type: 'select',
+                      name: 'pais',
+                      label: 'País de Formação',
                       required: true,
+                      options: [
+                        { value: 'Angola', label: 'Angola'},
+                        { value: 'Espanha', label: 'Espanha'},
+                        { value: 'Cabo Verde', label: 'Cabo Verde'}
+                      ],
                       colSize: 4,
-                    },
-                    validation: {
-                      requiredMessage: 'Phone Number is required'
-                    },
+                    }
                   },
-                  
+                  {
+                    type: 'DateRangeInput',
+                    config: {
+                      type: 'range',
+                      name: 'inicio_fin',
+                      label: 'Periodo de formação',
+                      colSize: 4,
+                    }
+                  }
                 ],
               },
             ],
@@ -181,7 +234,7 @@ const components: Component[] = [
                   applyToAllForms: true,
                   refreshTable: true,
                   actionType: 'submitAll',
-                  buttonText: 'Enviar',
+                  buttonText: 'Guardar',
                   className: 'btn-info mb-2 mx-2',
                 },
               },
@@ -205,33 +258,35 @@ const components: Component[] = [
                 id: 'tablecomponent',
                 componentName: 'TableComponent',
                 config: {
-                  title: 'Members',
+                  title: 'Registros',
                   showTitle: true,
                   pageSize: 5,
-                  isGlobalFilter: true,
+                  isGlobalFilter: false,
                   SearchPlaceholder: 'Search...',
-                  isPagination: true,
-                  isSortable: true,
+                  isPagination: false,
+                  isSortable: false,
                   servrSsidePagination: false,
                   actionTitle: 'Actions'
                 },
                 fields: [
-                  { header: "Name", accessorKey: "name", enableColumnFilter: false },
-                  { header: "Age", accessorKey: "age", enableColumnFilter: false },
-                  { header: "Tel", accessorKey: "phone", enableColumnFilter: false },
-                  { header: "City", accessorKey: "city", enableColumnFilter: false },
-                  { header: "Company", accessorKey: "company", enableColumnFilter: false },
+                  { header: "Nome", accessorKey: "nome", enableColumnFilter: false },
+                  { header: "Identificação", accessorKey: "docId", enableColumnFilter: false },
+                  { header: "Sexo", accessorKey: "sexo", enableColumnFilter: false },
+                  { header: "Curso", accessorKey: "curso", enableColumnFilter: false },
+                  { header: "Grau Académico", accessorKey: "grau", enableColumnFilter: false },
+                  { header: "Período de Formação", accessorKey: "inicio_fin", enableColumnFilter: false },
+                  { header: "Contato", accessorKey: "telemovel", enableColumnFilter: false },
                 ],
                 actions: [
-                  {
-                    id:'editRow',
-                    type: 'Button',
-                    config: {
-                      icon: 'ri-pencil-fill',
-                      color: 'info',
-                      className: 'btn-ghost-info',
-                    },
-                  },
+                  // {
+                  //   id:'editRow',
+                  //   type: 'Button',
+                  //   config: {
+                  //     icon: 'ri-pencil-fill',
+                  //     color: 'info',
+                  //     className: 'btn-ghost-info',
+                  //   },
+                  // },
                   {
                     id:'deleteRow',
                     type: 'Button',
@@ -253,79 +308,23 @@ const components: Component[] = [
 
 ];
 
-const pokeComponent: Component[] = [
-  // add pokemon form component 
-  {
-    Row: [
-      {
-        Col: [
-          {
-            id: 'col_nihdj',
-            colSize: 6,
-            components: [
-              {
-                id: 'pokemonInfo',
-                componentName: 'FormLayout',
-                config: {
-                  title: 'Add Pokemon',
-                  showTitle: false,
-                },
-                fields: [
-                  {
-                    type: 'TextInput',
-                    config: {
-                      type: 'text',
-                      name: 'name',
-                      label: 'Name',
-                      required: true,
-                      placeholder: 'Enter the pokemon name',
-                      colSize: 6,
-                    },
-                  },
-                  {
-                    type: 'TextInput',
-                    config: {
-                      type: 'text',
-                      name: 'url',
-                      label: 'Url',
-                      placeholder: 'Enter the pokemon url',
-                      colSize: 6,
-                    }
-                  },
-                  {
-                    type: 'IGRP_ButtonInput',
-                    config: {
-                      type: 'button',
-                      name: 'formButton',
-                      label: 'Save',
-                      colSize: 6,
-                      className: 'btn-info mb-2 mx-2',
-                    },
-                  }
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  // add server side table component
+const registros: Component[] = [
+ 
   {
     Row: [
       {
         Col: [
           {
             id: 'col_2',
-            colSize: 6,
+            colSize: 12,
             components: [
               {
-                id: 'pokemonTable',
+                id: 'tablaRegistros',
                 componentName: 'TableComponent',
                 config: {
-                  title: 'Pokemons',
+                  title: 'Registros',
                   showTitle: true,
-                  pageSize: 5,
+                  pageSize: 10,
                   isGlobalFilter: true,
                   SearchPlaceholder: 'Search...',
                   isPagination: true,
@@ -334,19 +333,15 @@ const pokeComponent: Component[] = [
                   actionTitle: 'Actions',
                 },
                 fields: [
-                  { header: 'Name', accessorKey: 'name', enableColumnFilter: false },
-                  { header: 'Url', accessorKey: 'url', enableColumnFilter: false },
+                  { header: "Nome", accessorKey: "nome", enableColumnFilter: false },
+                  { header: "Identificação", accessorKey: "docId", enableColumnFilter: false },
+                  { header: "Sexo", accessorKey: "sexo", enableColumnFilter: false },
+                  { header: "Curso", accessorKey: "curso", enableColumnFilter: false },
+                  { header: "Grau Académico", accessorKey: "grau", enableColumnFilter: false },
+                  { header: "Período de Formação", accessorKey: "inicio_fin", enableColumnFilter: false },
+                  { header: "Contato", accessorKey: "telemovel", enableColumnFilter: false },
                 ],
                 actions: [
-                  {
-                    id:'editPokemon',
-                    type: 'Button',
-                    config: {
-                      icon: 'ri-pencil-fill',
-                      color: 'info',
-                      className: 'btn-ghost-info',
-                    },
-                  },
                   {
                     id:'removePokemon',
                     type: 'Button',
@@ -369,5 +364,5 @@ const pokeComponent: Component[] = [
 it('should create a new page', async () => {
   // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 
-  // await addComponentToPage(pokePage, pokeComponent, OUTPUT_DIR);
+  // await addComponentToPage(regPage, registros, OUTPUT_DIR);
 });
