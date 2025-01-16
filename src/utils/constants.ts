@@ -1,12 +1,12 @@
 import path from 'path';
 
 // Comment the following exports when building the application
-// export const CONFIGS = path.join(__dirname, '../../public/configs');
-// export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+export const CONFIGS = path.join(__dirname, '../../public/configs');
+export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
 //Uncomment the following exports when building the application
-export const TEMPLATE_DIR = path.join(__dirname, './templates');
-export const CONFIGS = path.join(__dirname, './configs');
+//export const TEMPLATE_DIR = path.join(__dirname, './templates');
+//export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -22,6 +22,9 @@ export const COMMON_FILES = {
   MAIN_LAYOUT_CSS: 'MainLayout.module.css',
   LAYOUT_TSX: 'layout.tsx',
   SERVICE: 'Service.ts',
+  DEPLOYMENT: 'deployment.yaml',
+  INGRESS: 'ingress.yaml',
+  SERVICE_K8S: 'service.yaml',
 };
 
 export const EXTENSIONS = {
@@ -36,6 +39,9 @@ export const TEMPLATES = {
   SERVICE: 'app/page/service.hbs',
   MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
   MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
+  CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
+  CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
+  CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
 };
 
 export const SRC_CONFIG_FILES = {
@@ -59,7 +65,7 @@ export const DST_CONFIG_FILES ={
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'next-env.d.ts',
-  GITLABCIYAML: 'gitlab-ci.yaml',
+  GITLABCIYAML: '.gitlab-ci.yml',
   TSCONFIG: 'tsconfig.json',
   NPMRC: '.npmrc',
   ENV: '.env.local',
@@ -82,6 +88,7 @@ export const DIRECTORIES = {
   IGRPSTUDIO: '.igrpstudio',
   MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
+  KUBERNETES: 'k8s'
 };
 
 export const ERROR_MESSAGE = {
