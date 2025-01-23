@@ -11,10 +11,10 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   KUBECONFIG: "/tmp/kubeconfig"
   KUBE_NAMESPACE: "app1-front"
-  API_URL: "https://app-manager-dev-test.nosi.cv/apps/1/resources"
-  APPLICATION_NAME: "application-1"
+  API_URL: "https://app-manager-dev-test.nosi.cv/apps/69/resources"
+  APPLICATION_NAME: "Formacion_App"
   HOME_URL: "frontend-dev-test.nosi.cv/example"
-  RESOURCE_NAME: "p2"
+  RESOURCE_NAME: "resource_1"
   RESOURCE_DESCRIPTION: "staff 1"
   REGISTRY_USERNAME: "bittor.vpn"
   REGISTRY_PASSWORD: "Bh1030_1812#"
@@ -23,11 +23,11 @@ variables:
   REGISTRY_IMAGE: "api-bittor-test"
   REGISTRY_TAG: "demo"
   APP_URL: "https://frontend-dev-test.nosi.cv/example"
-  RESOURCE_ID: "1"
+  RESOURCE_ID: "69"
   KEYCLOAK_URL: "https://keycloak-dev-test.nosi.cv"
   KEYCLOAK_REALM: "igrp"
-  APP_MANAGER_CLIENT_ID: "user-manager-sa"
-  APP_MANAGER_CLIENT_SECRET: "ij4RZGLxbYTCeGfrv5zU4HjsjnPrGTop"
+  APP_MANAGER_CLIENT_ID: "CLIENT_igrp-app-manager"
+  APP_MANAGER_CLIENT_SECRET: "150TOLCyHV3PaofJLPaPjK1sGCNLDlJM"
   KEYCLOAK_USERNAME: "admin"
   KEYCLOAK_PASSWORD: "igrp30"
 
@@ -156,7 +156,7 @@ build_json:
           "resourceItems": ($pages_meta.resourceItems | map(.url = ($app_url + .url))),
           "identityConfig": {
               "application": $application_name,
-              "homeUrl": $home_url,
+              "homeUrl": $app_url,
               "name": ("app1-resource" + $resource_id),
               "description": "App para registros de formaciones",
               "endpoints": [
