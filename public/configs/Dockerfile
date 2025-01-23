@@ -8,7 +8,9 @@ FROM base AS deps
 
 COPY package.json package-lock.json* ./
 
-RUN npm ci
+RUN npm install @igrp/navbar-library@1.0.7 --registry=https://sonatype.nosi.cv/repository/npm-group/
+
+RUN npm install
 
 FROM base AS build
 
@@ -22,18 +24,18 @@ RUN npm run build
 
 FROM node:18-alpine AS production
 
-WORKDIR /app
-
 ENV NODE_ENV=production
 
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/node_modules ./node_modules
+WORKDIR /app
+COPY --from=build /app/.next /app/.next
+COPY --from=build /app/.next/static /app/.next/static
+COPY --from=build /app/public /app/public
+COPY --from=deps /app/package*.json ./
+COPY --from=deps /app/node_modules ./node_modules
 
-EXPOSE 3000
+EXPOSE 80
 
 RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
 USER nextjs
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
