@@ -68,6 +68,7 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTCONFIG)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, DST_CONFIG_FILES.GITLABCIYAML)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERFILE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERFILE)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERIGNORE)},
   ]
 }

@@ -41,11 +41,11 @@ const components: Component[] = [
                     type: 'TextInput',
                     config: {
                       type: 'text',
-                      name: 'docId',
+                      name: 'docid',
                       label: 'Documento de Identificação',
                       required: true,
                       placeholder: 'BI / Passaporte / Cartão de Residência ou Visto de trabalho / Carta de condução',
-                      colSize: 6,
+                      colSize: 4,
                     },
                   },
                   {
@@ -56,31 +56,7 @@ const components: Component[] = [
                       label: 'Nome',
                       required: true,
                       placeholder: 'Seu nome completo',
-                      colSize: 6,
-                    },
-                  },
-                  {
-                    type: 'SelectInput',
-                    config: {
-                      type: 'select',
-                      name: 'sexo',
-                      label: 'Sexo',
-                      required: true,
-                      options: [
-                        { value: 'M', label: 'Masculino' },
-                        { value: 'F', label: 'Femenino' }
-                      ],
-                      colSize: 4,
-                    }
-                  },
-                  {
-                    type: 'TextInput',
-                    config: {
-                      type: 'text',
-                      name: 'nacionalidad',
-                      label: 'Nacionalidad',
-                      required: false,
-                      colSize: 4,
+                      colSize: 5,
                     },
                   },
                   {
@@ -90,7 +66,7 @@ const components: Component[] = [
                       name: 'telemovel',
                       label: 'Telemóvel',
                       placeholder: 'Enter your first name',
-                      colSize: 4,
+                      colSize: 3,
                     },
                     validation: {
                       requiredMessage: 'Phone Number is required'
@@ -148,27 +124,43 @@ const components: Component[] = [
                   showTitle: true,
                 },
                 fields: [
+                  
                   {
-                    type: 'TextInput',
+                    type: 'Select2Input',
                     config: {
-                      type: 'text',
+                      type: 'select',
                       name: 'instituicao',
                       label: 'Instituição',
                       required: true,
-                      placeholder: 'Instituição de Ensino Superior',
-                      colSize: 6,
-                    },
+                      placeholder:"Seleciona uma op",
+                      options: [
+                        { value: 'Intituto Superior de Educação', label: 'Intituto Superior de Educação'},
+                        { value: 'ISECMAR ', label: 'ISECMAR '},
+                        { value: 'Univ. Agunstinho Neto', label: 'Univ. Agustinho Neto'},
+                        { value: 'Univ. Complutense de Madrid', label: 'Univ. Complutense de Madrid'},
+                        { value: 'Univ. de Havana', label: 'Univ. de Havana'},
+                      ],
+                      colSize: 4,
+                    }
                   },
                   {
-                    type: 'TextInput',
+                    type: 'Select2Input',
                     config: {
-                      type: 'text',
+                      type: 'select',
                       name: 'curso',
                       label: 'Curso',
                       required: true,
-                      placeholder: 'Curso',
-                      colSize: 6,
-                    },
+                      options: [
+                        { value: 'Astrofísica', label: 'Astrofísica'},
+                        { value: 'Desenho', label: 'Desenho'},
+                        { value: 'Engenharia Informática', label: 'Engenharia Informática'},
+                        { value: 'Engenharia Mecânica', label: 'Engenharia Mecânica'},
+                        { value: 'Medicina', label: 'Medicina'},
+                        { value: 'Neurociencia', label: 'Neurociencia'},
+                        { value: 'Optometria y Visião', label: 'Optometria y Visião'},
+                      ],
+                      colSize: 4,
+                    }
                   },
                   {
                     type: 'SelectInput',
@@ -182,30 +174,6 @@ const components: Component[] = [
                         { value: 'Mestre', label: 'Mestre'},
                         { value: 'Doutor', label: 'Doutor'}
                       ],
-                      colSize: 4,
-                    }
-                  },
-                  {
-                    type: 'Select2Input',
-                    config: {
-                      type: 'select',
-                      name: 'pais',
-                      label: 'País de Formação',
-                      required: true,
-                      options: [
-                        { value: 'Angola', label: 'Angola'},
-                        { value: 'Espanha', label: 'Espanha'},
-                        { value: 'Cabo Verde', label: 'Cabo Verde'}
-                      ],
-                      colSize: 4,
-                    }
-                  },
-                  {
-                    type: 'DateRangeInput',
-                    config: {
-                      type: 'range',
-                      name: 'inicio_fin',
-                      label: 'Periodo de formação',
                       colSize: 4,
                     }
                   }
@@ -270,11 +238,10 @@ const components: Component[] = [
                 },
                 fields: [
                   { header: "Nome", accessorKey: "nome", enableColumnFilter: false },
-                  { header: "Identificação", accessorKey: "docId", enableColumnFilter: false },
-                  { header: "Sexo", accessorKey: "sexo", enableColumnFilter: false },
+                  { header: "Identificação", accessorKey: "docid", enableColumnFilter: false },
                   { header: "Curso", accessorKey: "curso", enableColumnFilter: false },
+                  { header: "Instituição", accessorKey: "instituicao", enableColumnFilter: false },
                   { header: "Grau Académico", accessorKey: "grau", enableColumnFilter: false },
-                  { header: "Período de Formação", accessorKey: "inicio_fin", enableColumnFilter: false },
                   { header: "Contato", accessorKey: "telemovel", enableColumnFilter: false },
                 ],
                 actions: [
@@ -319,35 +286,40 @@ const registros: Component[] = [
             colSize: 12,
             components: [
               {
-                id: 'tablaRegistros',
+                id: 'tablaregistros',
                 componentName: 'TableComponent',
                 config: {
                   title: 'Registros',
                   showTitle: true,
-                  pageSize: 10,
+                  pageSize: 5,
                   isGlobalFilter: true,
                   SearchPlaceholder: 'Search...',
                   isPagination: true,
                   isSortable: true,
-                  servrSsidePagination: true,
-                  actionTitle: 'Actions',
+                  servrSsidePagination: false,
+                  actionTitle: 'Ações',
                 },
                 fields: [
                   { header: "Nome", accessorKey: "nome", enableColumnFilter: false },
-                  { header: "Identificação", accessorKey: "docId", enableColumnFilter: false },
-                  { header: "Sexo", accessorKey: "sexo", enableColumnFilter: false },
+                  { header: "Identificação", accessorKey: "docid", enableColumnFilter: false },
                   { header: "Curso", accessorKey: "curso", enableColumnFilter: false },
+                  { header: "Instituição", accessorKey: "instituicao", enableColumnFilter: false },
                   { header: "Grau Académico", accessorKey: "grau", enableColumnFilter: false },
-                  { header: "Período de Formação", accessorKey: "inicio_fin", enableColumnFilter: false },
-                  { header: "Contato", accessorKey: "telemovel", enableColumnFilter: false },
+                  { header: "Contato", accessorKey: "telemovel", enableColumnFilter: false }
                 ],
                 actions: [
                   {
-                    id:'removePokemon',
-                    type: 'Button',
+                    id:'removeregistro',
+                    type: 'Button',                    
                     config: {
                       icon: 'ri-delete-bin-5-line',
                       className: 'btn-ghost-danger',
+                      refreshTable: true,
+                      actionType: 'alert',
+                      alertTitle:"Eliminar Registro",
+                      alertMessage:"Tem certeza que pretende elimanr este registro?",
+                      alertConfirmButtonLabel:"Eliminar",
+                      alertCancelButtonLabel:"Cancelar"
                     },
                   },
                 ],

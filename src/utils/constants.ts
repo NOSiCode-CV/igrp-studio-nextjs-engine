@@ -1,12 +1,12 @@
 import path from 'path';
 
 // Comment the following exports when building the application
-export const CONFIGS = path.join(__dirname, '../../public/configs');
-export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+// export const CONFIGS = path.join(__dirname, '../../public/configs');
+// export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
 //Uncomment the following exports when building the application
-//export const TEMPLATE_DIR = path.join(__dirname, './templates');
-//export const CONFIGS = path.join(__dirname, './configs');
+export const TEMPLATE_DIR = path.join(__dirname, './templates');
+export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -46,6 +46,7 @@ export const TEMPLATES = {
 
 export const SRC_CONFIG_FILES = {
   DOCKERIGNORE: 'dockerignore_template',
+  DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',
@@ -61,6 +62,7 @@ export const SRC_CONFIG_FILES = {
 
 export const DST_CONFIG_FILES ={
   DOCKERIGNORE: '.dockerignore',
+  DOCKERFILE: 'Dockerfile',
   GITIGNORE: '.gitignore',
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',

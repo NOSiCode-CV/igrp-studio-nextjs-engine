@@ -1,1 +1,1 @@
-export const OUTPUT_TEST= 'C:/Users/Public/Downloads/nextjs';
+export const OUTPUT_TEST= '';

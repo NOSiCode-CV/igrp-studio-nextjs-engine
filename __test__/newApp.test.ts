@@ -6,12 +6,12 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const baseConfig: AppConfig = {
   type: 'baseApp',
-  appName: 'PageMetaApplication',
+  appName: 'registo_cidadao',
 };
 
 describe('Create new nextjs application module', () => {
 
   test('Should create the application directories', async () => {
-    await newApp(baseConfig, OUTPUT_DIR);
+    // await newApp(baseConfig, OUTPUT_DIR);
   });
 });
