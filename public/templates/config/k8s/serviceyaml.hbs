@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-engine-service
+  name: nextjs-service 
   labels:
-    app: spring-engine
+    app: nextjs-app 
 spec:
   selector:
-    app: spring-engine
+    app: nextjs-app 
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
-  type: ClusterIP
+      port: 80  
+      targetPort: 3001 
+  type: ClusterIP 
