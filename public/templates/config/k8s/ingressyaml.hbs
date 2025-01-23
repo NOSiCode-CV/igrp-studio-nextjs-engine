@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: spring-engine-ingress
+  name: nextjs-ingress 
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: wayvant-test.com
+    - host: ${HOME_URL_FINAL}  
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: spring-engine-service
+                name: nextjs-service  
                 port:
-                  number: 8080
+                  number: 80

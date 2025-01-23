@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-engine
+  name: nextjs-app
   labels:
-    app: spring-engine
+    app: nextjs-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: spring-engine
+      app: nextjs-app
   template:
     metadata:
       labels:
-        app: spring-engine
+        app: nextjs-app
     spec:
       containers:
-        - name: spring-engine
-          image: ${REGISTRY_URL}/${REGISTRY_PROJECT}/spring-engine:${RESOURCE_NAME_FINAL}
+        - name: nextjs-app
+          image: ${REGISTRY_URL}/${REGISTRY_PROJECT}/${REGISTRY_IMAGE}:${REGISTRY_TAG}
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           resources:
             requests:
               cpu: "250m"
@@ -27,10 +27,7 @@ spec:
               cpu: "500m"
               memory: "1Gi"
           env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://<postgres-service-name>:5432/mydatabase"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "myuser"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "mypassword"
-          
+            - name: PORT
+              value: "80"
+            - name: NEXT_PUBLIC_API_URL
+              value: "${HOME_URL_FINAL}"
