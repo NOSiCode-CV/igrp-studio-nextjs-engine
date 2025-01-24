@@ -12,6 +12,6 @@ const baseConfig: AppConfig = {
 describe('Create new nextjs application module', () => {
 
   test('Should create the application directories', async () => {
-    // await newApp(baseConfig, OUTPUT_DIR);
+     await newApp(baseConfig, OUTPUT_DIR);
   });
 });
