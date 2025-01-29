@@ -6,14 +6,14 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'test',
-  path: 'test',
+  pageName: 'registros',
+  path: 'registros',
   components: [],
 };
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {
-    // await newPage(pageConfig, OUTPUT_DIR);
+    await newPage(pageConfig, OUTPUT_DIR);
   })
 
 })

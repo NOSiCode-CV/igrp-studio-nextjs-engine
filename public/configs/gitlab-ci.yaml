@@ -10,10 +10,10 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_HOST: tcp://docker:2375
   KUBECONFIG: "/tmp/kubeconfig"
-  KUBE_NAMESPACE: "app1-front"
-  API_URL: "https://app-manager-dev-test.nosi.cv/apps/69/resources"
-  APPLICATION_NAME: "Formacion_App"
-  HOME_URL: "frontend-dev-test.nosi.cv/example"
+  KUBE_NAMESPACE: "formacion-front"
+  API_URL: "https://app-manager-dev-test.nosi.cv/apps/1/resources"
+  APPLICATION_NAME: "Formacion2"
+  HOME_URL: "frontend-dev-test.nosi.cv/formacion2"
   RESOURCE_NAME: "resource_1"
   RESOURCE_DESCRIPTION: "staff 1"
   REGISTRY_USERNAME: "bittor.vpn"
@@ -21,9 +21,9 @@ variables:
   REGISTRY_URL: "registry.nosi.cv"
   REGISTRY_PROJECT: "bittortest"
   REGISTRY_IMAGE: "api-bittor-test"
-  REGISTRY_TAG: "demo"
-  APP_URL: "https://frontend-dev-test.nosi.cv/example"
-  RESOURCE_ID: "69"
+  REGISTRY_TAG: "formacion"
+  APP_URL: "https://frontend-dev-test.nosi.cv/formacion2"
+  RESOURCE_ID: "1"
   KEYCLOAK_URL: "https://keycloak-dev-test.nosi.cv"
   KEYCLOAK_REALM: "igrp"
   APP_MANAGER_CLIENT_ID: "CLIENT_igrp-app-manager"
@@ -153,38 +153,20 @@ build_json:
           "type": "UI",
           "url": $app_url,
           "description": "Demo frontend",
-          "resourceItems": ($pages_meta.resourceItems | map(.url = ($app_url + .url))),
+          "resourceItems": ($pages_meta.resourceItems | map(.url = ($app_url + .url) | .description = ("Pagina de " + .name ) )),
           "identityConfig": {
               "application": $application_name,
               "homeUrl": $app_url,
               "name": ("app1-resource" + $resource_id),
               "description": "App para registros de formaciones",
-              "endpoints": [
-                  {
-                  "name": "Ver registros",
-                  "methods": ["GET"],
-                  "path": "/api/registros",
-                  "permission": "professor"
-                  },
-                  {
-                  "name": "Crear registro",
-                  "methods": ["POST"],
-                  "path": "/api/registros",
-                  "permission": "director"
-                  },
-                  {
-                  "name": "Eliminar registro",
-                  "methods": ["DELETE"],
-                  "path": "/api/registros/deleteByDocid",
-                  "permission": "superdirector"
-                  }
-              ]
+              "endpoints": []
           }
         }' > payload.json
     - cat payload.json
   artifacts:
     paths:
       - payload.json
+
 
 deploy_resource:
   stage: deployjson
