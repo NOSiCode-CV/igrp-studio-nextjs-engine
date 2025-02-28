@@ -1,4 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constants';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
 
 export interface AppConfig {
   type: 'baseApp';
@@ -9,6 +9,13 @@ export interface AppConfig {
 export interface PageConfig {
   type: 'page';
   pageName: string;
+  path: string;
+  components?: Component[];
+}
+
+export interface ComponentConfig {
+  type: 'component';
+  name: string;
   path: string;
   components?: Component[];
 }

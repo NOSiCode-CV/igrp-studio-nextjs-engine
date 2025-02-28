@@ -1,6 +1,6 @@
-import { newApp } from '../src/index';
+import { newApp } from '../src';
 import { AppConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../testPath';
+import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 

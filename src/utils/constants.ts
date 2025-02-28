@@ -1,12 +1,12 @@
 import path from 'path';
 
 // Comment the following exports when building the application
-export const CONFIGS = path.join(__dirname, '../../public/configs');
-export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+//export const CONFIGS = path.join(__dirname, '../../public/configs');
+//export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 
 //Uncomment the following exports when building the application
-//export const TEMPLATE_DIR = path.join(__dirname, './templates');
-//export const CONFIGS = path.join(__dirname, './configs');
+export const TEMPLATE_DIR = path.join(__dirname, './templates');
+export const CONFIGS = path.join(__dirname, './configs');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -17,7 +17,9 @@ export const PATTERNS = {
 export const COMMON_FILES = {
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
+  COMPONENTS_META: 'componentsMeta.json',
   PAGE_TSX: 'page.tsx',
+  COMPONENT_TSX: '{{name}}.tsx',
   MAIN_LAYOUT_TSX: 'MainLayout.tsx',
   MAIN_LAYOUT_CSS: 'MainLayout.module.css',
   LAYOUT_TSX: 'layout.tsx',
@@ -36,6 +38,7 @@ export const TEMPLATES = {
   CONFIG_LAYOUT: 'config/layout.hbs',
   CONFIG_PACKGE_JSON: 'config/package.json.hbs',
   PAGE: 'app/page/page.hbs',
+  COMPONENT: 'app/component/component.hbs',
   SERVICE: 'app/page/service.hbs',
   MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
   MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
@@ -90,7 +93,9 @@ export const DIRECTORIES = {
   IGRPSTUDIO: '.igrpstudio',
   MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
-  KUBERNETES: 'k8s'
+  IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
+  KUBERNETES: 'k8s',
+  COMPONENTS: 'src/components',
 };
 
 export const ERROR_MESSAGE = {
@@ -101,7 +106,8 @@ export const ERROR_MESSAGE = {
     'The provided APP configuration is invalid. Please verify the APP details and try again.',
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
-  INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again'
+  INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
+  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again'
 };
 
 export const FIELD_TYPES = ['text',

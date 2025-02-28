@@ -1,6 +1,6 @@
-import { addComponentToPage } from '../src/index';
+import { addComponentToPage } from '../src';
 import { PageConfig, Component } from '../src/interfaces/types';
-import {OUTPUT_TEST} from '../testPath';
+import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
@@ -334,7 +334,7 @@ const registros: Component[] = [
 ];
 
 it('should create a new page', async () => {
-  // await addComponentToPage(pageConfig, components, OUTPUT_DIR);
+   await addComponentToPage(pageConfig, components, OUTPUT_DIR);
 
-  // await addComponentToPage(regPage, registros, OUTPUT_DIR);
+   await addComponentToPage(regPage, registros, OUTPUT_DIR);
 });

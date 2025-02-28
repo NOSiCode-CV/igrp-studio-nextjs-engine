@@ -1,6 +1,6 @@
-import { newPage } from '../src/index';
+import { newPage } from '../src';
 import { PageConfig } from '../src/interfaces/types';
-import {OUTPUT_TEST} from '../testPath';
+import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 

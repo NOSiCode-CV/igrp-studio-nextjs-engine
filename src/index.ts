@@ -9,9 +9,12 @@ import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
-import { AppConfig, RenderContext, Component, PageConfig, PageMetaConfig } from './interfaces/types';
+import { AppConfig, RenderContext, Component, PageConfig, PageMetaConfig, ComponentConfig } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
+import { componentConfigValidate } from './schema/componentConfig';
+import { saveComponentConfig } from './modules/components/saveComponentConfig';
+import { generateComponent } from './modules/components/generateComponent';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -30,8 +33,7 @@ import { pageConfigValidate } from './schema/pageConfig';
  * @returns {Promise<void>} A promise that resolves when the application has been successfully initialized.
  *
  */
-export const newApp = async (baseConfig: AppConfig, basePath: string) => {
-
+export const newApp = async (baseConfig: AppConfig, basePath: string): Promise<void> => {
   const isBaseConfigValid = appConfigValidate(baseConfig);
 
   if (!isBaseConfigValid && appConfigValidate.errors) throw appConfigValidate.errors;
@@ -40,7 +42,6 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
 
   if (!(await checkIfDirectoryIsEmpty(basePath))) throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
 
- 
   await saveBaseAppFileConfig(baseConfig, basePath);
 
   const context: RenderContext = {
@@ -48,8 +49,6 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
     basePath,
     baseConfig,
   };
-
-
 
   /**
    * Creates the folder structure needed for the application.
@@ -63,13 +62,12 @@ export const newApp = async (baseConfig: AppConfig, basePath: string) => {
 
   const pageMetaConfig: PageMetaConfig = {
     type: 'UI',
-    url: "",
-    description: baseConfig.description ||'Web description',
-    resourceItems: []
-  }
-  
-  await savePagesMeta(pageMetaConfig, basePath)
+    url: '',
+    description: baseConfig.description || 'Web description',
+    resourceItems: [],
+  };
 
+  await savePagesMeta(pageMetaConfig, basePath);
 };
 
 /**
@@ -101,6 +99,32 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
 };
 
 /**
+ *
+ * @param componentConfig
+ * @param basePath
+ */
+
+export const newComponent = async (componentConfig: ComponentConfig, basePath: string) => {
+
+  const isComponentConfigValid = componentConfigValidate(componentConfig);
+
+  if (!isComponentConfigValid && componentConfigValidate.errors)
+    throw componentConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  await saveComponentConfig(componentConfig, basePath);
+
+  const context: RenderContext<ComponentConfig> = {
+    resourceConfig: componentConfig,
+    basePath: basePath,
+  };
+
+  await generateComponent(context);
+
+};
+
+/**
  * 
  * @param pageConfig 
  * @param basePath 
@@ -124,7 +148,7 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
 /**
  *
  * @param pageConfig
- * @param component
+ * @param components
  * @param basePath
  */
 export const addComponentToPage = async (pageConfig: PageConfig, components: Component[], basePath: string) => {

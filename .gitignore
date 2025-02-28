@@ -16,7 +16,7 @@ bower_components/
 
 # Environment variables
 .env
-
+.npmrc
 
 # Build directories
 dist/
