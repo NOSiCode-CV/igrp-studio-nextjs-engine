@@ -15,7 +15,9 @@ const dashboardLayout: Layout = {
       componentName: "flex",
       properties: {
         variant: "col",
-        className: "w-1/4 p-4 border-r"
+        className: "border-r",
+        width: "1/4",
+        padding: "4"
       },
       children: [
         {
@@ -38,7 +40,8 @@ const dashboardLayout: Layout = {
           id: "section_content",
           componentName: "section",
           properties: {
-            className: "p-6 bg-gray-100 rounded-lg"
+            className: "bg-gray-100 rounded-lg",
+            padding: "6"
           }
         }
       ]

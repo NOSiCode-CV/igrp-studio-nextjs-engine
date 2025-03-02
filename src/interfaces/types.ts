@@ -10,7 +10,7 @@ export interface PageConfig {
   type: 'page';
   pageName: string;
   path: string;
-  components?: Component[];
+  components?: Layout;
 }
 
 export interface ComponentConfig {
@@ -182,6 +182,12 @@ export interface LayoutProperties {
   className?: string;
 }
 
+export interface ComponentMetadata {
+  import?: string | string[],
+  tag?: string,
+  stateTemplate?: string
+}
+
 export interface CommonProperties extends LayoutProperties{
   padding?: string; // p-1, p-2, etc.
   paddingX?: string; // px-1, px-2, etc.
@@ -203,6 +209,11 @@ export interface CommonProperties extends LayoutProperties{
   height?: string; // h-1/2, h-full, h-screen, etc.
 
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
+}
+
+export interface InputProperties {
+  type: string,
+  placeholder: string
 }
 
 export type RenderContext<T = undefined> = {

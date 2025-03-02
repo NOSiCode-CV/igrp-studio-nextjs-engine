@@ -1,5 +1,8 @@
 import * as Handlebars from 'handlebars'
 import { json } from 'stream/consumers';
+import { COMPONENT_METADATA } from './constants';
+import { Components, Layout } from '../interfaces/types';
+import { renderLayout } from './renderLayout';
 
 
 Handlebars.registerHelper('toLowerCase', (str: string) => {
@@ -126,6 +129,56 @@ function removeQuotes(jsonString: any) {
   return jsonString.replace(/"yup\.string\([^)]*\)"/g, (match: string | any[]) => match.slice(1, -1));
 }
 
+// Components
 
+Handlebars.registerHelper('resolve-imports', (config: Layout) => {
+  const imports = new Set();
+
+  const components = new Set<{ componentName: Components, id: string }>();
+  extractComponentData(config, components);
+
+  components.forEach((component) => {
+    const metadata = COMPONENT_METADATA.get(component.componentName);
+    if (metadata?.import) {
+      if (Array.isArray(metadata.import)) {
+        metadata.import.forEach((imp) => imports.add(imp));
+      } else {
+        imports.add(metadata.import);
+      }
+    }
+  });
+
+  return Array.from(imports).join('\n');
+});
+
+Handlebars.registerHelper('resolve-states', (config: Layout) => {
+  const stateDefinitions = new Set();
+
+  const components = new Set<{ componentName: Components, id: string }>();
+  extractComponentData(config, components);
+
+  components.forEach((component) => {
+    const metadata = COMPONENT_METADATA.get(component.componentName);
+    if (metadata?.stateTemplate) {
+      const capitalizedId = component.id.charAt(0).toUpperCase() + component.id.slice(1);
+      stateDefinitions.add(
+        metadata.stateTemplate.replace('{{id}}', component.id).replace('{{capitalizedId}}', capitalizedId),
+      );
+    }
+  });
+
+  return Array.from(stateDefinitions).join('\n');
+});
+
+function extractComponentData(layout: Layout, components: Set<{ componentName: Components, id: string }>) {
+  components.add({ componentName: layout.componentName, id: layout.id });
+  if (layout.children) {
+    layout.children.forEach((child) => extractComponentData(child, components));
+  }
+}
+
+Handlebars.registerHelper('render-layout', (config: Layout) => {
+  return renderLayout(config)
+});
 
 export { Handlebars };
