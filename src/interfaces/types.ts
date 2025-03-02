@@ -1,4 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
+import { COMPONENTS, COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
 
 export interface AppConfig {
   type: 'baseApp';
@@ -170,6 +170,41 @@ export interface PageMetaConfig {
   }[];
 }
 
+export interface Layout {
+  id: string;
+  componentName: Components;
+  properties: CommonProperties;
+  children?: Layout[];
+}
+
+export interface LayoutProperties {
+  variant?: string;
+  className?: string;
+}
+
+export interface CommonProperties extends LayoutProperties{
+  padding?: string; // p-1, p-2, etc.
+  paddingX?: string; // px-1, px-2, etc.
+  paddingY?: string; // py-1, py-2, etc.
+  paddingTop?: string; // pt-1, pt-2, etc.
+  paddingBottom?: string; // pb-1, pb-2, etc.
+  paddingLeft?: string; // pl-1, pl-2, etc.
+  paddingRight?: string; // pr-1, pr-2, etc.
+
+  margin?: string; // m-1, m-2, etc.
+  marginX?: string; // mx-1, mx-2, etc.
+  marginY?: string; // my-1, my-2, etc.
+  marginTop?: string; // mt-1, mt-2, etc.
+  marginBottom?: string; // mb-1, mb-2, etc.
+  marginLeft?: string; // ml-1, ml-2, etc.
+  marginRight?: string; // mr-1, mr-2, etc.
+
+  width?: string; // w-1/2, w-full, w-screen, etc.
+  height?: string; // h-1/2, h-full, h-screen, etc.
+
+  visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
+}
+
 export type RenderContext<T = undefined> = {
   resourceConfig: T;
   basePath: string;
@@ -180,4 +215,5 @@ export type RenderContext<T = undefined> = {
 
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
+export type Components = (typeof COMPONENTS)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];

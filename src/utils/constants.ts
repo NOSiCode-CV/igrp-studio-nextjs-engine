@@ -126,5 +126,14 @@ export const FIELD_TYPES = ['text',
   'date',
   'button',] as const;
 export const COMPONENTS_NAMES = ['FormLayout', 'TableComponent', 'Button', 'IGRP_ButtonInput'] as const
-export const COMPONENTS_TYPES = ['Form', 'Table'] as const
-
+export const COMPONENTS_TYPES = ['Form', 'Table', 'Flex'] as const
+export const COMPONENTS = [
+  "grid",
+  "flex",
+  "container",
+  "section",
+  "card",
+  "aspect",
+  "stack",
+  "inline"
+] as const;
