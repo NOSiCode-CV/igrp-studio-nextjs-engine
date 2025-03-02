@@ -124,18 +124,15 @@ export const COMPONENT_METADATA: Map<Components, ComponentMetadata>
     input: {
       tag: "Input",
       import: 'import { Input } from "@/components/ui/input";',
+      stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState("");',
     },
     button: {
       tag: "Button",
       import: 'import { Button } from "@/components/ui/button";',
     },
-    'text-field': {
-      tag: "TextField",
-      import: [
-        'import { Input } from "@/components/ui/input";',
-        'import { Label } from "@/components/ui/label";',
-      ],
-      stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState("");',
+    label: {
+      tag: "Label",
+      import: 'import { Label } from "@/components/ui/label";',
     },
     checkbox: {
       tag: "Checkbox",
@@ -172,7 +169,7 @@ export const COMPONENTS = [
   "stack",
   "inline",
   "input",
+  "label",
   "button",
-  "text-field",
   "checkbox"
 ] as const;

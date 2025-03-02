@@ -48,8 +48,14 @@ const dashboardLayout: Layout = {
           }
         },
         {
+          id: "label_field",
+          componentName: 'label',
+          properties: {
+          }
+        },
+        {
           id: "input_field",
-          componentName: 'text-field',
+          componentName: 'input',
           properties: {
           }
         },
