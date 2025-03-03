@@ -1,5 +1,5 @@
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
-import { Components } from '@/registries/componentRegistry';
+import { Components } from '../registries/componentRegistry';
 
 export interface AppConfig {
   type: 'baseApp';

@@ -1,4 +1,4 @@
-import { PageConfig, PageMetaConfig } from '@/interfaces/types'
+import { PageConfig, PageMetaConfig } from '../../interfaces/types'
 import { COMMON_FILES, DIRECTORIES } from '../../utils/constants'
 import fs from 'fs-extra'
 import path from 'path'

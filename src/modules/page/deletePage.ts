@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { PageConfig, RenderContext } from '@/interfaces/types';
+import { PageConfig, RenderContext } from '../../interfaces/types';
 import { getPageConfigPath, getPagePath, getPageServicePath } from '../../utils/helpers';
 import { updateMeta } from '../pageMeta/updatePageMeta';
 

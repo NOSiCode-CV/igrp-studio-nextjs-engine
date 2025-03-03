@@ -8,7 +8,7 @@ import { componentNameHelper } from '../helpers/componentNameHelper';
 import { fieldHelper } from '../helpers/fieldHelper';
 import { Default, isValidation, yupValidation } from '../helpers/validationHelpers';
 import { actionType, applyToAll, importActionsType, targetHelper } from '../helpers/actionHelpers';
-import { renderLayout } from '@/utils/renderLayout';
+import { renderLayout } from '../utils/renderLayout';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
