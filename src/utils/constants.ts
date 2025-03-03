@@ -1,5 +1,4 @@
 import path from 'path';
-import { ComponentMetadata, Components } from '@/interfaces/types';
 
 // Comment the following exports when building the application
 export const CONFIGS = path.join(__dirname, '../../public/configs');
@@ -111,36 +110,7 @@ export const ERROR_MESSAGE = {
   INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again'
 };
 
-export const COMPONENT_METADATA: Map<Components, ComponentMetadata>
-  = new Map(Object.entries({
-    aspect: {tag: "div"},
-    card: {tag: "div"},
-    container: {tag: "div"},
-    flex: {tag: "div"},
-    grid: {tag: "div"},
-    inline: {tag: "div"},
-    section: {tag: "div"},
-    stack: {tag: "div"},
-    input: {
-      tag: "Input",
-      import: 'import { Input } from "@/components/ui/input";',
-      stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState("");',
-    },
-    button: {
-      tag: "Button",
-      import: 'import { Button } from "@/components/ui/button";',
-    },
-    label: {
-      tag: "Label",
-      import: 'import { Label } from "@/components/ui/label";',
-    },
-    checkbox: {
-      tag: "Checkbox",
-      import: 'import { Checkbox } from "@/components/ui/checkbox";',
-      stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState(false);',
-    }
-  }) as [Components, ComponentMetadata][]
-);
+
 
 export const FIELD_TYPES = ['text',
   'number',

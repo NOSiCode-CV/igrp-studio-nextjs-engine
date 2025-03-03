@@ -1,4 +1,5 @@
-import { COMPONENTS, COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
+import { Components } from '@/registries/componentRegistry';
 
 export interface AppConfig {
   type: 'baseApp';
@@ -182,11 +183,7 @@ export interface LayoutProperties {
   className?: string;
 }
 
-export interface ComponentMetadata {
-  import?: string | string[],
-  tag?: string,
-  stateTemplate?: string
-}
+
 
 export interface CommonProperties extends LayoutProperties{
   padding?: string; // p-1, p-2, etc.
@@ -226,5 +223,4 @@ export type RenderContext<T = undefined> = {
 
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
-export type Components = (typeof COMPONENTS)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];

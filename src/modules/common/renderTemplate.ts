@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { Handlebars } from '../../utils/handlebarsHelpers';
+import { Handlebars } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE, TEMPLATE_DIR } from '../../utils/constants';
 
 /**

@@ -1,8 +1,9 @@
 import fs from 'fs-extra';
-import { ComponentConfig, RenderContext } from '../interfaces/types';
+import { ComponentConfig, Layout, RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
+import { Components } from '@/registries/componentRegistry';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
@@ -86,3 +87,19 @@ export const loadConfig = async function<T> (basePath: string): Promise<T[]> {
 export const replaceTemplate = (template: string, replacements: Record<string, string>): string => {
   return template.replace(/{{(.*?)}}/g, (_, key) => replacements[key] || '');
 };
+
+export function extractComponentData(layout: Layout, components: Set<{ componentName: Components, id: string }>) {
+  components.add({ componentName: layout.componentName, id: layout.id });
+  if (layout.children) {
+    layout.children.forEach((child) => extractComponentData(child, components));
+  }
+}
+
+export function transformValidation(field: any) {
+  const { validation, ...rest } = field; // Excluye 'validation' del objeto
+  return rest;
+}
+
+export function removeQuotes(jsonString: any) {
+  return jsonString.replace(/"yup\.string\([^)]*\)"/g, (match: string | any[]) => match.slice(1, -1));
+}

@@ -1,5 +1,5 @@
 import { CommonProperties, Layout } from '../interfaces/types';
-import { COMPONENT_METADATA } from './constants';
+import { COMPONENT_REGISTRY } from '../registries/componentRegistry';
 
 export const renderLayout = function(config: Layout): string {
   if (!config.componentName) return "";
@@ -11,13 +11,13 @@ export const renderLayout = function(config: Layout): string {
   if (className) classes += ` ${className}`;
   if (common) classes += ` ${getCommonPropertiesClasses(common)}`;
 
-  let str = `<${COMPONENT_METADATA.get(componentName)?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : `` }>`;
+  let str = `<${COMPONENT_REGISTRY.get(componentName)?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : `` }>`;
 
   if (children && children.length > 0) {
     str += "\n" + children.map(child => renderLayout(child)).join("\n") + "\n";
   }
 
-  str += `</${COMPONENT_METADATA.get(componentName)?.tag}>`;
+  str += `</${COMPONENT_REGISTRY.get(componentName)?.tag}>`;
 
   return str;
 };
