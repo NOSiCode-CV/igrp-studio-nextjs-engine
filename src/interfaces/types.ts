@@ -174,8 +174,9 @@ export interface PageMetaConfig {
 export interface Layout<S = any> {
   id: string;
   componentName: Components;
-  properties: CommonProperties;
+  properties?: CommonProperties;
   specs?: S,
+  content?: string,
   children?: Layout[];
 }
 

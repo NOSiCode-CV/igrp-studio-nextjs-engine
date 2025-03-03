@@ -167,8 +167,14 @@ const componentSchema: JSONSchemaType<Layout> = {
     },
     properties: {
       type: "object",
+      nullable: true,
       anyOf: [commonPropertiesSchema],
       errorMessage: "Properties must match the LayoutProperties schema."
+    },
+    content: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The Content must be a string.",
     },
     specs: {
       type: "object",
@@ -180,11 +186,11 @@ const componentSchema: JSONSchemaType<Layout> = {
       nullable: true,
       default: [],
       //items: { type: 'object', $ref: "#/definitions/layout", required: ['id', 'componentName', 'properties'] },
-      items: { type: 'object', required: ['id', 'componentName', 'properties'] },
+      items: { type: 'object', required: ['id', 'componentName'] },
       errorMessage: 'Invalid children configuration.'
     }
   },
-  required: ['id', 'componentName', 'properties'],
+  required: ['id', 'componentName'],
   //definitions: {
   //  layout: {} as JSONSchemaType<Layout> // Will be replaced with this schema itself for recursion
   //},

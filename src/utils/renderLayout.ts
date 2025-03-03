@@ -6,12 +6,18 @@ export const renderLayout = function (config: Layout): string {
   if (!config.componentName) return '';
 
   const { componentName, properties, children } = config;
-  let { variant, className, ...common } = properties;
 
-  let classes = getLayoutClasses(componentName, variant);
-  if (className) classes += ` ${className}`;
-  if (common) classes += ` ${getCommonPropertiesClasses(common)}`;
+  let classes = ""
 
+  if(config.properties) {
+
+    let { variant, className, ...common } = properties!;
+
+    classes += getLayoutClasses(componentName, variant);
+    if (className) classes += ` ${className}`;
+    if (common) classes += ` ${getCommonPropertiesClasses(common)}`;
+
+  }
   const component = COMPONENT_REGISTRY.get(componentName);
 
   let str = `<${component?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : ``} ${
@@ -23,9 +29,11 @@ export const renderLayout = function (config: Layout): string {
   }>`;
 
   if (children && children.length > 0) {
-    str += '\n' + children.map((child) => renderLayout(child)).join('\n') + '\n';
+    str += children.map((child) => renderLayout(child)).join('\n');
   }
 
+  if(config.content)
+    str += config.content
   //str += `/>`//`</${component?.tag}>`;
 
   return prettier.format(str, {
