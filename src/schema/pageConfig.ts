@@ -224,8 +224,7 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       type: 'object',
       nullable: true,
       oneOf: [componentSchema], // Ensure this matches the correct definition of `componentSchema`
-      required: ['id', 'componentName', 'properties'],
-      errorMessage: 'Components array must contain valid configurations.',
+      errorMessage: 'Components must contain valid configuration.',
     },
   },
   required: ['type', 'pageName', 'path'],

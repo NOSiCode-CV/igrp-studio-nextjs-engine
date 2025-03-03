@@ -11,14 +11,14 @@ export interface PageConfig {
   type: 'page';
   pageName: string;
   path: string;
-  components?: Layout;
+  components?: Layout | {};
 }
 
 export interface ComponentConfig {
   type: 'component';
   name: string;
   path: string;
-  components?: Component[];
+  components?: Layout | {};
 }
 
 export interface Component {

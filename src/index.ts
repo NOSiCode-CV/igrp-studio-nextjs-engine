@@ -125,14 +125,14 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
 };
 
 /**
- * 
- * @param pageConfig 
- * @param basePath 
+ *
+ * @param pageConfig
+ * @param basePath
  */
 export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
   const isPageConfigValid = pageConfigValidate(pageConfig);
 
-  if (!isPageConfigValid && pageConfigValidate.errors) 
+  if (!isPageConfigValid && pageConfigValidate.errors)
     throw pageConfigValidate.errors;
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
@@ -143,26 +143,4 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
   }
 
   await deletePageConfig(context)
-};
-
-/**
- *
- * @param pageConfig
- * @param components
- * @param basePath
- */
-export const addComponentToPage = async (pageConfig: PageConfig, components: Component[], basePath: string) => {
-  const isPageConfigValid = pageConfigValidate(pageConfig);
-
-  if (!isPageConfigValid && pageConfigValidate.errors) 
-    throw pageConfigValidate.errors;
-
-  
-  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
-
-  const context: RenderContext<PageConfig> = {
-    resourceConfig: pageConfig,
-    basePath: basePath,
-  };
-  await updateAndRenderPage(components, context);
 };

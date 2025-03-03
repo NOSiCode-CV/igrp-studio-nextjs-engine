@@ -1,6 +1,14 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { ComponentConfig, ColumnComponent, FieldConfig, ColumnLayout, RowLayout, Field, Component, ColumnConfig, IAction, IActionConfig } from '../interfaces/types';
-import { COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
+import {
+  ComponentConfig,
+  FieldConfig,
+  Field,
+  ColumnConfig,
+  IAction,
+  IActionConfig,
+  Layout, CommonProperties,
+} from '../interfaces/types';
+import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
 // Schema para FieldConfig
@@ -358,7 +366,46 @@ const actionSchema: JSONSchemaType<IAction> = {
 };
 
 // Schema para ColumnComponent (los componentes anidados dentro de las columnas)
-const columnComponentSchema: JSONSchemaType<ColumnComponent> = {
+const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
+  type: "object",
+  properties: {
+    variant: { type: "string", nullable: true },
+    className: { type: "string", nullable: true },
+
+    padding: { type: "string", nullable: true },
+    paddingX: { type: "string", nullable: true },
+    paddingY: { type: "string", nullable: true },
+    paddingTop: { type: "string", nullable: true },
+    paddingBottom: { type: "string", nullable: true },
+    paddingLeft: { type: "string", nullable: true },
+    paddingRight: { type: "string", nullable: true },
+
+    margin: { type: "string", nullable: true },
+    marginX: { type: "string", nullable: true },
+    marginY: { type: "string", nullable: true },
+    marginTop: { type: "string", nullable: true },
+    marginBottom: { type: "string", nullable: true },
+    marginLeft: { type: "string", nullable: true },
+    marginRight: { type: "string", nullable: true },
+
+    width: { type: "string", nullable: true },
+    height: { type: "string", nullable: true },
+    gap: { type: "string", nullable: true },
+
+    visibility: {
+      type: "string",
+      enum: ["visible", "invisible", "hidden"],
+      nullable: true,
+    },
+  },
+  additionalProperties: false,
+  errorMessage: {
+    additionalProperties: "Additional properties are not allowed",
+  },
+};
+
+// Schema para Component (los componentes que contienen filas)
+const componentSchema: JSONSchemaType<Layout> = {
   type: 'object',
   properties: {
     id: {
@@ -368,100 +415,41 @@ const columnComponentSchema: JSONSchemaType<ColumnComponent> = {
     },
     componentName: {
       type: 'string',
-      enum: COMPONENTS_NAMES,
+      enum: COMPONENTS,
       errorMessage: `Component name only must be one of ${COMPONENTS_NAMES}`
     },
-    config: columnConfigSchema,
-    fields: {
-      type: 'array',
+    properties: {
+      type: "object",
       nullable: true,
-      items: fieldSchema,
-      errorMessage: 'The fields array must contain valid field configurations.'
+      anyOf: [commonPropertiesSchema],
+      errorMessage: "Properties must match the LayoutProperties schema, if provided."
     },
-    actions: {
-      type: 'array',
-      nullable: true,
-      items: actionSchema,
-      errorMessage: 'The actions array must contain valid action configurations.'
-    },
-    formRefs: {
-      type: 'object',
-      nullable: true,
-      errorMessage: 'The formRefs attribute must be an object.'
-    },
-    values: {
-      type: 'object',
-      nullable: true,
-      errorMessage: 'The values attribute must be an object.'
-    },
-    serviceAction: {
-      type: 'object',
-      nullable: true,
-      errorMessage: 'The serviceAction attribute must be an object.'
-    },
-    target: {
+    content: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The target attribute must be a string.'
+      errorMessage: "The Content must be a string.",
+    },
+    specs: {
+      type: "object",
+      nullable: true,
+      errorMessage: "Properties must match the component specification schema, if provided."
+    },
+    children: {
+      type: 'array',
+      nullable: true,
+      default: [],
+      //items: { type: 'object', $ref: "#/definitions/layout", required: ['id', 'componentName', 'properties'] },
+      items: { type: 'object', required: ['id', 'componentName'] },
+      errorMessage: 'Invalid children configuration.'
     }
-   
   },
   required: ['id', 'componentName'],
+  //definitions: {
+  //  layout: {} as JSONSchemaType<Layout> // Will be replaced with this schema itself for recursion
+  //},
   additionalProperties: false
 };
 
-
-// Schema para ColumnLayout (las columnas que contienen componentes)
-const columnLayoutSchema: JSONSchemaType<ColumnLayout> = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
-    },
-    colSize: {
-      type: 'number',
-      errorMessage: 'The colSize attribute must be a number.'
-    },
-    components: {
-      type: 'array',
-      nullable: true,
-      items: columnComponentSchema,
-      errorMessage: 'Components array must contain valid component configurations.'
-    }
-  },
-  required: ['id', 'colSize'],
-  additionalProperties: false
-};
-
-// Schema para RowLayout (las filas que contienen columnas)
-const rowLayoutSchema: JSONSchemaType<RowLayout> = {
-  type: 'object',
-  properties: {
-    Col: {
-      type: 'array',
-      items: columnLayoutSchema,
-      errorMessage: 'Invalid Col configuration.'
-    }
-  },
-  required: ['Col'],
-  additionalProperties: false
-};
-
-// Schema para Component (los componentes que contienen filas)
-const componentSchema: JSONSchemaType<Component> = {
-  type: 'object',
-  properties: {
-    Row: {
-      type: 'array',
-      items: rowLayoutSchema,
-      errorMessage: 'Invalid Row configuration.'
-    }
-  },
-  required: ['Row'],
-  additionalProperties: false
-};
 
 // Schema para ComponentConfig (la configuración de la página)
 const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
@@ -483,11 +471,11 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       errorMessage: 'The path attribute must only contain letters and must not have spaces or special characters.',
     },
     components: {
-      type: 'array',
+      type: 'object',
       nullable: true,
-      items: componentSchema,
-      errorMessage: 'Components array must contain valid configurations.'
-    }
+      oneOf: [componentSchema], // Ensure this matches the correct definition of `componentSchema`
+      errorMessage: 'Components must contain valid configuration.',
+    },
   },
   required: ['type', 'name', 'path'],
   additionalProperties: false,
