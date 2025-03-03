@@ -1,1 +1,12 @@
-// component code here
+import { useState } from "react";
+
+{{{resolve-imports resourceConfig.components}}}
+
+export default function {{capitalize resourceConfig.name}}() {
+
+  {{{resolve-states resourceConfig.components}}}
+
+  return (
+{{{render-layout resourceConfig.components}}}
+  );
+}
