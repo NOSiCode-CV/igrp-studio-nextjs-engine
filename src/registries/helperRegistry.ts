@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
-Handlebars.registerHelper("resolve-state", resolveStates);
+Handlebars.registerHelper("resolve-states", resolveStates);
 Handlebars.registerHelper("component-name-helper", componentNameHelper);
 Handlebars.registerHelper("field-helper", fieldHelper);
 Handlebars.registerHelper("render-layout", renderLayout);

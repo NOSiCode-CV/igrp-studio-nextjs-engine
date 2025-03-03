@@ -57,6 +57,9 @@ const dashboardLayout: Layout = {
           id: "input_field",
           componentName: 'input',
           properties: {
+          },
+          specs: {
+            placeholder: "Enter the text"
           }
         },
         {

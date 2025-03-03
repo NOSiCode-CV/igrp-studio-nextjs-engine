@@ -171,10 +171,11 @@ export interface PageMetaConfig {
   }[];
 }
 
-export interface Layout {
+export interface Layout<S = any> {
   id: string;
   componentName: Components;
   properties: CommonProperties;
+  specs?: S,
   children?: Layout[];
 }
 
@@ -182,8 +183,6 @@ export interface LayoutProperties {
   variant?: string;
   className?: string;
 }
-
-
 
 export interface CommonProperties extends LayoutProperties{
   padding?: string; // p-1, p-2, etc.
@@ -207,6 +206,8 @@ export interface CommonProperties extends LayoutProperties{
 
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
 }
+
+export interface Input extends Layout<InputProperties> {}
 
 export interface InputProperties {
   type: string,

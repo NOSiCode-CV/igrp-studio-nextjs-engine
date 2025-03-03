@@ -169,6 +169,11 @@ const componentSchema: JSONSchemaType<Layout> = {
       anyOf: [commonPropertiesSchema],
       errorMessage: "Properties must match the LayoutProperties schema."
     },
+    specs: {
+      type: "object",
+      nullable: true,
+      errorMessage: "Properties must match the LayoutProperties schema."
+    },
     children: {
       type: 'array',
       nullable: true,
