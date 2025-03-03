@@ -203,6 +203,7 @@ export interface CommonProperties extends LayoutProperties{
 
   width?: string; // w-1/2, w-full, w-screen, etc.
   height?: string; // h-1/2, h-full, h-screen, etc.
+  gap?: string; // gap-1, gap-2, etc.
 
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
 }

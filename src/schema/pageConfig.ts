@@ -137,6 +137,7 @@ const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
 
     width: { type: "string", nullable: true },
     height: { type: "string", nullable: true },
+    gap: { type: "string", nullable: true },
 
     visibility: {
       type: "string",

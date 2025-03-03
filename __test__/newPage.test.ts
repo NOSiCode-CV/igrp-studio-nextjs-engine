@@ -9,8 +9,9 @@ const dashboardLayout: Layout = {
   componentName: "grid",
   properties: {
     variant: "cols2",
-    className: "gap-6 border rounded-lg",
-    padding: "4"
+    className: "border rounded-lg",
+    padding: "4",
+    gap: "6"
   },
   children: [
     {

@@ -1,5 +1,4 @@
 import prettier from '@prettier/sync';
-import * as parserHtml from 'prettier/plugins/html';
 import { CommonProperties, Layout } from '../interfaces/types';
 import { COMPONENT_REGISTRY } from '../registries/componentRegistry';
 
@@ -73,23 +72,23 @@ const getLayoutClasses = function (component: string, variant?: string): string 
     },
     grid: {
       // Basic grid columns
-      cols1: 'grid grid-cols-1 gap-4',
-      cols2: 'grid grid-cols-2 gap-4',
-      cols3: 'grid grid-cols-3 gap-4',
-      cols4: 'grid grid-cols-4 gap-4',
-      cols5: 'grid grid-cols-5 gap-4',
-      cols6: 'grid grid-cols-6 gap-4',
+      cols1: 'grid grid-cols-1',
+      cols2: 'grid grid-cols-2',
+      cols3: 'grid grid-cols-3',
+      cols4: 'grid grid-cols-4',
+      cols5: 'grid grid-cols-5',
+      cols6: 'grid grid-cols-6',
       // Basic grid rows
-      rows1: 'grid grid-rows-1 gap-4',
-      rows2: 'grid grid-rows-2 gap-4',
-      rows3: 'grid grid-rows-3 gap-4',
-      rows4: 'grid grid-rows-4 gap-4',
-      rows5: 'grid grid-rows-5 gap-4',
-      rows6: 'grid grid-rows-6 gap-4',
+      rows1: 'grid grid-rows-1',
+      rows2: 'grid grid-rows-2',
+      rows3: 'grid grid-rows-3',
+      rows4: 'grid grid-rows-4',
+      rows5: 'grid grid-rows-5',
+      rows6: 'grid grid-rows-6',
       // Common layouts
-      'holy-grail': 'grid grid-cols-[200px_1fr_200px] grid-rows-[auto_1fr_auto] min-h-screen gap-4',
-      'sidebar-left': 'grid grid-cols-[250px_1fr] gap-4',
-      'sidebar-right': 'grid grid-cols-[1fr_250px] gap-4',
+      'holy-grail': 'grid grid-cols-[200px_1fr_200px] grid-rows-[auto_1fr_auto] min-h-screen',
+      'sidebar-left': 'grid grid-cols-[250px_1fr]',
+      'sidebar-right': 'grid grid-cols-[1fr_250px]',
       // Column span variants
       'col-span-1': 'grid col-span-1',
       'col-span-2': 'grid col-span-2',
@@ -249,6 +248,7 @@ function getCommonPropertiesClasses(common?: CommonProperties | null): string {
 
     common.width ? `w-${common.width}` : '',
     common.height ? `h-${common.height}` : '',
+    common.gap? `gap-${common.gap}` : '',
 
     common.visibility ? `${common.visibility}` : '',
   ];
