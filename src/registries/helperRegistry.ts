@@ -9,6 +9,7 @@ import { fieldHelper } from '../helpers/fieldHelper';
 import { Default, isValidation, yupValidation } from '../helpers/validationHelpers';
 import { actionType, applyToAll, importActionsType, targetHelper } from '../helpers/actionHelpers';
 import { renderLayout } from '../utils/renderLayout';
+import { notNullOrEmpty } from '../helpers/objectHelpers';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -40,5 +41,8 @@ Handlebars.registerHelper("import-actions-type", importActionsType)
 Handlebars.registerHelper("action-type", actionType)
 Handlebars.registerHelper("applyToAll", applyToAll)
 Handlebars.registerHelper("default", Default)
+
+// Objects
+Handlebars.registerHelper("notNullOrEmpty", notNullOrEmpty)
 
 export { Handlebars };

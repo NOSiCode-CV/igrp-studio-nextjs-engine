@@ -1,12 +1,15 @@
+'use client'
+
 import { useState } from "react";
 
 {{{resolve-imports resourceConfig.components}}}
 
 export default function {{capitalize resourceConfig.name}}() {
-
+{{#if (notNullOrEmpty resourceConfig.components)}}
   {{{resolve-states resourceConfig.components}}}
 
   return (
 {{{render-layout resourceConfig.components}}}
   );
+{{/if}}
 }

@@ -19,16 +19,16 @@ export const COMPONENT_REGISTRY: Map<Components, ComponentMetadata>
     stack: {tag: "div"},
     input: {
       tag: "Input",
-      import: 'import { Input } from "@/components/ui/input";',
+      import: 'import { Input } from "@igrp/igrp-framework-react-design-system";',
       stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState("");',
     },
     button: {
       tag: "Button",
-      import: 'import { Button } from "@/components/ui/button";',
+      import: 'import { Button } from "@igrp/igrp-framework-react-design-system";',
     },
     label: {
       tag: "Label",
-      import: 'import { Label } from "@/components/ui/label";',
+      import: 'import { Label } from "@igrp/igrp-framework-react-design-system";',
     },
     checkbox: {
       //tag: "Checkbox",
