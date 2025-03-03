@@ -61,10 +61,15 @@ const dashboardLayout: Layout = {
           }
         },
         {
+          id: "checkbox_1",
+          componentName: 'checkbox'
+        },
+        {
           id: "button_submit",
           componentName: 'button',
           content: "Submit"
         },
+
       ]
     }
   ]

@@ -31,9 +31,9 @@ export const COMPONENT_REGISTRY: Map<Components, ComponentMetadata>
       import: 'import { Label } from "@/components/ui/label";',
     },
     checkbox: {
-      tag: "Checkbox",
-      import: 'import { Checkbox } from "@/components/ui/checkbox";',
-      stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState(false);',
+      //tag: "Checkbox",
+      //import: 'import { Checkbox } from "@/components/ui/checkbox";',
+      //stateTemplate: 'const [{{id}}, set{{capitalizedId}}] = useState(false);',
     }
   }) as [Components, ComponentMetadata][]
 );

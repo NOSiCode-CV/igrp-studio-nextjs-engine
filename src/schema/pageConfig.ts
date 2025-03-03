@@ -169,7 +169,7 @@ const componentSchema: JSONSchemaType<Layout> = {
       type: "object",
       nullable: true,
       anyOf: [commonPropertiesSchema],
-      errorMessage: "Properties must match the LayoutProperties schema."
+      errorMessage: "Properties must match the LayoutProperties schema, if provided."
     },
     content: {
       type: 'string',
@@ -179,7 +179,7 @@ const componentSchema: JSONSchemaType<Layout> = {
     specs: {
       type: "object",
       nullable: true,
-      errorMessage: "Properties must match the LayoutProperties schema."
+      errorMessage: "Properties must match the component specification schema, if provided."
     },
     children: {
       type: 'array',

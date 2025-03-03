@@ -13,28 +13,28 @@ export const renderLayout = function (config: Layout): string {
 
     let { variant, className, ...common } = properties!;
 
-    classes += getLayoutClasses(componentName, variant);
+    classes += getLayoutClasses(componentName.toLowerCase(), variant);
+
     if (className) classes += ` ${className}`;
     if (common) classes += ` ${getCommonPropertiesClasses(common)}`;
 
   }
+
   const component = COMPONENT_REGISTRY.get(componentName);
 
-  let str = `<${component?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : ``} ${
+  let str = component?.template? component.template : component?.tag? `<${component?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : ``} ${
     config.specs
       ? Object.entries(config.specs).map(([key, value]) => {
           return ` ${key}="${value}"`;
         })
       : ``
-  }>`;
+  }>` : `<div className="text-sm font-medium text-gray-700">${componentName}`;
 
   if (children && children.length > 0) {
-    str += children.map((child) => renderLayout(child)).join('\n');
+    str += children.map((child) => renderLayout(child)).join('');
+  } else {
+    if (config.content) str += config.content;
   }
-
-  if(config.content)
-    str += config.content
-  //str += `/>`//`</${component?.tag}>`;
 
   return prettier.format(str, {
     parser: 'angular'
