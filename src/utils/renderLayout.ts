@@ -1,4 +1,4 @@
-import prettier from '@prettier/sync';
+//import prettier from '@prettier/sync';
 import { CommonProperties, Layout } from '../interfaces/types';
 import { COMPONENT_REGISTRY } from '../registries/componentRegistry';
 
@@ -22,7 +22,7 @@ export const renderLayout = function (config: Layout): string {
 
   const component = COMPONENT_REGISTRY.get(componentName);
 
-  let str = component?.template? component.template : component?.tag? `<${component?.tag} ${classes.trim().length > 0 ? `class="${classes.trim()}"` : ``} ${
+  let str = component?.template? component.template : component?.tag? `<${component?.tag} ${classes.trim().length > 0 ? `className="${classes.trim()}"` : ``} ${
     config.specs
       ? Object.entries(config.specs).map(([key, value]) => {
           return ` ${key}="${value}"`;
@@ -36,9 +36,13 @@ export const renderLayout = function (config: Layout): string {
     if (config.content) str += config.content;
   }
 
-  return prettier.format(str, {
+  str += `</${component?.tag}>`
+
+  return str
+
+  /*return prettier.format(str, {
     parser: 'angular'
-  });
+  });*/
 
 };
 

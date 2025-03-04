@@ -1,4 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '../utils/constants';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
 import { Components } from '../registries/componentRegistry';
 
 export interface AppConfig {
@@ -6,7 +6,7 @@ export interface AppConfig {
   appName: string;
   description?: string
 }
-
+// TODO: add ID
 export interface PageConfig {
   type: 'page';
   pageName: string;
@@ -204,7 +204,7 @@ export interface CommonProperties extends LayoutProperties{
 
   width?: string; // w-1/2, w-full, w-screen, etc.
   height?: string; // h-1/2, h-full, h-screen, etc.
-  gap?: string; // gap-1, gap-2, etc.
+  gap?: string; // gap-1, gap-2, etc. // TODO: remove gap
 
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
 }
@@ -214,6 +214,12 @@ export interface Input extends Layout<InputProperties> {}
 export interface InputProperties {
   type: string,
   placeholder: string
+}
+
+export interface DeleteConfig {
+  name: string,
+  module?: string,
+  type: ConfigTypes
 }
 
 export type RenderContext<T = undefined> = {
@@ -227,3 +233,4 @@ export type RenderContext<T = undefined> = {
 export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
+export type ConfigTypes = (typeof CONFIG_TYPES)[number];

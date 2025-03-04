@@ -473,7 +473,7 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
     components: {
       type: 'object',
       nullable: true,
-      oneOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
+      anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
     },
   },

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './utils/constants';
+import { COMPONENTS, COMPONENTS_DIR, ERROR_MESSAGE } from './utils/constants';
 import { appConfigValidate } from './schema/baseApp';
 import { checkIfDirectoryIsEmpty } from './utils/helpers';
 import { generatePage } from './modules/page/generatePage';
@@ -8,13 +8,14 @@ import { generateService } from './modules/page/generateService';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
-import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { AppConfig, RenderContext, Component, PageConfig, PageMetaConfig, ComponentConfig } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
+import { getComponent, register } from './components';
+import aspectModule from "./components/aspect"
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -144,3 +145,17 @@ export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
 
   await deletePageConfig(context)
 };
+
+export const initComponents = async () => {
+  try {
+    register('aspect', aspectModule.register);
+    console.log(`✅ Registered components`);
+  } catch (error) {
+    console.error(`❌ Failed to load components`, error);
+  }
+}
+
+// for test purposes only
+export const getOneComponent = (config: {name: string}) => {
+  return getComponent(config.name)
+}

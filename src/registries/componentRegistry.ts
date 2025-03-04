@@ -3,6 +3,8 @@ import { COMPONENTS } from '../utils/constants';
 export interface ComponentMetadata {
   import?: string | string[],
   tag?: string,
+  properties: any,
+  propertiesMapping: any,
   stateTemplate?: string,
   template?: string
 }
