@@ -218,7 +218,6 @@ export interface InputProperties {
 
 export interface DeleteConfig {
   name: string,
-  module?: string,
   type: ConfigTypes
 }
 

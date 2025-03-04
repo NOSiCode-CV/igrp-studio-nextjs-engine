@@ -1,4 +1,4 @@
-import { COMPONENTS, COMPONENTS_DIR, ERROR_MESSAGE } from './utils/constants';
+import { ERROR_MESSAGE } from './utils/constants';
 import { appConfigValidate } from './schema/baseApp';
 import { checkIfDirectoryIsEmpty } from './utils/helpers';
 import { generatePage } from './modules/page/generatePage';
@@ -8,7 +8,14 @@ import { generateService } from './modules/page/generateService';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
-import { AppConfig, RenderContext, Component, PageConfig, PageMetaConfig, ComponentConfig } from './interfaces/types';
+import {
+  AppConfig,
+  RenderContext,
+  PageConfig,
+  PageMetaConfig,
+  ComponentConfig,
+  DeleteConfig,
+} from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
@@ -16,6 +23,8 @@ import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
 import { getComponent, register } from './components';
 import aspectModule from "./components/aspect"
+import { deleteValidation } from './schema/deleteConfig';
+import { deleteElementConfig } from './modules/delete/deleteElementConfig';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -125,26 +134,23 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
 
 };
 
-/**
- *
- * @param pageConfig
- * @param basePath
- */
-export const deletePage = async (pageConfig: PageConfig, basePath: string) => {
-  const isPageConfigValid = pageConfigValidate(pageConfig);
+export const deleteElement = async (config: DeleteConfig, basePath: string) => {
+  const valid = deleteValidation(config);
 
-  if (!isPageConfigValid && pageConfigValidate.errors)
-    throw pageConfigValidate.errors;
+  if (!valid && deleteValidation.errors) {
+    throw deleteValidation.errors;
+  }
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  const context: RenderContext<PageConfig> = {
-    resourceConfig: pageConfig,
+  const context: RenderContext<DeleteConfig> = {
+    resourceConfig: config,
     basePath,
-  }
+  };
 
-  await deletePageConfig(context)
+  await deleteElementConfig(context);
 };
+
 
 export const initComponents = async () => {
   try {

@@ -147,11 +147,6 @@ export const COMPONENTS = [
 ] as const;
 
 export const CONFIG_TYPES = [
-  'dto',
-  'controller',
-  'model',
-  'module',
-  'enum',
-  'filter',
-  'response',
+  'page',
+  'component'
 ] as const;

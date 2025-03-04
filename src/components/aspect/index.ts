@@ -1,6 +1,5 @@
-import { aspectPropertiesMapping, aspectProperties } from './properties';
+import { aspectPropertiesMapping, aspectProperties, aspectVariants } from './properties';
 import { Component, defaultRenderer } from '../index';
-import { aspectVariants } from './variants';
 
 export default {
   register(component: Component) {
