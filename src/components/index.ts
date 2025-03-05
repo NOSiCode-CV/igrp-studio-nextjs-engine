@@ -99,12 +99,12 @@ export function defaultRenderer (component: Layout, element?: Component): ((comp
   const props = common
     ? Object.entries(common).map(([key, value]) => {
       return ` ${element.propertiesMapping[key] ?? key}="${value}"`;
-    })
+    }).join("")
     : ``
 
   let str = ""
 
-  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} `
+  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
