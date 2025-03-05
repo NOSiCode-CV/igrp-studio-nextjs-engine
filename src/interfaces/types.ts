@@ -1,20 +1,24 @@
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
 import { Components } from '../registries/componentRegistry';
 
+interface IdentifiableElement {
+  id: string
+}
+
 export interface AppConfig {
   type: 'baseApp';
   appName: string;
   description?: string
 }
-// TODO: add ID
-export interface PageConfig {
+
+export interface PageConfig extends IdentifiableElement{
   type: 'page';
   pageName: string;
   path: string;
   components?: Layout | {};
 }
 
-export interface ComponentConfig {
+export interface ComponentConfig extends IdentifiableElement {
   type: 'component';
   name: string;
   path: string;
@@ -171,8 +175,7 @@ export interface PageMetaConfig {
   }[];
 }
 
-export interface Layout<S = any> {
-  id: string;
+export interface Layout<S = any> extends IdentifiableElement{
   componentName: Components;
   properties?: CommonProperties;
   specs?: S,
@@ -204,16 +207,8 @@ export interface CommonProperties extends LayoutProperties{
 
   width?: string; // w-1/2, w-full, w-screen, etc.
   height?: string; // h-1/2, h-full, h-screen, etc.
-  gap?: string; // gap-1, gap-2, etc. // TODO: remove gap
 
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
-}
-
-export interface Input extends Layout<InputProperties> {}
-
-export interface InputProperties {
-  type: string,
-  placeholder: string
 }
 
 export interface DeleteConfig {

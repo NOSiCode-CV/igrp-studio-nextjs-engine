@@ -92,5 +92,11 @@ export function getComponent(name: string): Component {
 
 export function defaultRenderer (component: Layout): ((component: Layout) => string) {
   const element: Component = getComponent(component.componentName)
-  return () => `<div className="${component.componentName} ${component.properties?.variant ? element.variants[component.properties.variant] : ``}" </div>`
+  let { variant, className, ...common } = component.properties!;
+  const props = common
+    ? Object.entries(common).map(([key, value]) => {
+      return ` ${key}="${value}"`;
+    })
+    : ``
+  return () => `<div className="${component.componentName} ${variant ? element.variants[variant] : ``}" ${props} </div>`
 }
