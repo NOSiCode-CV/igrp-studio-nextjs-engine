@@ -1,0 +1,22 @@
+<FormField
+  control={{resourceConfig.properties.control}}
+  name="{{resourceConfig.properties.name}}"
+  render={({ field }) => (
+    <FormItem>
+      {{#if resourceConfig.properties.label}}
+      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
+      {{/if}}
+      <FormControl>
+        {{#each resourceConfig.children}}
+          {{render-layout this}}
+        {{/each}}
+      </FormControl>
+      {{#if resourceConfig.properties.description}}
+      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
+      {{/if}}
+    {{#if resourceConfig.properties.message}}
+      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
+    {{/if}}
+    </FormItem>
+  )}
+/>

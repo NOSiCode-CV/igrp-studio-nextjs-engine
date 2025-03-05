@@ -1,0 +1,18 @@
+<Table>
+  <TableHeader>
+    <TableRow>
+      {{#each resourceConfig.properties.columns}}
+        <TableHead>{{this.label}}</TableHead>
+      {{/each}}
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {{#each resourceConfig.properties.data}}
+      <TableRow>
+        {{#each ../resourceConfig.properties.columns}}
+          <TableCell>{{lookup ../this this.key}}</TableCell>
+        {{/each}}
+      </TableRow>
+    {{/each}}
+  </TableBody>
+</Table>

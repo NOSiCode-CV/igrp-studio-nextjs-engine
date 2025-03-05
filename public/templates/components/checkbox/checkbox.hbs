@@ -1,0 +1,20 @@
+<FormField
+  control={{resourceConfig.properties.control}}
+  name="{{resourceConfig.properties.name}}"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
+      <FormControl>
+        <Checkbox
+          checked={field.value}
+          onChange={field.onChange}
+          {{#if resourceConfig.properties.disabled}}disabled{{/if}}
+        />
+      </FormControl>
+      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
+      {{#if resourceConfig.properties.message}}
+        <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
+      {{/if}}
+    </FormItem>
+  )}
+/>

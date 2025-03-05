@@ -1,6 +1,6 @@
-import { Layout } from '../interfaces/types';
-import { COMPONENT_REGISTRY, Components } from '../registries/componentRegistry';
+import { Layout, Components } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
+import { getComponent } from '../components';
 
 export function resolveStates(config: Layout): string {
   const stateDefinitions = new Set();
@@ -9,12 +9,13 @@ export function resolveStates(config: Layout): string {
   extractComponentData(config, components);
 
   components.forEach((component) => {
-    const metadata = COMPONENT_REGISTRY.get(component.componentName);
-    if (metadata?.stateTemplate) {
-      const capitalizedId = component.id.charAt(0).toUpperCase() + component.id.slice(1);
-      stateDefinitions.add(
-        metadata.stateTemplate.replace('{{id}}', component.id).replace('{{capitalizedId}}', capitalizedId),
-      );
+    const metadata = getComponent(component.componentName);
+    if (metadata?.states) {
+      if (Array.isArray(metadata.states)) {
+        metadata.states.forEach((imp) => stateDefinitions.add(imp));
+      } else {
+        stateDefinitions.add(metadata.states);
+      }
     }
   });
 

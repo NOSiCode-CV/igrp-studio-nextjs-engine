@@ -1,4 +1,4 @@
-import { newComponent } from '../src';
+import { initComponents, newComponent } from '../src';
 import { ComponentConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
@@ -11,6 +11,10 @@ const componentConfig: ComponentConfig = {
   path: 'card',
   components: {}
 };
+
+beforeAll(async () => {
+  await initComponents();
+});
 
 describe('Component module',() =>{
   it('should save the component configuration file', async()=> {

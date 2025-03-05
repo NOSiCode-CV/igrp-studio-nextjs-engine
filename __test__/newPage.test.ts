@@ -1,4 +1,4 @@
-import { newPage } from '../src';
+import { initComponents, newPage } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
@@ -10,8 +10,7 @@ const dashboardLayout: Layout = {
   properties: {
     variant: "cols2",
     className: "border rounded-lg",
-    padding: "4",
-    gap: "6"
+    padding: "4"
   },
   children: [
     {
@@ -76,11 +75,16 @@ const dashboardLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
+  id: 'e76Typ9lm2m1',
   type: 'page',
   pageName: 'registros',
   path: 'registros',
   components: dashboardLayout,
 };
+
+beforeAll(async () => {
+  await initComponents();
+});
 
 describe('Page module',() =>{
   it('should save the page configuration file', async()=> {

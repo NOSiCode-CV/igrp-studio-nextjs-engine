@@ -1,0 +1,24 @@
+<FormField
+  control={{resourceConfig.properties.control}}
+  name="{{resourceConfig.properties.name}}"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
+      <FormControl>
+        <Select
+          value={field.value}
+          onChange={field.onChange}
+          {{#if resourceConfig.properties.disabled}}disabled{{/if}}
+        >
+          {{#each resourceConfig.properties.options as |option|}}
+          <Option value="{{option.value}}">{{option.label}}</Option>
+          {{/each}}
+        </Select>
+      </FormControl>
+      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
+      {{#if resourceConfig.properties.message}}
+      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
+      {{/if}}
+    </FormItem>
+  )}
+/>

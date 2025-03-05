@@ -1,6 +1,6 @@
-import { Layout } from '../interfaces/types';
-import { COMPONENT_REGISTRY, Components } from '../registries/componentRegistry';
+import { Layout, Components } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
+import { getComponent } from '../components';
 
 export function resolveImports(config: Layout): string {
   const imports = new Set();
@@ -9,12 +9,12 @@ export function resolveImports(config: Layout): string {
   extractComponentData(config, components);
 
   components.forEach((component) => {
-    const metadata = COMPONENT_REGISTRY.get(component.componentName);
-    if (metadata?.import) {
-      if (Array.isArray(metadata.import)) {
-        metadata.import.forEach((imp) => imports.add(imp));
+    const metadata = getComponent(component.componentName);
+    if (metadata?.imports) {
+      if (Array.isArray(metadata.imports)) {
+        metadata.imports.forEach((imp) => imports.add(imp));
       } else {
-        imports.add(metadata.import);
+        imports.add(metadata.imports);
       }
     }
   });

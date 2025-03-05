@@ -1,0 +1,36 @@
+<FormField
+  control={{resourceConfig.properties.control}}
+  name="{{resourceConfig.properties.name}}"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
+      <FormControl>
+        <Card
+          {{#if resourceConfig.properties.shadow}}shadow="{{resourceConfig.properties.shadow}}"{{/if}}
+          {{#if resourceConfig.properties.border}}border="{{resourceConfig.properties.border}}"{{/if}}
+        >
+          <CardHeader>
+            <CardTitle>{{resourceConfig.properties.title}}</CardTitle>
+            {{#if resourceConfig.properties.subtitle}}
+              <CardSubtitle>{{resourceConfig.properties.subtitle}}</CardSubtitle>
+            {{/if}}
+          </CardHeader>
+          <CardBody>
+            {{#if resourceConfig.properties.body}}
+              <p>{{resourceConfig.properties.body}}</p>
+            {{/if}}
+          </CardBody>
+          <CardFooter>
+            {{#if resourceConfig.properties.footer}}
+              <p>{{resourceConfig.properties.footer}}</p>
+            {{/if}}
+          </CardFooter>
+        </Card>
+      </FormControl>
+      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
+      {{#if resourceConfig.properties.message}}
+      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
+      {{/if}}
+    </FormItem>
+  )}
+/>

@@ -1,0 +1,9 @@
+<Button
+  {{#if resourceConfig.properties.variant}}variant="{{resourceConfig.properties.variant}}"{{/if}}
+  {{#if resourceConfig.properties.size}}size="{{resourceConfig.properties.size}}"{{/if}}
+  {{#if resourceConfig.properties.disabled}}disabled{{/if}}
+  {{#if resourceConfig.properties.loading}}disabled{{/if}}
+  onClick={{resourceConfig.properties.onClick}}
+>
+  {{resourceConfig.properties.label}}
+</Button>

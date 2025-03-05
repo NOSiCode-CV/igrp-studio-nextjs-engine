@@ -48,6 +48,7 @@ export const TEMPLATES = {
   CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
   CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
   CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
+  ELEMENT: 'app/components/{{name}}/{{name}}.hbs'
 };
 
 export const SRC_CONFIG_FILES = {
@@ -144,7 +145,19 @@ export const COMPONENTS = [
   "input",
   "label",
   "button",
-  "checkbox"
+  "checkbox",
+  "form",
+  "table",
+  "chart",
+  "carousel",
+  "datePicker",
+  "password",
+  "textarea",
+  "select",
+  "radio",
+  "switch",
+  "slider",
+  "tabs"
 ] as const;
 
 export const CONFIG_TYPES = [

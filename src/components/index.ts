@@ -1,4 +1,8 @@
 import { Layout } from '../interfaces/types';
+import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { TEMPLATES } from '../utils/constants';
+import { getCommonPropertiesClasses } from './properties';
+import { replaceTemplate } from '../utils/helpers';
 
 export type Component = {
   imports: Set<string>;
@@ -92,11 +96,22 @@ export function getComponent(name: string): Component {
 
 export function defaultRenderer (component: Layout): ((component: Layout) => string) {
   const element: Component = getComponent(component.componentName)
+  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}`
+
   let { variant, className, ...common } = component.properties!;
+
   const props = common
     ? Object.entries(common).map(([key, value]) => {
-      return ` ${key}="${value}"`;
+      return ` ${element.propertiesMapping[key] ?? key}="${value}"`;
     })
     : ``
-  return () => `<div className="${component.componentName} ${variant ? element.variants[variant] : ``}" ${props} </div>`
+
+  return () => `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} </div>`
+}
+
+export function hbsRenderer (component: Layout): ((component: Layout) => string) {
+  const componentName = component.componentName
+  return () => renderSyncTemplate(replaceTemplate(TEMPLATES.ELEMENT, { componentName }), {
+    resourceConfig: component
+  })
 }

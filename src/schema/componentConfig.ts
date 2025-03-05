@@ -475,6 +475,12 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage: 'The path attribute must only contain letters and must not have spaces or special characters.',
     },
+    icon: {
+      type: "string",
+      nullable: true,
+      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
+      errorMessage: 'The icon attribute must only contain alphanumeric characters.',
+    },
     components: {
       type: 'object',
       nullable: true,

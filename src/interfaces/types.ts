@@ -1,5 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
-import { Components } from '../registries/componentRegistry';
+import { COMPONENTS, COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
 
 interface IdentifiableElement {
   id: string
@@ -27,6 +26,7 @@ export interface ComponentConfig extends IdentifiableElement {
   type: 'component';
   name: string;
   path: string;
+  icon?: string;
   components?: Layout | {};
 }
 
@@ -233,3 +233,4 @@ export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
+export type Components = (typeof COMPONENTS)[number];

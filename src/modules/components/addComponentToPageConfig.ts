@@ -3,8 +3,8 @@ import { PageConfig, Component, RenderContext, PageComponentConfig, ComponentCon
 import { getPageConfig } from '../page/getPageConfig';
 import { getComponentConfigPath, getPageConfigPath, loadConfig } from '../../utils/helpers';
 import path from 'path';
-import { DIRECTORIES } from '@/utils/constants';
-import { getComponentConfig } from '@/modules/components/getComponentConfig';
+import { DIRECTORIES } from '../../utils/constants';
+import { getComponentConfig } from './getComponentConfig';
 
 /**
  * 

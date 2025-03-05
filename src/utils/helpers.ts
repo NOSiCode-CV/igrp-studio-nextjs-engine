@@ -1,9 +1,8 @@
 import fs from 'fs-extra';
-import { ComponentConfig, Layout, RenderContext } from '../interfaces/types';
+import { ComponentConfig, Components, Layout, RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
-import { Components } from '../registries/componentRegistry';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
