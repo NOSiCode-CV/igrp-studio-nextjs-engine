@@ -9,10 +9,6 @@ export default {
     component.getProperties(sectionProperties());
     component.getPropertiesMapping(sectionPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'section',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

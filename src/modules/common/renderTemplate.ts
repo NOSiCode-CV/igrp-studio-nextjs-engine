@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { Handlebars } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE, TEMPLATE_DIR } from '../../utils/constants';
+import { registry } from '../../components';
 
 /**
  * Generates content from a template and a context.
@@ -18,6 +19,8 @@ export const renderTemplate = async (templateName: string, context: any) => {
   if (!context) {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
+
+  context.registry = registry
 
   const templatePath = path.join(TEMPLATE_DIR, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
@@ -41,6 +44,8 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
   if (!context) {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
+
+  context.registry = registry
 
   const templatePath = path.join(TEMPLATE_DIR, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');

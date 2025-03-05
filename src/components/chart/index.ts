@@ -16,10 +16,6 @@ export default {
       'const [chartData, setChartData] = useState([]);'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'chart',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

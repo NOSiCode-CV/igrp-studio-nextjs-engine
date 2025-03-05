@@ -225,6 +225,7 @@ export type RenderContext<T = undefined> = {
   resourceConfig: T;
   basePath: string;
   baseConfig?: AppConfig;
+  registry?: Record<string, Component>,
   velzonImports?: string[];
   formRefs?: string[];
 };

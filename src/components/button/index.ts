@@ -1,5 +1,5 @@
 import { buttonPropertiesMapping, buttonProperties, buttonVariants } from './properties';
-import { Component, defaultRenderer, hbsRenderer } from '../index';
+import { Component, hbsRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -18,10 +18,6 @@ export default {
       'const handleClick = () => { console.log("Button clicked"); };'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'button',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

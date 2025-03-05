@@ -9,10 +9,6 @@ export default {
     component.getProperties(gridProperties());
     component.getPropertiesMapping(gridPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'grid',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

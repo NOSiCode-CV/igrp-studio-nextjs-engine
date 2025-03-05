@@ -17,10 +17,6 @@ export default {
       'const [password, setPassword] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'password',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

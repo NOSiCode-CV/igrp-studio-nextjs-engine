@@ -17,10 +17,6 @@ export default {
       'const [selectedRadio, setSelectedRadio] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'radio',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

@@ -17,10 +17,6 @@ export default {
       'const [selectedOption, setSelectedOption] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'select',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

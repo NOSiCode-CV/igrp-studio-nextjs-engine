@@ -9,10 +9,6 @@ export default {
     component.getProperties(containerProperties());
     component.getPropertiesMapping(containerPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'container',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

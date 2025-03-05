@@ -9,10 +9,6 @@ export default {
     component.getProperties(stackProperties());
     component.getPropertiesMapping(stackPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'stack',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

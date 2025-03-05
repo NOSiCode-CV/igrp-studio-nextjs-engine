@@ -16,10 +16,6 @@ export default {
       'const [currentIndex, setCurrentIndex] = useState(0);'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'carousel',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

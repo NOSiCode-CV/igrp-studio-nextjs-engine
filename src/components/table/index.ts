@@ -16,10 +16,6 @@ export default {
       'const [data, setData] = useState([]);'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'table',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

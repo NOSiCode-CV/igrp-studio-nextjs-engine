@@ -17,10 +17,6 @@ export default {
       'const [value, setValue] = useState([0, 100]);' // example range for the slider
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'slider',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

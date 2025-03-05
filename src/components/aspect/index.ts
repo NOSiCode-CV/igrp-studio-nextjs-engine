@@ -9,10 +9,6 @@ export default {
     component.getProperties(aspectProperties());
     component.getPropertiesMapping(aspectPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'aspect',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

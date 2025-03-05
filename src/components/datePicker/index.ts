@@ -17,10 +17,6 @@ export default {
       'const [selectedDate, setSelectedDate] = useState(null);'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'datePicker',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

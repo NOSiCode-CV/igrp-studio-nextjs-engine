@@ -18,10 +18,6 @@ export default {
       'const [error, setError] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'form',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

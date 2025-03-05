@@ -17,10 +17,6 @@ export default {
       'const [isChecked, setIsChecked] = useState(false);'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'checkbox',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

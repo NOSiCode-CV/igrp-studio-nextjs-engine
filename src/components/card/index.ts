@@ -17,10 +17,6 @@ export default {
       'const [cardData, setCardData] = useState({ title: "", body: "", footer: "" });'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'card',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

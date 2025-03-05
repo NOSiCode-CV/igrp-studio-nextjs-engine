@@ -1,14 +1,14 @@
 import path from 'path';
 
 // Comment the following exports when building the application
-export const CONFIGS = path.join(__dirname, '../../public/configs');
-export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
-export const COMPONENTS_DIR = path.join(__dirname, '../../src/components');
+//export const CONFIGS = path.join(__dirname, '../../public/configs');
+//export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+//export const COMPONENTS_DIR = path.join(__dirname, '../../src/components');
 
 //Uncomment the following exports when building the application
-//export const TEMPLATE_DIR = path.join(__dirname, './templates');
-//export const CONFIGS = path.join(__dirname, './configs');
-//export const COMPONENTS_DIR = path.join('./dist/components');
+export const TEMPLATE_DIR = path.join(__dirname, './templates');
+export const CONFIGS = path.join(__dirname, './configs');
+export const COMPONENTS_DIR = path.join('./dist/components');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -48,7 +48,7 @@ export const TEMPLATES = {
   CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
   CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
   CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
-  ELEMENT: 'app/components/{{name}}/{{name}}.hbs'
+  ELEMENT: 'components/{{name}}/{{name}}.hbs'
 };
 
 export const SRC_CONFIG_FILES = {

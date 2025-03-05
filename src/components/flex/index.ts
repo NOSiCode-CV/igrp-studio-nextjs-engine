@@ -9,10 +9,6 @@ export default {
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'form',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

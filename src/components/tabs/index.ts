@@ -17,10 +17,6 @@ export default {
       'const [activeTab, setActiveTab] = useState("tab1");',
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'tabs',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

@@ -1,21 +1,18 @@
 import { Layout, Components } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
-import { getComponent } from '../components';
+import { Component } from '../components';
 
-export function resolveImports(config: Layout): string {
-  const imports = new Set();
+export function resolveImports(config: Layout, registry: Record<string, Component>): string {
+  const imports = new Set<string>();
 
   const components = new Set<{ componentName: Components, id: string }>();
   extractComponentData(config, components);
 
   components.forEach((component) => {
-    const metadata = getComponent(component.componentName);
+    const metadata = registry[component.componentName];
+    console.log("metadata:  : ", metadata)
     if (metadata?.imports) {
-      if (Array.isArray(metadata.imports)) {
-        metadata.imports.forEach((imp) => imports.add(imp));
-      } else {
-        imports.add(metadata.imports);
-      }
+      metadata.imports.forEach((imp) => imports.add(imp));
     }
   });
 

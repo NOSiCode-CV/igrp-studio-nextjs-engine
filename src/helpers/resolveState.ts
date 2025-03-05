@@ -1,23 +1,19 @@
 import { Layout, Components } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
-import { getComponent } from '../components';
+import { Component } from '../components';
 
-export function resolveStates(config: Layout): string {
-  const stateDefinitions = new Set();
+export function resolveStates(config: Layout, registry: Record<string, Component>): string {
+  const stateDefinitions = new Set<string>();
 
   const components = new Set<{ componentName: Components, id: string }>();
   extractComponentData(config, components);
 
   components.forEach((component) => {
-    const metadata = getComponent(component.componentName);
+    const metadata = registry[component.componentName];
     if (metadata?.states) {
-      if (Array.isArray(metadata.states)) {
-        metadata.states.forEach((imp) => stateDefinitions.add(imp));
-      } else {
-        stateDefinitions.add(metadata.states);
-      }
+      metadata.states.forEach((imp: string) => stateDefinitions.add(imp));
     }
   });
 
-  return Array.from(stateDefinitions).join('\n');
+  return Array.from(stateDefinitions).join('\n  ');
 }

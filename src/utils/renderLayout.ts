@@ -5,19 +5,13 @@ import { getComponent } from '../components';
 export const renderLayout = function (config: Layout): string {
   if (!config.componentName) return '';
 
+  let str: string = ""
+
   const component = getComponent(config.componentName)
 
-  console.log("Config: ", config)
-  console.log("Component name: ", config.componentName)
-  console.log("Renderer: ", typeof component.renderer)
+  if(!component) return `<div className="text-sm font-medium text-gray-700">${config.componentName}</div>`
 
-  const str = component.render(config)
-
-  console.log("Rendered!: ", config.componentName)
-
-  if (config.children && config.children.length > 0) {
-    config.children.map((child) => renderLayout(child)).join('');
-  }
+  str += component.render(config, component)
 
   return str
 
@@ -25,4 +19,4 @@ export const renderLayout = function (config: Layout): string {
     parser: 'angular'
   });*/
 
-};
+}

@@ -3,6 +3,7 @@ import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { getCommonPropertiesClasses } from './properties';
 import { replaceTemplate } from '../utils/helpers';
+import { renderLayout } from '../utils/renderLayout';
 
 export type Component = {
   imports: Set<string>;
@@ -10,21 +11,21 @@ export type Component = {
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
   variants: Record<string, any>;
-  states: Record<string, any>;
-  renderer: ((component: Layout) => string) | null;
+  states: Set<string>;
+  renderer: ((component: Layout<any>, element?: Component) => (component: Layout<any>) => string);
 
-  loadImports: (imports: string | string[]) => void;
+  loadImports: (imports: string[]) => void;
   getImports: () => string[];
 
   getParentProperties: (properties: Record<string, any>) => void;
   loadVariants: (variants: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
-  loadStates: (states: Record<string, any>) => void;
+  loadStates: (states: string[]) => void;
 
-  setRenderer: (fn: ((component: Layout) => string)) => void;
+  setRenderer: (fn: ((component: Layout<any>, element?: Component) => (component: Layout<any>) => string)) => void;
 
-  render: (context: any) => string;
+  render: (context: Layout, component: Component) => string;
 };
 
 function initComponent(): Component {
@@ -34,15 +35,11 @@ function initComponent(): Component {
     parentProperties: {},
     properties: {},
     propertiesMapping: {},
-    states: {},
-    renderer: null,
+    states: new Set(),
+    renderer: () => () => `<div className="text-sm font-medium text-gray-700">Component Not Registered</div>`,
 
     loadImports(imports) {
-      if (Array.isArray(imports)) {
-        imports.forEach((imp) => this.imports.add(imp));
-      } else {
-        this.imports.add(imports);
-      }
+      imports.forEach((imp) => this.imports.add(imp));
     },
 
     getImports() {
@@ -66,23 +63,23 @@ function initComponent(): Component {
     },
 
     loadStates(states) {
-      Object.assign(this.states, states);
+      states.forEach((state) => this.states.add(state));
     },
 
     setRenderer(renderer) {
       this.renderer = renderer
     },
 
-    render(context) {
+    render(context: Layout<any>, component: Component) {
       if (this.renderer) {
-        return this.renderer(context);
+        return this.renderer(context, component)(context);
       }
       throw new Error("No renderer function defined");
-    },
+    }
   };
 }
 
-const registry: Record<string, Component> = {};
+export const registry: Record<string, Component> = {};
 
 export function register(name: string, registerFn: (component: Component) => void) {
   const componentInstance: Component = initComponent();
@@ -94,9 +91,8 @@ export function getComponent(name: string): Component {
   return registry[name];
 }
 
-export function defaultRenderer (component: Layout): ((component: Layout) => string) {
-  const element: Component = getComponent(component.componentName)
-  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}`
+export function defaultRenderer (component: Layout, element?: Component): ((component: Layout) => string) {
+  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
   let { variant, className, ...common } = component.properties!;
 
@@ -106,12 +102,23 @@ export function defaultRenderer (component: Layout): ((component: Layout) => str
     })
     : ``
 
-  return () => `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} </div>`
+  let str = ""
+
+  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} `
+
+  if (component.children && component.children.length > 0) {
+    str += "\n\t"
+    str += component.children.map((child) => renderLayout(child)).join('\n');
+  }
+
+  str += `</div>`
+
+  return () => str
 }
 
 export function hbsRenderer (component: Layout): ((component: Layout) => string) {
-  const componentName = component.componentName
-  return () => renderSyncTemplate(replaceTemplate(TEMPLATES.ELEMENT, { componentName }), {
+  const name = component.componentName
+  return () => renderSyncTemplate(replaceTemplate(TEMPLATES.ELEMENT, { name }), {
     resourceConfig: component
   })
 }

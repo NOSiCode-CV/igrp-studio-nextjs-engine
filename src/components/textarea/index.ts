@@ -17,10 +17,6 @@ export default {
       'const [textValue, setTextValue] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'textarea',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };

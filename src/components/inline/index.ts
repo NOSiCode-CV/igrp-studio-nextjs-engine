@@ -9,10 +9,6 @@ export default {
     component.getProperties(inlineProperties());
     component.getPropertiesMapping(inlinePropertiesMapping());
     component.loadStates([]);
-    component.setRenderer(defaultRenderer({
-      componentName: 'inline',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(defaultRenderer);
   },
 };

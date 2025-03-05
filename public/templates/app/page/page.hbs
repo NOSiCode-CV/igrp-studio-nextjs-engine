@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-{{{resolve-imports resourceConfig}}}
+{{{resolve-imports resourceConfig.components registry}}}
 
 export default function PageComponent() {
 {{#if (notNullOrEmpty resourceConfig.components)}}
-  {{{resolve-states resourceConfig}}}
+  {{{resolve-states resourceConfig.components registry}}}
 
   return (
 {{{render-layout resourceConfig.components}}}

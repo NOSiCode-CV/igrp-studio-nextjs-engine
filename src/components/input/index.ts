@@ -17,10 +17,6 @@ export default {
       'const [inputValue, setInputValue] = useState("");'
     ]);
 
-    component.setRenderer(hbsRenderer({
-      componentName: 'input',
-      properties: component.properties,
-      id: ''
-    }));
+    component.setRenderer(hbsRenderer);
   },
 };
