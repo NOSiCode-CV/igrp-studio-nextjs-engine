@@ -103,3 +103,12 @@ export function transformValidation(field: any) {
 export function removeQuotes(jsonString: any) {
   return jsonString.replace(/"yup\.string\([^)]*\)"/g, (match: string | any[]) => match.slice(1, -1));
 }
+
+/**
+ * Extracts the directory path from a given full file path.
+ * @param filePath - The full path of the file.
+ * @returns The directory path containing the file.
+ */
+export const getDirectoryPath = (filePath: string): string => {
+  return path.dirname(filePath);
+};

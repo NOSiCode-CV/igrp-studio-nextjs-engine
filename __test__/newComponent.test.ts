@@ -5,6 +5,7 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 export const OUTPUT_DIR = OUTPUT_TEST;
 
 const componentConfig: ComponentConfig = {
+  id: 'e34RfF3',
   type: 'component',
   name: 'card',
   path: 'card',

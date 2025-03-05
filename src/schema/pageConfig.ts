@@ -203,6 +203,11 @@ const componentSchema: JSONSchemaType<Layout> = {
 const pageConfigSchema: JSONSchemaType<PageConfig> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
     type: {
       type: 'string',
       const: 'page',

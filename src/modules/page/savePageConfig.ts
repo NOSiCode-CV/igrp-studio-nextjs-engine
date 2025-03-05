@@ -25,6 +25,6 @@ export const savePageConfig = async (pageConfig: PageConfig, basePath: string) =
     `${pageConfig.pageName}${EXTENSIONS.JSON}`,
   );
   
-  await saveToFile(JSON.stringify(pageConfig), pageConfigOutputPath);
+  await saveToFile(JSON.stringify(pageConfig), pageConfigOutputPath, true, DIRECTORIES.IGRPSTUDIO_PAGES, pageConfig.id, basePath, EXTENSIONS.JSON);
   await updateMeta(basePath)
 };

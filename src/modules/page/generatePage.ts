@@ -1,7 +1,7 @@
 import { getPageDir } from '../../utils/helpers';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
-import { ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
+import { DIRECTORIES, ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
 import { PageConfig, RenderContext } from '../../interfaces/types';
 
 /**
@@ -12,7 +12,7 @@ export const generatePage = async (context: RenderContext<PageConfig>) => {
   const page = await renderPage(context);
   const pageOutputPath = getPageDir(context);
 
-  await saveToFile(page, pageOutputPath);
+  await saveToFile(page, pageOutputPath, true, DIRECTORIES.PAGES, context.resourceConfig.id, context.basePath);
 };
 
 /**

@@ -260,7 +260,6 @@ function getCommonPropertiesClasses(common?: CommonProperties | null): string {
 
     common.width ? `w-${common.width}` : '',
     common.height ? `h-${common.height}` : '',
-    common.gap? `gap-${common.gap}` : '',
 
     common.visibility ? `${common.visibility}` : '',
   ];

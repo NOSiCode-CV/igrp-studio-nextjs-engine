@@ -24,5 +24,5 @@ export const saveComponentConfig = async (componentConfig: ComponentConfig, base
     `${componentConfig.name}${EXTENSIONS.JSON}`,
   );
   
-  await saveToFile(JSON.stringify(componentConfig), componentConfigOutputPath);
+  await saveToFile(JSON.stringify(componentConfig), componentConfigOutputPath, true, DIRECTORIES.IGRPSTUDIO_COMPONENTS, componentConfig.id, basePath, EXTENSIONS.JSON);
 };
