@@ -11,10 +11,15 @@ export interface AppConfig {
   description?: string
 }
 
-export interface PageConfig extends IdentifiableElement{
+export interface PageConfig extends IdentifiableElement {
   type: 'page';
-  pageName: string;
   path: string;
+  pageName: string;
+  components?: Layout | {};
+}
+
+export interface PageComponentConfig extends IdentifiableElement {
+  type: 'page' | 'component'
   components?: Layout | {};
 }
 

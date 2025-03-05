@@ -14,7 +14,7 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig,
+  DeleteConfig, PageComponentConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -25,6 +25,8 @@ import { getComponent, register } from './components';
 import aspectModule from "./components/aspect"
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
+import { updateAndRenderPage } from '@/modules/components/updateAndRenderPage';
+import { pageComponentConfigValidate } from '@/schema/pageComponentConfig';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -132,6 +134,29 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
   await saveComponentConfig(componentConfig, basePath);
 
 };
+
+/**
+ *
+ * @param pageConfig
+ * @param component
+ * @param basePath
+ */
+export const addComponentToPage = async (config: PageComponentConfig, basePath: string) => {
+  const isConfigValid = pageComponentConfigValidate(config);
+
+  if (!isConfigValid && pageComponentConfigValidate.errors)
+    throw pageComponentConfigValidate.errors;
+
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  const context: RenderContext<PageComponentConfig> = {
+    resourceConfig: config,
+    basePath: basePath,
+  };
+  await updateAndRenderPage(context);
+};
+
 
 export const deleteElement = async (config: DeleteConfig, basePath: string) => {
   const valid = deleteValidation(config);
