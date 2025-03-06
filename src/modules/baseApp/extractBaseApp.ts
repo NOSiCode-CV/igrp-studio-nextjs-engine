@@ -1,7 +1,9 @@
 import { RenderContext } from '@/interfaces/types';
 
 import path from "path";
-import extract from 'extract-zip';
+import AdmZip from 'adm-zip';
+import fs from 'fs-extra';
+import { BASE_APP_ZIP } from '../../utils/constants';
 
 /**
  * Extracts the necessary application directories based on the template.
@@ -13,17 +15,20 @@ import extract from 'extract-zip';
  * @returns {Promise<void>} A promise that resolves when all directories have been created.
  */
 export const extractBaseApp = async (context: RenderContext): Promise<void> => {
+
+  const zipPath = BASE_APP_ZIP; // Ensure absolute path to the ZIP file
+
+  if(!fs.existsSync(zipPath)) throw Error(`The base app was not found ${zipPath}`)
+
+  const outputPath = path.resolve(context.basePath); // Ensure absolute output path
+
   try {
-    const zipPath = path.resolve("base_app.zip"); // Ensure absolute path to the ZIP file
-    const outputPath = path.resolve(context.basePath); // Ensure absolute output path
-
-    extract(zipPath, { dir: outputPath })
-      .then(() => console.log('Extraction completed successfully to: ${outputPath}'))
-      .catch((err) => console.error('Error extracting base_app.zip:', err));
-
+    const zip = new AdmZip(zipPath);
+    zip.extractAllTo(outputPath, true);
     console.log(`Extraction completed successfully to: ${outputPath}`);
   } catch (error) {
     console.error("Error extracting base_app.zip:", error);
     throw error;
   }
+
 };

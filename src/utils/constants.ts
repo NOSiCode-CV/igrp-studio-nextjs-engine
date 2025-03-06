@@ -3,12 +3,12 @@ import path from 'path';
 // Comment the following exports when building the application
 //export const CONFIGS = path.join(__dirname, '../../public/configs');
 //export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
-//export const COMPONENTS_DIR = path.join(__dirname, '../../src/components');
+//export const BASE_APP_ZIP = path.join(__dirname, '../../public/templates/base_app.zip');
 
 //Uncomment the following exports when building the application
 export const TEMPLATE_DIR = path.join(__dirname, './templates');
 export const CONFIGS = path.join(__dirname, './configs');
-export const COMPONENTS_DIR = path.join('./dist/components');
+export const BASE_APP_ZIP = path.join(__dirname, './templates/base_app.zip');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
