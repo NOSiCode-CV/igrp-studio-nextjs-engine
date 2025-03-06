@@ -1,20 +1,10 @@
 import { RenderContext } from '@/interfaces/types';
-
-import path from "path";
-import AdmZip from 'adm-zip';
 import fs from 'fs-extra';
 import { BASE_APP_ZIP } from '../../utils/constants';
 
-/**
- * Extracts the necessary application directories based on the template.
- *
- * @async
- * @function extractBaseApp
- * @param {RenderContext} context - An object containing the base path where the directories will be created.
- *
- * @returns {Promise<void>} A promise that resolves when all directories have been created.
- */
-export const extractBaseApp = async (context: RenderContext): Promise<void> => {
+const JSZip = require('jszip');
+
+/*export const extractBaseApp = async (context: RenderContext): Promise<void> => {
 
   const zipPath = BASE_APP_ZIP; // Ensure absolute path to the ZIP file
 
@@ -32,3 +22,22 @@ export const extractBaseApp = async (context: RenderContext): Promise<void> => {
   }
 
 };
+*/
+
+export const extractBaseApp = async (context: RenderContext): Promise<void> => {
+  try {
+    fs.readFile(BASE_APP_ZIP, (err, data) => {
+      if (err) throw err;
+
+      JSZip.loadAsync(data).then((zip: any) => {
+        Object.keys(zip.files).forEach((filename) => {
+          zip.files[filename].async('nodebuffer').then((content: any) => {
+            fs.writeFileSync(`${context.basePath}/${filename}`, content);
+          });
+        });
+      });
+    });
+  } catch (e) {
+    console.error("Error on extracting: ", e)
+  }
+}
