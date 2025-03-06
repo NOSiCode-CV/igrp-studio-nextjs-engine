@@ -1,5 +1,5 @@
 import { Layout, Components } from '../interfaces/types';
-import { extractComponentData } from '../utils/helpers';
+import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
@@ -8,15 +8,21 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   const stateDefinitions = new Set<string>();
 
-  const components = new Set<{ componentName: Components, id: string }>();
+  const components = new Set<{ componentName: Components, id: string, properties: Record<string, any> }>();
   extractComponentData(config, components);
 
   components.forEach((component) => {
     const metadata = registry[component.componentName];
     if (metadata?.states) {
-      metadata.states.forEach((imp: string) => stateDefinitions.add(imp));
+      const id = component.id
+      const value = isBool(component.componentName) ? component.properties?.disabled ?? 'false' : component.properties?.value ?? ''
+      metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
     }
   });
 
   return Array.from(stateDefinitions).join('\n  ');
+}
+
+const isBool = (name: string) => {
+  return name === 'button'
 }

@@ -94,17 +94,29 @@ export function getComponent(name: string): Component {
 export function defaultRenderer (component: Layout, element?: Component): ((component: Layout) => string) {
   if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
-  let { variant, className, ...common } = component.properties!;
+  let { variant, customProperties, ...common } = component.properties!;
 
-  const props = common
+  let props = common
     ? Object.entries(common).map(([key, value]) => {
-      return ` ${element.propertiesMapping[key] ?? key}="${value}"`;
+      return element.propertiesMapping[key]?.property? ` ${element.propertiesMapping[key]?.property ?? key}="${value}"` : ``;
+    }).join("")
+    : ``
+
+  props += customProperties
+    ? Object.entries(customProperties).map(([key, value]) => {
+      return ` ${key}="${value}"`;
+    }).join("")
+    : ``
+
+  const classNames = common
+    ? Object.entries(common).map(([key, value]) => {
+      return element.propertiesMapping[key]?.className? ` ${element.propertiesMapping[key]?.className ?? key}${value}` : ``;
     }).join("")
     : ``
 
   let str = ""
 
-  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${common ? getCommonPropertiesClasses(common) : ``}" ${props} >`
+  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``}" ${props} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

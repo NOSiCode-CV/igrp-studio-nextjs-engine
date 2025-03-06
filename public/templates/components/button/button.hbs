@@ -1,9 +1,9 @@
-<Button
+<IGRPButton
   {{#if resourceConfig.properties.variant}}variant="{{resourceConfig.properties.variant}}"{{/if}}
   {{#if resourceConfig.properties.size}}size="{{resourceConfig.properties.size}}"{{/if}}
-  {{#if resourceConfig.properties.disabled}}disabled{{/if}}
-  {{#if resourceConfig.properties.loading}}disabled{{/if}}
-  onClick={() => { {{#if resourceConfig.properties.onClick}}{{resourceConfig.properties.onClick}}(){{else}}handleClick(){{/if}} }}
+  {{#if resourceConfig.properties.disabled}}disabled={ {{resourceConfig.id}}Disabled }{{/if}}
+  {{#if resourceConfig.properties.loading}}loading={ {{resourceConfig.id}}Loading }{{/if}}
+  onClick={() => { {{#if resourceConfig.properties.onClick}}{{resourceConfig.properties.onClick}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
 >
   {{resourceConfig.properties.label}}
-</Button>
+</IGRPButton>

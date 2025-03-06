@@ -182,7 +182,7 @@ export interface PageMetaConfig {
 
 export interface Layout<S = any> extends IdentifiableElement{
   componentName: Components;
-  properties?: CommonProperties;
+  properties?: Record<string, any>;
   specs?: S,
   content?: string,
   children?: Layout[];

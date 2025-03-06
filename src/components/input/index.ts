@@ -4,8 +4,7 @@ import { Component, defaultRenderer, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Input } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPInput } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(inputVariants());
@@ -14,7 +13,7 @@ export default {
     component.getPropertiesMapping(inputPropertiesMapping());
 
     component.loadStates([
-      'const [inputValue, setInputValue] = useState("");'
+      'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
     ]);
 
     component.setRenderer(hbsRenderer);

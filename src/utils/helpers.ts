@@ -71,7 +71,6 @@ export const getComponentPath = (context: RenderContext<ComponentConfig>) =>
 export const onlyUnique = (value:any, index:any, array: any) => array.indexOf(value) === index
 
 export const loadConfig = async function<T> (basePath: string): Promise<T[]> {
-  console.log(basePath)
   if (!(await fs.pathExists(basePath))) {
     return [];
   }
@@ -87,8 +86,8 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
   return template.replace(/{{(.*?)}}/g, (_, key) => replacements[key] || '');
 };
 
-export function extractComponentData(layout: Layout, components: Set<{ componentName: Components, id: string }>) {
-  components.add({ componentName: layout.componentName, id: layout.id });
+export function extractComponentData(layout: Layout, components: Set<{ componentName: Components, id: string, properties?: Record<string, any> }>) {
+  components.add({ componentName: layout.componentName, id: layout.id, properties: layout.properties });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components));
   }

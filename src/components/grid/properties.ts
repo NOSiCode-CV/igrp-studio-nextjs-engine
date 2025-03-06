@@ -1,11 +1,15 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function gridProperties() {
-  return {}
+  return {
+    padding: {type: 'string', required: false}
+  }
 }
 
 export function gridPropertiesMapping() {
-  return {}
+  return {
+    padding: {className: 'p-'}
+  }
 }
 
 export function gridVariants() {
