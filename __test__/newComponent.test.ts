@@ -9,7 +9,6 @@ const componentConfig: ComponentConfig = {
   type: 'component',
   name: 'card',
   path: 'card',
-  components: {}
 };
 
 beforeAll(async () => {

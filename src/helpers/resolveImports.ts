@@ -3,6 +3,9 @@ import { extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 
 export function resolveImports(config: Layout, registry: Record<string, Component>): string {
+
+  if(!config) return ''
+
   const imports = new Set<string>();
 
   const components = new Set<{ componentName: Components, id: string }>();

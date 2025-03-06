@@ -1,5 +1,5 @@
 <FormField
-  control={{resourceConfig.properties.control}}
+  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
   name="{{resourceConfig.properties.name}}"
   render={({ field }) => (
     <FormItem>

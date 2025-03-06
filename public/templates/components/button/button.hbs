@@ -3,7 +3,7 @@
   {{#if resourceConfig.properties.size}}size="{{resourceConfig.properties.size}}"{{/if}}
   {{#if resourceConfig.properties.disabled}}disabled{{/if}}
   {{#if resourceConfig.properties.loading}}disabled{{/if}}
-  onClick={{resourceConfig.properties.onClick}}
+  onClick={() => { {{#if resourceConfig.properties.onClick}}{{resourceConfig.properties.onClick}}(){{else}}handleClick(){{/if}} }}
 >
   {{resourceConfig.properties.label}}
 </Button>

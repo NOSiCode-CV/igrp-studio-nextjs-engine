@@ -3,6 +3,9 @@ import { extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
+
+  if(!config) return ''
+
   const stateDefinitions = new Set<string>();
 
   const components = new Set<{ componentName: Components, id: string }>();
