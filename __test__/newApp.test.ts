@@ -6,7 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const baseConfig: AppConfig = {
   type: 'baseApp',
-  appName: 'teste',
+  appName: 'testeMan',
 };
 
 describe('Create new nextjs application module', () => {
