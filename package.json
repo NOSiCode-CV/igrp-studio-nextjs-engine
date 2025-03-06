@@ -1,6 +1,6 @@
 {
   "name": "@igrp/igrp-studio-nextjs-engine",
-  "version": "0.0.1-alpha.29",
+  "version": "0.0.1-alpha.30",
   "description": "The NextJS engine application allows to create a new NextJS application",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -41,6 +41,7 @@
     "ts-loader": "^9.5.1"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.2.0",

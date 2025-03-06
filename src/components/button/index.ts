@@ -13,7 +13,7 @@ export default {
     component.getPropertiesMapping(buttonPropertiesMapping());
 
     component.loadStates([
-      'const [{{id}}Loading, set{{id}}Loading] = useState(false);',
+      //'const [{{id}}Loading, set{{id}}Loading] = useState(false);',
       'const [{{id}}Disabled, set{{id}}Disabled] = useState({{value}});',
       'const handle{{id}}Click = () => { console.log("Button {{id}} clicked"); };',
     ]);

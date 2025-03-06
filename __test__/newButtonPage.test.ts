@@ -81,7 +81,7 @@ const buttonLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  id: 'i76Typ9lm2m1',
+  id: 'b76Typ9lm2m1',
   type: 'page',
   pageName: 'buttons',
   path: 'buttons',

@@ -27,6 +27,7 @@ import { deleteElementConfig } from './modules/delete/deleteElementConfig';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { registerAllComponents } from './components/register';
+import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -66,6 +67,11 @@ export const newApp = async (baseConfig: AppConfig, basePath: string): Promise<v
    * Creates the folder structure needed for the application.
    */
   await createAppDirectories(context);
+
+  /**
+   * Extracts the folder structure needed for the application.
+   */
+  await extractBaseApp(context);
 
   /**
    * Creates the configuration files based on the provided context.
