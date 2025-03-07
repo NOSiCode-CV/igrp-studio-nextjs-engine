@@ -1,4 +1,10 @@
-import { tabsPropertiesMapping, tabsProperties, tabsVariants } from './properties';
+import {
+  tabsPropertiesMapping,
+  tabsProperties,
+  tabsVariants,
+  tabsChildProperties,
+  tabsChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +15,10 @@ export default {
     ]);
 
     component.loadVariants(tabsVariants());
-    component.getParentProperties(tabsProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(tabsProperties());
     component.getPropertiesMapping(tabsPropertiesMapping());
+    component.getChildProperties(tabsChildProperties()); // TODO: handle a way to fetch parent properties
+    component.getChildPropertiesMapping(tabsChildPropertiesMapping());
 
     component.loadStates([
       'const [activeTab, setActiveTab] = useState("tab1");',

@@ -12,6 +12,18 @@ export function gridPropertiesMapping() {
   }
 }
 
+export function gridChildProperties() {
+  return {
+    padding: {type: 'string', required: false}
+  }
+}
+
+export function gridChildPropertiesMapping() {
+  return {
+    padding: {className: 'p-'}
+  }
+}
+
 export function gridVariants() {
   return {
     // Basic grid columns

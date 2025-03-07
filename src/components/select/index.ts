@@ -1,4 +1,10 @@
-import { selectPropertiesMapping, selectProperties, selectVariants } from './properties';
+import {
+  selectPropertiesMapping,
+  selectProperties,
+  selectVariants,
+  selectChildProperties,
+  selectChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +15,10 @@ export default {
     ]);
 
     component.loadVariants(selectVariants());
-    component.getParentProperties(selectProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(selectProperties());
     component.getPropertiesMapping(selectPropertiesMapping());
+    component.getChildProperties(selectChildProperties());
+    component.getChildPropertiesMapping(selectChildPropertiesMapping());
 
     component.loadStates([
       'const [selectedOption, setSelectedOption] = useState("");'

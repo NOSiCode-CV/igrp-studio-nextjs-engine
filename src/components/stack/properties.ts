@@ -8,6 +8,14 @@ export function stackPropertiesMapping() {
   return {}
 }
 
+export function stackChildProperties() {
+  return {}
+}
+
+export function stackChildPropertiesMapping() {
+  return {}
+}
+
 export function stackVariants() {
   return {
     xs: 'space-y-1',

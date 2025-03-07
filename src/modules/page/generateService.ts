@@ -11,7 +11,7 @@ import { PageConfig, RenderContext } from '../../interfaces/types';
 *
 * @throws {Error} - Throws an error if the service file cannot be rendered or if a problem occurs while saving the file.
 */
-export const generateService = async (context: RenderContext<PageConfig>) => {
+export const generateService = async (context: RenderContext<PageConfig, PageConfig>) => {
   const service = await renderService(context);
   const pageServicePath = getPageServiceFilePath(context);
   
@@ -26,7 +26,7 @@ export const generateService = async (context: RenderContext<PageConfig>) => {
 *
 * @throws {Error} - Throws an error if the resource configuration (`resourceConfig`) is not present in the context.
 */
-const renderService = async (context: RenderContext<PageConfig>) => {
+const renderService = async (context: RenderContext<PageConfig, PageConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_PAGE_CONFIG;
   return await renderTemplate(TEMPLATES.SERVICE, context);
 };

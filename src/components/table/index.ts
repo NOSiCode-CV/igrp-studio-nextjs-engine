@@ -1,4 +1,10 @@
-import { tablePropertiesMapping, tableProperties, tableVariants } from './properties';
+import {
+  tablePropertiesMapping,
+  tableProperties,
+  tableVariants,
+  tableChildProperties,
+  tableChildPropertiesMapping,
+} from './properties';
 import { Component, defaultRenderer, hbsRenderer } from '../index';
 
 export default {
@@ -8,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(tableVariants());
-    component.getParentProperties(tableProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
+    component.getChildProperties(tableChildProperties());
+    component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadStates([
       'const [data, setData] = useState([]);'

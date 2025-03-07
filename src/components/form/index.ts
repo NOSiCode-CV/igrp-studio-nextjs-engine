@@ -1,5 +1,6 @@
 import { formPropertiesMapping, formProperties, formVariants } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { formChildProperties, formChildPropertiesMapping } from '@/components/flex/properties';
 
 export default {
   register(component: Component) {
@@ -8,9 +9,10 @@ export default {
     ]);
 
     component.loadVariants(formVariants());
-    component.getParentProperties(formProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
+    component.getChildProperties(formChildProperties());
+    component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
       'const [loading, setLoading] = useState(false);',

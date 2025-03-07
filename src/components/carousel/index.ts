@@ -1,4 +1,10 @@
-import { carouselPropertiesMapping, carouselProperties, carouselVariants } from './properties';
+import {
+  carouselPropertiesMapping,
+  carouselProperties,
+  carouselVariants,
+  carouselChildProperties,
+  carouselChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -8,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(carouselVariants());
-    component.getParentProperties(carouselProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(carouselProperties());
     component.getPropertiesMapping(carouselPropertiesMapping());
+    component.getChildProperties(carouselChildProperties());
+    component.getChildPropertiesMapping(carouselChildPropertiesMapping());
 
     component.loadStates([
       'const [currentIndex, setCurrentIndex] = useState(0);'

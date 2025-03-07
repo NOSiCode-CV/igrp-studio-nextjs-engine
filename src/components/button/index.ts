@@ -1,4 +1,10 @@
-import { buttonPropertiesMapping, buttonProperties, buttonVariants } from './properties';
+import {
+  buttonPropertiesMapping,
+  buttonProperties,
+  buttonVariants,
+  buttonChildProperties,
+  buttonChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -8,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(buttonVariants());
-    component.getParentProperties(buttonProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(buttonProperties());
     component.getPropertiesMapping(buttonPropertiesMapping());
+    component.getChildProperties(buttonChildProperties());
+    component.getChildPropertiesMapping(buttonChildPropertiesMapping());
 
     component.loadStates([
       //'const [{{id}}Loading, set{{id}}Loading] = useState(false);',

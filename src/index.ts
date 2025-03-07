@@ -105,7 +105,7 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  const context: RenderContext<PageConfig> = {
+  const context: RenderContext<PageConfig, PageConfig> = {
     resourceConfig: pageConfig,
     basePath: basePath,
   };
@@ -132,7 +132,7 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  const context: RenderContext<ComponentConfig> = {
+  const context: RenderContext<ComponentConfig, ComponentConfig> = {
     resourceConfig: componentConfig,
     basePath: basePath,
   };

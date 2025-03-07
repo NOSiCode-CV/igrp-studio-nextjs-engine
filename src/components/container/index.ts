@@ -1,13 +1,19 @@
-import { containerPropertiesMapping, containerProperties, containerVariants } from './properties';
+import {
+  containerPropertiesMapping,
+  containerProperties,
+  containerVariants,
+  containerChildProperties, containerChildPropertiesMapping,
+} from './properties';
 import { Component, defaultRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(containerVariants())
-    component.getParentProperties(containerProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(containerProperties());
     component.getPropertiesMapping(containerPropertiesMapping());
+    component.getChildProperties(containerChildProperties());
+    component.getChildPropertiesMapping(containerChildPropertiesMapping());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

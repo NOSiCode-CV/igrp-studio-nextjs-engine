@@ -1,4 +1,10 @@
-import { chartPropertiesMapping, chartProperties, chartVariants } from './properties';
+import {
+  chartPropertiesMapping,
+  chartProperties,
+  chartVariants,
+  chartChildProperties,
+  chartChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -8,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(chartVariants());
-    component.getParentProperties(chartProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(chartProperties());
     component.getPropertiesMapping(chartPropertiesMapping());
+    component.getChildProperties(chartChildProperties());
+    component.getChildPropertiesMapping(chartChildPropertiesMapping());
 
     component.loadStates([
       'const [chartData, setChartData] = useState([]);'

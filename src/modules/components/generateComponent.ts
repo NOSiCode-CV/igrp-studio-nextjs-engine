@@ -8,7 +8,7 @@ import { ComponentConfig, RenderContext } from '../../interfaces/types';
  *
  * @param context
  */
-export const generateComponent = async (context: RenderContext<ComponentConfig>) => {
+export const generateComponent = async (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const component = await renderComponent(context);
   const componentOutputPath = getComponentDir(context);
 
@@ -20,7 +20,7 @@ export const generateComponent = async (context: RenderContext<ComponentConfig>)
  * @param context
  * @returns
  */
-const renderComponent = async (context: RenderContext<ComponentConfig>) => {
+const renderComponent = async (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_COMPONENT_CONFIG;
 
   return await renderTemplate(TEMPLATES.COMPONENT, context);

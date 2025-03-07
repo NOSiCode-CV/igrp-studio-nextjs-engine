@@ -424,15 +424,22 @@ const componentSchema: JSONSchemaType<Layout> = {
       anyOf: [commonPropertiesSchema],
       errorMessage: "Properties must match the LayoutProperties schema, if provided."
     },
+    childProperties: {
+      type: "object",
+      nullable: true,
+      anyOf: [commonPropertiesSchema],
+      errorMessage: "Child Properties must match the LayoutProperties schema, if provided."
+    },
+    parentProperties: {
+      type: "object",
+      nullable: true,
+      anyOf: [commonPropertiesSchema],
+      errorMessage: "Parent Properties must match the LayoutProperties schema, if provided."
+    },
     content: {
       type: 'string',
       nullable: true,
       errorMessage: "The Content must be a string.",
-    },
-    specs: {
-      type: "object",
-      nullable: true,
-      errorMessage: "Properties must match the component specification schema, if provided."
     },
     children: {
       type: 'array',

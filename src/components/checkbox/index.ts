@@ -1,4 +1,10 @@
-import { checkboxPropertiesMapping, checkboxProperties, checkboxVariants } from './properties';
+import {
+  checkboxPropertiesMapping,
+  checkboxProperties,
+  checkboxVariants,
+  checkboxChildProperties,
+  checkboxChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +15,10 @@ export default {
     ]);
 
     component.loadVariants(checkboxVariants());
-    component.getParentProperties(checkboxProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(checkboxProperties());
     component.getPropertiesMapping(checkboxPropertiesMapping());
+    component.getChildProperties(checkboxChildProperties()); // TODO: handle a way to fetch parent properties
+    component.getChildPropertiesMapping(checkboxChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
 
     component.loadStates([
       'const [isChecked, setIsChecked] = useState(false);'

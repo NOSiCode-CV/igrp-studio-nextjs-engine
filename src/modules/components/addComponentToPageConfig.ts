@@ -22,7 +22,7 @@ export const addComponentToPageConfig = async (context: RenderContext<PageCompon
 
     if(!page) throw Error(`No page found for ID '${context.resourceConfig.id}'`)
 
-    const pageContext: RenderContext<PageConfig> = {
+    const pageContext: RenderContext<PageConfig, PageConfig> = {
       ...context,
       resourceConfig: page,
     };
@@ -45,7 +45,7 @@ export const addComponentToPageConfig = async (context: RenderContext<PageCompon
 
     if(!component) throw Error(`No component found for ID '${context.resourceConfig.id}'`)
 
-    const componentContext: RenderContext<ComponentConfig> = {
+    const componentContext: RenderContext<ComponentConfig, ComponentConfig> = {
       ...context,
       resourceConfig: component,
     };

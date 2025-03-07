@@ -1,4 +1,10 @@
-import { aspectPropertiesMapping, aspectProperties, aspectVariants } from './properties';
+import {
+  aspectPropertiesMapping,
+  aspectProperties,
+  aspectVariants,
+  aspectChildProperties,
+  aspectChildPropertiesMapping,
+} from './properties';
 import { Component, defaultRenderer } from '../index';
 
 export default {
@@ -8,9 +14,10 @@ export default {
     component.loadGroup('');
     component.loadLabel('Aspect');
     component.loadVariants(aspectVariants())
-    component.getParentProperties(aspectProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(aspectProperties());
     component.getPropertiesMapping(aspectPropertiesMapping());
+    component.getChildProperties(aspectChildProperties());
+    component.getChildPropertiesMapping(aspectChildPropertiesMapping());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

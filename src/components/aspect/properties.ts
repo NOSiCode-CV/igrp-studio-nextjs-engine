@@ -4,7 +4,15 @@ export function aspectProperties() {
   return {}
 }
 
+export function aspectChildProperties() {
+  return {}
+}
+
 export function aspectPropertiesMapping() {
+  return {}
+}
+
+export function aspectChildPropertiesMapping() {
   return {}
 }
 

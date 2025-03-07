@@ -32,14 +32,19 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     variants: {
       type: 'object'
     },
-    parentProperties: {
-      type: 'object'
-    },
     properties: {
       type: 'object'
     },
     propertiesMapping: {
       type: 'object'
+    },
+    childProperties: {
+      type: 'object',
+      nullable: true
+    },
+    childPropertiesMapping: {
+      type: 'object',
+      nullable: true
     },
     states: {
       type: 'array',
@@ -57,7 +62,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       errorMessage: "The template path attribute must be a valid path string."
     },
   },
-  required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'parentProperties', 'properties', 'propertiesMapping', 'states', 'renderer'],
+  required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'renderer'],
   additionalProperties: false,
 }
 

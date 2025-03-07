@@ -7,7 +7,7 @@ import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 
-export const getPageDir = (context: RenderContext<PageConfig>) =>
+export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.PAGES,
@@ -15,7 +15,7 @@ export const getPageDir = (context: RenderContext<PageConfig>) =>
     COMMON_FILES.PAGE_TSX,
   );
 
-export const getComponentDir = (context: RenderContext<ComponentConfig>) => {
+export const getComponentDir = (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const name = context.resourceConfig.name.toLowerCase();
   return path.join(
     context.basePath,
@@ -26,7 +26,7 @@ export const getComponentDir = (context: RenderContext<ComponentConfig>) => {
 
 export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const getPageServiceFilePath = (context: RenderContext<PageConfig>) =>
+export const getPageServiceFilePath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.SERVICES,
@@ -34,35 +34,35 @@ export const getPageServiceFilePath = (context: RenderContext<PageConfig>) =>
     `${capitalize(context.resourceConfig.pageName)}${COMMON_FILES.SERVICE}`,
   );
   
-export const getPageConfigPath = (context: RenderContext<PageConfig>) =>
+export const getPageConfigPath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.IGRPSTUDIO_PAGES,
     `${context.resourceConfig.pageName}${EXTENSIONS.JSON}`,
   );
 
-export const getComponentConfigPath = (context: RenderContext<ComponentConfig>) =>
+export const getComponentConfigPath = (context: RenderContext<ComponentConfig, ComponentConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.IGRPSTUDIO_COMPONENTS,
     `${context.resourceConfig.name}${EXTENSIONS.JSON}`,
   );
 
-export const getPageServicePath = (context: RenderContext<PageConfig>) =>
+export const getPageServicePath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.SERVICES,
     `${context.resourceConfig.pageName}`.toLowerCase(),
   );
 
-export const getPagePath = (context: RenderContext<PageConfig>) =>
+export const getPagePath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.PAGES,
     `${context.resourceConfig.pageName}`.toLowerCase(),
   );
 
-export const getComponentPath = (context: RenderContext<ComponentConfig>) =>
+export const getComponentPath = (context: RenderContext<ComponentConfig, ComponentConfig>) =>
   path.join(
     context.basePath,
     DIRECTORIES.COMPONENTS

@@ -10,7 +10,7 @@ import { getPageConfigPath } from '../../utils/helpers';
 *
 * @throws {Error} - Throws an error if the configuration file cannot be read or if the content is not valid JSON.
 */
-export const getPageConfig = async (context: RenderContext<PageConfig>) => {
+export const getPageConfig = async (context: RenderContext<PageConfig, PageConfig>) => {
   const pageConfigPath = getPageConfigPath(context);
   const PageCOnfigContent = await fs.readFile(pageConfigPath, 'utf8');
 

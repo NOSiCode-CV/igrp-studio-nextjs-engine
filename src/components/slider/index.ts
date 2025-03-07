@@ -1,4 +1,9 @@
-import { rangeSliderPropertiesMapping, rangeSliderProperties, rangeSliderVariants } from './properties';
+import {
+  rangeSliderPropertiesMapping,
+  rangeSliderProperties,
+  rangeSliderVariants,
+  rangeSliderChildProperties, rangeSliderChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(rangeSliderVariants());
-    component.getParentProperties(rangeSliderProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(rangeSliderProperties());
     component.getPropertiesMapping(rangeSliderPropertiesMapping());
+    component.getChildProperties(rangeSliderChildProperties()); // TODO: handle a way to fetch parent properties
+    component.getChildPropertiesMapping(rangeSliderChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
 
     component.loadStates([
       'const [value, setValue] = useState([0, 100]);' // example range for the slider

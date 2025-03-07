@@ -1,5 +1,5 @@
-import { textareaPropertiesMapping, textareaProperties, textareaVariants } from './properties';
-import { Component, defaultRenderer, hbsRenderer } from '../index';
+import { textareaPropertiesMapping, textareaProperties, textareaVariants, textareaChildProperties } from './properties';
+import { Component, hbsRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -9,9 +9,10 @@ export default {
     ]);
 
     component.loadVariants(textareaVariants());
-    component.getParentProperties(textareaProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(textareaProperties());
     component.getPropertiesMapping(textareaPropertiesMapping());
+    component.getChildProperties(textareaChildProperties()); // TODO: handle a way to fetch parent properties
+    component.getChildPropertiesMapping(textareaChildProperties()); // TODO: handle a way to fetch parent properties
 
     component.loadStates([
       'const [textValue, setTextValue] = useState("");'

@@ -14,7 +14,7 @@ export const updateAndRenderPage = async (context: RenderContext<PageComponentCo
   const updatedConfig = await addComponentToPageConfig(context);
   
   if (context.resourceConfig.type === 'page') {
-    const updateContext: RenderContext<PageConfig> = {
+    const updateContext: RenderContext<PageConfig, PageConfig> = {
       ...context,
       resourceConfig: updatedConfig,
     };
@@ -23,7 +23,7 @@ export const updateAndRenderPage = async (context: RenderContext<PageComponentCo
   }
 
   if (context.resourceConfig.type === 'component') {
-    const updateContext: RenderContext<ComponentConfig> = {
+    const updateContext: RenderContext<ComponentConfig, ComponentConfig> = {
       ...context,
       resourceConfig: updatedConfig,
     };

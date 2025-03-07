@@ -6,7 +6,7 @@ import { getComponentConfigPath, getComponentPath } from '../../utils/helpers';
  *
  * @param context
  */
-export const deleteComponentConfig = async (context: RenderContext<ComponentConfig>) => {
+export const deleteComponentConfig = async (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const componentConfigPath = getComponentConfigPath(context);
   const componentPath = getComponentPath(context);
 

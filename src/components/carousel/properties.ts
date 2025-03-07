@@ -16,6 +16,22 @@ export function carouselPropertiesMapping() {
   };
 }
 
+export function carouselChildProperties() {
+  return {
+    items: { type: 'array', required: true, items: { type: 'object'} },
+    autoPlay: { type: 'boolean', required: false },
+    interval: { type: 'number', required: false }
+  };
+}
+
+export function carouselChildPropertiesMapping() {
+  return {
+    items: 'items',
+    autoPlay: 'autoPlay',
+    interval: 'interval'
+  };
+}
+
 export function carouselVariants() {
   return {
     fade: "fade",

@@ -2,7 +2,7 @@
 import { Layout } from '../interfaces/types';
 import { getComponent } from '../components';
 
-export const renderLayout = function (config: Layout): string {
+export const renderLayout = function (config: Layout, parent?: Layout): string {
   if (!config.componentName) return '';
 
   let str: string = ""
@@ -11,7 +11,9 @@ export const renderLayout = function (config: Layout): string {
 
   if(!component) return `<div className="text-sm font-medium text-gray-700">${config.componentName}</div>`
 
-  str += component.render(config, component)
+  const componentParent = ((parent)? getComponent(parent.componentName) : undefined)
+
+  str += component.render(config, component, parent, componentParent)
 
   return str
 

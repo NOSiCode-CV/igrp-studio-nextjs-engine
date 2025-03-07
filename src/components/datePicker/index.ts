@@ -1,4 +1,9 @@
-import { datePickerPropertiesMapping, datePickerProperties, datePickerVariants } from './properties';
+import {
+  datePickerPropertiesMapping,
+  datePickerProperties,
+  datePickerVariants,
+  datePickerChildProperties, datePickerChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(datePickerVariants());
-    component.getParentProperties(datePickerProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(datePickerProperties());
     component.getPropertiesMapping(datePickerPropertiesMapping());
+    component.getChildProperties(datePickerChildProperties());
+    component.getChildPropertiesMapping(datePickerChildPropertiesMapping());
 
     component.loadStates([
       'const [selectedDate, setSelectedDate] = useState(null);'

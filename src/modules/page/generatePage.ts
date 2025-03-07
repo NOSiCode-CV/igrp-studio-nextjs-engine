@@ -8,7 +8,7 @@ import { PageConfig, RenderContext } from '../../interfaces/types';
  *
  * @param context
  */
-export const generatePage = async (context: RenderContext<PageConfig>) => {
+export const generatePage = async (context: RenderContext<PageConfig, PageConfig>) => {
   const page = await renderPage(context);
   const pageOutputPath = getPageDir(context);
 
@@ -20,7 +20,7 @@ export const generatePage = async (context: RenderContext<PageConfig>) => {
  * @param context
  * @returns
  */
-const renderPage = async (context: RenderContext<PageConfig>) => {
+const renderPage = async (context: RenderContext<PageConfig, PageConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_PAGE_CONFIG;
 
   return await renderTemplate(TEMPLATES.PAGE, context);

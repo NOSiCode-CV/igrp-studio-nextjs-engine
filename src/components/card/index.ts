@@ -1,4 +1,10 @@
-import { cardPropertiesMapping, cardProperties, cardVariants } from './properties';
+import {
+  cardPropertiesMapping,
+  cardProperties,
+  cardVariants,
+  cardChildProperties,
+  cardChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +15,10 @@ export default {
     ]);
 
     component.loadVariants(cardVariants());
-    component.getParentProperties(cardProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(cardProperties());
     component.getPropertiesMapping(cardPropertiesMapping());
+    component.getChildProperties(cardChildProperties());
+    component.getChildPropertiesMapping(cardChildPropertiesMapping());
 
     component.loadStates([
       'const [cardData, setCardData] = useState({ title: "", body: "", footer: "" });'

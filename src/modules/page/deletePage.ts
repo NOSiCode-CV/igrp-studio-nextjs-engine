@@ -7,7 +7,7 @@ import { updateMeta } from '../pageMeta/updatePageMeta';
  *
  * @param context
  */
-export const deletePageConfig = async (context: RenderContext<PageConfig>) => {
+export const deletePageConfig = async (context: RenderContext<PageConfig, PageConfig>) => {
   const pageConfigPath = getPageConfigPath(context);
   const pagePath = getPagePath(context);
   const pageServicePath = getPageServicePath(context);

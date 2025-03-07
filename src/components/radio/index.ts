@@ -1,4 +1,9 @@
-import { radioGroupPropertiesMapping, radioGroupProperties, radioGroupVariants } from './properties';
+import {
+  radioGroupPropertiesMapping,
+  radioGroupProperties,
+  radioGroupVariants,
+  radioGroupChildProperties, radioGroupChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +14,10 @@ export default {
     ]);
 
     component.loadVariants(radioGroupVariants());
-    component.getParentProperties(radioGroupProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(radioGroupProperties());
     component.getPropertiesMapping(radioGroupPropertiesMapping());
+    component.getChildProperties(radioGroupChildProperties());
+    component.getChildPropertiesMapping(radioGroupChildPropertiesMapping());
 
     component.loadStates([
       'const [selectedRadio, setSelectedRadio] = useState("");'

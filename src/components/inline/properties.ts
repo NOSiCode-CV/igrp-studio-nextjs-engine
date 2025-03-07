@@ -8,6 +8,14 @@ export function inlinePropertiesMapping() {
   return {}
 }
 
+export function inlineChildProperties() {
+  return {}
+}
+
+export function inlineChildPropertiesMapping() {
+  return {}
+}
+
 export function inlineVariants() {
   return {
     xs: 'space-x-1',

@@ -184,7 +184,8 @@ export interface PageMetaConfig {
 export interface Layout<S = any> extends IdentifiableElement{
   componentName: Components;
   properties?: Record<string, any>;
-  specs?: S,
+  childProperties?: Record<string, any>;
+  parentProperties?: Record<string, any>;
   content?: string,
   children?: Layout[];
 }
@@ -233,16 +234,18 @@ export interface ComponentRegisterConfig {
   group: string,
   label: string,
   variants: Record<string, any>,
-  parentProperties: Record<string, any>,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,
+  childProperties?: Record<string, any>,
+  childPropertiesMapping?: Record<string, any>,
   states: string[],
   renderer: 'default' | 'hbs',
   templatePath?: string
 }
 
-export type RenderContext<T = undefined> = {
+export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
+  parentResourceConfig?: P;
   basePath: string;
   baseConfig?: AppConfig;
   registry?: Record<string, Component>,

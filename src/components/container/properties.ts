@@ -8,6 +8,14 @@ export function containerPropertiesMapping() {
   return {}
 }
 
+export function containerChildProperties() {
+  return {}
+}
+
+export function containerChildPropertiesMapping() {
+  return {}
+}
+
 export function containerVariants() {
   return {
     default: 'mx-auto px-4',

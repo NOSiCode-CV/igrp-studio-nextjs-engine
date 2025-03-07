@@ -10,7 +10,7 @@ import { getComponentConfigPath } from '../../utils/helpers';
 *
 * @throws {Error} - Throws an error if the configuration file cannot be read or if the content is not valid JSON.
 */
-export const getComponentConfig = async (context: RenderContext<ComponentConfig>) => {
+export const getComponentConfig = async (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const componentConfigPath = getComponentConfigPath(context);
   const componentConfigContent = await fs.readFile(componentConfigPath, 'utf8');
 

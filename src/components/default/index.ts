@@ -9,9 +9,10 @@ export default {
     component.loadLabel(config.label);
     component.loadTemplatePath(config.templatePath);
     component.loadVariants(config.variants)
-    component.getParentProperties(config.parentProperties); // TODO: handle a way to fetch parent properties
     component.getProperties(config.properties);
     component.getPropertiesMapping(config.propertiesMapping);
+    component.getChildProperties(config.childProperties);
+    component.getChildPropertiesMapping(config.childPropertiesMapping);
     component.loadStates(config.states);
     component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : defaultRenderer);
   }

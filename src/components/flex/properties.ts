@@ -8,6 +8,14 @@ export function formPropertiesMapping() {
   return {}
 }
 
+export function formChildProperties() {
+  return {}
+}
+
+export function formChildPropertiesMapping() {
+  return {}
+}
+
 export function formVariants() {
   return {
     auto: 'flex-auto',

@@ -6,16 +6,17 @@ import { renderLayout } from '../utils/renderLayout';
 
 export type Component = {
   imports: Set<string>;
-  parentProperties: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
+  childProperties: Record<string, any>;
+  childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
   states: Set<string>;
   icon: string;
   label: string;
   group: string;
   templatePath?: string;
-  renderer: ((component: Layout<any>, element?: Component, templatePath?: string) => (component: Layout<any>) => string);
+  renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
 
   loadImports: (imports: string[]) => void;
   getImports: () => string[];
@@ -25,24 +26,26 @@ export type Component = {
   loadGroup:(group: string) => void;
   loadTemplatePath:(templatePath?: string) => void;
 
-  getParentProperties: (properties: Record<string, any>) => void;
   loadVariants: (variants: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
+  getChildProperties: (properties?: Record<string, any>) => void;
+  getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
   loadStates: (states: string[]) => void;
 
-  setRenderer: (fn: ((component: Layout<any>, element?: Component, templatePath?: string) => (component: Layout<any>) => string)) => void;
+  setRenderer: (fn: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string)) => void;
 
-  render: (context: Layout, component: Component) => string;
+  render: (context: Layout, component: Component, parentContext?: Layout<any>, parent?: Component) => string;
 };
 
 function initComponent(): Component {
   return {
     imports: new Set(),
     variants: {},
-    parentProperties: {},
     properties: {},
+    childProperties: {},
     propertiesMapping: {},
+    childPropertiesMapping: {},
     states: new Set(),
     icon: '',
     label: 'Component',
@@ -78,16 +81,20 @@ function initComponent(): Component {
       Object.assign(this.variants, variants);
     },
 
-    getParentProperties(properties) {
-      Object.assign(this.parentProperties, properties);
-    },
-
     getProperties(properties) {
       Object.assign(this.properties, properties);
     },
 
     getPropertiesMapping(mapping) {
       Object.assign(this.propertiesMapping, mapping);
+    },
+
+    getChildProperties(properties?) {
+      Object.assign(this.childProperties, properties);
+    },
+
+    getChildPropertiesMapping(mapping?) {
+      Object.assign(this.childPropertiesMapping, mapping);
     },
 
     loadStates(states) {
@@ -98,9 +105,9 @@ function initComponent(): Component {
       this.renderer = renderer
     },
 
-    render(context: Layout<any>, component: Component) {
+    render(context: Layout<any>, component: Component, parentContext?: Layout<any>, parent?: Component) {
       if (this.renderer) {
-        return this.renderer(context, component)(context);
+        return this.renderer(context, parentContext, parent)(context, parentContext);
       }
       throw new Error("No renderer function defined");
     }
@@ -128,9 +135,10 @@ export function registryAsObject(): ComponentRegistrationConfig {
       group: value.group,
       label: value.label,
       variants: value.variants,
-      parentProperties: value.parentProperties,
+      childProperties: value.childProperties,
       properties: value.properties,
       propertiesMapping: value.propertiesMapping,
+      childPropertiesMapping: value.childPropertiesMapping,
       states: Array.from(value.states),
       renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
       templatePath: value.templatePath
@@ -140,10 +148,11 @@ export function registryAsObject(): ComponentRegistrationConfig {
   return { components: components }
 }
 
-export function defaultRenderer (component: Layout, element?: Component): ((component: Layout) => string) {
+export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
   let { variant, customProperties, ...common } = component.properties!;
+  let { variant: childVariant, customProperties: childCustomProperties, ...childCommon } = component.properties!;
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -163,13 +172,31 @@ export function defaultRenderer (component: Layout, element?: Component): ((comp
     }).join("")
     : ``
 
+  let childProps = childCommon
+    ? Object.entries(childCommon).map(([key, value]) => {
+      return parentElement?.childPropertiesMapping[key]?.property? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"` : ``;
+    }).join("")
+    : ``
+
+  childProps += childCustomProperties
+    ? Object.entries(childCustomProperties).map(([key, value]) => {
+      return ` ${key}="${value}"`;
+    }).join("")
+    : ``
+
+  const childClassNames = childCommon
+    ? Object.entries(childCommon).map(([key, value]) => {
+      return parentElement?.childPropertiesMapping[key]?.className? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}` : ``;
+    }).join("")
+    : ``
+
   let str = ""
 
-  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``}" ${props} >`
+  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``}" ${props} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${childProps} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
-    str += component.children.map((child) => renderLayout(child)).join('\n');
+    str += component.children.map((child) => renderLayout(child, component)).join('\n');
   }
 
   str += `</div>`
@@ -177,9 +204,10 @@ export function defaultRenderer (component: Layout, element?: Component): ((comp
   return () => str
 }
 
-export function hbsRenderer (component: Layout, _?: Component, templatePath?: string): ((component: Layout) => string) {
+export function hbsRenderer (component: Layout, parentComponent?: Layout, _?: Component, __?: Component, templatePath?: string): ((component: Layout, parentComponent?: Layout) => string) {
   const name = component.componentName
   return () => renderSyncTemplate(replaceTemplate((templatePath)? templatePath : TEMPLATES.ELEMENT, { name }), {
-    resourceConfig: component
+    resourceConfig: component,
+    parentResourceConfig: parentComponent
   })
 }

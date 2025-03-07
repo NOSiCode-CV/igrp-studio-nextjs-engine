@@ -8,6 +8,14 @@ export function sectionPropertiesMapping() {
   return {}
 }
 
+export function sectionChildProperties() {
+  return {}
+}
+
+export function sectionChildPropertiesMapping() {
+  return {}
+}
+
 export function sectionVariants() {
   return {
     default: 'py-12',

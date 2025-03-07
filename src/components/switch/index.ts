@@ -1,4 +1,10 @@
-import { switchPropertiesMapping, switchProperties, switchVariants } from './properties';
+import {
+  switchPropertiesMapping,
+  switchProperties,
+  switchVariants,
+  switchChildProperties,
+  switchChildPropertiesMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
@@ -9,9 +15,10 @@ export default {
     ]);
 
     component.loadVariants(switchVariants());
-    component.getParentProperties(switchProperties()); // TODO: handle a way to fetch parent properties
     component.getProperties(switchProperties());
     component.getPropertiesMapping(switchPropertiesMapping());
+    component.getChildProperties(switchChildProperties());
+    component.getChildPropertiesMapping(switchChildPropertiesMapping());
 
     component.loadStates([
       'const [isChecked, setIsChecked] = useState(false);'

@@ -12,7 +12,7 @@ describe('Register Custom Components', () => {
         group: "Custom",
         label: "My Component",
         variants: {},
-        parentProperties: {},
+        childProperties: {},
         properties: {
           title: {type: 'string', required: true, default: 'New Component'},
         },
@@ -30,7 +30,7 @@ describe('Register Custom Components', () => {
         group: "Form",
         label: "My Form",
         variants: {},
-        parentProperties: {},
+        childProperties: {},
         properties: {
           title: {type: 'string', required: true, default: 'New Component'},
         },

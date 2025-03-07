@@ -25,7 +25,7 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
 
     if(!page) throw Error(`Page '${context.resourceConfig.name}' does not exist!`)
 
-    const contextPage: RenderContext<PageConfig> = {
+    const contextPage: RenderContext<PageConfig, PageConfig> = {
       resourceConfig: page,
       basePath: context.basePath,
     };
@@ -53,7 +53,7 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
 
     if(!component) throw Error(`Component '${context.resourceConfig.name}' does not exist!`)
 
-    const contextComponent: RenderContext<ComponentConfig> = {
+    const contextComponent: RenderContext<ComponentConfig, ComponentConfig> = {
       resourceConfig: component,
       basePath: context.basePath,
     };
