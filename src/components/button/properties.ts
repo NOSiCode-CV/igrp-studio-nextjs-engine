@@ -2,11 +2,10 @@ import { CommonProperties } from '../../interfaces/types';
 
 export function buttonProperties() {
   return {
-    label: { type: 'string', required: true },
-    variant: { type: 'string', required: false },
-    size: { type: 'string', required: false },
-    disabled: { type: 'boolean', required: false },
-    loading: { type: 'boolean', required: false },
+    label: { type: 'string', required: true, default: 'Button' },
+    variant: { type: 'string', required: false, default: 'default' },
+    size: { type: 'string', required: false, default: 'default' },
+    disabled: { type: 'boolean', required: false, default: false },
     onClick: { type: 'string', required: false },
   };
 }

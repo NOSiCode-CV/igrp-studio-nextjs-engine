@@ -13,14 +13,14 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig, PageComponentConfig,
+  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
-import { getComponent } from './components';
+import { Component, getComponent, register, registryAsObject } from './components';
 
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
@@ -28,6 +28,8 @@ import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { registerAllComponents } from './components/register';
 import { extractBaseApp } from './modules/baseApp/extractBaseApp';
+import defaultModule from './components/default';
+import { componentRegistrationValidate } from './schema/componentRegisterConfig';
 
 /**
  * Initializes a new application by validating configuration, checking directory status,
@@ -191,7 +193,16 @@ export const initComponents = async () => {
   }
 }
 
-// for test purposes only
-export const getOneComponent = (config: {name: string}) => {
-  return getComponent(config.name)
+export const registerComponents = (config: ComponentRegistrationConfig) => {
+  const isConfigValid = componentRegistrationValidate(config);
+
+  if (!isConfigValid && componentRegistrationValidate.errors)
+    throw componentRegistrationValidate.errors;
+
+  config.components.forEach((component) => register(component.name, (e) => defaultModule.register(e, component)))
+
+}
+
+export const loadRegistry = () => {
+  return registryAsObject();
 }

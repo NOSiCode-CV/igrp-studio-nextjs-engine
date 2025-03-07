@@ -12,3 +12,7 @@ export default {
     component.setRenderer(defaultRenderer);
   },
 };
+
+const GRID = 'grid'
+
+export { GRID };

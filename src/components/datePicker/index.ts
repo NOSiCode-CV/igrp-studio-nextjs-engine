@@ -20,3 +20,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const DATE_PICKER = 'datePicker'
+
+export { DATE_PICKER };

@@ -3,6 +3,10 @@
   placeholder="{{resourceConfig.properties.placeholder}}"
   value={input{{resourceConfig.id}}Value}
   onChange={(e) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
-  {{#if resourceConfig.properties.disabled}}disabled{{/if}}
-  {{#if resourceConfig.properties.readOnly}}readOnly{{/if}}
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.readOnly}}
+  readOnly
+  {{/if~}}
 />

@@ -20,3 +20,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const SLIDER = 'slider'
+
+export { SLIDER };

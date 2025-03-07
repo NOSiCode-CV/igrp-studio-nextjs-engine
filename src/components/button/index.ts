@@ -21,3 +21,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const BUTTON = 'button'
+
+export { BUTTON };

@@ -9,7 +9,7 @@ const buttonLayout: Layout = {
   componentName: "grid",
   properties: {
     variant: "cols3",
-    className: "border rounded-lg",
+    className: "border rounded-lg center",
     padding: "4"
   },
   children: [
@@ -60,7 +60,7 @@ const buttonLayout: Layout = {
       }
     },
     {
-      id: "button_destructive",
+      id: "button_ghost",
       componentName: "button",
       properties: {
         variant: 'ghost',
@@ -69,12 +69,45 @@ const buttonLayout: Layout = {
       }
     },
     {
-      id: "button_destructive",
+      id: "button_link",
       componentName: "button",
       properties: {
         variant: 'link',
         size: 'default',
         label: 'Link'
+      }
+    },
+    {
+      id: "button_icon_start",
+      componentName: "button",
+      properties: {
+        variant: 'default',
+        size: 'default',
+        hasIcon: true,
+        label: 'Left',
+        iconName: 'House',
+        iconPosition: 'start'
+      }
+    },
+    {
+      id: "button_icon_end",
+      componentName: "button",
+      properties: {
+        variant: 'default',
+        size: 'default',
+        hasIcon: true,
+        label: 'Right',
+        iconName: 'House',
+        iconPosition: 'end'
+      }
+    },
+    {
+      id: "button_icon_size",
+      componentName: "button",
+      properties: {
+        variant: 'default',
+        size: 'icon',
+        iconName: 'House'
       }
     },
   ]

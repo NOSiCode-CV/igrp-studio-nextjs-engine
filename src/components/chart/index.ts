@@ -19,3 +19,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const CHART = 'chart'
+
+export { CHART };

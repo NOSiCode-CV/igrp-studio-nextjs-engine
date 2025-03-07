@@ -1,4 +1,4 @@
-import { getOneComponent, initComponents } from '../src';
+import { initComponents, loadRegistry } from '../src';
 
 describe('Load Components', () => {
 
@@ -7,7 +7,7 @@ describe('Load Components', () => {
   });
 
   test('Get component', async () => {
-     console.log(getOneComponent({ name: 'aspect' }));
+     console.log(loadRegistry());
   });
 
 });

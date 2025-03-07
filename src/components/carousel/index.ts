@@ -19,3 +19,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const CAROUSEL = 'carousel'
+
+export { CAROUSEL };

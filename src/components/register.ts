@@ -1,50 +1,48 @@
 import { register } from './index';
-import aspectModule from "./aspect"
-import buttonModule from "./button"
-import cardModule from "./card"
-import carouselModule from "./carousel"
-import chartModule from "./chart"
-import checkboxModule from "./checkbox"
-import containerModule from "./container"
-import datePickerModule from "./datePicker"
-import flexModule from "./flex"
-import formModule from "./form"
-import gridModule from "./grid"
-import inlineModule from "./inline"
-import inputModule from "./input"
-import passwordModule from "./password"
-import radioModule from "./radio"
-import sectionModule from "./section"
-import selectModule from "./select"
-import sliderModule from "./slider"
-import stackModule from "./stack"
-import switchModule from "./switch"
-import tableModule from "./table"
-import tabsModule from "./tabs"
-import textareaModule from "./textarea"
+import aspectModule, { ASPECT } from './aspect';
+import buttonModule, { BUTTON } from './button';
+import cardModule, { CARD } from './card';
+import carouselModule, { CAROUSEL } from './carousel';
+import chartModule, { CHART } from './chart';
+import checkboxModule, { CHECKBOX } from './checkbox';
+import containerModule, { CONTAINER } from './container';
+import datePickerModule, { DATE_PICKER } from './datePicker';
+import flexModule, { FLEX } from './flex';
+import formModule, { FORM } from './form';
+import gridModule, { GRID } from './grid';
+import inlineModule, { INLINE } from './inline';
+import inputModule, { INPUT } from './input';
+import radioModule, { RADIO } from './radio';
+import sectionModule, { SECTION } from './section';
+import selectModule, { SELECT } from './select';
+import sliderModule, { SLIDER } from './slider';
+import stackModule, { STACK } from './stack';
+import switchModule, { SWITCH } from './switch';
+import tableModule, { TABLE } from './table';
+import tabsModule, { TABS } from './tabs';
+import textareaModule, { TEXTAREA } from './textarea';
 
 export function registerAllComponents() {
-  register('aspect', aspectModule.register);
-  register('button', buttonModule.register);
-  register('card', cardModule.register);
-  register('carousel', carouselModule.register);
-  register('chart', chartModule.register);
-  register('checkbox', checkboxModule.register);
-  register('container', containerModule.register);
-  register('datePicker', datePickerModule.register);
-  register('flex', flexModule.register);
-  register('form', formModule.register);
-  register('grid', gridModule.register);
-  register('inline', inlineModule.register);
-  register('input', inputModule.register);
-  register('password', passwordModule.register);
-  register('radio', radioModule.register);
-  register('section', sectionModule.register);
-  register('select', selectModule.register);
-  register('slider', sliderModule.register);
-  register('stack', stackModule.register);
-  register('switch', switchModule.register);
-  register('table', tableModule.register);
-  register('tabs', tabsModule.register);
-  register('textarea', textareaModule.register);
+  register(ASPECT, aspectModule.register);
+  register(BUTTON, buttonModule.register);
+  register(CARD, cardModule.register);
+  register(CAROUSEL, carouselModule.register);
+  register(CHART, chartModule.register);
+  register(CHECKBOX, checkboxModule.register);
+  register(CONTAINER, containerModule.register);
+  register(DATE_PICKER, datePickerModule.register);
+  register(FLEX, flexModule.register);
+  register(FORM, formModule.register);
+  register(GRID, gridModule.register);
+  register(INLINE, inlineModule.register);
+  register(INPUT, inputModule.register);
+  register(RADIO, radioModule.register);
+  register(SECTION, sectionModule.register);
+  register(SELECT, selectModule.register);
+  register(SLIDER, sliderModule.register);
+  register(STACK, stackModule.register);
+  register(SWITCH, switchModule.register);
+  register(TABLE, tableModule.register);
+  register(TABS, tabsModule.register);
+  register(TEXTAREA, textareaModule.register);
 }

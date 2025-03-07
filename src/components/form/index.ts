@@ -21,3 +21,7 @@ export default {
     component.setRenderer(hbsRenderer);
   },
 };
+
+const FORM = 'form'
+
+export { FORM };

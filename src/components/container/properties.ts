@@ -10,8 +10,8 @@ export function containerPropertiesMapping() {
 
 export function containerVariants() {
   return {
-    default: 'container mx-auto px-4',
-    narrow: 'container mx-auto px-4 max-w-4xl',
-    wide: 'container mx-auto px-4 max-w-7xl',
+    default: 'mx-auto px-4',
+    narrow: 'mx-auto px-4 max-w-4xl',
+    wide: 'mx-auto px-4 max-w-7xl',
   }
 }

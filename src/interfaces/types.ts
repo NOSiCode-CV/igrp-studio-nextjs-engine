@@ -1,4 +1,5 @@
 import { COMPONENTS, COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
+import { a } from 'vite/dist/node/types.d-aGj9QkWt';
 
 interface IdentifiableElement {
   id: string
@@ -219,6 +220,25 @@ export interface CommonProperties extends LayoutProperties{
 export interface DeleteConfig {
   name: string,
   type: ConfigTypes
+}
+
+export interface ComponentRegistrationConfig {
+  components: ComponentRegisterConfig[]
+}
+
+export interface ComponentRegisterConfig {
+  name: string,
+  imports: string[],
+  icon: string,
+  group: string,
+  label: string,
+  variants: Record<string, any>,
+  parentProperties: Record<string, any>,
+  properties: Record<string, any>,
+  propertiesMapping: Record<string, any>,
+  states: string[],
+  renderer: 'default' | 'hbs',
+  templatePath?: string
 }
 
 export type RenderContext<T = undefined> = {

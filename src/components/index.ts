@@ -1,7 +1,6 @@
-import { Layout } from '../interfaces/types';
+import { ComponentRegisterConfig, ComponentRegistrationConfig, Layout } from '../interfaces/types';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
-import { getCommonPropertiesClasses } from './properties';
 import { replaceTemplate } from '../utils/helpers';
 import { renderLayout } from '../utils/renderLayout';
 
@@ -12,10 +11,19 @@ export type Component = {
   propertiesMapping: Record<string, any>;
   variants: Record<string, any>;
   states: Set<string>;
-  renderer: ((component: Layout<any>, element?: Component) => (component: Layout<any>) => string);
+  icon: string;
+  label: string;
+  group: string;
+  templatePath?: string;
+  renderer: ((component: Layout<any>, element?: Component, templatePath?: string) => (component: Layout<any>) => string);
 
   loadImports: (imports: string[]) => void;
   getImports: () => string[];
+
+  loadIcon:(icon: string) => void;
+  loadLabel:(label: string) => void;
+  loadGroup:(group: string) => void;
+  loadTemplatePath:(templatePath?: string) => void;
 
   getParentProperties: (properties: Record<string, any>) => void;
   loadVariants: (variants: Record<string, any>) => void;
@@ -23,7 +31,7 @@ export type Component = {
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   loadStates: (states: string[]) => void;
 
-  setRenderer: (fn: ((component: Layout<any>, element?: Component) => (component: Layout<any>) => string)) => void;
+  setRenderer: (fn: ((component: Layout<any>, element?: Component, templatePath?: string) => (component: Layout<any>) => string)) => void;
 
   render: (context: Layout, component: Component) => string;
 };
@@ -36,10 +44,30 @@ function initComponent(): Component {
     properties: {},
     propertiesMapping: {},
     states: new Set(),
+    icon: '',
+    label: 'Component',
+    group: '',
+    templatePath: undefined,
     renderer: () => () => `<div className="text-sm font-medium text-gray-700">Component Not Registered</div>`,
 
     loadImports(imports) {
       imports.forEach((imp) => this.imports.add(imp));
+    },
+
+    loadIcon(icon: string) {
+      this.icon = icon
+    },
+
+    loadLabel(label: string) {
+      this.label = label
+    },
+
+    loadGroup(group: string) {
+      this.group = group
+    },
+
+    loadTemplatePath(path?: string) {
+      this.templatePath = path
     },
 
     getImports() {
@@ -79,7 +107,7 @@ function initComponent(): Component {
   };
 }
 
-export const registry: Record<string, Component> = {};
+export let registry: Record<string, Component> = {};
 
 export function register(name: string, registerFn: (component: Component) => void) {
   const componentInstance: Component = initComponent();
@@ -89,6 +117,27 @@ export function register(name: string, registerFn: (component: Component) => voi
 
 export function getComponent(name: string): Component {
   return registry[name];
+}
+
+export function registryAsObject(): ComponentRegistrationConfig {
+  const components: ComponentRegisterConfig[] = Object.entries(registry).map(([key, value]) => {
+    return {
+      name: key,
+      imports: Array.from(value.imports),
+      icon: value.icon,
+      group: value.group,
+      label: value.label,
+      variants: value.variants,
+      parentProperties: value.parentProperties,
+      properties: value.properties,
+      propertiesMapping: value.propertiesMapping,
+      states: Array.from(value.states),
+      renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+      templatePath: value.templatePath
+    }
+  });
+
+  return { components: components }
 }
 
 export function defaultRenderer (component: Layout, element?: Component): ((component: Layout) => string) {
@@ -128,9 +177,9 @@ export function defaultRenderer (component: Layout, element?: Component): ((comp
   return () => str
 }
 
-export function hbsRenderer (component: Layout): ((component: Layout) => string) {
+export function hbsRenderer (component: Layout, _?: Component, templatePath?: string): ((component: Layout) => string) {
   const name = component.componentName
-  return () => renderSyncTemplate(replaceTemplate(TEMPLATES.ELEMENT, { name }), {
+  return () => renderSyncTemplate(replaceTemplate((templatePath)? templatePath : TEMPLATES.ELEMENT, { name }), {
     resourceConfig: component
   })
 }

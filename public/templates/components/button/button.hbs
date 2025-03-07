@@ -1,9 +1,30 @@
 <IGRPButton
-  {{#if resourceConfig.properties.variant}}variant="{{resourceConfig.properties.variant}}"{{/if}}
-  {{#if resourceConfig.properties.size}}size="{{resourceConfig.properties.size}}"{{/if}}
+  {{#if resourceConfig.properties.variant}}
+  variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
   disabled={ {{resourceConfig.id}}Disabled }
+  {{#if resourceConfig.properties.hasIcon}}
+  hasIcon={ {{resourceConfig.properties.hasIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconName}}
+  iconName="{{resourceConfig.properties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconPosition}}
+  iconPosition="{{resourceConfig.properties.iconPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconClass}}
+  iconClass="{{resourceConfig.properties.iconClass}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconSize}}
+  iconSize={{resourceConfig.properties.iconSize}}
+  {{/if~}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
   onClick={() => { {{#if resourceConfig.properties.onClick}}{{resourceConfig.properties.onClick}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
 >
+  {{#if resourceConfig.properties.label}}
   {{resourceConfig.properties.label}}
+  {{/if~}}
 </IGRPButton>
