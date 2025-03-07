@@ -32,6 +32,7 @@ const getDirectoriesToCreate = (basePath: string): string[] => {
   return [
     path.join(basePath, DIRECTORIES.APP),
     path.join(basePath, DIRECTORIES.PAGES),
+    path.join(basePath, DIRECTORIES.COMPONENTS),
     path.join(basePath, DIRECTORIES.PUBLIC),
     path.join(basePath, DIRECTORIES.ASSETS),
     path.join(basePath, DIRECTORIES.STUDIO),
