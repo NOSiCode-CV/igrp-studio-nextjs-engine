@@ -11,7 +11,7 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadIcon('');
-    component.loadGroup('structures');
+    component.loadGroup('structure');
     component.loadLabel('Aspect');
     component.loadVariants(aspectVariants())
     component.getProperties(aspectProperties());

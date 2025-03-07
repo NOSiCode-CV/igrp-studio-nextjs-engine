@@ -1,4 +1,4 @@
-import { Layout, Components } from '../interfaces/types';
+import { Layout } from '../interfaces/types';
 import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 
@@ -8,7 +8,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   const stateDefinitions = new Set<string>();
 
-  const components = new Set<{ componentName: Components, id: string, properties: Record<string, any> }>();
+  const components = new Set<{ componentName: string, id: string, properties: Record<string, any> }>();
   extractComponentData(config, components);
 
   components.forEach((component) => {

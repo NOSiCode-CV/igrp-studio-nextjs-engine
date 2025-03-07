@@ -12,6 +12,7 @@ export type Component = {
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
   states: Set<string>;
+  customClassName?: string;
   icon: string;
   label: string;
   group: string;
@@ -21,6 +22,7 @@ export type Component = {
   loadImports: (imports: string[]) => void;
   getImports: () => string[];
 
+  loadCustomClassName:(tag: string) => void;
   loadIcon:(icon: string) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
@@ -47,6 +49,7 @@ function initComponent(): Component {
     propertiesMapping: {},
     childPropertiesMapping: {},
     states: new Set(),
+    customClassName: undefined,
     icon: '',
     label: 'Component',
     group: '',
@@ -55,6 +58,10 @@ function initComponent(): Component {
 
     loadImports(imports) {
       imports.forEach((imp) => this.imports.add(imp));
+    },
+
+    loadCustomClassName(tag: string) {
+      this.customClassName = tag
     },
 
     loadIcon(icon: string) {
@@ -152,7 +159,6 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
   if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
   let { variant, customProperties, ...common } = component.properties!;
-  let { variant: childVariant, customProperties: childCustomProperties, ...childCommon } = component.properties!;
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -167,32 +173,60 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     : ``
 
   const classNames = common
-    ? Object.entries(common).map(([key, value]) => {
-      return element.propertiesMapping[key]?.className? ` ${element.propertiesMapping[key]?.className ?? key}${value}` : ``;
-    }).join("")
-    : ``
+    ? Object.entries(common)
+        .map(([key, value]) => {
+          return element.propertiesMapping[key]?.className
+            ? ` ${element.propertiesMapping[key]?.className ?? key}${value}`
+            : ``;
+        })
+        .join('')
+    : ``;
 
-  let childProps = childCommon
-    ? Object.entries(childCommon).map(([key, value]) => {
-      return parentElement?.childPropertiesMapping[key]?.property? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"` : ``;
-    }).join("")
-    : ``
+  let childProps = ``
+  let childClassNames = ``
+  let childVariant = ``
 
-  childProps += childCustomProperties
-    ? Object.entries(childCustomProperties).map(([key, value]) => {
-      return ` ${key}="${value}"`;
-    }).join("")
-    : ``
+  if (parentComponent?.childProperties) {
 
-  const childClassNames = childCommon
-    ? Object.entries(childCommon).map(([key, value]) => {
-      return parentElement?.childPropertiesMapping[key]?.className? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}` : ``;
-    }).join("")
-    : ``
+    let { variant: childVar, customProperties: childCustomProperties, ...childCommon } = parentComponent?.childProperties;
+
+    childVariant = childVar
+
+    childProps = childCommon
+      ? Object.entries(childCommon)
+          .map(([key, value]) => {
+            return parentElement?.childPropertiesMapping[key]?.property
+              ? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"`
+              : ``;
+          })
+          .join('')
+      : ``;
+
+    childProps += childCustomProperties
+      ? Object.entries(childCustomProperties)
+          .map(([key, value]) => {
+            return ` ${key}="${value}"`;
+          })
+          .join('')
+      : ``;
+
+    childClassNames = childCommon
+      ? Object.entries(childCommon)
+          .map(([key, value]) => {
+            return parentElement?.childPropertiesMapping[key]?.className
+              ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
+              : ``;
+          })
+          .join('')
+      : ``;
+
+  }
 
   let str = ""
 
-  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
+  console.log("element: ", element)
+
+  str += `<div className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

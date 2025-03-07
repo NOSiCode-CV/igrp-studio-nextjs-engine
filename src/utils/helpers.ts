@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { ComponentConfig, Components, Layout, RenderContext } from '../interfaces/types';
+import { ComponentConfig, Layout, RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
@@ -86,7 +86,7 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
   return template.replace(/{{(.*?)}}/g, (_, key) => replacements[key] || '');
 };
 
-export function extractComponentData(layout: Layout, components: Set<{ componentName: Components, id: string, properties?: Record<string, any> }>) {
+export function extractComponentData(layout: Layout, components: Set<{ componentName: string, id: string, properties?: Record<string, any> }>) {
   components.add({ componentName: layout.componentName, id: layout.id, properties: layout.properties });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components));

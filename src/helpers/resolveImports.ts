@@ -1,4 +1,4 @@
-import { Layout, Components } from '../interfaces/types';
+import { Layout } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 
@@ -8,7 +8,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
   const imports = new Set<string>();
 
-  const components = new Set<{ componentName: Components, id: string }>();
+  const components = new Set<{ componentName: string, id: string }>();
   extractComponentData(config, components);
 
   components.forEach((component) => {

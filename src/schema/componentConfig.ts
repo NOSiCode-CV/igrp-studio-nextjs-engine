@@ -415,8 +415,7 @@ const componentSchema: JSONSchemaType<Layout> = {
     },
     componentName: {
       type: 'string',
-      enum: COMPONENTS,
-      errorMessage: `Component name only must be one of ${COMPONENTS_NAMES}`
+      errorMessage: `Component name must be a valid string`
     },
     properties: {
       type: "object",

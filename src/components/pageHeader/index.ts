@@ -16,7 +16,7 @@ export default {
     component.loadVariants(pageHeaderVariants());
     component.loadIcon('')
     component.loadGroup('layout')
-    component.loadLabel('PageHeader')
+    component.loadLabel('Page Header')
     component.getProperties(pageHeaderProperties());
     component.getPropertiesMapping(pageHeaderPropertiesMapping());
     component.getChildProperties(pageHeaderChildProperties());

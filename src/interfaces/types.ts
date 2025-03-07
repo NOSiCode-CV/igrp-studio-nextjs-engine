@@ -182,7 +182,7 @@ export interface PageMetaConfig {
 }
 
 export interface Layout<S = any> extends IdentifiableElement{
-  componentName: Components;
+  componentName: string;
   properties?: Record<string, any>;
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
@@ -257,4 +257,3 @@ export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
-export type Components = (typeof COMPONENTS)[number];
