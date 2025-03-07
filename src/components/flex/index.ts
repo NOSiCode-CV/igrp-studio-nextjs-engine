@@ -11,6 +11,9 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(formVariants())
+    component.loadIcon('')
+    component.loadGroup('structure')
+    component.loadLabel('Flex')
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
     component.getChildProperties(formChildProperties());

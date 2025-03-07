@@ -15,6 +15,9 @@ export default {
     ]);
 
     component.loadVariants(tabsVariants());
+    component.loadIcon('Tabs')
+    component.loadGroup('layout')
+    component.loadLabel('Tabs')
     component.getProperties(tabsProperties());
     component.getPropertiesMapping(tabsPropertiesMapping());
     component.getChildProperties(tabsChildProperties()); // TODO: handle a way to fetch parent properties

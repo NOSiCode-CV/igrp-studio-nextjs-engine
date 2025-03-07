@@ -15,6 +15,9 @@ export default {
     ]);
 
     component.loadVariants(checkboxVariants());
+    component.loadIcon('CheckSquare')
+    component.loadGroup('formElements')
+    component.loadLabel('Checkbox')
     component.getProperties(checkboxProperties());
     component.getPropertiesMapping(checkboxPropertiesMapping());
     component.getChildProperties(checkboxChildProperties()); // TODO: handle a way to fetch parent properties

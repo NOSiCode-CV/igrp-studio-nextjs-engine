@@ -107,7 +107,7 @@ function initComponent(): Component {
 
     render(context: Layout<any>, component: Component, parentContext?: Layout<any>, parent?: Component) {
       if (this.renderer) {
-        return this.renderer(context, parentContext, parent)(context, parentContext);
+        return this.renderer(context, parentContext, component, parent)(context, parentContext);
       }
       throw new Error("No renderer function defined");
     }
@@ -192,7 +192,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``}" ${props} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${childProps} >`
+  str += `<div className="${component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

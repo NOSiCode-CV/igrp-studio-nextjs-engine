@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(rangeSliderVariants());
+    component.loadIcon('')
+    component.loadGroup('formElements')
+    component.loadLabel('Slider')
     component.getProperties(rangeSliderProperties());
     component.getPropertiesMapping(rangeSliderPropertiesMapping());
     component.getChildProperties(rangeSliderChildProperties()); // TODO: handle a way to fetch parent properties

@@ -11,6 +11,9 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(inlineVariants())
+    component.loadIcon('')
+    component.loadGroup('structure')
+    component.loadLabel('Inline')
     component.getProperties(inlineProperties());
     component.getPropertiesMapping(inlinePropertiesMapping());
     component.getChildProperties(inlineChildProperties());

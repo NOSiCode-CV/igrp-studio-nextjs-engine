@@ -11,6 +11,9 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(sectionVariants())
+    component.loadIcon('')
+    component.loadGroup('structure')
+    component.loadLabel('Section')
     component.getProperties(sectionProperties());
     component.getPropertiesMapping(sectionPropertiesMapping());
     component.getChildProperties(sectionChildProperties());

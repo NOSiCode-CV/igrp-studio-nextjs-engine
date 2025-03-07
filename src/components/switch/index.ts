@@ -15,6 +15,9 @@ export default {
     ]);
 
     component.loadVariants(switchVariants());
+    component.loadIcon('ToggleLeft')
+    component.loadGroup('formElements')
+    component.loadLabel('Switch')
     component.getProperties(switchProperties());
     component.getPropertiesMapping(switchPropertiesMapping());
     component.getChildProperties(switchChildProperties());

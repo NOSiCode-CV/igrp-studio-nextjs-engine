@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(radioGroupVariants());
+    component.loadIcon('Radio')
+    component.loadGroup('formElements')
+    component.loadLabel('Radio')
     component.getProperties(radioGroupProperties());
     component.getPropertiesMapping(radioGroupPropertiesMapping());
     component.getChildProperties(radioGroupChildProperties());

@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(datePickerVariants());
+    component.loadIcon('Calendar')
+    component.loadGroup('formElements')
+    component.loadLabel('Date Picker')
     component.getProperties(datePickerProperties());
     component.getPropertiesMapping(datePickerPropertiesMapping());
     component.getChildProperties(datePickerChildProperties());

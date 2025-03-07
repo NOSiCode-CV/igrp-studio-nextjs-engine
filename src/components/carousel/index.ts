@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(carouselVariants());
+    component.loadIcon('Play')
+    component.loadGroup('dataDisplay')
+    component.loadLabel('Carousel')
     component.getProperties(carouselProperties());
     component.getPropertiesMapping(carouselPropertiesMapping());
     component.getChildProperties(carouselChildProperties());

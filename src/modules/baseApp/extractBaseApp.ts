@@ -1,4 +1,4 @@
-import { RenderContext } from '@/interfaces/types';
+import { RenderContext } from '../../interfaces/types';
 import fs from 'fs-extra';
 import { BASE_APP_ZIP } from '../../utils/constants';
 

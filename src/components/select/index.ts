@@ -15,6 +15,9 @@ export default {
     ]);
 
     component.loadVariants(selectVariants());
+    component.loadIcon('List')
+    component.loadGroup('formElements')
+    component.loadLabel('Select')
     component.getProperties(selectProperties());
     component.getPropertiesMapping(selectPropertiesMapping());
     component.getChildProperties(selectChildProperties());

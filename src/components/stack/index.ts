@@ -11,6 +11,9 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(stackVariants())
+    component.loadIcon('')
+    component.loadGroup('structure')
+    component.loadLabel('Stack')
     component.getProperties(stackProperties());
     component.getPropertiesMapping(stackPropertiesMapping());
     component.getChildProperties(stackChildProperties());

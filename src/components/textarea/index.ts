@@ -9,6 +9,9 @@ export default {
     ]);
 
     component.loadVariants(textareaVariants());
+    component.loadIcon('FileText')
+    component.loadGroup('formElements')
+    component.loadLabel('Text Area')
     component.getProperties(textareaProperties());
     component.getPropertiesMapping(textareaPropertiesMapping());
     component.getChildProperties(textareaChildProperties()); // TODO: handle a way to fetch parent properties

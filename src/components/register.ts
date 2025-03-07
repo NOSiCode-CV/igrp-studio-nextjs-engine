@@ -12,6 +12,7 @@ import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
 import inlineModule, { INLINE } from './inline';
 import inputModule, { INPUT } from './input';
+import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import radioModule, { RADIO } from './radio';
 import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
@@ -36,6 +37,7 @@ export function registerAllComponents() {
   register(GRID, gridModule.register);
   register(INLINE, inlineModule.register);
   register(INPUT, inputModule.register);
+  register(PAGEHEADER, pageHeaderModule.register);
   register(RADIO, radioModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);

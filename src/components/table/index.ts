@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(tableVariants());
+    component.loadIcon('Table')
+    component.loadGroup('dataDisplay')
+    component.loadLabel('Table')
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
     component.getChildProperties(tableChildProperties());

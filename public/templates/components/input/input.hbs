@@ -18,8 +18,17 @@
   {{#if resourceConfig.properties.showIcon}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showIcon}}
-  showIcon={ {{resourceConfig.properties.showIcon}} }
+  {{#if resourceConfig.properties.iconName}}
+  iconName={ {{resourceConfig.properties.iconName}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconSize}}
+  iconSize={ {{resourceConfig.properties.iconSize}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconPlacement}}
+  iconPlacement={ {{resourceConfig.properties.iconPlacement}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconClassName}}
+  iconClassName={ {{resourceConfig.properties.iconClassName}} }
   {{/if~}}
 
   {{#if resourceConfig.properties.readOnly}}

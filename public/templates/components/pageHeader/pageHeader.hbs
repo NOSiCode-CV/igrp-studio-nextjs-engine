@@ -1,0 +1,12 @@
+<PageHeader
+  title="{{resourceConfig.properties.title}}"
+  {{#if resourceConfig.properties.description}}
+  description="{{resourceConfig.properties.description}}"
+  {{/if~}}
+>
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+</PageHeader>

@@ -14,6 +14,9 @@ export default {
     ]);
 
     component.loadVariants(chartVariants());
+    component.loadIcon('BarChart2')
+    component.loadGroup('dataDisplay')
+    component.loadLabel('Chart')
     component.getProperties(chartProperties());
     component.getPropertiesMapping(chartPropertiesMapping());
     component.getChildProperties(chartChildProperties());
