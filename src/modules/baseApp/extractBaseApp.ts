@@ -32,7 +32,7 @@ export const extractBaseApp = async (context: RenderContext): Promise<void> => {
       JSZip.loadAsync(data).then((zip: any) => {
         Object.keys(zip.files).forEach((filename) => {
           zip.files[filename].async('nodebuffer').then((content: any) => {
-            fs.writeFileSync(`${context.basePath}/${filename}`, content);
+            if(filename.includes('.')) fs.writeFile(`${context.basePath}/${filename}`, content);
           });
         });
       });
