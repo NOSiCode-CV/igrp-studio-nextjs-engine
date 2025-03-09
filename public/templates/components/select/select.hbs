@@ -1,21 +1,26 @@
-<IGRPInputSelect
+<Combobox
+  name="{{resourceConfig.properties.labelText}}"
   value={input{{resourceConfig.id}}Value}
+  placeholder="{{resourceConfig.properties.placeholder}}"
   onChange={(e: any) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
   {{#if resourceConfig.properties.disabled}}
   disabled
   {{/if~}}
-  {{#if resourceConfig.properties.labelText}}
+  {{#if resourceConfig.properties.width}}
+  width="{{resourceConfig.properties.width}}"
+  {{/if~}}
+  {{!--{{#if resourceConfig.properties.labelText}}
   labelText="{{resourceConfig.properties.labelText}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.optionLabel}}
+  {{/if~}}--}}
+  {{!--{{#if resourceConfig.properties.optionLabel}}
   optionLabel="{{resourceConfig.properties.floatingLabel}}"
-  {{/if~}}
+  {{/if~}}--}}
   {{#if resourceConfig.properties.options}}
   options={ {{{json resourceConfig.properties.options}}} }
   {{/if~}}
-  {{#if resourceConfig.properties.required}}
+  {{!--{{#if resourceConfig.properties.required}}
   required = { {{resourceConfig.properties.required}} }
-  {{/if~}}
+  {{/if~}}--}}
   {{#if resourceConfig.properties.readOnly}}
   readOnly
   {{/if~}}

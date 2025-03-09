@@ -2,8 +2,10 @@ import { CommonProperties } from '../../interfaces/types';
 
 export function selectProperties() {
   return {
-    labelText: { type: 'string', required: false },
+    labelText: { type: 'string', required: true },
+    placeholder: { type: 'string', required: false },
     helperText: { type: 'string', required: false },
+    width: { type: 'string', required: false },
     options: { type: 'array', items: { value: 'string', label: 'string' }, required: true }, // Array of objects with value and label
     optionsLabel: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },

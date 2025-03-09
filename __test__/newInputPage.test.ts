@@ -96,20 +96,19 @@ const inputLayout: Layout = {
         required: true,
       },
     },
-    /*{
+    {
       id: 'input_select',
       componentName: 'select',
       properties: {
         labelText: 'Type',
-        helperText: 'This will help you',
+        placeholder: 'Choose an option',
         options: [
           { value: '01', label: 'Option 1' },
           { value: '02', label: 'Option 2' },
           { value: '03', label: 'Option 3' },
         ],
-        optionLabel: 'Type Option'
       },
-    },*/
+    },
   ],
 };
 
