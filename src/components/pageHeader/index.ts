@@ -22,9 +22,7 @@ export default {
     component.getChildProperties(pageHeaderChildProperties());
     component.getChildPropertiesMapping(pageHeaderChildPropertiesMapping());
 
-    component.loadStates([
-      'const [pageHeaderData, setPageHeaderData] = useState({ title: "", body: "", footer: "" });'
-    ]);
+    component.loadStates([]);
 
     component.setRenderer(hbsRenderer);
   },

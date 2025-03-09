@@ -10,8 +10,7 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Select, Option } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPInputSelect } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(selectVariants());
@@ -24,7 +23,7 @@ export default {
     component.getChildPropertiesMapping(selectChildPropertiesMapping());
 
     component.loadStates([
-      'const [selectedOption, setSelectedOption] = useState("");'
+      'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
     ]);
 
     component.setRenderer(hbsRenderer);

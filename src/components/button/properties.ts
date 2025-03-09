@@ -4,21 +4,10 @@ export function buttonProperties() {
   return {
     label: { type: 'string', required: true, default: 'Button' },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'primary', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
-    size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'large', 'icon'] },
+    size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
     disabled: { type: 'boolean', required: false, default: false },
     onClick: { type: 'string', required: false },
   };
-
-  /*
-  default: "default",
-    primary: "primary",
-    secondary: "secondary",
-    destructive: "destructive",
-    outline: "outline",
-    ghost: "ghost",
-    link: "link",
-
-  * */
 }
 
 export function buttonPropertiesMapping() {

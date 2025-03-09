@@ -1,24 +1,22 @@
-<FormField
-  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
-  name="{{resourceConfig.properties.name}}"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
-      <FormControl>
-        <Select
-          value={field.value}
-          onChange={field.onChange}
-          {{#if resourceConfig.properties.disabled}}disabled{{/if}}
-        >
-          {{#each resourceConfig.properties.options as |option|}}
-          <Option value="{{option.value}}">{{option.label}}</Option>
-          {{/each}}
-        </Select>
-      </FormControl>
-      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
-      {{#if resourceConfig.properties.message}}
-      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
-      {{/if}}
-    </FormItem>
-  )}
+<IGRPInputSelect
+  value={input{{resourceConfig.id}}Value}
+  onChange={(e: any) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.labelText}}
+  labelText="{{resourceConfig.properties.labelText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.optionLabel}}
+  optionLabel="{{resourceConfig.properties.floatingLabel}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.options}}
+  options={ {{{json resourceConfig.properties.options}}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.required}}
+  required = { {{resourceConfig.properties.required}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.readOnly}}
+  readOnly
+  {{/if~}}
 />

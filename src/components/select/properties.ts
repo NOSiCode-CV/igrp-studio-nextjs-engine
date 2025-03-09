@@ -2,46 +2,26 @@ import { CommonProperties } from '../../interfaces/types';
 
 export function selectProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
-    options: { type: 'array', required: true }, // Array of objects with value and label
-    description: { type: 'string', required: false },
+    labelText: { type: 'string', required: false },
+    helperText: { type: 'string', required: false },
+    options: { type: 'array', items: { value: 'string', label: 'string' }, required: true }, // Array of objects with value and label
+    optionsLabel: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
+    required: { type: 'boolean', required: true },
     message: { type: 'string', required: false }
   };
 }
 
 export function selectPropertiesMapping() {
-  return {
-    name: 'name',
-    label: 'label',
-    options: 'options',
-    description: 'description',
-    disabled: 'disabled',
-    message: 'message'
-  };
+  return {};
 }
 
 export function selectChildProperties() {
-  return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
-    options: { type: 'array', required: true }, // Array of objects with value and label
-    description: { type: 'string', required: false },
-    disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
-  };
+  return {};
 }
 
 export function selectChildPropertiesMapping() {
-  return {
-    name: 'name',
-    label: 'label',
-    options: 'options',
-    description: 'description',
-    disabled: 'disabled',
-    message: 'message'
-  };
+  return {};
 }
 
 export function selectVariants() {

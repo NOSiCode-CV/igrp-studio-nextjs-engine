@@ -1,8 +1,8 @@
-<IGRPInput
+<IGRPInputBasic
   type="{{resourceConfig.properties.type}}"
   placeholder="{{resourceConfig.properties.placeholder}}"
   value={input{{resourceConfig.id}}Value}
-  onChange={(e) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
+  onChange={(e: any) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
   {{#if resourceConfig.properties.disabled}}
   disabled
   {{/if~}}
@@ -10,7 +10,7 @@
   labelText="{{resourceConfig.properties.labelText}}"
   {{/if~}}
   {{#if resourceConfig.properties.floatingLabel}}
-  floatingLabel="{{resourceConfig.properties.floatingLabel}}"
+  floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
   {{#if resourceConfig.properties.helperText}}
   helperText="{{resourceConfig.properties.helperText}}"
@@ -18,17 +18,20 @@
   {{#if resourceConfig.properties.showIcon}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}
+  {{#if resourceConfig.properties.required}}
+  required={ {{resourceConfig.properties.required}} }
+  {{/if~}}
   {{#if resourceConfig.properties.iconName}}
-  iconName={ {{resourceConfig.properties.iconName}} }
+  iconName="{{resourceConfig.properties.iconName}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconSize}}
-  iconSize={ {{resourceConfig.properties.iconSize}} }
+  iconSize="{{resourceConfig.properties.iconSize}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconPlacement}}
-  iconPlacement={ {{resourceConfig.properties.iconPlacement}} }
+  iconPlacement="{{resourceConfig.properties.iconPlacement}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconClassName}}
-  iconClassName={ {{resourceConfig.properties.iconClassName}} }
+  iconClassName="{{resourceConfig.properties.iconClassName}}"
   {{/if~}}
 
   {{#if resourceConfig.properties.readOnly}}
