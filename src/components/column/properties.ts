@@ -1,7 +1,38 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function columnProperties() {
-  return {}
+  return {
+    variant: { type: 'string', required: true, enum: [
+      'defaultSingle',
+        'defaultMultiple',
+        'wide',
+        'cols1',
+        'cols2',
+        'cols3',
+        'cols4',
+        'cols5',
+        'cols6',
+        'cols7',
+        'cols8',
+        'cols9',
+        'cols10',
+        'cols11',
+        'cols12',
+        'span1',
+        'span2',
+        'span3',
+        'span4',
+        'span5',
+        'span6',
+        'span7',
+        'span8',
+        'span9',
+        'span10',
+        'span11',
+        'span12',
+      ]
+    }
+  }
 }
 
 export function columnChildProperties() {

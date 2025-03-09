@@ -1,7 +1,9 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function inlineProperties() {
-  return {}
+  return {
+    variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] }
+  }
 }
 
 export function inlinePropertiesMapping() {

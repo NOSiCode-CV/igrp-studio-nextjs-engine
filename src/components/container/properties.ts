@@ -1,7 +1,9 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function containerProperties() {
-  return {}
+  return {
+    variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'] }
+  }
 }
 
 export function containerPropertiesMapping() {

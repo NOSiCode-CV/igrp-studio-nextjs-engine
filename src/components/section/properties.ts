@@ -1,7 +1,9 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function sectionProperties() {
-  return {}
+  return {
+    variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'] }
+  }
 }
 
 export function sectionPropertiesMapping() {

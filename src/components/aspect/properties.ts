@@ -1,7 +1,9 @@
 import { CommonProperties } from '../../interfaces/types';
 
 export function aspectProperties() {
-  return {}
+  return {
+    variant: { type: 'string', required: true, enum: ['square', 'video', 'auto', 'portrait', 'landscape'] }
+  }
 }
 
 export function aspectChildProperties() {

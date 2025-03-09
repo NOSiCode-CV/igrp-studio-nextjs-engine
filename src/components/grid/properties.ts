@@ -2,7 +2,28 @@ import { CommonProperties } from '../../interfaces/types';
 
 export function gridProperties() {
   return {
-    padding: {type: 'string', required: false}
+    padding: {type: 'string', required: false},
+    variant: {
+      type: 'string',
+      required: true,
+      enum: [
+        'cols1', 'cols2', 'cols3', 'cols4', 'cols5', 'cols6',
+        'rows1', 'rows2', 'rows3', 'rows4', 'rows5', 'rows6',
+        'holy-grail', 'sidebar-left', 'sidebar-right',
+        'col-span-1', 'col-span-2', 'col-span-3', 'col-span-4', 'col-span-full',
+        'col-start-1', 'col-start-2', 'col-start-3', 'col-start-4', 'col-start-5', 'col-start-6', 'col-start-auto',
+        '-col-start-1', '-col-start-2', '-col-start-3', '-col-start-4', '-col-start-5', '-col-start-6',
+        'col-end-1', 'col-end-2', 'col-end-3', 'col-end-4', 'col-end-5', 'col-end-6', 'col-end-auto',
+        '-col-end-1', '-col-end-2', '-col-end-3', '-col-end-4', '-col-end-5', '-col-end-6',
+        'col-auto', 'cols-auto', 'cols-min', 'cols-max',
+        'row-span-1', 'row-span-2', 'row-span-3', 'row-span-4', 'row-span-5', 'row-span-6', 'row-span-full',
+        'row-start-1', 'row-start-2', 'row-start-3', 'row-start-4', 'row-start-5', 'row-start-6', 'row-start-auto',
+        '-row-start-1', '-row-start-2', '-row-start-3', '-row-start-4', '-row-start-5', '-row-start-6',
+        'row-end-1', 'row-end-2', 'row-end-3', 'row-end-4', 'row-end-5', 'row-end-6', 'row-end-auto',
+        '-row-end-1', '-row-end-2', '-row-end-3', '-row-end-4', '-row-end-5', '-row-end-6',
+        'row-auto', 'rows-auto', 'rows-min', 'rows-max'
+      ]
+    }
   }
 }
 
