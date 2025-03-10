@@ -1,8 +1,9 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function aspectProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['square', 'video', 'auto', 'portrait', 'landscape'] }
+    variant: { type: 'string', required: true, enum: ['square', 'video', 'auto', 'portrait', 'landscape'] },
+    ...commonProperties(),
   }
 }
 
@@ -11,7 +12,9 @@ export function aspectChildProperties() {
 }
 
 export function aspectPropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function aspectChildPropertiesMapping() {

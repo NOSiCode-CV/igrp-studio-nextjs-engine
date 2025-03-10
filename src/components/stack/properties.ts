@@ -1,13 +1,16 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function stackProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] }
+    variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] },
+    ...commonProperties()
   }
 }
 
 export function stackPropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function stackChildProperties() {

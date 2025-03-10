@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function rangeSliderProperties() {
   return {
@@ -9,7 +9,8 @@ export function rangeSliderProperties() {
     step: { type: 'number', required: false, default: 1 },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
+    message: { type: 'string', required: false },
+    ...commonPropertiesMapping()
   };
 }
 
@@ -22,7 +23,8 @@ export function rangeSliderPropertiesMapping() {
     step: 'step',
     description: 'description',
     disabled: 'disabled',
-    message: 'message'
+    message: 'message',
+    ...commonPropertiesMapping()
   };
 }
 

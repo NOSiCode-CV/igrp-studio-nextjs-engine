@@ -1,13 +1,16 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function sectionProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'] }
+    variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'] },
+    ...commonProperties(),
   }
 }
 
 export function sectionPropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function sectionChildProperties() {

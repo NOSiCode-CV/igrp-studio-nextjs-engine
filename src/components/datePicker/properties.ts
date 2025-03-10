@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function datePickerProperties() {
   return {
@@ -10,12 +10,15 @@ export function datePickerProperties() {
     floatingLabel: { type: 'boolean', required: false },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
-    className: { type: 'string', required: false }
+    className: { type: 'string', required: false },
+    ...commonProperties(),
   };
 }
 
 export function datePickerPropertiesMapping() {
-  return {};
+  return {
+    ...commonPropertiesMapping()
+  };
 }
 
 export function datePickerChildProperties() {

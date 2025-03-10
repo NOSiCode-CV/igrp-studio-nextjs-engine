@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function formProperties() {
   return {
@@ -7,6 +7,7 @@ export function formProperties() {
     label: { type: 'string', required: false },
     description: { type: 'string', required: false },
     message: { type: 'string', required: false },
+    ...commonProperties(),
   };
 }
 
@@ -17,6 +18,7 @@ export function formPropertiesMapping() {
     label: 'label',
     description: 'description',
     message: 'message',
+    ...commonPropertiesMapping(),
   };
 }
 

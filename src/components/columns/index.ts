@@ -10,7 +10,7 @@ import { Component, defaultRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([]);
-    component.loadCustomClassName('');
+    component.loadCustomClassName('grid');
     component.loadIcon('');
     component.loadGroup('structure');
     component.loadLabel('Columns');

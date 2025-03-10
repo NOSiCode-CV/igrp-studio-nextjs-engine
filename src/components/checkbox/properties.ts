@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function checkboxProperties() {
   return {
@@ -6,7 +6,8 @@ export function checkboxProperties() {
     label: { type: 'string', required: false },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
+    message: { type: 'string', required: false },
+    ...commonProperties(),
   };
 }
 
@@ -16,27 +17,20 @@ export function checkboxPropertiesMapping() {
     label: 'label',
     description: 'description',
     disabled: 'disabled',
-    message: 'message'
+    message: 'message',
+    ...commonPropertiesMapping(),
   };
 }
 
 export function checkboxChildProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
-    description: { type: 'string', required: false },
-    disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
+
   };
 }
 
 export function checkboxChildPropertiesMapping() {
   return {
-    name: 'name',
-    label: 'label',
-    description: 'description',
-    disabled: 'disabled',
-    message: 'message'
+
   };
 }
 

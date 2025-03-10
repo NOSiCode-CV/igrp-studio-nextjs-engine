@@ -1,13 +1,16 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function containerProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'] }
+    variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'] },
+    ...commonProperties(),
   }
 }
 
 export function containerPropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function containerChildProperties() {

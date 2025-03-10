@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function textareaProperties() {
   return {
@@ -9,7 +9,8 @@ export function textareaProperties() {
     cols: { type: 'number', required: false },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
+    message: { type: 'string', required: false },
+    ...commonProperties()
   };
 }
 
@@ -22,7 +23,8 @@ export function textareaPropertiesMapping() {
     cols: 'cols',
     description: 'description',
     disabled: 'disabled',
-    message: 'message'
+    message: 'message',
+    ...commonPropertiesMapping()
   };
 }
 

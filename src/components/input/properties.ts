@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function inputProperties() {
   return {
@@ -17,24 +17,26 @@ export function inputProperties() {
         'time',
         'color'
       ] },
-    labelText: { type: 'string', required: false, default: '' },
+    labelText: { type: 'string', required: false, default: 'Input Text' },
     floatingLabel: { type: 'string', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
     showIcon: { type: 'boolean', required: false, default: false },
-    iconName: { type: 'string', required: false, default: '' },
-    iconSize: { type: 'string', required: false, default: '16' },
-    iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
+    iconName: { type: 'string', required: false, },
+    iconSize: { type: 'string', required: false },
+    iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false, default: '' },
+    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
-    customProperties: { type: 'array', required: false }
+    ...commonProperties(),
   };
 }
 
 export function inputPropertiesMapping() {
-  return {};
+  return {
+    ...commonPropertiesMapping()
+  };
 }
 
 export function inputChildProperties() {

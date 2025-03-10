@@ -1,34 +1,27 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function carouselProperties() {
   return {
     items: { type: 'array', required: true, items: { type: 'object'} },
     autoPlay: { type: 'boolean', required: false },
-    interval: { type: 'number', required: false }
+    interval: { type: 'number', required: false },
+    ...commonProperties(),
   };
 }
 
 export function carouselPropertiesMapping() {
   return {
-    items: 'items',
-    autoPlay: 'autoPlay',
-    interval: 'interval'
+    ...commonPropertiesMapping(),
   };
 }
 
 export function carouselChildProperties() {
   return {
-    items: { type: 'array', required: true, items: { type: 'object'} },
-    autoPlay: { type: 'boolean', required: false },
-    interval: { type: 'number', required: false }
   };
 }
 
 export function carouselChildPropertiesMapping() {
   return {
-    items: 'items',
-    autoPlay: 'autoPlay',
-    interval: 'interval'
   };
 }
 

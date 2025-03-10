@@ -1,13 +1,16 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function inlineProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] }
+    variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] },
+    ...commonProperties(),
   }
 }
 
 export function inlinePropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function inlineChildProperties() {

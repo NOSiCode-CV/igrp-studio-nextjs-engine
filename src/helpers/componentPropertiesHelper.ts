@@ -3,8 +3,6 @@ import { Layout } from '../interfaces/types';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
-  console.log('parent: ', parent)
-
   if(!parent.childProperties) return ''
 
   const parentElement = registry[parent.componentName]

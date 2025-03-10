@@ -1,20 +1,17 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function chartProperties() {
   return {
     data: { type: 'array', required: true, items: 'object' },
     xAxisKey: { type: 'string', required: true },
     series: { type: 'array', required: true, items: { key: 'string', color: 'string' } },
-    height: { type: 'number', required: false }
+    ...commonProperties(),
   };
 }
 
 export function chartPropertiesMapping() {
   return {
-    data: 'data',
-    xAxisKey: 'xAxisKey',
-    series: 'series',
-    height: 'height'
+    ...commonPropertiesMapping()
   };
 }
 

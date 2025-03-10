@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function tabsProperties() {
   return {
@@ -8,7 +8,8 @@ export function tabsProperties() {
     tab1Content: { type: 'string', required: false },
     tab2Content: { type: 'string', required: false },
     description: { type: 'string', required: false },
-    message: { type: 'string', required: false }
+    message: { type: 'string', required: false },
+    ...commonProperties()
   };
 }
 
@@ -20,7 +21,8 @@ export function tabsPropertiesMapping() {
     tab1Content: 'tab1Content',
     tab2Content: 'tab2Content',
     description: 'description',
-    message: 'message'
+    message: 'message',
+    ...commonPropertiesMapping()
   };
 }
 

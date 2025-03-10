@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function buttonProperties() {
   return {
@@ -13,17 +13,13 @@ export function buttonProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
     action: { type: 'string', required: false },
+    ...commonProperties(),
   };
 }
 
 export function buttonPropertiesMapping() {
   return {
-    label: 'label',
-    variant: 'variant',
-    size: 'size',
-    disabled: 'disabled',
-    loading: 'loading',
-    action: 'onClick',
+    ...commonPropertiesMapping(),
   };
 }
 

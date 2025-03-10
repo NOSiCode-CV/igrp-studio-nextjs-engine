@@ -137,16 +137,16 @@ export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry).map(([key, value]) => {
     return {
       name: key,
-      imports: Array.from(value.imports),
+      imports: [],
       icon: value.icon,
       group: value.group,
       label: value.label,
       variants: value.variants,
       childProperties: value.childProperties,
       properties: value.properties,
-      propertiesMapping: value.propertiesMapping,
-      childPropertiesMapping: value.childPropertiesMapping,
-      states: Array.from(value.states),
+      propertiesMapping: {},
+      childPropertiesMapping: {},
+      states: [],
       renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
       templatePath: value.templatePath
     }

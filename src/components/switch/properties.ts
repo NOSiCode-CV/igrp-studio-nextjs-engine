@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function switchProperties() {
   return {
@@ -6,7 +6,8 @@ export function switchProperties() {
     label: { type: 'string', required: false },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false }
+    message: { type: 'string', required: false },
+    ...commonProperties()
   };
 }
 
@@ -16,7 +17,8 @@ export function switchPropertiesMapping() {
     label: 'label',
     description: 'description',
     disabled: 'disabled',
-    message: 'message'
+    message: 'message',
+    ...commonPropertiesMapping()
   };
 }
 

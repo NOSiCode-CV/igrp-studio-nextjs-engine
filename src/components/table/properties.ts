@@ -1,16 +1,17 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function tableProperties() {
   return {
     columns: { type: 'array', required: true, items: { key: 'string', label: 'string' } },
-    data: { type: 'array', required: true, items: 'object' }
+    data: { type: 'array', required: true, items: 'object' },
+    ...commonProperties()
   };
 }
 
 export function tableChildPropertiesMapping() {
   return {
     columns: 'columns',
-    data: 'data'
+    data: 'data',
   };
 }
 
@@ -24,7 +25,8 @@ export function tableChildProperties() {
 export function tablePropertiesMapping() {
   return {
     columns: 'columns',
-    data: 'data'
+    data: 'data',
+    ...commonPropertiesMapping()
   };
 }
 

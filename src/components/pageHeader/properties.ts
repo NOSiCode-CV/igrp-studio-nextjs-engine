@@ -1,10 +1,11 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function pageHeaderProperties() {
   return {
-    title: { type: 'string', required: true },
-    description: { type: 'string', required: false },
-    variant: {type: 'string', required: true, enum: ['default'], default: 'default'}
+    title: { type: 'string', required: true, default: 'Page Title' },
+    description: { type: 'string', required: false, default: 'Page Description' },
+    variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
+    ...commonProperties(),
   };
 }
 
@@ -12,6 +13,7 @@ export function pageHeaderPropertiesMapping() {
   return {
     title: { property: 'title' },
     description: { property: 'description' },
+    ...commonPropertiesMapping(),
   };
 }
 

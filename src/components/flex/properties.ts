@@ -1,4 +1,4 @@
-import { CommonProperties } from '../../interfaces/types';
+import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function formProperties() {
   return {
@@ -36,12 +36,15 @@ export function formProperties() {
         'between',
         'center-col',
       ]
-    }
+    },
+    ...commonProperties(),
   }
 }
 
 export function formPropertiesMapping() {
-  return {}
+  return {
+    ...commonPropertiesMapping()
+  }
 }
 
 export function formChildProperties() {
