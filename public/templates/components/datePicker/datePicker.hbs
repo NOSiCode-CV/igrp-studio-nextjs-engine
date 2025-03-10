@@ -1,22 +1,41 @@
-<FormField
-  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
-  name="{{resourceConfig.properties.name}}"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
-      <FormControl>
-        <DatePicker
-          selected={field.value}
-          onChange={field.onChange}
-          {{#if resourceConfig.properties.placeholder}}placeholder="{{resourceConfig.properties.placeholder}}"{{/if}}
-          {{#if resourceConfig.properties.format}}dateFormat="{{resourceConfig.properties.format}}"{{else}}dateFormat="yyyy-MM-dd"{{/if}}
-          {{#if resourceConfig.properties.disabled}}disabled{{/if}}
-        />
-      </FormControl>
-      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
-      {{#if resourceConfig.properties.message}}
-      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
-      {{/if}}
-    </FormItem>
-  )}
+<IGRPInputDate
+  placeholder="{{resourceConfig.properties.placeholder}}"
+  date={input{{resourceConfig.id}}Value}
+  onDateChange={setInput{{resourceConfig.id}}Value}
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.labelText}}
+  labelText="{{resourceConfig.properties.labelText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.floatingLabel}}
+  floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.dateFormat}}
+  dateFormat="{{resourceConfig.properties.dateFormat}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.yearRange}}
+  yearRange={{resourceConfig.properties.yearRange}}
+  {{/if~}}
+  {{#if resourceConfig.properties.locale}}
+  locale="{{resourceConfig.properties.locale}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.required}}
+  required={ {{resourceConfig.properties.required}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconPlacement}}
+  iconPlacement="{{resourceConfig.properties.iconPlacement}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.readOnly}}
+  readOnly
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{/if}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{/if}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
 />

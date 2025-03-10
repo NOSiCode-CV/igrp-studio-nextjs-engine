@@ -10,7 +10,8 @@ const buttonLayout: Layout = {
   properties: {
     variant: "cols3",
     className: "border rounded-lg center",
-    padding: "4"
+    padding: '10',
+    gap: '4',
   },
   children: [
     {

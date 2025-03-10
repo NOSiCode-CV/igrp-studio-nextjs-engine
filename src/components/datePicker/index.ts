@@ -9,8 +9,7 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { DatePicker } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPInputDate } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(datePickerVariants());
@@ -23,7 +22,7 @@ export default {
     component.getChildPropertiesMapping(datePickerChildPropertiesMapping());
 
     component.loadStates([
-      'const [selectedDate, setSelectedDate] = useState(null);'
+      'const [input{{id}}Value, setInput{{id}}Value] = useState<Date | undefined>(undefined);'
     ]);
 
     component.setRenderer(hbsRenderer);

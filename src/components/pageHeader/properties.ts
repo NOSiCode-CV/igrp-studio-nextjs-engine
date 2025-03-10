@@ -3,7 +3,8 @@ import { CommonProperties } from '../../interfaces/types';
 export function pageHeaderProperties() {
   return {
     title: { type: 'string', required: true },
-    description: { type: 'string', required: false }
+    description: { type: 'string', required: false },
+    variant: {type: 'string', required: true, enum: ['default'], default: 'default'}
   };
 }
 
@@ -28,5 +29,7 @@ export function pageHeaderChildPropertiesMapping() {
 
 
 export function pageHeaderVariants() {
-  return {};
+  return {
+    default: ''
+  };
 }

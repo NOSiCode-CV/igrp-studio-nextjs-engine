@@ -28,6 +28,7 @@ export function inputProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     iconClassName: { type: 'string', required: false, default: '' },
+    className: { type: 'string', required: false },
     customProperties: { type: 'array', required: false }
   };
 }

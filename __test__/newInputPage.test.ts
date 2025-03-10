@@ -10,7 +10,11 @@ const inputLayout: Layout = {
   properties: {
     variant: 'cols3',
     className: 'border rounded-lg',
-    padding: '4',
+    padding: '10',
+    gap: '4',
+  },
+  childProperties: {
+    //padding: '4'
   },
   children: [
     {
@@ -40,12 +44,28 @@ const inputLayout: Layout = {
       },
     },
     {
-      id: 'input_date',
-      componentName: 'input',
+      id: 'input_date_start_req',
+      componentName: 'datePicker',
       properties: {
-        type: 'date',
+        labelText: 'Birthdate',
         placeholder: 'Enter your birthdate',
-        format: 'dd/MM/yyyy'
+        format: 'dd/MM/yyyy',
+        locale: 'pt',
+        iconPlacement: 'start',
+        required: true
+      },
+    },
+    {
+      id: 'input_date_end_not_req',
+      componentName: 'datePicker',
+      properties: {
+        labelText: 'Registration Date',
+        placeholder: 'Enter the registration date',
+        floatingLabel: true,
+        format: 'yyyy-MM-dd',
+        locale: 'en',
+        iconPlacement: 'end',
+        required: false
       },
     },
     {

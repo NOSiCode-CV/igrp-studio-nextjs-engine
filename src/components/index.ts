@@ -224,8 +224,6 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  console.log("element: ", element)
-
   str += `<div className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
 
   if (component.children && component.children.length > 0) {

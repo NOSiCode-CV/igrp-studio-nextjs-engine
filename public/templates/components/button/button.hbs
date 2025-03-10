@@ -21,6 +21,15 @@
   {{#if resourceConfig.properties.iconSize}}
   iconSize={{resourceConfig.properties.iconSize}}
   {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{/if}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{/if}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
   onClick={() => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
 >

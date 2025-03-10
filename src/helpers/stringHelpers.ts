@@ -13,3 +13,7 @@ export function json(context: any): string {
 export function toProps(context: any): string {
   return `{${JSON.stringify(context)}}`
 }
+
+export function concat(str1: string, str2: string) {
+  return str1 + str2;
+}

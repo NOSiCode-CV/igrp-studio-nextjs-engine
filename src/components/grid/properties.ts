@@ -3,11 +3,16 @@ import { CommonProperties } from '../../interfaces/types';
 export function gridProperties() {
   return {
     padding: {type: 'string', required: false},
+    gap: {type: 'string', required: false},
+    paddingTop: {type: 'string', required: false},
+    paddingBottom: {type: 'string', required: false},
+    paddingHorizontal: {type: 'string', required: false},
+    paddingVertical: {type: 'string', required: false},
     variant: {
       type: 'string',
       required: true,
       enum: [
-        'cols1', 'cols2', 'cols3', 'cols4', 'cols5', 'cols6',
+        'default', 'cols1', 'cols2', 'cols3', 'cols4', 'cols5', 'cols6',
         'rows1', 'rows2', 'rows3', 'rows4', 'rows5', 'rows6',
         'holy-grail', 'sidebar-left', 'sidebar-right',
         'col-span-1', 'col-span-2', 'col-span-3', 'col-span-4', 'col-span-full',
@@ -22,32 +27,40 @@ export function gridProperties() {
         'row-end-1', 'row-end-2', 'row-end-3', 'row-end-4', 'row-end-5', 'row-end-6', 'row-end-auto',
         '-row-end-1', '-row-end-2', '-row-end-3', '-row-end-4', '-row-end-5', '-row-end-6',
         'row-auto', 'rows-auto', 'rows-min', 'rows-max'
-      ]
+      ], default: 'default'
     }
   }
 }
 
 export function gridPropertiesMapping() {
   return {
-    padding: {className: 'p-'}
+    padding: {className: 'p-'},
+    gap: {className: 'gap-'},
+    paddingHorizontal: {className: 'px-'},
+    paddingVertical: {className: 'py-'},
+    paddingTop: {className: 'pt-'},
+    paddingBottom: {className: 'pb-'}
   }
 }
 
 export function gridChildProperties() {
   return {
-    padding: {type: 'string', required: false}
+    padding: {type: 'string', required: false},
+    paddingX: {type: 'string', required: false}
   }
 }
 
 export function gridChildPropertiesMapping() {
   return {
-    padding: {className: 'p-'}
+    padding: {className: 'p-'},
+    paddingX: {className: 'px-'}
   }
 }
 
 export function gridVariants() {
   return {
     // Basic grid columns
+    default: 'grid-cols-4',
     cols1: 'grid-cols-1',
     cols2: 'grid-cols-2',
     cols3: 'grid-cols-3',
