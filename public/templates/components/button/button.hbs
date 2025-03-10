@@ -22,7 +22,7 @@
   iconSize={{resourceConfig.properties.iconSize}}
   {{/if~}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
-  onClick={() => { {{#if resourceConfig.properties.onClick}}{{resourceConfig.properties.onClick}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
+  onClick={() => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
 >
   {{#if resourceConfig.properties.label}}
   {{resourceConfig.properties.label}}

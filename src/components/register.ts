@@ -6,6 +6,7 @@ import carouselModule, { CAROUSEL } from './carousel';
 import chartModule, { CHART } from './chart';
 import checkboxModule, { CHECKBOX } from './checkbox';
 import columnModule, { COLUMN } from './column';
+import columnsModule, { COLUMNS } from './columns';
 import containerModule, { CONTAINER } from './container';
 import datePickerModule, { DATE_PICKER } from './datePicker';
 import flexModule, { FLEX } from './flex';
@@ -32,6 +33,7 @@ export function registerAllComponents() {
   register(CHART, chartModule.register);
   register(CHECKBOX, checkboxModule.register);
   register(COLUMN, columnModule.register);
+  register(COLUMNS, columnsModule.register);
   register(CONTAINER, containerModule.register);
   register(DATE_PICKER, datePickerModule.register);
   register(FLEX, flexModule.register);

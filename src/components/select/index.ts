@@ -10,7 +10,7 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Combobox } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPCombobox } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(selectVariants());
