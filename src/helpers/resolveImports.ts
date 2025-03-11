@@ -1,5 +1,5 @@
 import { Layout } from '../interfaces/types';
-import { extractComponentData } from '../utils/helpers';
+import { capitalize, extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 
 export function resolveImports(config: Layout, registry: Record<string, Component>): string {
@@ -17,6 +17,13 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
       metadata.imports.forEach((imp) => imports.add(imp));
     }
   });
+
+  // Define actions imports
+  const componentConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
+
+  if(componentConfigs) {
+    imports.add('import { IGRPButton } from "@igrp/igrp-framework-react-design-system";')
+  }
 
   return Array.from(imports).join('\n');
 }

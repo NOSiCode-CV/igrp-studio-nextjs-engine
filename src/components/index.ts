@@ -12,7 +12,9 @@ export type Component = {
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
   states: Set<string>;
+  serviceMethods: Set<string>;
   customClassName?: string;
+  codeBlock?: string;
   icon: string;
   label: string;
   group: string;
@@ -23,6 +25,7 @@ export type Component = {
   getImports: () => string[];
 
   loadCustomClassName:(tag: string) => void;
+  loadCodeBlock:(code: string) => void;
   loadIcon:(icon: string) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
@@ -34,6 +37,7 @@ export type Component = {
   getChildProperties: (properties?: Record<string, any>) => void;
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
   loadStates: (states: string[]) => void;
+  loadServiceMethods: (states: string[]) => void;
 
   setRenderer: (fn: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string)) => void;
 
@@ -49,7 +53,9 @@ function initComponent(): Component {
     propertiesMapping: {},
     childPropertiesMapping: {},
     states: new Set(),
+    serviceMethods: new Set(),
     customClassName: undefined,
+    codeBlock: undefined,
     icon: '',
     label: 'Component',
     group: '',
@@ -62,6 +68,10 @@ function initComponent(): Component {
 
     loadCustomClassName(tag: string) {
       this.customClassName = tag
+    },
+
+    loadCodeBlock(code: string) {
+      this.codeBlock = code
     },
 
     loadIcon(icon: string) {
@@ -106,6 +116,10 @@ function initComponent(): Component {
 
     loadStates(states) {
       states.forEach((state) => this.states.add(state));
+    },
+
+    loadServiceMethods(methods) {
+      methods.forEach((method) => this.serviceMethods.add(method));
     },
 
     setRenderer(renderer) {

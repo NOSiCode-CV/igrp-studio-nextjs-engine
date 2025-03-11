@@ -25,8 +25,14 @@ export default {
     component.loadStates([
       //'const [{{id}}Loading, set{{id}}Loading] = useState(false);',
       'const [{{id}}Disabled, set{{id}}Disabled] = useState({{value}});',
-      'const handle{{id}}Click = () => { console.log("Button {{id}} clicked"); };',
+      'const handle{{id}}Click = (e: any) => { service.handle{{id}}Click(e) };',
     ]);
+
+    component.loadServiceMethods(
+      [
+        `handle{{id}}Click: (data?: Record<string, unknown>) => void;`
+      ]
+    )
 
     component.setRenderer(hbsRenderer);
   },

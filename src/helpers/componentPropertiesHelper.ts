@@ -1,5 +1,6 @@
 import { Component } from '../components';
 import { Layout } from '../interfaces/types';
+import { capitalize } from './stringHelpers';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -28,4 +29,8 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
         : ``;
     })
     .join('')
+}
+
+export function resolveFirstType(data: any[]): string {
+  return (!data || Object.entries(data).length == 0)? '' : `${data[0].type}`;
 }

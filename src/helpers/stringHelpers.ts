@@ -17,3 +17,17 @@ export function toProps(context: any): string {
 export function concat(str1: string, str2: string) {
   return str1 + str2;
 }
+
+export function toCamelCaseFromNatural (str: string) {
+if (!str) return '';
+
+return str
+  .toLowerCase()
+  .split(' ')
+  .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+  .join('');
+}
+
+export function typeResolution(data: string): string {
+  return `<${data}>`
+}

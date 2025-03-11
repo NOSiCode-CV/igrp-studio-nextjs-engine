@@ -10,7 +10,7 @@ import { Component, defaultRenderer, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPTable } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableVariants());
@@ -23,8 +23,27 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadStates([
-      'const [data, setData] = useState([]);'
+      'const [contentTable{{id}}, setContentTable{{id}}] = useState([]);'
     ]);
+
+    component.loadServiceMethods([
+      '{{id}}: { populate: () => Promise<{ rows: any[] }>; };',
+    ]);
+
+    component.loadCodeBlock(
+    `
+    useEffect(() => {
+      updateTable()
+    },[])
+
+    const updateTable = async () => {
+      if (service.{{id}} && service.{{id}}.populate) {
+        const fakeData = (await service.{{id}}.populate()).rows
+        setContentTable{{id}}([...fakeData])
+      }
+    }
+    `
+    )
 
     component.setRenderer(hbsRenderer);
   },

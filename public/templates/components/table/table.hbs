@@ -1,18 +1,31 @@
-<Table>
-  <TableHeader>
-    <TableRow>
+<IGRPTable{{{typeResolution (resolveFirstType resourceConfig.properties.data)}}}
+  content={ contentTable{{resourceConfig.id}} }
+  columns={
+    [
+    {{#if resourceConfig.properties.columns}}
       {{#each resourceConfig.properties.columns}}
-        <TableHead>{{this.label}}</TableHead>
+      {
+        header: '{{this.name}}',
+        accessorKey: '{{toCamelCaseFromNatural this.name}}' as keyof {{resolveFirstType ../resourceConfig.properties.data}},
+        render: (value: string) => <span className="font-medium">{value}</span>
+      },
       {{/each}}
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    {{#each resourceConfig.properties.data}}
-      <TableRow>
-        {{#each ../resourceConfig.properties.columns}}
-          <TableCell>{{lookup ../this this.key}}</TableCell>
-        {{/each}}
-      </TableRow>
-    {{/each}}
-  </TableBody>
-</Table>
+    {{/if~}}
+    ]
+  }
+  {{#if resourceConfig.properties.actions}}
+  actions={({ original }) => (
+    <div className="flex justify-end gap-2">
+      {{#each resourceConfig.properties.actions}}
+      <IGRPButton
+        variant="{{this.variant}}"
+        size="icon"
+        hasIcon={ true }
+        iconName="{{this.iconName}}"
+        onClick={() => { handle{{this.id}}Click(original) }}
+      />
+      {{/each}}
+    </div>
+  )}
+  {{/if}}
+/>
