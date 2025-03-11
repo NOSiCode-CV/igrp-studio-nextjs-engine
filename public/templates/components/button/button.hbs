@@ -31,7 +31,7 @@
   className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
-  onClick={() => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(){{else}}handle{{resourceConfig.id}}Click(){{/if}} }}
+  onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
 >
   {{#if resourceConfig.properties.label}}
   {{resourceConfig.properties.label}}
