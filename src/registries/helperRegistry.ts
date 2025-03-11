@@ -25,6 +25,7 @@ import {
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
+import { renderTableRow } from '../helpers/renderTableRow';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -34,6 +35,7 @@ Handlebars.registerHelper("resolve-service-interface-methods", resolveServiceInt
 Handlebars.registerHelper("component-name-helper", componentNameHelper);
 Handlebars.registerHelper("field-helper", fieldHelper);
 Handlebars.registerHelper("render-layout", renderLayout);
+Handlebars.registerHelper("render-table-row", renderTableRow);
 Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperties);
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);

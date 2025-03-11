@@ -21,14 +21,36 @@ export function resolveStates(config: Layout, registry: Record<string, Component
     }
   });
 
-  const componentConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
+  const actionsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
   // Define Table states
-  if(componentConfigs) {
-    componentConfigs.forEach((c) => {
-      c.properties?.actions.forEach((e: any) =>
-        stateDefinitions.add(
-          `const handle${e.id}Click = (e: any) => { ${e.action ? `${e.action}(e)` : `service.${e.id}(e)`} };`,
-        ),
+  if(actionsConfigs) {
+    actionsConfigs.forEach((c) => {
+      c.properties?.actions.forEach((action: Layout) => {
+          const metadata = registry[action.componentName];
+          if (metadata?.states) {
+            const id = action.id
+            const value = isBool(action.componentName) ? action.properties?.disabled ?? 'false'
+              : action.properties?.value ?? ''
+            metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
+          }
+        }
+      );
+    })
+  }
+
+  const columnsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.columns);
+  // Define Table states
+  if(columnsConfigs) {
+    columnsConfigs.forEach((c) => {
+      c.properties?.columns.forEach((column: Layout) => {
+          const metadata = registry[column.componentName];
+          if (metadata?.states && !metadata?.onTableComponent) {
+            const id = column.id
+            const value = isBool(column.componentName) ? column.properties?.disabled ?? 'false'
+              : column.properties?.value ?? ''
+            metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
+          }
+        }
       );
     })
   }

@@ -26,6 +26,8 @@ export default {
       'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
     ]);
 
+    component.loadOnTableComponent(`<span className="font-medium">{value}</span>`)
+
     component.setRenderer(hbsRenderer);
   },
 };

@@ -19,10 +19,31 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   });
 
   // Define actions imports
-  const componentConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
+  const actionConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
 
-  if(componentConfigs) {
-    imports.add('import { IGRPButton } from "@igrp/igrp-framework-react-design-system";')
+  if(actionConfigs) {
+    actionConfigs.forEach((component) => {
+      component.properties?.actions.forEach((action: Layout) => {
+        const metadata = registry[action.componentName];
+        if (metadata?.imports) {
+          metadata.imports.forEach((imp) => imports.add(imp));
+        }
+      })
+    });
+  }
+
+  // Define columns components imports
+  const columnsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.columns);
+
+  if(columnsConfigs) {
+    columnsConfigs.forEach((component) => {
+      component.properties?.columns.forEach((column: Layout) => {
+        const metadata = registry[column.componentName];
+        if (metadata?.imports && !metadata?.onTableComponent) {
+          metadata.imports.forEach((imp) => imports.add(imp));
+        }
+      })
+    });
   }
 
   return Array.from(imports).join('\n');

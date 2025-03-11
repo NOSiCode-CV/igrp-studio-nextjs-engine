@@ -24,7 +24,7 @@ export function resolveServiceInterfaceMethods(config: Layout, registry: Record<
     componentConfigs.forEach((c) => {
       c.properties?.actions.forEach((e: any) =>
         methodDefinitions.add(
-          `${e.id}: ((data?: Record<string, any>) => void);`,
+          `handle${e.id}Click: ((data?: Record<string, any>) => void);`,
         ),
       );
     })

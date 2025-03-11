@@ -51,6 +51,11 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       items: { type: 'string' },
       errorMessage: "The states must be an array of strings"
     },
+    childrenTypes: {
+      type: 'array',
+      items: { type: 'object', required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
+      errorMessage: "The children types must be an array of objects"
+    },
     renderer: {
       type: 'string',
       enum: ['hbs', 'default'],
@@ -62,7 +67,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       errorMessage: "The template path attribute must be a valid path string."
     },
   },
-  required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'renderer'],
+  required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'],
   additionalProperties: false,
 }
 

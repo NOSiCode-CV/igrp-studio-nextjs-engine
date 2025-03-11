@@ -11,10 +11,12 @@ export type Component = {
   childProperties: Record<string, any>;
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
+  childrenTypes: Set<string>;
   states: Set<string>;
   serviceMethods: Set<string>;
   customClassName?: string;
   codeBlock?: string;
+  onTableComponent?: string;
   icon: string;
   label: string;
   group: string;
@@ -26,6 +28,7 @@ export type Component = {
 
   loadCustomClassName:(tag: string) => void;
   loadCodeBlock:(code: string) => void;
+  loadOnTableComponent:(component: string) => void;
   loadIcon:(icon: string) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
@@ -36,6 +39,7 @@ export type Component = {
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
+  loadChildrenTypes: (types: string[]) => void;
   loadStates: (states: string[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
@@ -52,10 +56,12 @@ function initComponent(): Component {
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
+    childrenTypes: new Set(),
     states: new Set(),
     serviceMethods: new Set(),
     customClassName: undefined,
     codeBlock: undefined,
+    onTableComponent: undefined,
     icon: '',
     label: 'Component',
     group: '',
@@ -72,6 +78,10 @@ function initComponent(): Component {
 
     loadCodeBlock(code: string) {
       this.codeBlock = code
+    },
+
+    loadOnTableComponent(component: string) {
+      this.onTableComponent = component
     },
 
     loadIcon(icon: string) {
@@ -118,6 +128,10 @@ function initComponent(): Component {
       states.forEach((state) => this.states.add(state));
     },
 
+    loadChildrenTypes(types) {
+      types.forEach((type) => this.childrenTypes.add(type));
+    },
+
     loadServiceMethods(methods) {
       methods.forEach((method) => this.serviceMethods.add(method));
     },
@@ -147,23 +161,29 @@ export function getComponent(name: string): Component {
   return registry[name];
 }
 
+function componentAsObject(key: string, value: Component): ComponentRegisterConfig {
+  return {
+    name: key,
+    imports: [],
+    icon: value.icon,
+    group: value.group,
+    label: value.label,
+    variants: value.variants,
+    childProperties: value.childProperties,
+    properties: value.properties,
+    propertiesMapping: {},
+    childPropertiesMapping: {},
+    childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it,
+      registry[it])),
+    states: [],
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    templatePath: value.templatePath
+  }
+}
+
 export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry).map(([key, value]) => {
-    return {
-      name: key,
-      imports: [],
-      icon: value.icon,
-      group: value.group,
-      label: value.label,
-      variants: value.variants,
-      childProperties: value.childProperties,
-      properties: value.properties,
-      propertiesMapping: {},
-      childPropertiesMapping: {},
-      states: [],
-      renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
-      templatePath: value.templatePath
-    }
+    return componentAsObject(key, value)
   });
 
   return { components: components }

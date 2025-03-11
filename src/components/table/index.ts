@@ -22,6 +22,10 @@ export default {
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
+    component.loadChildrenTypes([
+      'input'
+    ]);
+
     component.loadStates([
       'const [contentTable{{id}}, setContentTable{{id}}] = useState([]);'
     ]);

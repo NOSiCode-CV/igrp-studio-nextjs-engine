@@ -5,9 +5,9 @@
     {{#if resourceConfig.properties.columns}}
       {{#each resourceConfig.properties.columns}}
       {
-        header: '{{this.name}}',
-        accessorKey: '{{toCamelCaseFromNatural this.name}}' as keyof {{resolveFirstType ../resourceConfig.properties.data}},
-        render: (value: string) => <span className="font-medium">{value}</span>
+        header: '{{#if this.properties.labelText}}{{this.properties.labelText}}{{else}}{{capitalize this.id}}{{/if}}',
+        accessorKey: '{{toCamelCaseFromNatural this.id}}' as keyof {{resolveFirstType ../resourceConfig.properties.data}},
+        render: (value: string) => {{{render-table-row this ../registry}}}
       },
       {{/each}}
     {{/if~}}
@@ -17,13 +17,7 @@
   actions={({ original }) => (
     <div className="flex justify-end gap-2">
       {{#each resourceConfig.properties.actions}}
-      <IGRPButton
-        variant="{{this.variant}}"
-        size="icon"
-        hasIcon={ true }
-        iconName="{{this.iconName}}"
-        onClick={() => { handle{{this.id}}Click(original) }}
-      />
+      {{{render-layout this}}}
       {{/each}}
     </div>
   )}
