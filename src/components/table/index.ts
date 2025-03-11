@@ -6,6 +6,7 @@ import {
   tableChildPropertiesMapping,
 } from './properties';
 import { Component, defaultRenderer, hbsRenderer } from '../index';
+import { INPUT } from '@/components/input';
 
 export default {
   register(component: Component) {
@@ -23,7 +24,7 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      'input'
+      INPUT
     ]);
 
     component.loadStates([

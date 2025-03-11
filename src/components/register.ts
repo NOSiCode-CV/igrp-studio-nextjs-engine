@@ -12,7 +12,6 @@ import datePickerModule, { DATE_PICKER } from './datePicker';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
-import inlineModule, { INLINE } from './inline';
 import inputModule, { INPUT } from './input';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import radioModule, { RADIO } from './radio';
@@ -39,7 +38,6 @@ export function registerAllComponents() {
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(GRID, gridModule.register);
-  register(INLINE, inlineModule.register);
   register(INPUT, inputModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(RADIO, radioModule.register);
