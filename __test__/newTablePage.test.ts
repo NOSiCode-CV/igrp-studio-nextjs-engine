@@ -15,14 +15,6 @@ const tableLayout: Layout = {
       id: 'table_default',
       componentName: 'table',
       properties: {
-        data: [
-          {
-            type: 'any'
-          }
-        ],
-        content: [
-
-        ],
         columns: [
           { name: 'Name' },
           { name: 'Email' },

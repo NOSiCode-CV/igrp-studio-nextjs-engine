@@ -32,5 +32,5 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
 }
 
 export function resolveFirstType(data: any[]): string {
-  return (!data || Object.entries(data).length == 0)? '' : `${data[0].type}`;
+  return (!data || Object.entries(data).length == 0)? 'any' : `${data[0].type}`;
 }

@@ -31,18 +31,18 @@ export default {
     ]);
 
     component.loadCodeBlock(
-    `
-    useEffect(() => {
-      updateTable()
-    },[])
+  `
+  useEffect(() => {
+    updateTable{{id}}()
+  },[])
 
-    const updateTable = async () => {
-      if (service.{{id}} && service.{{id}}.populate) {
-        const fakeData = (await service.{{id}}.populate()).rows
-        setContentTable{{id}}([...fakeData])
-      }
+  const updateTable{{id}} = async () => {
+    if (service.{{id}} && service.{{id}}.populate) {
+      const data = (await service.{{id}}.populate()).rows
+      setContentTable{{id}}([...data])
     }
-    `
+  }
+  `
     )
 
     component.setRenderer(hbsRenderer);
