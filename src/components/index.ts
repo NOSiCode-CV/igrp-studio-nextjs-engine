@@ -12,6 +12,7 @@ export type Component = {
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
   childrenTypes: Set<string>;
+  acceptedChildren: Set<string>;
   states: Set<string>;
   serviceMethods: Set<string>;
   customClassName?: string;
@@ -40,6 +41,7 @@ export type Component = {
   getChildProperties: (properties?: Record<string, any>) => void;
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
   loadChildrenTypes: (types: string[]) => void;
+  loadAcceptedChildren: (types: string[]) => void;
   loadStates: (states: string[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
@@ -56,6 +58,7 @@ function initComponent(): Component {
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
+    acceptedChildren: new Set(),
     childrenTypes: new Set(),
     states: new Set(),
     serviceMethods: new Set(),
@@ -132,6 +135,10 @@ function initComponent(): Component {
       types.forEach((type) => this.childrenTypes.add(type));
     },
 
+    loadAcceptedChildren(types) {
+      types.forEach((type) => this.acceptedChildren.add(type));
+    },
+
     loadServiceMethods(methods) {
       methods.forEach((method) => this.serviceMethods.add(method));
     },
@@ -175,6 +182,8 @@ function componentAsObject(key: string, value: Component): ComponentRegisterConf
     childPropertiesMapping: {},
     childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it,
       registry[it])),
+    acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it,
+      registry[it])),
     states: [],
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
     templatePath: value.templatePath
@@ -182,9 +191,11 @@ function componentAsObject(key: string, value: Component): ComponentRegisterConf
 }
 
 export function registryAsObject(): ComponentRegistrationConfig {
-  const components: ComponentRegisterConfig[] = Object.entries(registry).map(([key, value]) => {
-    return componentAsObject(key, value)
-  });
+  const components: ComponentRegisterConfig[] = Object.entries(registry)
+    .filter(([_, itValue]) => !registry[itValue.group])
+    .map(([key, value]) => {
+      return componentAsObject(key, value)
+    });
 
   return { components: components }
 }

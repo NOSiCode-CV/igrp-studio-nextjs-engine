@@ -240,6 +240,7 @@ export interface ComponentRegisterConfig {
   childPropertiesMapping?: Record<string, any>,
   states: string[],
   childrenTypes: ComponentRegisterConfig[],
+  acceptedChildren: ComponentRegisterConfig[],
   renderer: 'default' | 'hbs',
   templatePath?: string
 }

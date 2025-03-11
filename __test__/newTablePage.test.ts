@@ -14,65 +14,9 @@ const tableLayout: Layout = {
     {
       id: 'table_default',
       componentName: 'table',
-      properties: {
-        columns: [
-          /*{
-            id: 'checkbox_selected',
-            componentName: 'checkbox',
-            properties: {
-              type: 'text',
-              labelText: 'Selected'
-            },
-          },*/
-          {
-            id: 'name',
-            componentName: 'input',
-            properties: {
-              type: 'text',
-              labelText: 'Name'
-            },
-          },
-          {
-            id: 'email',
-            componentName: 'input',
-            properties: {
-              type: 'email',
-              labelText: 'Email'
-            },
-          },
-          {
-            id: 'role',
-            componentName: 'select',
-            properties: {
-              options: [
-                { value: 'Admin', label: 'Admin' },
-                { value: 'User', label: 'User' },
-                { value: 'Guest', label: 'Guest' },
-              ],
-            },
-          },
-        ],
-        actions: [
-          {
-            id: "action_edit",
-            componentName: "button",
-            properties: {
-              variant: 'ghost',
-              size: 'icon',
-              iconName: 'Pencil'
-            }
-          },
-          {
-            id: "action_delete",
-            componentName: "button",
-            properties: {
-              variant: 'destructive',
-              size: 'icon',
-              iconName: 'Trash'
-            }
-          },
-        ]
-      },
+      children: [
+
+      ],
     },
   ],
 };

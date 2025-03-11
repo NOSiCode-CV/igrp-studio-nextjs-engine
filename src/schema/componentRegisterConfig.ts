@@ -56,6 +56,11 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       items: { type: 'object', required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
       errorMessage: "The children types must be an array of objects"
     },
+    acceptedChildren: {
+      type: 'array',
+      items: { type: 'object', required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
+      errorMessage: "The accepted children must be an array of objects"
+    },
     renderer: {
       type: 'string',
       enum: ['hbs', 'default'],
