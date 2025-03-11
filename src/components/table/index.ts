@@ -5,8 +5,11 @@ import {
   tableChildProperties,
   tableChildPropertiesMapping,
 } from './properties';
-import { Component, defaultRenderer, hbsRenderer } from '../index';
-import { INPUT } from '@/components/input';
+import { Component, hbsRenderer } from '../index';
+import { INPUT } from '../input';
+import { BUTTON } from '../button';
+import { DATE_PICKER } from '../datePicker';
+import { DROPDOWN } from '../dropdown';
 
 export default {
   register(component: Component) {
@@ -24,7 +27,7 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      INPUT
+      INPUT, DATE_PICKER, BUTTON, DROPDOWN
     ]);
 
     component.loadStates([

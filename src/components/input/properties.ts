@@ -9,12 +9,6 @@ export function inputProperties() {
         'number',
         'tel',
         'url',
-        'search',
-        'date',
-        'datetime-local',
-        'month',
-        'week',
-        'time',
         'color'
       ] },
     labelText: { type: 'string', required: false, default: 'Input Text' },

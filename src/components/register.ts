@@ -9,6 +9,7 @@ import columnModule, { COLUMN } from './column';
 import columnsModule, { COLUMNS } from './columns';
 import containerModule, { CONTAINER } from './container';
 import datePickerModule, { DATE_PICKER } from './datePicker';
+import dropdownModule, { DROPDOWN } from './dropdown';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
@@ -35,6 +36,7 @@ export function registerAllComponents() {
   register(COLUMNS, columnsModule.register);
   register(CONTAINER, containerModule.register);
   register(DATE_PICKER, datePickerModule.register);
+  register(DROPDOWN, dropdownModule.register);
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(GRID, gridModule.register);

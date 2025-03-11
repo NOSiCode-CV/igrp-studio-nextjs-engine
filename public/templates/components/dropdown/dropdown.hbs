@@ -1,0 +1,41 @@
+<IGRPDropdown
+  {{#if resourceConfig.properties.variant}}
+  variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
+  disabled={ {{resourceConfig.id}}Disabled }
+  {{#if resourceConfig.properties.hasIcon}}
+  hasIcon={ {{resourceConfig.properties.hasIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconName}}
+  iconName="{{resourceConfig.properties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconPosition}}
+  iconPosition="{{resourceConfig.properties.iconPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconClass}}
+  iconClass="{{resourceConfig.properties.iconClass}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconSize}}
+  iconSize={{resourceConfig.properties.iconSize}}
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{/if}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{/if}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{!--loading={ {{resourceConfig.id}}Loading }--}}
+  onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
+>
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+</IGRPDropdown>

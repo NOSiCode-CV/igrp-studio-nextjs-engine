@@ -142,7 +142,6 @@ export const COMPONENTS = [
   "card",
   "aspect",
   "stack",
-  "inline",
   "input",
   "label",
   "button",

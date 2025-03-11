@@ -2,6 +2,13 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 
 export function datePickerProperties() {
   return {
+    /*type: { type: 'string', required: false, default: 'date', enum: [
+        'date',
+        'datetime-local',
+        'month',
+        'week',
+        'time',
+    ]},*/
     labelText: { type: 'string', required: false },
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },

@@ -21,7 +21,7 @@ const inputLayout: Layout = {
       id: 'input_text',
       componentName: 'input',
       properties: {
-        type: 'text',
+        type: 'search',
         placeholder: 'Enter your text',
       },
     },
