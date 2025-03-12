@@ -66,6 +66,22 @@ const tableLayout: Layout = {
                 dateFormat: "dd/MM/yyyy"
               }
             },
+            {
+              id: 'department',
+              componentName: 'tableBadgeCell',
+              properties: {
+                headerTitle: 'Department',
+                headerType: 'sortDropdown'
+              }
+            },
+            {
+              id: 'subRole',
+              componentName: 'tableBadgeCell',
+              properties: {
+                headerTitle: 'Sub-Role',
+                headerType: 'sortDropdown'
+              }
+            },
           ],
         },
         {
@@ -81,19 +97,19 @@ const tableLayout: Layout = {
               }
             },
             {
-              id: 'role',
+              id: 'subRole',
               componentName: 'tableDropdownFilter',
               properties: {
                 placeholder: 'Filter by option...',
                 options: [
-                  { value: 'Admin', label: 'Admin' },
-                  { value: 'User', label: 'User' },
-                  { value: 'Guest', label: 'Guest' },
+                  { value: 'Master', label: 'Master' },
+                  { value: 'Default', label: 'Default' },
+                  { value: 'Temporary', label: 'Temporary' },
                 ],
               }
             },
             {
-              id: 'email',
+              id: 'role',
               componentName: 'tableFacetedFilter',
               properties: {
                 placeholder: 'Selecionar',
@@ -105,7 +121,7 @@ const tableLayout: Layout = {
               }
             },
             {
-              id: 'salary',
+              id: 'department',
               componentName: 'tableInputFilter',
               properties: {
 
@@ -118,7 +134,7 @@ const tableLayout: Layout = {
 
               }
             },
-            {
+            /*{
               id: 'role',
               componentName: 'tableSelectFilter',
               properties: {
@@ -129,7 +145,7 @@ const tableLayout: Layout = {
                   { value: 'Guest', label: 'Guest' },
                 ],
               }
-            },
+            },*/
           ],
         },
       ],

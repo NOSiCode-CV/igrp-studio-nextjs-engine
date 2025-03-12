@@ -26,6 +26,7 @@ export default {
     ]);
 
     component.loadVariants(tableVariants());
+    component.loadChildrenMax(2)
     component.loadIcon('Table')
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
@@ -35,14 +36,11 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      TABLE_COLUMNS, TABLE_FILTERS, TABLE_EXPANDER_CELL, TABLE_TEXT_CELL,
-      TABLE_AMOUNT_CELL, TABLE_DATE_CELL, TABLE_DATE_FILTER, TABLE_DROPDOWN_FILTER,
-      TABLE_FACETED_FILTER, TABLE_INPUT_FILTER, TABLE_MINMAX_FILTER, TABLE_SELECT_FILTER
+      TABLE_COLUMNS, TABLE_FILTERS
     ]);
 
-    component.loadAcceptedChildren([TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL,
-      TABLE_DATE_CELL, TABLE_DATE_FILTER, TABLE_DROPDOWN_FILTER,
-      TABLE_FACETED_FILTER, TABLE_INPUT_FILTER, TABLE_MINMAX_FILTER, TABLE_SELECT_FILTER
+    component.loadAcceptedChildren([
+      TABLE_COLUMNS, TABLE_FILTERS
     ])
 
     component.loadStates([

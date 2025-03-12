@@ -22,6 +22,7 @@ export type Component = {
   label: string;
   group: string;
   parent: string;
+  maxChildren?: number;
   templatePath?: string;
   renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
 
@@ -36,6 +37,7 @@ export type Component = {
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
   loadTemplatePath:(templatePath?: string) => void;
+  loadChildrenMax:(max: number) => void;
 
   loadVariants: (variants: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
@@ -71,6 +73,7 @@ function initComponent(): Component {
     label: 'Component',
     group: '',
     parent: '',
+    maxChildren: undefined,
     templatePath: undefined,
     renderer: () => () => `<div className="text-sm font-medium text-gray-700">Component Not Registered</div>`,
 
@@ -108,6 +111,10 @@ function initComponent(): Component {
 
     loadTemplatePath(path?: string) {
       this.templatePath = path
+    },
+
+    loadChildrenMax(max: number) {
+      this.maxChildren = max
     },
 
     getImports() {

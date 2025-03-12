@@ -13,6 +13,14 @@ export const renderLayout = function (config: Layout, parent?: Layout): string {
 
   const componentParent = ((parent)? getComponent(parent.componentName) : undefined)
 
+  if(component.maxChildren && config.children) {
+    if (config.children.length > component.maxChildren) {
+      throw Error(
+        `The component ${config.componentName} allows only ${component.maxChildren} children.`,
+      );
+    }
+  }
+  
   str += component.render(config, component, parent, componentParent)
 
   return str

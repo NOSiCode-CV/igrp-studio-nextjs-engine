@@ -7,6 +7,11 @@ import {
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { TABLE } from '../../index';
+import { TABLE_EXPANDER_CELL } from '../tableExpanderCell';
+import { TABLE_TEXT_CELL } from '../tableTextCell';
+import { TABLE_AMOUNT_CELL } from '../tableAmountCell';
+import { TABLE_DATE_CELL } from '../tableDateCell';
+import { TABLE_BADGE_CELL } from '../tableBadgeCell';
 
 export default {
   register(component: Component) {
@@ -24,6 +29,15 @@ export default {
     component.getChildPropertiesMapping(tableColumnsChildPropertiesMapping());
 
     component.loadStates([]);
+
+    component.loadChildrenTypes([
+      TABLE_EXPANDER_CELL, TABLE_TEXT_CELL,
+      TABLE_AMOUNT_CELL, TABLE_DATE_CELL, TABLE_BADGE_CELL
+    ]);
+
+    component.loadAcceptedChildren([TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL,
+      TABLE_DATE_CELL, TABLE_BADGE_CELL
+    ])
 
     component.setRenderer(hbsRenderer);
   },
