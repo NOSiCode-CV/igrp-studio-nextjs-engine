@@ -16,7 +16,8 @@ export default {
 
     component.loadVariants(tableFiltersVariants());
     component.loadIcon('default')
-    component.loadGroup(TABLE)
+    component.loadParent(TABLE)
+    component.loadGroup('Columns')
     component.loadLabel('Table Filter')
     component.getProperties(tableFiltersProperties());
     component.getPropertiesMapping(tableFiltersPropertiesMapping());

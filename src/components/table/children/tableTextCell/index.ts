@@ -17,8 +17,9 @@ export default {
 
     component.loadVariants(tableTextCellVariants());
     component.loadIcon('default')
-    component.loadGroup(TABLE)
-    component.loadLabel('Text Cell')
+    component.loadParent(TABLE)
+    component.loadGroup('Columns')
+    component.loadLabel('Text Column')
     component.getProperties(tableTextCellProperties());
     component.getPropertiesMapping(tableTextCellPropertiesMapping());
     component.getChildProperties(tableTextCellChildProperties());

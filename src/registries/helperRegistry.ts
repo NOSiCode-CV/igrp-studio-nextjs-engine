@@ -8,7 +8,7 @@ import {
   toProps,
   concat,
   toCamelCaseFromNatural,
-  typeResolution, trim,
+  typeResolution, trim, toCamelCase,
 } from '../helpers/stringHelpers';
 import { length } from '../helpers/arrayHelpers';
 import { greaterThan, equals, and, not } from '../helpers/comparisonHelpers';
@@ -48,6 +48,7 @@ Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
+Handlebars.registerHelper('toCamelCase', toCamelCase);
 Handlebars.registerHelper("capitalize", capitalize);
 Handlebars.registerHelper("trim", trim);
 Handlebars.registerHelper("json", json);

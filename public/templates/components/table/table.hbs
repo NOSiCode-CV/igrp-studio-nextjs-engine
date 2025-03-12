@@ -7,8 +7,24 @@
         {{#each this.children}}
         {
           {{#if this.properties.headerTitle}}header: {{> tableHeader this ~}},{{/if~}}
-          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCaseFromNatural this.id}}',
+          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.id}}',
           cell: ({ row }) => (
+          {{{render-table-row this ../../registry}}}
+          )
+        },
+        {{/each}}
+      {{/each}}
+    {{/if~}}
+    ]
+  }
+  filters={
+    [
+    {{#if resourceConfig.children}}
+      {{#each (extractTableFilters resourceConfig.children)}}
+        {{#each this.children}}
+        {
+          {{#if this.id}}columnId: "{{this.id}}",{{/if}}
+          component: (column) => (
           {{{render-table-row this ../../registry}}}
           )
         },

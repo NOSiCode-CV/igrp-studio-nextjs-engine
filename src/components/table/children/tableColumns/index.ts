@@ -16,7 +16,7 @@ export default {
 
     component.loadVariants(tableColumnsVariants());
     component.loadIcon('default')
-    component.loadGroup(TABLE)
+    component.loadParent(TABLE)
     component.loadLabel('Table Column')
     component.getProperties(tableColumnsProperties());
     component.getPropertiesMapping(tableColumnsPropertiesMapping());

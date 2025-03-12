@@ -18,8 +18,9 @@ export default {
 
     component.loadVariants(tableAmountCellVariants());
     component.loadIcon('default')
-    component.loadGroup(TABLE)
-    component.loadLabel('Expandable Cell')
+    component.loadParent(TABLE)
+    component.loadGroup('Columns')
+    component.loadLabel('Amount Column')
     component.getProperties(tableAmountCellProperties());
     component.getPropertiesMapping(tableAmountCellPropertiesMapping());
     component.getChildProperties(tableAmountCellChildProperties());

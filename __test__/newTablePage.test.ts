@@ -54,7 +54,16 @@ const tableLayout: Layout = {
               componentName: 'tableAmountCell',
               properties: {
                 headerTitle: "Salary",
+                headerType: "sortDropdown"
+              }
+            },
+            {
+              id: 'contractDate',
+              componentName: 'tableDateCell',
+              properties: {
+                headerTitle: "Contract Date",
                 headerType: "sortDropdown",
+                dateFormat: "dd/MM/yyyy"
               }
             },
           ],
@@ -64,7 +73,63 @@ const tableLayout: Layout = {
           componentName: 'tableFilters',
           properties: {},
           children: [
+            {
+              id: 'contractDate',
+              componentName: 'tableDateFilter',
+              properties: {
 
+              }
+            },
+            {
+              id: 'role',
+              componentName: 'tableDropdownFilter',
+              properties: {
+                placeholder: 'Filter by option...',
+                options: [
+                  { value: 'Admin', label: 'Admin' },
+                  { value: 'User', label: 'User' },
+                  { value: 'Guest', label: 'Guest' },
+                ],
+              }
+            },
+            {
+              id: 'email',
+              componentName: 'tableFacetedFilter',
+              properties: {
+                placeholder: 'Selecionar',
+                options: [
+                  { value: 'Admin', label: 'Admin' },
+                  { value: 'User', label: 'User' },
+                  { value: 'Guest', label: 'Guest' },
+                ],
+              }
+            },
+            {
+              id: 'salary',
+              componentName: 'tableInputFilter',
+              properties: {
+
+              }
+            },
+            {
+              id: 'salary',
+              componentName: 'tableMinMaxFilter',
+              properties: {
+
+              }
+            },
+            {
+              id: 'role',
+              componentName: 'tableSelectFilter',
+              properties: {
+                placeholder: 'Filter by option...',
+                options: [
+                  { value: 'Admin', label: 'Admin' },
+                  { value: 'User', label: 'User' },
+                  { value: 'Guest', label: 'Guest' },
+                ],
+              }
+            },
           ],
         },
       ],

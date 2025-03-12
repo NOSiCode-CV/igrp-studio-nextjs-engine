@@ -27,6 +27,13 @@ import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCel
 import tableColumnsModule, { TABLE_COLUMNS } from './table/children/tableColumns';
 import tableExpanderCellModule, { TABLE_EXPANDER_CELL } from './table/children/tableExpanderCell';
 import tableAmountCellModule, { TABLE_AMOUNT_CELL } from './table/children/tableAmountCell';
+import tableDateCellModule, { TABLE_DATE_CELL } from './table/children/tableDateCell';
+import tableDateFilterModule, { TABLE_DATE_FILTER } from './table/children/tableDateFilter';
+import tableDropdownFilterModule, { TABLE_DROPDOWN_FILTER } from './table/children/tableDropdownFilter';
+import tableMinMaxFilterModule, { TABLE_MINMAX_FILTER } from './table/children/tableMixMaxFilter';
+import tableInputFilterModule, { TABLE_INPUT_FILTER } from './table/children/tableInputFilter';
+import tableSelectFilterModule, { TABLE_SELECT_FILTER } from './table/children/tableSelectFilter';
+import tableFacetedFilterModule, { TABLE_FACETED_FILTER } from './table/children/tableFacetedFilter';
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
 import textareaModule, { TEXTAREA } from './textarea';
@@ -61,6 +68,13 @@ export function registerAllComponents() {
   register(TABLE_EXPANDER_CELL, tableExpanderCellModule.register);
   register(TABLE_FILTERS, tableFiltersModule.register);
   register(TABLE_AMOUNT_CELL, tableAmountCellModule.register);
+  register(TABLE_DATE_CELL, tableDateCellModule.register);
+  register(TABLE_DATE_FILTER, tableDateFilterModule.register);
+  register(TABLE_DROPDOWN_FILTER, tableDropdownFilterModule.register);
+  register(TABLE_INPUT_FILTER, tableInputFilterModule.register);
+  register(TABLE_MINMAX_FILTER, tableMinMaxFilterModule.register);
+  register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
+  register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
   register(TABS, tabsModule.register);
   register(TEXTAREA, textareaModule.register);
 }

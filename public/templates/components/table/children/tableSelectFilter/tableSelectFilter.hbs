@@ -1,0 +1,20 @@
+<SelectIGRPDataTableFilter
+  column={column}
+  placeholder="{{resourceConfig.properties.placeholder}}"
+  {{!--onChange={setInput{{resourceConfig.id}}Value}--}}
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.options}}
+  options={ {{{json resourceConfig.properties.options}}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{/if}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{/if}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+/>

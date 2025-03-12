@@ -21,6 +21,7 @@ export type Component = {
   icon: string;
   label: string;
   group: string;
+  parent: string;
   templatePath?: string;
   renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
 
@@ -33,6 +34,7 @@ export type Component = {
   loadIcon:(icon: string) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
+  loadParent:(parent: string) => void;
   loadTemplatePath:(templatePath?: string) => void;
 
   loadVariants: (variants: Record<string, any>) => void;
@@ -68,6 +70,7 @@ function initComponent(): Component {
     icon: '',
     label: 'Component',
     group: '',
+    parent: '',
     templatePath: undefined,
     renderer: () => () => `<div className="text-sm font-medium text-gray-700">Component Not Registered</div>`,
 
@@ -97,6 +100,10 @@ function initComponent(): Component {
 
     loadGroup(group: string) {
       this.group = group
+    },
+
+    loadParent(parent: string) {
+      this.parent = parent
     },
 
     loadTemplatePath(path?: string) {
@@ -193,7 +200,7 @@ function componentAsObject(key: string, value: Component): ComponentRegisterConf
 
 export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry)
-    .filter(([_, itValue]) => !registry[itValue.group])
+    .filter(([_, itValue]) => !registry[itValue.parent])
     .map(([key, value]) => {
       return componentAsObject(key, value)
     });

@@ -2,6 +2,11 @@ export function toLowerCase(str: string): string {
   return str.toLowerCase();
 }
 
+export function toCamelCase(str: string): string {
+  if (!str) return '';
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -31,6 +36,8 @@ return str
   .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
   .join('');
 }
+
+
 
 export function typeResolution(...data: any[]): string {
   data.pop();

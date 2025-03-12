@@ -18,8 +18,9 @@ export default {
 
     component.loadVariants(tableExpanderCellVariants());
     component.loadIcon('default')
-    component.loadGroup(TABLE)
-    component.loadLabel('Expandable Cell')
+    component.loadParent(TABLE)
+    component.loadGroup('Columns')
+    component.loadLabel('Expandable Column')
     component.getProperties(tableExpanderCellProperties());
     component.getPropertiesMapping(tableExpanderCellPropertiesMapping());
     component.getChildProperties(tableExpanderCellChildProperties());
