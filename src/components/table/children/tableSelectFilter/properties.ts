@@ -1,7 +1,9 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { cellProperties } from '@/components/table/children/tableColumns/properties';
 
 export function tableSelectFilterProperties() {
   return {
+    ...cellProperties(),
     placeholder: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
@@ -12,6 +14,7 @@ export function tableSelectFilterProperties() {
 
 export function tableSelectFilterPropertiesMapping() {
   return {
+    ...cellProperties(),
     ...commonPropertiesMapping(),
   };
 }

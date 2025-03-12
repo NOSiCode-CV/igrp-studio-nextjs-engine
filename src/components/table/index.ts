@@ -61,7 +61,7 @@ export default {
   const updateTable{{id}} = async () => {
     if (service.{{id}} && service.{{id}}.populate) {
       const data = (await service.{{id}}.populate()).rows
-      setContentTable{{id}}([...data])
+      setContentTable{{id}}(data)
     }
   }
   `
