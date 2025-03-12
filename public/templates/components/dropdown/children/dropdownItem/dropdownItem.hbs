@@ -1,4 +1,4 @@
-<IGRPButton
+<IGRPDropdownItem
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
@@ -33,13 +33,9 @@
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
   onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
 >
-  {{#if resourceConfig.properties.label}}
-  {{resourceConfig.properties.label}}
-  {{else}}
-  {{#if resourceConfig.children}}
+{{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
-  {{{render-layout this}}}
+    {{{render-layout this}}}
   {{/each}}
-  {{/if~}}
-  {{/if~}}
-</IGRPButton>
+{{/if~}}
+</IGRPDropdownItem>

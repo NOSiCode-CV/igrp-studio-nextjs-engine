@@ -4,11 +4,13 @@ import path from 'path';
 //export const CONFIGS = path.join(__dirname, '../../public/configs');
 //export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 //export const BASE_APP_ZIP = path.join(__dirname, '../../public/templates/base_app.zip');
+//export const PARTIALS_DIR = path.join(__dirname, '../../public/templates/components/{{name}}/partials');
 
 //Uncomment the following exports when building the application
 export const TEMPLATE_DIR = path.join(__dirname, './templates');
 export const CONFIGS = path.join(__dirname, './configs');
 export const BASE_APP_ZIP = path.join(__dirname, './templates/base_app.zip');
+export const PARTIALS_DIR = path.join(__dirname, './templates/components/{{name}}/partials');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -49,7 +51,8 @@ export const TEMPLATES = {
   CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
   CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
   CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
-  ELEMENT: 'components/{{name}}/{{name}}.hbs'
+  ELEMENT: 'components/{{name}}/{{name}}.hbs',
+  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs'
 };
 
 export const SRC_CONFIG_FILES = {

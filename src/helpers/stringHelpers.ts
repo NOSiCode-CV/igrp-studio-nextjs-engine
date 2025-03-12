@@ -28,6 +28,7 @@ return str
   .join('');
 }
 
-export function typeResolution(data: string): string {
-  return `<${data}>`
+export function typeResolution(...data: any[]): string {
+  data.pop();
+  return `<${data.join(', ')}>`
 }

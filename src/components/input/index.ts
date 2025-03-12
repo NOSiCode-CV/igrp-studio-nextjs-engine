@@ -6,6 +6,7 @@ import {
   inputChildPropertiesMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
 
 export default {
   register(component: Component) {
@@ -26,7 +27,7 @@ export default {
       'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
     ]);
 
-    component.loadOnTableComponent(`<span className="font-medium">{value}</span>`)
+    component.loadOnTableComponent(TABLE_TEXT_CELL)
 
     component.setRenderer(hbsRenderer);
   },

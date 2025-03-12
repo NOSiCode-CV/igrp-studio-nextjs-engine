@@ -6,11 +6,15 @@ import {
   tableChildPropertiesMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { INPUT } from '../input';
+import { BUTTON } from '../button';
+import { DROPDOWN } from '../dropdown';
+import { DATE_PICKER } from '../datePicker';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPTable } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTable } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableVariants());
@@ -25,7 +29,7 @@ export default {
     component.loadChildrenTypes([
     ]);
 
-    component.loadAcceptedChildren([...component.childrenTypes])
+    component.loadAcceptedChildren([...component.childrenTypes, INPUT, BUTTON, DATE_PICKER, DROPDOWN])
 
     component.loadStates([
       'const [contentTable{{id}}, setContentTable{{id}}] = useState([]);'

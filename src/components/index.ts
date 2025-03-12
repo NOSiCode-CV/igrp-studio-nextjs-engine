@@ -169,10 +169,11 @@ export function getComponent(name: string): Component {
 }
 
 function componentAsObject(key: string, value: Component): ComponentRegisterConfig {
+  const { icon } = value;
   return {
     name: key,
     imports: [],
-    icon: value.icon,
+    icon,
     group: value.group,
     label: value.label,
     variants: value.variants,
@@ -281,9 +282,9 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
   return () => str
 }
 
-export function hbsRenderer (component: Layout, parentComponent?: Layout, _?: Component, __?: Component, templatePath?: string): ((component: Layout, parentComponent?: Layout) => string) {
+export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   const name = component.componentName
-  return () => renderSyncTemplate(replaceTemplate((templatePath)? templatePath : TEMPLATES.ELEMENT, { name }), {
+  return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name }), {
     resourceConfig: component,
     parentResourceConfig: parentComponent
   })

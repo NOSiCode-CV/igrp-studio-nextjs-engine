@@ -1,5 +1,4 @@
-import { COMPONENTS, COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
-import { a } from 'vite/dist/node/types.d-aGj9QkWt';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
 
 interface IdentifiableElement {
   id: string
@@ -243,6 +242,11 @@ export interface ComponentRegisterConfig {
   acceptedChildren: ComponentRegisterConfig[],
   renderer: 'default' | 'hbs',
   templatePath?: string
+}
+
+export interface PartialConfig {
+  name: string,
+  path: string
 }
 
 export type RenderContext<T = undefined, P = undefined> = {

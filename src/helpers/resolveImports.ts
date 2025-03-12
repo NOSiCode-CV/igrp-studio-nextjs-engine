@@ -9,10 +9,11 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   const imports = new Set<string>();
 
   const components = new Set<{ componentName: string, id: string }>();
-  extractComponentData(config, components);
+  extractComponentData(config, components, registry);
 
   components.forEach((component) => {
     const metadata = registry[component.componentName];
+    console.log("Component: ", component.componentName)
     if (metadata?.imports) {
       metadata.imports.forEach((imp) => imports.add(imp));
     }
@@ -26,20 +27,6 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
       component.properties?.actions.forEach((action: Layout) => {
         const metadata = registry[action.componentName];
         if (metadata?.imports) {
-          metadata.imports.forEach((imp) => imports.add(imp));
-        }
-      })
-    });
-  }
-
-  // Define columns components imports
-  const columnsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.columns);
-
-  if(columnsConfigs) {
-    columnsConfigs.forEach((component) => {
-      component.properties?.columns.forEach((column: Layout) => {
-        const metadata = registry[column.componentName];
-        if (metadata?.imports && !metadata?.onTableComponent) {
           metadata.imports.forEach((imp) => imports.add(imp));
         }
       })

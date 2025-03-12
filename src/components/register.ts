@@ -10,6 +10,7 @@ import columnsModule, { COLUMNS } from './columns';
 import containerModule, { CONTAINER } from './container';
 import datePickerModule, { DATE_PICKER } from './datePicker';
 import dropdownModule, { DROPDOWN } from './dropdown';
+import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
@@ -22,8 +23,10 @@ import sliderModule, { SLIDER } from './slider';
 import stackModule, { STACK } from './stack';
 import switchModule, { SWITCH } from './switch';
 import tableModule, { TABLE } from './table';
+import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCell';
 import tabsModule, { TABS } from './tabs';
 import textareaModule, { TEXTAREA } from './textarea';
+import tableColumnModule, { TABLE_COLUMN } from './table/children/tableColumn';
 
 export function registerAllComponents() {
   register(ASPECT, aspectModule.register);
@@ -37,6 +40,7 @@ export function registerAllComponents() {
   register(CONTAINER, containerModule.register);
   register(DATE_PICKER, datePickerModule.register);
   register(DROPDOWN, dropdownModule.register);
+  register(DROPDOWN_ITEM, dropdownItemModule.register);
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(GRID, gridModule.register);
@@ -49,6 +53,8 @@ export function registerAllComponents() {
   register(STACK, stackModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
+  register(TABLE_TEXT_CELL, tableBadgeModule.register);
+  register(TABLE_COLUMN, tableColumnModule.register);
   register(TABS, tabsModule.register);
   register(TEXTAREA, textareaModule.register);
 }

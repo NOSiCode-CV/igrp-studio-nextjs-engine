@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { Handlebars } from '../../registries/helperRegistry';
+import { Handlebars, loadPartials } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE, TEMPLATE_DIR } from '../../utils/constants';
 import { registry } from '../../components';
 
@@ -44,6 +44,8 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
   if (!context) {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
+
+  loadPartials();
 
   context.registry = registry
 

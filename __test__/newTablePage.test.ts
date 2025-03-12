@@ -15,7 +15,63 @@ const tableLayout: Layout = {
       id: 'table_default',
       componentName: 'table',
       children: [
+        {
+          id: 'name',
+          componentName: 'tableColumn',
+          properties: {
+            headerTitle: 'Name'
+          },
+          children: [
+            {
+              id: 'name',
+              componentName: 'input',
+            },
+          ],
+        },
+        {
+          id: 'email',
+          componentName: 'tableColumn',
+          properties: {
+            headerTitle: 'Email',
+            headerType: 'sortToggle'
+          },
+          children: [
+            {
+              id: 'email',
+              componentName: 'input',
+            },
+          ],
+        },
+        {
+          id: 'role',
+          componentName: 'tableColumn',
+          properties: {
+            headerTitle: 'Role',
+            headerType: 'sortDropdown'
+          },
+          children: [
+            {
+              id: 'role',
+              componentName: 'input',
+            },
+          ],
+        },
+        /*{
+          id: 'table_default_filters',
+          componentName: 'tableFilters',
+          properties: {
+            variant: 'compact'
+          },
+          children: [
+            {
+              id: 'table_default',
+              componentName: '',
+              children: [
 
+              ],
+            },
+          ],
+        },*/
       ],
     },
   ],

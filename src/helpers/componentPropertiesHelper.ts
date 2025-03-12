@@ -1,6 +1,7 @@
 import { Component } from '../components';
 import { Layout } from '../interfaces/types';
 import { capitalize } from './stringHelpers';
+import { TABLE_COLUMN } from '../components/table/children/tableColumn';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -33,4 +34,8 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
 
 export function resolveFirstType(data: any[]): string {
   return (!data || Object.entries(data).length == 0)? 'any' : `${data[0].type}`;
+}
+
+export function extractTableColumns(children: Layout[]) {
+  return children.filter((it) => it.componentName === TABLE_COLUMN);
 }

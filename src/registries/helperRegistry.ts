@@ -20,12 +20,16 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties,
+  addClassNameFromProperties, extractTableColumns,
   resolveFirstType,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
 import { renderTableRow } from '../helpers/renderTableRow';
+import { registry } from '../components';
+import { PARTIALS_DIR } from '../utils/constants';
+import fs from 'fs-extra';
+import { replaceTemplate } from '../utils/helpers';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -39,6 +43,7 @@ Handlebars.registerHelper("render-table-row", renderTableRow);
 Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperties);
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
+Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
@@ -72,5 +77,32 @@ Handlebars.registerHelper("default", Default)
 // Objects
 Handlebars.registerHelper("notNullOrEmpty", notNullOrEmpty)
 Handlebars.registerHelper("nullOrEmpty", nullOrEmpty)
+
+
+/**
+ * Dynamically loads and registers Handlebars partials in a React.js application.
+ */
+export const loadPartials = () : void => {
+  try {
+    // Fetch a list of partial files (You may need to hardcode or retrieve this list from a backend API)
+    // Fetch each partial and register it
+    Object.entries(registry).map(async ([name, _]) => {
+      const partialsPath = replaceTemplate(PARTIALS_DIR, { name });
+      if (fs.pathExistsSync(partialsPath)) {
+        const partialDir = fs.readdirSync(partialsPath);
+        partialDir.forEach((partial) => {
+          const partialName = partial.replace('.hbs', '');
+          const partialContent: string = fs.readFileSync(`${partialsPath}/${partial}`, 'utf-8');
+          if (!partialContent) {
+            throw new Error(`Failed to load partial: ${partialName}`);
+          }
+          Handlebars.registerPartial(partialName, partialContent); // Register the partial
+        });
+      }
+    });
+  } catch (error) {
+    console.error('Error loading partials:', error);
+  }
+};
 
 export { Handlebars };

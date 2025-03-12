@@ -1,0 +1,9 @@
+{{#if (eq properties.headerType 'sortToggle')}}
+({ column }) => (<SortToggleIGRPDataTableHeader column={column} title="{{properties.headerTitle}}" />)
+{{else}}
+{{#if (eq properties.headerType 'sortDropdown')}}
+({ column }) => <SortDropdownIGRPDataTableHeader column={column} title="{{properties.headerTitle}}" />
+{{else}}
+'{{properties.headerTitle}}'
+{{/if~}}
+{{/if~}}

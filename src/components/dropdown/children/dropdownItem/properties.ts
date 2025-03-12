@@ -1,8 +1,8 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
-export function dropdownProperties() {
+export function dropdownItemProperties() {
   return {
-    label: { type: 'string', required: true, default: 'Dropdown' },
+    label: { type: 'string', required: true, default: 'DropdownItem' },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'icon', enum: ['default', 'sm', 'lg', 'icon'] },
     hasIcon: { type: 'boolean', required: false, default: false },
@@ -12,26 +12,25 @@ export function dropdownProperties() {
     iconSize: { type: 'number', required: false },
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
-    actionItem: { type: 'array', items: { type: 'object', items: { href: { type: 'string' } } }, required: false },
     ...commonProperties(),
   };
 }
 
-export function dropdownPropertiesMapping() {
+export function dropdownItemPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function dropdownChildProperties() {
+export function dropdownItemChildProperties() {
   return {};
 }
 
-export function dropdownChildPropertiesMapping() {
+export function dropdownItemChildPropertiesMapping() {
   return {};
 }
 
-export function dropdownVariants() {
+export function dropdownItemVariants() {
   return {
     default: "default",
     secondary: "secondary",

@@ -3,6 +3,8 @@ import { ComponentConfig, Layout, RenderContext } from '../interfaces/types';
 import { PageConfig } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
+import { Component } from '../components';
+import { TABLE } from '../components/table';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
@@ -86,10 +88,10 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
   return template.replace(/{{(.*?)}}/g, (_, key) => replacements[key] || '');
 };
 
-export function extractComponentData(layout: Layout, components: Set<{ componentName: string, id: string, properties?: Record<string, any> }>) {
-  components.add({ componentName: layout.componentName, id: layout.id, properties: layout.properties });
+export function extractComponentData(layout: Layout, components: Set<{ componentName: string, id: string, properties?: Record<string, any> }>, registry: Record<string, Component>, parent?: Layout) {
+  components.add({ componentName: ((parent && registry[parent.componentName]?.group === TABLE) ? registry[layout.componentName].onTableComponent ?? layout.componentName : layout.componentName), id: layout.id, properties: layout.properties });
   if (layout.children) {
-    layout.children.forEach((child) => extractComponentData(child, components));
+    layout.children.forEach((child) => extractComponentData(child, components, registry, layout));
   }
 }
 

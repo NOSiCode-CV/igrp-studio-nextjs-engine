@@ -9,7 +9,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
   const stateDefinitions = new Set<string>();
 
   const components = new Set<{ componentName: string, id: string, properties: Record<string, any> }>();
-  extractComponentData(config, components);
+  extractComponentData(config, components, registry);
 
   components.forEach((component) => {
     const metadata = registry[component.componentName];
@@ -31,23 +31,6 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             const id = action.id
             const value = isBool(action.componentName) ? action.properties?.disabled ?? 'false'
               : action.properties?.value ?? ''
-            metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
-          }
-        }
-      );
-    })
-  }
-
-  const columnsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.columns);
-  // Define Table states
-  if(columnsConfigs) {
-    columnsConfigs.forEach((c) => {
-      c.properties?.columns.forEach((column: Layout) => {
-          const metadata = registry[column.componentName];
-          if (metadata?.states && !metadata?.onTableComponent) {
-            const id = column.id
-            const value = isBool(column.componentName) ? column.properties?.disabled ?? 'false'
-              : column.properties?.value ?? ''
             metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
           }
         }
