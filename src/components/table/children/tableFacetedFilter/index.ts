@@ -14,7 +14,6 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { FacetedIGRPDataTableFilter } from "@igrp/igrp-framework-react-design-system";',
-      'import { facetedFilterFn } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableFacetedFilterVariants());

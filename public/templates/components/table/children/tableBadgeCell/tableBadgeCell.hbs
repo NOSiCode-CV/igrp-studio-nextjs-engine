@@ -1,6 +1,6 @@
 <BadgeIGRPDataTableCell
-  field={ row.getValue('{{resourceConfig.id}}') }
+  {{!--field={ row.getValue('{{resourceConfig.id}}') }--}}
   label={ row.original.{{resourceConfig.id}} }
-  customVariant={ {{#if resourceConfig.variant}}{{resourceConfig.variant}}{{else}}() => {}{{/if}} }
+  {{#if resourceConfig.variant}}variant="{{resourceConfig.variant}}"{{/if~}}
 >
 </BadgeIGRPDataTableCell>

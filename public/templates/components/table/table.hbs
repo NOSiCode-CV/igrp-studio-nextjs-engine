@@ -10,7 +10,8 @@
           {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.id}}',
           cell: ({ row }) => (
           {{{render-table-row this ../../registry}}}
-          )
+          ),
+        filterFn: {{#if (eq this.componentName 'tableDateCell')}}dateRangeFilterFn{{else}}facetedFilterFn{{/if}}
         },
         {{/each}}
       {{/each}}

@@ -9,13 +9,9 @@ export const renderTableRow = function (config: Layout, registry: Record<string,
 
   const table = config.componentName.includes('Cell') ? registry[TABLE_COLUMNS] : registry[TABLE_FILTERS]
 
-  console.log("Component: ", config.componentName)
-
   const component = registry[config.componentName]
 
   if(!component) return `<span className="font-medium">${config.componentName}</span>`
-
-
 
   return table.acceptedChildren.has(config.componentName)
       ? renderLayout(config)
