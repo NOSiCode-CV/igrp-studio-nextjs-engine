@@ -1,35 +1,37 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
-export function tableTextCellProperties() {
+export function tableExpanderCellProperties() {
   return {
     ...cellProperties(),
+    field: {type: 'string', required: true},
+    icons: {type: 'array', required: false, items: { type: 'string', required: true, enum: ['ChevronDown', 'ChevronUp'] }},
     variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
     ...commonProperties(),
   };
 }
 
-export function tableTextCellPropertiesMapping() {
+export function tableExpanderCellPropertiesMapping() {
   return {
     ...cellPropertiesMapping(),
     ...commonPropertiesMapping(),
   };
 }
 
-export function tableTextCellChildProperties() {
+export function tableExpanderCellChildProperties() {
   return {
 
   };
 }
 
-export function tableTextCellChildPropertiesMapping() {
+export function tableExpanderCellChildPropertiesMapping() {
   return {
 
   };
 }
 
 
-export function tableTextCellVariants() {
+export function tableExpanderCellVariants() {
   return {
     default: ''
   };

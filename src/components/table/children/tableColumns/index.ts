@@ -1,9 +1,9 @@
 import {
-  tableColumnPropertiesMapping,
-  tableColumnProperties,
-  tableColumnVariants,
-  tableColumnChildProperties,
-  tableColumnChildPropertiesMapping,
+  tableColumnsPropertiesMapping,
+  tableColumnsProperties,
+  tableColumnsVariants,
+  tableColumnsChildProperties,
+  tableColumnsChildPropertiesMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { TABLE } from '../../index';
@@ -14,14 +14,14 @@ export default {
       'import { SortToggleIGRPDataTableHeader, SortDropdownIGRPDataTableHeader, RowsSelectedIGRPDataTableHeader } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
-    component.loadVariants(tableColumnVariants());
+    component.loadVariants(tableColumnsVariants());
     component.loadIcon('default')
     component.loadGroup(TABLE)
     component.loadLabel('Table Column')
-    component.getProperties(tableColumnProperties());
-    component.getPropertiesMapping(tableColumnPropertiesMapping());
-    component.getChildProperties(tableColumnChildProperties());
-    component.getChildPropertiesMapping(tableColumnChildPropertiesMapping());
+    component.getProperties(tableColumnsProperties());
+    component.getPropertiesMapping(tableColumnsPropertiesMapping());
+    component.getChildProperties(tableColumnsChildProperties());
+    component.getChildPropertiesMapping(tableColumnsChildPropertiesMapping());
 
     component.loadStates([]);
 
@@ -29,6 +29,6 @@ export default {
   },
 };
 
-const TABLE_COLUMN = 'tableColumn'
+const TABLE_COLUMNS = 'tableColumns'
 
-export { TABLE_COLUMN };
+export { TABLE_COLUMNS };

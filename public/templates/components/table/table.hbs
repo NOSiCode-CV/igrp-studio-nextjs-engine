@@ -4,15 +4,15 @@
     [
     {{#if resourceConfig.children}}
       {{#each (extractTableColumns resourceConfig.children)}}
-      {
-        header: {{> tableHeader this ~}},
-        accessorKey: '{{toCamelCaseFromNatural this.id}}',
-        cell: ({ row }) => (
-        {{#each children}}
+        {{#each this.children}}
+        {
+          {{#if this.properties.headerTitle}}header: {{> tableHeader this ~}},{{/if~}}
+          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCaseFromNatural this.id}}',
+          cell: ({ row }) => (
           {{{render-table-row this ../../registry}}}
+          )
+        },
         {{/each}}
-        )
-      },
       {{/each}}
     {{/if~}}
     ]

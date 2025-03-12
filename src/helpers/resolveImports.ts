@@ -13,7 +13,6 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
   components.forEach((component) => {
     const metadata = registry[component.componentName];
-    console.log("Component: ", component.componentName)
     if (metadata?.imports) {
       metadata.imports.forEach((imp) => imports.add(imp));
     }

@@ -89,7 +89,7 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
 };
 
 export function extractComponentData(layout: Layout, components: Set<{ componentName: string, id: string, properties?: Record<string, any> }>, registry: Record<string, Component>, parent?: Layout) {
-  components.add({ componentName: ((parent && registry[parent.componentName]?.group === TABLE) ? registry[layout.componentName].onTableComponent ?? layout.componentName : layout.componentName), id: layout.id, properties: layout.properties });
+  components.add({ componentName: ((parent && registry[parent.componentName]?.group === TABLE) ? registry[layout.componentName]?.onTableComponent ?? layout.componentName : layout.componentName), id: layout.id, properties: layout.properties });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components, registry, layout));
   }

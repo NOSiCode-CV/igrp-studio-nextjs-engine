@@ -8,7 +8,7 @@ import {
   toProps,
   concat,
   toCamelCaseFromNatural,
-  typeResolution,
+  typeResolution, trim,
 } from '../helpers/stringHelpers';
 import { length } from '../helpers/arrayHelpers';
 import { greaterThan, equals, and, not } from '../helpers/comparisonHelpers';
@@ -20,7 +20,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties, extractTableColumns,
+  addClassNameFromProperties, extractTableColumns, extractTableFilters,
   resolveFirstType,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
@@ -44,10 +44,12 @@ Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperti
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
+Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
 Handlebars.registerHelper("capitalize", capitalize);
+Handlebars.registerHelper("trim", trim);
 Handlebars.registerHelper("json", json);
 Handlebars.registerHelper("toProps", toProps);
 Handlebars.registerHelper("concat", concat);
@@ -96,7 +98,7 @@ export const loadPartials = () : void => {
           if (!partialContent) {
             throw new Error(`Failed to load partial: ${partialName}`);
           }
-          Handlebars.registerPartial(partialName, partialContent); // Register the partial
+          Handlebars.registerPartial(partialName, partialContent.trim()); // Register the partial
         });
       }
     });

@@ -6,10 +6,11 @@ import {
   tableChildPropertiesMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
-import { INPUT } from '../input';
-import { BUTTON } from '../button';
-import { DROPDOWN } from '../dropdown';
-import { DATE_PICKER } from '../datePicker';
+import { TABLE_COLUMNS } from './children/tableColumns';
+import { TABLE_FILTERS } from './children/tableFilters';
+import { TABLE_EXPANDER_CELL } from './children/tableExpanderCell';
+import { TABLE_TEXT_CELL } from './children/tableTextCell';
+import { TABLE_AMOUNT_CELL } from './children/tableAmountCell';
 
 export default {
   register(component: Component) {
@@ -27,9 +28,10 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadChildrenTypes([
+      TABLE_COLUMNS, TABLE_FILTERS, TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL
     ]);
 
-    component.loadAcceptedChildren([...component.childrenTypes, INPUT, BUTTON, DATE_PICKER, DROPDOWN])
+    component.loadAcceptedChildren([TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL])
 
     component.loadStates([
       'const [contentTable{{id}}, setContentTable{{id}}] = useState([]);'

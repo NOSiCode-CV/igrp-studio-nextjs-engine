@@ -24,9 +24,12 @@ import stackModule, { STACK } from './stack';
 import switchModule, { SWITCH } from './switch';
 import tableModule, { TABLE } from './table';
 import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCell';
+import tableColumnsModule, { TABLE_COLUMNS } from './table/children/tableColumns';
+import tableExpanderCellModule, { TABLE_EXPANDER_CELL } from './table/children/tableExpanderCell';
+import tableAmountCellModule, { TABLE_AMOUNT_CELL } from './table/children/tableAmountCell';
+import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
 import textareaModule, { TEXTAREA } from './textarea';
-import tableColumnModule, { TABLE_COLUMN } from './table/children/tableColumn';
 
 export function registerAllComponents() {
   register(ASPECT, aspectModule.register);
@@ -54,7 +57,10 @@ export function registerAllComponents() {
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
   register(TABLE_TEXT_CELL, tableBadgeModule.register);
-  register(TABLE_COLUMN, tableColumnModule.register);
+  register(TABLE_COLUMNS, tableColumnsModule.register);
+  register(TABLE_EXPANDER_CELL, tableExpanderCellModule.register);
+  register(TABLE_FILTERS, tableFiltersModule.register);
+  register(TABLE_AMOUNT_CELL, tableAmountCellModule.register);
   register(TABS, tabsModule.register);
   register(TEXTAREA, textareaModule.register);
 }

@@ -16,62 +16,57 @@ const tableLayout: Layout = {
       componentName: 'table',
       children: [
         {
-          id: 'name',
-          componentName: 'tableColumn',
-          properties: {
-            headerTitle: 'Name'
-          },
+          id: 'expand',
+          componentName: 'tableColumns',
+          properties: {},
           children: [
+            {
+              id: 'expand',
+              componentName: 'tableExpanderCell',
+              properties: {
+              }
+            },
             {
               id: 'name',
-              componentName: 'input',
+              componentName: 'tableTextCell',
+              properties: {
+                headerTitle: "Name",
+              }
             },
-          ],
-        },
-        {
-          id: 'email',
-          componentName: 'tableColumn',
-          properties: {
-            headerTitle: 'Email',
-            headerType: 'sortToggle'
-          },
-          children: [
             {
               id: 'email',
-              componentName: 'input',
+              componentName: 'tableTextCell',
+              properties: {
+                headerTitle: "Email",
+                headerType: "sortToggle",
+              }
+            },
+            {
+              id: 'role',
+              componentName: 'tableTextCell',
+              properties: {
+                headerTitle: "Role",
+                headerType: "sortDropdown",
+              }
+            },
+            {
+              id: 'salary',
+              componentName: 'tableAmountCell',
+              properties: {
+                headerTitle: "Salary",
+                headerType: "sortDropdown",
+              }
             },
           ],
         },
         {
-          id: 'role',
-          componentName: 'tableColumn',
-          properties: {
-            headerTitle: 'Role',
-            headerType: 'sortDropdown'
-          },
-          children: [
-            {
-              id: 'role',
-              componentName: 'input',
-            },
-          ],
-        },
-        /*{
           id: 'table_default_filters',
           componentName: 'tableFilters',
-          properties: {
-            variant: 'compact'
-          },
+          properties: {},
           children: [
-            {
-              id: 'table_default',
-              componentName: '',
-              children: [
 
-              ],
-            },
           ],
-        },*/
+        },
       ],
     },
   ],

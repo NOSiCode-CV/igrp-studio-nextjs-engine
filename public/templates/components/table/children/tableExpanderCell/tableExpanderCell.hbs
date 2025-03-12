@@ -1,0 +1,11 @@
+<ExpanderIGRPDataTableCell
+  row={ row }
+  field={ row.getValue('{{resourceConfig.id}}') }
+  {{#if resourceConfig.properties.icons}}icons={ [ {{resourceConfig.properties.icons}} ] }{{/if}}
+>
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+</ExpanderIGRPDataTableCell>
