@@ -16,6 +16,8 @@
   {{/if~}}
   {{#if resourceConfig.properties.options}}
   options={ {{{json resourceConfig.properties.options}}} }
+  {{else}}
+  options={ [] }
   {{/if~}}
   {{#if resourceConfig.properties.required}}
   required = { {{resourceConfig.properties.required}} }

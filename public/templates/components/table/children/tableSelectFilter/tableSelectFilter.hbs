@@ -7,6 +7,8 @@
   {{/if~}}
   {{#if resourceConfig.properties.options}}
   options={ {{{json resourceConfig.properties.options}}} }
+  {{else}}
+  options={ [] }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
