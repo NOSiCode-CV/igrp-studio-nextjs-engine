@@ -2,9 +2,6 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 
 export function tableProperties() {
   return {
-    columns: { type: 'array', required: true, items: { name: { type: 'string', unique: true, required: true, default: 'New Column' } } },
-    actions: { type: 'array', required: false, items: { id: { type: 'string', unique: true, required: true },
-        variant: { type: 'string', required: true, }, iconName: { type: 'string', required: true } } },
     data: { type: 'array', required: false, items: { type: { type: 'string', required: true, default: 'any' } } },
     ...commonProperties()
   };

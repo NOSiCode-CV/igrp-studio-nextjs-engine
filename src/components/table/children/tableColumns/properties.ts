@@ -20,10 +20,10 @@ export function cellPropertiesMapping() {
   return {};
 }
 
-export function cellProperties() {
+export function cellProperties(defaultTitle?: string) {
   return {
     headerType: { type: 'string', required: false, enum: [ 'sortToggle', 'sortDropdown' ] },
-    headerTitle: { type: 'string', required: false, default: 'New Column' },
+    headerTitle: { type: 'string', required: false, default: defaultTitle ?? 'New Column' },
   };
 }
 

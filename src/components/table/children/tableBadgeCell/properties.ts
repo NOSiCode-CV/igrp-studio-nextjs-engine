@@ -3,7 +3,7 @@ import { cellProperties, cellPropertiesMapping } from '@/components/table/childr
 
 export function tableBadgeCellProperties() {
   return {
-    ...cellProperties(),
+    ...cellProperties('Badge Column'),
     field: { type: 'string', required: true },
     label: { type: 'string', required: true },
     variant: { type: 'string', required: false, default: 'default', enum: ['default'] },

@@ -3,7 +3,7 @@ import { cellProperties, cellPropertiesMapping } from '../tableColumns/propertie
 
 export function tableExpanderCellProperties() {
   return {
-    ...cellProperties(),
+    ...cellProperties('Expander Column'),
     field: {type: 'string', required: true},
     icons: {type: 'array', required: false, items: { type: 'string', required: true, enum: ['ChevronDown', 'ChevronUp'] }},
     variant: {type: 'string', required: true, enum: ['default'], default: 'default'},

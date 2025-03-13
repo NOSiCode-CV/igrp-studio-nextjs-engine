@@ -3,7 +3,7 @@ import { cellProperties, cellPropertiesMapping } from '@/components/table/childr
 
 export function tableDateCellProperties() {
   return {
-    ...cellProperties(),
+    ...cellProperties('Date Column'),
     date: {type: 'string', required: true, default: '01/01/2025'},
     dateFormat: {type: 'string', required: false, default: 'dd/MM/YYYY', enum: ['dd/MM/yyyy', 'dd-MM-YYYY', 'yyyy/MM/dd', 'yyyy-MM-dd']},
     ...commonProperties(),

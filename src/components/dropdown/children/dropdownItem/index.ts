@@ -18,7 +18,7 @@ export default {
 
     component.loadVariants(dropdownItemVariants());
     component.loadIcon('DropdownItemIcon')
-    component.loadGroup(DROPDOWN)
+    component.loadParent(DROPDOWN)
     component.loadLabel('Dropdown Item')
     component.getProperties(dropdownItemProperties());
     component.getPropertiesMapping(dropdownItemPropertiesMapping());

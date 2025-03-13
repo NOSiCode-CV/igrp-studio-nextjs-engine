@@ -3,7 +3,7 @@ import { cellProperties, cellPropertiesMapping } from '../tableColumns/propertie
 
 export function tableAmountCellProperties() {
   return {
-    ...cellProperties(),
+    ...cellProperties('Amount Column'),
     field: {type: 'string', required: true},
     currency: {type: 'string', required: false, default: 'CVE', enum: ['CVE', 'EUR', 'USD']},
     language: {type: 'string', required: false, default: 'pt-PT', enum: ['pt-PT', 'en-US', 'fr-FR']},

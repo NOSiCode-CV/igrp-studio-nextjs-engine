@@ -3,7 +3,7 @@ import { cellProperties, cellPropertiesMapping } from '../tableColumns/propertie
 
 export function tableTextCellProperties() {
   return {
-    ...cellProperties(),
+    ...cellProperties('Text Column'),
     variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
     ...commonProperties(),
   };
