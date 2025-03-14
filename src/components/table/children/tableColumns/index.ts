@@ -12,11 +12,12 @@ import { TABLE_TEXT_CELL } from '../tableTextCell';
 import { TABLE_AMOUNT_CELL } from '../tableAmountCell';
 import { TABLE_DATE_CELL } from '../tableDateCell';
 import { TABLE_BADGE_CELL } from '../tableBadgeCell';
+import { TABLE_ACTION_LIST_CELL } from '../tableActionListCell';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { SortToggleIGRPDataTableHeader, SortDropdownIGRPDataTableHeader, RowsSelectedIGRPDataTableHeader } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableHeaderSortToggle, IGRPDataTableHeaderSortDropdown, IGRPDataTableHeaderRowsSelected } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableColumnsVariants());
@@ -32,11 +33,11 @@ export default {
 
     component.loadChildrenTypes([
       TABLE_EXPANDER_CELL, TABLE_TEXT_CELL,
-      TABLE_AMOUNT_CELL, TABLE_DATE_CELL, TABLE_BADGE_CELL
+      TABLE_AMOUNT_CELL, TABLE_DATE_CELL, TABLE_BADGE_CELL, TABLE_ACTION_LIST_CELL
     ]);
 
     component.loadAcceptedChildren([TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL,
-      TABLE_DATE_CELL, TABLE_BADGE_CELL
+      TABLE_DATE_CELL, TABLE_BADGE_CELL, TABLE_ACTION_LIST_CELL
     ])
 
     component.setRenderer(hbsRenderer);

@@ -1,11 +1,11 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
-import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableColumns/properties';
+import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 
-export function tableAlertDropdownItemProperties() {
+export function tableModalActionProperties() {
   return {
-    ...dropdownItemProperties('Alert'),
-    type: { type: 'string', required: true, const: 'alert' },
-    title: { type: 'string', required: false, default: 'New Alert' },
+    ...actionProperties('Modal'),
+    type: { type: 'string', required: true, default: 'modal' },
+    title: { type: 'string', required: false, default: 'New Modal' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
     classNameCancel: { type: 'string', required: false },
@@ -18,27 +18,27 @@ export function tableAlertDropdownItemProperties() {
   };
 }
 
-export function tableAlertDropdownItemPropertiesMapping() {
+export function tableModalActionPropertiesMapping() {
   return {
-    ...dropdownItemPropertiesMapping(),
+    ...actionPropertiesMapping(),
     ...commonPropertiesMapping(),
   };
 }
 
-export function tableAlertDropdownItemChildProperties() {
+export function tableModalActionChildProperties() {
   return {
 
   };
 }
 
-export function tableAlertDropdownItemChildPropertiesMapping() {
+export function tableModalActionChildPropertiesMapping() {
   return {
 
   };
 }
 
 
-export function tableAlertDropdownItemVariants() {
+export function tableModalActionVariants() {
   return {
     default: ''
   };

@@ -1,0 +1,37 @@
+<IGRPDataTableButton
+  actionButtons={
+    {
+      type: "{{resourceConfig.properties.type}}",
+      component: {{resolveComponent resourceConfig.componentName registry 'button'}},
+      props: {
+        {{#if resourceConfig.properties.title}}title: "{{resourceConfig.properties.title}}",{{/if~}}
+        {{#if resourceConfig.properties.labelTrigger}}labelTrigger: "{{resourceConfig.properties.labelTrigger}}",{{/if~}}
+        {{#if resourceConfig.properties.icon}}icon: "{{resourceConfig.properties.icon}}",{{/if~}}
+        {{#if resourceConfig.properties.iconPlacement}}iconPlacement: "{{resourceConfig.properties.iconPlacement}}",{{/if~}}
+        {{#if resourceConfig.properties.iconClassName}}iconClassName: "{{resourceConfig.properties.iconClassName}}",{{/if~}}
+        {{#if resourceConfig.properties.variant}}variant: "{{resourceConfig.properties.variant}}",{{/if~}}
+        {{#if resourceConfig.properties.href}}href: "{{resourceConfig.properties.variant}}",{{/if~}}
+        {{#if resourceConfig.properties.className}}className: "{{resourceConfig.properties.className}}",{{/if~}}
+        {{#if resourceConfig.properties.action}}action: () => {{resourceConfig.properties.action}}(rowData),{{/if~}}
+        {{#if resourceConfig.properties.showIcon}}showIcon: { {{resourceConfig.properties.showIcon}} },{{/if~}}
+        {{#if resourceConfig.properties.showCancel}}showCancel: { {{resourceConfig.properties.showCancel}} },{{/if~}}
+        {{#if resourceConfig.properties.labelCancel}}labelCancel: "{{resourceConfig.properties.labelCancel}}",{{/if~}}
+        {{#if resourceConfig.properties.classNameCancel}}classNameCancel: "{{resourceConfig.properties.classNameCancel}}",{{/if~}}
+        {{#if resourceConfig.properties.variantCancel}}variantCancel: "{{resourceConfig.properties.variantCancel}}",{{/if~}}
+        {{#if resourceConfig.properties.showConfirm}}showConfirm: { {{resourceConfig.properties.showConfirm}} },{{/if~}}
+        {{#if resourceConfig.properties.labelConfirm}}labelConfirm: "{{resourceConfig.properties.labelConfirm}}",{{/if~}}
+        {{#if resourceConfig.properties.classNameConfirm}}classNameConfirm: "{{resourceConfig.properties.classNameConfirm}}",{{/if~}}
+        {{#if resourceConfig.properties.variantConfirm}}variantConfirm: "{{resourceConfig.properties.variantConfirm}}",{{/if~}}
+        {{#if resourceConfig.properties.actionConfirm}}onClickConfirm: () => {{resourceConfig.properties.actionConfirm}}(rowData),{{/if~}}
+        {{#if resourceConfig.children}}
+        children:
+        {{#each resourceConfig.children}}
+        {{{render-layout resourceConfig}}}
+        {{/each}}
+        {{/if~}}
+      }
+    }
+  }
+
+>
+</IGRPDataTableButton>

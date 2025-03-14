@@ -16,7 +16,7 @@ import { TABLE_LINK_DROPDOWN_ITEM } from '../tableLinkDropdownItem';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { DropdownMenuIGRPDataTable } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableDropdownMenu } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableDropdownMenuCellVariants());

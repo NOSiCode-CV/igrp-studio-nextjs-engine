@@ -14,7 +14,7 @@ import { TABLE_BUTTON_LIST_CELL } from '../tableButtonListCell';
 export default {
   register(component: Component) {
 
-    component.loadComponentClass('ModalIGRPDataTableButton')
+    component.loadComponentClass('IGRPDataTableButtonModal')
 
     component.loadImports([
       `import { ${component.componentClass} } from "@igrp/igrp-framework-react-design-system";`,

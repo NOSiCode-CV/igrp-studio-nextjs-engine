@@ -1,34 +1,35 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
-export function tableDropdownMenuCellProperties() {
+export function tableActionListCellProperties() {
   return {
     ...cellProperties('Actions Column'),
+    type: { type: 'string', required: false, enum: [ 'dropdown', 'inline' ], default: 'inline' },
     ...commonProperties(),
   };
 }
 
-export function tableDropdownMenuCellPropertiesMapping() {
+export function tableActionListCellPropertiesMapping() {
   return {
     ...cellPropertiesMapping(),
     ...commonPropertiesMapping(),
   };
 }
 
-export function tableDropdownMenuCellChildProperties() {
+export function tableActionListCellChildProperties() {
   return {
 
   };
 }
 
-export function tableDropdownMenuCellChildPropertiesMapping() {
+export function tableActionListCellChildPropertiesMapping() {
   return {
 
   };
 }
 
 
-export function tableDropdownMenuCellVariants() {
+export function tableActionListCellVariants() {
   return {
     default: ''
   };

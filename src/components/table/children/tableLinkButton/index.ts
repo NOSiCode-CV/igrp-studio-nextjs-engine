@@ -9,12 +9,12 @@ import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
 import { TABLE } from '../../index';
-import { TABLE_BUTTON_LIST_CELL } from '@/components/table/children/tableButtonListCell';
+import { TABLE_BUTTON_LIST_CELL } from '../tableButtonListCell';
 
 export default {
   register(component: Component) {
 
-    component.loadComponentClass('LinkIGRPDataTableButton')
+    component.loadComponentClass('IGRPDataTableButtonLink')
 
     component.loadImports([
       `import { ${component.componentClass} } from "@igrp/igrp-framework-react-design-system";`,

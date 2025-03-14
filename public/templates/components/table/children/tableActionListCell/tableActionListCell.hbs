@@ -1,0 +1,11 @@
+const rowData = row.original;
+
+return (
+<>
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+</>
+);

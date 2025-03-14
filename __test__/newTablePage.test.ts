@@ -1,6 +1,7 @@
 import { initComponents, newPage } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
+import { inputLayout } from "./newInputPage.test";
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
@@ -14,6 +15,12 @@ const tableLayout: Layout = {
     {
       id: 'table_default',
       componentName: 'table',
+      properties: {
+        showFilter: true,
+        showPagination: true,
+        showToggleColumn: true
+
+      },
       children: [
         {
           id: 'expand',
@@ -81,6 +88,83 @@ const tableLayout: Layout = {
                 headerTitle: 'Sub-Role',
                 headerType: 'sortDropdown'
               }
+            },
+            {
+              id: 'actions',
+              componentName: 'tableActionListCell',
+              properties: {
+                type: 'inline',
+                headerTitle: 'Actions'
+              },
+              children: [
+                {
+                  id: 'delete',
+                  componentName: 'tableAlertAction',
+                  properties: {
+                    labelTrigger: 'Delete',
+                    icon: 'Trash',
+                    title: 'Delete',
+                    type: 'alert'
+                  }
+                },
+                {
+                  id: 'dropdown',
+                  componentName: 'tableDropdownMenuCell',
+                  children: [
+                    {
+                      id: 'disable',
+                      componentName: 'tableAlertDropdownItem',
+                      properties: {
+                        icon: 'Pause',
+                        labelTrigger: 'Disable',
+                        type: "alert"
+                      }
+                    },
+                    {
+                      id: 'edit',
+                      componentName: 'tableModalDropdownItem',
+                      properties: {
+                        icon: 'Pencil',
+                        labelTrigger: 'Edit',
+                        type: "modal"
+                      }
+                    },
+                    {
+                      id: 'external',
+                      componentName: 'tableLinkDropdownItem',
+                      properties: {
+                        icon: 'Link',
+                        labelTrigger: 'External',
+                        href: "https://igrp.cv/",
+                        type: "link"
+                      }
+                    },
+                  ]
+                },
+                {
+                  id: 'view',
+                  componentName: 'tableModalAction',
+                  properties: {
+                    labelTrigger: 'View',
+                    icon: 'Eye',
+                    title: 'View',
+                    type: 'modal'
+                  },
+                  children: [
+                    //inputLayout // TODO: modal shouldn't allow hrefs??
+                  ]
+                },
+                /*{
+                  id: 'external',
+                  componentName: 'tableLinkAction',
+                  properties: {
+                    labelTrigger: 'External',
+                    icon: 'ArrowRight',
+                    href: 'https://www.igrp.cv/',
+                    type: 'link'
+                  }
+                },*/
+              ]
             },
           ],
         },

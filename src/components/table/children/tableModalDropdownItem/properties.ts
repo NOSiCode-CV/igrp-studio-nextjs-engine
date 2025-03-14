@@ -4,6 +4,7 @@ import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableC
 export function tableModalDropdownItemProperties() {
   return {
     ...dropdownItemProperties('Modal'),
+    type: { type: 'string', required: true, const: 'modal' },
     title: { type: 'string', required: false, default: 'New Modal' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },

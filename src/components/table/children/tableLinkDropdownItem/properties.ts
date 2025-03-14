@@ -4,6 +4,7 @@ import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableC
 export function tableLinkDropdownItemProperties() {
   return {
     ...dropdownItemProperties('Link'),
+    type: { type: 'string', required: true, const: 'link' },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/' },
     ...commonProperties(),
   };

@@ -212,9 +212,11 @@ function componentAsObject(key: string, value: Component): ComponentRegisterConf
   }
 }
 
+const hiddenComponents: string [] = [];
+
 export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry)
-    .filter(([_, itValue]) => !registry[itValue.parent])
+    .filter(([key, itValue]) => !(registry[itValue.parent] || hiddenComponents.includes(key)))
     .map(([key, value]) => {
       return componentAsObject(key, value)
     });

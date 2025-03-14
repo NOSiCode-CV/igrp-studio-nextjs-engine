@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { ExpanderIGRPDataTableCell } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableCellExpander } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableExpanderCellVariants());

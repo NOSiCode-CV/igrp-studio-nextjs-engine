@@ -1,5 +1,5 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
-import { cellProperties, cellPropertiesMapping } from '@/components/table/children/tableColumns/properties';
+import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableDateCellProperties() {
   return {

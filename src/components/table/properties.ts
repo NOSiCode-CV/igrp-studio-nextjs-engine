@@ -3,6 +3,9 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 export function tableProperties() {
   return {
     data: { type: 'array', required: false, items: { type: { type: 'string', required: true, default: 'any' } } },
+    showFilter: { type: 'boolean', required: false, default: false },
+    showPagination: { type: 'boolean', required: false, default: false },
+    showToggleColumn: { type: 'boolean', required: false, default: false },
     ...commonProperties()
   };
 }

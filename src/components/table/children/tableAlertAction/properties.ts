@@ -1,9 +1,9 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
-import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableColumns/properties';
+import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 
-export function tableAlertDropdownItemProperties() {
+export function tableAlertActionProperties() {
   return {
-    ...dropdownItemProperties('Alert'),
+    ...actionProperties('Alert'),
     type: { type: 'string', required: true, const: 'alert' },
     title: { type: 'string', required: false, default: 'New Alert' },
     showCancel: { type: 'boolean', required: false, default: true },
@@ -18,27 +18,27 @@ export function tableAlertDropdownItemProperties() {
   };
 }
 
-export function tableAlertDropdownItemPropertiesMapping() {
+export function tableAlertActionPropertiesMapping() {
   return {
-    ...dropdownItemPropertiesMapping(),
+    ...actionPropertiesMapping(),
     ...commonPropertiesMapping(),
   };
 }
 
-export function tableAlertDropdownItemChildProperties() {
+export function tableAlertActionChildProperties() {
   return {
 
   };
 }
 
-export function tableAlertDropdownItemChildPropertiesMapping() {
+export function tableAlertActionChildPropertiesMapping() {
   return {
 
   };
 }
 
 
-export function tableAlertDropdownItemVariants() {
+export function tableAlertActionVariants() {
   return {
     default: ''
   };

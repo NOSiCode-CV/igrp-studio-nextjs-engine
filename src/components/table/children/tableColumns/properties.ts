@@ -27,6 +27,19 @@ export function cellProperties(defaultTitle?: string) {
   };
 }
 
+export function actionPropertiesMapping() {
+  return {};
+}
+
+export function actionProperties(labelTrigger?: string) {
+  return {
+    labelTrigger: { type: 'string', required: true, default: labelTrigger ?? 'New Action' },
+    icon: { type: 'string', required: false, default: "ArrowRight" },
+    className: { type: 'string', required: false },
+    variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
+  };
+}
+
 export function buttonPropertiesMapping() {
   return {};
 }

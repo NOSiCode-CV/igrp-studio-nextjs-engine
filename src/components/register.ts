@@ -36,6 +36,7 @@ import tableInputFilterModule, { TABLE_INPUT_FILTER } from './table/children/tab
 import tableSelectFilterModule, { TABLE_SELECT_FILTER } from './table/children/tableSelectFilter';
 import tableFacetedFilterModule, { TABLE_FACETED_FILTER } from './table/children/tableFacetedFilter';
 import tableButtonListCellModule, { TABLE_BUTTON_LIST_CELL } from './table/children/tableButtonListCell';
+import tableActionListCellModule, { TABLE_ACTION_LIST_CELL } from './table/children/tableActionListCell';
 import tableAlertButtonModule, { TABLE_ALERT_BUTTON } from './table/children/tableAlertButton';
 import tableLinkButtonModule, { TABLE_LINK_BUTTON } from './table/children/tableLinkButton';
 import tableModalButtonModule, { TABLE_MODAL_BUTTON } from './table/children/tableModalButton';
@@ -43,6 +44,10 @@ import tableDropdownMenuCellModule, { TABLE_DROPDOWN_MENU_CELL } from './table/c
 import tableAlertDropdownItemModule, { TABLE_ALERT_DROPDOWN_ITEM } from './table/children/tableAlertDropdownItem';
 import tableLinkDropdownItemModule, { TABLE_LINK_DROPDOWN_ITEM } from './table/children/tableLinkDropdownItem';
 import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table/children/tableModalDropdownItem';
+import tableAlertActionModule, { TABLE_ALERT_ACTION } from './table/children/tableAlertAction';
+import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/tableLinkAction';
+import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tableModalAction';
+
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
 import textareaModule, { TEXTAREA } from './textarea';
@@ -83,16 +88,22 @@ export function registerAllComponents() {
   register(TABLE_BADGE_CELL, tableBadgeCellModule.register);
   register(TABLE_BUTTON_LIST_CELL, tableButtonListCellModule.register);
   register(TABLE_DROPDOWN_MENU_CELL, tableDropdownMenuCellModule.register);
+  register(TABLE_ACTION_LIST_CELL, tableActionListCellModule.register);
 
   // Action Buttons
   register(TABLE_ALERT_BUTTON, tableAlertButtonModule.register);
   register(TABLE_MODAL_BUTTON, tableModalButtonModule.register);
   register(TABLE_LINK_BUTTON, tableLinkButtonModule.register);
 
-  // Dropdown Item
+  // Dropdown Items
   register(TABLE_ALERT_DROPDOWN_ITEM, tableAlertDropdownItemModule.register);
   register(TABLE_MODAL_DROPDOWN_ITEM, tableModalDropdownItemModule.register);
   register(TABLE_LINK_DROPDOWN_ITEM, tableLinkDropdownItemModule.register);
+
+  // Action Items
+  register(TABLE_ALERT_ACTION, tableAlertActionModule.register);
+  register(TABLE_MODAL_ACTION, tableModalActionModule.register);
+  register(TABLE_LINK_ACTION, tableLinkActionModule.register);
 
   // Table Filters
   register(TABLE_DATE_FILTER, tableDateFilterModule.register);

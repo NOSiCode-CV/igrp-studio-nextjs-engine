@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { MinMaxIGRPDataTableFilter } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableFilterMinMax } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableMinMaxFilterVariants());

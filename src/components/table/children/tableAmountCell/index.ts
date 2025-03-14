@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { AmountIGRPDataTableCell } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableCellAmount } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableAmountCellVariants());

@@ -1,4 +1,4 @@
-<ExpanderIGRPDataTableCell
+return <IGRPDataTableCellExpander
   row={ row }
   field={ row.getValue('{{resourceConfig.id}}') }
   {{#if resourceConfig.properties.icons}}icons={ [ {{resourceConfig.properties.icons}} ] }{{/if}}
@@ -8,4 +8,4 @@
   {{{render-layout this}}}
   {{/each}}
   {{/if~}}
-</ExpanderIGRPDataTableCell>
+</IGRPDataTableCellExpander>

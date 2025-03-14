@@ -4,7 +4,7 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const inputLayout: Layout = {
+export const inputLayout: Layout = {
   id: 'grid_inputs',
   componentName: 'grid',
   properties: {

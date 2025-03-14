@@ -1,5 +1,5 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
-import { cellProperties } from '@/components/table/children/tableColumns/properties';
+import { cellProperties } from '../tableColumns/properties';
 
 export function tableSelectFilterProperties() {
   return {

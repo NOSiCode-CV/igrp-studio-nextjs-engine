@@ -16,7 +16,7 @@ import { TABLE_LINK_BUTTON } from '../tableLinkButton';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { ButtonListIGRPDataTable } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableButtonList } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableButtonListCellVariants());

@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { DateIGRPDataTableCell } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableCellDate } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableDateCellVariants());

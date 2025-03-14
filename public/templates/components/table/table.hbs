@@ -1,5 +1,8 @@
 <IGRPDataTable{{{typeResolution (resolveFirstType resourceConfig.properties.data) 'any'}}}
   data={ contentTable{{resourceConfig.id}} }
+  {{#if resourceConfig.properties.showFilter}}showFilter={ {{resourceConfig.properties.showFilter}} }{{/if}}
+  {{#if resourceConfig.properties.showPagination}}showPagination={ {{resourceConfig.properties.showFilter}} }{{/if}}
+  {{#if resourceConfig.properties.showToggleColumn}}showToggleColumn={ {{resourceConfig.properties.showToggleColumn}} }{{/if}}
   columns={
     [
     {{#if resourceConfig.children}}
@@ -8,9 +11,10 @@
         {
           {{#if this.properties.headerTitle}}header: {{> tableHeader this ~}},{{/if~}}
           {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.id}}',
-          cell: ({ row }) => (
+          {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,{{/if}}
+          cell: ({ row }) => {
           {{{render-table-row this ../../registry}}}
-          ),
+          },
         filterFn: {{#if (eq this.componentName 'tableDateCell')}}dateRangeFilterFn{{else}}facetedFilterFn{{/if}}
         },
         {{/each}}

@@ -1,13 +1,11 @@
-const rowData = row.original;
-
-return <DropdownMenuIGRPDataTable
-  actionDropdown={
+<IGRPDataTableDropdownMenu
+  IGRPDataTableActionDropdown={
     [
       {{#if resourceConfig.children}}
       {{#each resourceConfig.children}}
       {
-        type: {{this.properties.type}},
-        component: {{resolveComponent this.componentName}},
+        type: "{{this.properties.type}}",
+        component: {{resolveComponent this.componentName ../registry}},
         props: {
           {{#if this.properties.title}}title: "{{this.properties.title}}",{{/if~}}
           {{#if this.properties.labelTrigger}}labelTrigger: "{{this.properties.labelTrigger}}",{{/if~}}
@@ -17,7 +15,7 @@ return <DropdownMenuIGRPDataTable
           {{#if this.properties.variant}}variant: "{{this.properties.variant}}",{{/if~}}
           {{#if this.properties.href}}href: "{{this.properties.variant}}",{{/if~}}
           {{#if this.properties.className}}className: "{{this.properties.className}}",{{/if~}}
-          {{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{else}}action: () => {},{{/if~}}
+          {{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{/if~}}
           {{#if this.properties.showIcon}}showIcon: { {{this.properties.showIcon}} },{{/if~}}
           {{#if this.properties.showCancel}}showCancel: { {{this.properties.showCancel}} },{{/if~}}
           {{#if this.properties.labelCancel}}labelCancel: "{{this.properties.labelCancel}}",{{/if~}}
@@ -27,7 +25,7 @@ return <DropdownMenuIGRPDataTable
           {{#if this.properties.labelConfirm}}labelConfirm: "{{this.properties.labelConfirm}}",{{/if~}}
           {{#if this.properties.classNameConfirm}}classNameConfirm: "{{this.properties.classNameConfirm}}",{{/if~}}
           {{#if this.properties.variantConfirm}}variantConfirm: "{{this.properties.variantConfirm}}",{{/if~}}
-          {{#if this.properties.actionConfirm}}onClickConfirm: () => {{this.properties.actionConfirm}}(rowData),{{else}}onClickConfirm: () => {},{{/if~}}
+          {{#if this.properties.actionConfirm}}onClickConfirm: () => {{this.properties.actionConfirm}}(rowData),{{/if~}}
           {{#if this.children}}
           children:
           {{#each this.children}}
@@ -40,4 +38,5 @@ return <DropdownMenuIGRPDataTable
       {{/if~}}
     ]
   }
-/>;
+>
+</IGRPDataTableDropdownMenu>

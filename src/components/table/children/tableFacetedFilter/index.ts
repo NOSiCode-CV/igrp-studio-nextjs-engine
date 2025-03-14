@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { FacetedIGRPDataTableFilter } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableFilterFaceted } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableFacetedFilterVariants());

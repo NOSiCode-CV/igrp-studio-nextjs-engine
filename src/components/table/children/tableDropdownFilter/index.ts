@@ -13,7 +13,7 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { DropdownIGRPDataTableFilter } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableFilterDropdown } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableDropdownFilterVariants());
