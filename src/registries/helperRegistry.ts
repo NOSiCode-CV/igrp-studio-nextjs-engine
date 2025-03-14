@@ -20,7 +20,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties, extractTableColumns, extractTableFilters,
+  addClassNameFromProperties, extractTableColumns, extractTableFilters, resolveComponent,
   resolveFirstType,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
@@ -45,6 +45,7 @@ Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChi
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
+Handlebars.registerHelper("resolveComponent", resolveComponent);
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
@@ -80,7 +81,6 @@ Handlebars.registerHelper("default", Default)
 // Objects
 Handlebars.registerHelper("notNullOrEmpty", notNullOrEmpty)
 Handlebars.registerHelper("nullOrEmpty", nullOrEmpty)
-
 
 /**
  * Dynamically loads and registers Handlebars partials in a React.js application.

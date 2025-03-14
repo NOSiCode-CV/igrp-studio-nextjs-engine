@@ -43,3 +43,7 @@ export function extractTableColumns(children: Layout[]) {
 export function extractTableFilters(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_FILTERS);
 }
+
+export function resolveComponent(componentName: string, registry: Record<string, Component>): string {
+  return registry[componentName]?.componentClass ?? 'any'
+}

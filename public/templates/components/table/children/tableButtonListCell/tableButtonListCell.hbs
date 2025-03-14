@@ -1,0 +1,43 @@
+const rowData = row.original;
+
+return <ButtonListIGRPDataTable
+  actionButtons={
+    [
+      {{#if resourceConfig.children}}
+      {{#each resourceConfig.children}}
+      {
+        type: {{this.properties.type}},
+        component: {{resolveComponent this.componentName registry}},
+        props: {
+          {{#if this.properties.title}}title: "{{this.properties.title}}",{{/if~}}
+          {{#if this.properties.labelTrigger}}labelTrigger: "{{this.properties.labelTrigger}}",{{/if~}}
+          {{#if this.properties.icon}}icon: "{{this.properties.icon}}",{{/if~}}
+          {{#if this.properties.iconPlacement}}iconPlacement: "{{this.properties.iconPlacement}}",{{/if~}}
+          {{#if this.properties.iconClassName}}iconClassName: "{{this.properties.iconClassName}}",{{/if~}}
+          {{#if this.properties.variant}}variant: "{{this.properties.variant}}",{{/if~}}
+          {{#if this.properties.href}}href: "{{this.properties.variant}}",{{/if~}}
+          {{#if this.properties.className}}className: "{{this.properties.className}}",{{/if~}}
+          {{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{else}}action: () => {},{{/if~}}
+          {{#if this.properties.showIcon}}showIcon: { {{this.properties.showIcon}} },{{/if~}}
+          {{#if this.properties.showCancel}}showCancel: { {{this.properties.showCancel}} },{{/if~}}
+          {{#if this.properties.labelCancel}}labelCancel: "{{this.properties.labelCancel}}",{{/if~}}
+          {{#if this.properties.classNameCancel}}classNameCancel: "{{this.properties.classNameCancel}}",{{/if~}}
+          {{#if this.properties.variantCancel}}variantCancel: "{{this.properties.variantCancel}}",{{/if~}}
+          {{#if this.properties.showConfirm}}showConfirm: { {{this.properties.showConfirm}} },{{/if~}}
+          {{#if this.properties.labelConfirm}}labelConfirm: "{{this.properties.labelConfirm}}",{{/if~}}
+          {{#if this.properties.classNameConfirm}}classNameConfirm: "{{this.properties.classNameConfirm}}",{{/if~}}
+          {{#if this.properties.variantConfirm}}variantConfirm: "{{this.properties.variantConfirm}}",{{/if~}}
+          {{#if this.properties.actionConfirm}}onClickConfirm: () => {{this.properties.actionConfirm}}(rowData),{{else}}onClickConfirm: () => {},{{/if~}}
+          {{#if this.children}}
+          children:
+          {{#each this.children}}
+          {{{render-layout this}}}
+          {{/each}}
+          {{/if~}}
+        }
+      },
+      {{/each}}
+      {{/if~}}
+    ]
+  }
+/>;

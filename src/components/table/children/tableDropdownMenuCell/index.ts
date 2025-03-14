@@ -1,0 +1,45 @@
+import {
+  tableDropdownMenuCellPropertiesMapping,
+  tableDropdownMenuCellProperties,
+  tableDropdownMenuCellVariants,
+  tableDropdownMenuCellChildProperties,
+  tableDropdownMenuCellChildPropertiesMapping,
+} from './properties';
+import { Component, hbsRenderer } from '../../../index';
+import { replaceTemplate } from '../../../../utils/helpers';
+import { TEMPLATES } from '../../../../utils/constants';
+import { TABLE } from '../../index';
+import { TABLE_ALERT_DROPDOWN_ITEM } from '../tableAlertDropdownItem';
+import { TABLE_MODAL_DROPDOWN_ITEM } from '../tableModalDropdownItem';
+import { TABLE_LINK_DROPDOWN_ITEM } from '../tableLinkDropdownItem';
+
+export default {
+  register(component: Component) {
+    component.loadImports([
+      'import { DropdownMenuIGRPDataTable } from "@igrp/igrp-framework-react-design-system";',
+    ]);
+
+    component.loadVariants(tableDropdownMenuCellVariants());
+    component.loadIcon('default')
+    component.loadParent(TABLE)
+    component.loadGroup('Columns')
+    component.loadLabel('Dropdown Column')
+    component.getProperties(tableDropdownMenuCellProperties());
+    component.getPropertiesMapping(tableDropdownMenuCellPropertiesMapping());
+    component.getChildProperties(tableDropdownMenuCellChildProperties());
+    component.getChildPropertiesMapping(tableDropdownMenuCellChildPropertiesMapping());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_DROPDOWN_MENU_CELL }))
+
+    component.loadStates([]);
+
+    component.loadChildrenTypes([TABLE_ALERT_DROPDOWN_ITEM, TABLE_MODAL_DROPDOWN_ITEM, TABLE_LINK_DROPDOWN_ITEM])
+
+    component.loadAcceptedChildren([...component.childrenTypes])
+
+    component.setRenderer(hbsRenderer);
+  },
+};
+
+const TABLE_DROPDOWN_MENU_CELL = 'tableDropdownMenuCell'
+
+export { TABLE_DROPDOWN_MENU_CELL };

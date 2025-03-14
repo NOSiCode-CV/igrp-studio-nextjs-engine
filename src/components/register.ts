@@ -35,6 +35,14 @@ import tableMinMaxFilterModule, { TABLE_MINMAX_FILTER } from './table/children/t
 import tableInputFilterModule, { TABLE_INPUT_FILTER } from './table/children/tableInputFilter';
 import tableSelectFilterModule, { TABLE_SELECT_FILTER } from './table/children/tableSelectFilter';
 import tableFacetedFilterModule, { TABLE_FACETED_FILTER } from './table/children/tableFacetedFilter';
+import tableButtonListCellModule, { TABLE_BUTTON_LIST_CELL } from './table/children/tableButtonListCell';
+import tableAlertButtonModule, { TABLE_ALERT_BUTTON } from './table/children/tableAlertButton';
+import tableLinkButtonModule, { TABLE_LINK_BUTTON } from './table/children/tableLinkButton';
+import tableModalButtonModule, { TABLE_MODAL_BUTTON } from './table/children/tableModalButton';
+import tableDropdownMenuCellModule, { TABLE_DROPDOWN_MENU_CELL } from './table/children/tableDropdownMenuCell';
+import tableAlertDropdownItemModule, { TABLE_ALERT_DROPDOWN_ITEM } from './table/children/tableAlertDropdownItem';
+import tableLinkDropdownItemModule, { TABLE_LINK_DROPDOWN_ITEM } from './table/children/tableLinkDropdownItem';
+import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table/children/tableModalDropdownItem';
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
 import textareaModule, { TEXTAREA } from './textarea';
@@ -64,6 +72,8 @@ export function registerAllComponents() {
   register(STACK, stackModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
+
+  // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);
   register(TABLE_COLUMNS, tableColumnsModule.register);
   register(TABLE_EXPANDER_CELL, tableExpanderCellModule.register);
@@ -71,12 +81,27 @@ export function registerAllComponents() {
   register(TABLE_AMOUNT_CELL, tableAmountCellModule.register);
   register(TABLE_DATE_CELL, tableDateCellModule.register);
   register(TABLE_BADGE_CELL, tableBadgeCellModule.register);
+  register(TABLE_BUTTON_LIST_CELL, tableButtonListCellModule.register);
+  register(TABLE_DROPDOWN_MENU_CELL, tableDropdownMenuCellModule.register);
+
+  // Action Buttons
+  register(TABLE_ALERT_BUTTON, tableAlertButtonModule.register);
+  register(TABLE_MODAL_BUTTON, tableModalButtonModule.register);
+  register(TABLE_LINK_BUTTON, tableLinkButtonModule.register);
+
+  // Dropdown Item
+  register(TABLE_ALERT_DROPDOWN_ITEM, tableAlertDropdownItemModule.register);
+  register(TABLE_MODAL_DROPDOWN_ITEM, tableModalDropdownItemModule.register);
+  register(TABLE_LINK_DROPDOWN_ITEM, tableLinkDropdownItemModule.register);
+
+  // Table Filters
   register(TABLE_DATE_FILTER, tableDateFilterModule.register);
   register(TABLE_DROPDOWN_FILTER, tableDropdownFilterModule.register);
   register(TABLE_INPUT_FILTER, tableInputFilterModule.register);
   register(TABLE_MINMAX_FILTER, tableMinMaxFilterModule.register);
   register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
+
   register(TABS, tabsModule.register);
   register(TEXTAREA, textareaModule.register);
 }

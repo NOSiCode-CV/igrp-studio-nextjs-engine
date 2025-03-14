@@ -27,6 +27,32 @@ export function cellProperties(defaultTitle?: string) {
   };
 }
 
+export function buttonPropertiesMapping() {
+  return {};
+}
+
+export function buttonProperties(labelTrigger?: string) {
+  return {
+    labelTrigger: { type: 'string', required: true, default: labelTrigger ?? 'New Action' },
+    icon: { type: 'string', required: false, default: "ArrowRight" },
+    className: { type: 'string', required: false },
+    variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
+  };
+}
+
+export function dropdownItemPropertiesMapping() {
+  return {};
+}
+
+export function dropdownItemProperties(labelTrigger?: string) {
+  return {
+    labelTrigger: { type: 'string', required: true, default: labelTrigger ?? 'New Action' },
+    icon: { type: 'string', required: false, default: "ArrowRight" },
+    className: { type: 'string', required: false },
+    variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
+  };
+}
+
 export function tableColumnsChildPropertiesMapping() {
   return {};
 }
