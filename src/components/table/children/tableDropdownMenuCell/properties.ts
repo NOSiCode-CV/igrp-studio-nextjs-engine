@@ -1,16 +1,19 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
-import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
+import {
+  actionProperties,
+  actionPropertiesMapping,
+} from '../tableColumns/properties';
 
 export function tableDropdownMenuCellProperties() {
   return {
-    ...cellProperties('Actions Column'),
+    ...actionProperties('Dropdown Actions'),
     ...commonProperties(),
   };
 }
 
 export function tableDropdownMenuCellPropertiesMapping() {
   return {
-    ...cellPropertiesMapping(),
+    ...actionPropertiesMapping(),
     ...commonPropertiesMapping(),
   };
 }
