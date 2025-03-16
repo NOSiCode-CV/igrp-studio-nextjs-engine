@@ -18,6 +18,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPDataTableButton } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableRowAction } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableActionListCellVariants());

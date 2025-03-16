@@ -116,6 +116,7 @@ const tableLayout: Layout = {
                       componentName: 'tableAlertDropdownItem',
                       properties: {
                         icon: 'Pause',
+                        showIcon: true,
                         labelTrigger: 'Disable',
                         type: "alert"
                       }
@@ -125,6 +126,7 @@ const tableLayout: Layout = {
                       componentName: 'tableModalDropdownItem',
                       properties: {
                         icon: 'Pencil',
+                        showIcon: true,
                         labelTrigger: 'Edit',
                         type: "modal"
                       }
@@ -134,6 +136,7 @@ const tableLayout: Layout = {
                       componentName: 'tableLinkDropdownItem',
                       properties: {
                         icon: 'Link',
+                        showIcon: true,
                         labelTrigger: 'External',
                         href: "https://igrp.cv/",
                         type: "link"
