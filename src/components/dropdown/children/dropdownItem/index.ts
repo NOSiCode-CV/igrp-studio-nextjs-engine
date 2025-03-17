@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(dropdownItemVariants());
-    component.loadIcon('DropdownItemIcon')
     component.loadParent(DROPDOWN)
     component.loadLabel('Dropdown Item')
     component.getProperties(dropdownItemProperties());

@@ -21,7 +21,6 @@ export default {
     ]);
 
     component.loadVariants(tableLinkDropdownItemVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE_DROPDOWN_MENU_CELL)
     component.loadGroup('Columns')
     component.loadLabel('Link Item')

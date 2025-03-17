@@ -22,7 +22,6 @@ export default {
     ]);
 
     component.loadVariants(tableActionListCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Actions Column')
@@ -34,7 +33,12 @@ export default {
 
     component.loadStates([]);
 
-    component.loadChildrenTypes([TABLE_ALERT_ACTION, TABLE_MODAL_ACTION, TABLE_LINK_ACTION, TABLE_DROPDOWN_MENU_CELL])
+    component.loadChildrenTypes([
+      { name: TABLE_ALERT_ACTION, isDefault: false },
+      { name: TABLE_MODAL_ACTION, isDefault: false },
+      { name: TABLE_LINK_ACTION, isDefault: false },
+      { name: TABLE_DROPDOWN_MENU_CELL, isDefault: false },
+    ]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
 

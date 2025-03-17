@@ -11,7 +11,6 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(gridVariants())
-    component.loadIcon('')
     component.loadGroup('structure')
     component.loadLabel('Grid')
     component.getProperties(gridProperties());

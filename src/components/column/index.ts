@@ -6,12 +6,13 @@ import {
   columnChildPropertiesMapping,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
+import { COLUMNS } from '../columns';
 
 export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadCustomClassName('');
-    component.loadIcon('');
+    component.loadParent(COLUMNS)
     component.loadGroup('structure');
     component.loadLabel('Column');
     component.loadVariants(columnVariants())

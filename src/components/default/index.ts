@@ -4,7 +4,7 @@ import { ComponentRegisterConfig } from '../../interfaces/types';
 export default {
   register(component: Component, config: ComponentRegisterConfig) {
     component.loadImports(config.imports);
-    component.loadIcon(config.icon);
+    component.loadDefault(config.defaultValue);
     component.loadGroup(config.group);
     component.loadLabel(config.label);
     component.loadTemplatePath(config.templatePath);

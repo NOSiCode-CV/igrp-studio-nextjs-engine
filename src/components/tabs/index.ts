@@ -15,7 +15,6 @@ export default {
     ]);
 
     component.loadVariants(tabsVariants());
-    component.loadIcon('Tabs')
     component.loadGroup('layout')
     component.loadLabel('Tabs')
     component.getProperties(tabsProperties());

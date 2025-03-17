@@ -20,7 +20,6 @@ export default {
     ]);
 
     component.loadVariants(tableButtonListCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Actions Column')
@@ -32,7 +31,11 @@ export default {
 
     component.loadStates([]);
 
-    component.loadChildrenTypes([TABLE_ALERT_BUTTON, TABLE_MODAL_BUTTON, TABLE_LINK_BUTTON])
+    component.loadChildrenTypes([
+      { name: TABLE_ALERT_BUTTON, isDefault: false },
+      { name: TABLE_MODAL_BUTTON, isDefault: false },
+      { name: TABLE_LINK_BUTTON, isDefault: false },
+    ]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
 

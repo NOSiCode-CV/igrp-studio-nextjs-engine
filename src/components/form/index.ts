@@ -1,6 +1,7 @@
 import { formPropertiesMapping, formProperties, formVariants } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { formChildProperties, formChildPropertiesMapping } from '../flex/properties';
+import { GRID } from '../grid';
 
 export default {
   register(component: Component) {
@@ -9,12 +10,13 @@ export default {
     ]);
 
     component.loadVariants(formVariants());
-    component.loadIcon('Form')
     component.loadGroup('containers')
     component.loadLabel('Form')
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
     component.getChildProperties(formChildProperties());
+    component.loadChildrenTypes([{name: GRID, isDefault: true}])
+    component.loadAcceptedChildren([{name: GRID, isDefault: true}])
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([

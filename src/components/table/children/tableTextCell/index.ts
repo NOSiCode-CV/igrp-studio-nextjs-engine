@@ -16,7 +16,6 @@ export default {
     ]);
 
     component.loadVariants(tableTextCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Text Column')

@@ -21,7 +21,6 @@ export default {
     ]);
 
     component.loadVariants(tableFiltersVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Table Filter')
@@ -33,13 +32,16 @@ export default {
     component.loadStates([]);
 
     component.loadChildrenTypes([
-      TABLE_DATE_FILTER, TABLE_DROPDOWN_FILTER,
-      TABLE_FACETED_FILTER, TABLE_INPUT_FILTER, TABLE_MINMAX_FILTER, TABLE_SELECT_FILTER
-    ])
+      { name: TABLE_DATE_FILTER, isDefault: false },
+      { name: TABLE_DROPDOWN_FILTER, isDefault: false },
+      { name: TABLE_FACETED_FILTER, isDefault: false },
+      { name: TABLE_INPUT_FILTER, isDefault: false },
+      { name: TABLE_MINMAX_FILTER, isDefault: false },
+      { name: TABLE_SELECT_FILTER, isDefault: false },
+    ]);
 
     component.loadAcceptedChildren([
-      TABLE_DATE_FILTER, TABLE_DROPDOWN_FILTER,
-      TABLE_FACETED_FILTER, TABLE_INPUT_FILTER, TABLE_MINMAX_FILTER, TABLE_SELECT_FILTER
+      ...component.childrenTypes
     ])
 
     component.setRenderer(hbsRenderer);

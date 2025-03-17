@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableSelectFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Select Filter')
     component.loadGroup('Filters')

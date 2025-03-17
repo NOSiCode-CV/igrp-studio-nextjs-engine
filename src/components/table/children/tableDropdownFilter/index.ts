@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableDropdownFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Dropdown Filter')
     component.loadGroup('Filters')

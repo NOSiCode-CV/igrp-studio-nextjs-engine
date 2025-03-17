@@ -20,7 +20,6 @@ export default {
     ]);
 
     component.loadVariants(tableDropdownMenuCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Dropdown Column')
@@ -32,7 +31,11 @@ export default {
 
     component.loadStates([]);
 
-    component.loadChildrenTypes([TABLE_ALERT_DROPDOWN_ITEM, TABLE_MODAL_DROPDOWN_ITEM, TABLE_LINK_DROPDOWN_ITEM])
+    component.loadChildrenTypes([
+      { name: TABLE_ALERT_DROPDOWN_ITEM, isDefault: false },
+      { name: TABLE_MODAL_DROPDOWN_ITEM, isDefault: false },
+      { name: TABLE_LINK_DROPDOWN_ITEM, isDefault: false },
+    ]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
 

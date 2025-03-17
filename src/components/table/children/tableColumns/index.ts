@@ -21,7 +21,6 @@ export default {
     ]);
 
     component.loadVariants(tableColumnsVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Table Column')
     component.getProperties(tableColumnsProperties());
@@ -32,12 +31,21 @@ export default {
     component.loadStates([]);
 
     component.loadChildrenTypes([
-      TABLE_EXPANDER_CELL, TABLE_TEXT_CELL,
-      TABLE_AMOUNT_CELL, TABLE_DATE_CELL, TABLE_BADGE_CELL, TABLE_ACTION_LIST_CELL
+      { name: TABLE_EXPANDER_CELL, isDefault: false },
+      { name: TABLE_TEXT_CELL, isDefault: false },
+      { name: TABLE_AMOUNT_CELL, isDefault: false },
+      { name: TABLE_DATE_CELL, isDefault: false },
+      { name: TABLE_BADGE_CELL, isDefault: false },
+      { name: TABLE_ACTION_LIST_CELL, isDefault: false },
     ]);
 
-    component.loadAcceptedChildren([TABLE_EXPANDER_CELL, TABLE_TEXT_CELL, TABLE_AMOUNT_CELL,
-      TABLE_DATE_CELL, TABLE_BADGE_CELL, TABLE_ACTION_LIST_CELL
+    component.loadAcceptedChildren([
+      { name: TABLE_EXPANDER_CELL, isDefault: false },
+      { name: TABLE_TEXT_CELL, isDefault: false },
+      { name: TABLE_AMOUNT_CELL, isDefault: false },
+      { name: TABLE_DATE_CELL, isDefault: false },
+      { name: TABLE_BADGE_CELL, isDefault: false },
+      { name: TABLE_ACTION_LIST_CELL, isDefault: false },
     ])
 
     component.setRenderer(hbsRenderer);

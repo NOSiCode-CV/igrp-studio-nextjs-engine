@@ -28,7 +28,6 @@ export default {
 
     component.loadVariants(tableVariants());
     component.loadChildrenMax(2)
-    component.loadIcon('Table')
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
     component.getProperties(tableProperties());
@@ -37,11 +36,11 @@ export default {
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      TABLE_COLUMNS, TABLE_FILTERS
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
     ]);
 
     component.loadAcceptedChildren([
-      TABLE_COLUMNS, TABLE_FILTERS
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
     ])
 
     component.loadStates([

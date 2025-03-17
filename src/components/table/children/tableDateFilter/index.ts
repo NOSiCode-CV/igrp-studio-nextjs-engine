@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableDateFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Date Filter')
     component.loadGroup('Filters')

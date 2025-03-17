@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableBadgeCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Badge Column')

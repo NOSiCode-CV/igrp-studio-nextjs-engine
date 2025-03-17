@@ -1,4 +1,4 @@
-import { ComponentRegisterConfig, ComponentRegistrationConfig, Layout } from '../interfaces/types';
+import { ChildComponent, ComponentRegisterConfig, ComponentRegistrationConfig, Layout } from '../interfaces/types';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { replaceTemplate } from '../utils/helpers';
@@ -11,14 +11,14 @@ export type Component = {
   childProperties: Record<string, any>;
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
-  childrenTypes: Set<string>;
-  acceptedChildren: Set<string>;
+  childrenTypes: Set<ChildComponent>;
+  acceptedChildren: Set<ChildComponent>;
   states: Set<string>;
   serviceMethods: Set<string>;
   customClassName?: string;
   codeBlock?: string;
   onTableComponent?: string;
-  icon: string;
+  defaultValue: boolean;
   label: string;
   group: string;
   parent: string;
@@ -33,7 +33,7 @@ export type Component = {
   loadCustomClassName:(tag: string) => void;
   loadCodeBlock:(code: string) => void;
   loadOnTableComponent:(component: string) => void;
-  loadIcon:(icon: string) => void;
+  loadDefault:(defaultValue: boolean) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -46,8 +46,8 @@ export type Component = {
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
-  loadChildrenTypes: (types: string[]) => void;
-  loadAcceptedChildren: (types: string[]) => void;
+  loadChildrenTypes: (types: ChildComponent[]) => void;
+  loadAcceptedChildren: (types: ChildComponent[]) => void;
   loadStates: (states: string[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
@@ -71,7 +71,7 @@ function initComponent(): Component {
     customClassName: undefined,
     codeBlock: undefined,
     onTableComponent: undefined,
-    icon: '',
+    defaultValue: false,
     label: 'Component',
     group: '',
     parent: '',
@@ -96,8 +96,8 @@ function initComponent(): Component {
       this.onTableComponent = component
     },
 
-    loadIcon(icon: string) {
-      this.icon = icon
+    loadDefault(defaultValue: boolean) {
+      this.defaultValue = defaultValue
     },
 
     loadLabel(label: string) {
@@ -189,12 +189,12 @@ export function getComponent(name: string): Component {
   return registry[name];
 }
 
-function componentAsObject(key: string, value: Component): ComponentRegisterConfig {
-  const { icon } = value;
+function componentAsObject(key: string, value: Component, isDefault?: boolean): ComponentRegisterConfig {
+  const { defaultValue } = value;
   return {
     name: key,
     imports: [],
-    icon,
+    defaultValue: isDefault ?? defaultValue,
     group: value.group,
     label: value.label,
     variants: value.variants,
@@ -202,10 +202,10 @@ function componentAsObject(key: string, value: Component): ComponentRegisterConf
     properties: value.properties,
     propertiesMapping: {},
     childPropertiesMapping: {},
-    childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it,
-      registry[it])),
-    acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it,
-      registry[it])),
+    childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
+      registry[it.name], it.isDefault)),
+    acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
+      registry[it.name], it.isDefault)),
     states: [],
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
     templatePath: value.templatePath

@@ -15,7 +15,6 @@ export default {
     ]);
 
     component.loadVariants(cardVariants());
-    component.loadIcon('CreditCard')
     component.loadGroup('layout')
     component.loadLabel('Card')
     component.getProperties(cardProperties());

@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableInputFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Input Filter')
     component.loadGroup('Filters')

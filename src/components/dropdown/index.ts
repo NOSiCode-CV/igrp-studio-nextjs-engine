@@ -15,7 +15,6 @@ export default {
     ]);
 
     component.loadVariants(dropdownVariants());
-    component.loadIcon('DropdownIcon')
     component.loadGroup('basicElements')
     component.loadLabel('Dropdown')
     component.getProperties(dropdownProperties());
@@ -23,9 +22,7 @@ export default {
     component.getChildProperties(dropdownChildProperties());
     component.getChildPropertiesMapping(dropdownChildPropertiesMapping());
 
-    component.loadChildrenTypes([
-      DROPDOWN_ITEM
-    ]);
+    component.loadChildrenTypes([{ name: DROPDOWN_ITEM, isDefault: true }]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
 

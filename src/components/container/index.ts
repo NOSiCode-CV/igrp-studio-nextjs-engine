@@ -10,7 +10,6 @@ export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(containerVariants())
-    component.loadIcon('')
     component.loadGroup('structure')
     component.loadLabel('Container')
     component.getProperties(containerProperties());

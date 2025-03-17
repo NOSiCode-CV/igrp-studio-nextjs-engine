@@ -21,7 +21,6 @@ export default {
     ]);
 
     component.loadVariants(tableAlertButtonVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE_BUTTON_LIST_CELL)
     component.loadGroup('Columns')
     component.loadLabel('Alert Button')

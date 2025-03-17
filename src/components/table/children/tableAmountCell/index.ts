@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableAmountCellVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadGroup('Columns')
     component.loadLabel('Amount Column')

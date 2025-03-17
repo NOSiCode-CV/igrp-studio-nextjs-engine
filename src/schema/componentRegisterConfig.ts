@@ -16,10 +16,9 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       items: { type: 'string' },
       errorMessage: "The imports must be an array of strings"
     },
-    icon: {
-      type: 'string',
-      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
-      errorMessage: "The icon attribute must only contain letters and must not have spaces or special characters."
+    defaultValue: {
+      type: 'boolean',
+      errorMessage: "The default value attribute must be a boolean."
     },
     group: {
       type: 'string',
@@ -53,12 +52,12 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     },
     childrenTypes: {
       type: 'array',
-      items: { type: 'object', required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
+      items: { type: 'object', required: ['name', 'imports', 'defaultValue', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
       errorMessage: "The children types must be an array of objects"
     },
     acceptedChildren: {
       type: 'array',
-      items: { type: 'object', required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
+      items: { type: 'object', required: ['name', 'imports', 'defaultValue', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
       errorMessage: "The accepted children must be an array of objects"
     },
     renderer: {
@@ -72,7 +71,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       errorMessage: "The template path attribute must be a valid path string."
     },
   },
-  required: ['name', 'imports', 'icon', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'],
+  required: ['name', 'imports', 'defaultValue', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'],
   additionalProperties: false,
 }
 

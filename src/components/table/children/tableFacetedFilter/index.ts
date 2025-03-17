@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableFacetedFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Faceted Filter')
     component.loadGroup('Filters')

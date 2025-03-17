@@ -15,7 +15,6 @@ export default {
     ]);
 
     component.loadVariants(checkboxVariants());
-    component.loadIcon('CheckSquare')
     component.loadGroup('formElements')
     component.loadLabel('Checkbox')
     component.getProperties(checkboxProperties());

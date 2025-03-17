@@ -19,7 +19,6 @@ export default {
     ]);
 
     component.loadVariants(tableLinkActionVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE_ACTION_LIST_CELL)
     component.loadGroup('Columns')
     component.loadLabel('Link Action')

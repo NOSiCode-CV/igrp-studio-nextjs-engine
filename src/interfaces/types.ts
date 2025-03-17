@@ -229,7 +229,7 @@ export interface ComponentRegistrationConfig {
 export interface ComponentRegisterConfig {
   name: string,
   imports: string[],
-  icon: string,
+  defaultValue: boolean,
   group: string,
   label: string,
   variants: Record<string, any>,
@@ -247,6 +247,11 @@ export interface ComponentRegisterConfig {
 export interface PartialConfig {
   name: string,
   path: string
+}
+
+export interface ChildComponent {
+  name: string,
+  isDefault: boolean
 }
 
 export type RenderContext<T = undefined, P = undefined> = {

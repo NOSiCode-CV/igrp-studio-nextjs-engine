@@ -14,7 +14,6 @@ export default {
     ]);
 
     component.loadVariants(rangeSliderVariants());
-    component.loadIcon('')
     component.loadGroup('formElements')
     component.loadLabel('Slider')
     component.getProperties(rangeSliderProperties());

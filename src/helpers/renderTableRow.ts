@@ -13,7 +13,7 @@ export const renderTableRow = function (config: Layout, registry: Record<string,
 
   if(!component) return `<span className="font-medium">${config.componentName}</span>`
 
-  return table.acceptedChildren.has(config.componentName)
+  return Array.from(table.acceptedChildren).map((it) => it.name).includes(config.componentName)
       ? renderLayout(config)
       : '<span className="bg-red-600 text-yellow-300 px-2 py-1 rounded">Unsupported Component</span>';
 

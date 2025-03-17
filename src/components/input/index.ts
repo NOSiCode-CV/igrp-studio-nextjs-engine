@@ -15,7 +15,6 @@ export default {
     ]);
 
     component.loadVariants(inputVariants());
-    component.loadIcon('FormInput')
     component.loadGroup('formElements')
     component.loadLabel('Input')
     component.getProperties(inputProperties());

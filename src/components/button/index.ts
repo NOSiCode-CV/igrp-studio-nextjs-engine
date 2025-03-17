@@ -14,7 +14,6 @@ export default {
     ]);
 
     component.loadVariants(buttonVariants());
-    component.loadIcon('ButtonIcon')
     component.loadGroup('basicElements')
     component.loadLabel('Button')
     component.getProperties(buttonProperties());

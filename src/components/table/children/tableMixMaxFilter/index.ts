@@ -17,7 +17,6 @@ export default {
     ]);
 
     component.loadVariants(tableMinMaxFilterVariants());
-    component.loadIcon('default')
     component.loadParent(TABLE)
     component.loadLabel('Interval Filter')
     component.loadGroup('Filters')
