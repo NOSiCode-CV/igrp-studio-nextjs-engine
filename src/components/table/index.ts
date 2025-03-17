@@ -45,7 +45,7 @@ export default {
     ])
 
     component.loadStates([
-      'const [contentTable{{id}}, setContentTable{{id}}] = useState([]);'
+      'const [contentTable{{id}}, setContentTable{{id}}] = useState<any>([]);'
     ]);
 
     component.loadServiceMethods([

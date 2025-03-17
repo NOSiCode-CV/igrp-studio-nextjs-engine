@@ -4,7 +4,7 @@ import { actionProperties, actionPropertiesMapping } from '../tableColumns/prope
 export function tableLinkActionProperties() {
   return {
     ...actionProperties('Link'),
-    type: { type: 'string', required: true, const: 'link' },
+    type: { type: 'string', required: true, default: 'link' },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/' },
     ...commonProperties(),
   };

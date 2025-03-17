@@ -4,7 +4,7 @@ import { actionProperties, actionPropertiesMapping } from '../tableColumns/prope
 export function tableAlertActionProperties() {
   return {
     ...actionProperties('Alert'),
-    type: { type: 'string', required: true, const: 'alert' },
+    type: { type: 'string', required: true, default: 'alert' },
     title: { type: 'string', required: false, default: 'New Alert' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
