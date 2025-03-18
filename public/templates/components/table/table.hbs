@@ -11,7 +11,7 @@
         {
           {{#if this.properties.headerTitle}}header: {{> tableHeader this ~}},{{/if~}}
           {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.id}}',
-          {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,{{/if}}
+          {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,{{/if~}}
           cell: ({ row }) => {
           {{{render-table-row this ../../registry}}}
           },
@@ -35,7 +35,7 @@
         },
         {{/each}}
       {{/each}}
-    {{/if~}}
+    {{/if}}
     ]
   }
 />
