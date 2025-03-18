@@ -14,7 +14,9 @@ import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownI
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
+import headlineModule, { HEADLINE } from './headline';
 import inputModule, { INPUT } from './input';
+import labelModule, { LABEL } from './label';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import radioModule, { RADIO } from './radio';
 import sectionModule, { SECTION } from './section';
@@ -68,7 +70,9 @@ export function registerAllComponents() {
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(GRID, gridModule.register);
+  register(HEADLINE, headlineModule.register);
   register(INPUT, inputModule.register);
+  register(LABEL, labelModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(RADIO, radioModule.register);
   register(SECTION, sectionModule.register);

@@ -9,9 +9,19 @@ const tableLayout: Layout = {
   id: 'section_tables',
   componentName: 'section',
   properties: {
-    variant: 'compact'
+    variant: 'compact',
+    spaceY: '6'
   },
   children: [
+    {
+      id: 'headline',
+      componentName: 'headline',
+      properties: {
+        variant: 'h4',
+        title: 'Table',
+        description: 'A demo table component',
+      }
+    },
     {
       id: 'table_default',
       componentName: 'table',

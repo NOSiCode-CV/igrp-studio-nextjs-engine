@@ -6,6 +6,11 @@ export function tableProperties() {
     showFilter: { type: 'boolean', required: false, default: false },
     showPagination: { type: 'boolean', required: false, default: false },
     showToggleColumn: { type: 'boolean', required: false, default: false },
+    isNumericPagination: { type: 'boolean', required: false, default: false },
+    isServerSide: { type: 'boolean', required: false, default: false },
+    toggleLabel: { type: 'string', required: false },
+    toggleOptionsLabel: { type: 'string', required: false },
+    className: { type: 'string', required: false },
     ...commonProperties()
   };
 }

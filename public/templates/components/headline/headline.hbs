@@ -1,4 +1,4 @@
-<IGRPHeaderPage
+<IGRPHeadline
   title="{{resourceConfig.properties.title}}"
   {{#if resourceConfig.properties.description}}
   description="{{resourceConfig.properties.description}}"
@@ -9,13 +9,5 @@
   {{#if resourceConfig.properties.className}}
   className="{{resourceConfig.properties.className}}"
   {{/if~}}
-  {{#if resourceConfig.properties.headlineClassName}}
-  headlineClassName="{{resourceConfig.properties.headlineClassName}}"
-  {{/if~}}
 >
-  {{#if resourceConfig.children}}
-  {{#each resourceConfig.children}}
-  {{{render-layout this}}}
-  {{/each}}
-  {{/if~}}
-</IGRPHeaderPage>
+</IGRPHeadline>

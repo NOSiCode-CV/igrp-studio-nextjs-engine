@@ -3,6 +3,11 @@
   {{#if resourceConfig.properties.showFilter}}showFilter={ {{resourceConfig.properties.showFilter}} }{{/if}}
   {{#if resourceConfig.properties.showPagination}}showPagination={ {{resourceConfig.properties.showFilter}} }{{/if}}
   {{#if resourceConfig.properties.showToggleColumn}}showToggleColumn={ {{resourceConfig.properties.showToggleColumn}} }{{/if}}
+  {{#if resourceConfig.properties.isNumericPagination}}isNumericPagination={ {{resourceConfig.properties.isNumericPagination}} }{{/if}}
+  {{#if resourceConfig.properties.isServerSide}}isServerSide={ {{resourceConfig.properties.isServerSide}} }{{/if}}
+  {{#if resourceConfig.properties.toggleLabel}}toggleLabel="{{resourceConfig.properties.toggleLabel}}"{{/if}}
+  {{#if resourceConfig.properties.toggleOptionsLabel}}toggleOptionsLabel="{{resourceConfig.properties.toggleOptionsLabel}}"{{/if}}
+  {{#if resourceConfig.properties.className}}className="{{resourceConfig.properties.className}}"{{/if}}
   columns={
     [
     {{#if resourceConfig.children}}

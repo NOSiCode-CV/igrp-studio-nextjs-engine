@@ -10,7 +10,7 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { PageHeader } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPHeaderPage } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(pageHeaderVariants());
