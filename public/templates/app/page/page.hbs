@@ -1,17 +1,13 @@
 'use client'
 
-import { useState, useEffect } from "react";
-import { {{capitalize resourceConfig.pageName}}Service} from '@/services/{{toLowerCase resourceConfig.pageName}}/{{capitalize resourceConfig.pageName}}Service'
-
-{{{resolve-imports resourceConfig.components registry}}}
+{{{resolve-imports resourceConfig.components registry resourceConfig.pageName basePath}}}
 
 export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.pageName)}}Component() {
 {{#if (notNullOrEmpty resourceConfig.components)}}
 
   const service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {{capitalize resourceConfig.pageName}}Service;
 
-  {{{resolve-states resourceConfig.components registry}}}
-
+  {{!--{{{resolve-states resourceConfig.components registry}}}--}}
   {{{resolve-code-blocks resourceConfig.components registry}}}
 
   return (
@@ -21,5 +17,5 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
 }
 
 export type I{{toLowerCase resourceConfig.pageName}}Service = {
-  {{{resolve-service-interface-methods resourceConfig.components registry}}}
+  {{!--{{{resolve-service-interface-methods resourceConfig.components registry}}}--}}
 }

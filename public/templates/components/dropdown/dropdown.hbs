@@ -32,6 +32,9 @@
   {{/if~}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
   onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 >
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}

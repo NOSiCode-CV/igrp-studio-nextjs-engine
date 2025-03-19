@@ -6,8 +6,14 @@
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
+  {{#if resourceConfig.properties.icon}}
+  icon="{{resourceConfig.properties.icon}}"
+  {{/if~}}
   {{#if resourceConfig.properties.className}}
   className="{{resourceConfig.properties.className}}"
   {{/if~}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 >
 </IGRPHeadline>

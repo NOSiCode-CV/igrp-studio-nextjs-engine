@@ -18,6 +18,7 @@ import headlineModule, { HEADLINE } from './headline';
 import inputModule, { INPUT } from './input';
 import labelModule, { LABEL } from './label';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
+import paragraphModule, { PARAGRAPH } from './paragraph';
 import radioModule, { RADIO } from './radio';
 import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
@@ -74,6 +75,7 @@ export function registerAllComponents() {
   register(INPUT, inputModule.register);
   register(LABEL, labelModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
+  register(PARAGRAPH, paragraphModule.register);
   register(RADIO, radioModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);

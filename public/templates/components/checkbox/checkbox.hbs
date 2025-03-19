@@ -1,20 +1,34 @@
-<FormField
-  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
-  name="{{resourceConfig.properties.name}}"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
-      <FormControl>
-        <Checkbox
-          checked={field.value}
-          onChange={field.onChange}
-          {{#if resourceConfig.properties.disabled}}disabled{{/if}}
-        />
-      </FormControl>
-      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
-      {{#if resourceConfig.properties.message}}
-        <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
-      {{/if}}
-    </FormItem>
-  )}
+<IGRPCheckbox
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.labelText}}
+  labelText="{{resourceConfig.properties.labelText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.helperText}}
+  helperText="{{resourceConfig.properties.helperText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.required}}
+  required={ {{resourceConfig.properties.required}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.readOnly}}
+  readOnly
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 />

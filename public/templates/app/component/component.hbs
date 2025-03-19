@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from "react";
+{{{resolve-imports resourceConfig.components registry resourceConfig.name basePath false}}}
 
-{{{resolve-imports resourceConfig.components registry}}}
-
-export default function {{capitalize resourceConfig.name}}() {
+export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}() {
 {{#if (notNullOrEmpty resourceConfig.components)}}
-  {{{resolve-states resourceConfig}}}
+  {{!--{{{resolve-states resourceConfig.components registry}}}--}}
+  {{{resolve-code-blocks resourceConfig.components registry}}}
 
   return (
 {{{render-layout resourceConfig.components}}}

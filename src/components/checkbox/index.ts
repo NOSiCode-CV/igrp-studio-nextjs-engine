@@ -3,15 +3,14 @@ import {
   checkboxProperties,
   checkboxVariants,
   checkboxChildProperties,
-  checkboxChildPropertiesMapping,
+  checkboxChildPropertiesMapping, checkboxInteractions, checkboxInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Checkbox } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPCheckbox } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(checkboxVariants());
@@ -19,6 +18,8 @@ export default {
     component.loadLabel('Checkbox')
     component.getProperties(checkboxProperties());
     component.getPropertiesMapping(checkboxPropertiesMapping());
+    component.getInteractions(checkboxInteractions());
+    component.getInteractionsMapping(checkboxInteractionsMapping());
     component.getChildProperties(checkboxChildProperties()); // TODO: handle a way to fetch parent properties
     component.getChildPropertiesMapping(checkboxChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
 

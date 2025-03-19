@@ -1,8 +1,6 @@
 <IGRPInputBasic
   type="{{resourceConfig.properties.type}}"
   placeholder="{{resourceConfig.properties.placeholder}}"
-  value={input{{resourceConfig.id}}Value}
-  onChange={(e: any) => { setInput{{resourceConfig.id}}Value(e.target.value) }}
   {{#if resourceConfig.properties.disabled}}
   disabled
   {{/if~}}
@@ -38,11 +36,19 @@
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
-  {{/if}}
+  {{else}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className="{{resourceConfig.properties.className}}"
-  {{/if}}
+  {{else}}
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
   className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 />

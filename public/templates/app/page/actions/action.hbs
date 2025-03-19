@@ -1,0 +1,9 @@
+'use server'
+
+{{#if resourceConfig.imports}}
+{{#each resourceConfig.imports}}
+{{{this.namespace}}}
+{{/each}}
+{{/if~}}
+
+{{{resourceConfig.code}}}

@@ -3,7 +3,7 @@ import {
   buttonProperties,
   buttonVariants,
   buttonChildProperties,
-  buttonChildPropertiesMapping,
+  buttonChildPropertiesMapping, buttonInteractions, buttonInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -16,6 +16,8 @@ export default {
     component.loadVariants(buttonVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Button')
+    component.getInteractions(buttonInteractions());
+    component.getInteractionsMapping(buttonInteractionsMapping());
     component.getProperties(buttonProperties());
     component.getPropertiesMapping(buttonPropertiesMapping());
     component.getChildProperties(buttonChildProperties());

@@ -12,7 +12,16 @@ export function resolveCodeBlocks(config: Layout, registry: Record<string, Compo
 
   if(baseComponent) {
     const id = config.id
+
     if(baseComponent.codeBlock) codeBlock += replaceTemplate(baseComponent.codeBlock, { id })
+
+    if(config.interactions) {
+      Object.entries(config.interactions).forEach(([_, value]) => {
+        console.log("Code: ", value)
+        if(value.type !== 'action' && value.fnCustomCode?.fnCode) codeBlock += ('\n' + value.fnCustomCode.fnCode + '\n')
+      })
+    }
+
     config.children?.forEach((child) => codeBlock += resolveCodeBlocks(child, registry))
   }
 

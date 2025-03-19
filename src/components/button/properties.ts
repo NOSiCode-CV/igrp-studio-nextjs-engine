@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function buttonProperties() {
   return {
@@ -39,5 +39,17 @@ export function buttonVariants() {
     outline: "outline",
     ghost: "ghost",
     link: "link",
+  };
+}
+
+export function buttonInteractions() {
+  return {
+    onClick: baseInteraction
+  };
+}
+
+export function buttonInteractionsMapping() {
+  return {
+
   };
 }

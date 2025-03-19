@@ -59,3 +59,19 @@ export function resolveComponent(componentName: string, registry: Record<string,
   }
 
 }
+
+export function renderProperties(customProperties: Record<string, any>) {
+  return customProperties
+    ? Object.entries(customProperties).map(([key, value]) => {
+      return `${key}="${value}"`;
+    }).join("\n")
+    : ``
+}
+
+export function renderInteractions(interactions: Record<string, any>) {
+  return interactions
+    ? Object.entries(interactions).map(([key, value]) => {
+      return `${key}={ ${value.fnName ?? value.fnCustomSet} }`;
+    }).join("\n")
+    : ``
+}

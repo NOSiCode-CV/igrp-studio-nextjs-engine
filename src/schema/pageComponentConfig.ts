@@ -170,6 +170,21 @@ const componentSchema: JSONSchemaType<Layout> = {
       anyOf: [commonPropertiesSchema],
       errorMessage: "Properties must match the LayoutProperties schema, if provided."
     },
+    interactions: {
+      type: "object",
+      required: [],
+      nullable: true,
+      additionalProperties: {
+        type: "object",
+        errorMessage: "Interactions fields are invalid",
+        required: [],
+        nullable: true,
+        anyOf: [
+          { type: "object" }, // For dynamic content types
+        ],
+      },
+      errorMessage: "The 'interactions' field must be an object mapping of actions.",
+    },
     childProperties: {
       type: "object",
       nullable: true,

@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function inputProperties() {
   return {
@@ -40,6 +40,21 @@ export function inputChildProperties() {
 export function inputChildPropertiesMapping() {
   return {};
 }
+
+export function inputInteractions() {
+  return {
+    value: baseInteraction,
+    onChange: baseInteraction,
+    onKeyDown: baseInteraction
+  };
+}
+
+export function checkboxInteractionsMapping() {
+  return {
+
+  };
+}
+
 
 export function inputVariants() {
   return {};

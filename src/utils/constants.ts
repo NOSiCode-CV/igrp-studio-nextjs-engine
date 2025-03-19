@@ -1,16 +1,16 @@
 import path from 'path';
 
 // Comment the following exports when building the application
-//export const CONFIGS = path.join(__dirname, '../../public/configs');
-//export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
-//export const BASE_APP_ZIP = path.join(__dirname, '../../public/templates/base_app.zip');
-//export const PARTIALS_DIR = path.join(__dirname, '../../public/templates/components/{{name}}/partials');
+export const CONFIGS = path.join(__dirname, '../../public/configs');
+export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
+export const BASE_APP_ZIP = path.join(__dirname, '../../public/templates/base_app.zip');
+export const PARTIALS_DIR = path.join(__dirname, '../../public/templates/components/{{name}}/partials');
 
 //Uncomment the following exports when building the application
-export const TEMPLATE_DIR = path.join(__dirname, './templates');
-export const CONFIGS = path.join(__dirname, './configs');
-export const BASE_APP_ZIP = path.join(__dirname, './templates/base_app.zip');
-export const PARTIALS_DIR = path.join(__dirname, './templates/components/{{name}}/partials');
+//export const TEMPLATE_DIR = path.join(__dirname, './templates');
+//export const CONFIGS = path.join(__dirname, './configs');
+//export const BASE_APP_ZIP = path.join(__dirname, './templates/base_app.zip');
+//export const PARTIALS_DIR = path.join(__dirname, './templates/components/{{name}}/partials');
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
@@ -45,6 +45,7 @@ export const TEMPLATES = {
   CONFIG_PACKGE_JSON: 'config/package.json.hbs',
   PAGE: 'app/page/page.hbs',
   COMPONENT: 'app/component/component.hbs',
+  ACTION: 'app/page/actions/action.hbs',
   SERVICE: 'app/page/service.hbs',
   MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
   MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
@@ -97,6 +98,7 @@ export const DIRECTORIES = {
   DESIGN_SYSTEM: 'design-system',
   PUBLIC: 'public',
   PAGES: 'src/app/pages',
+  ACTIONS: 'src/app/pages/{{pageName}}/actions',
   STUDIO: 'public/studio',
   IGRPSTUDIO: '.igrpstudio',
   MESSAGES: 'messages',
@@ -115,7 +117,8 @@ export const ERROR_MESSAGE = {
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
-  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again'
+  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again',
+  INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
 };
 
 

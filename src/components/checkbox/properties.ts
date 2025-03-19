@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function checkboxProperties() {
   return {
@@ -29,6 +29,19 @@ export function checkboxChildProperties() {
 }
 
 export function checkboxChildPropertiesMapping() {
+  return {
+
+  };
+}
+
+export function checkboxInteractions() {
+  return {
+    checked: baseInteraction,
+    onCheckedChange: baseInteraction
+  };
+}
+
+export function checkboxInteractionsMapping() {
   return {
 
   };

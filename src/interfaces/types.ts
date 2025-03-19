@@ -183,6 +183,7 @@ export interface PageMetaConfig {
 export interface Layout<S = any> extends IdentifiableElement{
   componentName: string;
   properties?: Record<string, any>;
+  interactions?: Record<string, any>;
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
   content?: string,
@@ -192,6 +193,17 @@ export interface Layout<S = any> extends IdentifiableElement{
 export interface LayoutProperties {
   variant?: string;
   className?: string;
+}
+
+export interface ActionConfig extends IdentifiableElement {
+  pageName: string,
+  actionName: string,
+  imports?: Import[],
+  code: string
+}
+
+interface Import {
+  namespace: string
 }
 
 export interface CommonProperties extends LayoutProperties{

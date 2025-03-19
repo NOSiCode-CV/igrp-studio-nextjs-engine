@@ -34,4 +34,7 @@
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
   className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 />

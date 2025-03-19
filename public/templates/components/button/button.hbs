@@ -5,15 +5,18 @@
   {{#if resourceConfig.properties.size}}
   size="{{resourceConfig.properties.size}}"
   {{/if~}}
-  disabled={ {{resourceConfig.id}}Disabled }
+  {{!--disabled={ {{resourceConfig.id}}Disabled }--}}
+  {{#if resourceConfig.properties.disabled}}
+  disabled={ {{resourceConfig.properties.disabled}} }
+  {{/if~}}
   {{#if resourceConfig.properties.hasIcon}}
-  hasIcon={ {{resourceConfig.properties.hasIcon}} }
+  showIcon={ {{resourceConfig.properties.hasIcon}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconName}}
   iconName="{{resourceConfig.properties.iconName}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconPosition}}
-  iconPosition="{{resourceConfig.properties.iconPosition}}"
+  iconPlacement="{{resourceConfig.properties.iconPosition}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconClass}}
   iconClass="{{resourceConfig.properties.iconClass}}"
@@ -23,15 +26,22 @@
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
-  {{/if}}
+  {{else}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className="{{resourceConfig.properties.className}}"
-  {{/if}}
+  {{else}}
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
   className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
+  {{/if}}
+  {{/if}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
-  onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 >
   {{#if resourceConfig.properties.label}}
   {{resourceConfig.properties.label}}

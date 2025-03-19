@@ -20,7 +20,12 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties, extractTableColumns, extractTableFilters, resolveComponent,
+  addClassNameFromProperties,
+  extractTableColumns,
+  extractTableFilters,
+  renderInteractions,
+  renderProperties,
+  resolveComponent,
   resolveFirstType,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
@@ -46,6 +51,8 @@ Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
+Handlebars.registerHelper("render-properties", renderProperties);
+Handlebars.registerHelper("render-interactions", renderInteractions);
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);

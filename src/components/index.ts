@@ -6,6 +6,8 @@ import { renderLayout } from '../utils/renderLayout';
 
 export type Component = {
   imports: Set<string>;
+  interactions: Record<string, any>;
+  interactionsMapping: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
   childProperties: Record<string, any>;
@@ -16,6 +18,7 @@ export type Component = {
   states: Set<string>;
   serviceMethods: Set<string>;
   customClassName?: string;
+  customComponentTag?: string;
   codeBlock?: string;
   onTableComponent?: string;
   defaultValue: boolean;
@@ -31,6 +34,7 @@ export type Component = {
   getImports: () => string[];
 
   loadCustomClassName:(tag: string) => void;
+  loadCustomComponentTag:(tag: string) => void;
   loadCodeBlock:(code: string) => void;
   loadOnTableComponent:(component: string) => void;
   loadDefault:(defaultValue: boolean) => void;
@@ -42,6 +46,8 @@ export type Component = {
   loadChildrenMax:(max: number) => void;
 
   loadVariants: (variants: Record<string, any>) => void;
+  getInteractions: (interactions: Record<string, any>) => void;
+  getInteractionsMapping: (mapping: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
@@ -61,6 +67,8 @@ function initComponent(): Component {
     imports: new Set(),
     variants: {},
     properties: {},
+    interactions: {},
+    interactionsMapping: {},
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
@@ -69,6 +77,7 @@ function initComponent(): Component {
     states: new Set(),
     serviceMethods: new Set(),
     customClassName: undefined,
+    customComponentTag: undefined,
     codeBlock: undefined,
     onTableComponent: undefined,
     defaultValue: false,
@@ -86,6 +95,10 @@ function initComponent(): Component {
 
     loadCustomClassName(tag: string) {
       this.customClassName = tag
+    },
+
+    loadCustomComponentTag(tag: string) {
+      this.customComponentTag = tag
     },
 
     loadCodeBlock(code: string) {
@@ -130,6 +143,14 @@ function initComponent(): Component {
 
     loadVariants(variants) {
       Object.assign(this.variants, variants);
+    },
+
+    getInteractions(interactions) {
+      Object.assign(this.interactions, interactions);
+    },
+
+    getInteractionsMapping(mapping) {
+      Object.assign(this.interactionsMapping, mapping);
     },
 
     getProperties(properties) {
@@ -227,7 +248,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
-  let { variant, customProperties, ...common } = component.properties!;
+  let { variant, customProperties, ...common } = component.properties ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -293,14 +314,19 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<div className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
+  str += `<${element.customComponentTag ?? 'div'} className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
     str += component.children.map((child) => renderLayout(child, component)).join('\n');
   }
 
-  str += `</div>`
+  if(component.content) {
+    str += "\n\t"
+    str += component.content
+  }
+
+  str += `</${element.customComponentTag ?? 'div'}>`
 
   return () => str
 }

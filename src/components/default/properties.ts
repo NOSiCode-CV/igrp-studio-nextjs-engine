@@ -49,3 +49,37 @@ export function commonPropertiesMapping() {
     visibility: { className: '' } // Visibility classes don't need a prefix
   };
 }
+
+export function baseInteraction() {
+  return {
+    type: 'object',
+    properties: {
+      fnName: {
+        type: 'string', required: false
+      },
+      actionName: {
+        type: 'string', required: false
+      },
+      fnCustomSet: {
+        type: 'string', required: false
+      },
+      fnCustomCode: {
+        type: 'object',
+        properties: {
+          imports: {
+            type: 'array', required: false,
+            items: {
+              type: 'string', required: false
+            },
+          },
+          fnCode: {
+            type: 'string', required: false
+          },
+          actionCode: {
+            type: 'string', required: false
+          },
+        }
+      }
+    }
+  };
+}

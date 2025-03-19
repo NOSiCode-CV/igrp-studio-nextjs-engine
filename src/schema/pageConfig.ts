@@ -158,34 +158,50 @@ const componentSchema: JSONSchemaType<Layout> = {
     id: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+      errorMessage:
+        'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
     },
     componentName: {
       type: 'string',
-      errorMessage: `Component name only must be a valid string`
+      errorMessage: `Component name only must be a valid string`,
     },
     properties: {
-      type: "object",
+      type: 'object',
       nullable: true,
       anyOf: [commonPropertiesSchema],
-      errorMessage: "Properties must match the LayoutProperties schema, if provided."
+      errorMessage: 'Properties must match the LayoutProperties schema, if provided.',
+    },
+    interactions: {
+      type: "object",
+      required: [],
+      nullable: true,
+      additionalProperties: {
+        type: "object",
+        errorMessage: "Interactions fields are invalid",
+        required: [],
+        nullable: true,
+        anyOf: [
+          { type: "object" }, // For dynamic content types
+        ],
+      },
+      errorMessage: "The 'interactions' field must be an object mapping of actions.",
     },
     childProperties: {
-      type: "object",
+      type: 'object',
       nullable: true,
       anyOf: [commonPropertiesSchema],
-      errorMessage: "Child Properties must match the LayoutProperties schema, if provided."
+      errorMessage: 'Child Properties must match the LayoutProperties schema, if provided.',
     },
     parentProperties: {
-      type: "object",
+      type: 'object',
       nullable: true,
       anyOf: [commonPropertiesSchema],
-      errorMessage: "Parent Properties must match the LayoutProperties schema, if provided."
+      errorMessage: 'Parent Properties must match the LayoutProperties schema, if provided.',
     },
     content: {
       type: 'string',
       nullable: true,
-      errorMessage: "The Content must be a string.",
+      errorMessage: 'The Content must be a string.',
     },
     children: {
       type: 'array',
@@ -193,14 +209,14 @@ const componentSchema: JSONSchemaType<Layout> = {
       default: [],
       //items: { type: 'object', $ref: "#/definitions/layout", required: ['id', 'componentName', 'properties'] },
       items: { type: 'object', required: ['id', 'componentName'] },
-      errorMessage: 'Invalid children configuration.'
-    }
+      errorMessage: 'Invalid children configuration.',
+    },
   },
   required: ['id', 'componentName'],
   //definitions: {
   //  layout: {} as JSONSchemaType<Layout> // Will be replaced with this schema itself for recursion
   //},
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 //componentSchema.definitions!.layout = componentSchema;

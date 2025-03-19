@@ -21,6 +21,32 @@ const buttonLayout: Layout = {
         variant: 'default',
         size: 'default',
         label: 'Default'
+      },
+      interactions: {
+        onClick: {
+          fnName: 'handleSubmit',
+          fnCustomCode: {
+            imports: [{ namespace: 'import { someImport } from "./custom";' }],
+            code: `
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault()
+      if (!title.trim()) return
+      
+      const newTodo = await addTodo(title)
+      if (onAdd) {
+        onAdd(newTodo)
+      }
+      setTitle('')
+      router.refresh()
+
+      toast.success(\`Added: \${title}\`, {
+        icon: "➕"
+      });
+    }
+            `,
+            type: 'function'
+          }
+        }
       }
     },
     {
@@ -40,6 +66,31 @@ const buttonLayout: Layout = {
         variant: 'destructive',
         size: 'default',
         label: 'Destructive'
+      },
+      interactions: {
+        onClick: {
+          fnName: 'customAction',
+          fnCustomCode: {
+            code: `
+  const customAction = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!title.trim()) return
+    
+    const newTodo = await addTodo(title)
+    if (onAdd) {
+      onAdd(newTodo)
+    }
+    setTitle('')
+    router.refresh()
+
+    toast.success(\`Added: \${title}\`, {
+      icon: "➕"
+    });
+  }
+            `
+          },
+          type: 'action'
+        }
       }
     },
     {
