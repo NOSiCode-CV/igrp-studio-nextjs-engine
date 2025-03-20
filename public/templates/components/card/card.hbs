@@ -1,36 +1,63 @@
-<FormField
-  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
-  name="{{resourceConfig.properties.name}}"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
-      <FormControl>
-        <Card
-          {{#if resourceConfig.properties.shadow}}shadow="{{resourceConfig.properties.shadow}}"{{/if}}
-          {{#if resourceConfig.properties.border}}border="{{resourceConfig.properties.border}}"{{/if}}
-        >
-          <CardHeader>
-            <CardTitle>{{resourceConfig.properties.title}}</CardTitle>
-            {{#if resourceConfig.properties.subtitle}}
-              <CardSubtitle>{{resourceConfig.properties.subtitle}}</CardSubtitle>
-            {{/if}}
-          </CardHeader>
-          <CardBody>
-            {{#if resourceConfig.properties.body}}
-              <p>{{resourceConfig.properties.body}}</p>
-            {{/if}}
-          </CardBody>
-          <CardFooter>
-            {{#if resourceConfig.properties.footer}}
-              <p>{{resourceConfig.properties.footer}}</p>
-            {{/if}}
-          </CardFooter>
-        </Card>
-      </FormControl>
-      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
-      {{#if resourceConfig.properties.message}}
-      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
-      {{/if}}
-    </FormItem>
-  )}
-/>
+<IGRPCard
+  {{#if resourceConfig.properties.title}}
+  title="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.titleClassName}}
+  titleClassName="{{resourceConfig.properties.titleClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.description}}
+  description="{{resourceConfig.properties.description}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.descriptionClassName}}
+  descriptionClassName="{{resourceConfig.properties.descriptionClassName}}"
+  {{/if~}}
+  content={
+    {{#if resourceConfig.children}}
+    <div>
+      {{#each (extractCardContent resourceConfig.children)}}
+      {{#each this.children}}
+      {{{render-layout this}}}
+      {{/each}}
+      {{/each}}
+    </div>
+    {{/if~}}
+  }
+  footer={
+    {{#if resourceConfig.children}}
+    <div>
+      {{#each (extractCardFooter resourceConfig.children)}}
+      {{#each this.children}}
+      {{{render-layout this}}}
+      {{/each}}
+      {{/each}}
+    </div>
+    {{/if~}}
+  }
+  {{#if resourceConfig.properties.showHeader}}
+  showHeader={ {{resourceConfig.properties.showHeader}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showFooter}}
+  showFooter={ {{resourceConfig.properties.showFooter}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.footerClassName}}
+  footerClassName="{{resourceConfig.properties.descriptionClassName}}"
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if~}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if~}}
+>
+</IGRPCard>

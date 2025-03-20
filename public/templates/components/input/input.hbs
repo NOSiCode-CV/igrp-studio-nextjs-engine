@@ -19,20 +19,23 @@
   {{#if resourceConfig.properties.required}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
-  {{#if resourceConfig.properties.iconName}}
-  iconName="{{resourceConfig.properties.iconName}}"
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconSize}}
-  iconSize="{{resourceConfig.properties.iconSize}}"
+  {{#if resourceConfig.properties.iconProperties.iconSize}}
+  iconSize="{{resourceConfig.properties.iconProperties.iconSize}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconPlacement}}
-  iconPlacement="{{resourceConfig.properties.iconPlacement}}"
+  {{#if resourceConfig.properties.iconProperties.iconPosition}}
+  iconPlacement="{{resourceConfig.properties.iconProperties.iconPosition}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconClassName}}
-  iconClassName="{{resourceConfig.properties.iconClassName}}"
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
   {{/if~}}
   {{#if resourceConfig.properties.readOnly}}
   readOnly
+  {{/if~}}
+  {{#if resourceConfig.properties.autofocus}}
+  autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"

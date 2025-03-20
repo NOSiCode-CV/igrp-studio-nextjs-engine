@@ -6,7 +6,7 @@ import {
   ColumnConfig,
   IAction,
   IActionConfig,
-  Layout, CommonProperties,
+  Layout, CommonProperties, Arguments,
 } from '../interfaces/types';
 import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -365,6 +365,22 @@ const actionSchema: JSONSchemaType<IAction> = {
   additionalProperties: true
 };
 
+const argsSchema: JSONSchemaType<Arguments> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      errorMessage: 'The type attribute must be a string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name attribute must be a string.'
+    },
+  },
+  required: ['type', 'name'],
+  additionalProperties: false
+};
+
 // Schema para ColumnComponent (los componentes anidados dentro de las columnas)
 const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
   type: "object",
@@ -507,6 +523,14 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       nullable: true,
       anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
+    },
+    args: {
+      type: 'array',
+      items: {
+        anyOf: [argsSchema]
+      },
+      nullable: true,
+      errorMessage: 'Arguments must contain valid args configuration.',
     },
   },
   required: ['type', 'name', 'path'],

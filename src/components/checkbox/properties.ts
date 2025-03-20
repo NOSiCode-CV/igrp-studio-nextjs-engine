@@ -36,8 +36,8 @@ export function checkboxChildPropertiesMapping() {
 
 export function checkboxInteractions() {
   return {
-    checked: baseInteraction,
-    onCheckedChange: baseInteraction
+    checked: { ...baseInteraction, required: true, default: 'value' },
+    onCheckedChange: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Check(e)" },
   };
 }
 

@@ -2,6 +2,8 @@ import { Component } from '../components';
 import { Layout } from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
+import { CARD_CONTENT } from '../components/card/children/cardContent';
+import { CARD_FOOTER } from '../components/card/children/cardFooter';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -42,6 +44,14 @@ export function extractTableColumns(children: Layout[]) {
 
 export function extractTableFilters(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_FILTERS);
+}
+
+export function extractCardContent(children: Layout[]) {
+  return children.filter((it) => it.componentName === CARD_CONTENT);
+}
+
+export function extractCardFooter(children: Layout[]) {
+  return children.filter((it) => it.componentName === CARD_FOOTER);
 }
 
 export function resolveComponent(componentName: string, registry: Record<string, Component>, type?: string): string {

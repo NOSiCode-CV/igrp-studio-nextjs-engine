@@ -1,27 +1,27 @@
 import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
-export function dynamicListProperties() {
+export function repetitiveListProperties() {
   return {
     data: { type: 'string', required: true, default: 'data' },
     ...commonProperties(),
   };
 }
 
-export function dynamicListPropertiesMapping() {
+export function repetitiveListPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function dynamicListChildProperties() {
+export function repetitiveListChildProperties() {
   return {};
 }
 
-export function dynamicListChildPropertiesMapping() {
+export function repetitiveListChildPropertiesMapping() {
   return {};
 }
 
-export function dynamicListVariants() {
+export function repetitiveListVariants() {
   return {
   };
 }

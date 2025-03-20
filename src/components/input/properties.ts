@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
 export function inputProperties() {
   return {
@@ -16,9 +16,7 @@ export function inputProperties() {
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
     showIcon: { type: 'boolean', required: false, default: false },
-    iconName: { type: 'string', required: false, },
-    iconSize: { type: 'string', required: false },
-    iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
+    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     iconClassName: { type: 'string', required: false },
@@ -43,9 +41,9 @@ export function inputChildPropertiesMapping() {
 
 export function inputInteractions() {
   return {
-    value: baseInteraction,
-    onChange: baseInteraction,
-    onKeyDown: baseInteraction
+    value: { ...baseInteraction, required: true, default: 'value' },
+    onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
+    onKeyDown: { ...baseInteraction, required: false, default: `(e) => { if(e.key === 'Enter') handle{{id}}(e); }` },
   };
 }
 

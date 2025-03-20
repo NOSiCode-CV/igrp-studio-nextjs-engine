@@ -50,6 +50,17 @@ export function commonPropertiesMapping() {
   };
 }
 
+export function iconProperties() {
+  return {
+    iconProperties: {
+      iconName: { type: 'string', required: false },
+      iconPosition: { type: 'string', required: false, enum: ['start', 'end']  },
+      iconClassName: { type: 'string', required: false },
+      iconSize: { type: 'number', required: false },
+    }
+  }
+}
+
 export function baseInteraction() {
   return {
     type: 'object',

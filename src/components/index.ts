@@ -218,6 +218,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     defaultValue: isDefault ?? defaultValue,
     group: value.group,
     label: value.label,
+    customClassName: value.customClassName,
+    customComponentTag: value.customComponentTag,
     variants: value.variants,
     childProperties: value.childProperties,
     properties: value.properties,
@@ -317,6 +319,68 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
   let str = ""
 
   str += `<${element.customComponentTag ?? 'div'} className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
+
+  if (component.children && component.children.length > 0) {
+    str += "\n\t"
+    str += component.children.map((child) => renderLayout(child, component)).join('\n');
+  }
+
+  if(component.content) {
+    str += "\n\t"
+    str += component.content
+  }
+
+  str += `</${element.customComponentTag ?? 'div'}>`
+
+  return () => str
+}
+
+export function customRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
+  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
+
+  let { customProperties, className: cn, ...common } = component.properties ?? {};
+
+  let props = common
+    ? Object.entries(common).map(([key, value]) => {
+      return element.propertiesMapping[key]?.property? ` ${element.propertiesMapping[key]?.property ?? key}="${value}"` : ``;
+    }).join("")
+    : ``
+
+  props += customProperties
+    ? Object.entries(customProperties).map(([key, value]) => {
+      return ` ${key}=${value}`;
+    }).join("")
+    : ``
+
+  let childProps = ``
+
+  if (parentComponent?.childProperties) {
+
+    let { customProperties: childCustomProperties, ...childCommon } = parentComponent?.childProperties;
+
+    childProps = childCommon
+      ? Object.entries(childCommon)
+        .map(([key, value]) => {
+          return parentElement?.childPropertiesMapping[key]?.property
+            ? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"`
+            : ``;
+        })
+        .join('')
+      : ``;
+
+    childProps += childCustomProperties
+      ? Object.entries(childCustomProperties)
+        .map(([key, value]) => {
+          return ` ${key}=${value}`;
+        })
+        .join('')
+      : ``;
+
+  }
+
+  let str = ""
+
+  str += `<${element.customComponentTag ?? 'div'} ${props} ${childProps} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

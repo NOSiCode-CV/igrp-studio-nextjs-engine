@@ -1,31 +1,20 @@
-<IGRPDynamicList
-  {{#if resourceConfig.properties.data}}
-  data={ {{resourceConfig.properties.variant}} }
+<IGRPIcon
+  {{#if resourceConfig.properties.iconName}}
+  iconName="{{resourceConfig.properties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.keyExtractor}}
-  keyExtractor={ {{resourceConfig.properties.keyExtractor}} }
+  {{#if resourceConfig.properties.size}}
+  size={ {{resourceConfig.properties.size}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
-  {{else}}
+  {{/if}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className="{{resourceConfig.properties.className}}"
-  {{else}}
+  {{/if}}
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
   className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
-  {{/if}}
-  {{/if}}
-  {{#if resourceConfig.interactions}}
-  {{{render-interactions resourceConfig.interactions}}}
-  {{/if}}
   {{#if resourceConfig.properties.customProperties}}
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
->
-  {{#if resourceConfig.children}}
-  {{#each resourceConfig.children}}
-  {{{render-layout this}}}
-  {{/each}}
-  {{/if~}}
-</IGRPDynamicList>
+/>

@@ -20,7 +20,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties,
+  addClassNameFromProperties, extractCardContent, extractCardFooter,
   extractTableColumns,
   extractTableFilters,
   renderInteractions,
@@ -50,6 +50,8 @@ Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChi
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
+Handlebars.registerHelper("extractCardContent", extractCardContent);
+Handlebars.registerHelper("extractCardFooter", extractCardFooter);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);

@@ -22,11 +22,17 @@ export interface PageComponentConfig extends IdentifiableElement {
   components?: Layout | {};
 }
 
+export interface Arguments {
+  type: string,
+  name: string
+}
+
 export interface ComponentConfig extends IdentifiableElement {
   type: 'component';
   name: string;
   path: string;
   icon?: string;
+  args?: Arguments[];
   components?: Layout | {};
 }
 
@@ -244,6 +250,8 @@ export interface ComponentRegisterConfig {
   defaultValue: boolean,
   group: string,
   label: string,
+  customClassName?: string,
+  customComponentTag?: string,
   variants: Record<string, any>,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,
@@ -252,7 +260,7 @@ export interface ComponentRegisterConfig {
   states: string[],
   childrenTypes: ComponentRegisterConfig[],
   acceptedChildren: ComponentRegisterConfig[],
-  renderer: 'default' | 'hbs',
+  renderer: 'default' | 'hbs' | 'custom',
   templatePath?: string
 }
 

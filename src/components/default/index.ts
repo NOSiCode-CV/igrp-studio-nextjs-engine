@@ -1,4 +1,4 @@
-import { Component, defaultRenderer, hbsRenderer } from '../index';
+import { Component, customRenderer, defaultRenderer, hbsRenderer } from '../index';
 import { ComponentRegisterConfig } from '../../interfaces/types';
 
 export default {
@@ -7,6 +7,13 @@ export default {
     component.loadDefault(config.defaultValue);
     component.loadGroup(config.group);
     component.loadLabel(config.label);
+
+    if(config.customComponentTag !== undefined)
+      component.loadCustomComponentTag(config.customComponentTag);
+
+    if(config.customClassName !== undefined)
+      component.loadCustomClassName(config.customClassName);
+
     component.loadTemplatePath(config.templatePath);
     component.loadVariants(config.variants)
     component.getProperties(config.properties);
@@ -14,6 +21,6 @@ export default {
     component.getChildProperties(config.childProperties);
     component.getChildPropertiesMapping(config.childPropertiesMapping);
     component.loadStates(config.states);
-    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : defaultRenderer);
+    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : customRenderer);
   }
 };

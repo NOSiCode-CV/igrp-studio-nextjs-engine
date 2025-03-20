@@ -2,7 +2,7 @@
 
 {{{resolve-imports resourceConfig.components registry resourceConfig.name basePath false}}}
 
-export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}() {
+export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}: {{{this.type}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
   {{!--{{{resolve-states resourceConfig.components registry}}}--}}
   {{{resolve-code-blocks resourceConfig.components registry}}}

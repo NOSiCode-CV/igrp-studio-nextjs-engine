@@ -9,41 +9,49 @@ const componentConfig: ComponentConfig = {
   type: 'component',
   name: 'todolist',
   path: 'todo',
+  args: [
+    {
+      name: '{ initialTodos }',
+      type: '{ initialTodos: Todo[] }',
+    },
+  ],
   components: {
-    id: "section_todo",
-    componentName: "section",
+    id: 'section_todo',
+    componentName: 'section',
     properties: {
-      spaceY: '3'
+      spaceY: '3',
     },
     children: [
       {
         id: 'dynamic-list',
-        componentName: "dynamicList",
+        componentName: 'repetitiveList',
         properties: {
           data: 'todos',
-          keyExtractor: '(todo) => todo.id'
+          variable: 'todo',
+          keyExtractor: '(todo) => todo.id',
         },
         children: [
           {
-            id: "flex-group",
-            componentName: "flex",
+            id: 'flex-group',
+            componentName: 'flex',
             properties: {
-              className: "group relative items-center gap-4 rounded-xl bg-card p-4 hover:shadow-lg transition-all " +
-                "duration-200 border border-border/50 hover:border-border"
+              className:
+                'group relative items-center gap-4 rounded-xl bg-card p-4 hover:shadow-lg transition-all ' +
+                'duration-200 border border-border/50 hover:border-border',
             },
             children: [
               {
-                id: "flex-checkbox",
-                componentName: "flex",
+                id: 'flex-checkbox',
+                componentName: 'flex',
                 properties: {
-                  className: "items-center gap-4 flex-1 min-w-0"
+                  className: 'items-center gap-4 flex-1 min-w-0',
                 },
                 children: [
                   {
-                    id: "checkbox",
-                    componentName: "checkbox",
+                    id: 'checkbox',
+                    componentName: 'checkbox',
                     properties: {
-                      className: "h-5 w-5 rounded-md border-2 transition-colors"
+                      className: 'h-5 w-5 rounded-md border-2 transition-colors',
                     },
                     interactions: {
                       onCheckedChange: {
@@ -100,54 +108,53 @@ const componentConfig: ComponentConfig = {
     );
   }
             `,
-
                         },
-                        type: 'both'
-                      }
-                    }
+                        type: 'both',
+                      },
+                    },
                   },
                   //Edit Case
                   {
-                    id: "flex-edit",
-                    componentName: "flex",
+                    id: 'flex-edit',
+                    componentName: 'flex',
                     properties: {
                       variant: 'flex1',
-                      className: "min-w-0"
+                      className: 'min-w-0',
                     },
                     children: [
                       {
-                        id: "flex-items-center",
-                        componentName: "flex",
+                        id: 'flex-items-center',
+                        componentName: 'flex',
                         properties: {
-                          variant: "items-center",
-                          className: "gap-2"
+                          variant: 'items-center',
+                          className: 'gap-2',
                         },
                         children: [
                           {
-                            id: "todo_edit_input",
-                            componentName: "input",
+                            id: 'todo_edit_input',
+                            componentName: 'input',
                             properties: {
                               type: 'text',
                               placeholder: 'Add a new task...',
                               className: 'h-8',
-                              autofocus: true
+                              autofocus: true,
                             },
                             interactions: {
                               value: {
-                                fnName: "editValue",
+                                fnName: 'editValue',
                                 fnCustomCode: {
                                   fnCode: `
   const [editingId, setEditingId] = useState<string | null>(null);
-`
+`,
                                 },
-                                type: "function"
+                                type: 'function',
                               },
                               onChange: {
-                                fnCustomSet: "(e) => setEditValue(e.target.value)",
+                                fnCustomSet: '(e) => setEditValue(e.target.value)',
                                 fnCustomCode: {
-                                  fnCode: "const [editValue, setEditValue] = useState('');"
+                                  fnCode: " const [editValue, setEditValue] = useState('');",
                                 },
-                                type: "function"
+                                type: 'function',
                               },
                               onKeyDown: {
                                 fnCustomSet: `
@@ -156,30 +163,31 @@ const componentConfig: ComponentConfig = {
                           if (e.key === 'Escape') cancelEditing();
                         }
                         `,
-                                type: "function"
+                                type: 'function',
                               },
-                            }
+                            },
                           },
                           {
                             id: 'flex_buttons',
                             componentName: 'flex',
                             properties: {
-                              className: "gap-1"
+                              className: 'gap-1',
                             },
                             children: [
                               {
                                 id: 'check_button',
                                 componentName: 'button',
                                 properties: {
-                                  variant: "ghost",
-                                  size: "icon",
-                                  iconName: "Check",
-                                  className: "h-8 w-8 text-green-600 hover:text-green-700 hover:bg-green-50"
+                                  variant: 'ghost',
+                                  size: 'icon',
+                                  iconName: 'Check',
+                                  className:
+                                    'h-8 w-8 text-green-600 hover:text-green-700 hover:bg-green-50',
                                 },
                                 interactions: {
                                   onClick: {
-                                    fnCustomSet: "() => handleEdit(todo.id)",
-                                    actionName: "editTodo",
+                                    fnCustomSet: '() => handleEdit(todo.id)',
+                                    actionName: 'editTodo',
                                     fnCustomCode: {
                                       fnCode: `
   const handleEdit = async (id: string) => {
@@ -213,95 +221,99 @@ const componentConfig: ComponentConfig = {
     );
     return todos.find(todo => todo.id === id);
   }                            
-                              `
+                              `,
                                     },
-                                    type: "both"
-                                  }
-                                }
+                                    type: 'both',
+                                  },
+                                },
                               },
                               {
                                 id: 'cancel_button',
                                 componentName: 'button',
                                 properties: {
-                                  variant: "ghost",
-                                  size: "icon",
-                                  iconName: "X",
-                                  className: "h-8 w-8 text-muted-foreground hover:text-muted-foreground/80"
+                                  variant: 'ghost',
+                                  size: 'icon',
+                                  iconName: 'X',
+                                  className:
+                                    'h-8 w-8 text-muted-foreground hover:text-muted-foreground/80',
                                 },
                                 interactions: {
                                   onClick: {
-                                    fnName: "cancelEditing",
+                                    fnName: 'cancelEditing',
                                     fnCustomCode: {
                                       fnCode: `
   const cancelEditing = () => {
     setEditingId(null);
     setEditValue('');
   };
-                              `
+                              `,
                                     },
-                                    type: "function"
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  // Show Case
-                  {
-                    id: "flex-show",
-                    componentName: "flex",
-                    children: [
+                                    type: 'function',
+                                  },
+                                },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      // Show Case
                       {
-                        id: 'paragraph-name',
-                        componentName: "paragraph",
-                        content: "{todo.title}",
-                        properties: {
-                          className: `
+                        id: 'flex-show',
+                        componentName: 'flex',
+                        children: [
+                          {
+                            id: 'paragraph-name',
+                            componentName: 'paragraph',
+                            content: '{todo.title}',
+                            properties: {
+                              className: `
                       {\`text-sm font-medium truncate \${
                         todo.completed ? 'text-muted-foreground line-through' : ''
                       }\`}
-                      `
-                        }
-                      },
-                      {
-                        id: 'flex-clock',
-                        componentName: 'flex',
-                        properties: {
-                          className: "items-center gap-1 mt-1"
-                        },
-                        children: [
-                          // TODO: icon Clock!
-                          {
-                            id: 'paragraph-date',
-                            componentName: "paragraph",
-                            content: "{format(new Date(todo.createdAt), 'MMM d, h:mm a')}",
-                            properties: {
-                              className: "text-xs text-muted-foreground"
+                      `,
                             },
-                            interactions: {
-                              custom: {
-                                fnCustomCode: {
-                                  imports: [{ namespace: "import { format } from 'date-fns';" }],
-                                },
-                                type: 'function'
-                              }
-                            }
                           },
-                        ]
-                      }
-                    ]
-                  }
-                ]
+                          {
+                            id: 'flex-clock',
+                            componentName: 'flex',
+                            properties: {
+                              className: 'items-center gap-1 mt-1',
+                            },
+                            children: [
+                              // TODO: icon Clock!
+                              {
+                                id: 'paragraph-date',
+                                componentName: 'paragraph',
+                                content: "{format(new Date(todo.createdAt), 'MMM d, h:mm a')}",
+                                properties: {
+                                  className: 'text-xs text-muted-foreground',
+                                },
+                                interactions: {
+                                  custom: {
+                                    fnCustomCode: {
+                                      imports: [
+                                        { namespace: "import { format } from 'date-fns';" },
+                                      ],
+                                    },
+                                    type: 'function',
+                                  },
+                                },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
               // editingId !== todo.id && ...
               {
                 id: 'flex-todo-actions',
                 componentName: 'flex',
                 properties: {
-                  className: "opacity-0 group-hover:opacity-100 transition-opacity absolute right-2 gap-1"
+                  className:
+                    'opacity-0 group-hover:opacity-100 transition-opacity absolute right-2 gap-1',
                 },
                 children: [
                   {
@@ -311,7 +323,7 @@ const componentConfig: ComponentConfig = {
                       variant: 'ghost',
                       size: 'icon',
                       iconName: 'Pencil',
-                      className: 'text-muted-foreground hover:text-muted-foreground/80'
+                      className: 'text-muted-foreground hover:text-muted-foreground/80',
                     },
                     interactions: {
                       onClick: {
@@ -322,11 +334,11 @@ const componentConfig: ComponentConfig = {
     setEditingId(todo.id);
     setEditValue(todo.title);
   };
-`
+`,
                         },
-                        type: 'function'
-                      }
-                    }
+                        type: 'function',
+                      },
+                    },
                   },
                   {
                     id: 'button_delete',
@@ -335,7 +347,7 @@ const componentConfig: ComponentConfig = {
                       variant: 'ghost',
                       size: 'icon',
                       iconName: 'Trash2',
-                      className: 'text-destructive hover:text-destructive hover:bg-destructive/10'
+                      className: 'text-destructive hover:text-destructive hover:bg-destructive/10',
                     },
                     interactions: {
                       onClick: {
@@ -362,20 +374,20 @@ const componentConfig: ComponentConfig = {
  export async function deleteTodo(id: string) {
     todos = todos.filter((todo) => todo.id !== id);
  }                     
-                      `
+                      `,
                         },
-                        type: 'both'
-                      }
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                        type: 'both',
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };
 
 beforeAll(async () => {

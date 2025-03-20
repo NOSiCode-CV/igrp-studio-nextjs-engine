@@ -28,6 +28,16 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       type: 'string',
       errorMessage: "The label attribute must be a valid string."
     },
+    customClassName: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The label attribute must be a valid string."
+    },
+    customComponentTag: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The label attribute must be a valid string."
+    },
     variants: {
       type: 'object'
     },
@@ -62,8 +72,8 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     },
     renderer: {
       type: 'string',
-      enum: ['hbs', 'default'],
-      errorMessage: "The renderer attribute must only be 'hbs' or 'default'."
+      enum: ['hbs', 'default', 'custom'],
+      errorMessage: "The renderer attribute must only be 'hbs', 'custom' or 'default'."
     },
     templatePath: {
       type: 'string',

@@ -9,23 +9,20 @@
   {{#if resourceConfig.properties.disabled}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
-  {{#if resourceConfig.properties.autofocus}}
-  autoFocus={ {{resourceConfig.properties.autofocus}} }
-  {{/if~}}
   {{#if resourceConfig.properties.hasIcon}}
   showIcon={ {{resourceConfig.properties.hasIcon}} }
   {{/if~}}
-  {{#if resourceConfig.properties.iconName}}
-  iconName="{{resourceConfig.properties.iconName}}"
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconPosition}}
-  iconPlacement="{{resourceConfig.properties.iconPosition}}"
+  {{#if resourceConfig.properties.iconProperties.iconPosition}}
+  iconPlacement="{{resourceConfig.properties.iconProperties.iconPosition}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconClass}}
-  iconClass="{{resourceConfig.properties.iconClass}}"
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClass="{{resourceConfig.properties.iconClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconSize}}
-  iconSize={{resourceConfig.properties.iconSize}}
+  {{#if resourceConfig.properties.iconProperties.iconSize}}
+  iconSize={ {{resourceConfig.properties.iconProperties.iconSize}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"

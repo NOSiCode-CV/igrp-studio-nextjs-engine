@@ -6,15 +6,17 @@ import {
   cardChildPropertiesMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { CARD_CONTENT } from './children/cardContent';
+import { CARD_FOOTER } from './children/cardFooter';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPCard } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(cardVariants());
+    component.loadChildrenMax(2)
     component.loadGroup('layout')
     component.loadLabel('Card')
     component.getProperties(cardProperties());
@@ -22,9 +24,13 @@ export default {
     component.getChildProperties(cardChildProperties());
     component.getChildPropertiesMapping(cardChildPropertiesMapping());
 
-    component.loadStates([
-      'const [cardData, setCardData] = useState({ title: "", body: "", footer: "" });'
+    component.loadChildrenTypes([
+      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }
     ]);
+
+    component.loadAcceptedChildren([
+      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }
+    ])
 
     component.setRenderer(hbsRenderer);
   },

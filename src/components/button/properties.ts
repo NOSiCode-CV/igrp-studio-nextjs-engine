@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
 export function buttonProperties() {
   return {
@@ -6,10 +6,7 @@ export function buttonProperties() {
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
     hasIcon: { type: 'boolean', required: false, default: false },
-    iconName: { type: 'string', required: false },
-    iconPosition: { type: 'string', required: false },
-    iconClass: { type: 'string', required: false },
-    iconSize: { type: 'number', required: false },
+    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
     action: { type: 'string', required: false },
@@ -44,7 +41,7 @@ export function buttonVariants() {
 
 export function buttonInteractions() {
   return {
-    onClick: baseInteraction
+    onClick: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
   };
 }
 
