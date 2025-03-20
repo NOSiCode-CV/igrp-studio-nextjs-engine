@@ -17,7 +17,6 @@ export function resolveCodeBlocks(config: Layout, registry: Record<string, Compo
 
     if(config.interactions) {
       Object.entries(config.interactions).forEach(([_, value]) => {
-        console.log("Code: ", value)
         if(value.type !== 'action' && value.fnCustomCode?.fnCode) codeBlock += ('\n' + value.fnCustomCode.fnCode + '\n')
       })
     }

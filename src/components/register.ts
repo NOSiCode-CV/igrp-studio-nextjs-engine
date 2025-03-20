@@ -11,6 +11,7 @@ import containerModule, { CONTAINER } from './container';
 import datePickerModule, { DATE_PICKER } from './datePicker';
 import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
+import dynamicListModule, { DYNAMIC_LIST } from './dynamicList';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import gridModule, { GRID } from './grid';
@@ -68,6 +69,7 @@ export function registerAllComponents() {
   register(DATE_PICKER, datePickerModule.register);
   register(DROPDOWN, dropdownModule.register);
   register(DROPDOWN_ITEM, dropdownItemModule.register);
+  register(DYNAMIC_LIST, dynamicListModule.register);
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(GRID, gridModule.register);

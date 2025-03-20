@@ -248,7 +248,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
 
-  let { variant, customProperties, ...common } = component.properties ?? {};
+  let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -258,19 +258,21 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return ` ${key}="${value}"`;
+      return (key === "className")? `` : ` ${key}="${value}"`;
     }).join("")
     : ``
 
-  const classNames = common
+  let classNames = common
     ? Object.entries(common)
         .map(([key, value]) => {
           return element.propertiesMapping[key]?.className
-            ? ` ${element.propertiesMapping[key]?.className ?? key}${value}`
+            ? ` ${element.propertiesMapping[key]?.className ?? key} ${value}`
             : ``;
         })
         .join('')
     : ``;
+  
+  if(cn) classNames += ` ${cn}`;
 
   let childProps = ``
   let childClassNames = ``

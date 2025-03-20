@@ -14,6 +14,7 @@ export default {
     component.loadGroup('typography')
     component.loadLabel('Paragraph')
     component.loadCustomComponentTag('p')
+    component.loadCustomClassName("")
     component.getProperties(paragraphProperties());
     component.getPropertiesMapping(paragraphPropertiesMapping());
     component.getChildProperties(paragraphChildProperties());
