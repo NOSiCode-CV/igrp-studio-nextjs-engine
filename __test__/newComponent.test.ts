@@ -62,8 +62,13 @@ const componentConfig: ComponentConfig = {
                             { namespace: 'import {useRouter} from "next/navigation";' },
                             { namespace: 'import {toast} from "sonner";' },
                           ],
+                          states: [
+                            {
+                              state: `const [todos, setTodos] = useState([]);`
+                            }
+                          ],
                           fnCode: `
-  const [todos, setTodos] = useState([]);
+  
   const router = useRouter();
   
   type Todo = {
@@ -143,16 +148,16 @@ const componentConfig: ComponentConfig = {
                               value: {
                                 fnName: 'editValue',
                                 fnCustomCode: {
-                                  fnCode: `
-  const [editingId, setEditingId] = useState<string | null>(null);
-`,
+                                  states: [
+                                    { state: `const [editingId, setEditingId] = useState<string | null>(null);`}
+                                  ],
                                 },
                                 type: 'function',
                               },
                               onChange: {
                                 fnCustomSet: '(e) => setEditValue(e.target.value)',
                                 fnCustomCode: {
-                                  fnCode: " const [editValue, setEditValue] = useState('');",
+                                  states: [{ state: `const [editValue, setEditValue] = useState('');` }],
                                 },
                                 type: 'function',
                               },
@@ -180,7 +185,9 @@ const componentConfig: ComponentConfig = {
                                 properties: {
                                   variant: 'ghost',
                                   size: 'icon',
-                                  iconName: 'Check',
+                                  iconProperties: {
+                                    iconName: 'Check',
+                                  },
                                   className:
                                     'h-8 w-8 text-green-600 hover:text-green-700 hover:bg-green-50',
                                 },
@@ -233,7 +240,9 @@ const componentConfig: ComponentConfig = {
                                 properties: {
                                   variant: 'ghost',
                                   size: 'icon',
-                                  iconName: 'X',
+                                  iconProperties: {
+                                    iconName: 'X',
+                                  },
                                   className:
                                     'h-8 w-8 text-muted-foreground hover:text-muted-foreground/80',
                                 },
@@ -280,7 +289,14 @@ const componentConfig: ComponentConfig = {
                               className: 'items-center gap-1 mt-1',
                             },
                             children: [
-                              // TODO: icon Clock!
+                              {
+                                id: 'clock-icon',
+                                componentName: 'icon',
+                                properties: {
+                                  iconName: 'Clock',
+                                  className: 'h-3 w-3 text-muted-foreground'
+                                }
+                              },
                               {
                                 id: 'paragraph-date',
                                 componentName: 'paragraph',
@@ -322,7 +338,9 @@ const componentConfig: ComponentConfig = {
                     properties: {
                       variant: 'ghost',
                       size: 'icon',
-                      iconName: 'Pencil',
+                      iconProperties: {
+                        iconName: 'Pencil',
+                      },
                       className: 'text-muted-foreground hover:text-muted-foreground/80',
                     },
                     interactions: {
@@ -346,7 +364,9 @@ const componentConfig: ComponentConfig = {
                     properties: {
                       variant: 'ghost',
                       size: 'icon',
-                      iconName: 'Trash2',
+                      iconProperties: {
+                        iconName: 'Trash2',
+                      },
                       className: 'text-destructive hover:text-destructive hover:bg-destructive/10',
                     },
                     interactions: {

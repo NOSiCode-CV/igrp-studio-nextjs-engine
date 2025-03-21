@@ -1,6 +1,7 @@
-import { Layout } from '../interfaces/types';
+import { ActionConfig, Layout, RenderContext } from '../interfaces/types';
 import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
+import { generateAction } from '@/modules/actions/generateAction';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
 
@@ -8,10 +9,11 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   const stateDefinitions = new Set<string>();
 
-  const components = new Set<{ componentName: string, id: string, properties: Record<string, any> }>();
+  const components = new Set<{ componentName: string, id: string, properties: Record<string, any>, interactions: Record<string, any>, }>();
   extractComponentData(config, components, registry);
 
-  components.forEach((component) => {
+  // add default component states
+  /*components.forEach((component) => {
     const metadata = registry[component.componentName];
     if (metadata?.states) {
       const id = component.id
@@ -19,22 +21,17 @@ export function resolveStates(config: Layout, registry: Record<string, Component
         : component.properties?.value ?? ''
       metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
     }
-  });
+  });*/
 
-  const actionsConfigs: Layout[] | undefined = config.children?.filter((it) => it.properties?.actions);
+  // Define actions imports
+  const actionsConfigs: Layout[] | undefined = Array.from(components)?.filter((it) => it.interactions);
+
   // Define Table states
   if(actionsConfigs) {
     actionsConfigs.forEach((c) => {
-      c.properties?.actions.forEach((action: Layout) => {
-          const metadata = registry[action.componentName];
-          if (metadata?.states) {
-            const id = action.id
-            const value = isBool(action.componentName) ? action.properties?.disabled ?? 'false'
-              : action.properties?.value ?? ''
-            metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
-          }
-        }
-      );
+      Object.entries(c.interactions!).forEach(([_, value]) => {
+        value?.fnCustomCode?.states?.forEach((state: any) => stateDefinitions.add(state.state));
+      })
     })
   }
 

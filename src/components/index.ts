@@ -268,7 +268,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     ? Object.entries(common)
         .map(([key, value]) => {
           return element.propertiesMapping[key]?.className
-            ? ` ${element.propertiesMapping[key]?.className ?? key} ${value}`
+            ? ` ${element.propertiesMapping[key]?.className ?? key}${value}`
             : ``;
         })
         .join('')

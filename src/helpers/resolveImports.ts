@@ -51,13 +51,16 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
             if (actionConfig.actionName) {
               imports.add(
-                `import { ${actionConfig.actionName} } from "@/app/pages/${pageName}/actions/${actionConfig.actionName.toLowerCase()}"`
+                isPage?
+                `import { ${actionConfig.actionName} } from "@/app/pages/${pageName.toLowerCase()}/actions/${actionConfig.actionName.toLowerCase()}"`
+                  :
+                `import { ${actionConfig.actionName} } from "@/components/${pageName.toLowerCase()}/actions/${actionConfig.actionName.toLowerCase()}"`
               );
             } else {
               console.error("actionName is undefined for", actionConfig);
             }
 
-            generateAction(context)
+            generateAction(context, !isPage)
 
           }
 

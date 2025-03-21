@@ -7,10 +7,15 @@ import {
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { CARD } from '../../index';
+import { replaceTemplate } from '../../../../utils/helpers';
+import { TEMPLATES } from '../../../../utils/constants';
 
 export default {
   register(component: Component) {
-    component.loadImports([]);
+
+    component.loadImports([
+      `import { IGRPCardFooter } from "@igrp/igrp-framework-react-design-system";`,
+    ]);
 
     component.loadVariants(cardFooterVariants());
     component.loadParent(CARD)
@@ -19,6 +24,7 @@ export default {
     component.getPropertiesMapping(cardFooterPropertiesMapping());
     component.getChildProperties(cardFooterChildProperties());
     component.getChildPropertiesMapping(cardFooterChildPropertiesMapping());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: CARD, name: CARD_FOOTER }))
 
     component.loadStates([]);
 

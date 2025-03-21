@@ -1,4 +1,10 @@
-import { formPropertiesMapping, formProperties, formVariants } from './properties';
+import {
+  formPropertiesMapping,
+  formProperties,
+  formVariants,
+  formInteractions,
+  formInteractionsMapping,
+} from './properties';
 import { Component, hbsRenderer } from '../index';
 import { formChildProperties, formChildPropertiesMapping } from '../flex/properties';
 import { GRID } from '../grid';
@@ -7,12 +13,13 @@ import { HEADLINE } from '../headline';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(formVariants());
     component.loadGroup('containers')
     component.loadLabel('Form')
+    component.getInteractions(formInteractions())
+    component.getInteractionsMapping(formInteractionsMapping())
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
     component.getChildProperties(formChildProperties());
@@ -21,9 +28,7 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
-      'const [loading, setLoading] = useState(false);',
-      'const [disabled, setDisabled] = useState(false);',
-      'const [error, setError] = useState("");'
+
     ]);
 
     component.setRenderer(hbsRenderer);

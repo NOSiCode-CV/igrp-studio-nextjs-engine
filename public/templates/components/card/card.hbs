@@ -1,47 +1,4 @@
 <IGRPCard
-  {{#if resourceConfig.properties.title}}
-  title="{{resourceConfig.properties.title}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.titleClassName}}
-  titleClassName="{{resourceConfig.properties.titleClassName}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.description}}
-  description="{{resourceConfig.properties.description}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.descriptionClassName}}
-  descriptionClassName="{{resourceConfig.properties.descriptionClassName}}"
-  {{/if~}}
-  content={
-    {{#if resourceConfig.children}}
-    <div>
-      {{#each (extractCardContent resourceConfig.children)}}
-      {{#each this.children}}
-      {{{render-layout this}}}
-      {{/each}}
-      {{/each}}
-    </div>
-    {{/if~}}
-  }
-  footer={
-    {{#if resourceConfig.children}}
-    <div>
-      {{#each (extractCardFooter resourceConfig.children)}}
-      {{#each this.children}}
-      {{{render-layout this}}}
-      {{/each}}
-      {{/each}}
-    </div>
-    {{/if~}}
-  }
-  {{#if resourceConfig.properties.showHeader}}
-  showHeader={ {{resourceConfig.properties.showHeader}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.showFooter}}
-  showFooter={ {{resourceConfig.properties.showFooter}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.footerClassName}}
-  footerClassName="{{resourceConfig.properties.descriptionClassName}}"
-  {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
@@ -60,4 +17,9 @@
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if~}}
 >
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
 </IGRPCard>

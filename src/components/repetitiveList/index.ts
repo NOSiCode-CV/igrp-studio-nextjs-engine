@@ -10,12 +10,12 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPRepetitiveList } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPRepetitiveComponent } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(repetitiveListVariants());
     component.loadGroup('basicElements')
-    component.loadLabel('Dynamic List')
+    component.loadLabel('Repetitive Component')
     component.getProperties(repetitiveListProperties());
     component.getPropertiesMapping(repetitiveListPropertiesMapping());
     component.getChildProperties(repetitiveListChildProperties());

@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function formProperties() {
   return {
@@ -19,6 +19,18 @@ export function formPropertiesMapping() {
     description: 'description',
     message: 'message',
     ...commonPropertiesMapping(),
+  };
+}
+
+export function formInteractions() {
+  return {
+    onSubmit: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+  };
+}
+
+export function formInteractionsMapping() {
+  return {
+
   };
 }
 

@@ -27,16 +27,17 @@ export const getComponentDir = (context: RenderContext<ComponentConfig, Componen
   return path.join(
     context.basePath,
     DIRECTORIES.COMPONENTS,
+    `${context.resourceConfig.name}`.toLowerCase(),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };
 
-export const getActionDir = (context: RenderContext<ActionConfig, ActionConfig>) => {
+export const getActionDir = (context: RenderContext<ActionConfig, ActionConfig>, isComponent: boolean = false) => {
   const name = context.resourceConfig.actionName.toLowerCase();
   const pageName = context.resourceConfig.pageName.toLowerCase();
   return path.join(
     context.basePath,
-    replaceTemplate(DIRECTORIES.ACTIONS, { pageName }),
+    replaceTemplate(isComponent? DIRECTORIES.ACTIONS_COMPONENT : DIRECTORIES.ACTIONS, { pageName }),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };

@@ -8,6 +8,7 @@ import {
 import { Component, hbsRenderer } from '../index';
 import { CARD_CONTENT } from './children/cardContent';
 import { CARD_FOOTER } from './children/cardFooter';
+import { CARD_HEADER } from './children/cardHeader';
 
 export default {
   register(component: Component) {
@@ -16,7 +17,7 @@ export default {
     ]);
 
     component.loadVariants(cardVariants());
-    component.loadChildrenMax(2)
+    component.loadChildrenMax(3)
     component.loadGroup('layout')
     component.loadLabel('Card')
     component.getProperties(cardProperties());
@@ -25,11 +26,11 @@ export default {
     component.getChildPropertiesMapping(cardChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }
+      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }, { name: CARD_HEADER, isDefault: true }
     ]);
 
     component.loadAcceptedChildren([
-      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }
+      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }, { name: CARD_HEADER, isDefault: true }
     ])
 
     component.setRenderer(hbsRenderer);

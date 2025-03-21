@@ -1,11 +1,11 @@
-<IGRPRepetitiveList
+<IGRPRepetitiveComponent
   {{#if resourceConfig.properties.data}}
-  data={ {{{resourceConfig.properties.data}}} }
+  items={ {{{resourceConfig.properties.data}}} }
   {{/if~}}
   {{#if resourceConfig.properties.keyExtractor}}
   keyExtractor={ {{{resourceConfig.properties.keyExtractor}}} }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{!--{{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
@@ -18,7 +18,7 @@
   {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
-  {{/if}}
+  {{/if}}--}}
   {{#if resourceConfig.properties.customProperties}}
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
@@ -29,5 +29,5 @@
   {{{render-layout this}}}
   {{/each}}
   {{/if~}}
-  }
-</IGRPRepetitiveList>
+}
+</IGRPRepetitiveComponent>

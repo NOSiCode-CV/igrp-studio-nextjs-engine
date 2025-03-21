@@ -1,7 +1,4 @@
-<form
-  {{#if resourceConfig.interactions}}
-  {{{render-interactions resourceConfig.interactions}}}
-  {{/if}}
+<IGRPCardHeader
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
@@ -13,10 +10,16 @@
   {{/if~}}
   {{/if}}
   {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if~}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if~}}
 >
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
   {{{render-layout this}}}
   {{/each}}
   {{/if~}}
-</form>
+</IGRPCardHeader>

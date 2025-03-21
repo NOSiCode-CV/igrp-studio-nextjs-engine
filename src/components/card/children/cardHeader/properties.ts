@@ -1,26 +1,26 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
-export function cardContentProperties() {
+export function cardHeaderProperties() {
   return {
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
 
-export function cardContentPropertiesMapping() {
+export function cardHeaderPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function cardContentChildProperties() {
+export function cardHeaderChildProperties() {
   return {};
 }
 
-export function cardContentChildPropertiesMapping() {
+export function cardHeaderChildPropertiesMapping() {
   return {};
 }
 
-export function cardContentVariants() {
+export function cardHeaderVariants() {
   return {};
 }

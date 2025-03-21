@@ -1,5 +1,6 @@
-import { getOneComponent, initComponents, registerComponents } from '../src';
+import { initComponents, registerComponents } from '../src';
 import { ComponentRegistrationConfig } from '../src/interfaces/types';
+import { registryAsObject } from '../src/components';
 
 describe('Register Custom Components', () => {
 
@@ -7,8 +8,7 @@ describe('Register Custom Components', () => {
     components: [
       {
         name: "MyComponent",
-        imports: [`import { MyComponent } from '@components/myComponent'`],
-        icon: "component",
+        imports: [`import { MyComponent } from '@components/mycomponent/myComponent'`],
         group: "Custom",
         label: "My Component",
         variants: {},
@@ -20,13 +20,15 @@ describe('Register Custom Components', () => {
           title: { property: 'title' }
         },
         states: [],
+        childrenTypes: [],
+        acceptedChildren: [],
+        defaultValue: false,
         renderer: 'hbs'
       },
 
       {
         name: "MyForm",
-        imports: [`import { MyForm } from '@components/myForm'`],
-        icon: "form",
+        imports: [`import { MyForm } from '@components/myform/myForm'`],
         group: "Form",
         label: "My Form",
         variants: {},
@@ -38,6 +40,9 @@ describe('Register Custom Components', () => {
           title: { className: 'title' }
         },
         states: [],
+        childrenTypes: [],
+        acceptedChildren: [],
+        defaultValue: false,
         renderer: 'default'
       }
     ]
@@ -45,7 +50,7 @@ describe('Register Custom Components', () => {
 
   test('Get component', async () => {
      registerComponents(config)
-     console.log(getOneComponent({ name: 'MyComponent' }));
+     console.log(registryAsObject());
   });
 
 });

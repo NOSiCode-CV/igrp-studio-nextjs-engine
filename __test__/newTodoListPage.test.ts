@@ -15,7 +15,7 @@ export const todoLayout: Layout = {
       id: 'hl_container',
       componentName: 'container',
       properties: {
-        className: 'mx-auto sm:p-6 lg:p-8',
+        className: 'mx-auto sm:p-6 lg:p-8 space-y-4',
         padding: 4
       },
       children: [
@@ -23,7 +23,7 @@ export const todoLayout: Layout = {
           id: 'hl_title',
           componentName: 'headline',
           properties: {
-            variant: 'h6',
+            variant: 'h1',
             title: 'Task Management Assistant'
           }
         },
@@ -46,12 +46,15 @@ export const todoLayout: Layout = {
                   id: 'card_todo',
                   componentName: 'card',
                   properties: {
-
+                    className: 'flex-1 border-none shadow-lg'
                   },
                   children: [
                     {
-                      id: 'card_todo_content',
-                      componentName: 'cardContent',
+                      id: 'card_todo_header',
+                      componentName: 'cardHeader',
+                      properties: {
+                        className: 'pb-4'
+                      },
                       children: [
                         {
                           id: 'todo_hl_flex',
@@ -77,23 +80,37 @@ export const todoLayout: Layout = {
                             },
                           ]
                         },
-                        {
-                          id: 'addTodo',
-                          componentName: 'addTodo',
-                          properties: {
-                            customProperties: {
-                              onAdd: '{handleAddTodo}'
-                            }
-                          },
-                          interactions: {
-                            custom: {
-                              fnName: 'handleAddTodo',
-                              actionName: 'getTodos',
-                              fnCustomCode: {
-                                fnCode: `
-                          
-  const [todos, setTodos] = useState<any[]>([]);
+                      ]
+                    },
+                    {
+                      id: 'card_todo_content',
+                      componentName: 'cardContent',
+                      properties: {
 
+                      },
+                      children: [
+                        {
+                          id: 'section_todo',
+                          componentName: 'section',
+                          properties: {
+                            spaceY: '4'
+                          },
+                          children: [
+                            {
+                              id: 'addTodo',
+                              componentName: 'addTodo',
+                              properties: {
+                                customProperties: {
+                                  onAdd: '{handleAddTodo}'
+                                }
+                              },
+                              interactions: {
+                                custom: {
+                                  fnName: 'handleAddTodo',
+                                  actionName: 'getTodos',
+                                  fnCustomCode: {
+                                    states: [{ state: `const [todos, setTodos] = useState<any[]>([]);` }],
+                                    fnCode: `
   useEffect(() => {
     const loadTodos = async () => {
       const initialTodos = await getTodos();
@@ -106,7 +123,7 @@ export const todoLayout: Layout = {
     setTodos(prevTodos => [newTodo, ...prevTodos]);
   };
                           `,
-                                actionCode: `
+                                    actionCode: `
                           
   let todos: any[] = [];
   
@@ -114,32 +131,59 @@ export const todoLayout: Layout = {
     return todos;
   }
                           `
-                              },
-                              type: 'both'
-                            },
+                                  },
+                                  type: 'both'
+                                },
 
-                          }
-                        },
-                        {
-                          id: 'todolist',
-                          componentName: 'todolist',
-                          properties: {
-                            customProperties: {
-                              initialTodos: '{todos}'
+                              }
+                            },
+                            {
+                              id: 'flex-todolist',
+                              componentName: 'section',
+                              properties: {
+                                className: "h-[calc(100vh-320px)] overflow-auto pr-2"
+                              },
+                              children: [
+                                {
+                                  id: 'todolist',
+                                  componentName: 'todolist',
+                                  properties: {
+                                    customProperties: {
+                                      initialTodos: '{todos}'
+                                    }
+                                  },
+                                }
+                              ]
                             }
-                          },
+                          ]
                         }
                       ]
                     }
                   ],
                 },
+              ],
+            },
+            {
+              id: 'flex_2',
+              componentName: 'flex',
+              properties: {
+                variant: 'col',
+                className: 'space-y-4',
+              },
+              children: [
                 {
                   id: 'card_chat',
                   componentName: 'card',
+                  properties: {
+                    className: 'flex-1 border-none shadow-lg'
+                  },
                   children: [
                     {
-                      id: 'card_chat_content',
-                      componentName: 'cardContent',
+                      id: 'card_chat_header',
+                      componentName: 'cardHeader',
+                      properties: {
+                        className: 'pb-4'
+                      },
                       children: [
                         {
                           id: 'ai_chat_hl_flex',
@@ -165,6 +209,15 @@ export const todoLayout: Layout = {
                             },
                           ]
                         },
+                      ]
+                    },
+                    {
+                      id: 'card_chat_content',
+                      componentName: 'cardContent',
+                      properties: {
+                        className: 'h-[calc(100vh-240px)]'
+                      },
+                      children: [
                         {
                           id: 'ai_chat',
                           componentName: 'chat',
@@ -199,7 +252,7 @@ beforeAll(async () => {
     components: [
       {
         name: "todolist",
-        imports: [`import Todolist from "@/components/todolist"`],
+        imports: [`import Todolist from "@/components/todolist/todolist"`],
         group: "custom",
         label: "Todolist",
         customComponentTag: "Todolist",
@@ -216,7 +269,7 @@ beforeAll(async () => {
       {
         name: "addTodo",
         customClassName: "",
-        imports: [`import AddTodo from "@/components/addtodo"`],
+        imports: [`import AddTodo from "@/components/addtodo/addtodo"`],
         group: "custom",
         label: "Add Todo",
         customComponentTag: "AddTodo",

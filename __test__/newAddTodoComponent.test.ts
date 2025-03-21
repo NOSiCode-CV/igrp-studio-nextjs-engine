@@ -24,9 +24,8 @@ const componentConfig: ComponentConfig = {
     children: [
       {
         id: 'input_add_todo',
-        componentName: "input",
+        componentName: "inputText",
         properties: {
-          type: "text",
           placeholder: "Add a new task...",
           className: "flex-1",
         },
@@ -42,21 +41,41 @@ const componentConfig: ComponentConfig = {
         properties: {
           type: "submit",
           size: "icon",
-          iconName: "Plus"
+          iconProperties: {
+            iconName: "Plus"
+          }
         },
       }
     ],
     interactions: {
       onSubmit: {
         fnName: 'handleSubmit',
+        actionName: "addTodo",
         fnCustomCode: {
           imports: [
             { namespace: `import { useRouter } from 'next/navigation'`},
             { namespace: `import { toast } from 'sonner'`},
+            { namespace: `interface AddTodoProps { onAdd?: (todo: any) => void}`},
           ],
+          states: [{ state: `const [title, setTitle] = useState('');` }],
+          actionCode: `
+          
+  let todos: any[] = [];
+          
+  export async function addTodo(title: string) {
+    const newTodo = {
+      id: Math.random().toString(36).substring(7),
+      title,
+      completed: false,
+      createdAt: new Date(),
+    };
+    
+    todos = [newTodo, ...todos];
+    return newTodo;
+  }        
+          `,
           fnCode: `
           
-  const [title, setTitle] = useState('')
   const router = useRouter()
           
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,7 +94,8 @@ const componentConfig: ComponentConfig = {
     });
   }
           `
-        }
+        },
+        type: "both"
       }
     }
   }

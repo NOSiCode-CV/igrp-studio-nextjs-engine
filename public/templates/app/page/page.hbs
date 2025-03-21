@@ -7,7 +7,7 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
 
   const service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {{capitalize resourceConfig.pageName}}Service;
 
-  {{!--{{{resolve-states resourceConfig.components registry}}}--}}
+  {{{resolve-states resourceConfig.components registry}}}
   {{{resolve-code-blocks resourceConfig.components registry}}}
 
   return (

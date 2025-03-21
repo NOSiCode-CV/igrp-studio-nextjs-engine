@@ -2,6 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 
 export function cardFooterProperties() {
   return {
+    className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

@@ -99,6 +99,7 @@ export const DIRECTORIES = {
   PUBLIC: 'public',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
+  ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
   STUDIO: 'public/studio',
   IGRPSTUDIO: '.igrpstudio',
   MESSAGES: 'messages',

@@ -7,10 +7,11 @@ import { ActionConfig, RenderContext } from '../../interfaces/types';
 /**
  *
  * @param context
+ * @param isComponent
  */
-export const generateAction = (context: RenderContext<ActionConfig, ActionConfig>) => {
+export const generateAction = (context: RenderContext<ActionConfig, ActionConfig>, isComponent: boolean = false) => {
   const component = renderAction(context);
-  const componentOutputPath = getActionDir(context);
+  const componentOutputPath = getActionDir(context, isComponent);
 
   saveToFileSync(component, componentOutputPath, true, DIRECTORIES.COMPONENTS, context.resourceConfig.id, context.basePath);
 };
