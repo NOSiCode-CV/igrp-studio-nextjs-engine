@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 
 export function tableModalActionProperties() {
@@ -37,6 +37,17 @@ export function tableModalActionChildPropertiesMapping() {
   };
 }
 
+export function tableModalActionInteractions() {
+  return {
+    onClickConfirm: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+  };
+}
+
+export function tableModalActionInteractionsMapping() {
+  return {
+
+  };
+}
 
 export function tableModalActionVariants() {
   return {

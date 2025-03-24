@@ -87,7 +87,7 @@ function initComponent(): Component {
     componentClass: '',
     maxChildren: undefined,
     templatePath: undefined,
-    renderer: () => () => `<div className="text-sm font-medium text-gray-700">Component Not Registered</div>`,
+    renderer: () => () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: "Not registered" }),
 
     loadImports(imports) {
       imports.forEach((imp) => this.imports.add(imp));
@@ -248,7 +248,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 }
 
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
-  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
+  if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
 
@@ -336,7 +336,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 }
 
 export function customRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
-  if(!element) return () => `<div className="text-sm font-medium text-gray-700">${component.componentName}</div>`
+  if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { customProperties, className: cn, ...common } = component.properties ?? {};
 

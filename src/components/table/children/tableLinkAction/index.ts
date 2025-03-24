@@ -3,7 +3,7 @@ import {
   tableLinkActionProperties,
   tableLinkActionVariants,
   tableLinkActionChildProperties,
-  tableLinkActionChildPropertiesMapping,
+  tableLinkActionChildPropertiesMapping, tableLinkActionInteractions, tableLinkActionInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -24,9 +24,11 @@ export default {
     component.loadLabel('Link Action')
     component.getProperties(tableLinkActionProperties());
     component.getPropertiesMapping(tableLinkActionPropertiesMapping());
+    component.getInteractions(tableLinkActionInteractions());
+    component.getInteractionsMapping(tableLinkActionInteractionsMapping())
     component.getChildProperties(tableLinkActionChildProperties());
     component.getChildPropertiesMapping(tableLinkActionChildPropertiesMapping());
-    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: "tableActionButton"}))
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_LINK_ACTION}))
 
     component.loadStates([]);
 

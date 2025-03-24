@@ -29,7 +29,6 @@ const tableLayout: Layout = {
         showFilter: true,
         showPagination: true,
         showToggleColumn: true
-
       },
       children: [
         {
@@ -112,9 +111,10 @@ const tableLayout: Layout = {
                   componentName: 'tableAlertAction',
                   properties: {
                     labelTrigger: 'Delete',
-                    icon: 'Trash',
+                    iconProperties: {
+                      iconName: 'Trash',
+                    },
                     title: 'Delete',
-                    type: 'alert'
                   }
                 },
                 {
@@ -125,7 +125,9 @@ const tableLayout: Layout = {
                       id: 'disable',
                       componentName: 'tableAlertDropdownItem',
                       properties: {
-                        icon: 'Pause',
+                        iconProperties: {
+                          iconName: 'Pause',
+                        },
                         showIcon: true,
                         labelTrigger: 'Disable',
                         type: "alert"
@@ -135,7 +137,9 @@ const tableLayout: Layout = {
                       id: 'edit',
                       componentName: 'tableModalDropdownItem',
                       properties: {
-                        icon: 'Pencil',
+                        iconProperties: {
+                          iconName: 'Pencil',
+                        },
                         showIcon: true,
                         labelTrigger: 'Edit',
                         type: "modal"
@@ -145,7 +149,9 @@ const tableLayout: Layout = {
                       id: 'external',
                       componentName: 'tableLinkDropdownItem',
                       properties: {
-                        icon: 'Link',
+                        iconProperties: {
+                          iconName: 'Link',
+                        },
                         showIcon: true,
                         labelTrigger: 'External',
                         href: "https://igrp.cv/",
@@ -159,9 +165,10 @@ const tableLayout: Layout = {
                   componentName: 'tableModalAction',
                   properties: {
                     labelTrigger: 'View',
-                    icon: 'Eye',
+                    iconProperties: {
+                      iconName: 'Eye',
+                    },
                     title: 'View',
-                    type: 'modal'
                   },
                   children: [
                     //inputLayout // TODO: modal shouldn't allow hrefs??
@@ -172,9 +179,10 @@ const tableLayout: Layout = {
                   componentName: 'tableLinkAction',
                   properties: {
                     labelTrigger: 'External',
-                    icon: 'ArrowRight',
+                    iconProperties: {
+                      iconName: 'ArrowRight',
+                    },
                     href: 'https://www.igrp.cv/',
-                    type: 'link'
                   }
                 },*/
               ]
@@ -246,6 +254,13 @@ const tableLayout: Layout = {
           ],
         },
       ],
+      interactions: {
+        custom: {
+          fnCustomCode: {
+            states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }]
+          }
+        }
+      }
     },
   ],
 };

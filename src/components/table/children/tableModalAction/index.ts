@@ -3,7 +3,7 @@ import {
   tableModalActionProperties,
   tableModalActionVariants,
   tableModalActionChildProperties,
-  tableModalActionChildPropertiesMapping,
+  tableModalActionChildPropertiesMapping, tableModalActionInteractions, tableModalActionInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -22,11 +22,13 @@ export default {
     component.loadParent(TABLE_ACTION_LIST_CELL)
     component.loadGroup('Columns')
     component.loadLabel('Modal Action')
+    component.getInteractions(tableModalActionInteractions());
+    component.getInteractionsMapping(tableModalActionInteractionsMapping());
     component.getProperties(tableModalActionProperties());
     component.getPropertiesMapping(tableModalActionPropertiesMapping());
     component.getChildProperties(tableModalActionChildProperties());
     component.getChildPropertiesMapping(tableModalActionChildPropertiesMapping());
-    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: "tableActionButton" }))
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_MODAL_ACTION }))
 
     component.loadStates([]);
 

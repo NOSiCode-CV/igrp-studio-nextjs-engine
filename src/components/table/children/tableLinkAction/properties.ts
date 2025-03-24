@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 
 export function tableLinkActionProperties() {
@@ -29,6 +29,17 @@ export function tableLinkActionChildPropertiesMapping() {
   };
 }
 
+export function tableLinkActionInteractions() {
+  return {
+    action: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+  };
+}
+
+export function tableLinkActionInteractionsMapping() {
+  return {
+
+  };
+}
 
 export function tableLinkActionVariants() {
   return {

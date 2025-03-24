@@ -22,32 +22,6 @@ const buttonLayout: Layout = {
         size: 'default',
         label: 'Default'
       },
-      interactions: {
-        onClick: {
-          fnName: 'handleSubmit',
-          fnCustomCode: {
-            imports: [{ namespace: 'import { someImport } from "./custom";' }],
-            code: `
-  const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault()
-      if (!title.trim()) return
-      
-      const newTodo = await addTodo(title)
-      if (onAdd) {
-        onAdd(newTodo)
-      }
-      setTitle('')
-      router.refresh()
-
-      toast.success(\`Added: \${title}\`, {
-        icon: "➕"
-      });
-    }
-            `,
-            type: 'function'
-          }
-        }
-      }
     },
     {
       id: "button_default_disabled",
@@ -67,31 +41,6 @@ const buttonLayout: Layout = {
         size: 'default',
         label: 'Destructive'
       },
-      interactions: {
-        onClick: {
-          fnName: 'customAction',
-          fnCustomCode: {
-            code: `
-  const customAction = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!title.trim()) return
-    
-    const newTodo = await addTodo(title)
-    if (onAdd) {
-      onAdd(newTodo)
-    }
-    setTitle('')
-    router.refresh()
-
-    toast.success(\`Added: \${title}\`, {
-      icon: "➕"
-    });
-  }
-            `
-          },
-          type: 'action'
-        }
-      }
     },
     {
       id: "button_outline",
@@ -137,8 +86,10 @@ const buttonLayout: Layout = {
         size: 'default',
         hasIcon: true,
         label: 'Left',
-        iconName: 'House',
-        iconPosition: 'start'
+        iconProperties: {
+          iconName: 'ArrowLeft',
+          iconPosition: 'start'
+        }
       }
     },
     {
@@ -149,8 +100,10 @@ const buttonLayout: Layout = {
         size: 'default',
         hasIcon: true,
         label: 'Right',
-        iconName: 'House',
-        iconPosition: 'end'
+        iconProperties: {
+          iconName: 'ArrowRight',
+          iconPosition: 'end'
+        }
       }
     },
     {
@@ -159,7 +112,9 @@ const buttonLayout: Layout = {
       properties: {
         variant: 'default',
         size: 'icon',
-        iconName: 'House'
+        iconProperties: {
+          iconName: 'Eye'
+        }
       }
     },
   ]

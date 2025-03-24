@@ -1,31 +1,22 @@
-<IGRPButton
-  {{#if resourceConfig.properties.type}}
-  type="{{resourceConfig.properties.type}}"
+<IGRPDataTableButtonLink
+  labelTrigger="{{resourceConfig.properties.labelTrigger}}"
+  {{#if resourceConfig.properties.href}}
+  href="{{resourceConfig.properties.href}}"
   {{/if~}}
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
-  size="{{resourceConfig.properties.size}}"
-  {{/if~}}
-  {{!--disabled={ {{resourceConfig.id}}Disabled }--}}
   {{#if resourceConfig.properties.disabled}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hasIcon}}
-  showIcon={ {{resourceConfig.properties.hasIcon}} }
-  {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  icon="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconPosition}}
-  iconPlacement="{{resourceConfig.properties.iconProperties.iconPosition}}"
+  {{#if resourceConfig.properties.classNameTrigger}}
+  classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClass="{{resourceConfig.properties.iconClassName}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconSize}}
-  iconSize={ {{resourceConfig.properties.iconProperties.iconSize}} }
+  iconClassName="{{resourceConfig.properties.iconClassName}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
@@ -46,13 +37,4 @@
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
 >
-  {{#if resourceConfig.properties.label}}
-  {{resourceConfig.properties.label}}
-  {{else}}
-  {{#if resourceConfig.children}}
-  {{#each resourceConfig.children}}
-  {{{render-layout this}}}
-  {{/each}}
-  {{/if~}}
-  {{/if~}}
-</IGRPButton>
+</IGRPDataTableButtonLink>

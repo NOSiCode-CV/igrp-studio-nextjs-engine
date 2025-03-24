@@ -36,14 +36,14 @@
           cell: ({ row }) => {
           {{{render-table-row this ../../registry}}}
           },
-        filterFn: {{#if (eq this.componentName 'tableDateCell')}}dateRangeFilterFn{{else}}facetedFilterFn{{/if}}
+        filterFn: {{#if (eq this.componentName 'tableDateCell')}}IGRPDataTableDateRangeFilterFn{{else}}IGRPDataTableFacetedFilterFn{{/if}}
         },
         {{/each}}
       {{/each}}
     {{/if~}}
     ]
   }
-  filters={
+  clientFilters={
     [
     {{#if resourceConfig.children}}
       {{#each (extractTableFilters resourceConfig.children)}}

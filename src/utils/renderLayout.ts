@@ -1,6 +1,8 @@
 //import prettier from '@prettier/sync';
 import { Layout } from '../interfaces/types';
 import { getComponent } from '../components';
+import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { TEMPLATES } from './constants';
 
 export const renderLayout = function (config: Layout, parent?: Layout): string {
   if (!config.componentName) return '';
@@ -9,7 +11,7 @@ export const renderLayout = function (config: Layout, parent?: Layout): string {
 
   const component = getComponent(config.componentName)
 
-  if(!component) return `<div className="text-sm font-medium text-gray-700">${config.componentName}</div>`
+  if(!component) return renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: config.componentName })
 
   const componentParent = ((parent)? getComponent(parent.componentName) : undefined)
 

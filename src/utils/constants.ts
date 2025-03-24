@@ -53,7 +53,8 @@ export const TEMPLATES = {
   CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
   CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
   ELEMENT: 'components/{{name}}/{{name}}.hbs',
-  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs'
+  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
+  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs'
 };
 
 export const SRC_CONFIG_FILES = {

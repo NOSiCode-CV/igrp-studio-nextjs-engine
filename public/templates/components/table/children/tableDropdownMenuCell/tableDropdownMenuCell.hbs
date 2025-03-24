@@ -1,19 +1,18 @@
 <IGRPDataTableDropdownMenu
-  IGRPDataTableActionDropdown={
+  items={
     [
       {{#if resourceConfig.children}}
       {{#each resourceConfig.children}}
       {
-        type: "{{this.properties.type}}",
         component: {{resolveComponent this.componentName ../registry}},
         props: {
           {{#if this.properties.title}}title: "{{this.properties.title}}",{{/if~}}
           {{#if this.properties.labelTrigger}}labelTrigger: "{{this.properties.labelTrigger}}",{{/if~}}
-          {{#if this.properties.icon}}icon: "{{this.properties.icon}}",{{/if~}}
-          {{#if this.properties.iconPlacement}}iconPlacement: "{{this.properties.iconPlacement}}",{{/if~}}
-          {{#if this.properties.iconClassName}}iconClassName: "{{this.properties.iconClassName}}",{{/if~}}
+          {{#if this.properties.iconProperties.iconName}}icon: "{{this.properties.iconProperties.iconName}}",{{/if~}}
+          {{#if this.properties.iconProperties.iconPlacement}}iconPlacement: "{{this.properties.iconProperties.iconPlacement}}",{{/if~}}
+          {{#if this.properties.iconProperties.iconClassName}}iconClassName: "{{this.properties.iconProperties.iconClassName}}",{{/if~}}
           {{#if this.properties.variant}}variant: "{{this.properties.variant}}",{{/if~}}
-          {{#if this.properties.href}}href: "{{this.properties.variant}}",{{/if~}}
+          {{#if this.properties.href}}href: "{{this.properties.href}}",{{/if~}}
           {{#if this.properties.className}}className: "{{this.properties.className}}",{{/if~}}
           {{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{/if~}}
           {{#if this.properties.showIcon}}showIcon: {{this.properties.showIcon}},{{/if~}}

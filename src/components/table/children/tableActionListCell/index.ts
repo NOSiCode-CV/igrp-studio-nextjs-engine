@@ -17,7 +17,6 @@ import { TABLE_DROPDOWN_MENU_CELL } from '../tableDropdownMenuCell';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDataTableButton } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPDataTableRowAction } from "@igrp/igrp-framework-react-design-system";',
     ]);
 

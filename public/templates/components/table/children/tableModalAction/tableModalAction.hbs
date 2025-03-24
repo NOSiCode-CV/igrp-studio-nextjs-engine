@@ -1,0 +1,75 @@
+<IGRPDataTableButtonModal
+  {{#if resourceConfig.properties.title}}
+  modalTitle="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.labelTrigger}}
+  labelTrigger="{{resourceConfig.properties.labelTrigger}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.variant}}
+  variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.disabled}}
+  disabled={ {{resourceConfig.properties.disabled}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  icon="{{resourceConfig.properties.iconProperties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.variantCancel}}
+  variantCancel="{{resourceConfig.properties.variantCancel}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.variantConfirm}}
+  variantConfirm="{{resourceConfig.properties.variantConfirm}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.labelCancel}}
+  labelCancel="{{resourceConfig.properties.labelCancel}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.labelConfirm}}
+  labelConfirm="{{resourceConfig.properties.labelConfirm}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showCancel}}
+  showCancel={ {{resourceConfig.properties.showCancel}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showConfirm}}
+  showConfirm={ {{resourceConfig.properties.showCancel}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.classNameCancel}}
+  classNameCancel="{{resourceConfig.properties.classNameCancel}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.classNameConfirm}}
+  classNameConfirm="{{resourceConfig.properties.classNameConfirm}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.classNameTrigger}}
+  classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.modalSize}}
+  modalSize="{{resourceConfig.properties.modalSize}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.modalTitle}}
+  modalTitle="{{resourceConfig.properties.modalTitle}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showStickyFooter}}
+  showStickyFooter={ {{resourceConfig.properties.showStickyFooter}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClassName="{{resourceConfig.properties.iconClassName}}"
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{!--loading={ {{resourceConfig.id}}Loading }--}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
+>
+</IGRPDataTableButtonModal>

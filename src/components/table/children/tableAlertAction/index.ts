@@ -3,7 +3,7 @@ import {
   tableAlertActionProperties,
   tableAlertActionVariants,
   tableAlertActionChildProperties,
-  tableAlertActionChildPropertiesMapping,
+  tableAlertActionChildPropertiesMapping, tableAlertActionInteractions, tableAlertActionInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -24,9 +24,11 @@ export default {
     component.loadLabel('Alert Action')
     component.getProperties(tableAlertActionProperties());
     component.getPropertiesMapping(tableAlertActionPropertiesMapping());
+    component.getInteractions(tableAlertActionInteractions())
+    component.getInteractionsMapping(tableAlertActionInteractionsMapping())
     component.getChildProperties(tableAlertActionChildProperties());
     component.getChildPropertiesMapping(tableAlertActionChildPropertiesMapping());
-    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: "tableActionButton" }))
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_ALERT_ACTION }))
 
     component.loadStates([]);
 

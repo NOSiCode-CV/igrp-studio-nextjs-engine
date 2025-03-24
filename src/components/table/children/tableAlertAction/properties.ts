@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 
 export function tableAlertActionProperties() {
@@ -32,6 +32,18 @@ export function tableAlertActionChildProperties() {
 }
 
 export function tableAlertActionChildPropertiesMapping() {
+  return {
+
+  };
+}
+
+export function tableAlertActionInteractions() {
+  return {
+    onClickConfirm: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+  };
+}
+
+export function tableAlertActionInteractionsMapping() {
   return {
 
   };

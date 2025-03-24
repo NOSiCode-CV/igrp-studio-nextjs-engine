@@ -53,7 +53,6 @@ export const todoLayout: Layout = {
                       id: 'card_todo_header',
                       componentName: 'cardHeader',
                       properties: {
-                        className: 'pb-4'
                       },
                       children: [
                         {
@@ -67,7 +66,7 @@ export const todoLayout: Layout = {
                               id: 'check_icon',
                               componentName: 'icon',
                               properties: {
-                                iconName: 'Check'
+                                iconName: 'SquareCheck'
                               }
                             },
                             {
@@ -182,7 +181,6 @@ export const todoLayout: Layout = {
                       id: 'card_chat_header',
                       componentName: 'cardHeader',
                       properties: {
-                        className: 'pb-4'
                       },
                       children: [
                         {
@@ -222,7 +220,7 @@ export const todoLayout: Layout = {
                           id: 'ai_chat',
                           componentName: 'chat',
                           properties: {
-
+                            apiEndpoint: "https://api.igrp.cv/chat",
                           }
                         }
                       ]
@@ -286,7 +284,7 @@ beforeAll(async () => {
   })
 });
 
-describe('Todolist module',() =>{
+describe('Todolist Page module',() =>{
   it('should save the input page configuration file', async()=> {
     await newPage(pageConfig, OUTPUT_DIR);
   })
