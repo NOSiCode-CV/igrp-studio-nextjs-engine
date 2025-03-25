@@ -22,6 +22,7 @@ export type Component = {
   codeBlock?: string;
   onTableComponent?: string;
   defaultValue: boolean;
+  noClassName: boolean;
   label: string;
   group: string;
   parent: string;
@@ -38,6 +39,7 @@ export type Component = {
   loadCodeBlock:(code: string) => void;
   loadOnTableComponent:(component: string) => void;
   loadDefault:(defaultValue: boolean) => void;
+  setNoClassName:(value: boolean) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -81,6 +83,7 @@ function initComponent(): Component {
     codeBlock: undefined,
     onTableComponent: undefined,
     defaultValue: false,
+    noClassName: false,
     label: 'Component',
     group: '',
     parent: '',
@@ -107,6 +110,10 @@ function initComponent(): Component {
 
     loadOnTableComponent(component: string) {
       this.onTableComponent = component
+    },
+
+    setNoClassName(value: boolean) {
+      this.noClassName = value
     },
 
     loadDefault(defaultValue: boolean) {
@@ -318,7 +325,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} className="${(element.customClassName !== undefined)? element.customClassName : component.componentName} ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``}" ${props} ${childProps} >`
+  str += `<${element.customComponentTag ?? 'div'} ${ element.noClassName? `` : `className="${element.customClassName !== undefined ? element.customClassName : component.componentName}` } ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``} ${element.noClassName? `` : `"`} ${props} ${childProps} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

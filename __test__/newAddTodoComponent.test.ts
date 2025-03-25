@@ -60,7 +60,7 @@ const componentConfig: ComponentConfig = {
           states: [{ state: `const [title, setTitle] = useState('');` }],
           actionCode: `
           
-  let todos: any[] = [];
+  import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
           
   export async function addTodo(title: string) {
     const newTodo = {
@@ -70,7 +70,9 @@ const componentConfig: ComponentConfig = {
       createdAt: new Date(),
     };
     
-    todos = [newTodo, ...todos];
+    const todos = await getTodos();
+    
+    await setTodos([newTodo, ...todos]);
     return newTodo;
   }        
           `,

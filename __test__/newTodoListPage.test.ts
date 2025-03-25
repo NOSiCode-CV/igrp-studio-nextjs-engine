@@ -124,10 +124,16 @@ export const todoLayout: Layout = {
                           `,
                                     actionCode: `
                           
-  let todos: any[] = [];
+  const todoStore = {
+    todos: [] as any[]
+  };
   
-  export async function getTodos() {
-    return todos;
+  export function getTodos() {
+    return todoStore.todos;
+  }
+  
+  export function setTodos(updatedTodos: any[]) {
+    todoStore.todos = updatedTodos;
   }
                           `
                                   },

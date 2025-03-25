@@ -17,6 +17,7 @@ import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
+import fragmentModule, { FRAGMENT } from './fragment';
 import gridModule, { GRID } from './grid';
 import headlineModule, { HEADLINE } from './headline';
 import iconModule, { ICON } from './icon';
@@ -81,6 +82,7 @@ export function registerAllComponents() {
   register(DROPDOWN_ITEM, dropdownItemModule.register);
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
+  register(FRAGMENT, fragmentModule.register);
   register(GRID, gridModule.register);
   register(HEADLINE, headlineModule.register);
   register(ICON, iconModule.register);
