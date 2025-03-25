@@ -1,7 +1,7 @@
 import { initComponents, newPage } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
-import { inputLayout } from "./newInputPage.test";
+//import { inputLayout } from "./newInputPage.test";
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 

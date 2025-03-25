@@ -107,7 +107,7 @@ beforeAll(async () => {
   await initComponents();
 });
 
-describe('Add Todo Component module',() =>{
+describe('Add Component module',() =>{
   it('should save the component configuration file', async()=> {
     await newComponent(componentConfig, OUTPUT_DIR);
   })

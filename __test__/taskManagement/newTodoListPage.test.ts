@@ -1,8 +1,8 @@
-import { initComponents, newPage, registerComponents } from '../src';
-import { Layout, PageConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../src/utils/testPath';
+import { initComponents, newPage, registerComponents } from '../../src';
+import { Layout, PageConfig } from '../../src/interfaces/types';
+import { OUTPUT_TODO_TEST } from '../../src/utils/testPath';
 
-export const OUTPUT_DIR = OUTPUT_TEST;
+export const OUTPUT_DIR = OUTPUT_TODO_TEST;
 
 export const todoLayout: Layout = {
   id: 'main_layout',
@@ -17,6 +17,16 @@ export const todoLayout: Layout = {
       properties: {
         className: 'mx-auto sm:p-6 lg:p-8 space-y-4',
         padding: 4
+      },
+      interactions: {
+        custom: {
+          fnCustomCode: {
+            imports: [
+              { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
+            ]
+          },
+          type: 'function'
+        }
       },
       children: [
         {
@@ -108,7 +118,7 @@ export const todoLayout: Layout = {
                                   fnName: 'handleAddTodo',
                                   actionName: 'getTodos',
                                   fnCustomCode: {
-                                    states: [{ state: `const [todos, setTodos] = useState<any[]>([]);` }],
+                                    states: [{ state: `const [todos, setTodos] = useState<Todo[]>([]);` }],
                                     fnCode: `
   useEffect(() => {
     const loadTodos = async () => {
@@ -118,23 +128,59 @@ export const todoLayout: Layout = {
     loadTodos();
   }, []);
   
-  const handleAddTodo = (newTodo: any) => {
+  const handleAddTodo = (newTodo: Todo) => {
     setTodos(prevTodos => [newTodo, ...prevTodos]);
   };
                           `,
                                     actionCode: `
+  export type Todo = {
+    id: string;
+    title: string;
+    completed: boolean;
+    createdAt: Date;
+  };
                           
   const todoStore = {
-    todos: [] as any[]
+    todos: [] as Todo[],
   };
+
+  /**
+   * Fetches tasks from the backend API and maps them to the Todo interface.
+   */
+  export async function getTodos(): Promise<Todo[]> {
+      try {
+          const response = await fetch("http://localhost:8080/tasks");
+          if (!response.ok) {
+              throw new Error("Failed to fetch tasks");
+          }
   
-  export function getTodos() {
-    return todoStore.todos;
+          const data = await response.json();
+  
+          // Convert API response to match the Todo interface
+          const todos: Todo[] = data.content.map((task: any) => ({
+              id: String(task.id), // Ensure ID is a string
+              title: task.title,
+              completed: task.status === "COMPLETED",
+              createdAt: new Date(task.date),
+          }));
+  
+          // Update store
+          todoStore.todos = todos;
+  
+          return todos;
+      } catch (error) {
+          console.error("Error fetching todos:", error);
+          return [];
+      }
   }
   
-  export function setTodos(updatedTodos: any[]) {
-    todoStore.todos = updatedTodos;
+  /**
+   * Updates the local todo store.
+   */
+  export async function setTodos(updatedTodos: Todo[]) {
+      todoStore.todos = updatedTodos;
   }
+
                           `
                                   },
                                   type: 'both'
@@ -226,7 +272,7 @@ export const todoLayout: Layout = {
                           id: 'ai_chat',
                           componentName: 'chat',
                           properties: {
-                            apiEndpoint: "https://api.igrp.cv/chat",
+                            apiEndpoint: "http://localhost:8080/chat",
                           }
                         }
                       ]
