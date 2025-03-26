@@ -1,9 +1,9 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function selectProperties() {
   return {
     labelText: { type: 'string', required: false },
-    floatingLabel: { type: 'string', required: false },
+    floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false },
     helperText: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
@@ -26,6 +26,19 @@ export function selectChildProperties() {
 
 export function selectChildPropertiesMapping() {
   return {};
+}
+
+export function selectInteractions() {
+  return {
+    value: { ...baseInteraction, required: true, default: 'value' },
+    onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
+  };
+}
+
+export function selectInteractionsMapping() {
+  return {
+
+  };
 }
 
 export function selectVariants() {

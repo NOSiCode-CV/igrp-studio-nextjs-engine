@@ -1,45 +1,36 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
-export function inputProperties() {
+export function inputTextareaProperties() {
   return {
-    type: { type: 'string', required: false, default: 'text', enum: [
-        'text',
-        'email',
-        'password',
-        'number',
-        'tel',
-        'url',
-        'color'
-      ] },
-    labelText: { type: 'string', required: false, default: 'Input Text' },
+    labelText: { type: 'string', required: false, default: 'InputTextarea Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
-    placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
+    error: { type: 'string', required: false, default: 'Invalid text format' },
+    rows: { type: 'number', required: false, default: 3 },
     showIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
 
-export function inputPropertiesMapping() {
+export function inputTextareaPropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function inputChildProperties() {
+export function inputTextareaChildProperties() {
   return {};
 }
 
-export function inputChildPropertiesMapping() {
+export function inputTextareaChildPropertiesMapping() {
   return {};
 }
 
-export function inputInteractions() {
+export function inputTextareaInteractions() {
   return {
     value: { ...baseInteraction, required: true, default: 'value' },
     onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
@@ -47,13 +38,13 @@ export function inputInteractions() {
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputTextareaInteractionsMapping() {
   return {
 
   };
 }
 
 
-export function inputVariants() {
+export function inputTextareaVariants() {
   return {};
 }

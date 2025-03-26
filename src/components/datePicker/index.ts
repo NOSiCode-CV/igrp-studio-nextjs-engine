@@ -14,7 +14,7 @@ export default {
 
     component.loadVariants(datePickerVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Date Picker')
+    component.loadLabel('Input Date')
     component.getProperties(datePickerProperties());
     component.getPropertiesMapping(datePickerPropertiesMapping());
     component.getChildProperties(datePickerChildProperties());

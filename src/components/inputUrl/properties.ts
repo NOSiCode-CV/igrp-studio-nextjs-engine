@@ -1,45 +1,48 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
-export function inputProperties() {
+export function inputUrlProperties() {
+
+  const protocols = [
+    'https://',
+    'http://',
+    'ftp://',
+    'sftp://',
+    'ws://',
+    'wss://',
+  ]
+
   return {
-    type: { type: 'string', required: false, default: 'text', enum: [
-        'text',
-        'email',
-        'password',
-        'number',
-        'tel',
-        'url',
-        'color'
-      ] },
-    labelText: { type: 'string', required: false, default: 'Input Text' },
+    labelText: { type: 'string', required: false, default: 'InputUrl Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
-    placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
+    defaultValue: { type: 'string', required: false, default: '' },
+    defaultProtocol: { type: 'string', required: false, enum: protocols, default: 'https://' },
+    protocols: { type: 'array', required: false, items: { type: 'string', required: false, enum: protocols, default: 'https://' }},
+    error: { type: 'string', required: false, default: 'Invalid text format' },
     showIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
 
-export function inputPropertiesMapping() {
+export function inputUrlPropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function inputChildProperties() {
+export function inputUrlChildProperties() {
   return {};
 }
 
-export function inputChildPropertiesMapping() {
+export function inputUrlChildPropertiesMapping() {
   return {};
 }
 
-export function inputInteractions() {
+export function inputUrlInteractions() {
   return {
     value: { ...baseInteraction, required: true, default: 'value' },
     onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
@@ -47,13 +50,13 @@ export function inputInteractions() {
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputUrlInteractionsMapping() {
   return {
 
   };
 }
 
 
-export function inputVariants() {
+export function inputUrlVariants() {
   return {};
 }

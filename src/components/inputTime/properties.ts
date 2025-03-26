@@ -1,45 +1,36 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
-export function inputProperties() {
+export function inputTimeProperties() {
   return {
-    type: { type: 'string', required: false, default: 'text', enum: [
-        'text',
-        'email',
-        'password',
-        'number',
-        'tel',
-        'url',
-        'color'
-      ] },
-    labelText: { type: 'string', required: false, default: 'Input Text' },
+    labelText: { type: 'string', required: false, default: 'InputTime Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
-    placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
+    defaultValue: { type: 'string', required: false, default: '' },
+    error: { type: 'string', required: false, default: 'Invalid text format' },
     showIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
 
-export function inputPropertiesMapping() {
+export function inputTimePropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function inputChildProperties() {
+export function inputTimeChildProperties() {
   return {};
 }
 
-export function inputChildPropertiesMapping() {
+export function inputTimeChildPropertiesMapping() {
   return {};
 }
 
-export function inputInteractions() {
+export function inputTimeInteractions() {
   return {
     value: { ...baseInteraction, required: true, default: 'value' },
     onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
@@ -47,13 +38,13 @@ export function inputInteractions() {
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputTimeInteractionsMapping() {
   return {
 
   };
 }
 
 
-export function inputVariants() {
+export function inputTimeVariants() {
   return {};
 }

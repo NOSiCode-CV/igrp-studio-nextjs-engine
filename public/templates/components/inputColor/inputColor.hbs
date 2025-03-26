@@ -1,0 +1,67 @@
+<IGRPInputColor
+  {{#if resourceConfig.properties.name}}
+  name="{{resourceConfig.properties.name}}"
+  {{/if}}
+  {{#if resourceConfig.properties.defaultValue}}
+  defaultValue="{{resourceConfig.properties.defaultValue}}"
+  {{/if}}
+  {{#if resourceConfig.properties.error}}
+  error="{{resourceConfig.properties.error}}"
+  {{/if}}
+  {{#if resourceConfig.properties.disabled}}
+  disabled
+  {{/if~}}
+  {{#if resourceConfig.properties.labelText}}
+  labelText="{{resourceConfig.properties.labelText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.floatingLabel}}
+  floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showHexValue}}
+  showHexValue={ {{resourceConfig.properties.showHexValue}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.helperText}}
+  helperText="{{resourceConfig.properties.helperText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showIcon}}
+  showIcon={ {{resourceConfig.properties.showIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.required}}
+  required={ {{resourceConfig.properties.required}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconSize}}
+  iconSize="{{resourceConfig.properties.iconProperties.iconSize}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconPosition}}
+  iconPlacement="{{resourceConfig.properties.iconProperties.iconPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.readOnly}}
+  readOnly
+  {{/if~}}
+  {{#if resourceConfig.properties.autofocus}}
+  autoFocus={ {{resourceConfig.properties.autofocus}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
+/>

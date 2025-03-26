@@ -1,45 +1,38 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
-export function inputProperties() {
+export function inputPasswordProperties() {
   return {
-    type: { type: 'string', required: false, default: 'text', enum: [
-        'text',
-        'email',
-        'password',
-        'number',
-        'tel',
-        'url',
-        'color'
-      ] },
-    labelText: { type: 'string', required: false, default: 'Input Text' },
+    labelText: { type: 'string', required: false, default: 'InputPassword Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
+    error: { type: 'string', required: false, default: 'Invalid password' },
+    defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
     helperText: { type: 'string', required: false, default: '' },
+    showPasswordToggle: { type: 'boolean', required: false, default: true },
     showIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
 
-export function inputPropertiesMapping() {
+export function inputPasswordPropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function inputChildProperties() {
+export function inputPasswordChildProperties() {
   return {};
 }
 
-export function inputChildPropertiesMapping() {
+export function inputPasswordChildPropertiesMapping() {
   return {};
 }
 
-export function inputInteractions() {
+export function inputPasswordInteractions() {
   return {
     value: { ...baseInteraction, required: true, default: 'value' },
     onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
@@ -47,13 +40,13 @@ export function inputInteractions() {
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputPasswordInteractionsMapping() {
   return {
 
   };
 }
 
 
-export function inputVariants() {
+export function inputPasswordVariants() {
   return {};
 }

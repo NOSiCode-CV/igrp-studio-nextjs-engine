@@ -3,7 +3,7 @@ import {
   selectProperties,
   selectVariants,
   selectChildProperties,
-  selectChildPropertiesMapping,
+  selectChildPropertiesMapping, selectInteractions, selectInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -18,6 +18,8 @@ export default {
     component.loadLabel('Select')
     component.getProperties(selectProperties());
     component.getPropertiesMapping(selectPropertiesMapping());
+    component.getInteractions(selectInteractions());
+    component.getInteractionsMapping(selectInteractionsMapping());
     component.getChildProperties(selectChildProperties());
     component.getChildPropertiesMapping(selectChildPropertiesMapping());
 

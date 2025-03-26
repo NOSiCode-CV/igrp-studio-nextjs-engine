@@ -3,14 +3,13 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputTextProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputText Text' },
-    floatingLabel: { type: 'string', required: false, default: false },
+    floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
     showIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    iconClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

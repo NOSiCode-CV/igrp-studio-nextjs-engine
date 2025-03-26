@@ -22,7 +22,17 @@ import gridModule, { GRID } from './grid';
 import headlineModule, { HEADLINE } from './headline';
 import iconModule, { ICON } from './icon';
 import inputModule, { INPUT } from './input';
+import inputAddOnModule, { INPUT_ADD_ON } from './inputAddOn';
+import inputColorModule, { INPUT_COLOR } from './inputColor';
+import inputDatePickerModule, { INPUT_DATE_PICKER } from './inputDatePicker';
+import inputFileModule, { INPUT_FILE } from './inputFile';
+import inputNumberModule, { INPUT_NUMBER } from './inputNumber';
+import inputPasswordModule, { INPUT_PASSWORD } from './inputPassword';
+import inputPhoneModule, { INPUT_PHONE } from './inputPhone';
 import inputTextModule, { INPUT_TEXT } from './inputText';
+import inputTextareaModule, { INPUT_TEXTAREA } from './inputTextarea';
+import inputTimeModule, { INPUT_TIME } from './inputTime';
+import inputUrlModule, { INPUT_URL } from './inputUrl';
 import labelModule, { LABEL } from './label';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import paragraphModule, { PARAGRAPH } from './paragraph';
@@ -61,7 +71,6 @@ import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tab
 
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
-import textareaModule, { TEXTAREA } from './textarea';
 
 export function registerAllComponents() {
   register(ASPECT, aspectModule.register);
@@ -87,7 +96,17 @@ export function registerAllComponents() {
   register(HEADLINE, headlineModule.register);
   register(ICON, iconModule.register);
   register(INPUT, inputModule.register);
+  register(INPUT_ADD_ON, inputAddOnModule.register);
+  register(INPUT_COLOR, inputColorModule.register);
+  register(INPUT_DATE_PICKER, inputDatePickerModule.register);
+  register(INPUT_FILE, inputFileModule.register);
+  register(INPUT_NUMBER, inputNumberModule.register);
+  register(INPUT_PASSWORD, inputPasswordModule.register);
+  register(INPUT_PHONE, inputPhoneModule.register);
   register(INPUT_TEXT, inputTextModule.register);
+  register(INPUT_TEXTAREA, inputTextareaModule.register);
+  register(INPUT_TIME, inputTimeModule.register);
+  register(INPUT_URL, inputUrlModule.register);
   register(LABEL, labelModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(PARAGRAPH, paragraphModule.register);
@@ -136,5 +155,4 @@ export function registerAllComponents() {
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
 
   register(TABS, tabsModule.register);
-  register(TEXTAREA, textareaModule.register);
 }
