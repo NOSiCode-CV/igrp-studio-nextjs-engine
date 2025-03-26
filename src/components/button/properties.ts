@@ -5,7 +5,6 @@ export function buttonProperties() {
     label: { type: 'string', required: true, default: 'Button' },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
-    hasIcon: { type: 'boolean', required: false, default: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
