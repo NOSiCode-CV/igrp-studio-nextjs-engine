@@ -10,8 +10,6 @@ export function inputAddOnProperties() {
     error: { type: 'string', required: false, default: 'Invalid text format' },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

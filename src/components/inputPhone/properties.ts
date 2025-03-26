@@ -33,8 +33,6 @@ export function inputPhoneProperties() {
     defaultCountry: { type: 'string', required: false, default: 'CV', enum: countries },
     countries: { type: 'array', items: { type: 'string', required: true, enum: countries, default: 'CPV'}, required: false },
     international: { type: 'boolean', required: false, default: true },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

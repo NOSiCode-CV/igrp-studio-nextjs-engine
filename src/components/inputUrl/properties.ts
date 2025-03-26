@@ -19,8 +19,6 @@ export function inputUrlProperties() {
     defaultProtocol: { type: 'string', required: false, enum: protocols, default: 'https://' },
     protocols: { type: 'array', required: false, items: { type: 'string', required: false, enum: protocols, default: 'https://' }},
     error: { type: 'string', required: false, default: 'Invalid text format' },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

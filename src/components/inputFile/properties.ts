@@ -10,8 +10,6 @@ export function inputFileProperties() {
     customId: { type: 'string', required: false, default: '{{id}}' },
     helperText: { type: 'string', required: false, default: '' },
     multiple: { type: 'boolean', required: false, default: false },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

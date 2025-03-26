@@ -53,7 +53,7 @@ export function commonPropertiesMapping() {
 export function iconProperties() {
   return {
     iconProperties: {
-      hasIcon: { type: 'boolean', required: false, default: false },
+      showIcon: { type: 'boolean', required: false, default: false },
       iconName: { type: 'string', required: false },
       iconPosition: { type: 'string', required: false, enum: ['start', 'end']  },
       iconClassName: { type: 'string', required: false },

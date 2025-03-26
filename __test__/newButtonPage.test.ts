@@ -84,7 +84,7 @@ const buttonLayout: Layout = {
       properties: {
         variant: 'default',
         size: 'default',
-        hasIcon: true,
+        showIcon: true,
         label: 'Left',
         iconProperties: {
           iconName: 'ArrowLeft',
@@ -98,7 +98,7 @@ const buttonLayout: Layout = {
       properties: {
         variant: 'default',
         size: 'default',
-        hasIcon: true,
+        showIcon: true,
         label: 'Right',
         iconProperties: {
           iconName: 'ArrowRight',

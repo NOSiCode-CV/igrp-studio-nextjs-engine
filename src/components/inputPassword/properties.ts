@@ -9,8 +9,6 @@ export function inputPasswordProperties() {
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
     helperText: { type: 'string', required: false, default: '' },
     showPasswordToggle: { type: 'boolean', required: false, default: true },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

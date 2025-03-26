@@ -7,8 +7,6 @@ export function inputTextareaProperties() {
     helperText: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false, default: 'Invalid text format' },
     rows: { type: 'number', required: false, default: 3 },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

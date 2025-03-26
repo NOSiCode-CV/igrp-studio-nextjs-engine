@@ -9,8 +9,6 @@ export function inputDatePickerProperties() {
     error: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '2025-01-01' },
     helperText: { type: 'string', required: false, default: '' },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     calendarClassName: { type: 'string', required: false },

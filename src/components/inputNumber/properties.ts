@@ -13,8 +13,6 @@ export function inputNumberProperties() {
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 9999999 },
     step: { type: 'number', required: false, default: 1 },
-    showIcon: { type: 'boolean', required: false, default: false },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },
