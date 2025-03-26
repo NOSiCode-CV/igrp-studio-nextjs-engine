@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputUrlVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input URL')
+    component.loadLabel('URL')
     component.getProperties(inputUrlProperties());
     component.getPropertiesMapping(inputUrlPropertiesMapping());
     component.getChildProperties(inputUrlChildProperties());

@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputTextareaVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Textarea')
+    component.loadLabel('Textarea')
     component.getProperties(inputTextareaProperties());
     component.getPropertiesMapping(inputTextareaPropertiesMapping());
     component.getChildProperties(inputTextareaChildProperties());

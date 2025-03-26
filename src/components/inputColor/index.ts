@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputColorVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Color')
+    component.loadLabel('Color')
     component.getProperties(inputColorProperties());
     component.getPropertiesMapping(inputColorPropertiesMapping());
     component.getChildProperties(inputColorChildProperties());

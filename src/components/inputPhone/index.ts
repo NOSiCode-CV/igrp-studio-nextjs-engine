@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputPhoneVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Phone')
+    component.loadLabel('Phone')
     component.getProperties(inputPhoneProperties());
     component.getPropertiesMapping(inputPhonePropertiesMapping());
     component.getChildProperties(inputPhoneChildProperties());

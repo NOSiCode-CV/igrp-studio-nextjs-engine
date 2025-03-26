@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputAddOnVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Add On')
+    component.loadLabel('Add On')
     component.getProperties(inputAddOnProperties());
     component.getPropertiesMapping(inputAddOnPropertiesMapping());
     component.getChildProperties(inputAddOnChildProperties());

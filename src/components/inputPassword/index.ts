@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputPasswordVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Password')
+    component.loadLabel('Password')
     component.getProperties(inputPasswordProperties());
     component.getPropertiesMapping(inputPasswordPropertiesMapping());
     component.getInteractions(inputPasswordInteractions());

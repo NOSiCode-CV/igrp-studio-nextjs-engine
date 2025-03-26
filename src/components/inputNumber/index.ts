@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputNumberVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Number')
+    component.loadLabel('Number')
     component.getProperties(inputNumberProperties());
     component.getPropertiesMapping(inputNumberPropertiesMapping());
     component.getChildProperties(inputNumberChildProperties());

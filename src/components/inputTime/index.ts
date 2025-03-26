@@ -15,7 +15,7 @@ export default {
 
     component.loadVariants(inputTimeVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Input Textarea')
+    component.loadLabel('Time')
     component.getProperties(inputTimeProperties());
     component.getPropertiesMapping(inputTimePropertiesMapping());
     component.getChildProperties(inputTimeChildProperties());
