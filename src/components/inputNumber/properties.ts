@@ -4,7 +4,7 @@ export function inputNumberProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputNumber Text' },
     description: { type: 'string', required: false, default: 'A number input text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },

@@ -3,7 +3,7 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputTextareaProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputTextarea Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     rows: { type: 'number', required: false, default: 3 },

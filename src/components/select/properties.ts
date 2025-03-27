@@ -3,7 +3,7 @@ import { baseInteraction, commonProperties, commonPropertiesMapping } from '../d
 export function selectProperties() {
   return {
     labelText: { type: 'string', required: false },
-    floatingLabel: { type: 'boolean', required: false },
+    //floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false },
     helperText: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },

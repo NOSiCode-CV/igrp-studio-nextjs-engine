@@ -3,7 +3,7 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputTimeProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputTime Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },

@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function datePickerProperties() {
   return {
@@ -14,7 +14,7 @@ export function datePickerProperties() {
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     locale: { type: 'string', required: false, default: 'pt' },
     iconPlacement: { type: 'string', required: false, default: 'start' },
-    floatingLabel: { type: 'boolean', required: false },
+    //floatingLabel: { type: 'boolean', required: false },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
     className: { type: 'string', required: false },
@@ -36,6 +36,18 @@ export function datePickerChildPropertiesMapping() {
   return {};
 }
 
+export function datePickerInteractions() {
+  return {
+    data: { ...baseInteraction('[]'), required: true },
+    onDateChange: { ...baseInteraction(), required: true },
+  };
+}
+
+export function datePickerInteractionsMapping() {
+  return {
+
+  };
+}
 
 export function datePickerVariants() {
   return {};

@@ -40,7 +40,7 @@ export function buttonVariants() {
 
 export function buttonInteractions() {
   return {
-    onClick: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+    onClick: { ...baseInteraction("() => {}"), required: true },
   };
 }
 

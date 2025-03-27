@@ -2,7 +2,7 @@ import {
   datePickerPropertiesMapping,
   datePickerProperties,
   datePickerVariants,
-  datePickerChildProperties, datePickerChildPropertiesMapping,
+  datePickerChildProperties, datePickerChildPropertiesMapping, datePickerInteractions, datePickerInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -17,6 +17,8 @@ export default {
     component.loadLabel('Input Date')
     component.getProperties(datePickerProperties());
     component.getPropertiesMapping(datePickerPropertiesMapping());
+    component.getInteractions(datePickerInteractions());
+    component.getInteractionsMapping(datePickerInteractionsMapping());
     component.getChildProperties(datePickerChildProperties());
     component.getChildPropertiesMapping(datePickerChildPropertiesMapping());
 

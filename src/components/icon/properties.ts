@@ -3,7 +3,7 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 export function iconProperties() {
   return {
     iconName: { type: 'string', required: true, default: 'CheckSquare' },
-    size: { type: 'string', required: false, default: '16t' },
+    size: { type: 'string', required: false, default: '16' },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

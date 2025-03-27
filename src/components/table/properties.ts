@@ -25,14 +25,14 @@ export function tableChildPropertiesMapping() {
 export function tableChildProperties() {
   return {
     columns: { type: 'array', required: true, items: { key: 'string', label: 'string' } },
-    data: { type: 'array', required: true, items: 'object' }
+    //data: { type: 'array', required: true, items: 'object' }
   };
 }
 
 export function tablePropertiesMapping() {
   return {
     columns: 'columns',
-    data: 'data',
+    //data: 'data',
     ...commonPropertiesMapping()
   };
 }

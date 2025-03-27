@@ -3,16 +3,16 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputAddOnProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputAddOn Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     optionLabel: { type: 'string', required: false, default: 'Add On Option' },
-    helperText: { type: 'string', required: false, default: '' },
+    //helperText: { type: 'string', required: false, default: '' },
     selectValue: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    className: { type: 'string', required: false },
+    classNameGlobal: { type: 'string', required: false },
     classNameLabel: { type: 'string', required: false },
     ...commonProperties(),
   };

@@ -52,13 +52,13 @@
   {{#if resourceConfig.properties.classNameLabel}}
   classNameLabel="{{resourceConfig.properties.classNameLabel}}"
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
-  classNameGlobal="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{#if (and resourceConfig.properties.classNameGlobal parentResourceConfig)}}
+  classNameGlobal="{{concat resourceConfig.properties.classNameGlobal (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
-  classNameGlobal="{{resourceConfig.properties.className}}"
+  {{#if (and resourceConfig.properties.classNameGlobal (not parentResourceConfig))}}
+  classNameGlobal="{{resourceConfig.properties.classNameGlobal}}"
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.classNameGlobal) parentResourceConfig)}}
   classNameGlobal="{{addClassNameFromChildProperties parentResourceConfig registry}}"
   {{/if~}}
   {{/if}}

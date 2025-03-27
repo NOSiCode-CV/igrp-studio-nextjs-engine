@@ -3,7 +3,7 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputFileProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputFile Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     accept: { type: 'string', required: false, default: 'application/pdf' },

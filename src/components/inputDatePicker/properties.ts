@@ -4,7 +4,7 @@ export function inputDatePickerProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputDatePicker Text' },
     placeholder: { type: 'string', required: false, default: 'Please select a date...' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: '2025-01-01' },

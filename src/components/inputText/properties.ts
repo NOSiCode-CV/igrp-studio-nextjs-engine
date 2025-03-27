@@ -3,7 +3,7 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 export function inputTextProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputText Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
     ...iconProperties(),

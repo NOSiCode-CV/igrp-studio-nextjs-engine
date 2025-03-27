@@ -13,7 +13,7 @@ export function inputUrlProperties() {
 
   return {
     labelText: { type: 'string', required: false, default: 'InputUrl Text' },
-    floatingLabel: { type: 'boolean', required: false, default: false },
+    //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '' },
     defaultProtocol: { type: 'string', required: false, enum: protocols, default: 'https://' },
