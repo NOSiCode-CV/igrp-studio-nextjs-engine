@@ -3,7 +3,7 @@ import {
   tableProperties,
   tableVariants,
   tableChildProperties,
-  tableChildPropertiesMapping,
+  tableChildPropertiesMapping, tableInteractions, tableInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
@@ -32,6 +32,8 @@ export default {
     component.loadLabel('Table')
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
+    component.getInteractions(tableInteractions());
+    component.getInteractionsMapping(tableInteractionsMapping());
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
 
@@ -50,21 +52,6 @@ export default {
     component.loadServiceMethods([
       '{{id}}: { populate: () => Promise<{ rows: any[] }>; };',
     ]);
-
-    component.loadCodeBlock(
-  `
-  useEffect(() => {
-    updateTable{{id}}()
-  },[])
-
-  const updateTable{{id}} = async () => {
-    if (service.{{id}} && service.{{id}}.populate) {
-      const data = (await service.{{id}}.populate()).rows
-      setContentTable{{id}}(data)
-    }
-  }
-  `
-    )
 
     component.setRenderer(hbsRenderer);
   },

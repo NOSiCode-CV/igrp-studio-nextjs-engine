@@ -1,5 +1,4 @@
 <IGRPDataTable{{{typeResolution (resolveFirstType resourceConfig.properties.data) 'any'}}}
-  data={ contentTable{{resourceConfig.id}} }
   {{#if resourceConfig.properties.showFilter}}
   showFilter={ {{resourceConfig.properties.showFilter}} }
   {{/if~}}
@@ -59,4 +58,7 @@
     {{/if}}
     ]
   }
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
 />

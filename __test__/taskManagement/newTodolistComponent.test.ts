@@ -12,7 +12,7 @@ const componentConfig: ComponentConfig = {
   args: [
     {
       name: '{ initialTodos }',
-      type: '{ initialTodos: any[] }',
+      type: '{ initialTodos: Todo[] }',
     },
   ],
   components: {
@@ -29,7 +29,7 @@ const componentConfig: ComponentConfig = {
             { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
           ],
           states: [
-            { state: `const [todos, setTodos] = useState([]);` }
+            { state: `const [todos, setTodos] = useState<Todo[]>([]);` }
           ],
           fnCode: `
   const router = useRouter();

@@ -55,14 +55,14 @@ export function iconProperties() {
     iconProperties: {
       showIcon: { type: 'boolean', required: false, default: false },
       iconName: { type: 'string', required: false },
-      iconPosition: { type: 'string', required: false, enum: ['start', 'end']  },
+      iconPlacement: { type: 'string', required: false, enum: ['start', 'end']  },
       iconClassName: { type: 'string', required: false },
       iconSize: { type: 'number', required: false },
     }
   }
 }
 
-export function baseInteraction() {
+export function baseInteraction(defaultCustomSet?: string) {
   return {
     type: 'object',
     properties: {
@@ -73,7 +73,7 @@ export function baseInteraction() {
         type: 'string', required: false
       },
       fnCustomSet: {
-        type: 'string', required: false
+        type: 'string', required: false, default: defaultCustomSet
       },
       fnCustomCode: {
         type: 'object',
@@ -81,7 +81,23 @@ export function baseInteraction() {
           imports: {
             type: 'array', required: false,
             items: {
-              type: 'string', required: false
+              type: 'object',
+              properties: {
+                namespace: {
+                  type: 'string', required: true
+                }
+              }
+            },
+          },
+          states: {
+            type: 'array', required: false,
+            items: {
+              type: 'object',
+              properties: {
+                state: {
+                  type: 'string', required: true
+                }
+              }
             },
           },
           fnCode: {

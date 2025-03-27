@@ -88,7 +88,7 @@ const buttonLayout: Layout = {
         label: 'Left',
         iconProperties: {
           iconName: 'ArrowLeft',
-          iconPosition: 'start'
+          iconPlacement: 'start'
         }
       }
     },
@@ -102,7 +102,7 @@ const buttonLayout: Layout = {
         label: 'Right',
         iconProperties: {
           iconName: 'ArrowRight',
-          iconPosition: 'end'
+          iconPlacement: 'end'
         }
       }
     },

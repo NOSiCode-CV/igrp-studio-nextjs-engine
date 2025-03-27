@@ -255,11 +255,25 @@ const tableLayout: Layout = {
         },
       ],
       interactions: {
-        custom: {
+        data: {
+          fnCustomSet: 'contentTabletable_default',
           fnCustomCode: {
-            states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }]
-          }
-        }
+            states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }],
+            fnCode: `
+  useEffect(() => {
+    updateTabletable_default()
+  },[])
+
+  const updateTabletable_default = async () => {
+    if (service.table_default && service.table_default.populate) {
+      const data = (await service.table_default.populate()).rows
+      setContentTabletable_default(data)
+    }
+  }
+            `
+          },
+          type: 'function'
+        },
       }
     },
   ],
