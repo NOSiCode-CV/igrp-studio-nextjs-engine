@@ -6,7 +6,7 @@ export function inputDatePickerProperties() {
     placeholder: { type: 'string', required: false, default: 'Please select a date...' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: '' },
+    error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: '2025-01-01' },
     helperText: { type: 'string', required: false, default: '' },
     disabled: { type: 'boolean', required: false, default: false },

@@ -5,7 +5,7 @@ export function inputPasswordProperties() {
     labelText: { type: 'string', required: false, default: 'InputPassword Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: 'Invalid password' },
+    error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
     helperText: { type: 'string', required: false, default: '' },
     showPasswordToggle: { type: 'boolean', required: false, default: true },

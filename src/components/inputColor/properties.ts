@@ -5,7 +5,7 @@ export function inputColorProperties() {
     labelText: { type: 'string', required: false, default: 'InputColor Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: '' },
+    error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: '#000000' },
     helperText: { type: 'string', required: false, default: '' },
     showHexValue: { type: 'boolean', required: false, default: true },

@@ -7,7 +7,7 @@ export function inputAddOnProperties() {
     optionLabel: { type: 'string', required: false, default: 'Add On Option' },
     helperText: { type: 'string', required: false, default: '' },
     selectValue: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: 'Invalid text format' },
+    error: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false, default: false },

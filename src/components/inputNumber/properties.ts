@@ -6,7 +6,7 @@ export function inputNumberProperties() {
     description: { type: 'string', required: false, default: 'A number input text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
-    errorMessage: { type: 'string', required: false, default: 'Invalid number format' },
+    errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
     helperText: { type: 'string', required: false, default: '' },
     formatOptions: { type: 'string', required: false, default: '' },

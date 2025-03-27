@@ -27,7 +27,7 @@ export function inputPhoneProperties() {
     floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     dir: { type: 'string', required: false, default: 'ltr' },
-    errorMessage: { type: 'string', required: false, default: 'Invalid number format' },
+    errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
     helperText: { type: 'string', required: false, default: '' },
     defaultCountry: { type: 'string', required: false, default: 'CV', enum: countries },

@@ -6,7 +6,7 @@ export function inputTimeProperties() {
     floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: 'Invalid text format' },
+    error: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     className: { type: 'string', required: false },

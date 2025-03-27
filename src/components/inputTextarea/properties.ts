@@ -5,7 +5,7 @@ export function inputTextareaProperties() {
     labelText: { type: 'string', required: false, default: 'InputTextarea Text' },
     floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
-    error: { type: 'string', required: false, default: 'Invalid text format' },
+    error: { type: 'string', required: false },
     rows: { type: 'number', required: false, default: 3 },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
