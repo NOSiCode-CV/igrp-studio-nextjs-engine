@@ -10,10 +10,7 @@
     "esModuleInterop": true,   
     "moduleResolution": "node",    
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src", "public/configs"],
   "exclude": ["node_modules", "__test__"]      

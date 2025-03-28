@@ -1,4 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputDatePickerProperties() {
   return {
@@ -35,8 +36,8 @@ export function inputDatePickerChildPropertiesMapping() {
 
 export function inputDatePickerInteractions() {
   return {
-    date: { ...baseInteraction, required: true, default: 'value' },
-    onDateChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
+    date: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.DATE), required: true },
+    onDateChange: { ...baseInteraction, required: true },
   };
 }
 

@@ -1,7 +1,7 @@
 import { ActionConfig, Layout, RenderContext } from '../interfaces/types';
 import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
-import { generateAction } from '@/modules/actions/generateAction';
+import { generateAction } from '../modules/actions/generateAction';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
 

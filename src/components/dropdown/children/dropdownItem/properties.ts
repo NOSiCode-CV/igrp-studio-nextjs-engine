@@ -1,4 +1,10 @@
-import { commonProperties, commonPropertiesMapping, iconProperties } from '../../../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../../../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
 export function dropdownItemProperties() {
   return {
@@ -24,6 +30,21 @@ export function dropdownItemChildProperties() {
 
 export function dropdownItemChildPropertiesMapping() {
   return {};
+}
+
+export function dropdownItemInteractions() {
+  return {
+    action: {
+      ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ACTION), required: true
+    },
+    onClickConfirm: {
+      ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ACTION), required: true
+    },
+  }
+}
+
+export function dropdownItemInteractionsMapping() {
+  return {}
 }
 
 export function dropdownItemVariants() {

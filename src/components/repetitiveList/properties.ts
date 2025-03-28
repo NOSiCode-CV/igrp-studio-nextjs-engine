@@ -2,7 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 
 export function repetitiveListProperties() {
   return {
-    data: { type: 'string', required: true, default: 'data' },
+    items: { type: 'array', items: { type: 'object' }, required: true },
     ...commonProperties(),
   };
 }

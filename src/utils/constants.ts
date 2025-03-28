@@ -88,10 +88,29 @@ export const DST_CONFIG_FILES ={
 }
 
 export const INTERACTIONS_TYPES = {
+
+  // Events
   ON_CLICK: 'Mouse click (tap)',
+  ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
+  ON_PICK: 'On pick',
   ON_SELECT_CHANGE: 'On select',
+  ON_CHECK: "On check",
+  ON_KEY_DOWN: "On key down",
+  ACTION: "Action",
+
+  // Values
+  CHECKED: "Checked",
+  DATA: "Data",
+  DATE: "Date",
+  VALUE: "Value"
+}
+
+export const INTERACTIONS_DEFAULTS = {
+  ON_CLICK_NO_EVENT: '() => {}',
+  ON_CLICK_WITH_EVENT: '(e) => {}',
+  NULLABLE: 'null',
 
 }
 

@@ -1,4 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputColorProperties() {
   return {
@@ -32,8 +33,8 @@ export function inputColorChildPropertiesMapping() {
 
 export function inputColorInteractions() {
   return {
-    value: { ...baseInteraction, required: true, default: 'value' },
-    onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true, default: 'value' },
+    onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true, default: '(e) => set{{id}}Value(e)' },
   };
 }
 

@@ -3,7 +3,7 @@ import {
   dropdownItemProperties,
   dropdownItemVariants,
   dropdownItemChildProperties,
-  dropdownItemChildPropertiesMapping,
+  dropdownItemChildPropertiesMapping, dropdownItemInteractions, dropdownItemInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { TEMPLATES } from '../../../../utils/constants';
@@ -21,6 +21,8 @@ export default {
     component.loadLabel('Dropdown Item')
     component.getProperties(dropdownItemProperties());
     component.getPropertiesMapping(dropdownItemPropertiesMapping());
+    component.getInteractions(dropdownItemInteractions());
+    component.getInteractionsMapping(dropdownItemInteractionsMapping());
     component.getChildProperties(dropdownItemChildProperties());
     component.getChildPropertiesMapping(dropdownItemChildPropertiesMapping());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: DROPDOWN, name: DROPDOWN_ITEM }))

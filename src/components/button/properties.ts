@@ -1,5 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
-import { INTERACTIONS_TYPES } from '../../utils/constants';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function buttonProperties() {
   return {
@@ -41,7 +41,7 @@ export function buttonVariants() {
 
 export function buttonInteractions() {
   return {
-    onClick: { ...baseInteraction("() => {}", INTERACTIONS_TYPES.ON_CLICK), required: true },
+    onClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK), required: true },
   };
 }
 

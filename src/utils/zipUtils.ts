@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { RenderContext } from '@/interfaces/types';
+import { RenderContext } from '../interfaces/types';
 
 const JSZip = require('jszip');
 

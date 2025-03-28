@@ -1,4 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputProperties() {
   return {
@@ -40,13 +41,13 @@ export function inputChildPropertiesMapping() {
 
 export function inputInteractions() {
   return {
-    value: { ...baseInteraction, required: true, default: 'value' },
-    onChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
-    onKeyDown: { ...baseInteraction, required: false, default: `(e) => { if(e.key === 'Enter') handle{{id}}(e); }` },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
+    onKeyDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_KEY_DOWN), required: false },
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputInteractionsMapping() {
   return {
 
   };

@@ -1,4 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputAddOnProperties() {
   return {
@@ -34,8 +35,8 @@ export function inputAddOnChildPropertiesMapping() {
 
 export function inputAddOnInteractions() {
   return {
-    value: { ...baseInteraction, required: true, default: 'value' },
-    onSelectValueChange: { ...baseInteraction, required: true, default: '(e) => set{{id}}Value(e)' },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    onSelectValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_SELECT_CHANGE), required: true },
   };
 }
 
