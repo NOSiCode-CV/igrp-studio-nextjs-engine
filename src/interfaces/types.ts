@@ -276,6 +276,14 @@ export interface ChildComponent {
   isDefault: boolean
 }
 
+// Workspace
+
+export interface WorkspaceConfig extends IdentifiableElement {
+  name: string;
+  description?: string;
+  projects?: any[];
+}
+
 export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
   parentResourceConfig?: P;

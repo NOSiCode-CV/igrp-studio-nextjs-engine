@@ -5,6 +5,7 @@ import { generatePage } from './modules/page/generatePage';
 import { savePageConfig } from './modules/page/savePageConfig';
 import { generateService } from './modules/page/generateService';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
+import { saveWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
 import { createAppDirectories } from './modules/baseApp/createAppDirectories';
 import {
@@ -13,7 +14,7 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig,
+  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -30,6 +31,61 @@ import { registerAllComponents } from './components/register';
 import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import defaultModule from './components/default';
 import { componentRegistrationValidate } from './schema/componentRegisterConfig';
+import { workspaceConfigValidate } from './schema/baseWorkspace';
+import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
+import { createWorkspaceDirectories } from './modules/workspace/createWorkspaceDirectories';
+import { extractBaseWorkspace } from './modules/workspace/extractBaseWorkspace';
+
+/**
+ * Initializes a new workspace by validating configuration, checking directory status,
+ * and creating necessary files and folders.
+ *
+ * @async
+ * @function newWorkspace
+ * @param {AppConfig} baseConfig - The base configuration object for the workspace.
+ * @param {string} basePath - The base path where the workspace directories and files will be created.
+ *
+ * @throws {Error} Throws an error if:
+ * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
+ * - The base path is not provided (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
+ * - The base path directory is not empty (`ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE`).
+ *
+ * @returns {Promise<void>} A promise that resolves when the workspace has been successfully initialized.
+ *
+ */
+export const newWorkspace = async (baseConfig: WorkspaceConfig, basePath: string): Promise<void> => {
+  const isBaseConfigValid = workspaceConfigValidate(baseConfig);
+
+  if (!isBaseConfigValid && workspaceConfigValidate.errors) throw workspaceConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
+
+  if (!(await checkIfDirectoryIsEmpty(basePath))) throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
+
+  await saveBaseWorkspaceFileConfig(baseConfig, basePath);
+
+  const context: RenderContext<WorkspaceConfig, WorkspaceConfig> = {
+    resourceConfig: baseConfig,
+    basePath,
+  };
+
+  /**
+   * Creates the folder structure needed for the workspace.
+   */
+  await createWorkspaceDirectories(context);
+
+  /**
+   * Extracts the folder structure needed for the workspace.
+   */
+  await extractBaseWorkspace(context);
+
+  /**
+   * Creates the configuration files based on the provided context.
+   */
+  await saveWorkspaceFileConfig(context);
+
+};
+
 
 /**
  * Initializes a new application by validating configuration, checking directory status,

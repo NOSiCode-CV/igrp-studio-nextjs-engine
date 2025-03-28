@@ -4,12 +4,14 @@ import path from 'path';
 //export const CONFIGS = path.join(__dirname, '../../public/configs');
 //export const TEMPLATE_DIR = path.join(__dirname, '../../public/templates');
 //export const BASE_APP_ZIP = path.join(__dirname, '../../public/templates/base_app.zip');
+//export const BASE_WORKSPACE_ZIP = path.join(__dirname, '../../public/templates/base_workspace.zip');
 //export const PARTIALS_DIR = path.join(__dirname, '../../public/templates/components/{{name}}/partials');
 
 //Uncomment the following exports when building the application
 export const TEMPLATE_DIR = path.join(__dirname, './templates');
 export const CONFIGS = path.join(__dirname, './configs');
 export const BASE_APP_ZIP = path.join(__dirname, './templates/base_app.zip');
+export const BASE_WORKSPACE_ZIP = path.join(__dirname, './templates/base_workspace.zip');
 export const PARTIALS_DIR = path.join(__dirname, './templates/components/{{name}}/partials');
 
 export const PATTERNS = {
@@ -20,6 +22,7 @@ export const PATTERNS = {
 }
 
 export const COMMON_FILES = {
+  WORKSPACE: 'workspace.json',
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
   COMPONENTS_META: 'componentsMeta.json',
@@ -61,6 +64,7 @@ export const SRC_CONFIG_FILES = {
   DOCKERIGNORE: 'dockerignore_template',
   DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',
+  WORKSPACE_GITIGNORE: 'workspace_gitignore_template',
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'nextenv_template',
@@ -106,6 +110,7 @@ export const DIRECTORIES = {
   ASSETS: 'src/assets',
   DESIGN_SYSTEM: 'design-system',
   PUBLIC: 'public',
+  PROJECTS: 'projects',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
   ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
@@ -124,6 +129,8 @@ export const ERROR_MESSAGE = {
   EMPTY_CONTEXT: 'Provide a valid context. The context must not be empty.',
   INVALID_APP_CONFIG:
     'The provided APP configuration is invalid. Please verify the APP details and try again.',
+  INVALID_WORKSPACE_CONFIG:
+    'The provided workspace configuration is invalid. Please verify the workspace details and try again.',
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
