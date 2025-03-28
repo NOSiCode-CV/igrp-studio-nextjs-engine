@@ -231,6 +231,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     childProperties: value.childProperties,
     properties: value.properties,
     propertiesMapping: {},
+    interactions: value.interactions,
+    interactionsMapping: value.interactionsMapping,
     childPropertiesMapping: {},
     childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),

@@ -2,13 +2,13 @@ import { baseInteraction, commonProperties, commonPropertiesMapping, iconPropert
 
 export function inputNumberProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputNumber Text' },
+    label: { type: 'string', required: false, default: 'InputNumber Text' },
     description: { type: 'string', required: false, default: 'A number input text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
-    helperText: { type: 'string', required: false, default: '' },
+    //helperText: { type: 'string', required: false, default: '' },
     formatOptions: { type: 'string', required: false, default: '' },
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 9999999 },

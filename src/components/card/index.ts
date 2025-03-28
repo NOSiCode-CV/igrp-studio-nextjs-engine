@@ -26,11 +26,11 @@ export default {
     component.getChildPropertiesMapping(cardChildPropertiesMapping());
 
     component.loadChildrenTypes([
-      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }, { name: CARD_HEADER, isDefault: true }
+      { name: CARD_HEADER, isDefault: true }, { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true },
     ]);
 
     component.loadAcceptedChildren([
-      { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true }, { name: CARD_HEADER, isDefault: true }
+      { name: CARD_HEADER, isDefault: true }, { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true },
     ])
 
     component.setRenderer(hbsRenderer);

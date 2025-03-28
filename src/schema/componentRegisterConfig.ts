@@ -47,6 +47,12 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     propertiesMapping: {
       type: 'object'
     },
+    interactions: {
+      type: 'object'
+    },
+    interactionsMapping: {
+      type: 'object'
+    },
     childProperties: {
       type: 'object',
       nullable: true

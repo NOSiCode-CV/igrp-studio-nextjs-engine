@@ -89,6 +89,14 @@ export const DST_CONFIG_FILES ={
   EN: 'messages/en.json',
 }
 
+export const INTERACTIONS_TYPES = {
+  ON_CLICK: 'Mouse click (tap)',
+  ON_HOVER: 'Mouse hover',
+  ON_CHANGE: 'On change',
+  ON_SELECT_CHANGE: 'On select',
+
+}
+
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
 
 export const DIRECTORIES = {

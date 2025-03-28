@@ -2,8 +2,8 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 
 export function iconProperties() {
   return {
-    iconName: { type: 'string', required: true, default: 'CheckSquare' },
-    size: { type: 'string', required: false, default: '16' },
+    iconName: { type: 'string', required: true, default: 'Heart' },
+    size: { type: 'string', required: false, default: '24' },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

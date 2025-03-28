@@ -255,6 +255,8 @@ export interface ComponentRegisterConfig {
   variants: Record<string, any>,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,
+  interactions: Record<string, any>,
+  interactionsMapping: Record<string, any>,
   childProperties?: Record<string, any>,
   childPropertiesMapping?: Record<string, any>,
   states: string[],

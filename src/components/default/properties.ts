@@ -62,9 +62,10 @@ export function iconProperties() {
   }
 }
 
-export function baseInteraction(defaultCustomSet?: string) {
+export function baseInteraction(defaultCustomSet?: string, label?: string) {
   return {
     type: 'object',
+    label: label,
     properties: {
       fnName: {
         type: 'string', required: false
