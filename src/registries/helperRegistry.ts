@@ -32,9 +32,9 @@ import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
 import { renderTableRow } from '../helpers/renderTableRow';
 import { registry } from '../components';
-import { PARTIALS_DIR } from '../utils/constants';
 import fs from 'fs-extra';
 import { replaceTemplate } from '../utils/helpers';
+import { getPaths } from '../index';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -99,7 +99,7 @@ export const loadPartials = () : void => {
     // Fetch a list of partial files (You may need to hardcode or retrieve this list from a backend API)
     // Fetch each partial and register it
     Object.entries(registry).map(async ([name, _]) => {
-      const partialsPath = replaceTemplate(PARTIALS_DIR, { name });
+      const partialsPath = replaceTemplate(getPaths().partials, { name });
       if (fs.pathExistsSync(partialsPath)) {
         const partialDir = fs.readdirSync(partialsPath);
         partialDir.forEach((partial) => {

@@ -14,14 +14,14 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig,
+  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig, PathConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
-import { Component, getComponent, register, registryAsObject } from './components';
+import { register, registryAsObject } from './components';
 
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
@@ -35,6 +35,31 @@ import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
 import { createWorkspaceDirectories } from './modules/workspace/createWorkspaceDirectories';
 import { extractBaseWorkspace } from './modules/workspace/extractBaseWorkspace';
+import path from 'path';
+
+export function getPaths(): PathConfig {
+
+  const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV
+
+  if(environment === 'production') {
+    return {
+      configs: path.join(__dirname, './configs'),
+      template: path.join(__dirname, './templates'),
+      baseApp: path.join(__dirname, './templates/base_app.zip'),
+      baseWorkspace: path.join(__dirname, './templates/base_workspace.zip'),
+      partials: path.join(__dirname, './templates/components/{{name}}/partials')
+    }
+  } else {
+    return {
+      configs: path.join(__dirname, '../public/configs'),
+      template: path.join(__dirname, '../public/templates'),
+      baseApp: path.join(__dirname, '../public/templates/base_app.zip'),
+      baseWorkspace: path.join(__dirname, '../public/templates/base_workspace.zip'),
+      partials: path.join(__dirname, '../public/templates/components/{{name}}/partials')
+    }
+  }
+
+}
 
 /**
  * Initializes a new workspace by validating configuration, checking directory status,
@@ -105,6 +130,7 @@ export const newWorkspace = async (baseConfig: WorkspaceConfig, basePath: string
  *
  */
 export const newApp = async (baseConfig: AppConfig, basePath: string): Promise<void> => {
+
   const isBaseConfigValid = appConfigValidate(baseConfig);
 
   if (!isBaseConfigValid && appConfigValidate.errors) throw appConfigValidate.errors;

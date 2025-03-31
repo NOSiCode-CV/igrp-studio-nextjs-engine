@@ -1,6 +1,6 @@
 {
   "name": "@igrp/igrp-studio-nextjs-engine",
-  "version": "0.0.1-alpha.96",
+  "version": "0.0.1-alpha.117",
   "description": "The NextJS engine application allows to create a new NextJS application",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc && vite build",
+    "build": "env-cmd -f .env.production tsc && vite build",
     "start": "tsc && vite"
   },
   "repository": {
@@ -61,7 +61,8 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.2.4",
     "vite": "^5.4.2",
-    "vite-plugin-dts": "^4.0.3"
+    "vite-plugin-dts": "^4.0.3",
+    "env-cmd": "^10.1.0"
   },
   "type": "commonjs",
   "exports": {

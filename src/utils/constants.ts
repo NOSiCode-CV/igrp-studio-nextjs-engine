@@ -1,13 +1,3 @@
-import path from 'path';
-
-const isProductionEnv = process.env.ENGINE_IGRP_STUDIO_ENV === 'production'
-
-export const CONFIGS = path.join(__dirname, isProductionEnv? './configs' : '../../public/configs');
-export const TEMPLATE_DIR = path.join(__dirname, isProductionEnv? './templates' : '../../public/templates');
-export const BASE_APP_ZIP = path.join(__dirname, isProductionEnv? './templates/base_app.zip' : '../../public/templates/base_app.zip');
-export const BASE_WORKSPACE_ZIP = path.join(__dirname, isProductionEnv? './templates/base_workspace.zip' : '../../public/templates/base_workspace.zip');
-export const PARTIALS_DIR = path.join(__dirname, isProductionEnv? './templates/components/{{name}}/partials' : '../../public/templates/components/{{name}}/partials');
-
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
   VALID_APP_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",

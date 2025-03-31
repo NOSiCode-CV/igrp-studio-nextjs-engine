@@ -5,7 +5,6 @@ import { renderTemplate } from '../common/renderTemplate';
 import { RenderContext, WorkspaceConfig } from '../../interfaces/types';
 import {
   COMMON_FILES,
-  CONFIGS,
   DIRECTORIES,
   ERROR_MESSAGE,
   TEMPLATES,
@@ -14,6 +13,7 @@ import {
   DST_CONFIG_FILES
 } from '../../utils/constants';
 import { workspaceConfigValidate } from '../../schema/baseWorkspace';
+import { getPaths } from '../../index';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -48,7 +48,7 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
  */
 const generateConfigFiles = (context: RenderContext<WorkspaceConfig, WorkspaceConfig>): BASE_CONFIG_FILES => {
   return [
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.WORKSPACE_GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
+    {src: path.join(getPaths().configs, SRC_CONFIG_FILES.WORKSPACE_GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
   ]
 }
 

@@ -1,8 +1,9 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { Handlebars, loadPartials } from '../../registries/helperRegistry';
-import { ERROR_MESSAGE, TEMPLATE_DIR } from '../../utils/constants';
+import { ERROR_MESSAGE } from '../../utils/constants';
 import { registry } from '../../components';
+import { getPaths } from '../../index';
 
 /**
  * Generates content from a template and a context.
@@ -22,7 +23,7 @@ export const renderTemplate = async (templateName: string, context: any) => {
 
   context.registry = registry
 
-  const templatePath = path.join(TEMPLATE_DIR, templateName);
+  const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   const template = Handlebars.compile(templateContent);
 
@@ -49,7 +50,7 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
 
   context.registry = registry
 
-  const templatePath = path.join(TEMPLATE_DIR, templateName);
+  const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
   const template = Handlebars.compile(templateContent);
 

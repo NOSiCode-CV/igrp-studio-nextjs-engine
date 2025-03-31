@@ -284,6 +284,15 @@ export interface WorkspaceConfig extends IdentifiableElement {
   projects?: any[];
 }
 
+// Paths
+export interface PathConfig {
+  configs: string,
+  template: string,
+  baseApp: string,
+  baseWorkspace: string,
+  partials: string
+}
+
 export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
   parentResourceConfig?: P;

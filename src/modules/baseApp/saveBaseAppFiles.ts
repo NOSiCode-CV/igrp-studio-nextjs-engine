@@ -5,7 +5,6 @@ import { renderTemplate } from '../common/renderTemplate';
 import { RenderContext } from '../../interfaces/types';
 import {
   COMMON_FILES,
-  CONFIGS,
   DIRECTORIES,
   ERROR_MESSAGE,
   TEMPLATES,
@@ -14,6 +13,7 @@ import {
   DST_CONFIG_FILES
 } from '../../utils/constants';
 import { appConfigValidate } from '../../schema/baseApp';
+import { getPaths } from '../../index';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -56,6 +56,9 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
  * @returns 
  */
 const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
+
+  const CONFIGS = getPaths().configs
+
   return [
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.EN), dest: path.join(context.basePath, DST_CONFIG_FILES.EN)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.ES), dest: path.join(context.basePath, DST_CONFIG_FILES.ES)},
