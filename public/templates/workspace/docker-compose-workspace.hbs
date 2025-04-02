@@ -1,0 +1,65 @@
+name: '{{toLowerCase resourceConfig.workspace}}-workspace'
+
+networks:
+  default:
+    name: {{toLowerCase resourceConfig.workspace}}-network
+    external: false
+
+services:
+  {{#each resourceConfig.projects}}
+  {{#if (eq this.config.type 'springboot')}}
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}:
+    build: ./projects/{{this.basePath}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}
+    depends_on:
+    {{#if this.dependsOn}}
+    {{#each this.dependsOn}}
+      - {{this.service}}
+    {{/each}}
+      - {{#if (eq this.config.database "Postgresql")}}postgres-{{toLowerCase this.config.name}}{{else if (eq this.config.database "MySQL")}}mysql-{{toLowerCase this.config.name}}{{else if (eq this.config.database "Oracle")}}oracle-{{toLowerCase this.config.name}}{{/if}}
+    {{/if}}
+    {{#if this.environments}}
+    environment:
+      {{#each this.environments}}
+      - {{this.key}}={{this.value}}
+      {{/each}}
+    {{/if~}}
+    ports:
+      - "{{this.ports.external}}:{{this.ports.internal}}"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    {{#if this.config.enableObservability}}
+    labels:
+      logging: "promtail"
+    {{/if}}
+  {{/if~}}
+  {{#if (eq this.config.type 'nextjs')}}
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}:
+    build: ./projects/{{this.basePath}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}
+    ports:
+      - "{{this.ports.external}}:{{this.ports.internal}}"
+    networks:
+      - {{toLowerCase ../resourceConfig.workspace}}-network
+    {{#if this.dependsOn}}
+    depends_on:
+    {{#each this.dependsOn}}
+      - {{this.service}}
+    {{/each}}
+    {{/if}}
+    stdin_open: true
+  {{/if~}}
+
+  {{/each}}
+  {{> igrp-docker-services resourceConfig=resourceConfig}}
+
+volumes:
+  {{#each (extractVolumes resourceConfig)}}
+  {{this.name}}:
+    driver: {{#if this.driver}}{{this.driver}}{{else}}local{{/if}}
+  {{/each}}
+  igrp_access_management_data:
+    driver: local

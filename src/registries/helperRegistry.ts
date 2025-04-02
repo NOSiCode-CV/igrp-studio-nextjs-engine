@@ -35,6 +35,7 @@ import { registry } from '../components';
 import fs from 'fs-extra';
 import { replaceTemplate } from '../utils/helpers';
 import { getPaths } from '../index';
+import { extractVolumes } from '../helpers/workspaceHelper';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -55,6 +56,9 @@ Handlebars.registerHelper("extractCardFooter", extractCardFooter);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
+
+// Workspace
+Handlebars.registerHelper("extractVolumes", extractVolumes)
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);

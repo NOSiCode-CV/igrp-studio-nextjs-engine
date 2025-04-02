@@ -1,0 +1,14 @@
+{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}oracle-{{toLowerCase resourceConfig.config.name}}{{/if}}:
+  image: oracle/database:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}19.3.0-ee{{/if}}
+  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}oracle-{{toLowerCase resourceConfig.config.name}}{{/if}}
+  environment:
+    - ORACLE_SID: "{{#if resourceConfig.dataSource.dbSid}}{{resourceConfig.dataSource.dbSid}}{{else}}ORCLCDB{{/if}}"
+    - ORACLE_PWD: "{{resourceConfig.dataSource.dbPassword}}"
+    - ORACLE_PDB: "{{resourceConfig.dataSource.dbName}}"
+  ports:
+    - "{{resourceConfig.dataSource.ports.external}}:{{resourceConfig.dataSource.ports.internal}}"
+  volumes:
+    - {{resourceConfig.dataSource.volume.name}}:{{#if resourceConfig.dataSource.volume.path}}{{resourceConfig.dataSource.volume.path}}{{else}}/opt/oracle/oradata{{/if}}
+  restart: unless-stopped
+  networks:
+    - {{toLowerCase ../resourceConfig.workspace}}-network

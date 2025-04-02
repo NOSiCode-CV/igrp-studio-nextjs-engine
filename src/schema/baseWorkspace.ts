@@ -15,6 +15,11 @@ const workspaceConfigSchema: JSONSchemaType<WorkspaceConfig> = {
     name: {
       type: 'string'
     },
+    slug: {
+      type: 'string',
+      pattern: PATTERNS.VALID_WORKSPACE_NAME_CONVENTIONAL,
+      errorMessage: 'The workspace slug must only contain letters and must not have spaces or special characters except hyphen.'
+    },
     description: {
       type: 'string',
       nullable: true,

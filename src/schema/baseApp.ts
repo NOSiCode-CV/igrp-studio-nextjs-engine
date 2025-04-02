@@ -6,6 +6,18 @@ import { ajvInstance } from '../utils/ajv-instance';
 const appConfigSchema: JSONSchemaType<AppConfig> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage:
+        'The project id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
+    },
+    workspaceId: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage:
+        'The workspace id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
+    },
     type: { 
       type: 'string', 
       const: 'baseApp',
@@ -21,7 +33,7 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       nullable: true,
     },
   },
-  required: ['type', 'appName'],
+  required: ['id', 'workspaceId', 'type', 'appName'],
   additionalProperties: false,
 };
 

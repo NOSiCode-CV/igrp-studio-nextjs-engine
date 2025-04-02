@@ -1,0 +1,14 @@
+{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.name}}{{/if}}:
+  image: postgres:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}14-alpine{{/if}}
+  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.name}}{{/if}}
+  environment:
+    - POSTGRES_USER: "{{#if resourceConfig.dataSource.dbUser}}{{resourceConfig.dataSource.dbUser}}{{else}}postgres{{/if}}"
+    - POSTGRES_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
+    - POSTGRES_DB: "{{resourceConfig.dataSource.dbName}}"
+  ports:
+    - "{{resourceConfig.dataSource.ports.external}}:{{resourceConfig.dataSource.ports.internal}}"
+  volumes:
+    - {{resourceConfig.dataSource.volume.name}}:{{#if resourceConfig.dataSource.volume.path}}{{resourceConfig.dataSource.volume.path}}{{else}}/var/lib/postgresql/data{{/if}}
+  restart: unless-stopped
+  networks:
+    - {{toLowerCase ../resourceConfig.workspace}}-network

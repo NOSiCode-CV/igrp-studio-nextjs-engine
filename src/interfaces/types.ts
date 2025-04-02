@@ -4,8 +4,9 @@ interface IdentifiableElement {
   id: string
 }
 
-export interface AppConfig {
+export interface AppConfig extends IdentifiableElement {
   type: 'baseApp';
+  workspaceId: string;
   appName: string;
   description?: string
 }
@@ -280,8 +281,85 @@ export interface ChildComponent {
 
 export interface WorkspaceConfig extends IdentifiableElement {
   name: string;
+  slug: string;
   description?: string;
   projects?: any[];
+}
+
+export interface WorkspaceProjectsConfig {
+  workspace: string,
+  projects: WorkspaceProject[],
+  platform: PlatformServices
+}
+
+export interface PlatformServices {
+  dataSource: ProjectDataSource,
+  appManager: PlatformConfig,
+  userManager: PlatformConfig,
+  ui: PlatformConfig,
+  auth: PlatformAuthConfig,
+  file: PlatformFileConfig,
+}
+
+export interface BasePlatformConfig {
+  version?: string,
+  containerName: string
+}
+
+export interface PlatformConfig extends BasePlatformConfig {
+  ports: Port
+}
+
+export interface PlatformAuthConfig extends BasePlatformConfig {
+  ports: Port,
+  dataSource: ProjectDataSource,
+  volumes: Volume
+}
+
+export interface PlatformFileConfig extends BasePlatformConfig {
+  ports: Port[]
+  volumes: Volume,
+}
+
+export interface WorkspaceProject {
+  config: any,
+  containerName?: string,
+  basePath: string,
+  environments: Environment[],
+  ports: Port,
+  dependsOn: Dependency[],
+  dataSource: ProjectDataSource
+}
+
+export interface ProjectDataSource {
+  imageVersion?: string,
+  containerName?: string,
+  dbUser?: string,
+  dbPassword: string,
+  dbName: string,
+  dbSid?: string,
+  ports: Port,
+  volume: Volume
+}
+
+export interface Volume {
+  name: string,
+  path?: string,
+  driver?: string
+}
+
+export interface Dependency {
+  service: string
+}
+
+export interface Port {
+  internal: number,
+  external: number
+}
+
+export interface Environment {
+  key: string,
+  value: string
 }
 
 // Paths
