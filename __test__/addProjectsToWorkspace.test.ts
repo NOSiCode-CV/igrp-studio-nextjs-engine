@@ -123,7 +123,8 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
       basePath: 'demoDomain',
       environments: [
-
+        { key: 'TEST_VARIABLE', value: 'value321'},
+        { key: 'TEST_ANOTHER_VARIABLE', value: '123'},
       ],
       ports: {
         internal: 8083,

@@ -55,6 +55,7 @@ export const TEMPLATES = {
   IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
+  SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
 
