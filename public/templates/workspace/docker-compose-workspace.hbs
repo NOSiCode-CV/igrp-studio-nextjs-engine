@@ -8,6 +8,15 @@ networks:
 services:
   {{#each resourceConfig.projects}}
   {{#if (eq this.config.type 'springboot')}}
+
+  {{#if (eq this.config.database "Postgresql")}}
+  {{> postgres-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
+  {{else if (eq this.config.database "MySQL")}}
+  {{> mysql-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
+  {{else if (eq this.config.database "Oracle")}}
+  {{> oracle-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
+  {{/if}}
+
   {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}:
     build: ./projects/{{this.basePath}}
     container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}
@@ -23,6 +32,8 @@ services:
     {{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
+    networks:
+      - {{toLowerCase ../resourceConfig.workspace}}-network
     restart: unless-stopped
     deploy:
       resources:

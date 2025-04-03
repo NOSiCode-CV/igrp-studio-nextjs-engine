@@ -1,6 +1,6 @@
-{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.name}}{{/if}}:
+{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.apiName}}{{/if}}:
   image: mysql:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}8.0{{/if}}
-  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.name}}{{/if}}
+  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.apiName}}{{/if}}
   environment:
     - MYSQL_PASSWORD: "{{#if resourceConfig.dataSource.dbPassword}}{{resourceConfig.dataSource.dbPassword}}{{else}}root{{/if}}"
     - MYSQL_ROOT_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
@@ -11,4 +11,4 @@
     - {{resourceConfig.dataSource.volume.name}}:{{#if resourceConfig.dataSource.volume.path}}{{resourceConfig.dataSource.volume.path}}{{else}}/var/lib/postgresql/data{{/if}}
   restart: unless-stopped
   networks:
-    - {{toLowerCase ../resourceConfig.workspace}}-network
+    - {{toLowerCase workspace}}-network

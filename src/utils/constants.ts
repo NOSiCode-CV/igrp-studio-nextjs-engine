@@ -1,5 +1,8 @@
 export const PARTIALS = [
-  'workspace/igrp-docker-services.hbs'
+  'workspace/igrp-docker-services.hbs',
+  'workspace/mysql-docker-service.hbs',
+  'workspace/oracle-docker-service.hbs',
+  'workspace/postgres-docker-service.hbs'
 ];
 
 export const PATTERNS = {
