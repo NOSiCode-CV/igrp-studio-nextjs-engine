@@ -245,6 +245,19 @@ export interface ComponentRegistrationConfig {
   components: ComponentRegisterConfig[]
 }
 
+export interface DockerServiceRegistrationConfig {
+  services: DockerServiceRegisterConfig[]
+}
+
+export interface DockerServiceRegisterConfig {
+  name: string,
+  custom?: string,
+  properties: Record<string, any>,
+  propertiesMapping: Record<string, any>,
+  renderer: 'default' | 'hbs' | 'custom',
+  templatePath?: string
+}
+
 export interface ComponentRegisterConfig {
   name: string,
   imports: string[],
@@ -369,14 +382,107 @@ export interface Dependency {
   service: string
 }
 
+export interface Profile {
+  profile: string
+}
+
 export interface Port {
   internal: number,
   external: number
 }
 
+export interface Expose {
+  port: number,
+}
+
+export interface Network {
+  network: number,
+}
+
+export interface Storage {
+  storage: number,
+}
+
+export interface Secret {
+  secret: number,
+}
+
 export interface Environment {
   key: string,
   value: string
+}
+
+export interface DockerServiceConfig {
+  config: string
+}
+
+export interface DockerServiceInstruction {
+  instruction: string
+}
+
+export interface DockerServiceResourceLimit {
+  cpus: string,
+  memory: string
+}
+
+export interface DockerServiceHealthcheck {
+  test: DockerServiceInstruction[],
+  interval: string,
+  timeout: string,
+  retries: number
+}
+
+export interface DockerServiceResources {
+  limits: DockerServiceResourceLimit,
+  reservations: DockerServiceResourceLimit,
+}
+
+export interface ResourceLimits {
+  replicas: number,
+  restart_policy: string,
+  resources: DockerServiceResources
+}
+
+export interface DockerServiceLoggingOptions {
+  max_size: string,
+  max_file: string
+}
+
+export interface DockerServiceLogging {
+  driver: 'json-file' | 'syslog' | 'fluentd',
+  options: DockerServiceLoggingOptions
+}
+
+export interface DockerContainer {
+  image: string,
+  build: string,
+  container_name?: string,
+  restart?: string,
+  dependsOn?: Dependency[],
+  extends?: string,
+  hostname?: string,
+  profiles?: Profile[],
+  ports: Port[],
+  expose?: Expose[],
+  networks: Network[],
+  domainname?: string,
+  environments?: Environment[],
+  env_file?: string,
+  labels?: Environment[],
+  volumes?: Volume[],
+  tmpfs?: Storage[],
+  secret?: Secret[],
+  configs?: DockerServiceConfig[],
+  command?: DockerServiceInstruction[],
+  entrypoint?: DockerServiceInstruction[],
+  deploy?: ResourceLimits,
+  healthcheck?: DockerServiceHealthcheck,
+  logging?: DockerServiceLogging,
+  ipc?: string,
+  pid?: string,
+  runtime?: string,
+  init?: boolean,
+  stop_signal: string
 }
 
 // Paths
