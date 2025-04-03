@@ -59,7 +59,7 @@ import { AppConfig } from '@igrp/nextjs-engine/dist/interfaces/types';
 const basePath = 'Path where the application will be created';
 
 const appConfig: AppConfig = {
-  type: 'baseApp',
+  type: 'nextjs',
   appName: 'appTest',
 };
 
@@ -441,7 +441,7 @@ removePage();
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constants';
 
 export interface AppConfig {
-  type: 'baseApp';
+  type: 'nextjs';
   appName: string;
   description?: string
 }

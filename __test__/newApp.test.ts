@@ -5,8 +5,10 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 export const OUTPUT_DIR = OUTPUT_TEST;
 
 const baseConfig: AppConfig = {
-  type: 'baseApp',
+  id: 'teste',
+  type: 'nextjs',
   appName: 'testeMan',
+  workspaceId: 'none'
 };
 
 describe('Create new nextjs application module', () => {

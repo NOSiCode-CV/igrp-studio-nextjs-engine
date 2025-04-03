@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { Handlebars, loadPartials } from '../../registries/helperRegistry';
+import { Handlebars, loadComponentPartials, loadPartials } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE } from '../../utils/constants';
 import { registry } from '../../components';
 import { getPaths } from '../../index';
@@ -20,6 +20,8 @@ export const renderTemplate = async (templateName: string, context: any) => {
   if (!context) {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
+
+  await loadPartials();
 
   context.registry = registry
 
@@ -46,7 +48,7 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
 
-  loadPartials();
+  loadComponentPartials();
 
   context.registry = registry
 

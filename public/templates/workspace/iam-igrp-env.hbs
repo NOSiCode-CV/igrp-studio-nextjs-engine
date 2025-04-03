@@ -1,0 +1,15 @@
+# Database
+IGRP_IAM_DB_HOSTNAME=igrp_iam_db
+IGRP_IAM_DB_NAME=igrp-iam-db
+IGRP_IAM_DB_USER=keycloak
+IGRP_IAM_DB_PASSWORD=password
+IGRP_IAM_HOSTNAME=keycloak
+IGRP_IAM_ADMIN_USER=admin
+IGRP_IAM_ADMIN_PASSWORD=password
+
+KEYCLOAK_REALM=quickstart
+
+# IGRP UI
+KEYCLOAK_ISSUER=http://${KEYCLOAK_HOSTNAME}:${KEYCLOAK_HOSTNAME_PORT}/realms/${KEYCLOAK_REALM}
+APP_MANAGER_API=http://igrp-app-manager-api:{{resourceConfig.platform.appManager.ports.internal}}
+USER_MANAGER_API=http://igrp-user-management-api:{{resourceConfig.platform.userManager.ports.internal}}

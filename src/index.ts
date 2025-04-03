@@ -14,7 +14,7 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig, PathConfig,
+  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig, PathConfig, WorkspaceProjectsConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -36,6 +36,8 @@ import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspa
 import { createWorkspaceDirectories } from './modules/workspace/createWorkspaceDirectories';
 import { extractBaseWorkspace } from './modules/workspace/extractBaseWorkspace';
 import path from 'path';
+import { workspaceProjectsConfigValidate } from './schema/workspaceProjectConfig';
+import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
 
 export function getPaths(): PathConfig {
 
@@ -47,7 +49,8 @@ export function getPaths(): PathConfig {
       template: path.join(__dirname, './templates'),
       baseApp: path.join(__dirname, './templates/base_app.zip'),
       baseWorkspace: path.join(__dirname, './templates/base_workspace.zip'),
-      partials: path.join(__dirname, './templates/components/{{name}}/partials')
+      componentPartials: path.join(__dirname, './templates/components/{{name}}/partials'),
+      genericPartials: path.join(__dirname, './templates/partials')
     }
   } else {
     return {
@@ -55,7 +58,8 @@ export function getPaths(): PathConfig {
       template: path.join(__dirname, '../public/templates'),
       baseApp: path.join(__dirname, '../public/templates/base_app.zip'),
       baseWorkspace: path.join(__dirname, '../public/templates/base_workspace.zip'),
-      partials: path.join(__dirname, '../public/templates/components/{{name}}/partials')
+      componentPartials: path.join(__dirname, '../public/templates/components/{{name}}/partials'),
+      genericPartials: path.join(__dirname, '../public/templates/partials')
     }
   }
 
@@ -71,8 +75,8 @@ export function getPaths(): PathConfig {
  * @param {string} basePath - The base path where the workspace directories and files will be created.
  *
  * @throws {Error} Throws an error if:
- * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
- * - The base path is not provided (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
+ * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
+ * - The base path is not provided (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
  * - The base path directory is not empty (`ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE`).
  *
  * @returns {Promise<void>} A promise that resolves when the workspace has been successfully initialized.
@@ -247,6 +251,42 @@ export const addComponentToPage = async (config: PageComponentConfig, basePath: 
   await updateAndRenderPage(context);
 };
 
+/**
+ * Add projects to a workspace by validating configuration, checking directory status,
+ * and creating necessary files (.env and igrp-compose.yaml).
+ *
+ * @async
+ * @function addProjectsToWorkspace
+ * @param {WorkspaceProjectsConfig} baseConfig - The base configuration object for the workspace.
+ * @param {string} basePath - The base path where the workspace directories and files will be created.
+ *
+ * @throws {Error} Throws an error if:
+ * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
+ * - The base path is not provided (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
+ *
+ * @returns {Promise<void>} A promise that resolves when the workspace has been successfully initialized.
+ *
+ */
+export const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig, basePath: string): Promise<void> => {
+  const isBaseConfigValid = workspaceProjectsConfigValidate(baseConfig);
+
+  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw workspaceProjectsConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
+
+  await saveBaseWorkspaceFileConfig(baseConfig, basePath);
+
+  const context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig> = {
+    resourceConfig: baseConfig,
+    basePath,
+  };
+
+  /**
+   * Generates the environment files and compose file
+   */
+  await generateWorkspaceFiles(context);
+
+};
 
 export const deleteElement = async (config: DeleteConfig, basePath: string) => {
   const valid = deleteValidation(config);

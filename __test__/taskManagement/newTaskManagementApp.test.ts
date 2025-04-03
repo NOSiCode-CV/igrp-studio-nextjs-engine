@@ -5,7 +5,9 @@ import { OUTPUT_TODO_TEST } from '../../src/utils/testPath';
 export const OUTPUT_DIR = OUTPUT_TODO_TEST;
 
 const baseConfig: AppConfig = {
-  type: 'baseApp',
+  id: 'task-management-project',
+  workspaceId: 'none',
+  type: 'nextjs',
   appName: 'taskManagement',
 };
 

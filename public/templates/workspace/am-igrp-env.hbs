@@ -1,0 +1,38 @@
+# User Manager (UM) environment variables
+POSTGRES_DB={{resourceConfig.platform.dataSource.dbName}}
+POSTGRES_USER={{resourceConfig.platform.dataSource.dbUser}}
+POSTGRES_PORT={{resourceConfig.platform.dataSource.ports.internal}}
+POSTGRES_PASSWORD={{resourceConfig.platform.dataSource.dbPassword}}
+POSTGRES_HOSTNAME={{#if resourceConfig.platform.dataSource.dbHostname}}{{resourceConfig.platform.dataSource.dbHostname}}{{else}}igrp_access_management_db{{/if}}
+
+KEYCLOAK_CLIENT_ID=CLIENT_igrp-user-manager
+KEYCLOAK_CLIENT_SECRET=**********
+USER_MANAGEMENT_PORT={{resourceConfig.platform.userManager.ports.internal}}
+
+# Keycloak
+KEYCLOAK_ADMIN={{resourceConfig.platform.auth.adminUser}}
+KEYCLOAK_ADMIN_PASSWORD={{resourceConfig.platform.auth.adminPassword}}
+KEYCLOAK_HOSTNAME={{resourceConfig.platform.auth.hostname}}
+KEYCLOAK_HOSTNAME_PORT={{resourceConfig.platform.auth.ports.internal}}
+KEYCLOAK_REALM=quickstart
+KEYCLOAK_ISSUER=http://${KEYCLOAK_HOSTNAME}:${KEYCLOAK_HOSTNAME_PORT}/realms/${KEYCLOAK_REALM}
+# KEYCLOAK_CLIENT_ID=whole-api # whole-api is used as frontend client
+# KEYCLOAK_CLIENT_SECRET=wpq7oMFUPiAFZIXky3TRzl7kU6zmsHs0
+
+MINIO_URL=http://minio:{{getAttribute resourceConfig.platform.file.ports 0 'internal'}}
+MINIO_PORT={{getAttribute resourceConfig.platform.file.ports 0 'internal'}}
+MINIO_SECURITY={{#if resourceConfig.platform.file.enableSecurity}}{{resourceConfig.platform.file.enableSecurity}}{{else}}false{{/if}}
+MINIO_ACCESS_KEY={{resourceConfig.platform.file.adminUser}}
+MINIO_SECRET_KEY={{resourceConfig.platform.file.adminPassword}}
+MINIO_BUCKET_NAME=igrp
+
+USER_MANAGEMENT_URL=http://igrp-user-management-api:${USER_MANAGEMENT_PORT}
+
+APP_AUTHENTICATION_PROVIDER=keycloak
+
+# Email server configuration
+EMAIL_SENDER={{resourceConfig.platform.mail.sender}}
+EMAIL_HOST={{resourceConfig.platform.mail.host}}
+EMAIL_PORT={{resourceConfig.platform.mail.port}}
+EMAIL_USERNAME={{resourceConfig.platform.mail.username}}
+EMAIL_PASSWORD={{resourceConfig.platform.mail.password}}

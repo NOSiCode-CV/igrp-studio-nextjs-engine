@@ -20,8 +20,8 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
     },
     type: { 
       type: 'string', 
-      const: 'baseApp',
-      errorMessage: "The app config type attribute must be 'baseApp'."
+      const: 'nextjs',
+      errorMessage: "The app config type attribute must be 'nextjs'."
     },
     appName: {
       type: 'string',

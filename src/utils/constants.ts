@@ -1,9 +1,16 @@
+export const PARTIALS = [
+  'workspace/igrp-docker-services.hbs'
+];
+
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
   VALID_APP_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_WORKSPACE_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[a-zA-Z0-9_ ]+$",
-  WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$"
+  WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
+  PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/]*$',
+  VOLUME_PATH_VALIDATION_PATTERN: '^[A-Za-z/][A-Za-z0-9_/]*$',
+  DOCKER_SERVICE_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_-]*$',
 }
 
 export const COMMON_FILES = {
@@ -42,10 +49,25 @@ export const TEMPLATES = {
   CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
   ELEMENT: 'components/{{name}}/{{name}}.hbs',
   CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
-  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs'
+  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
+  AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',
+  UM_IGRP_ENV: 'workspace/um-igrp-env.hbs',
+  IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
+  FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
+  IGRP_ENV: 'workspace/igrp-env.hbs',
+  WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
 
+export const ENVIRONMENT_FILES = {
+  AM_IGRP_ENV: '.am.igrp.env',
+  UM_IGRP_ENV: '.um.igrp.env',
+  IAM_IGRP_ENV: '.iam.igrp.env',
+  FILE_IGRP_ENV: '.file.igrp.env',
+  IGRP_ENV: '.igrp.env',
+}
+
 export const SRC_CONFIG_FILES = {
+  IGRP_COMPOSE: 'igrp-compose.yaml',
   DOCKERIGNORE: 'dockerignore_template',
   DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',

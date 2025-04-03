@@ -5,7 +5,7 @@ interface IdentifiableElement {
 }
 
 export interface AppConfig extends IdentifiableElement {
-  type: 'baseApp';
+  type: 'nextjs';
   workspaceId: string;
   appName: string;
   description?: string
@@ -286,7 +286,7 @@ export interface WorkspaceConfig extends IdentifiableElement {
   projects?: any[];
 }
 
-export interface WorkspaceProjectsConfig {
+export interface WorkspaceProjectsConfig extends IdentifiableElement {
   workspace: string,
   projects: WorkspaceProject[],
   platform: PlatformServices
@@ -299,6 +299,7 @@ export interface PlatformServices {
   ui: PlatformConfig,
   auth: PlatformAuthConfig,
   file: PlatformFileConfig,
+  mail: PlatformMailConfig
 }
 
 export interface BasePlatformConfig {
@@ -313,12 +314,27 @@ export interface PlatformConfig extends BasePlatformConfig {
 export interface PlatformAuthConfig extends BasePlatformConfig {
   ports: Port,
   dataSource: ProjectDataSource,
+  adminUser: string,
+  adminPassword: string,
+  hostname: string,
   volumes: Volume
 }
 
 export interface PlatformFileConfig extends BasePlatformConfig {
-  ports: Port[]
+  ports: Port[],
+  enableSecurity?: boolean,
+  adminUser: string,
+  adminPassword: string,
   volumes: Volume,
+}
+
+export interface PlatformMailConfig extends BasePlatformConfig {
+  protocol?: string,
+  sender: string,
+  host: string,
+  port: number,
+  username: string,
+  password: string
 }
 
 export interface WorkspaceProject {
@@ -328,7 +344,7 @@ export interface WorkspaceProject {
   environments: Environment[],
   ports: Port,
   dependsOn: Dependency[],
-  dataSource: ProjectDataSource
+  dataSource?: ProjectDataSource
 }
 
 export interface ProjectDataSource {
@@ -338,14 +354,15 @@ export interface ProjectDataSource {
   dbPassword: string,
   dbName: string,
   dbSid?: string,
+  dbHostName?: string,
   ports: Port,
-  volume: Volume
+  volumes: Volume
 }
 
 export interface Volume {
   name: string,
-  path?: string,
-  driver?: string
+  path: string,
+  driver: string
 }
 
 export interface Dependency {
@@ -368,7 +385,8 @@ export interface PathConfig {
   template: string,
   baseApp: string,
   baseWorkspace: string,
-  partials: string
+  componentPartials: string,
+  genericPartials: string,
 }
 
 export type RenderContext<T = undefined, P = undefined> = {

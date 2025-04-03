@@ -7,6 +7,7 @@ export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
 const baseConfig: WorkspaceConfig = {
   id: 'a03Yl1rsM1P1',
   name: 'My Workspace',
+  slug: 'my-workspace',
   description: 'A demo workspace',
 };
 
