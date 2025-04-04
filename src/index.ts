@@ -47,6 +47,7 @@ import { workspaceProjectsConfigValidate } from './schema/workspaceProjectConfig
 import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
 import { registerAllServices } from './docker_services/register';
 import { dockerServiceRegistrationValidate } from './schema/serviceRegisterConfig';
+import { saveWorkspaceComposeFile } from './modules/workspace/saveWorkspaceComposeFile';
 
 export function getPaths(): PathConfig {
 
@@ -293,6 +294,10 @@ export const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig
   await saveBaseWorkspaceFileConfig(baseConfig, basePath);
 
 };
+
+export const saveCustomWorkspaceComposeFile = async (yaml: object, basePath: string) => {
+  await saveWorkspaceComposeFile(yaml, basePath)
+}
 
 export const deleteElement = async (config: DeleteConfig, basePath: string) => {
   const valid = deleteValidation(config);
