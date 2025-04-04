@@ -1,20 +1,15 @@
 import path from 'path';
-import fs from 'fs-extra';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
-import { RenderContext, WorkspaceConfig, WorkspaceProject, WorkspaceProjectsConfig } from '../../interfaces/types';
+import { RenderContext, WorkspaceProject, WorkspaceProjectsConfig } from '../../interfaces/types';
 import {
-  COMMON_FILES,
-  DIRECTORIES,
   ERROR_MESSAGE,
   TEMPLATES,
   SRC_CONFIG_FILES,
-  PACKAGE_JSON,
-  DST_CONFIG_FILES, ENVIRONMENT_FILES,
+  ENVIRONMENT_FILES,
 } from '../../utils/constants';
-import { workspaceConfigValidate } from '../../schema/baseWorkspace';
-import { getPaths } from '../../index';
 import { workspaceProjectsConfigValidate } from '../../schema/workspaceProjectConfig';
+import { checkDuplicated } from './checkDuplicated';
 
 export type BASE_FILE = { output: string; template: string; name: string };
 export type BASE_FILES = BASE_FILE[];
@@ -37,6 +32,8 @@ const generateFiles = (context: RenderContext<WorkspaceProjectsConfig, Workspace
   const isBaseConfigValid = workspaceProjectsConfigValidate(context.resourceConfig);
 
   if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
+
+  checkDuplicated(context)
 
   return [
     { output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },

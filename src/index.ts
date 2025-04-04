@@ -277,13 +277,8 @@ export const addComponentToPage = async (config: PageComponentConfig, basePath: 
  *
  */
 export const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig, basePath: string): Promise<void> => {
-  const isBaseConfigValid = workspaceProjectsConfigValidate(baseConfig);
-
-  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw workspaceProjectsConfigValidate.errors;
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
-
-  await saveBaseWorkspaceFileConfig(baseConfig, basePath);
 
   const context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig> = {
     resourceConfig: baseConfig,
@@ -294,6 +289,8 @@ export const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig
    * Generates the environment files and compose file
    */
   await generateWorkspaceFiles(context);
+
+  await saveBaseWorkspaceFileConfig(baseConfig, basePath);
 
 };
 
