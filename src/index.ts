@@ -38,6 +38,7 @@ import { extractBaseWorkspace } from './modules/workspace/extractBaseWorkspace';
 import path from 'path';
 import { workspaceProjectsConfigValidate } from './schema/workspaceProjectConfig';
 import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
+import { registerAllServices } from './docker_services/register';
 
 export function getPaths(): PathConfig {
 
@@ -312,6 +313,15 @@ export const initComponents = async () => {
     console.log(`✅ Registered components`);
   } catch (error) {
     console.error(`❌ Failed to load components`, error);
+  }
+}
+
+export const initServices = async () => {
+  try {
+    registerAllServices();
+    console.log(`✅ Registered Docker services`);
+  } catch (error) {
+    console.error(`❌ Failed to load Docker services`, error);
   }
 }
 

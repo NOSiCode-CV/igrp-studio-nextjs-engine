@@ -1,0 +1,163 @@
+{{#if resourceConfig.container_name}}{{resourceConfig.container_name}}{{else}}service{{/if}}:
+  image: {{resourceConfig.image}}
+  {{#if resourceConfig.build}}
+  build: {{resourceConfig.build}}
+  {{/if}}
+  {{#if resourceConfig.container_name}}
+  container_name: {{resourceConfig.container_name}}
+  {{/if}}
+  {{#if resourceConfig.restart}}
+  restart: {{resourceConfig.restart}}
+  {{/if}}
+  {{#if resourceConfig.dependsOn}}
+  dependsOn:
+    {{#each resourceConfig.dependsOn}}
+    - {{this.service}}
+    {{/each}}
+  {{/if}}
+  {{#if resourceConfig.extends}}
+  extends: {{resourceConfig.extends}}
+  {{/if}}
+  {{#if resourceConfig.hostname}}
+  hostname: {{resourceConfig.hostname}}
+  {{/if}}
+  {{#if resourceConfig.profiles}}
+  profiles:
+    {{#each resourceConfig.profiles}}
+    - {{this.profile}}
+    {{/each}}
+  {{/if}}
+  {{#if resourceConfig.ports}}
+  ports:
+    {{#each resourceConfig.ports}}
+    - "{{this.external}}:{{this.internal}}"
+    {{/each}}
+  {{/if}}
+  {{#if resourceConfig.expose}}
+  expose:
+  {{#each resourceConfig.expose}}
+    - "{{this.port}}"
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.networks}}
+  networks:
+  {{#each resourceConfig.networks}}
+    - {{this.network}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.domainname}}
+  domainname: {{resourceConfig.domainname}}
+  {{/if}}
+  {{#if resourceConfig.environments}}
+  environment:
+  {{#each resourceConfig.environments}}
+    - {{this.key}}={{this.value}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.env_file}}
+  env_file: "{{resourceConfig.env_file}}"
+  {{/if}}
+  {{#if resourceConfig.labels}}
+  labels:
+  {{#each resourceConfig.labels}}
+    - {{this.key}}: "{{this.value}}"
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.volumes}}
+  volumes:
+  {{#each resourceConfig.volumes}}
+    - {{this.name}}:{{this.path}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.tmpfs}}
+  tmpfs:
+  {{#each resourceConfig.tmpfs}}
+    - {{this.storage}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.secrets}}
+  secrets:
+  {{#each resourceConfig.secrets}}
+    - {{this.secret}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.configs}}
+  configs:
+  {{#each resourceConfig.configs}}
+    - {{this.config}}
+  {{/each}}
+  {{/if}}
+  {{#if resourceConfig.command}}
+  command: [{{#each resourceConfig.command}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+  {{/if}}
+  {{#if resourceConfig.entrypoint}}
+  entrypoint: [{{#each resourceConfig.entrypoint}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+  {{/if}}
+  {{#if resourceConfig.deploy}}
+  deploy:
+    {{#if resourceConfig.deploy.replicas}}
+    replicas: {{resourceConfig.deploy.replicas}}
+    {{/if}}
+    {{#if resourceConfig.deploy.restart_policy}}
+    restart_policy:
+      condition: {{resourceConfig.deploy.restart_policy}}
+    {{/if}}
+    {{#if resourceConfig.deploy.resources}}
+    resources:
+      {{#if resourceConfig.deploy.resources.limits}}
+      limits:
+        cpus: "{{resourceConfig.deploy.resources.limits.cpus}}"
+        memory: "{{resourceConfig.deploy.resources.limits.memory}}"
+      {{/if}}
+      {{#if resourceConfig.deploy.resources.reservations}}
+      reservations:
+        cpus: "{{resourceConfig.deploy.resources.reservations.cpus}}"
+        memory: "{{resourceConfig.deploy.resources.reservations.memory}}"
+      {{/if}}
+    {{/if}}
+  {{/if}}
+  {{#if resourceConfig.healthcheck}}
+  healthcheck:
+    {{#if resourceConfig.healthcheck.test}}
+    test: [{{#each resourceConfig.healthcheck.test}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+    {{/if}}
+    {{#if resourceConfig.healthcheck.interval}}
+    interval: {{resourceConfig.healthcheck.interval}}
+    {{/if}}
+    {{#if resourceConfig.healthcheck.timeout}}
+    timeout: {{resourceConfig.healthcheck.timeout}}
+    {{/if}}
+    {{#if resourceConfig.healthcheck.retries}}
+    retries: {{resourceConfig.healthcheck.retries}}
+    {{/if}}
+  {{/if}}
+  {{#if resourceConfig.logging}}
+  logging:
+    {{#if resourceConfig.logging.driver}}
+    driver: "{{resourceConfig.logging.driver}}"
+    {{/if}}
+    {{#if resourceConfig.logging.options}}
+    options:
+      {{#if resourceConfig.logging.options.max_size}}
+      max-size: "{{resourceConfig.logging.options.max_size}}"
+      {{/if}}
+      {{#if resourceConfig.logging.options.min_size}}
+      min-size: "{{resourceConfig.logging.options.min_size}}"
+      {{/if}}
+    {{/if}}
+  {{/if}}
+  {{#if resourceConfig.ipc}}
+  ipc: {{resourceConfig.ipc}}
+  {{/if}}
+  {{#if resourceConfig.pid}}
+  pid: {{resourceConfig.pid}}
+  {{/if}}
+  {{#if resourceConfig.runtime}}
+  runtime: {{resourceConfig.runtime}}
+  {{/if}}
+  {{#if resourceConfig.init}}
+  init: {{resourceConfig.init}}
+  {{/if}}
+  {{#if resourceConfig.stop_signal}}
+  stop_signal: {{resourceConfig.stop_signal}}
+  {{/if}}

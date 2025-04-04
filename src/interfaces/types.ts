@@ -455,7 +455,7 @@ export interface DockerServiceLogging {
 
 export interface DockerContainer {
   image: string,
-  build: string,
+  build?: string,
   container_name?: string,
   restart?: string,
   dependsOn?: Dependency[],

@@ -11,17 +11,32 @@ export type DockerService = {
   custom?: string;
   defaultName: string;
   templatePath?: string;
-  renderer: ((dockerService: DockerContainer, element?: DockerService, templatePath?: string) => (dockerService: DockerContainer) => string);
+  renderer: ((
+    dockerService: DockerContainer,
+    element?: DockerService,
+    templatePath?: string,
+  ) => (dockerService: DockerContainer) => Promise<string>)
+  | ((
+    dockerService: DockerContainer,
+    element?: DockerService,
+  ) => Promise<(dockerService: DockerContainer) => Promise<string>>);
 
-  loadDefaultName:(name: string) => void;
-  loadCustom:(custom: string) => void;
-  loadTemplatePath:(templatePath?: string) => void;
+  loadDefaultName: (name: string) => void;
+  loadCustom: (custom: string) => void;
+  loadTemplatePath: (templatePath?: string) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
 
-  setRenderer: (fn: ((dockerService: DockerContainer, element?: DockerService, templatePath?: string) => (dockerService: DockerContainer) => string)) => void;
+  setRenderer: (
+    fn:
+      | ((
+          dockerService: DockerContainer,
+          element?: DockerService,
+        ) => Promise<(dockerService: DockerContainer) => Promise<string>>)
+      | ((dockerService: DockerContainer, element?: DockerService) => () => Promise<string>),
+  ) => void;
 
-  render: (context: DockerContainer, dockerService: DockerService) => string;
+  render: (context: DockerContainer, dockerService: DockerService) => Promise<string>;
 };
 
 function initDockerService(): DockerService {
@@ -31,7 +46,7 @@ function initDockerService(): DockerService {
     custom: undefined,
     defaultName: '',
     templatePath: undefined,
-    renderer: () => () => "",
+    renderer: () => () => Promise.any(""),
 
     loadDefaultName(name: string) {
       this.defaultName = name
@@ -57,9 +72,9 @@ function initDockerService(): DockerService {
       this.renderer = renderer
     },
 
-    render(context: DockerContainer, dockerService: DockerService) {
+    async render(context: DockerContainer, dockerService: DockerService) {
       if (this.renderer) {
-        return this.renderer(context, dockerService)(context);
+        return (await this.renderer(context, dockerService))(context);
       }
       throw new Error("No renderer function defined");
     }
