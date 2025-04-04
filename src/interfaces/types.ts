@@ -397,6 +397,11 @@ export interface Port {
   external: number
 }
 
+export interface Host {
+  hostname: string,
+  ip: string
+}
+
 export interface Expose {
   port: number,
 }
@@ -474,6 +479,7 @@ export interface DockerContainer {
   domainname?: string,
   environments?: Environment[],
   env_file?: string,
+  extra_hosts?: Host[],
   labels?: Environment[],
   volumes?: Volume[],
   tmpfs?: Storage[],
@@ -488,7 +494,9 @@ export interface DockerContainer {
   pid?: string,
   runtime?: string,
   init?: boolean,
+  stdin_open?: boolean,
   stop_signal?: string
+  shm_size?: string
 }
 
 // Paths

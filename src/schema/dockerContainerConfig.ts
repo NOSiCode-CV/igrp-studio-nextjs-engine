@@ -5,8 +5,8 @@ import {
   DockerServiceInstruction, DockerServiceLogging, DockerServiceLoggingOptions,
   DockerServiceResourceLimit,
   DockerServiceResources,
-  Expose,
-  Network,
+  Expose, Host,
+  Network, Port,
   Profile,
   ResourceLimits,
   Secret,
@@ -15,6 +15,24 @@ import {
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 import { dependencySchema, environmentSchema, portSchema, volumeSchema } from './workspaceProjectConfig';
+
+const hostSchema: JSONSchemaType<Host> = {
+  type: 'object',
+  properties: {
+    hostname: {
+      type: 'string',
+      pattern: PATTERNS.HOSTNAME_VALIDATION_PATTERN,
+      errorMessage: "The 'hostname' attribute, if provided, must be a valid Docker service hostname, contains no special characters except dot (.) or colon (:)."
+    },
+    ip: {
+      type: 'string',
+      pattern: PATTERNS.VOLUME_PATH_VALIDATION_PATTERN,
+      errorMessage: 'The external port must be a number that ranges from 1 to 65535.'
+    },
+  },
+  required: ['hostname', 'ip'],
+  additionalProperties: false,
+};
 
 const profileSchema: JSONSchemaType<Profile> = {
   type: 'object',
@@ -326,6 +344,12 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
       nullable: true,
       errorMessage: "The 'env_file' attribute must be a valid string."
     },
+    extra_hosts: {
+      type: 'array',
+      items: hostSchema,
+      nullable: true,
+      errorMessage: "The extra hosts attribute must be a valid host array configuration."
+    },
     labels: {
       type: 'array',
       nullable: true,
@@ -412,10 +436,20 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
       nullable: true,
       errorMessage: 'The init attribute, if provided, must be a valid boolean.'
     },
+    stdin_open: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The STDIN attribute, if provided, must be a valid boolean.'
+    },
     stop_signal: {
       type: 'string',
       nullable: true,
       errorMessage: 'The stop signal attribute, if provided, must be a valid string.'
+    },
+    shm_size: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The shared memory size attribute, if provided, must be a valid string.'
     },
   },
   required: ['image', 'ports', 'networks'],
