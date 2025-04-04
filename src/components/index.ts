@@ -1,5 +1,5 @@
 import { ChildComponent, ComponentRegisterConfig, ComponentRegistrationConfig, Layout } from '../interfaces/types';
-import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { renderServiceTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { replaceTemplate } from '../utils/helpers';
 import { renderLayout } from '../utils/renderLayout';
@@ -90,7 +90,7 @@ function initComponent(): Component {
     componentClass: '',
     maxChildren: undefined,
     templatePath: undefined,
-    renderer: () => () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: "Not registered" }),
+    renderer: () => () => renderServiceTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: "Not registered" }),
 
     loadImports(imports) {
       imports.forEach((imp) => this.imports.add(imp));
@@ -257,7 +257,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 }
 
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
-  if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
+  if(!element) return () => renderServiceTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
 
@@ -345,7 +345,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 }
 
 export function customRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
-  if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
+  if(!element) return () => renderServiceTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { customProperties, className: cn, ...common } = component.properties ?? {};
 
@@ -408,7 +408,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
 export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   const name = component.componentName
-  return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name }), {
+  return () => renderServiceTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name }), {
     resourceConfig: component,
     parentResourceConfig: parentComponent
   })

@@ -1,7 +1,7 @@
 import {
   DockerContainer, DockerServiceRegisterConfig, DockerServiceRegistrationConfig,
 } from '../interfaces/types';
-import { renderTemplate } from '../modules/common/renderTemplate';
+import { renderServiceTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { replaceTemplate } from '../utils/helpers';
 
@@ -15,11 +15,11 @@ export type DockerService = {
     dockerService: DockerContainer,
     element?: DockerService,
     templatePath?: string,
-  ) => (dockerService: DockerContainer) => Promise<string>)
+  ) => (dockerService: DockerContainer) => string)
   | ((
     dockerService: DockerContainer,
     element?: DockerService,
-  ) => Promise<(dockerService: DockerContainer) => Promise<string>>);
+  ) => (dockerService: DockerContainer) => string);
 
   loadDefaultName: (name: string) => void;
   loadCustom: (custom: string) => void;
@@ -32,11 +32,11 @@ export type DockerService = {
       | ((
           dockerService: DockerContainer,
           element?: DockerService,
-        ) => Promise<(dockerService: DockerContainer) => Promise<string>>)
-      | ((dockerService: DockerContainer, element?: DockerService) => () => Promise<string>),
+        ) => (dockerService: DockerContainer) => string)
+      | ((dockerService: DockerContainer, element?: DockerService) => () => string),
   ) => void;
 
-  render: (context: DockerContainer, dockerService: DockerService) => Promise<string>;
+  render: (context: DockerContainer, dockerService: DockerService) => string;
 };
 
 function initDockerService(): DockerService {
@@ -46,7 +46,7 @@ function initDockerService(): DockerService {
     custom: undefined,
     defaultName: '',
     templatePath: undefined,
-    renderer: () => () => Promise.any(""),
+    renderer: () => () => "",
 
     loadDefaultName(name: string) {
       this.defaultName = name
@@ -72,9 +72,9 @@ function initDockerService(): DockerService {
       this.renderer = renderer
     },
 
-    async render(context: DockerContainer, dockerService: DockerService) {
+    render(context: DockerContainer, dockerService: DockerService) {
       if (this.renderer) {
-        return (await this.renderer(context, dockerService))(context);
+        return (this.renderer(context, dockerService))(context);
       }
       throw new Error("No renderer function defined");
     }
@@ -119,42 +119,45 @@ export function dockerRegistryAsObject(): DockerServiceRegistrationConfig {
 export function defaultRenderer(
   dockerService: DockerContainer,
   element?: DockerService
-): () => Promise<string> {
-  const name = dockerService.container_name ?? element?.defaultName ?? "unknown";
+): () => string {
+  const name = element?.defaultName ?? "service";
 
   if (!element) {
-    return () => renderTemplate(TEMPLATES.UNREGISTERED_SERVICE, { name });
+    return () => renderServiceTemplate(TEMPLATES.UNREGISTERED_SERVICE, { name });
   }
 
-  return async () =>
-    await renderTemplate(TEMPLATES.DEFAULT_DOCKER_SERVICE, {
+  return () =>
+    renderServiceTemplate(TEMPLATES.DEFAULT_DOCKER_SERVICE, {
       resourceConfig: dockerService,
+      serviceName: name
     });
 }
 
 export function customRenderer(
   dockerService: DockerContainer,
-  element?: DockerService
-): () => Promise<string> {
-  if (!element) {
-    return async () =>
-      await renderTemplate(TEMPLATES.UNREGISTERED_SERVICE, {
-        name: dockerService.container_name,
-      });
-  }
+): () => string {
 
-  return async () => element.custom ?? "";
+  // element is always the 'custom' service
+  if (!dockerService.container_name)
+    throw new Error("No service name! You should provide a service name for custom generation");
+
+  return () =>
+    renderServiceTemplate(TEMPLATES.DEFAULT_DOCKER_SERVICE, {
+      resourceConfig: dockerService,
+      serviceName: dockerService.container_name
+    });
+
 }
 
-export async function hbsRenderer(
+export function hbsRenderer(
   dockerService: DockerContainer,
   element?: DockerService
-): Promise<(dockerService: DockerContainer) => Promise<string>> {
-  const name = dockerService.container_name ?? element?.defaultName;
+): (dockerService: DockerContainer) => string {
+  const name = element?.defaultName;
   if (!name) throw new Error("No service name");
 
-  return async () =>
-    await renderTemplate(
+  return () =>
+    renderServiceTemplate(
       element?.templatePath
         ? element.templatePath
         : replaceTemplate(TEMPLATES.DOCKER_SERVICE, { name }),

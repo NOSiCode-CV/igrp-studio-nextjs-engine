@@ -1,7 +1,7 @@
 //import prettier from '@prettier/sync';
 import { Layout } from '../interfaces/types';
 import { getComponent } from '../components';
-import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { renderServiceTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from './constants';
 
 export const renderLayout = function (config: Layout, parent?: Layout): string {
@@ -11,7 +11,7 @@ export const renderLayout = function (config: Layout, parent?: Layout): string {
 
   const component = getComponent(config.componentName)
 
-  if(!component) return renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: config.componentName })
+  if(!component) return renderServiceTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: config.componentName })
 
   const componentParent = ((parent)? getComponent(parent.componentName) : undefined)
 

@@ -37,6 +37,7 @@ import { replaceTemplate } from '../utils/helpers';
 import { getPaths } from '../index';
 import { extractVolumes } from '../helpers/workspaceHelper';
 import { PARTIALS } from '../utils/constants';
+import { renderService } from '../utils/renderService';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -60,6 +61,7 @@ Handlebars.registerHelper("render-interactions", renderInteractions);
 
 // Workspace
 Handlebars.registerHelper("extractVolumes", extractVolumes)
+Handlebars.registerHelper("render-service", renderService)
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
@@ -128,20 +130,18 @@ export const loadComponentPartials = () : void => {
 /**
  * Dynamically loads and registers Handlebars partials in a React.js application.
  */
-export const loadPartials = async (): Promise<void> => {
+export const loadPartials = (): void => {
   try {
     // Fetch a list of partial files (You may need to hardcode or retrieve this list from a backend API)
     // Fetch each partial and register it
-    await Promise.all(
-      PARTIALS.map(async (file) => {
-        const partialName = file.split('/').pop()?.replace('.hbs', '') ?? file.replace('.hbs', '');
-        const partialContent: string = await fs.readFile(`${getPaths().genericPartials}/${file}`, 'utf-8');
-        if (!partialContent) {
-          throw new Error(`Failed to load partial: ${file}`);
-        }
-        Handlebars.registerPartial(partialName, partialContent); // Register the partial
-      }),
-    );
+    PARTIALS.map((file) => {
+      const partialName = file.split('/').pop()?.replace('.hbs', '') ?? file.replace('.hbs', '');
+      const partialContent: string = fs.readFileSync(`${getPaths().genericPartials}/${file}`, 'utf-8');
+      if (!partialContent) {
+        throw new Error(`Failed to load partial: ${file}`);
+      }
+      Handlebars.registerPartial(partialName, partialContent); // Register the partial
+    });
   } catch (error) {
     console.error('Error loading partials:', error);
   }

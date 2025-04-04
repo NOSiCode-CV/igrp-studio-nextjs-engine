@@ -1,4 +1,4 @@
-{{#if resourceConfig.container_name}}{{resourceConfig.container_name}}{{else}}service{{/if}}:
+{{#if resourceConfig.container_name}}{{resourceConfig.container_name}}{{else}}{{serviceName}}{{/if}}:
   image: {{resourceConfig.image}}
   {{#if resourceConfig.build}}
   build: {{resourceConfig.build}}

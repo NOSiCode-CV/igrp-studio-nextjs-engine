@@ -6,10 +6,11 @@ import {
   PlatformConfig, PlatformFileConfig, PlatformMailConfig,
   PlatformServices, Port, ProjectDataSource, Volume,
   WorkspaceProject,
-  WorkspaceProjectsConfig,
+  WorkspaceProjectsConfig, WorkspaceService,
 } from '../interfaces/types';
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+import { dockerContainerConfigSchema } from './dockerContainerConfig';
 
 export const dependencySchema: JSONSchemaType<Dependency> = {
   type: 'object',
@@ -406,6 +407,26 @@ const workspaceProjectSchema: JSONSchemaType<WorkspaceProject> = {
   additionalProperties: false,
 };
 
+const workspaceServiceSchema: JSONSchemaType<WorkspaceService> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
+      errorMessage: 'The service name must only contain letters and must not have spaces or special characters except underscore (_).'
+    },
+    properties: {
+      type: "object",
+      anyOf: [
+        dockerContainerConfigSchema
+      ],
+      errorMessage: "The 'properties' field must be a valid Docker Container configuration.",
+    },
+  },
+  required: ['name', 'properties'],
+  additionalProperties: false,
+};
+
 const workspaceProjectConfigSchema: JSONSchemaType<WorkspaceProjectsConfig> = {
   type: 'object',
   properties: {
@@ -424,6 +445,11 @@ const workspaceProjectConfigSchema: JSONSchemaType<WorkspaceProjectsConfig> = {
       type: 'array',
       items: workspaceProjectSchema,
       errorMessage: "The 'projects' attribute must be a valid workspace project array configuration."
+    },
+    services: {
+      type: 'array',
+      items: workspaceServiceSchema,
+      errorMessage: "The 'services' attribute must be a valid workspace service array configuration."
     },
     platform: {
       type: "object",

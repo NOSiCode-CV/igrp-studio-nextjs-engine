@@ -244,7 +244,7 @@ const loggingConfigSchema: JSONSchemaType<DockerServiceLogging> = {
   additionalProperties: false
 }
 
-const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
+export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
   type: 'object',
   properties: {
     image: {

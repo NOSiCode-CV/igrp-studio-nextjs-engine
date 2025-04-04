@@ -302,6 +302,7 @@ export interface WorkspaceConfig extends IdentifiableElement {
 export interface WorkspaceProjectsConfig extends IdentifiableElement {
   workspace: string,
   projects: WorkspaceProject[],
+  services: WorkspaceService[],
   platform: PlatformServices
 }
 
@@ -358,6 +359,11 @@ export interface WorkspaceProject {
   ports: Port,
   dependsOn: Dependency[],
   dataSource?: ProjectDataSource
+}
+
+export interface WorkspaceService {
+  name: string,
+  properties: DockerContainer
 }
 
 export interface ProjectDataSource {
