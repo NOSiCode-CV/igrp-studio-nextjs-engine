@@ -1,5 +1,5 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { AppConfig, ComponentRegisterConfig, ComponentRegistrationConfig } from '../interfaces/types';
+import { ComponentRegisterConfig, ComponentRegistrationConfig } from '../interfaces/types';
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
@@ -104,5 +104,5 @@ const componentRegistrationConfigSchema: JSONSchemaType<ComponentRegistrationCon
   additionalProperties: false,
 };
 
-export const componentRegistrationValidate: ValidateFunction<AppConfig> =
-  ajvInstance.compile<AppConfig>(componentRegistrationConfigSchema);
+export const componentRegistrationValidate: ValidateFunction<ComponentRegistrationConfig> =
+  ajvInstance.compile<ComponentRegistrationConfig>(componentRegistrationConfigSchema);

@@ -14,7 +14,13 @@ import {
   PageConfig,
   PageMetaConfig,
   ComponentConfig,
-  DeleteConfig, PageComponentConfig, ComponentRegistrationConfig, WorkspaceConfig, PathConfig, WorkspaceProjectsConfig,
+  DeleteConfig,
+  PageComponentConfig,
+  ComponentRegistrationConfig,
+  WorkspaceConfig,
+  PathConfig,
+  WorkspaceProjectsConfig,
+  DockerServiceRegistrationConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -22,7 +28,7 @@ import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
 import { register, registryAsObject } from './components';
-
+import { register as registerService, dockerRegistryAsObject } from './docker_services';
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
@@ -30,6 +36,7 @@ import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { registerAllComponents } from './components/register';
 import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import defaultModule from './components/default';
+import defaultServiceModule from './docker_services/default';
 import { componentRegistrationValidate } from './schema/componentRegisterConfig';
 import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
@@ -39,6 +46,7 @@ import path from 'path';
 import { workspaceProjectsConfigValidate } from './schema/workspaceProjectConfig';
 import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
 import { registerAllServices } from './docker_services/register';
+import { dockerServiceRegistrationValidate } from './schema/serviceRegisterConfig';
 
 export function getPaths(): PathConfig {
 
@@ -335,6 +343,20 @@ export const registerComponents = (config: ComponentRegistrationConfig) => {
 
 }
 
+export const registerServices = (config: DockerServiceRegistrationConfig) => {
+  const isConfigValid = dockerServiceRegistrationValidate(config);
+
+  if (!isConfigValid && dockerServiceRegistrationValidate.errors)
+    throw dockerServiceRegistrationValidate.errors;
+
+  config.services.forEach((service) => registerService(service.name, (e) => defaultServiceModule.register(e, service)))
+
+}
+
 export const loadRegistry = () => {
   return registryAsObject();
+}
+
+export const loadServiceRegistry = () => {
+  return dockerRegistryAsObject();
 }

@@ -13,6 +13,8 @@ export const PATTERNS = {
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/]*$',
   VOLUME_PATH_VALIDATION_PATTERN: '^[A-Za-z/][A-Za-z0-9_/]*$',
+  BUILD_PATH_VALIDATION_PATTERN: '^[A-Za-z./][A-Za-z0-9._/]*$',
+  HOSTNAME_VALIDATION_PATTERN: '^(?:[a-zA-Z0-9.-]+)(?:\d{1,5})?$',
   DOCKER_SERVICE_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_-]*$',
 }
 

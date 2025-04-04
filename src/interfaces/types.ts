@@ -396,15 +396,15 @@ export interface Expose {
 }
 
 export interface Network {
-  network: number,
+  network: string,
 }
 
 export interface Storage {
-  storage: number,
+  storage: string,
 }
 
 export interface Secret {
-  secret: number,
+  secret: string,
 }
 
 export interface Environment {
@@ -421,43 +421,43 @@ export interface DockerServiceInstruction {
 }
 
 export interface DockerServiceResourceLimit {
-  cpus: string,
-  memory: string
+  cpus?: string,
+  memory?: string
 }
 
 export interface DockerServiceHealthcheck {
-  test: DockerServiceInstruction[],
-  interval: string,
-  timeout: string,
-  retries: number
+  test?: DockerServiceInstruction[],
+  interval?: string,
+  timeout?: string,
+  retries?: number
 }
 
 export interface DockerServiceResources {
-  limits: DockerServiceResourceLimit,
-  reservations: DockerServiceResourceLimit,
+  limits?: DockerServiceResourceLimit,
+  reservations?: DockerServiceResourceLimit,
 }
 
 export interface ResourceLimits {
-  replicas: number,
-  restart_policy: string,
-  resources: DockerServiceResources
+  replicas?: number,
+  restart_policy?: 'always' | 'no' | 'on-failure' | 'unless-stopped',
+  resources?: DockerServiceResources
 }
 
 export interface DockerServiceLoggingOptions {
-  max_size: string,
-  max_file: string
+  max_size?: string,
+  max_file?: string
 }
 
 export interface DockerServiceLogging {
-  driver: 'json-file' | 'syslog' | 'fluentd',
-  options: DockerServiceLoggingOptions
+  driver?: 'json-file' | 'syslog' | 'fluentd',
+  options?: DockerServiceLoggingOptions
 }
 
 export interface DockerContainer {
   image: string,
   build?: string,
   container_name?: string,
-  restart?: string,
+  restart?: 'always' | 'no' | 'on-failure' | 'unless-stopped',
   dependsOn?: Dependency[],
   extends?: string,
   hostname?: string,
@@ -482,7 +482,7 @@ export interface DockerContainer {
   pid?: string,
   runtime?: string,
   init?: boolean,
-  stop_signal: string
+  stop_signal?: string
 }
 
 // Paths

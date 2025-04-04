@@ -11,7 +11,7 @@ import {
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
-const dependencySchema: JSONSchemaType<Dependency> = {
+export const dependencySchema: JSONSchemaType<Dependency> = {
   type: 'object',
   properties: {
     service: {
@@ -24,7 +24,7 @@ const dependencySchema: JSONSchemaType<Dependency> = {
   additionalProperties: false,
 };
 
-const environmentSchema: JSONSchemaType<Environment> = {
+export const environmentSchema: JSONSchemaType<Environment> = {
   type: 'object',
   properties: {
     key: {
@@ -40,7 +40,7 @@ const environmentSchema: JSONSchemaType<Environment> = {
   additionalProperties: false,
 };
 
-const portSchema: JSONSchemaType<Port> = {
+export const portSchema: JSONSchemaType<Port> = {
   type: 'object',
   properties: {
     internal: {
@@ -60,7 +60,7 @@ const portSchema: JSONSchemaType<Port> = {
   additionalProperties: false,
 };
 
-const volumeSchema: JSONSchemaType<Volume> = {
+export const volumeSchema: JSONSchemaType<Volume> = {
   type: 'object',
   properties: {
     name: {
@@ -71,7 +71,7 @@ const volumeSchema: JSONSchemaType<Volume> = {
     path: {
       type: 'string',
       pattern: PATTERNS.VOLUME_PATH_VALIDATION_PATTERN,
-      errorMessage: 'The volume path attribute can only contain alphanumeric characters and slash, without spaces or other special characters.'
+      errorMessage: 'The volume path must only contain letters and must not have spaces or special characters except slash (/) or dot(.).'
     },
     driver: {
       type: 'string',
