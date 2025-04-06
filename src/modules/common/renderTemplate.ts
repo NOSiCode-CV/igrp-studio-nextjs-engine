@@ -22,6 +22,10 @@ export const renderTemplate = async (templateName: string, context: any) => {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
 
+  loadPartials();
+
+  context.registry = registryService
+
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   const template = Handlebars.compile(templateContent);

@@ -1,14 +1,14 @@
 {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}oracle-{{toLowerCase resourceConfig.config.apiName}}{{/if}}:
-  image: oracle/database:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}19.3.0-ee{{/if}}
+  image: gvenzl/oracle-free:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}latest{{/if}}
   container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}oracle-{{toLowerCase resourceConfig.config.apiName}}{{/if}}
   environment:
-    - ORACLE_SID: "{{#if resourceConfig.dataSource.dbSid}}{{resourceConfig.dataSource.dbSid}}{{else}}ORCLCDB{{/if}}"
-    - ORACLE_PWD: "{{resourceConfig.dataSource.dbPassword}}"
-    - ORACLE_PDB: "{{resourceConfig.dataSource.dbName}}"
+    - ORACLE_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
+    - APP_USER_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
+    - APP_USER: "{{#if resourceConfig.dataSource.dbUser}}{{resourceConfig.dataSource.dbUser}}{{else}}igrp{{/if}}"
   ports:
     - "{{resourceConfig.dataSource.ports.external}}:{{resourceConfig.dataSource.ports.internal}}"
   volumes:
-    - {{resourceConfig.dataSource.volume.name}}:{{#if resourceConfig.dataSource.volume.path}}{{resourceConfig.dataSource.volume.path}}{{else}}/opt/oracle/oradata{{/if}}
+    - {{resourceConfig.dataSource.volume.name}}:{{#if resourceConfig.dataSource.volume.path}}{{resourceConfig.dataSource.volume.path}}{{else}}/container-entrypoint-initdb.d/my-init.sql:ro{{/if}}
   restart: unless-stopped
   networks:
     - {{toLowerCase workspace}}-network
