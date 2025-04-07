@@ -43,6 +43,10 @@ export function getBaseDockerServiceProperties() {
         }
       },
       env_file: { type: "string", required: false },
+      extra_hosts: {
+        type: "array",
+        items: { type: "object", properties: { hostname: { type: "string", required: true }, ip: { type: "string", required: true } } }
+      },
       labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true }, value: { type: "string", required: true } } } },
       volumes: {
         type: "array",

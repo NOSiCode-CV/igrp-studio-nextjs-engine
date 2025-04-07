@@ -15,6 +15,7 @@ export function oracleProperties() {
           }
         }
       },
+      hostname: { type: "string", required: false, default: 'oracle' },
       environments: {
         type: "array",
         default: [

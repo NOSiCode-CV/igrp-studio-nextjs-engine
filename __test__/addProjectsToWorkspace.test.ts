@@ -116,10 +116,10 @@ const baseConfig: WorkspaceProjectsConfig = {
         description: 'Demo project for Spring Boot',
         database: 'Postgresql',
         projectStructureStyle: 'domain',
-        enableObservability: true,
-        enableEntityRevision: true,
+        enableObservability: "true",
+        enableEntityRevision: "true",
         igrpCoreVersion: "0.0.1-alpha",
-        enableGraalVm: false
+        enableGraalVm: "false"
       },
       basePath: 'demoDomain',
       environments: [
@@ -159,10 +159,10 @@ const baseConfig: WorkspaceProjectsConfig = {
         description: 'Demo project for Spring Boot',
         database: 'Postgresql',
         projectStructureStyle: 'technical',
-        enableObservability: true,
-        enableEntityRevision: false,
+        enableObservability: "true",
+        enableEntityRevision: "false",
         igrpCoreVersion: "0.0.1-alpha",
-        enableGraalVm: true
+        enableGraalVm: "true"
       },
       basePath: 'demoTechnical',
       environments: [
@@ -218,7 +218,14 @@ const baseConfig: WorkspaceProjectsConfig = {
       properties: {
         image: "postgres:14-alpine",
         container_name: "postgres-test",
+        restart: "always",
         hostname: "pgresdb",
+        environments: [
+          { key: "PGDATA", value: "/var/lib/postgresql/data/pgdata" },
+          { key: "POSTGRES_DB", value: "${POSTGRES_DB}" },
+          { key: "POSTGRES_USER", value: "${POSTGRES_USER}" },
+          { key: "POSTGRES_PASSWORD", value: "${POSTGRES_PASSWORD}" },
+        ],
         volumes: [
           {
             name: "postgres_test_data",
@@ -234,9 +241,126 @@ const baseConfig: WorkspaceProjectsConfig = {
         ],
         networks: [
           { network: "my-workspace-network" }
-        ]
+        ],
+        env_file: ".env",
       },
-    }
+    },
+    {
+      name: "mysql",
+      properties: {
+        image: "mysql:8.0",
+        container_name: "mysql",
+        hostname: "mysqldb",
+        restart: "always",
+        environments: [
+          { key: "MYSQL_DATABASE", value: "${MYSQL_DATABASE}" },
+          { key: "MYSQL_USER", value: "${MYSQL_USER}" },
+          { key: "MYSQL_PASSWORD", value: "${MYSQL_PASSWORD}" },
+          { key: "MYSQL_ROOT_PASSWORD", value: "${MYSQL_ROOT_PASSWORD}" },
+        ],
+        volumes: [
+          {
+            name: "mysql_data",
+            path: "/var/lib/mysql",
+            driver: "local"
+          }
+        ],
+        ports: [
+          {
+            internal: 3306,
+            external: 3306
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        env_file: ".env",
+      },
+    },
+    {
+      name: "oracle",
+      properties: {
+        image: "gvenzl/oracle-free:latest",
+        container_name: "oracle",
+        hostname: "oracledb",
+        restart: "always",
+        environments: [
+          { key: "APP_USER", value: "${APP_USER}" },
+          { key: "ORACLE_PASSWORD", value: "${ORACLE_PASSWORD}" },
+          { key: "APP_USER_PASSWORD", value: "${APP_USER_PASSWORD}" },
+        ],
+        volumes: [
+          {
+            name: "my-init.sql",
+            path: "/container-entrypoint-initdb.d/my-init.sql:ro",
+            driver: "local"
+          }
+        ],
+        ports: [
+          {
+            internal: 1521,
+            external: 1521
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        env_file: ".env",
+      },
+    },
+    {
+      name: "keycloak",
+      properties: {
+        image: "keycloak:25.0.4",
+        container_name: "keycloak",
+        dependsOn: [
+          { service: "keycloak_db" }
+        ],
+        hostname: "keycloak",
+        restart: "always",
+        environments: [
+          { key: "KC_HOSTNAME", value: "http://${KEYCLOAK_URL}" },
+          { key: "KC_HOSTNAME_PORT", value: "${KEYCLOAK_HOSTNAME_PORT}" },
+          { key: "KC_HOSTNAME_STRICT_BACKCHANNEL", value: "false" },
+          { key: "KC_HTTP_ENABLED", value: "true" },
+          { key: "KC_HOSTNAME_STRICT_HTTPS", value: "false" },
+          { key: "KC_HEALTH_ENABLED", value: "true" },
+          { key: "KEYCLOAK_ADMIN", value: "${KEYCLOAK_ADMIN}" },
+          { key: "KEYCLOAK_ADMIN_PASSWORD", value: "${KEYCLOAK_ADMIN_PASSWORD}" },
+          { key: "KC_HOSTNAME_BACKCHANNEL_DYNAMIC", value: "true" },
+          { key: "KC_DB", value: "${POSTGRES_DB}" },
+          { key: "KC_DB_URL", value: "jdbc:postgresql://keycloak_db:5434/${POSTGRES_DB}" },
+          { key: "KC_DB_USERNAME", value: "${POSTGRES_USER}" },
+          { key: "KC_DB_PASSWORD", value: "${POSTGRES_PASSWORD}" },
+        ],
+        volumes: [
+          {
+            name: "./data/",
+            path: "/opt/keycloak/data/import",
+            driver: "local"
+          }
+        ],
+        extra_hosts: [
+          { hostname: "${KEYCLOAK_HOSTNAME}", ip: "host-gateway" }
+        ],
+        command: [
+          { instruction: 'start' },
+          { instruction: '--import-realm' },
+          { instruction: '--features=admin-fine-grained-authz' },
+        ],
+        ports: [
+          {
+            internal: 8090,
+            external: 8090
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        env_file: ".env",
+      },
+    },
+
   ]
 };
 

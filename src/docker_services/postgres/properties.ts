@@ -15,6 +15,7 @@ export function postgresProperties() {
           }
         }
       },
+      hostname: { type: "string", required: false, default: 'postgres' },
       environments: {
         type: "array",
         default: [

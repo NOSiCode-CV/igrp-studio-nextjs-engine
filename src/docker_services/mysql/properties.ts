@@ -15,6 +15,7 @@ export function mysqlProperties() {
           }
         }
       },
+      hostname: { type: "string", required: false, default: 'mysql' },
       environments: {
         type: "array",
         default: [

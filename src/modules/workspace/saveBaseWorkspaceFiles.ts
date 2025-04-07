@@ -10,7 +10,7 @@ import {
   TEMPLATES,
   SRC_CONFIG_FILES,
   PACKAGE_JSON,
-  DST_CONFIG_FILES
+  DST_CONFIG_FILES, ENVIRONMENT_FILES,
 } from '../../utils/constants';
 import { workspaceConfigValidate } from '../../schema/baseWorkspace';
 import { getPaths } from '../../index';
@@ -37,6 +37,11 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
 
   return [
     { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
+    { output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.UM_IGRP_ENV, name: ENVIRONMENT_FILES.UM_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.IAM_IGRP_ENV, name: ENVIRONMENT_FILES.IAM_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.FILE_IGRP_ENV, name: ENVIRONMENT_FILES.FILE_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },
   ];
 
 };
