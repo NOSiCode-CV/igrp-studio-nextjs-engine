@@ -34,7 +34,7 @@ igrp_iam_db:
     - {{toLowerCase resourceConfig.workspace}}-network
 
 # Keycloak server
-keycloak:
+igrp_keycloak:
   image: keycloak/keycloak:25.0.4
   container_name: {{toLowerCase resourceConfig.workspace}}-keycloak
   hostname: ${IGRP_IAM_HOSTNAME}

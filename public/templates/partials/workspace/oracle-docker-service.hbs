@@ -2,9 +2,9 @@
   image: gvenzl/oracle-free:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}latest{{/if}}
   container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}oracle-{{toLowerCase resourceConfig.config.apiName}}{{/if}}
   environment:
-    - ORACLE_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
-    - APP_USER_PASSWORD: "{{resourceConfig.dataSource.dbPassword}}"
-    - APP_USER: "{{#if resourceConfig.dataSource.dbUser}}{{resourceConfig.dataSource.dbUser}}{{else}}igrp{{/if}}"
+    - ORACLE_PASSWORD="{{resourceConfig.dataSource.dbPassword}}"
+    - APP_USER_PASSWORD="{{resourceConfig.dataSource.dbPassword}}"
+    - APP_USER="{{#if resourceConfig.dataSource.dbUser}}{{resourceConfig.dataSource.dbUser}}{{else}}igrp{{/if}}"
   ports:
     - "{{resourceConfig.dataSource.ports.external}}:{{resourceConfig.dataSource.ports.internal}}"
   volumes:

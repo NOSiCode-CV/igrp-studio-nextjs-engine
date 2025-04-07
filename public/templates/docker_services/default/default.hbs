@@ -11,7 +11,7 @@ container_name: {{resourceConfig.container_name}}
 restart: {{resourceConfig.restart}}
 {{/if}}
 {{#if resourceConfig.dependsOn}}
-dependsOn:
+depends_on:
   {{#each resourceConfig.dependsOn}}
   - {{this.service}}
   {{/each}}

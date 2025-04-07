@@ -1,7 +1,7 @@
 name: '{{toLowerCase resourceConfig.workspace}}-workspace'
 
 networks:
-{{toLowerCase resourceConfig.workspace}}-network:
+  {{toLowerCase resourceConfig.workspace}}-network:
     driver: bridge
 
 services:
@@ -19,8 +19,8 @@ services:
   {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}:
     build: ./projects/{{this.basePath}}
     container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}
-    depends_on:
     {{#if this.dependsOn}}
+    depends_on:
     {{#each this.dependsOn}}
       - {{this.service}}
     {{/each}}
