@@ -12,7 +12,7 @@ import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 import { dockerContainerConfigSchema } from './dockerContainerConfig';
 
-export const dependencySchema: JSONSchemaType<Dependency> = {
+const dependencySchema: JSONSchemaType<Dependency> = {
   type: 'object',
   properties: {
     service: {
@@ -25,7 +25,7 @@ export const dependencySchema: JSONSchemaType<Dependency> = {
   additionalProperties: false,
 };
 
-export const environmentSchema: JSONSchemaType<Environment> = {
+const environmentSchema: JSONSchemaType<Environment> = {
   type: 'object',
   properties: {
     key: {
@@ -41,7 +41,7 @@ export const environmentSchema: JSONSchemaType<Environment> = {
   additionalProperties: false,
 };
 
-export const portSchema: JSONSchemaType<Port> = {
+const portSchema: JSONSchemaType<Port> = {
   type: 'object',
   properties: {
     internal: {
@@ -61,7 +61,7 @@ export const portSchema: JSONSchemaType<Port> = {
   additionalProperties: false,
 };
 
-export const volumeSchema: JSONSchemaType<Volume> = {
+const volumeSchema: JSONSchemaType<Volume> = {
   type: 'object',
   properties: {
     name: {

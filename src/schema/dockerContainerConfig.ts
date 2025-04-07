@@ -1,20 +1,91 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
 import {
+  Dependency,
   DockerContainer,
   DockerServiceConfig, DockerServiceHealthcheck,
   DockerServiceInstruction, DockerServiceLogging, DockerServiceLoggingOptions,
   DockerServiceResourceLimit,
-  DockerServiceResources,
+  DockerServiceResources, Environment,
   Expose, Host,
   Network, Port,
   Profile,
   ResourceLimits,
   Secret,
-  Storage,
+  Storage, Volume,
 } from '../interfaces/types';
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
-import { dependencySchema, environmentSchema, portSchema, volumeSchema } from './workspaceProjectConfig';
+
+const dependencySchema: JSONSchemaType<Dependency> = {
+  type: 'object',
+  properties: {
+    service: {
+      type: 'string',
+      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
+      errorMessage: 'The service must only contain letters and must not have spaces or special characters except underscore (_) and hyphen (-).'
+    },
+  },
+  required: ['service'],
+  additionalProperties: false,
+};
+
+const environmentSchema: JSONSchemaType<Environment> = {
+  type: 'object',
+  properties: {
+    key: {
+      type: 'string',
+      errorMessage: 'The key attribute must be a string.'
+    },
+    value: {
+      type: 'string',
+      errorMessage: 'The value attribute must be a string.'
+    },
+  },
+  required: ['key', 'value'],
+  additionalProperties: false,
+};
+
+const portSchema: JSONSchemaType<Port> = {
+  type: 'object',
+  properties: {
+    internal: {
+      type: 'number',
+      maximum: 65535,
+      minimum: 1,
+      errorMessage: 'The internal port must be a number that ranges from 1 to 65535.'
+    },
+    external: {
+      type: 'number',
+      maximum: 65535,
+      minimum: 1,
+      errorMessage: 'The external port must be a number that ranges from 1 to 65535.'
+    },
+  },
+  required: ['internal', 'external'],
+  additionalProperties: false,
+};
+
+const volumeSchema: JSONSchemaType<Volume> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The volume name must only contain letters and must not have spaces or special characters except underscore (_).'
+    },
+    path: {
+      type: 'string',
+      pattern: PATTERNS.VOLUME_PATH_VALIDATION_PATTERN,
+      errorMessage: 'The volume path must only contain letters and must not have spaces or special characters except slash (/) or dot(.).'
+    },
+    driver: {
+      type: 'string',
+      errorMessage: 'The volume driver must be a valid string.'
+    },
+  },
+  required: ['name', 'path', 'driver'],
+  additionalProperties: false,
+};
 
 const hostSchema: JSONSchemaType<Host> = {
   type: 'object',
