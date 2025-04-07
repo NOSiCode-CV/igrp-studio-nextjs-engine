@@ -1,4 +1,4 @@
-import { addProjectsToWorkspace } from '../src';
+import { addProjectsToWorkspace, initServices } from '../src';
 import { WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
@@ -71,7 +71,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       adminPassword: 'password',
       hostname: 'keycloak_db',
       volumes: {
-        name: 'igrp_keycloak_db_data',
+        name: 'igrp_keycloak_data',
         path: '/opt/keycloak/data/import',
         driver: 'local'
       }
@@ -211,8 +211,38 @@ const baseConfig: WorkspaceProjectsConfig = {
         { service: 'demoTechnical-service'}
       ],
     }
+  ],
+  services: [
+    {
+      name: "postgres",
+      properties: {
+        image: "postgres:14-alpine",
+        container_name: "postgres-test",
+        hostname: "pgresdb",
+        volumes: [
+          {
+            name: "postgres_test_data",
+            path: "/var/lib/postgresql/data",
+            driver: "local"
+          }
+        ],
+        ports: [
+          {
+            internal: 5434,
+            external: 5434
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ]
+      },
+    }
   ]
 };
+
+beforeAll(async () => {
+  await initServices();
+});
 
 describe('Add projects to workspace module', () => {
 

@@ -58,7 +58,7 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
     context.resourceConfig.platform.appManager.containerName,
     context.resourceConfig.platform.auth.containerName,
     context.resourceConfig.platform.ui.containerName,
-    ...context.resourceConfig.platform.file.containerName
+    context.resourceConfig.platform.file.containerName
   )
 
   // Datasources

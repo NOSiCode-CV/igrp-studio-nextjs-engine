@@ -67,6 +67,10 @@ services:
   {{/each}}
   {{> igrp-docker-services resourceConfig=resourceConfig}}
 
+  {{#each resourceConfig.services}}
+  {{{render-service this}}}
+  {{/each}}
+
 volumes:
   {{#each (extractVolumes resourceConfig)}}
   {{this.name}}:

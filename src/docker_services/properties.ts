@@ -42,7 +42,7 @@ export function getBaseDockerServiceProperties() {
           properties: { key: { type: "string", required: true }, value: { type: "string", required: true } },
         }
       },
-      env_file: { type: "string" },
+      env_file: { type: "string", required: false },
       labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true }, value: { type: "string", required: true } } } },
       volumes: {
         type: "array",
@@ -103,7 +103,9 @@ export function getBaseDockerServiceProperties() {
       pid: { type: "string", required: false },
       runtime: { type: "string", required: false },
       init: { type: "boolean", required: false },
-      stop_signal: { type: "string", required: false }
+      stdin_open: { type: "boolean", required: false },
+      stop_signal: { type: "string", required: false },
+      shm_size: { type: "string", required: false }
     }
   }
 }

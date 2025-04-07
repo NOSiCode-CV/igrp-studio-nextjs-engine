@@ -35,7 +35,7 @@ import { registry } from '../components';
 import fs from 'fs-extra';
 import { replaceTemplate } from '../utils/helpers';
 import { getPaths } from '../index';
-import { extractVolumes } from '../helpers/workspaceHelper';
+import { extractVolumes, indent } from '../helpers/workspaceHelper';
 import { PARTIALS } from '../utils/constants';
 import { renderService } from '../utils/renderService';
 
@@ -62,6 +62,7 @@ Handlebars.registerHelper("render-interactions", renderInteractions);
 // Workspace
 Handlebars.registerHelper("extractVolumes", extractVolumes)
 Handlebars.registerHelper("render-service", renderService)
+Handlebars.registerHelper("indent", indent)
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);

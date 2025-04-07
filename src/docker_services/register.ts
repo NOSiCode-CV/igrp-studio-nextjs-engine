@@ -1,5 +1,6 @@
 import { register } from './index';
+import postgresModule, { POSTGRES } from './postgres/index';
 
 export function registerAllServices() {
-  //register(ASPECT, aspectModule.register);
+  register(POSTGRES, postgresModule.register);
 }
