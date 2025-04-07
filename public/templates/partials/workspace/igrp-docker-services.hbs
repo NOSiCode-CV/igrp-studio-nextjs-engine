@@ -15,7 +15,6 @@ igrp_access_management_db:
     POSTGRES_PASSWORD: ${IGRP_ACCESS_MANAGEMENT_DB_PASSWORD}
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
-  env_file: ".igrp.env"
 
 igrp_iam_db:
   image: postgres:16-alpine
@@ -33,7 +32,6 @@ igrp_iam_db:
     POSTGRES_PASSWORD: ${IGRP_IAM_DB_PASSWORD}
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
-  env_file: ".iam.igrp.env"
 
 # Keycloak server
 keycloak:
@@ -44,21 +42,6 @@ keycloak:
     - start
     - --import-realm
     - --features=admin-fine-grained-authz
-  environment:
-    KC_HOSTNAME: http://${IGRP_IAM_HOSTNAME}:{{resourceConfig.platform.auth.ports.internal}}
-    KC_HOSTNAME_PORT: {{resourceConfig.platform.auth.ports.internal}}
-    KC_HOSTNAME_STRICT_BACKCHANNEL: false
-    KC_HTTP_ENABLED: true
-    KC_HOSTNAME_STRICT_HTTPS: false
-    KC_HEALTH_ENABLED: true
-    KEYCLOAK_ADMIN: ${IGRP_IAM_ADMIN_USER}
-    KEYCLOAK_ADMIN_PASSWORD: ${IGRP_IAM_ADMIN_PASSWORD}
-    KC_HOSTNAME_BACKCHANNEL_DYNAMIC: true
-    KC_DB: postgres
-    KC_DB_URL: jdbc:postgresql://igrp_iam_db:{{resourceConfig.platform.auth.dataSource.ports.internal}}/${IGRP_IAM_DB_NAME}
-    KC_DB_USERNAME: ${IGRP_IAM_DB_USER}
-    KC_DB_PASSWORD: ${IGRP_IAM_DB_PASSWORD}
-    KEYCLOAK_IMPORT: ./igrp-user-management-api/igrp-user-management-api/imports/${KEYCLOAK_REALM}-realm.json
   volumes:
     - {{#if resourceConfig.platform.auth.volumes}}{{resourceConfig.platform.auth.volumes.name}}{{else}}./data/{{/if}}:{{#if resourceConfig.platform.auth.volumes}}{{#if resourceConfig.platform.auth.volumes.path}}{{resourceConfig.platform.auth.volumes.path}}{{else}}/opt/keycloak/data/import{{/if}}{{else}}/opt/keycloak/data/import{{/if}}
   ports:
@@ -68,7 +51,9 @@ keycloak:
     - "${IGRP_IAM_HOSTNAME}:host-gateway"
   depends_on:
     - igrp_iam_db
-  env_file: ".iam.igrp.env"
+  env_file:
+    - .igrp.env
+    - .iam.igrp.env
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
   healthcheck:
@@ -85,10 +70,9 @@ minio:
   image: minio/minio:latest
   container_name: {{toLowerCase resourceConfig.workspace}}-minio
   restart: no
-  env_file: ".file.igrp.env"
-  environment:
-    MINIO_ROOT_USER: ${IGRP_FILE_MANAGEMENT_USER}
-    MINIO_ROOT_PASSWORD: ${IGRP_FILE_MANAGEMENT_PASSWORD}
+  env_file:
+    - .igrp.env
+    - .file.igrp.env
   volumes:
     - {{#if resourceConfig.platform.file.volumes}}{{resourceConfig.platform.file.volumes.name}}{{else}}./data{{/if}}:{{#if resourceConfig.platform.file.volumes}}{{#if resourceConfig.platform.file.volumes.path}}{{resourceConfig.platform.file.volumes.path}}{{else}}/minio_data{{/if}}{{else}}/minio_data{{/if}}
   ports:
@@ -118,7 +102,8 @@ igrp-user-management-api:
     keycloak:
       condition: service_healthy
   container_name: {{toLowerCase resourceConfig.workspace}}-user-management
-  env_file: ".um.igrp.env"
+  env_file:
+    - .um.igrp.env
   ports:
     - "{{resourceConfig.platform.userManager.ports.external}}:{{resourceConfig.platform.userManager.ports.internal}}"
   networks:
@@ -127,7 +112,8 @@ igrp-user-management-api:
 # App Management API
 igrp-app-manager-api:
   image: registry.nosi.cv/formacao-igrp/app-manager-api:demo-local
-  env_file: ".am.igrp.env"
+  env_file:
+    - .am.igrp.env
   container_name: {{toLowerCase resourceConfig.workspace}}-app-manager
   ports:
     - "{{resourceConfig.platform.appManager.ports.external}}:{{resourceConfig.platform.appManager.ports.internal}}"
@@ -140,7 +126,9 @@ igrp-app-manager-api:
 # IGRP UI
 igrp-ui:
   image: registry.nosi.cv/formacao-igrp/igrp-ui-dev:demo-local
-  env_file: ".igrp.env"
+  env_file:
+    - .igrp.env
+    - .ui.igrp.env
   container_name: {{toLowerCase resourceConfig.workspace}}-igrp-ui
   ports:
     - "{{resourceConfig.platform.ui.ports.external}}:{{resourceConfig.platform.ui.ports.internal}}"

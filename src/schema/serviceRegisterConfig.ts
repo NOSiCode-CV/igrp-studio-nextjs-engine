@@ -11,6 +11,10 @@ const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterCon
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage: "The docker service name attribute must only contain alphanumeric characters and must not have spaces or special characters."
     },
+    label: {
+      type: 'string',
+      errorMessage: "The docker service label attribute must be a valid string."
+    },
     custom: {
       type: 'string',
       nullable: true,

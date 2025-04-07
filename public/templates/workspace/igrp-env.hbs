@@ -1,4 +1,21 @@
+# Workspace
+COMPOSE_PROJECT_NAME={{toLowerCase resourceConfig.workspace}}-workspace
+
+# Access Management
 IGRP_ACCESS_MANAGEMENT_DB_HOSTNAME={{#if resourceConfig.platform.dataSource.dbHostname}}{{resourceConfig.platform.dataSource.dbHostname}}{{else}}igrp_access_management_db{{/if}}
 IGRP_ACCESS_MANAGEMENT_DB_NAME={{resourceConfig.platform.dataSource.dbName}}
 IGRP_ACCESS_MANAGEMENT_DB_USER={{resourceConfig.platform.dataSource.dbUser}}
 IGRP_ACCESS_MANAGEMENT_DB_PASSWORD={{resourceConfig.platform.dataSource.dbPassword}}
+
+# IAM
+IGRP_IAM_DB_HOSTNAME=igrp_iam_db
+IGRP_IAM_DB_NAME=igrp-iam-db
+IGRP_IAM_DB_USER=keycloak
+IGRP_IAM_DB_PASSWORD=password
+IGRP_IAM_HOSTNAME=keycloak
+IGRP_IAM_ADMIN_USER=admin
+IGRP_IAM_ADMIN_PASSWORD=password
+IGRP_IAM_TENANT=quickstart
+
+IGRP_FILE_MANAGEMENT_USER={{resourceConfig.platform.file.adminUser}}
+IGRP_FILE_MANAGEMENT_PASSWORD={{resourceConfig.platform.file.adminPassword}}

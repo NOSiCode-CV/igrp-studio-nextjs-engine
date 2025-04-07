@@ -19,7 +19,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         external: 5432
       },
       volumes: {
-        name: 'igrp_db_data',
+        name: 'igrp_access_management_data',
         path: '/var/lib/postgresql/data2',
         driver: 'local'
       }
@@ -278,37 +278,6 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
     },
     {
-      name: "oracle",
-      properties: {
-        image: "gvenzl/oracle-free:latest",
-        container_name: "oracle",
-        hostname: "oracledb",
-        restart: "always",
-        environments: [
-          { key: "APP_USER", value: "${APP_USER}" },
-          { key: "ORACLE_PASSWORD", value: "${ORACLE_PASSWORD}" },
-          { key: "APP_USER_PASSWORD", value: "${APP_USER_PASSWORD}" },
-        ],
-        volumes: [
-          {
-            name: "my-init.sql",
-            path: "/container-entrypoint-initdb.d/my-init.sql:ro",
-            driver: "local"
-          }
-        ],
-        ports: [
-          {
-            internal: 1521,
-            external: 1521
-          }
-        ],
-        networks: [
-          { network: "my-workspace-network" }
-        ],
-        env_file: ".env",
-      },
-    },
-    {
       name: "keycloak",
       properties: {
         image: "keycloak:25.0.4",
@@ -352,6 +321,37 @@ const baseConfig: WorkspaceProjectsConfig = {
           {
             internal: 8090,
             external: 8090
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        env_file: ".env",
+      },
+    },
+    {
+      name: "oracle",
+      properties: {
+        image: "gvenzl/oracle-free:latest",
+        container_name: "oracle",
+        hostname: "oracledb",
+        restart: "always",
+        environments: [
+          { key: "APP_USER", value: "${APP_USER}" },
+          { key: "ORACLE_PASSWORD", value: "${ORACLE_PASSWORD}" },
+          { key: "APP_USER_PASSWORD", value: "${APP_USER_PASSWORD}" },
+        ],
+        volumes: [
+          {
+            name: "my-init.sql",
+            path: "/container-entrypoint-initdb.d/my-init.sql:ro",
+            driver: "local"
+          }
+        ],
+        ports: [
+          {
+            internal: 1521,
+            external: 1521
           }
         ],
         networks: [

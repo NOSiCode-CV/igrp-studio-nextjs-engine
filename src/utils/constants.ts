@@ -12,9 +12,8 @@ export const PATTERNS = {
   VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[a-zA-Z0-9_ ]+$",
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/]*$',
-  VOLUME_PATH_VALIDATION_PATTERN: '^/([A-Za-z0-9_.-]+/?)*$',
   BUILD_PATH_VALIDATION_PATTERN: '^[A-Za-z0-9._/-]+$',
-  HOSTNAME_VALIDATION_PATTERN: '^([a-zA-Z0-9-]+\\.)*[a-zA-Z0-9-]+(:\\d{1,5})?$',
+  HOSTNAME_VALIDATION_PATTERN: '^((\\$\\{?[A-Za-z_][A-Za-z0-9_]*\\}?)|(([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*))(:\\d{1,5})?$',
   DOCKER_SERVICE_VALIDATION_PATTERN: '^[a-zA-Z][a-zA-Z0-9_-]*$'
 }
 
@@ -60,6 +59,7 @@ export const TEMPLATES = {
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',
   UM_IGRP_ENV: 'workspace/um-igrp-env.hbs',
+  UI_IGRP_ENV: 'workspace/ui-igrp-env.hbs',
   IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
@@ -70,6 +70,7 @@ export const TEMPLATES = {
 export const ENVIRONMENT_FILES = {
   AM_IGRP_ENV: '.am.igrp.env',
   UM_IGRP_ENV: '.um.igrp.env',
+  UI_IGRP_ENV: '.ui.igrp.env',
   IAM_IGRP_ENV: '.iam.igrp.env',
   FILE_IGRP_ENV: '.file.igrp.env',
   IGRP_ENV: '.igrp.env',

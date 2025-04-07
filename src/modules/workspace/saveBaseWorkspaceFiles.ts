@@ -4,12 +4,8 @@ import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { RenderContext, WorkspaceConfig, WorkspaceProject, WorkspaceProjectsConfig } from '../../interfaces/types';
 import {
-  COMMON_FILES,
-  DIRECTORIES,
-  ERROR_MESSAGE,
   TEMPLATES,
   SRC_CONFIG_FILES,
-  PACKAGE_JSON,
   DST_CONFIG_FILES, ENVIRONMENT_FILES,
 } from '../../utils/constants';
 import { workspaceConfigValidate } from '../../schema/baseWorkspace';
@@ -33,12 +29,13 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
 
   const isBaseConfigValid = workspaceConfigValidate(context.resourceConfig);
 
-  if (!isBaseConfigValid && workspaceConfigValidate.errors) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
+  if (!isBaseConfigValid && workspaceConfigValidate.errors) throw workspaceConfigValidate.errors;
 
   return [
     { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
     { output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.UM_IGRP_ENV, name: ENVIRONMENT_FILES.UM_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.UI_IGRP_ENV, name: ENVIRONMENT_FILES.UI_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IAM_IGRP_ENV, name: ENVIRONMENT_FILES.IAM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.FILE_IGRP_ENV, name: ENVIRONMENT_FILES.FILE_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },
@@ -89,7 +86,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             external: 5432
           },
           volumes: {
-            name: 'igrp_db_data',
+            name: 'igrp_access_management_data',
             path: '/var/lib/postgresql/data2',
             driver: 'local'
           }

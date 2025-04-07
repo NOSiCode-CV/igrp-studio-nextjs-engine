@@ -116,7 +116,8 @@ export const newWorkspace = async (baseConfig: WorkspaceConfig, basePath: string
   /**
    * Extracts the folder structure needed for the workspace.
    */
-  await extractBaseWorkspace(context);
+  // No need to extract from ZIP for now
+  //await extractBaseWorkspace(context);
 
   /**
    * Creates the configuration files based on the provided context.

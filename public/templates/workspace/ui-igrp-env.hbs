@@ -1,0 +1,10 @@
+# IGRP UI
+KEYCLOAK_ISSUER=http://${IGRP_IAM_HOSTNAME}:{{resourceConfig.platform.auth.ports.internal}}/realms/${IGRP_IAM_TENANT}
+IGRP_UI_PORT={{resourceConfig.platform.ui.ports.internal}}
+IGRP_UI_HOSTNAME={{toLowerCase resourceConfig.workspace}}-igrp-ui
+NEXTAUTH_URL=http://{{toLowerCase resourceConfig.workspace}}-igrp-ui:{{resourceConfig.platform.ui.ports.internal}}
+NEXTAUTH_SECRET=4oC9C+V7ZrANFWiGhcmyvu3GTlOfVDthdxUyn3V3Mtk=
+NEXT_PUBLIC_APP_MANAGER_API=http://{{toLowerCase resourceConfig.workspace}}-igrp-app-manager-api:{{resourceConfig.platform.appManager.ports.internal}}
+NEXT_PUBLIC_USER_MANAGER_API=http://{{toLowerCase resourceConfig.workspace}}-igrp-user-management-api:{{resourceConfig.platform.userManager.ports.internal}}
+APP_MANAGER_API=http://{{toLowerCase resourceConfig.workspace}}-igrp-app-manager-api:{{resourceConfig.platform.appManager.ports.internal}}
+USER_MANAGER_API=http://{{toLowerCase resourceConfig.workspace}}-igrp-user-management-api:{{resourceConfig.platform.userManager.ports.internal}}

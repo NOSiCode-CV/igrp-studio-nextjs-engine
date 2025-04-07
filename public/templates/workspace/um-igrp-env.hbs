@@ -28,7 +28,7 @@ MINIO_BUCKET_NAME=igrp
 
 APP_AUTHENTICATION_PROVIDER=keycloak
 # App Manager
-APP_MANAGER_URL=http://igrp-app-manager-api:{{resourceConfig.platform.appManager.ports.internal}}
+APP_MANAGER_URL=http://{{toLowerCase resourceConfig.workspace}}-igrp-app-manager-api:{{resourceConfig.platform.appManager.ports.internal}}
 
 # Email server configuration
 EMAIL_SENDER={{resourceConfig.platform.mail.sender}}

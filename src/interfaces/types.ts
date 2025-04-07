@@ -251,6 +251,7 @@ export interface DockerServiceRegistrationConfig {
 
 export interface DockerServiceRegisterConfig {
   name: string,
+  label: string,
   custom?: string,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,

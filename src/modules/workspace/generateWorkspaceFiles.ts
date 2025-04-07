@@ -31,13 +31,14 @@ const generateFiles = (context: RenderContext<WorkspaceProjectsConfig, Workspace
 
   const isBaseConfigValid = workspaceProjectsConfigValidate(context.resourceConfig);
 
-  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
+  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw workspaceProjectsConfigValidate.errors;
 
   checkDuplicated(context)
 
   return [
     { output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.UM_IGRP_ENV, name: ENVIRONMENT_FILES.UM_IGRP_ENV },
+    { output: context.basePath, template: TEMPLATES.UI_IGRP_ENV, name: ENVIRONMENT_FILES.UI_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IAM_IGRP_ENV, name: ENVIRONMENT_FILES.IAM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.FILE_IGRP_ENV, name: ENVIRONMENT_FILES.FILE_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },

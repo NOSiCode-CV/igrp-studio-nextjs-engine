@@ -5,6 +5,7 @@ export default {
 
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(POSTGRES);
+    dockerService.loadLabel("Postgres");
     dockerService.getProperties(postgresProperties);
     dockerService.setRenderer(defaultRenderer);
   }

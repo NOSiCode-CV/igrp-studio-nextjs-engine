@@ -1,4 +1,4 @@
-IGRP_FILE_MANAGEMENT_USER={{resourceConfig.platform.file.adminUser}}
-IGRP_FILE_MANAGEMENT_PASSWORD={{resourceConfig.platform.file.adminPassword}}
-
-MINIO_BUCKER_NAME=igrp
+MINIO_ROOT_USER=${IGRP_FILE_MANAGEMENT_USER}
+MINIO_ROOT_PASSWORD=${IGRP_FILE_MANAGEMENT_PASSWORD}
+MINIO_BUCKET_NAME=igrp
+ERROR=An error occurred while health checking IGRP Minio

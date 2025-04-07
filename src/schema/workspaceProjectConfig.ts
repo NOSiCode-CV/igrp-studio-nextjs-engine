@@ -66,13 +66,11 @@ const volumeSchema: JSONSchemaType<Volume> = {
   properties: {
     name: {
       type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The volume name must only contain letters and must not have spaces or special characters except underscore (_).'
+      errorMessage: 'The volume name must be a valid string..'
     },
     path: {
       type: 'string',
-      pattern: PATTERNS.VOLUME_PATH_VALIDATION_PATTERN,
-      errorMessage: 'The volume path must only contain letters and must not have spaces or special characters except slash (/) or dot(.).'
+      errorMessage: 'The volume path must be a valid string..'
     },
     driver: {
       type: 'string',

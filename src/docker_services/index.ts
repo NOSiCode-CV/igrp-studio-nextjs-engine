@@ -10,6 +10,7 @@ export type DockerService = {
   propertiesMapping: Record<string, any>;
   custom?: string;
   defaultName: string;
+  label: string;
   templatePath?: string;
   renderer: ((
     dockerService: DockerContainer,
@@ -22,6 +23,7 @@ export type DockerService = {
   ) => (dockerService: DockerContainer) => string);
 
   loadDefaultName: (name: string) => void;
+  loadLabel: (label: string) => void;
   loadCustom: (custom: string) => void;
   loadTemplatePath: (templatePath?: string) => void;
   getProperties: (properties: Record<string, any>) => void;
@@ -45,11 +47,16 @@ function initDockerService(): DockerService {
     propertiesMapping: {},
     custom: undefined,
     defaultName: '',
+    label: '',
     templatePath: undefined,
     renderer: () => () => "",
 
     loadDefaultName(name: string) {
       this.defaultName = name
+    },
+
+    loadLabel(label: string) {
+      this.label = label
     },
 
     loadCustom(custom: string) {
@@ -96,6 +103,7 @@ export function getDockerService(name: string): DockerService {
 function dockerServiceAsObject(key: string, value: DockerService): DockerServiceRegisterConfig {
   return {
     name: key,
+    label: value.label,
     custom: value.custom,
     properties: value.properties,
     propertiesMapping: {},

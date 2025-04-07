@@ -26,7 +26,7 @@ MINIO_ACCESS_KEY={{resourceConfig.platform.file.adminUser}}
 MINIO_SECRET_KEY={{resourceConfig.platform.file.adminPassword}}
 MINIO_BUCKET_NAME=igrp
 
-USER_MANAGEMENT_URL=http://igrp-user-management-api:${USER_MANAGEMENT_PORT}
+USER_MANAGEMENT_URL=http://{{toLowerCase resourceConfig.workspace}}-igrp-user-management-api:${USER_MANAGEMENT_PORT}
 
 APP_AUTHENTICATION_PROVIDER=keycloak
 
