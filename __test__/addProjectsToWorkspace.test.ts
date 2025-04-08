@@ -243,6 +243,9 @@ const baseConfig: WorkspaceProjectsConfig = {
           { network: "my-workspace-network" }
         ],
         env_file: ".env",
+        labels: [
+          { key: 'type', value: 'database'}
+        ]
       },
     },
     {
@@ -275,6 +278,9 @@ const baseConfig: WorkspaceProjectsConfig = {
           { network: "my-workspace-network" }
         ],
         env_file: ".env",
+        labels: [
+          { key: 'type', value: 'database'}
+        ]
       },
     },
     {
@@ -327,6 +333,9 @@ const baseConfig: WorkspaceProjectsConfig = {
           { network: "my-workspace-network" }
         ],
         env_file: ".env",
+        labels: [
+          { key: 'type', value: 'auth'}
+        ]
       },
     },
     {
@@ -358,9 +367,68 @@ const baseConfig: WorkspaceProjectsConfig = {
           { network: "my-workspace-network" }
         ],
         env_file: ".env",
+        labels: [
+          { key: 'type', value: 'database'}
+        ]
       },
     },
-
+    {
+      name: "minio",
+      properties: {
+        image: "minio/minio:latest",
+        container_name: "minio",
+        hostname: "minio",
+        restart: "no",
+        environments: [
+          { key: "MINIO_SCHEME", value: "http" },
+          { key: "MINIO_FORCE_NEW_KEYS", value: "no" },
+          { key: "MINIO_API_PORT_NUMBER", value: "9002" },
+          { key: "KC_HTTP_ENABLED", value: "true" },
+          { key: "MINIO_DEFAULT_BUCKETS", value: "user, apps" },
+          { key: "MINIO_BROWSER", value: "on" },
+          { key: "MINIO_PROMETHEUS_AUTH_TYPE", value: "public" },
+          { key: "MINIO_CONSOLE_PORT_NUMBER", value: "9001" },
+          { key: "MINIO_ROOT_USER", value: "root" },
+          { key: "MINIO_ROOT_PASSWORD", value: "password" },
+          { key: "MINIO_IDENTITY_OPENID_CONFIG_URL_PRIMARY_IAM", value: "http://${IGRP_IAM_HOSTNAME}/realms/${IGRP_IAM_TENANT}/.well-known/openid-configuration" },
+          { key: "MINIO_IDENTITY_OPENID_CLIENT_ID", value: "minio" },
+          { key: "MINIO_IDENTITY_OPENID_CLIENT_SECRET", value: "************" },
+          { key: "MINIO_IDENTITY_OPENID_DISPLAY_NAME", value: "Minio OpenID Login" },
+          { key: "MINIO_IDENTITY_OPENID_SCOPES", value: "openid" },
+          { key: "MINIO_IDENTITY_OPENID_REDIRECT_URI_DYNAMIC", value: "on" },
+          { key: "MINIO_IDENTITY_OPENID_REDIRECT_URI", value: "http://${IGRP_IAM_HOSTNAME}" },
+        ],
+        volumes: [
+          {
+            name: "./minio_data/",
+            path: "/minio_data",
+            driver: "local"
+          }
+        ],
+        command: [
+          { instruction: 'start' },
+          { instruction: '/data' },
+          { instruction: '--console-address :9003' },
+        ],
+        ports: [
+          {
+            internal: 9002,
+            external: 9002
+          },
+          {
+            internal: 9003,
+            external: 9003
+          },
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        env_file: ".env",
+        labels: [
+          { key: 'type', value: 'file'}
+        ]
+      },
+    }
   ]
 };
 

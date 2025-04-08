@@ -47,6 +47,7 @@ export function oracleProperties() {
           }
         }
       },
+      labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },
     }
   }
 }

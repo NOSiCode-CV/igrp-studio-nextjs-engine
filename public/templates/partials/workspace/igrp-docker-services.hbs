@@ -15,6 +15,8 @@ igrp_access_management_db:
     POSTGRES_PASSWORD: ${IGRP_ACCESS_MANAGEMENT_DB_PASSWORD}
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
+  labels:
+    type: database
 
 igrp_iam_db:
   image: postgres:16-alpine
@@ -32,6 +34,8 @@ igrp_iam_db:
     POSTGRES_PASSWORD: ${IGRP_IAM_DB_PASSWORD}
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
+  labels:
+    type: database
 
 # Keycloak server
 igrp_keycloak:
@@ -64,6 +68,8 @@ igrp_keycloak:
     interval: 10s
     timeout: 5s
     retries: 5
+  labels:
+    type: auth
 
 # Minio server
 minio:
@@ -94,6 +100,8 @@ minio:
       while isAlive; do sleep 0.1; done                                  # wait until Minio is stopped
       exec minio $0 "$@"                                                 # start Minio in the foreground
     '
+  labels:
+    type: file
 
 # User management API
 igrp-user-management-api:
@@ -108,6 +116,8 @@ igrp-user-management-api:
     - "{{resourceConfig.platform.userManager.ports.external}}:{{resourceConfig.platform.userManager.ports.internal}}"
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
+  labels:
+    type: web
 
 # App Management API
 igrp-app-manager-api:
@@ -122,6 +132,8 @@ igrp-app-manager-api:
   depends_on:
     keycloak:
       condition: service_healthy
+  labels:
+    type: web
 
 # IGRP UI
 igrp-ui:
@@ -138,3 +150,5 @@ igrp-ui:
     - igrp-app-manager-api
     - igrp-user-management-api
   stdin_open: true
+  labels:
+    type: web

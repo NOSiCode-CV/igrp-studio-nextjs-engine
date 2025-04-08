@@ -48,7 +48,8 @@ export function postgresProperties() {
           }
         }
       },
-      shm_size: { type: "string", required: false, default: "128mb" }
+      shm_size: { type: "string", required: false, default: "128mb" },
+      labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },
     }
   }
 }
