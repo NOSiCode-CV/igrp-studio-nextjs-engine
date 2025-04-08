@@ -376,8 +376,8 @@ const baseConfig: WorkspaceProjectsConfig = {
       name: "minio",
       properties: {
         image: "minio/minio:latest",
-        container_name: "minio",
-        hostname: "minio",
+        container_name: "minio_service",
+        hostname: "minio-service",
         restart: "no",
         environments: [
           { key: "MINIO_SCHEME", value: "http" },
