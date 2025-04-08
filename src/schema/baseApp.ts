@@ -8,15 +8,13 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
   properties: {
     id: {
       type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage:
-        'The project id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
+        'The project id attribute must be a valid string.',
     },
     workspaceId: {
       type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage:
-        'The workspace id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
+        'The workspace id attribute must be a valid string.',
     },
     type: { 
       type: 'string', 

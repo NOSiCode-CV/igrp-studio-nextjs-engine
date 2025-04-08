@@ -430,9 +430,8 @@ const workspaceProjectConfigSchema: JSONSchemaType<WorkspaceProjectsConfig> = {
   properties: {
     id: {
       type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage:
-        'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
+        'The id attribute must be a valid string.',
     },
     workspace: {
       type: 'string',
