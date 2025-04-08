@@ -59,7 +59,7 @@ igrp_keycloak:
   healthcheck:
     test: [
       "CMD-SHELL",
-      'exec 3<>/dev/tcp/localhost/{{resourceConfig.platform.auth.ports.internal}}; echo -e "GET /health/ready HTTP/1.1\nhost: localhost:{{resourceConfig.platform.auth.ports.internal}}\n" >&3; timeout --preserve-status 1 cat <&3 | grep -m 1 status | grep -m 1 UP; ERROR=$?; exec 3<&-; exec 3>&-; exit $ERROR'
+      'exec 3<>/dev/tcp/localhost/{{resourceConfig.platform.auth.ports.internal}}; echo -e "GET /health/ready HTTP/1.1\nhost: localhost:{{resourceConfig.platform.auth.ports.internal}}\n" >&3; timeout --preserve-status 1 cat <&3 | grep -m 1 status | grep -m 1 UP; ERROR=$$?; exec 3<&-; exec 3>&-; exit $$ERROR'
     ]
     interval: 10s
     timeout: 5s
@@ -88,8 +88,8 @@ minio:
       minio $0 "$@" --quiet & echo $! > /tmp/minio.pid                   # start Minio in the background
       while ! isAlive; do sleep 0.1; done                                # wait until Minio is alive
       mc alias set minio http://127.0.0.1:{{getAttribute resourceConfig.platform.file.ports 0 'internal'}} ${IGRP_FILE_MANAGEMENT_USER} ${IGRP_FILE_MANAGEMENT_PASSWORD} # setup Minio client
-      mc mb minio/${MINIO_BUCKET_NAME}|| true                            # create a test bucket
-      mc anonymous set public minio/${MINIO_BUCKET_NAME}                 # make the test bucket public
+      mc mb minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME}|| true                            # create a test bucket
+      mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME}                 # make the test bucket public
       kill -s INT $(cat /tmp/minio.pid) && rm /tmp/minio.pid             # stop Minio
       while isAlive; do sleep 0.1; done                                  # wait until Minio is stopped
       exec minio $0 "$@"                                                 # start Minio in the foreground
