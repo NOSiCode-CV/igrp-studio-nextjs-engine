@@ -22,8 +22,8 @@ export const mapProjectToWorkspace = async (
   const isSpringBoot = config.config.type === 'springboot';
   const basePort = isSpringBoot ? 8083 : 3001;
   const index = isSpringBoot
-    ? workspace.projects.filter((proj) => proj.config.type === 'stringboot').length
-    : workspace.projects.filter((proj) => !(proj.config.type === 'stringboot')).length;
+    ? workspace.projects.filter((proj) => proj.config.type === 'springboot').length
+    : workspace.projects.filter((proj) => !(proj.config.type === 'springboot')).length;
 
   workspace.projects.push({
     config: config.config,
@@ -65,11 +65,11 @@ export const updateProjectInWorkspace = async (
     throw new Error(`Project with id "${updatedProjectId}" not found in workspace`);
   }
 
-  const isSpringBoot = config.config.type === 'stringboot';
+  const isSpringBoot = config.config.type === 'springboot';
   const basePort = isSpringBoot ? 8083 : 3001;
   const index = isSpringBoot
-    ? workspace.projects.filter((proj) => proj.config.type === 'stringboot').length - 1
-    : workspace.projects.filter((proj) => proj.config.type !== 'stringboot').length - 1;
+    ? workspace.projects.filter((proj) => proj.config.type === 'springboot').length - 1
+    : workspace.projects.filter((proj) => proj.config.type !== 'springboot').length - 1;
 
   workspace.projects[projectIndex] = {
     config: config.config,
