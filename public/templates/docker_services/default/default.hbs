@@ -31,7 +31,11 @@ profiles:
 {{#if resourceConfig.ports}}
 ports:
   {{#each resourceConfig.ports}}
+  {{#if this.reference}}
+  - {{this.reference}}
+  {{else}}
   - "{{this.external}}:{{this.internal}}"
+  {{/if}}
   {{/each}}
 {{/if}}
 {{#if resourceConfig.expose}}

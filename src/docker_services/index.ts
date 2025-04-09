@@ -1,5 +1,5 @@
 import {
-  DockerContainer, DockerServiceRegisterConfig, DockerServiceRegistrationConfig,
+  DockerContainer, DockerServiceRegisterConfig, DockerServiceRegistrationConfig, VolumeFile,
 } from '../interfaces/types';
 import { renderServiceTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
@@ -8,6 +8,7 @@ import { replaceTemplate } from '../utils/helpers';
 export type DockerService = {
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
+  volumes: Record<string, VolumeFile>;
   custom?: string;
   defaultName: string;
   label: string;
@@ -26,6 +27,7 @@ export type DockerService = {
   loadLabel: (label: string) => void;
   loadCustom: (custom: string) => void;
   loadTemplatePath: (templatePath?: string) => void;
+  loadVolumes: (volumes: Record<string, VolumeFile>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
 
@@ -45,6 +47,7 @@ function initDockerService(): DockerService {
   return {
     properties: {},
     propertiesMapping: {},
+    volumes: {},
     custom: undefined,
     defaultName: '',
     label: '',
@@ -65,6 +68,10 @@ function initDockerService(): DockerService {
 
     loadTemplatePath(path?: string) {
       this.templatePath = path
+    },
+
+    loadVolumes(volumes: Record<string, VolumeFile>) {
+      Object.assign(this.volumes, volumes);
     },
 
     getProperties(properties) {

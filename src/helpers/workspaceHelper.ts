@@ -1,7 +1,9 @@
 import { Volume, WorkspaceProjectsConfig } from '../interfaces/types';
 import { HelperOptions } from 'handlebars';
+import { generateVolumeFiles } from '../modules/workspace/generateVolumeFiles';
+import { DockerService } from '../docker_services/index';
 
-export function extractVolumes(config: WorkspaceProjectsConfig): Volume[] {
+export function extractVolumes(config: WorkspaceProjectsConfig, basePath: string, registry: Record<string, DockerService>): Volume[] {
 
   let volumes: Set<Volume> = new Set<Volume>()
 
@@ -16,7 +18,12 @@ export function extractVolumes(config: WorkspaceProjectsConfig): Volume[] {
 
   config.services.forEach((serv) => {
     if(serv.properties.volumes)
-      serv.properties.volumes.forEach((vol) => volumes.add(vol));
+      serv.properties.volumes.forEach((vol) => {
+        if(vol.driver !== "none")
+          volumes.add(vol);
+        else
+          generateVolumeFiles(serv, vol, basePath, registry)
+      });
   })
 
   return Array.from(volumes)

@@ -333,7 +333,13 @@ export interface BasePlatformConfig {
 }
 
 export interface PlatformConfig extends BasePlatformConfig {
-  ports: Port
+  ports: Port,
+  observability?: PlatformObservability
+}
+
+export interface PlatformObservability {
+  enableObservability: boolean,
+  collectorPort: number
 }
 
 export interface PlatformAuthConfig extends BasePlatformConfig {
@@ -395,6 +401,11 @@ export interface Volume {
   driver: string
 }
 
+export interface VolumeFile {
+  context: any
+  template: string,
+}
+
 export interface Dependency {
   service: string
 }
@@ -405,7 +416,8 @@ export interface Profile {
 
 export interface Port {
   internal: number,
-  external: number
+  external: number,
+  reference?: number
 }
 
 export interface Host {

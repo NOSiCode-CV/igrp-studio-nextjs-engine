@@ -31,7 +31,11 @@ export function rabbitmqProperties() {
         items: {
           type: "object",
           properties: { key: { type: "string", required: true }, value: { type: "string", required: true } },
-        }
+        },
+        default: [
+          { key: "RABBITMQ_DEFAULT_USER", value: "admin" },
+          { key: "RABBITMQ_DEFAULT_PASS", value: "password" }
+        ]
       },
       networks: {
         type: "array",
@@ -46,30 +50,12 @@ export function rabbitmqProperties() {
           type: "object",
           properties: {
             name: { type: "string", required: true, default: "rabbitmq_data" },
-            path: { type: "string", required: true, default: "/data" },
+            path: { type: "string", required: true, default: "/var/lib/rabbitmq" },
             driver: { type: "string", required: true, default: "local" }
           }
         }
       },
-      command: {
-        type: "array",
-        default: [
-          { instruction: 'rabbitmq-server' },
-          { instruction: '--requirepass' },
-          { instruction: 'password' },
-        ],
-        items: {
-          type: "object",
-          properties: {
-            instruction: {
-              type: "string",
-              required: true
-            }
-          }
-        },
-        required: false
-      },
-      labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "cache" } } } },
+      labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "messaging" } } } },
     }
   }
 }

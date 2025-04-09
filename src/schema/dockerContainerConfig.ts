@@ -60,6 +60,13 @@ const portSchema: JSONSchemaType<Port> = {
       minimum: 1,
       errorMessage: 'The external port must be a number that ranges from 1 to 65535.'
     },
+    reference: {
+      type: 'number',
+      maximum: 65535,
+      minimum: 1,
+      nullable: true,
+      errorMessage: 'The reference port, if provided, must be a number that ranges from 1 to 65535.'
+    },
   },
   required: ['internal', 'external'],
   additionalProperties: false,

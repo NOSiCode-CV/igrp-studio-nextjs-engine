@@ -12,3 +12,5 @@
   restart: unless-stopped
   networks:
     - {{toLowerCase workspace}}-network
+  labels:
+    type: database

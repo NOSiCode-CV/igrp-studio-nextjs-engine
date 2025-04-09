@@ -58,6 +58,7 @@ export const TEMPLATES = {
   ELEMENT: 'components/{{name}}/{{name}}.hbs',
   DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.hbs',
   DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.hbs',
+  DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.hbs',
   CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',

@@ -8,10 +8,6 @@ services:
   {{#each resourceConfig.projects}}
   {{#if (eq this.config.type 'springboot')}}
 
-  {{#if baseConfig.enableObservability}}
-  {{> observability-docker-services }}
-  {{/if}}
-
   {{#if (eq this.config.database "Postgresql")}}
   {{> postgres-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
   {{else if (eq this.config.database "MySQL")}}
@@ -43,6 +39,7 @@ services:
         limits:
           memory: 700m
     labels:
+      type: "web"
       is_project: true
     {{#if this.config.enableObservability}}
       logging: "promtail"
@@ -68,6 +65,7 @@ services:
     {{/if}}
     stdin_open: true
     labels:
+      type: "web"
       is_project: true
 
   {{/if~}}
@@ -80,10 +78,7 @@ services:
   {{/each}}
 
 volumes:
-  {{#each (extractVolumes resourceConfig)}}
+  {{#each (extractVolumes resourceConfig basePath registry)}}
   {{this.name}}:
     driver: {{#if this.driver}}{{this.driver}}{{else}}local{{/if}}
   {{/each}}
-  {{#if baseConfig.enableObservability}}
-  {{> observability-docker-volumes }}
-  {{/if}}

@@ -36,3 +36,13 @@ EMAIL_HOST={{resourceConfig.platform.mail.host}}
 EMAIL_PORT={{resourceConfig.platform.mail.port}}
 EMAIL_USERNAME={{resourceConfig.platform.mail.username}}
 EMAIL_PASSWORD={{resourceConfig.platform.mail.password}}
+
+{{#if resourceConfig.platform.userManager.observability.enableObservability}}
+OTEL_ENABLED=true
+OTEL_HTTP_PORT={{resourceConfig.platform.userManager.observability.collectorPort}}
+OTEL_COLLECTOR_ENDPOINT=http://host.docker.internal:{{resourceConfig.platform.userManager.observability.collectorPort}}
+OTEL_METRICS_EXPORTER=otlp
+OTEL_LOGS_EXPORTER=otlp
+OTEL_TRACES_EXPORTER=otlp
+OTEL_SERVICE_NAME=igrp-user-management
+{{/if}}

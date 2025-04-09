@@ -440,9 +440,17 @@ const baseConfig: WorkspaceProjectsConfig = {
 const projectConfig: ProjectWorkspace = {
   id: 'my_workspace',
   config: {
-    "type": "nextjs",
-    "appName": "rere",
-    "description": ""
+    type: 'springboot',
+    apiName: 'demoDomain',
+    group: 'com.petshop',
+    artifact: 'animals',
+    description: 'Demo project for Spring Boot',
+    database: 'Postgresql',
+    projectStructureStyle: 'domain',
+    enableObservability: "true",
+    enableEntityRevision: "true",
+    igrpCoreVersion: "0.0.1-alpha",
+    enableGraalVm: "false"
   }
 }
 

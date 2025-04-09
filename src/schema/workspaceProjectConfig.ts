@@ -3,7 +3,7 @@ import {
   Dependency,
   Environment,
   PlatformAuthConfig,
-  PlatformConfig, PlatformFileConfig, PlatformMailConfig,
+  PlatformConfig, PlatformFileConfig, PlatformMailConfig, PlatformObservability,
   PlatformServices, Port, ProjectDataSource, Volume,
   WorkspaceProject,
   WorkspaceProjectsConfig, WorkspaceService,
@@ -11,6 +11,24 @@ import {
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 import { dockerContainerConfigSchema } from './dockerContainerConfig';
+
+const observabilitySchema: JSONSchemaType<PlatformObservability> = {
+  type: 'object',
+  properties: {
+    enableObservability: {
+      type: 'boolean',
+      errorMessage: 'The enable observability attribute must be a valid boolean.'
+    },
+    collectorPort: {
+      type: 'number',
+      maximum: 65535,
+      minimum: 1,
+      errorMessage: 'The collector port must be a number that ranges from 1 to 65535.'
+    },
+  },
+  required: ['enableObservability', 'collectorPort'],
+  additionalProperties: false,
+};
 
 const dependencySchema: JSONSchemaType<Dependency> = {
   type: 'object',
@@ -55,6 +73,13 @@ const portSchema: JSONSchemaType<Port> = {
       maximum: 65535,
       minimum: 1,
       errorMessage: 'The external port must be a number that ranges from 1 to 65535.'
+    },
+    reference: {
+      type: 'number',
+      maximum: 65535,
+      minimum: 1,
+      nullable: true,
+      errorMessage: 'The reference port, if provided, must be a number that ranges from 1 to 65535.'
     },
   },
   required: ['internal', 'external'],
@@ -156,6 +181,14 @@ const platformConfigSchema: JSONSchemaType<PlatformConfig> = {
         portSchema
       ],
       errorMessage: "The 'ports' field must be a valid Port configuration.",
+    },
+    observability: {
+      type: "object",
+      nullable: true,
+      anyOf: [
+        observabilitySchema
+      ],
+      errorMessage: "The 'observability' field, if provided, must be a valid Observability configuration.",
     },
   },
   required: ['containerName', 'ports'],

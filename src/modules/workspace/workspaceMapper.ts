@@ -12,7 +12,14 @@ export const mapProjectToWorkspace = async (
 ): Promise<WorkspaceProjectsConfig> => {
   const workspace = await loadWorkspaceConfig(basePath);
 
-  const isSpringBoot = config.config.type === 'stringboot';
+  const addProjectId = config.config.id;
+  const projectIndex = workspace.projects.findIndex((p) => p.config?.id === addProjectId);
+
+  if (projectIndex === 1) {
+    throw new Error(`Project with id "${addProjectId}" is in the workspace already`);
+  }
+
+  const isSpringBoot = config.config.type === 'springboot';
   const basePort = isSpringBoot ? 8083 : 3001;
   const index = isSpringBoot
     ? workspace.projects.filter((proj) => proj.config.type === 'stringboot').length
