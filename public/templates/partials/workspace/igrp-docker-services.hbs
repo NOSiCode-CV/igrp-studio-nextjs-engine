@@ -107,7 +107,7 @@ minio:
 igrp-user-management-api:
   image: registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local
   depends_on:
-    keycloak:
+    igrp_keycloak:
       condition: service_healthy
   container_name: {{toLowerCase resourceConfig.workspace}}-user-management
   env_file:
@@ -130,7 +130,7 @@ igrp-app-manager-api:
   networks:
     - {{toLowerCase resourceConfig.workspace}}-network
   depends_on:
-    keycloak:
+    igrp_keycloak:
       condition: service_healthy
   labels:
     type: web

@@ -408,6 +408,11 @@ const workspaceProjectSchema: JSONSchemaType<WorkspaceProject> = {
 const workspaceServiceSchema: JSONSchemaType<WorkspaceService> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      errorMessage:
+        'The id attribute must be a valid string.',
+    },
     name: {
       type: 'string',
       pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
@@ -421,7 +426,7 @@ const workspaceServiceSchema: JSONSchemaType<WorkspaceService> = {
       errorMessage: "The 'properties' field must be a valid Docker Container configuration.",
     },
   },
-  required: ['name', 'properties'],
+  required: ['id', 'name', 'properties'],
   additionalProperties: false,
 };
 

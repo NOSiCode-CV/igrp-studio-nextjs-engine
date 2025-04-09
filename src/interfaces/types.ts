@@ -291,6 +291,16 @@ export interface ChildComponent {
   isDefault: boolean
 }
 
+// Workspace API
+
+export interface ProjectWorkspace extends IdentifiableElement {
+  config: any,
+}
+
+export interface ServiceWorkspace extends IdentifiableElement {
+  service: WorkspaceService
+}
+
 // Workspace
 
 export interface WorkspaceConfig extends IdentifiableElement {
@@ -362,7 +372,7 @@ export interface WorkspaceProject {
   dataSource?: ProjectDataSource
 }
 
-export interface WorkspaceService {
+export interface WorkspaceService extends IdentifiableElement{
   name: string,
   properties: DockerContainer
 }

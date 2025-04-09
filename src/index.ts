@@ -20,7 +20,7 @@ import {
   WorkspaceConfig,
   PathConfig,
   WorkspaceProjectsConfig,
-  DockerServiceRegistrationConfig,
+  DockerServiceRegistrationConfig, ProjectWorkspace, ServiceWorkspace,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -48,6 +48,11 @@ import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFil
 import { registerAllServices } from './docker_services/register';
 import { dockerServiceRegistrationValidate } from './schema/serviceRegisterConfig';
 import { saveWorkspaceComposeFile } from './modules/workspace/saveWorkspaceComposeFile';
+import {
+  mapProjectToWorkspace, mapServiceToWorkspace,
+  removeProjectInWorkspace, removeServiceInWorkspace,
+  updateProjectInWorkspace, updateServiceInWorkspace,
+} from './modules/workspace/workspaceMapper';
 
 export function getPaths(): PathConfig {
 
@@ -100,8 +105,6 @@ export const newWorkspace = async (baseConfig: WorkspaceConfig, basePath: string
   if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
 
   if (!(await checkIfDirectoryIsEmpty(basePath))) throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
-
-  await saveBaseWorkspaceFileConfig(baseConfig, basePath);
 
   const context: RenderContext<WorkspaceConfig, WorkspaceConfig> = {
     resourceConfig: baseConfig,
@@ -262,6 +265,54 @@ export const addComponentToPage = async (config: PageComponentConfig, basePath: 
   await updateAndRenderPage(context);
 };
 
+export const addProjectToWorkspace = async (config: ProjectWorkspace, basePath: string) => {
+
+  const workspaceConfig = await mapProjectToWorkspace(config, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
+export const updateProjectToWorkspace = async (config: ProjectWorkspace, basePath: string) => {
+
+  const workspaceConfig = await updateProjectInWorkspace(config, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
+export const removeProjectFromWorkspace = async (projectId: string, basePath: string) => {
+
+  const workspaceConfig = await removeProjectInWorkspace(projectId, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
+export const addServiceToWorkspace = async (config: ServiceWorkspace, basePath: string) => {
+
+  const workspaceConfig = await mapServiceToWorkspace(config, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
+export const updateServiceToWorkspace = async (config: ServiceWorkspace, basePath: string) => {
+
+  const workspaceConfig = await updateServiceInWorkspace(config, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
+export const removeServiceFromWorkspace = async (serviceId: string, basePath: string) => {
+
+  const workspaceConfig = await removeServiceInWorkspace(serviceId, basePath)
+
+  await addProjectsToWorkspace(workspaceConfig, basePath)
+
+}
+
 /**
  * Add projects to a workspace by validating configuration, checking directory status,
  * and creating necessary files (.env and igrp-compose.yaml).
@@ -278,7 +329,7 @@ export const addComponentToPage = async (config: PageComponentConfig, basePath: 
  * @returns {Promise<void>} A promise that resolves when the workspace has been successfully initialized.
  *
  */
-export const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig, basePath: string): Promise<void> => {
+const addProjectsToWorkspace = async (baseConfig: WorkspaceProjectsConfig, basePath: string): Promise<void> => {
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
 

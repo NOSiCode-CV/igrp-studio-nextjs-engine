@@ -1,5 +1,5 @@
-import { addProjectsToWorkspace, initServices } from '../src';
-import { WorkspaceProjectsConfig } from '../src/interfaces/types';
+import { addProjectToWorkspace, initServices } from '../src';
+import { ProjectWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
@@ -214,6 +214,7 @@ const baseConfig: WorkspaceProjectsConfig = {
   ],
   services: [
     {
+      id: "postgres_1",
       name: "postgres",
       properties: {
         image: "postgres:14-alpine",
@@ -249,6 +250,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
     },
     {
+      id: "mysql_1",
       name: "mysql",
       properties: {
         image: "mysql:8.0",
@@ -284,6 +286,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
     },
     {
+      id: "keycloak_1",
       name: "keycloak",
       properties: {
         image: "keycloak:25.0.4",
@@ -339,6 +342,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
     },
     {
+      id: "oracle_1",
       name: "oracle",
       properties: {
         image: "gvenzl/oracle-free:latest",
@@ -373,6 +377,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       },
     },
     {
+      id: "minio_1",
       name: "minio",
       properties: {
         image: "minio/minio:latest",
@@ -427,10 +432,19 @@ const baseConfig: WorkspaceProjectsConfig = {
         labels: [
           { key: 'type', value: 'file'}
         ]
-      },
+      }
     }
   ]
 };
+
+const projectConfig: ProjectWorkspace = {
+  id: 'my_workspace',
+  config: {
+    "type": "nextjs",
+    "appName": "rere",
+    "description": ""
+  }
+}
 
 beforeAll(async () => {
   await initServices();
@@ -439,6 +453,6 @@ beforeAll(async () => {
 describe('Add projects to workspace module', () => {
 
   test('Should generate the compose and environment variables file for workspace', async () => {
-     await addProjectsToWorkspace(baseConfig, OUTPUT_DIR);
+     await addProjectToWorkspace(projectConfig, OUTPUT_DIR);
   });
 });

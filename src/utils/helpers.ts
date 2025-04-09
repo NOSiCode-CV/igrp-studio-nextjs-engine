@@ -4,7 +4,7 @@ import {
   ComponentConfig,
   Layout,
   PageConfig,
-  RenderContext,
+  RenderContext, WorkspaceProjectsConfig,
 } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
@@ -95,6 +95,15 @@ export const loadConfig = async function <T>(basePath: string): Promise<T[]> {
     .map((f) => fs.readJSON(path.join(basePath, f)));
   return await Promise.all<T>(files);
 };
+
+export const loadWorkspaceConfig = async (basePath: string) => {
+  const workspaces = await loadConfig<WorkspaceProjectsConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO))
+
+  if(workspaces.length > 0)
+    return workspaces[0]
+  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`)
+
+}
 
 export const loadConfigSync = function <T>(basePath: string): T[] {
   if (!fs.pathExistsSync(basePath)) {
