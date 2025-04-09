@@ -186,6 +186,7 @@ const findDuplicateExternalPorts = (arr: Port[]): string[] => {
   const duplicates: string[] = [];
 
   arr.forEach((e) => {
+    if(e.reference) return;
     nameCount[e.external] = (nameCount[e.external] || 0) + 1;
     if (nameCount[e.external] === 2) {
       duplicates.push(`${e.external}`);
@@ -201,6 +202,7 @@ const findDuplicateInternalPorts = (arr: Port[]): string[] => {
   const duplicates: string[] = [];
 
   arr.forEach((e) => {
+    if(e.reference) return;
     nameCount[e.internal] = (nameCount[e.internal] || 0) + 1;
     if (nameCount[e.internal] === 2) {
       duplicates.push(`${e.internal}`);

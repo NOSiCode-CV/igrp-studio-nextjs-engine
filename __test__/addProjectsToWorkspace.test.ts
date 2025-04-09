@@ -433,6 +433,227 @@ const baseConfig: WorkspaceProjectsConfig = {
           { key: 'type', value: 'file'}
         ]
       }
+    },
+    {
+      id: "otel_1",
+      name: "opentelemetry",
+      properties: {
+        image: "otel/opentelemetry-collector-contrib:0.82.0",
+        container_name: "otel-collector",
+        restart: "always",
+        volumes: [
+          {
+            name: "./monitoring/collector/otel-collector.yml",
+            path: "/etc/otelcol-cont/otel-collector.yml",
+            driver: "none"
+          }
+        ],
+        command: [
+          { instruction: '--config=/etc/otelcol-cont/otel-collector.yml' },
+        ],
+        ports: [
+          {
+            internal: 1888,
+            external: 1888
+          },
+          {
+            internal: 8888,
+            external: 8888
+          },
+          {
+            internal: 8889,
+            external: 8889
+          },
+          {
+            internal: 13133,
+            external: 13133
+          },
+          {
+            internal: 4317,
+            external: 4317
+          },
+          {
+            internal: 4318,
+            external: 4318
+          },
+          {
+            internal: 55679,
+            external: 55679
+          },
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
+    },
+    {
+      id: "prometheus_1",
+      name: "prometheus",
+      properties: {
+        image: "prom/prometheus:v2.51.2",
+        container_name: "prometheus",
+        hostname: "prometheus",
+        volumes: [
+          {
+            name: "./monitoring/prometheus/prometheus.yml",
+            path: "/etc/prometheus/prometheus.yml",
+            driver: "none"
+          }
+        ],
+        command: [
+          { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
+        ],
+        ports: [
+          {
+            internal: 9090,
+            external: 9090
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
+    },
+    {
+      id: "promtail_1",
+      name: "promtail",
+      properties: {
+        image: "grafana/promtail:3.0.0",
+        container_name: "promtail",
+        hostname: "promtail",
+        volumes: [
+          { name: "./monitoring/promtail/promtail-docker-config.yml", path: "/etc/promtail/docker-config.yml", driver: "none" },
+          { name: "/var/lib/docker/containers", path: "/var/lib/docker/containers:ro", driver: "none" },
+          { name: "/var/run/docker.sock", path: "/var/run/docker.sock", driver: "none" },
+        ],
+        ports: [
+          {
+            internal: 9080,
+            external: 9080
+          }
+        ],
+        environments: [
+          { key: "PROMTAIL_SERVICE_INTERNAL_PORT", value: "9080" },
+          { key: "LOKI_SERVICE_INTERNAL_PORT", value: "3100" },
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
+    },
+    {
+      id: "loki_1",
+      name: "loki",
+      properties: {
+        image: "grafana/loki:3.0.0",
+        container_name: "loki",
+        hostname: "loki",
+        ports: [
+          {
+            internal: 3100,
+            external: 3100
+          }
+        ],
+        command: [
+          { instruction: '-config.expand-env=true' },
+          { instruction: '-config.file=/etc/loki/local-config.yml' },
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        dependsOn: [
+          { service: "promtail" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
+    },
+    {
+      id: "tempo_1",
+      name: "tempo",
+      properties: {
+        image: "grafana/tempo:2.4.1",
+        container_name: "tempo",
+        hostname: "tempo",
+        ports: [
+          {
+            internal: 3200,
+            external: 3200
+          },
+          {
+            internal: 9411,
+            external: 9411
+          },
+          {
+            internal: 4317,
+            external: 4317,
+            reference: 4317,
+          },
+        ],
+        environments: [
+          { key: "TEMPO_SERVICE_HTTP_PORT", value: "3200" },
+        ],
+        volumes: [
+          {
+            name: "./monitoring/tempo/tempo.yml",
+            path: "/etc/tempo-config.yml",
+            driver: "none"
+          }
+        ],
+        command: [
+          { instruction: '-config.expand-env=true' },
+          { instruction: '-config.file /etc/tempo-config.yml' },
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
+    },
+    {
+      id: "grafana_1",
+      name: "grafana",
+      properties: {
+        image: "grafana/grafana:10.4.2",
+        container_name: "grafana",
+        hostname: "grafana",
+        ports: [
+          {
+            internal: 2000,
+            external: 2000
+          }
+        ],
+        environments:  [
+          { key: "GF_SECURITY_ADMIN_USER", value: "admin" },
+          { key: "GF_SECURITY_ADMIN_PASSWORD", value: "password" },
+          { key: "GF_USERS_ALLOW_SIGN_UP", value: "false" },
+        ],
+        volumes: [
+          {
+            name: "grafana_data",
+            path: "/var/lib/grafana",
+            driver: "local"
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'observability'}
+        ]
+      }
     }
   ]
 };
@@ -457,26 +678,28 @@ const projectConfig: ProjectWorkspace = {
 const serviceConfig: ServiceWorkspace = {
   id: 'my_workspace',
   service: {
-    id: "prometheus_1",
-    name: "prometheus",
+    id: "grafana_1",
+    name: "grafana",
     properties: {
-      image: "prom/prometheus:v2.51.2",
-      container_name: "prometheus",
-      hostname: "prometheus",
-      volumes: [
-        {
-          name: "./monitoring/prometheus/prometheus.yml",
-          path: "/etc/prometheus/prometheus.yml",
-          driver: "none"
-        }
-      ],
-      command: [
-        { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
-      ],
+      image: "grafana/grafana:10.4.2",
+      container_name: "grafana",
+      hostname: "grafana",
       ports: [
         {
-          internal: 9090,
-          external: 9090
+          internal: 2000,
+          external: 2000
+        }
+      ],
+      environments:  [
+        { key: "GF_SECURITY_ADMIN_USER", value: "admin" },
+        { key: "GF_SECURITY_ADMIN_PASSWORD", value: "password" },
+        { key: "GF_USERS_ALLOW_SIGN_UP", value: "false" },
+      ],
+      volumes: [
+        {
+          name: "grafana_data",
+          path: "/var/lib/grafana",
+          driver: "local"
         }
       ],
       networks: [

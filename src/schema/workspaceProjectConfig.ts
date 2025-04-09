@@ -405,8 +405,7 @@ const workspaceProjectSchema: JSONSchemaType<WorkspaceProject> = {
     },
     basePath: {
       type: 'string',
-      pattern: PATTERNS.PATH_SLASH_VALIDATION_PATTERN,
-      errorMessage: 'The base path attribute can only contain alphanumeric characters and slash, without spaces or other special characters.'
+      errorMessage: 'The base path attribute must be a valid string.'
     },
     environments: {
       type: 'array',

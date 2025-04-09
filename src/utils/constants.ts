@@ -14,7 +14,7 @@ export const PATTERNS = {
   VALID_WORKSPACE_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[a-zA-Z0-9_ ]+$",
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
-  PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/]*$',
+  PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/ ]*$',
   BUILD_PATH_VALIDATION_PATTERN: '^[A-Za-z0-9._/-]+$',
   HOSTNAME_VALIDATION_PATTERN: '^((\\$\\{?[A-Za-z_][A-Za-z0-9_]*\\}?)|(([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*))(:\\d{1,5})?$',
   DOCKER_SERVICE_VALIDATION_PATTERN: '^[a-zA-Z][a-zA-Z0-9_-]*$'
