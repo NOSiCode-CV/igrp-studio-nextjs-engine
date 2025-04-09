@@ -99,10 +99,10 @@ configs:
 {{/each}}
 {{/if}}
 {{#if resourceConfig.command}}
-command: [{{#each resourceConfig.command}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+command: [{{#each resourceConfig.command}}"{{{this.instruction}}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
 {{/if}}
 {{#if resourceConfig.entrypoint}}
-entrypoint: [{{#each resourceConfig.entrypoint}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+entrypoint: [{{#each resourceConfig.entrypoint}}"{{{this.instruction}}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
 {{/if}}
 {{#if resourceConfig.deploy}}
 deploy:
@@ -130,7 +130,7 @@ deploy:
 {{#if resourceConfig.healthcheck}}
 healthcheck:
   {{#if resourceConfig.healthcheck.test}}
-  test: [{{#each resourceConfig.healthcheck.test}}"{{this.instruction}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
+  test: [{{#each resourceConfig.healthcheck.test}}"{{{this.instruction}}}"{{#if @last}}{{else}}, {{/if}}{{/each}}]
   {{/if}}
   {{#if resourceConfig.healthcheck.interval}}
   interval: {{resourceConfig.healthcheck.interval}}

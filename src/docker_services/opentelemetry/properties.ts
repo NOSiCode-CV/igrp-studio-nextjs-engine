@@ -93,7 +93,7 @@ export function opentelemetryProperties() {
 export function opentelemetryVolumes(): Record<string, VolumeFile> {
   return {
     "/etc/otelcol-cont/otel-collector.yml": {
-      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE, { name: OPENTELEMETRY, volume: "otel-collector.yml" }),
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, { name: OPENTELEMETRY, volume: "otel-collector.yml" }),
       context: {}
     }
   }

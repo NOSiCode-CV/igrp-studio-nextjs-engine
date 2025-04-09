@@ -1,5 +1,5 @@
-import { addProjectToWorkspace, initServices } from '../src';
-import { ProjectWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
+import { addProjectToWorkspace, addServiceToWorkspace, initServices } from '../src';
+import { ProjectWorkspace, ServiceWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
@@ -454,6 +454,41 @@ const projectConfig: ProjectWorkspace = {
   }
 }
 
+const serviceConfig: ServiceWorkspace = {
+  id: 'my_workspace',
+  service: {
+    id: "prometheus_1",
+    name: "prometheus",
+    properties: {
+      image: "prom/prometheus:v2.51.2",
+      container_name: "prometheus",
+      hostname: "prometheus",
+      volumes: [
+        {
+          name: "./monitoring/prometheus/prometheus.yml",
+          path: "/etc/prometheus/prometheus.yml",
+          driver: "none"
+        }
+      ],
+      command: [
+        { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
+      ],
+      ports: [
+        {
+          internal: 9090,
+          external: 9090
+        }
+      ],
+      networks: [
+        { network: "my-workspace-network" }
+      ],
+      labels: [
+        { key: 'type', value: 'observability'}
+      ]
+    }
+  }
+}
+
 beforeAll(async () => {
   await initServices();
 });
@@ -462,5 +497,12 @@ describe('Add projects to workspace module', () => {
 
   test('Should generate the compose and environment variables file for workspace', async () => {
      await addProjectToWorkspace(projectConfig, OUTPUT_DIR);
+  });
+});
+
+describe('Add services to workspace module', () => {
+
+  test('Should generate the compose and environment variables file for workspace', async () => {
+    await addServiceToWorkspace(serviceConfig, OUTPUT_DIR);
   });
 });

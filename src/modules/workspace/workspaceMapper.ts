@@ -109,6 +109,13 @@ export const mapServiceToWorkspace = async (
 
   const workspace = await loadWorkspaceConfig(basePath);
 
+  const addServiceId = config.service.id;
+  const serviceIndex = workspace.services.findIndex((s) => s.id === addServiceId);
+
+  if (serviceIndex === 1) {
+    throw new Error(`Service with id "${addServiceId}" is in the workspace already`);
+  }
+
   workspace.services.push(config.service);
 
   return workspace;

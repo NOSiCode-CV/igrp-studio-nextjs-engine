@@ -68,7 +68,7 @@ export function prometheusProperties() {
 export function prometheusVolumes(): Record<string, VolumeFile> {
   return {
     "/etc/prometheus/prometheus.yml": {
-      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE, { name: PROMETHEUS, volume: "prometheus.yml" }),
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, { name: PROMETHEUS, volume: "prometheus.yml" }),
       context: {}
     }
   }

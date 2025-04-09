@@ -86,7 +86,7 @@ export function tempoProperties() {
 export function tempoVolumes(): Record<string, VolumeFile> {
   return {
     "/etc/tempo-config.yml": {
-      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE, { name: TEMPO, volume: "tempo.yml" }),
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, { name: TEMPO, volume: "tempo.yml" }),
       context: {}
     }
   }

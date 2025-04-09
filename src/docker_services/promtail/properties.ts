@@ -85,7 +85,7 @@ export function promtailProperties() {
 export function promtailVolumes(): Record<string, VolumeFile> {
   return {
     "/etc/promtail/docker-config.yml": {
-      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE, { name: PROMTAIL, volume: "promtail.yml" }),
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, { name: PROMTAIL, volume: "promtail.yml" }),
       context: {}
     }
   }
