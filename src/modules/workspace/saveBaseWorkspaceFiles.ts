@@ -66,7 +66,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         const basePort = isSpringBoot ? 8083 : 3001;
         return {
           config: proj,
-          basePath: `${proj.appName ?? proj.apiName}`,
+          basePath: `${proj.name ?? proj.name}`,
           environments: [],
           ports: {
             internal: basePort + index,
@@ -75,13 +75,13 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           dependsOn: [],
           dataSource: isSpringBoot? {
             dbPassword: "password",
-            dbName: `${proj.apiName}_db`,
+            dbName: `${proj.name}_db`,
             ports: {
               internal: 5434 + index,
               external: 5434 + index,
             },
             volumes: {
-              name: `${proj.apiName}_data`,
+              name: `${proj.name}_data`,
               path: '/var/lib/postgresql/data2',
               driver: 'local'
             }

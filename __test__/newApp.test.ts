@@ -7,7 +7,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 const baseConfig: AppConfig = {
   id: 'teste',
   type: 'nextjs',
-  appName: 'testeMan',
+  name: 'testeMan',
   workspaceId: 'none'
 };
 

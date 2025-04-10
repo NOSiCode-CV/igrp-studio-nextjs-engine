@@ -62,7 +62,7 @@ const generateServiceEnvironmentFiles = async (context: RenderContext<WorkspaceP
       await saveServiceEnvironmentFiles({
         output: context.basePath,
         template: TEMPLATES.SERVICE_ENV,
-        name: `.${(proj.config.apiName ?? proj.config.appName ?? '').toLowerCase()}.env`
+        name: `.${(proj.config.name).toLowerCase()}.env`
       }, elementContext)
 
   }

@@ -1,6 +1,6 @@
-{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.apiName}}{{/if}}:
+{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.name}}{{/if}}:
   image: mysql:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}8.0{{/if}}
-  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.apiName}}{{/if}}
+  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}mysql-{{toLowerCase resourceConfig.config.name}}{{/if}}
   environment:
     - MYSQL_PASSWORD="{{#if resourceConfig.dataSource.dbPassword}}{{resourceConfig.dataSource.dbPassword}}{{else}}root{{/if}}"
     - MYSQL_ROOT_PASSWORD="{{resourceConfig.dataSource.dbPassword}}"

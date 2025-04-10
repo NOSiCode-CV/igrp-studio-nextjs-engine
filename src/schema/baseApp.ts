@@ -21,7 +21,7 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       const: 'nextjs',
       errorMessage: "The app config type attribute must be 'nextjs'."
     },
-    appName: {
+    name: {
       type: 'string',
       pattern: PATTERNS.VALID_APP_NAME_CONVENTIONAL,
       errorMessage: 'The application name must only contain letters and must not have spaces or special characters except hyphen.'
@@ -31,7 +31,7 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       nullable: true,
     },
   },
-  required: ['id', 'workspaceId', 'type', 'appName'],
+  required: ['id', 'workspaceId', 'type', 'name'],
   additionalProperties: false,
 };
 

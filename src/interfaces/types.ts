@@ -7,7 +7,7 @@ interface IdentifiableElement {
 export interface AppConfig extends IdentifiableElement {
   type: 'nextjs';
   workspaceId: string;
-  appName: string;
+  name: string;
   description?: string
 }
 

@@ -9,7 +9,7 @@ const baseConfig: WorkspaceConfig = {
   slug: 'my-workspace',
   description: 'My development workspace with Docker projects',
   id: '5bce7a73-45a4-4fa8-a87d-497583123951',
-  //projects: [ { type: 'nextjs', appName: 'ewewe', description: 'ew' } ],
+  //projects: [ { type: 'nextjs', name: 'ewewe', description: 'ew' } ],
   //workspace: 'my-workspace'
 };
 

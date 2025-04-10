@@ -1,4 +1,4 @@
-import { addProjectToWorkspace, addServiceToWorkspace, initServices } from '../src';
+import { addProjectToWorkspace, addServiceToWorkspace, initServices, updateProjectToWorkspace } from '../src';
 import { ProjectWorkspace, ServiceWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
@@ -695,11 +695,12 @@ const baseConfig: WorkspaceProjectsConfig = {
 const projectConfig: ProjectWorkspace = {
   id: 'my_workspace',
   config: {
+    id: "5bce7a73-45a4-4fa8-a87d-497583123952",
     type: 'springboot',
-    name: 'demoDomain',
+    name: 'demoDomainEditado',
     group: 'com.petshop',
     artifact: 'animals',
-    description: 'Demo project for Spring Boot',
+    description: 'Demo project for Spring Boot Editado',
     database: 'Postgresql',
     projectStructureStyle: 'domain',
     enableObservability: "true",
@@ -751,14 +752,14 @@ beforeAll(async () => {
   await initServices();
 });
 
-describe('Add projects to workspace module', () => {
+describe('Update projects to workspace module', () => {
 
   test('Should generate the compose and environment variables file for workspace', async () => {
-     await addProjectToWorkspace(projectConfig, OUTPUT_DIR);
+     await updateProjectToWorkspace(projectConfig, OUTPUT_DIR);
   });
 });
 
-describe('Add services to workspace module', () => {
+describe('Update services to workspace module', () => {
 
   test('Should generate the compose and environment variables file for workspace', async () => {
     await addServiceToWorkspace(serviceConfig, OUTPUT_DIR);

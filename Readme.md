@@ -60,7 +60,7 @@ const basePath = 'Path where the application will be created';
 
 const appConfig: AppConfig = {
   type: 'nextjs',
-  appName: 'appTest',
+  name: 'appTest',
 };
 
 const createApp = async () => {
@@ -442,7 +442,7 @@ import { COMPONENTS_NAMES, COMPONENTS_TYPES, FIELD_TYPES } from '@/utils/constan
 
 export interface AppConfig {
   type: 'nextjs';
-  appName: string;
+  name: string;
   description?: string
 }
 

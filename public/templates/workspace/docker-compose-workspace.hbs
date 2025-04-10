@@ -16,18 +16,18 @@ services:
   {{> oracle-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
   {{/if}}
 
-  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}:
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}:
     build: ./projects/{{this.basePath}}
-    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.apiName}}-service{{/if}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}
     {{#if this.dependsOn}}
     depends_on:
     {{#each this.dependsOn}}
       - {{this.service}}
     {{/each}}
-      - {{#if (eq this.config.database "Postgresql")}}postgres-{{toLowerCase this.config.apiName}}{{else if (eq this.config.database "MySQL")}}mysql-{{toLowerCase this.config.apiName}}{{else if (eq this.config.database "Oracle")}}oracle-{{toLowerCase this.config.apiName}}{{/if}}
+      - {{#if (eq this.config.database "Postgresql")}}postgres-{{toLowerCase this.config.name}}{{else if (eq this.config.database "MySQL")}}mysql-{{toLowerCase this.config.name}}{{else if (eq this.config.database "Oracle")}}oracle-{{toLowerCase this.config.name}}{{/if}}
     {{/if}}
     {{#if this.environments}}
-    env_file: ".{{toLowerCase this.config.apiName}}.env"
+    env_file: ".{{toLowerCase this.config.name}}.env"
     {{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
@@ -47,9 +47,9 @@ services:
 
   {{/if~}}
   {{#if (eq this.config.type 'nextjs')}}
-  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.appName}}-ui{{/if}}:
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}:
     build: ./projects/{{this.basePath}}
-    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.appName}}-ui{{/if}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
     networks:
@@ -61,7 +61,7 @@ services:
     {{/each}}
     {{/if}}
     {{#if this.environments}}
-    env_file: ".{{toLowerCase this.config.appName}}.env"
+    env_file: ".{{toLowerCase this.config.name}}.env"
     {{/if}}
     stdin_open: true
     labels:

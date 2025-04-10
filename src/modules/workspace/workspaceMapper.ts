@@ -27,7 +27,7 @@ export const mapProjectToWorkspace = async (
 
   workspace.projects.push({
     config: config.config,
-    basePath: `${config.config.appName ?? config.config.apiName}`,
+    basePath: `${config.config.name}`,
     environments: [],
     ports: {
       internal: basePort + index,
@@ -36,13 +36,13 @@ export const mapProjectToWorkspace = async (
     dependsOn: [],
     dataSource: isSpringBoot? {
       dbPassword: "password",
-      dbName: `${config.config.apiName}_db`,
+      dbName: `${config.config.name}_db`,
       ports: {
         internal: 5434 + index,
         external: 5434 + index,
       },
       volumes: {
-        name: `${config.config.apiName}_data`,
+        name: `${config.config.name}_data`,
         path: '/var/lib/postgresql/data2',
         driver: 'local'
       }
@@ -73,7 +73,7 @@ export const updateProjectInWorkspace = async (
 
   workspace.projects[projectIndex] = {
     config: config.config,
-    basePath: `${config.config.appName ?? config.config.apiName}`,
+    basePath: `${config.config.name}`,
     environments: [],
     ports: {
       internal: basePort + index,

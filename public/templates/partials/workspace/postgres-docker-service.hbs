@@ -1,6 +1,6 @@
-{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.apiName}}{{/if}}:
+{{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.name}}{{/if}}:
   image: postgres:{{#if resourceConfig.dataSource.imageVersion}}{{resourceConfig.dataSource.imageVersion}}{{else}}16-alpine{{/if}}
-  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.apiName}}{{/if}}
+  container_name: {{#if resourceConfig.dataSource.containerName}}{{resourceConfig.dataSource.containerName}}{{else}}postgres-{{toLowerCase resourceConfig.config.name}}{{/if}}
   environment:
     - POSTGRES_USER="{{#if resourceConfig.dataSource.dbUser}}{{resourceConfig.dataSource.dbUser}}{{else}}postgres{{/if}}"
     - POSTGRES_PASSWORD="{{resourceConfig.dataSource.dbPassword}}"

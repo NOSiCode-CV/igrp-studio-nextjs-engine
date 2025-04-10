@@ -8,7 +8,7 @@ const baseConfig: AppConfig = {
   id: 'task-management-project',
   workspaceId: 'none',
   type: 'nextjs',
-  appName: 'taskManagement',
+  name: 'taskManagement',
 };
 
 describe('Create new task management application module', () => {
