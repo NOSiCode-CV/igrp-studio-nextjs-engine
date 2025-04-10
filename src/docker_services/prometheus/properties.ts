@@ -5,63 +5,60 @@ import { PROMETHEUS } from './index';
 
 export function prometheusProperties() {
   return {
-    type: "object",
-    properties: {
-      image: { type: "string", required: true, default: "prom/prometheus:v2.51.2" },
-      container_name: { type: "string", required: false, default: "prometheus" },
-      command: {
-        type: "array",
-        default: [
-          { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
-        ],
-        items: {
-          type: "object",
-          properties: {
-            instruction: {
-              type: "string",
-              required: true
-            }
-          }
-        },
-        required: false
-      },
-      ports: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            internal: { type: "number", required: true, default: 9090 },
-            external: { type: "number", required: true, default: 9090}
-          }
-        },
-        default: [
-          {
-            internal: 9090,
-            external: 9090
-          }
-        ]
-      },
-      hostname: { type: "string", required: false, default: 'prometheus' },
-      networks: {
-        type: "array",
-        default: [
-          { network: "{{slug}}-workspace" }
-        ],
-        items: { type: "object", properties: { network: { type: "number", required: true } } }
-      },
-      volumes: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            name: { type: "string", required: true, default: "./monitoring/prometheus/prometheus.yml" },
-            path: { type: "string", required: true, default: "/etc/prometheus/prometheus.yml" },
-            driver: { type: "string", required: true, default: "none" }
+    image: { type: "string", required: true, default: "prom/prometheus:v2.51.2" },
+    container_name: { type: "string", required: false, default: "prometheus" },
+    command: {
+      type: "array",
+      default: [
+        { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
+      ],
+      items: {
+        type: "object",
+        properties: {
+          instruction: {
+            type: "string",
+            required: true
           }
         }
       },
-      labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
-    }
+      required: false
+    },
+    ports: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          internal: { type: "number", required: true, default: 9090 },
+          external: { type: "number", required: true, default: 9090}
+        }
+      },
+      default: [
+        {
+          internal: 9090,
+          external: 9090
+        }
+      ]
+    },
+    hostname: { type: "string", required: false, default: 'prometheus' },
+    networks: {
+      type: "array",
+      default: [
+        { network: "{{slug}}-workspace" }
+      ],
+      items: { type: "object", properties: { network: { type: "number", required: true } } }
+    },
+    volumes: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          name: { type: "string", required: true, default: "./monitoring/prometheus/prometheus.yml" },
+          path: { type: "string", required: true, default: "/etc/prometheus/prometheus.yml" },
+          driver: { type: "string", required: true, default: "none" }
+        }
+      }
+    },
+    labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
   }
 }
 

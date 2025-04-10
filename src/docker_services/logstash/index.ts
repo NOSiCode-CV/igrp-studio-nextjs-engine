@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(LOGSTASH);
     dockerService.loadLabel("Logstash");
-    dockerService.getProperties(logstashProperties);
+    dockerService.getProperties(logstashProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

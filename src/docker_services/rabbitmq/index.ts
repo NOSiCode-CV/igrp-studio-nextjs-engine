@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(RABBITMQ);
     dockerService.loadLabel("RabbitMQ Server");
-    dockerService.getProperties(rabbitmqProperties);
+    dockerService.getProperties(rabbitmqProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

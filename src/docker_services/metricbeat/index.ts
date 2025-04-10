@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(METRICBEAT);
     dockerService.loadLabel("Metricbeat");
-    dockerService.getProperties(metricbeatProperties);
+    dockerService.getProperties(metricbeatProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(KIBANA);
     dockerService.loadLabel("Kibana");
-    dockerService.getProperties(kibanaProperties);
+    dockerService.getProperties(kibanaProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

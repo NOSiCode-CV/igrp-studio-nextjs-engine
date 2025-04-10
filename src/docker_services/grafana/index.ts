@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(GRAFANA);
     dockerService.loadLabel("Grafana");
-    dockerService.getProperties(grafanaProperties);
+    dockerService.getProperties(grafanaProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

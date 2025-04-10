@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(MYSQL);
     dockerService.loadLabel("MySQL Server");
-    dockerService.getProperties(mysqlProperties);
+    dockerService.getProperties(mysqlProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

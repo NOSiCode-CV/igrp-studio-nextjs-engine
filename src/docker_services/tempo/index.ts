@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(TEMPO);
     dockerService.loadLabel("Tempo");
-    dockerService.getProperties(tempoProperties);
+    dockerService.getProperties(tempoProperties());
     dockerService.loadVolumes(tempoVolumes())
     dockerService.setRenderer(defaultRenderer);
   }

@@ -1,4 +1,5 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function areaChartProperties() {
   return {
@@ -57,10 +58,7 @@ export function areaChartPropertiesMapping() {
 
 export function areaChartChildProperties() {
   return {
-    data: { type: 'array', required: true, items: 'object' },
-    xAxisKey: { type: 'string', required: true },
-    series: { type: 'array', required: true, items: { key: 'string', color: 'string' } },
-    height: { type: 'number', required: false }
+
   };
 }
 
@@ -70,5 +68,11 @@ export function areaChartChildPropertiesMapping() {
     xAxisKey: 'xAxisKey',
     series: 'series',
     height: 'height'
+  };
+}
+
+export function areaChartInteractions() {
+  return {
+    onClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK), required: true },
   };
 }

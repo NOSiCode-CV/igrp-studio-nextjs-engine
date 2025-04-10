@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(REDIS);
     dockerService.loadLabel("Redis Server");
-    dockerService.getProperties(redisProperties);
+    dockerService.getProperties(redisProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

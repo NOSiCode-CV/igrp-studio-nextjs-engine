@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(PROMETHEUS);
     dockerService.loadLabel("Prometheus");
-    dockerService.getProperties(prometheusProperties);
+    dockerService.getProperties(prometheusProperties());
     dockerService.loadVolumes(prometheusVolumes());
     dockerService.setRenderer(defaultRenderer);
   }

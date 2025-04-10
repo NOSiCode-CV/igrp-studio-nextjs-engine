@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(LOKI);
     dockerService.loadLabel("Loki");
-    dockerService.getProperties(lokiProperties);
+    dockerService.getProperties(lokiProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

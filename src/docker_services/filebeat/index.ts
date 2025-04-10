@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(FILEBEAT);
     dockerService.loadLabel("Filebeat");
-    dockerService.getProperties(filebeatProperties);
+    dockerService.getProperties(filebeatProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

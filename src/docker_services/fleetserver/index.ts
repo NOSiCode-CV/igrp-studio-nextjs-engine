@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(FLEETSERVER);
     dockerService.loadLabel("Elastic Fleet Server");
-    dockerService.getProperties(fleetserverProperties);
+    dockerService.getProperties(fleetserverProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(ORACLE);
     dockerService.loadLabel("Oracle Database");
-    dockerService.getProperties(oracleProperties);
+    dockerService.getProperties(oracleProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

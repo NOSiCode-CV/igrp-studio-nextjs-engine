@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(APMSERVER);
     dockerService.loadLabel("Elastic APM Server");
-    dockerService.getProperties(apmserverProperties);
+    dockerService.getProperties(apmserverProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 

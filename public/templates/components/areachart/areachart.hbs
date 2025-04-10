@@ -12,6 +12,13 @@
     {{/if~}}
     ]
   }
+  {{#if resourceConfig.properties.customLegend}}
+  customLegend={
+    <>
+    {{{resourceConfig.properties.customLegend}}}
+    </>
+  }
+  {{/if}}
   categoryKey="{{resourceConfig.properties.categoryKey}}"
   {{#if resourceConfig.properties.title}}
   title="{{resourceConfig.properties.title}}"

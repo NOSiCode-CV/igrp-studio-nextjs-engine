@@ -6,7 +6,7 @@ export default {
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(ELASTICSEARCH);
     dockerService.loadLabel("Elastic Search");
-    dockerService.getProperties(elasticsearchProperties);
+    dockerService.getProperties(elasticsearchProperties());
     dockerService.setRenderer(defaultRenderer);
   }
 
