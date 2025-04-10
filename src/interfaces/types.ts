@@ -487,6 +487,15 @@ export interface DockerServiceLogging {
   options?: DockerServiceLoggingOptions
 }
 
+export interface DockerServiceUserLimitsMemLock {
+  soft?: number,
+  hard?: number
+}
+
+export interface DockerServiceUserLimits {
+  memlock: DockerServiceUserLimitsMemLock;
+}
+
 export interface DockerContainer {
   image: string,
   build?: string,
@@ -513,6 +522,7 @@ export interface DockerContainer {
   deploy?: ResourceLimits,
   healthcheck?: DockerServiceHealthcheck,
   logging?: DockerServiceLogging,
+  ulimits?: DockerServiceUserLimits,
   ipc?: string,
   pid?: string,
   runtime?: string,

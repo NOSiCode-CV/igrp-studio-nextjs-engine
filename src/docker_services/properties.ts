@@ -103,6 +103,16 @@ export function getBaseDockerServiceProperties() {
           }
         }
       },
+      ulimits: {
+        type: "object",
+        properties: {
+          memlock: {
+            type: "object",
+            required: true,
+            properties: { soft: { type: "number", required: false, default: -1 }, hard: { type: "number", required: false, default: -1 }, }
+          }
+        }
+      },
       ipc: { type: "string", required: false },
       pid: { type: "string", required: false },
       runtime: { type: "string", required: false },

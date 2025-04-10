@@ -654,6 +654,40 @@ const baseConfig: WorkspaceProjectsConfig = {
           { key: 'type', value: 'observability'}
         ]
       }
+    },
+    {
+      id: "redis_1",
+      name: "redis",
+      properties: {
+        image: "redis:8.0-rc1",
+        container_name: "redis",
+        hostname: "redis",
+        restart: "always",
+        ports: [
+          {
+            internal: 6379,
+            external: 6379
+          }
+        ],
+        command: [
+          { instruction: 'redis-server' },
+          { instruction: '--requirepass' },
+          { instruction: 'password' },
+        ],
+        volumes: [
+          {
+            name: "redis_data",
+            path: "/data",
+            driver: "local"
+          }
+        ],
+        networks: [
+          { network: "my-workspace-network" }
+        ],
+        labels: [
+          { key: 'type', value: 'cache'}
+        ]
+      }
     }
   ]
 };
@@ -678,27 +712,28 @@ const projectConfig: ProjectWorkspace = {
 const serviceConfig: ServiceWorkspace = {
   id: 'my_workspace',
   service: {
-    id: "grafana_1",
-    name: "grafana",
+    id: "redis_1",
+    name: "redis",
     properties: {
-      image: "grafana/grafana:10.4.2",
-      container_name: "grafana",
-      hostname: "grafana",
+      image: "redis:8.0-rc1",
+      container_name: "redis",
+      hostname: "redis",
+      restart: "always",
       ports: [
         {
-          internal: 2000,
-          external: 2000
+          internal: 6379,
+          external: 6379
         }
       ],
-      environments:  [
-        { key: "GF_SECURITY_ADMIN_USER", value: "admin" },
-        { key: "GF_SECURITY_ADMIN_PASSWORD", value: "password" },
-        { key: "GF_USERS_ALLOW_SIGN_UP", value: "false" },
+      command: [
+        { instruction: 'redis-server' },
+        { instruction: '--requirepass' },
+        { instruction: 'password' },
       ],
       volumes: [
         {
-          name: "grafana_data",
-          path: "/var/lib/grafana",
+          name: "redis_data",
+          path: "/data",
           driver: "local"
         }
       ],
@@ -706,7 +741,7 @@ const serviceConfig: ServiceWorkspace = {
         { network: "my-workspace-network" }
       ],
       labels: [
-        { key: 'type', value: 'observability'}
+        { key: 'type', value: 'cache'}
       ]
     }
   }

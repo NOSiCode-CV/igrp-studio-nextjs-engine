@@ -12,6 +12,13 @@ import promtailModule, { PROMTAIL } from './promtail/index';
 import lokiModule, { LOKI } from './loki/index';
 import tempoModule, { TEMPO } from './tempo/index';
 import grafanaModule, { GRAFANA } from './grafana/index';
+import elasticsearchModule, { ELASTICSEARCH } from './elasticsearch/index';
+import kibanaModule, { KIBANA } from './kibana/index';
+import logstashModule, { LOGSTASH } from './logstash/index';
+import filebeatModule, { FILEBEAT } from './filebeat/index';
+import metricbeatModule, { METRICBEAT } from './metricbeat/index';
+import apmServerModule, { APMSERVER } from './apmserver/index';
+import fleetServerModule, { FLEETSERVER } from './fleetserver/index';
 
 export function registerAllServices() {
 
@@ -33,11 +40,23 @@ export function registerAllServices() {
   register(RABBITMQ, rabbitMqModule.register);
 
   // Observability
+
   register(OPENTELEMETRY, opentelemetryModule.register);
+
+  // Grafana Stack
   register(PROMETHEUS, prometheusModule.register);
   register(PROMTAIL, promtailModule.register);
   register(LOKI, lokiModule.register);
   register(TEMPO, tempoModule.register);
   register(GRAFANA, grafanaModule.register);
+
+  // Elastic Stack
+  register(ELASTICSEARCH, elasticsearchModule.register);
+  register(KIBANA, kibanaModule.register);
+  register(LOGSTASH, logstashModule.register);
+  register(FILEBEAT, filebeatModule.register);
+  register(METRICBEAT, metricbeatModule.register);
+  register(APMSERVER, apmServerModule.register);
+  register(FLEETSERVER, fleetServerModule.register);
 
 }

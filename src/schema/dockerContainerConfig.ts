@@ -5,7 +5,7 @@ import {
   DockerServiceConfig, DockerServiceHealthcheck,
   DockerServiceInstruction, DockerServiceLogging, DockerServiceLoggingOptions,
   DockerServiceResourceLimit,
-  DockerServiceResources, Environment,
+  DockerServiceResources, DockerServiceUserLimits, DockerServiceUserLimitsMemLock, Environment,
   Expose, Host,
   Network, Port,
   Profile,
@@ -336,6 +336,39 @@ const loggingConfigSchema: JSONSchemaType<DockerServiceLogging> = {
   additionalProperties: false
 }
 
+const memLockSchema: JSONSchemaType<DockerServiceUserLimitsMemLock> = {
+  type: 'object',
+  properties: {
+    soft: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The soft attribute, if provided, must be a valid number.'
+    },
+    hard: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The hard attribute, if provided, must be a valid number.'
+    },
+  },
+  additionalProperties: false,
+};
+
+const userLimitsConfigSchema: JSONSchemaType<DockerServiceUserLimits> = {
+  type: 'object',
+  properties: {
+    memlock: {
+      type: "object",
+      anyOf: [
+        memLockSchema
+      ],
+      errorMessage: "The 'options' field, if provided, must be a valid Docker Service Logging Options configuration.",
+    },
+  },
+  required: ['memlock'],
+  errorMessage: "",
+  additionalProperties: false
+}
+
 export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
   type: 'object',
   properties: {
@@ -489,6 +522,14 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
         loggingConfigSchema
       ],
       errorMessage: "The 'logging' field, if provided, must be a valid Docker Service Logging configuration.",
+    },
+    ulimits: {
+      type: "object",
+      nullable: true,
+      anyOf: [
+        userLimitsConfigSchema
+      ],
+      errorMessage: "The 'ulimits' field, if provided, must be a valid Docker Service User Limits configuration.",
     },
     ipc: {
       type: 'string',

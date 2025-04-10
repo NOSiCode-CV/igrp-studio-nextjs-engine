@@ -157,6 +157,18 @@ logging:
     {{/if}}
   {{/if}}
 {{/if}}
+{{#if resourceConfig.ulimits}}
+ulimits:
+  {{#if resourceConfig.ulimits.memlock}}
+  memlock:
+    {{#if resourceConfig.ulimits.memlock.soft}}
+    soft: "{{resourceConfig.ulimits.memlock.soft}}"
+    {{/if}}
+    {{#if resourceConfig.ulimits.memlock.hard}}
+    hard: "{{resourceConfig.ulimits.memlock.hard}}"
+    {{/if}}
+  {{/if}}
+{{/if}}
 {{#if resourceConfig.ipc}}
 ipc: {{resourceConfig.ipc}}
 {{/if}}
