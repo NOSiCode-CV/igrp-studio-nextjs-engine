@@ -22,9 +22,12 @@ export const renderTemplate = async (templateName: string, context: any) => {
     throw ERROR_MESSAGE.EMPTY_CONTEXT;
   }
 
+  loadComponentPartials();
+
   loadPartials();
 
-  context.registry = registryService
+  context.registryService = registryService
+  context.registry = registry
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
@@ -78,7 +81,7 @@ export const renderServiceTemplate = (templateName: string, context: any) => {
 
   loadPartials();
 
-  context.registry = registryService
+  context.registryService = registryService
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');

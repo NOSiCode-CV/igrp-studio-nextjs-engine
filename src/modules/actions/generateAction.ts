@@ -1,6 +1,6 @@
 import { getActionDir } from '../../utils/helpers';
 import { saveToFileSync } from '../common/saveToFile';
-import { renderServiceTemplate } from '../common/renderTemplate';
+import { renderSyncTemplate } from '../common/renderTemplate';
 import { DIRECTORIES, ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
 import { ActionConfig, RenderContext } from '../../interfaces/types';
 
@@ -24,5 +24,5 @@ export const generateAction = (context: RenderContext<ActionConfig, ActionConfig
 const renderAction = (context: RenderContext<ActionConfig, ActionConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_ACTION_CONFIG;
 
-  return renderServiceTemplate(TEMPLATES.ACTION, context);
+  return renderSyncTemplate(TEMPLATES.ACTION, context);
 };

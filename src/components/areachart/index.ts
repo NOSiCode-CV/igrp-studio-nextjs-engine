@@ -2,7 +2,7 @@ import {
   areaChartPropertiesMapping,
   areaChartProperties,
   areaChartChildProperties,
-  areaChartChildPropertiesMapping,
+  areaChartChildPropertiesMapping, areaChartInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -17,11 +17,11 @@ export default {
     component.loadLabel('Area Chart')
     component.getProperties(areaChartProperties());
     component.getPropertiesMapping(areaChartPropertiesMapping());
+    component.getInteractions(areaChartInteractions());
     component.getChildProperties(areaChartChildProperties());
     component.getChildPropertiesMapping(areaChartChildPropertiesMapping());
 
     component.loadStates([
-      'const [areaChartData, setAreaChartData] = useState([]);'
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -108,6 +108,12 @@ export function baseInteraction(defaultCustomSet?: string, label?: string) {
             type: 'string', required: false
           },
         }
+      },
+      type: {
+        type: 'string',
+        required: true,
+        enum: ["function", "action", "both"],
+        default: "function"
       }
     }
   };

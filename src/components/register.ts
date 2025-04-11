@@ -7,6 +7,8 @@ import cardFooterModule, { CARD_FOOTER } from './card/children/cardFooter';
 import cardHeaderModule, { CARD_HEADER } from './card/children/cardHeader';
 import carouselModule, { CAROUSEL } from './carousel';
 import chartModule, { AREACHART } from './areachart';
+import horizontalBarChartModule, { HORIZONTAL_BAR_CHART } from './horizontalbarchart';
+import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 import chatModule, { CHAT } from './chat';
 import checkboxModule, { CHECKBOX } from './checkbox';
 import columnModule, { COLUMN } from './column';
@@ -72,6 +74,7 @@ import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters
 import tabsModule, { TABS } from './tabs';
 
 export function registerAllComponents() {
+  register(AREACHART, chartModule.register);
   register(ASPECT, aspectModule.register);
   register(BUTTON, buttonModule.register);
   register(CARD, cardModule.register);
@@ -79,7 +82,6 @@ export function registerAllComponents() {
   register(CARD_FOOTER, cardFooterModule.register);
   register(CARD_HEADER, cardHeaderModule.register);
   register(CAROUSEL, carouselModule.register);
-  register(AREACHART, chartModule.register);
   register(CHAT, chatModule.register);
   register(CHECKBOX, checkboxModule.register);
   register(COLUMN, columnModule.register);
@@ -92,6 +94,7 @@ export function registerAllComponents() {
   register(FRAGMENT, fragmentModule.register);
   register(GRID, gridModule.register);
   register(HEADLINE, headlineModule.register);
+  register(HORIZONTAL_BAR_CHART, horizontalBarChartModule.register);
   register(ICON, iconModule.register);
   register(INPUT, inputModule.register);
   register(INPUT_ADD_ON, inputAddOnModule.register);
@@ -116,6 +119,7 @@ export function registerAllComponents() {
   register(STACK, stackModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
+  register(VERTICAL_BAR_CHART, verticalBarChartModule.register);
 
   // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);

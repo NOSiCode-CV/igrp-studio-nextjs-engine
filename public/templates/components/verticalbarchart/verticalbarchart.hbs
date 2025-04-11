@@ -1,13 +1,11 @@
-<IGRPAreaChart
-  areas={
+<IGRPVerticalBarChart
+  bars={
     [
-    {{#if resourceConfig.properties.areas}}
-      {{#each resourceConfig.properties.areas}}
+    {{#if resourceConfig.properties.bars}}
+      {{#each resourceConfig.properties.bars}}
         {
           dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.fillOpacity}}fillOpacity: {{this.fillOpacity}},{{/if~}}
-          {{#if this.gradient}}gradient: {{this.gradient}},{{/if~}}
+          {{#if this.radius}}radius: {{this.radius}},{{/if~}}
         },
       {{/each}}
     {{/if~}}
@@ -53,6 +51,15 @@
   {{/if~}}
   {{#if resourceConfig.properties.width}}
   width={ {{resourceConfig.properties.width}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.barRadius}}
+  barRadius={ {{resourceConfig.properties.barRadius}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.barGap}}
+  barGap={ {{resourceConfig.properties.barGap}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.barCategoryGap}}
+  barCategoryGap={ {{resourceConfig.properties.barCategoryGap}} }
   {{/if~}}
   {{#if resourceConfig.properties.showReferenceZero}}
   showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
@@ -104,4 +111,4 @@
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
 >
-</IGRPAreaChart>
+</IGRPVerticalBarChart>

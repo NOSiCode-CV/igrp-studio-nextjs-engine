@@ -6,7 +6,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../src/utils/constant
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-export const inputLayout: Layout = {
+export const chartLayout: Layout = {
   id: 'default_section',
   componentName: 'section',
   properties: {
@@ -32,10 +32,118 @@ export const inputLayout: Layout = {
           properties: {
             areas: [
               {
+                dataKey: 'temperature',
                 type: 'linear',
               },
-
-            ]
+            ],
+            categoryKey: "mes",
+            title: "Temperatura Média",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Temperatura diminuindo com a chegada do inverno",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}°C`",
+              type: "function"
+            },
+            data: {
+              fnName: 'dadosVisitantes',
+              fnCustomCode: {
+                fnCode: `
+  const dadosVisitantes = [
+    { mes: "Jan", temperature: 420 },
+    { mes: "Fev", temperature: 520 },
+    { mes: "Mar", temperature: 610 },
+    { mes: "Abr", temperature: 450 },
+    { mes: "Mai", temperature: 480 },
+    { mes: "Jun", temperature: 520 },
+  ];
+                `,
+              },
+              type: "function"
+            },
+          }
+        },
+        {
+          id: 'hor_chart_bar',
+          componentName: 'horizontalBarchart',
+          properties: {
+            bars: [
+              {
+                dataKey: 'temperature',
+                radius: 5
+              },
+            ],
+            categoryKey: "mes",
+            title: "Temperatura Média",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Temperatura diminuindo com a chegada do inverno",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}°C`",
+              type: "function"
+            },
+            data: {
+              fnCustomSet: 'dadosVisitantes',
+              type: "function"
+            },
+          }
+        },
+        {
+          id: 'ver_chart_bar',
+          componentName: 'verticalBarchart',
+          properties: {
+            bars: [
+              {
+                dataKey: 'temperature',
+                radius: 5
+              },
+            ],
+            categoryKey: "mes",
+            title: "Temperatura Média",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Temperatura diminuindo com a chegada do inverno",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}°C`",
+              type: "function"
+            },
+            data: {
+              fnCustomSet: 'dadosVisitantes',
+              type: "function"
+            },
           }
         },
       ]
@@ -44,19 +152,19 @@ export const inputLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  id: 'i76Typ9lm2m1',
+  id: 'i89Ayp9lmL2p',
   type: 'page',
-  pageName: 'inputs',
-  path: 'inputs',
-  components: inputLayout,
+  pageName: 'charts',
+  path: 'charts',
+  components: chartLayout,
 };
 
 beforeAll(async () => {
   await initComponents();
 });
 
-describe('Inputs module',() =>{
-  it('should save the input page configuration file', async()=> {
+describe('Charts module',() =>{
+  it('should save the chart page configuration file', async()=> {
     await newPage(pageConfig, OUTPUT_DIR);
   })
 

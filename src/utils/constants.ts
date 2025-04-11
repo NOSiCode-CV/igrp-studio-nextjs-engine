@@ -126,6 +126,8 @@ export const INTERACTIONS_TYPES = {
   ON_CHECK: "On check",
   ON_KEY_DOWN: "On key down",
   ACTION: "Action",
+  LABEL_FORMATTER: "Label Formatter",
+  VALUE_FORMATTER: "Label Formatter",
 
   // Values
   CHECKED: "Checked",
@@ -137,6 +139,7 @@ export const INTERACTIONS_TYPES = {
 export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_NO_EVENT: '() => {}',
   ON_CLICK_WITH_EVENT: '(e) => {}',
+  FUNCTION_WITH_VALUE: '(value) => {}',
   NULLABLE: 'null',
 
 }

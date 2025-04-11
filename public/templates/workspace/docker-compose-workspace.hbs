@@ -78,7 +78,7 @@ services:
   {{/each}}
 
 volumes:
-  {{#each (extractVolumes resourceConfig basePath registry)}}
+  {{#each (extractVolumes resourceConfig basePath registryService)}}
   {{this.name}}:
     driver: {{#if this.driver}}{{this.driver}}{{else}}local{{/if}}
   {{/each}}
