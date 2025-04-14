@@ -67,7 +67,14 @@ export function minioProperties() {
           path: { type: "string", required: true, default: "/minio_data" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "./minio_data/",
+          path: "/minio_data",
+          driver: "local"
+        }
+      ]
     },
     command: {
       type: "array",

@@ -65,7 +65,7 @@ export function elasticsearchProperties() {
           name: { type: "string", required: true, default: "elasticsearch_data" },
           path: { type: "string", required: true, default: "/usr/share/elasticsearch/data/" },
           driver: { type: "string", required: true, default: "local" }
-        }
+        },
       },
       default: [
         {

@@ -56,7 +56,14 @@ export function prometheusProperties() {
           path: { type: "string", required: true, default: "/etc/prometheus/prometheus.yml" },
           driver: { type: "string", required: true, default: "none" }
         }
-      }
+      },
+      default: [
+        {
+          name: "./monitoring/prometheus/prometheus.yml",
+          path: "/etc/prometheus/prometheus.yml",
+          driver: "none"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
   }

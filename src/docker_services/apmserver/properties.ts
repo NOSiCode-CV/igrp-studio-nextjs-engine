@@ -9,7 +9,13 @@ export function apmserverProperties() {
         properties: {
           internal: { type: "number", required: true, default: 8200 },
           external: { type: "number", required: true, default: 8200}
-        }
+        },
+        default: [
+          {
+            internal: 8200,
+            external: 8200
+          }
+        ]
       },
     },
     hostname: { type: "string", required: false, default: 'apm-server' },

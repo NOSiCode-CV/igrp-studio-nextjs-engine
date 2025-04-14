@@ -11,7 +11,13 @@ export function oracleProperties() {
           internal: { type: "number", required: true, default: 1521 },
           external: { type: "number", required: true, default: 1521 }
         }
-      }
+      },
+      default: [
+        {
+          internal: 1521,
+          external: 1521
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'oracle' },
     environments: {
@@ -41,9 +47,16 @@ export function oracleProperties() {
         properties: {
           name: { type: "string", required: true, default: "my-init.sql" },
           path: { type: "string", required: true, default: "/container-entrypoint-initdb.d/my-init.sql:ro" },
-          driver: { type: "string", required: true, default: "local" }
+          driver: { type: "string", required: true, default: "none" }
         }
-      }
+      },
+      default: [
+        {
+          name: "my-init.sql",
+          path: "/container-entrypoint-initdb.d/my-init.sql:ro",
+          driver: "none"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },
   }

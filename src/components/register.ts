@@ -7,8 +7,6 @@ import cardFooterModule, { CARD_FOOTER } from './card/children/cardFooter';
 import cardHeaderModule, { CARD_HEADER } from './card/children/cardHeader';
 import carouselModule, { CAROUSEL } from './carousel';
 import chartModule, { AREACHART } from './areachart';
-import horizontalBarChartModule, { HORIZONTAL_BAR_CHART } from './horizontalbarchart';
-import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 import chatModule, { CHAT } from './chat';
 import checkboxModule, { CHECKBOX } from './checkbox';
 import columnModule, { COLUMN } from './column';
@@ -21,6 +19,7 @@ import formModule, { FORM } from './form';
 import fragmentModule, { FRAGMENT } from './fragment';
 import gridModule, { GRID } from './grid';
 import headlineModule, { HEADLINE } from './headline';
+import horizontalBarChartModule, { HORIZONTAL_BAR_CHART } from './horizontalbarchart';
 import iconModule, { ICON } from './icon';
 import inputModule, { INPUT } from './input';
 import inputAddOnModule, { INPUT_ADD_ON } from './inputAddOn';
@@ -35,8 +34,10 @@ import inputTextareaModule, { INPUT_TEXTAREA } from './inputTextarea';
 import inputTimeModule, { INPUT_TIME } from './inputTime';
 import inputUrlModule, { INPUT_URL } from './inputUrl';
 import labelModule, { LABEL } from './label';
+import lineChartModule, { LINECHART } from './linechart';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import paragraphModule, { PARAGRAPH } from './paragraph';
+import pieChartModule, { PIECHART } from './piechart';
 import radioModule, { RADIO } from './radio';
 import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
 import sectionModule, { SECTION } from './section';
@@ -69,9 +70,9 @@ import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table
 import tableAlertActionModule, { TABLE_ALERT_ACTION } from './table/children/tableAlertAction';
 import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/tableLinkAction';
 import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tableModalAction';
-
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
+import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 
 export function registerAllComponents() {
   register(AREACHART, chartModule.register);
@@ -109,8 +110,10 @@ export function registerAllComponents() {
   register(INPUT_TIME, inputTimeModule.register);
   register(INPUT_URL, inputUrlModule.register);
   register(LABEL, labelModule.register);
+  register(LINECHART, lineChartModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(PARAGRAPH, paragraphModule.register);
+  register(PIECHART, pieChartModule.register);
   register(RADIO, radioModule.register);
   register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);

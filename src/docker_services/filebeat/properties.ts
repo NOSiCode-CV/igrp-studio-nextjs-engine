@@ -11,6 +11,12 @@ export function filebeatProperties() {
           external: { type: "number", required: true, default: 5045} // TODO: check how to handle default port
         }
       },
+      default: [
+        {
+          internal: 5045,
+          external: 5045
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'filebeat' },
     dependsOn: {

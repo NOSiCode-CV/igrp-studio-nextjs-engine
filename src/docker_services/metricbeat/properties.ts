@@ -11,6 +11,12 @@ export function metricbeatProperties() {
           external: { type: "number", required: true, default: 5046} // TODO: check how to handle default port
         }
       },
+      default: [
+        {
+          internal: 5046,
+          external: 5046
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'metricbeat' },
     dependsOn: {

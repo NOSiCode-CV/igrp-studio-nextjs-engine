@@ -11,7 +11,13 @@ export function mysqlProperties() {
           internal: { type: "number", required: true, default: 3306 },
           external: { type: "number", required: true, default: 3306 }
         }
-      }
+      },
+      default: [
+        {
+          internal: 3306,
+          external: 3306
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'mysql' },
     environments: {
@@ -44,7 +50,14 @@ export function mysqlProperties() {
           path: { type: "string", required: true, default: "/var/lib/mysql" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "mysql_data",
+          path: "/var/lib/mysql",
+          driver: "local"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },
   }

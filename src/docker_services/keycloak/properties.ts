@@ -15,7 +15,13 @@ export function keycloakProperties() {
           internal: { type: "number", required: true, default: 8090 },
           external: { type: "number", required: true, default: 8090 }
         }
-      }
+      },
+      default: [
+        {
+          internal: 8090,
+          external: 8090
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'keycloak' },
     environments: {
@@ -57,7 +63,14 @@ export function keycloakProperties() {
           path: { type: "string", required: true, default: "/opt/keycloak/data/import" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "./data/",
+          path: "/opt/keycloak/data/import",
+          driver: "local"
+        }
+      ]
     },
     extra_hosts: {
       type: "array",

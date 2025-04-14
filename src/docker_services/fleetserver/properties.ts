@@ -11,6 +11,12 @@ export function fleetserverProperties() {
           external: { type: "number", required: true, default: 8220}
         }
       },
+      default: [
+        {
+          internal: 8220,
+          external: 8220
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'fleet-server' },
     dependsOn: {

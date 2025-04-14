@@ -51,7 +51,14 @@ export function rabbitmqProperties() {
           path: { type: "string", required: true, default: "/var/lib/rabbitmq" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "rabbitmq_data",
+          path: "/var/lib/rabbitmq",
+          driver: "local"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "messaging" } } } },
   }

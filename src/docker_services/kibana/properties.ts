@@ -11,6 +11,12 @@ export function kibanaProperties() {
           external: { type: "number", required: true, default: 5601}
         }
       },
+      default: [
+        {
+          internal: 5601,
+          external: 5601
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'kibana' },
     environments: {

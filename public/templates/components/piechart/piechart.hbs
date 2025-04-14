@@ -1,0 +1,117 @@
+<IGRPPieChart
+  pies={
+    [
+    {{#if resourceConfig.properties.pies}}
+      {{#each resourceConfig.properties.pies}}
+        {
+          dataKey: '{{this.dataKey}}',
+          {{#if this.type}}type: '{{this.type}}',{{/if~}}
+          {{#if this.innerRadius}}innerRadius: {{this.innerRadius}},{{/if~}}
+          {{#if this.outerRadius}}outerRadius: {{this.outerRadius}},{{/if~}}
+          {{#if this.paddingAngle}}paddingAngle: {{this.paddingAngle}},{{/if~}}
+          {{#if this.cornerRadius}}cornerRadius: {{this.cornerRadius}},{{/if~}}
+          {{#if this.startAngle}}startAngle: {{this.startAngle}},{{/if~}}
+          {{#if this.cx}}cx: {{this.cx}},{{/if~}}
+          {{#if this.cy}}cy: {{this.cy}},{{/if~}}
+          {{#if this.showLabels}}showLabels: {{this.showLabels}},{{/if~}}
+          {{#if this.dot}}dot: {{this.dot}},{{/if~}}
+          {{#if this.labelType}}labelType: '{{this.labelType}}',{{/if~}}
+          {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
+          {{#if this.labelPosition}}labelPosition: '{{this.labelPosition}}',{{/if~}}
+          {{#if this.labelLine}}labelLine: {{this.labelLine}},{{/if~}}
+          {{#if this.activeIndex}}activeIndex: {{this.activeIndex}},{{/if~}}
+          {{#if this.activeShape}}activeShape: {{this.activeShape}},{{/if~}}
+        },
+      {{/each}}
+    {{/if~}}
+    ]
+  }
+  {{#if resourceConfig.properties.customLegend}}
+  customLegend={
+    <>
+    {{{resourceConfig.properties.customLegend}}}
+    </>
+  }
+  {{/if}}
+  categoryKey="{{resourceConfig.properties.categoryKey}}"
+  {{#if resourceConfig.properties.title}}
+  title="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.description}}
+  description="{{resourceConfig.properties.description}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showGrid}}
+  showGrid={ {{resourceConfig.properties.showGrid}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showTooltip}}
+  showTooltip={ {{resourceConfig.properties.showTooltip}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.hideAxis}}
+  hideAxis={ {{resourceConfig.properties.hideAxis}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.hideXAxis}}
+  hideXAxis={ {{resourceConfig.properties.hideXAxis}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.hideYAxis}}
+  hideYAxis={ {{resourceConfig.properties.hideYAxis}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.stacked}}
+  stacked={ {{resourceConfig.properties.stacked}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.expanded}}
+  expanded={ {{resourceConfig.properties.expanded}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.height}}
+  height={ {{resourceConfig.properties.height}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.width}}
+  width={ {{resourceConfig.properties.width}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showReferenceZero}}
+  showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.gridColor}}
+  gridColor="{{resourceConfig.properties.gridColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.backgroundColor}}
+  backgroundColor="{{resourceConfig.properties.backgroundColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.axisColor}}
+  axisColor="{{resourceConfig.properties.axisColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.footer}}
+  footer={
+    {
+      description: "{{resourceConfig.properties.footer.description}}"
+    }
+  }
+  {{/if~}}
+  {{#if resourceConfig.properties.legendPosition}}
+  legendPosition="{{resourceConfig.properties.legendPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.valueDomain}}
+  valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{!--loading={ {{resourceConfig.id}}Loading }--}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
+>
+</IGRPPieChart>

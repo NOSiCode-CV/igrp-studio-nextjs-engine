@@ -11,7 +11,13 @@ export function postgresProperties() {
           internal: { type: "number", required: true, default: 5434 },
           external: { type: "number", required: true, default: 5434 }
         }
-      }
+      },
+      default: [
+        {
+          internal: 5434,
+          external: 5434
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'postgres' },
     environments: {
@@ -44,7 +50,14 @@ export function postgresProperties() {
           path: { type: "string", required: true, default: "/var/lib/postgresql/data" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "postgres_data",
+          path: "/var/lib/postgresql/data",
+          driver: "local"
+        }
+      ]
     },
     shm_size: { type: "string", required: false, default: "128mb" },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },

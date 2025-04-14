@@ -81,7 +81,14 @@ export function opentelemetryProperties() {
           path: { type: "string", required: true, default: "/etc/otelcol-cont/otel-collector.yml" },
           driver: { type: "string", required: true, default: "none" }
         }
-      }
+      },
+      default: [
+        {
+          name: "./monitoring/collector/otel-collector.yml",
+          path: "/etc/otelcol-cont/otel-collector.yml",
+          driver: "none"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
   }

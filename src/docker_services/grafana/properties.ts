@@ -11,6 +11,12 @@ export function grafanaProperties() {
           external: { type: "number", required: true, default: 2000}
         }
       },
+      default: [
+        {
+          internal: 2000,
+          external: 2000
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'grafana' },
     environments: {
@@ -41,7 +47,14 @@ export function grafanaProperties() {
           path: { type: "string", required: true, default: "/var/lib/grafana" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "grafana_data",
+          path: "/var/lib/grafana",
+          driver: "local"
+        }
+      ]
     },
     labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
   }

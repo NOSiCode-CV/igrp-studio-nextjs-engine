@@ -146,6 +146,88 @@ export const chartLayout: Layout = {
             },
           }
         },
+        {
+          id: 'line_chart',
+          componentName: 'linechart',
+          properties: {
+            lines: [
+              {
+                dataKey: 'temperature',
+              },
+            ],
+            categoryKey: "mes",
+            title: "Temperatura Média",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Temperatura diminuindo com a chegada do inverno",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}°C`",
+              type: "function"
+            },
+            data: {
+              fnCustomSet: 'dadosVisitantes',
+              type: "function"
+            },
+          }
+        },
+        {
+          id: 'pie_chart',
+          componentName: 'piechart',
+          properties: {
+            pies: [
+              {
+                dataKey: 'users',
+                showLabels: true
+              },
+            ],
+            categoryKey: "mes",
+            title: "Temperatura Média",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Temperatura diminuindo com a chegada do inverno",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}°C`",
+              type: "function"
+            },
+            data: {
+              fnName: 'dadosNavegadores',
+              fnCustomCode: {
+                fnCode: `
+  const dadosNavegadores = [
+    { browser: "Chrome", users: 620 },
+    { browser: "Safari", users: 480 },
+    { browser: "Firefox", users: 350 },
+    { browser: "Edge", users: 290 },
+    { browser: "Other", users: 150 },
+  ];
+                `,
+              },
+              type: "function"
+            },
+          }
+        },
       ]
     },
   ]

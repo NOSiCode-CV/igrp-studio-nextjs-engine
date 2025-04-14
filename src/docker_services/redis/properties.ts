@@ -11,7 +11,13 @@ export function redisProperties() {
           internal: { type: "number", required: true, default: 6379 },
           external: { type: "number", required: true, default: 6379 }
         }
-      }
+      },
+      default: [
+        {
+          internal: 8200,
+          external: 8200
+        }
+      ]
     },
     hostname: { type: "string", required: false, default: 'redis' },
     environments: {
@@ -37,7 +43,14 @@ export function redisProperties() {
           path: { type: "string", required: true, default: "/data" },
           driver: { type: "string", required: true, default: "local" }
         }
-      }
+      },
+      default: [
+        {
+          name: "redis_data",
+          path: "/data",
+          driver: "local"
+        }
+      ]
     },
     command: {
       type: "array",
