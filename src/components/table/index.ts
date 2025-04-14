@@ -8,16 +8,6 @@ import {
 import { Component, hbsRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
 import { TABLE_FILTERS } from './children/tableFilters';
-import { TABLE_EXPANDER_CELL } from './children/tableExpanderCell';
-import { TABLE_TEXT_CELL } from './children/tableTextCell';
-import { TABLE_AMOUNT_CELL } from './children/tableAmountCell';
-import { TABLE_DATE_CELL } from './children/tableDateCell';
-import { TABLE_DATE_FILTER } from './children/tableDateFilter';
-import { TABLE_DROPDOWN_FILTER } from './children/tableDropdownFilter';
-import { TABLE_FACETED_FILTER } from './children/tableFacetedFilter';
-import { TABLE_INPUT_FILTER } from './children/tableInputFilter';
-import { TABLE_MINMAX_FILTER } from './children/tableMixMaxFilter';
-import { TABLE_SELECT_FILTER } from './children/tableSelectFilter';
 
 export default {
   register(component: Component) {

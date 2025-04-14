@@ -11,7 +11,7 @@ import {
   typeResolution, trim, toCamelCase,
 } from '../helpers/stringHelpers';
 import { getAttribute, getIndex, length } from '../helpers/arrayHelpers';
-import { greaterThan, equals, and, not } from '../helpers/comparisonHelpers';
+import { greaterThan, equals, and, not, or } from '../helpers/comparisonHelpers';
 import { componentNameHelper } from '../helpers/componentNameHelper';
 import { fieldHelper } from '../helpers/fieldHelper';
 import { Default, isValidation, yupValidation } from '../helpers/validationHelpers';
@@ -84,6 +84,7 @@ Handlebars.registerHelper("getAttribute", getAttribute);
 Handlebars.registerHelper("gt", greaterThan);
 Handlebars.registerHelper("eq", equals);
 Handlebars.registerHelper("and", and);
+Handlebars.registerHelper("or", or);
 Handlebars.registerHelper("not", not);
 
 // Validation

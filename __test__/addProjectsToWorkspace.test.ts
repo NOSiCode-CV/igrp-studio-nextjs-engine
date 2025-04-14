@@ -710,39 +710,70 @@ const projectConfig: ProjectWorkspace = {
 }
 
 const serviceConfig: ServiceWorkspace = {
-  id: 'my_workspace',
-  service: {
-    id: "redis_1",
-    name: "redis",
-    properties: {
-      image: "redis:8.0-rc1",
-      container_name: "redis",
-      hostname: "redis",
-      restart: "always",
-      ports: [
+  "id": "",
+  "service": {
+    "id": "svc-1744633175793",
+    "name": "opentelemetry",
+    "properties": {
+      "image": "otel/opentelemetry-collector-contrib:0.82.0",
+      "container_name": "otel-collector",
+      "restart": "always",
+      "command": [
         {
-          internal: 6379,
-          external: 6379
+          "instruction": "--config=/etc/otelcol-cont/otel-collector.yml"
         }
       ],
-      command: [
-        { instruction: 'redis-server' },
-        { instruction: '--requirepass' },
-        { instruction: 'password' },
-      ],
-      volumes: [
+      "ports": [
         {
-          name: "redis_data",
-          path: "/data",
-          driver: "local"
+          "external": 1888,
+          "internal": 1888
+        },
+        {
+          "external": 8888,
+          "internal": 8888
+        },
+        {
+          "external": 8889,
+          "internal": 8889
+        },
+        {
+          "external": 13133,
+          "internal": 13133
+        },
+        {
+          "external": 4317,
+          "internal": 4317
+        },
+        {
+          "external": 4318,
+          "internal": 4318
+        },
+        {
+          "external": 55679,
+          "internal": 55679
         }
       ],
-      networks: [
-        { network: "my-workspace-network" }
+      "hostname": "otel-collector",
+      "networks": [
+        {
+          "network": "igrp-workspace-workspace"
+        }
       ],
-      labels: [
-        { key: 'type', value: 'cache'}
-      ]
+      "volumes": [
+        {
+          "name": "./monitoring/collector/otel-collector.yml",
+          "path": "/etc/otelcol-cont/otel-collector.yml",
+          "driver": "none"
+        }
+      ],
+      "labels": [
+        {
+          "key": "type",
+          "value": "observability"
+        }
+      ],
+      "environments": [],
+      "dependsOn": []
     }
   }
 }

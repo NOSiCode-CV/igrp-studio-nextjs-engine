@@ -22,7 +22,7 @@ export function cellPropertiesMapping() {
 
 export function cellProperties(defaultTitle?: string) {
   return {
-    headerType: { type: 'string', required: false, enum: [ 'sortToggle', 'sortDropdown' ] },
+    headerType: { type: 'string', required: false, enum: [ 'sortToggle', 'sortDropdown', 'rowsSelect' ] },
     headerTitle: { type: 'string', required: false, default: defaultTitle ?? 'New Column' },
   };
 }

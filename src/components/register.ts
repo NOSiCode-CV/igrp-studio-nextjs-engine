@@ -28,6 +28,7 @@ import inputAddOnModule, { INPUT_ADD_ON } from './inputAddOn';
 import inputColorModule, { INPUT_COLOR } from './inputColor';
 import inputDatePickerModule, { INPUT_DATE_PICKER } from './inputDatePicker';
 import inputFileModule, { INPUT_FILE } from './inputFile';
+import inputHiddenModule, { INPUT_HIDDEN } from './inputHidden/index';
 import inputNumberModule, { INPUT_NUMBER } from './inputNumber';
 import inputPasswordModule, { INPUT_PASSWORD } from './inputPassword';
 import inputPhoneModule, { INPUT_PHONE } from './inputPhone';
@@ -50,6 +51,7 @@ import stackModule, { STACK } from './stack';
 import switchModule, { SWITCH } from './switch';
 import tableModule, { TABLE } from './table';
 import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCell';
+import tableCheckboxCellModule, { TABLE_CHECKBOX_CELL } from './table/children/tableCheckboxCell/index';
 import tableColumnsModule, { TABLE_COLUMNS } from './table/children/tableColumns';
 import tableExpanderCellModule, { TABLE_EXPANDER_CELL } from './table/children/tableExpanderCell';
 import tableAmountCellModule, { TABLE_AMOUNT_CELL } from './table/children/tableAmountCell';
@@ -107,6 +109,7 @@ export function registerAllComponents() {
   register(INPUT_COLOR, inputColorModule.register);
   register(INPUT_DATE_PICKER, inputDatePickerModule.register);
   register(INPUT_FILE, inputFileModule.register);
+  register(INPUT_HIDDEN, inputHiddenModule.register);
   register(INPUT_NUMBER, inputNumberModule.register);
   register(INPUT_PASSWORD, inputPasswordModule.register);
   register(INPUT_PHONE, inputPhoneModule.register);
@@ -133,6 +136,7 @@ export function registerAllComponents() {
   // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);
   register(TABLE_COLUMNS, tableColumnsModule.register);
+  register(TABLE_CHECKBOX_CELL, tableCheckboxCellModule.register);
   register(TABLE_EXPANDER_CELL, tableExpanderCellModule.register);
   register(TABLE_FILTERS, tableFiltersModule.register);
   register(TABLE_AMOUNT_CELL, tableAmountCellModule.register);

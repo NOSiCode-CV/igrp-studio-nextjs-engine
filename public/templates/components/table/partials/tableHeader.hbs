@@ -4,6 +4,10 @@
 {{#if (eq properties.headerType 'sortDropdown')}}
 ({ column }) => <IGRPDataTableHeaderSortDropdown column={column} title="{{properties.headerTitle}}" />
 {{else}}
+{{#if (eq properties.headerType 'rowsSelect')}}
+({ table }) => <IGRPDataTableHeaderRowsSelect table={table} title="{{properties.headerTitle}}" />
+{{else}}
 '{{properties.headerTitle}}'
+{{/if~}}
 {{/if~}}
 {{/if~}}

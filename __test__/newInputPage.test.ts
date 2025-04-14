@@ -444,6 +444,15 @@ export const inputLayout: Layout = {
             }
           }
         },
+        {
+          id: 'input_hidden',
+          componentName: 'inputHidden',
+          properties: {
+            name: 'input_hidden',
+            labelText: 'Input Hidden',
+            helperText: 'This is hidden',
+          },
+        },
       ],
     },
     {

@@ -13,11 +13,12 @@ import { TABLE_AMOUNT_CELL } from '../tableAmountCell';
 import { TABLE_DATE_CELL } from '../tableDateCell';
 import { TABLE_BADGE_CELL } from '../tableBadgeCell';
 import { TABLE_ACTION_LIST_CELL } from '../tableActionListCell';
+import { TABLE_CHECKBOX_CELL } from '../tableCheckboxCell/index';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDataTableHeaderSortToggle, IGRPDataTableHeaderSortDropdown, IGRPDataTableHeaderRowsSelected } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPDataTableHeaderSortToggle, IGRPDataTableHeaderSortDropdown, IGRPDataTableHeaderRowsSelect } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableColumnsVariants());
@@ -31,6 +32,7 @@ export default {
     component.loadStates([]);
 
     component.loadChildrenTypes([
+      { name: TABLE_CHECKBOX_CELL, isDefault: false },
       { name: TABLE_EXPANDER_CELL, isDefault: false },
       { name: TABLE_TEXT_CELL, isDefault: false },
       { name: TABLE_AMOUNT_CELL, isDefault: false },
@@ -40,6 +42,7 @@ export default {
     ]);
 
     component.loadAcceptedChildren([
+      { name: TABLE_CHECKBOX_CELL, isDefault: false },
       { name: TABLE_EXPANDER_CELL, isDefault: false },
       { name: TABLE_TEXT_CELL, isDefault: false },
       { name: TABLE_AMOUNT_CELL, isDefault: false },

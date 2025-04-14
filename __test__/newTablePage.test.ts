@@ -37,6 +37,13 @@ const tableLayout: Layout = {
           properties: {},
           children: [
             {
+              id: 'check',
+              componentName: 'tableCheckboxCell',
+              properties: {
+                headerType: "rowsSelect"
+              },
+            },
+            {
               id: 'expand',
               componentName: 'tableExpanderCell',
               properties: {

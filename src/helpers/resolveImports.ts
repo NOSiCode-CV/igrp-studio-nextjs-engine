@@ -6,8 +6,6 @@ import { toLowerCase } from './stringHelpers';
 
 export function resolveImports(config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, isPage: boolean = true): string {
 
-  console.log("Registry Within: ", registry)
-
   if(!config) return ''
 
   const imports = new Set<string>();
