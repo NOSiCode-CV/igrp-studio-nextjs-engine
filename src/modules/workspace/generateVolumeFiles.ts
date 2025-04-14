@@ -8,6 +8,8 @@ export const generateVolumeFiles = (service: WorkspaceService, volume: Volume, b
 
   const serviceElement = registry[service.name]
 
+  if(!serviceElement) return
+
   if (Object.entries(serviceElement.volumes).length > 0) {
     const file = serviceElement.volumes[volume.path]
     if(!file) return
