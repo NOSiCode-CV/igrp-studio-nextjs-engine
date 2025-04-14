@@ -1,40 +1,23 @@
-<IGRPPieChart
-  pies={
+<IGRPRadarChart
+  radars={
     [
-    {{#if resourceConfig.properties.pies}}
-      {{#each resourceConfig.properties.pies}}
+    {{#if resourceConfig.properties.radars}}
+      {{#each resourceConfig.properties.radars}}
         {
           dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.innerRadius}}innerRadius: {{this.innerRadius}},{{/if~}}
-          {{#if this.outerRadius}}outerRadius: {{this.outerRadius}},{{/if~}}
-          {{#if this.paddingAngle}}paddingAngle: {{this.paddingAngle}},{{/if~}}
-          {{#if this.cornerRadius}}cornerRadius: {{this.cornerRadius}},{{/if~}}
-          {{#if this.startAngle}}startAngle: {{this.startAngle}},{{/if~}}
-          {{#if this.cx}}cx: {{this.cx}},{{/if~}}
-          {{#if this.cy}}cy: {{this.cy}},{{/if~}}
-          {{#if this.showLabels}}showLabels: {{this.showLabels}},{{/if~}}
+          {{#if this.fill}}fill: '{{this.fill}}',{{/if~}}
+          {{#if this.fillOpacity}}fillOpacity: {{this.fillOpacity}},{{/if~}}
+          {{#if this.strokeWidth}}strokeWidth: {{this.strokeWidth}},{{/if~}}
           {{#if this.dot}}dot: {{this.dot}},{{/if~}}
-          {{#if this.labelType}}labelType: '{{this.labelType}}',{{/if~}}
           {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
-          {{#if this.labelPosition}}labelPosition: '{{this.labelPosition}}',{{/if~}}
-          {{#if this.labelLine}}labelLine: {{this.labelLine}},{{/if~}}
-          {{#if this.activeIndex}}activeIndex: {{this.activeIndex}},{{/if~}}
-          {{#if this.activeShape}}activeShape: {{this.activeShape}},{{/if~}}
+          {{#if this.isAnimationActive}}isAnimationActive: {{this.isAnimationActive}},{{/if~}}
         },
       {{/each}}
     {{/if~}}
     ]
   }
-  {{#if resourceConfig.properties.customLegend}}
-  customLegend={
-    <>
-    {{{resourceConfig.properties.customLegend}}}
-    </>
-  }
-  {{/if}}
-  nameKey="{{resourceConfig.properties.nameKey}}"
   categoryKey="{{resourceConfig.properties.categoryKey}}"
+  angleAxisKey="{{resourceConfig.properties.angleAxisKey}}"
   {{#if resourceConfig.properties.title}}
   title="{{resourceConfig.properties.title}}"
   {{/if~}}
@@ -87,14 +70,35 @@
     }
   }
   {{/if~}}
-  {{#if resourceConfig.properties.legendPosition}}
-  legendPosition="{{resourceConfig.properties.legendPosition}}"
+  {{#if resourceConfig.properties.polarGridType}}
+  polarGridType="{{resourceConfig.properties.polarGridType}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
-  size="{{resourceConfig.properties.size}}"
+  {{#if resourceConfig.properties.polarGridLineType}}
+  polarGridLineType="{{resourceConfig.properties.polarGridLineType}}"
   {{/if~}}
-  {{#if resourceConfig.properties.valueDomain}}
-  valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
+  {{#if resourceConfig.properties.showPolarGrid}}
+  showPolarGrid={ {{resourceConfig.properties.showPolarGrid}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showRadiusAxis}}
+  showRadiusAxis={ {{resourceConfig.properties.showRadiusAxis}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.radiusAxisDomain}}
+  radiusAxisDomain=[{{resourceConfig.properties.radiusAxisDomain.min}}, {{resourceConfig.properties.radiusAxisDomain.max}}]
+  {{/if~}}
+  {{#if resourceConfig.properties.radiusAxisAngle}}
+  radiusAxisAngle={ {{resourceConfig.properties.radiusAxisAngle}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.customAngleAsisTick}}
+  customAngleAsisTick={ {{{json resourceConfig.properties.customAngleAsisTick}}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showGridLines}}
+  showGridLines={ {{resourceConfig.properties.showGridLines}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showRadiusLines}}
+  showRadiusLines={ {{resourceConfig.properties.showRadiusLines}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.gridFilled}}
+  gridFilled={ {{resourceConfig.properties.gridFilled}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
@@ -115,4 +119,4 @@
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
 >
-</IGRPPieChart>
+</IGRPRadarChart>

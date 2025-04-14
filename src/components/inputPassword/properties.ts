@@ -5,6 +5,7 @@ export function inputPasswordProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputPassword Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
+    name: { type: 'string', required: true, default: 'password' },
     placeholder: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },

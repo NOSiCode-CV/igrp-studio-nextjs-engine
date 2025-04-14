@@ -3,6 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputTimeProperties() {
   return {
+    name: { type: 'string', required: true, default: 'time' },
     labelText: { type: 'string', required: false, default: 'InputTime Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },

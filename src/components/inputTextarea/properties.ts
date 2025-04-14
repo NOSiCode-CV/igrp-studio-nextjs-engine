@@ -3,6 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputTextareaProperties() {
   return {
+    name: { type: 'string', required: true, default: 'textarea' },
     labelText: { type: 'string', required: false, default: 'InputTextarea Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },

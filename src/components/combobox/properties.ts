@@ -1,9 +1,9 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
-export function selectProperties() {
+export function comboboxProperties() {
   return {
-    labelText: { type: 'string', required: false, default: "Select Input" },
+    labelText: { type: 'string', required: false, default: "Combobox Input" },
     variant: { type: 'string', required: false, default: 'single', enum: ['single', 'multiple'] },
     //floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false, default: "Select an option..." },
@@ -29,33 +29,32 @@ export function selectProperties() {
   };
 }
 
-export function selectPropertiesMapping() {
+export function comboboxPropertiesMapping() {
   return {...commonPropertiesMapping()};
 }
 
-export function selectChildProperties() {
+export function comboboxChildProperties() {
   return {};
 }
 
-export function selectChildPropertiesMapping() {
+export function comboboxChildPropertiesMapping() {
   return {};
 }
 
-export function selectInteractions() {
+export function comboboxInteractions() {
   return {
     value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
-    onValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
-    onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_OPEN), required: false },
+    onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
 
-export function selectInteractionsMapping() {
+export function comboboxInteractionsMapping() {
   return {
 
   };
 }
 
-export function selectVariants() {
+export function comboboxVariants() {
   return {
     single: "single",
     multiple: "multiple",

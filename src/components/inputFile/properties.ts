@@ -5,7 +5,7 @@ export function inputFileProperties() {
   return {
     labelText: { type: 'string', required: false, default: 'InputFile Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: false, default: '' },
+    name: { type: 'string', required: true, default: 'file' },
     error: { type: 'string', required: false },
     accept: { type: 'string', required: false, default: 'application/pdf' },
     customId: { type: 'string', required: false, default: '{{id}}' },

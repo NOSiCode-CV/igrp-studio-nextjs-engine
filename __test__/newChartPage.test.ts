@@ -185,14 +185,15 @@ export const chartLayout: Layout = {
           id: 'pie_chart',
           componentName: 'piechart',
           properties: {
+            nameKey: 'browser',
             pies: [
               {
                 dataKey: 'users',
                 showLabels: true
               },
             ],
-            categoryKey: "mes",
-            title: "Temperatura Média",
+            categoryKey: "browser",
+            title: "Média de Utilizadores",
             description: "Janeiro - Junho 2024",
             showGrid: true,
             legendPosition: "bottom",
@@ -203,12 +204,12 @@ export const chartLayout: Layout = {
             referenceLineColor: "#e5e7eb",
             axisColor: "#d1d5db",
             footer: {
-              description: "Temperatura diminuindo com a chegada do inverno",
+              description: "Números de utilizadores por browser",
             },
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}°C`",
+              fnCustomSet: "(value: number) => `${value}`",
               type: "function"
             },
             data: {
@@ -224,6 +225,42 @@ export const chartLayout: Layout = {
   ];
                 `,
               },
+              type: "function"
+            },
+          }
+        },
+        {
+          id: 'radar_chart',
+          componentName: 'radarchart',
+          properties: {
+            radars: [
+              {
+                dataKey: 'users',
+                showLabels: true
+              },
+            ],
+            categoryKey: "browser",
+            title: "Média de Utilizadores",
+            description: "Janeiro - Junho 2024",
+            showGrid: true,
+            legendPosition: "bottom",
+            tooltipIndicator: "dot",
+            showReferenceZero: true,
+            size: 'md',
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Números de utilizadores por browser",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}`",
+              type: "function"
+            },
+            data: {
+              fnCustomSet: 'dadosNavegadores',
               type: "function"
             },
           }

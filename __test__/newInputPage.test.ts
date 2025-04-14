@@ -36,6 +36,7 @@ export const inputLayout: Layout = {
           componentName: 'inputPassword',
           properties: {
             type: 'password',
+            name: 'input_password',
             placeholder: 'Enter your password',
           },
         },
@@ -153,6 +154,13 @@ export const inputLayout: Layout = {
           properties: {
             labelText: 'Type',
             placeholder: 'Choose an option',
+            showSearch: true,
+            showGroup: true,
+            showStatus: true,
+            showIcon: true,
+            iconProperties: {
+              iconName: "CornerDownRight",
+            },
             options: [
               { value: '01', label: 'Option 1' },
               { value: '02', label: 'Option 2' },
@@ -160,7 +168,7 @@ export const inputLayout: Layout = {
             ],
           },
           interactions: {
-            onChange: {
+            onValueChange: {
               fnCustomSet: '(e) => setSelect(e)',
               fnCustomCode: {
                 states: [
@@ -176,9 +184,45 @@ export const inputLayout: Layout = {
           }
         },
         {
+          id: 'input_combobox',
+          componentName: 'combobox',
+          properties: {
+            labelText: 'Type',
+            placeholder: 'Choose an option',
+            showSearch: true,
+            showGroup: true,
+            showStatus: true,
+            showIcon: true,
+            iconProperties: {
+              iconName: "CornerDownRight",
+            },
+            options: [
+              { value: '01', label: 'Option 1' },
+              { value: '02', label: 'Option 2' },
+              { value: '03', label: 'Option 3' },
+            ],
+          },
+          interactions: {
+            onChange: {
+              fnCustomSet: '(e) => setCombobox(e)',
+              fnCustomCode: {
+                states: [
+                  { state: `const [combobox, setCombobox] = useState(null);` }
+                ]
+              },
+              type: 'function'
+            },
+            value: {
+              fnCustomSet: 'combobox',
+              type: 'function'
+            }
+          }
+        },
+        {
           id: 'input_color',
           componentName: 'inputColor',
           properties: {
+            name: 'input_color',
             labelText: 'Color',
             showIcon: true,
             iconName: 'House',
@@ -209,6 +253,7 @@ export const inputLayout: Layout = {
           id: 'input_file_single',
           componentName: 'inputFile',
           properties: {
+            name: 'input_file_single',
             labelText: 'File',
             placeholder: 'Upload a file...',
             error: 'Unsupported file extension',
@@ -234,6 +279,7 @@ export const inputLayout: Layout = {
           id: 'input_file_multiple',
           componentName: 'inputFile',
           properties: {
+            name: 'input_file_multiple',
             labelText: 'Files',
             placeholder: 'Upload many files...',
             multiple: true,
@@ -260,6 +306,7 @@ export const inputLayout: Layout = {
           id: 'input_number',
           componentName: 'inputNumber',
           properties: {
+            name: 'input_number',
             labelText: 'Number',
             description: 'A number from 1 to 10',
             placeholder: 'Enter a number...',
@@ -289,6 +336,7 @@ export const inputLayout: Layout = {
           id: 'input_phone',
           componentName: 'inputPhone',
           properties: {
+            name: 'input_phone',
             labelText: 'Phone Number',
             placeholder: 'Enter a phone number...',
             error: 'Invalid phone number',
@@ -316,6 +364,7 @@ export const inputLayout: Layout = {
           id: 'input_time',
           componentName: 'inputTime',
           properties: {
+            name: 'input_time',
             labelText: 'Time',
             helperText: 'Enter the time',
             error: 'Invalid time format',
@@ -371,6 +420,7 @@ export const inputLayout: Layout = {
           id: 'input_url',
           componentName: 'inputUrl',
           properties: {
+            name: 'input_url',
             labelText: 'Website',
             helperText: 'Enter the website',
             error: 'Invalid URL format',
@@ -400,6 +450,7 @@ export const inputLayout: Layout = {
       id: 'input_textarea',
       componentName: 'inputTextarea',
       properties: {
+        name: 'input_textarea',
         labelText: 'Text Area',
         helperText: 'Describe your problem',
         rows: 6

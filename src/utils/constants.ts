@@ -121,6 +121,7 @@ export const INTERACTIONS_TYPES = {
   ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
+  ON_OPEN: 'On open',
   ON_PICK: 'On pick',
   ON_SELECT_CHANGE: 'On select',
   ON_CHECK: "On check",

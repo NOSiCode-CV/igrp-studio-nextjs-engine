@@ -13,6 +13,7 @@ export function inputUrlProperties() {
   ]
 
   return {
+    name: { type: 'string', required: true, default: 'url' },
     labelText: { type: 'string', required: false, default: 'InputUrl Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },

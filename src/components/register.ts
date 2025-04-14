@@ -1,5 +1,6 @@
 import { register } from './index';
 import aspectModule, { ASPECT } from './aspect';
+import badgeModule, { BADGE } from './badge';
 import buttonModule, { BUTTON } from './button';
 import cardModule, { CARD } from './card';
 import cardContentModule, { CARD_CONTENT } from './card/children/cardContent';
@@ -11,6 +12,7 @@ import chatModule, { CHAT } from './chat';
 import checkboxModule, { CHECKBOX } from './checkbox';
 import columnModule, { COLUMN } from './column';
 import columnsModule, { COLUMNS } from './columns';
+import comboboxModule, { COMBOBOX } from './combobox';
 import containerModule, { CONTAINER } from './container';
 import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
@@ -38,6 +40,7 @@ import lineChartModule, { LINECHART } from './linechart';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import paragraphModule, { PARAGRAPH } from './paragraph';
 import pieChartModule, { PIECHART } from './piechart';
+import radarChartModule, { RADARCHART } from './radarchart';
 import radioModule, { RADIO } from './radio';
 import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
 import sectionModule, { SECTION } from './section';
@@ -77,6 +80,7 @@ import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 export function registerAllComponents() {
   register(AREACHART, chartModule.register);
   register(ASPECT, aspectModule.register);
+  register(BADGE, badgeModule.register);
   register(BUTTON, buttonModule.register);
   register(CARD, cardModule.register);
   register(CARD_CONTENT, cardContentModule.register);
@@ -87,6 +91,7 @@ export function registerAllComponents() {
   register(CHECKBOX, checkboxModule.register);
   register(COLUMN, columnModule.register);
   register(COLUMNS, columnsModule.register);
+  register(COMBOBOX, comboboxModule.register);
   register(CONTAINER, containerModule.register);
   register(DROPDOWN, dropdownModule.register);
   register(DROPDOWN_ITEM, dropdownItemModule.register);
@@ -114,6 +119,7 @@ export function registerAllComponents() {
   register(PAGEHEADER, pageHeaderModule.register);
   register(PARAGRAPH, paragraphModule.register);
   register(PIECHART, pieChartModule.register);
+  register(RADARCHART, radarChartModule.register);
   register(RADIO, radioModule.register);
   register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);

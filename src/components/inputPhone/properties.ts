@@ -26,7 +26,7 @@ export function inputPhoneProperties() {
     labelText: { type: 'string', required: false, default: 'InputPhone Text' },
     description: { type: 'string', required: false, default: 'A number input text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: false, default: '' },
+    name: { type: 'string', required: true, default: 'phone' },
     dir: { type: 'string', required: false, default: 'ltr' },
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
