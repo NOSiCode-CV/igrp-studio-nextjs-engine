@@ -34,7 +34,7 @@ export function fleetserverProperties() {
     networks: {
       type: "array",
       default: [
-        { network: "{{slug}}-workspace" }
+        { network: "{{slug}}-network" }
       ],
       items: { type: "object", properties: { network: { type: "number", required: true } } }
     },
