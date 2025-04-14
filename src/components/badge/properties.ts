@@ -3,10 +3,12 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function badgeProperties() {
   return {
-    intent: { type: 'string', required: true, default: 'default', enum: ['default', 'secondary', 'success', 'info', 'warning', 'error', 'custom'] },
-    variant: { type: 'string', required: false, default: 'fill', enum: ['fill', 'outline'] },
+    //intent: { type: 'string', required: true, default: 'default', enum: ['default', 'secondary', 'success', 'info', 'warning', 'error', 'custom'] },
+    color: { type: 'string', required: true, default: 'default', enum: ['default', 'primary', 'secondary', 'success', 'error' ] },
+    variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
     children: { type: 'string', required: true },
-    custom: { type: 'string', required: false },
+    customColor: { type: 'string', required: false },
     style: { type: 'string', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
@@ -29,8 +31,9 @@ export function badgeChildPropertiesMapping() {
 
 export function badgeVariants() {
   return {
-    fill: "fill",
+    solid: "solid",
     outline: "outline",
+    soft: "soft",
   };
 }
 

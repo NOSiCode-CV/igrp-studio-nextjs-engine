@@ -1,9 +1,18 @@
 <IGRPBadge
-  intent="{{resourceConfig.properties.intent}}"
+  color="{{resourceConfig.properties.color}}"
   children="{{resourceConfig.properties.children}}"
-  {{#if resourceConfig.variant}}variant="{{resourceConfig.variant}}"{{/if~}}
-  {{#if resourceConfig.properties.customColor}}customColor="{{resourceConfig.properties.customColor}}"{{/if~}}
-  {{#if resourceConfig.properties.style}}style="{{resourceConfig.properties.style}}"{{/if~}}
+  {{#if resourceConfig.properties.variant}}
+  variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.customColor}}
+  customColor="{{resourceConfig.properties.customColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.style}}
+  style="{{resourceConfig.properties.style}}"
+  {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
