@@ -5,75 +5,97 @@ import { PROMETHEUS } from './index';
 
 export function prometheusProperties() {
   return {
-    image: { type: "string", required: true, default: "prom/prometheus:v2.51.2" },
-    container_name: { type: "string", required: false, default: "prometheus" },
+    image: { type: 'string', required: true, default: 'prom/prometheus:v2.51.2' },
+    container_name: { type: 'string', required: false, default: 'prometheus' },
     command: {
-      type: "array",
-      default: [
-        { instruction: '--config.file=/etc/prometheus/prometheus.yml' },
-      ],
+      type: 'array',
+      default: [{ instruction: '--config.file=/etc/prometheus/prometheus.yml' }],
       items: {
-        type: "object",
+        type: 'object',
         properties: {
           instruction: {
-            type: "string",
-            required: true
-          }
-        }
+            type: 'string',
+            required: true,
+          },
+        },
       },
-      required: false
+      required: false,
     },
     ports: {
-      type: "array",
+      type: 'array',
       items: {
-        type: "object",
+        type: 'object',
         properties: {
-          internal: { type: "number", required: true, default: 9090 },
-          external: { type: "number", required: true, default: 9090}
-        }
+          internal: { type: 'number', required: true, default: 9090 },
+          external: { type: 'number', required: true, default: 9090 },
+        },
       },
       default: [
         {
           internal: 9090,
-          external: 9090
-        }
-      ]
-    },
-    hostname: { type: "string", required: false, default: 'prometheus' },
-    networks: {
-      type: "array",
-      default: [
-        { network: "{{slug}}-network" }
+          external: 9090,
+        },
       ],
-      items: { type: "object", properties: { network: { type: "number", required: true } } }
+    },
+    hostname: { type: 'string', required: false, default: 'prometheus' },
+    networks: {
+      type: 'array',
+      default: [{ network: '{{slug}}-network' }],
+      items: { type: 'object', properties: { network: { type: 'number', required: true } } },
     },
     volumes: {
-      type: "array",
+      type: 'array',
       items: {
-        type: "object",
+        type: 'object',
         properties: {
-          name: { type: "string", required: true, default: "./monitoring/prometheus/prometheus.yml" },
-          path: { type: "string", required: true, default: "/etc/prometheus/prometheus.yml" },
-          driver: { type: "string", required: true, default: "none" }
-        }
+          name: {
+            type: 'string',
+            required: true,
+            default: './monitoring/prometheus/prometheus.yml',
+          },
+          path: { type: 'string', required: true, default: '/etc/prometheus/prometheus.yml' },
+          driver: { type: 'string', required: true, default: 'none' },
+        },
       },
       default: [
         {
-          name: "./monitoring/prometheus/prometheus.yml",
-          path: "/etc/prometheus/prometheus.yml",
-          driver: "none"
-        }
-      ]
+          name: './monitoring/prometheus/prometheus.yml',
+          path: '/etc/prometheus/prometheus.yml',
+          driver: 'none',
+        },
+      ],
     },
-    labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "observability" } } } },
-  }
+    labels: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          key: { type: 'string', required: true, default: 'type' },
+          value: { type: 'string', required: true, default: 'observability' },
+        },
+      },
+      default: [
+        {
+          key: 'type',
+          value: 'observability',
+        },
+        {
+          key: 'uuid',
+          value: '{{uuid}}',
+        },
+      ],
+    },
+  };
 }
 
 export function prometheusVolumes(): Record<string, VolumeFile> {
   return {
-    "/etc/prometheus/prometheus.yml": {
-      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, { name: PROMETHEUS, volume: "prometheus.yml" }),
-      context: {}
-    }
-  }
+    '/etc/prometheus/prometheus.yml': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: PROMETHEUS,
+        volume: 'prometheus.yml',
+      }),
+      context: {},
+    },
+  };
 }

@@ -710,50 +710,35 @@ const projectConfig: ProjectWorkspace = {
 }
 
 const serviceConfig: ServiceWorkspace = {
-  "id": "",
+  "id": "fa99f803-a81b-429c-9a07-9800390944da",
   "service": {
-    "id": "svc-1744633175793",
-    "name": "opentelemetry",
+    "id": "svc-1744633175794",
+    "name": "rabbitmq",
     "properties": {
-      "image": "otel/opentelemetry-collector-contrib:0.82.0",
-      "container_name": "otel-collector",
+      "image": "rabbitmq:4.1.0-rc.1",
+      "container_name": "rabbitmq",
       "restart": "always",
-      "command": [
-        {
-          "instruction": "--config=/etc/otelcol-cont/otel-collector.yml"
-        }
-      ],
       "ports": [
         {
-          "external": 1888,
-          "internal": 1888
+          "external": 5672,
+          "internal": 5672
         },
         {
-          "external": 8888,
-          "internal": 8888
-        },
-        {
-          "external": 8889,
-          "internal": 8889
-        },
-        {
-          "external": 13133,
-          "internal": 13133
-        },
-        {
-          "external": 4317,
-          "internal": 4317
-        },
-        {
-          "external": 4318,
-          "internal": 4318
-        },
-        {
-          "external": 55679,
-          "internal": 55679
+          "external": 15672,
+          "internal": 15672
         }
       ],
-      "hostname": "otel-collector",
+      "hostname": "rabbitmq",
+      "environments": [
+        {
+          "key": "RABBITMQ_DEFAULT_USER",
+          "value": "admin"
+        },
+        {
+          "key": "RABBITMQ_DEFAULT_PASS",
+          "value": "password"
+        }
+      ],
       "networks": [
         {
           "network": "igrp-workspace-workspace"
@@ -761,18 +746,17 @@ const serviceConfig: ServiceWorkspace = {
       ],
       "volumes": [
         {
-          "name": "./monitoring/collector/otel-collector.yml",
-          "path": "/etc/otelcol-cont/otel-collector.yml",
+          "name": "rabbitmq_data",
+          "path": "/var/lib/rabbitmq",
           "driver": "none"
         }
       ],
       "labels": [
         {
           "key": "type",
-          "value": "observability"
+          "value": "messaging"
         }
       ],
-      "environments": [],
       "dependsOn": []
     }
   }

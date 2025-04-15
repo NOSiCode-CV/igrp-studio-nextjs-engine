@@ -147,6 +147,58 @@ export const chartLayout: Layout = {
           }
         },
         {
+          id: 'rad_chart_bar',
+          componentName: 'radialBarchart',
+          properties: {
+            bars: [
+              {
+                dataKey: "desktop",
+                name: "Desktop",
+              },
+            ],
+            categoryKey: "month",
+            nameKey: "month",
+            title: "Monthly Stats",
+            description: "Desktop and Mobile Users",
+            showGrid: true,
+            size: "lg",
+            startAngle: 90,
+            endAngle: -270,
+            innerRadius: 30,
+            outerRadius: 140,
+            barSize: 10,
+            legendPosition: "bottom",
+            gridColor: "#e5e7eb",
+            referenceLineColor: "#e5e7eb",
+            axisColor: "#d1d5db",
+            footer: {
+              description: "Desktop usage trends over six months",
+            },
+          },
+          interactions: {
+            valueFormatter: {
+              fnCustomSet: "(value: number) => `${value}`",
+              type: "function"
+            },
+            data: {
+              fnName: 'dadosMensais',
+              fnCustomCode: {
+                fnCode: `
+  const dadosMensais = [
+    { month: "January", desktop: 186, mobile: 80 },
+    { month: "February", desktop: 305, mobile: 200 },
+    { month: "March", desktop: 237, mobile: 120 },
+    { month: "April", desktop: 73, mobile: 190 },
+    { month: "May", desktop: 209, mobile: 130 },
+    { month: "June", desktop: 214, mobile: 140 },
+  ];
+                `,
+              },
+              type: "function"
+            },
+          }
+        },
+        {
           id: 'line_chart',
           componentName: 'linechart',
           properties: {

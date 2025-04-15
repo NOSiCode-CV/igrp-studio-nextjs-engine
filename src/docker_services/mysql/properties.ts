@@ -1,64 +1,89 @@
 export function mysqlProperties() {
   return {
-    image: { type: "string", required: true, default: "mysql:8.0" },
-    container_name: { type: "string", required: false, default: "mysql" },
-    restart: { type: "string", required: false, enum: ['always', 'no', 'on-failure', 'unless-stopped'], default: "always" },
+    image: { type: 'string', required: true, default: 'mysql:8.0' },
+    container_name: { type: 'string', required: false, default: 'mysql' },
+    restart: {
+      type: 'string',
+      required: false,
+      enum: ['always', 'no', 'on-failure', 'unless-stopped'],
+      default: 'always',
+    },
     ports: {
-      type: "array",
+      type: 'array',
       items: {
-        type: "object",
+        type: 'object',
         properties: {
-          internal: { type: "number", required: true, default: 3306 },
-          external: { type: "number", required: true, default: 3306 }
-        }
+          internal: { type: 'number', required: true, default: 3306 },
+          external: { type: 'number', required: true, default: 3306 },
+        },
       },
       default: [
         {
           internal: 3306,
-          external: 3306
-        }
-      ]
+          external: 3306,
+        },
+      ],
     },
-    hostname: { type: "string", required: false, default: 'mysql' },
+    hostname: { type: 'string', required: false, default: 'mysql' },
     environments: {
-      type: "array",
+      type: 'array',
       default: [
-        { key: "MYSQL_DATABASE", value: "${MYSQL_DATABASE}" },
-        { key: "MYSQL_USER", value: "${MYSQL_USER}" },
-        { key: "MYSQL_PASSWORD", value: "${MYSQL_PASSWORD}" },
-        { key: "MYSQL_ROOT_PASSWORD", value: "${MYSQL_ROOT_PASSWORD}" },
+        { key: 'MYSQL_DATABASE', value: '${MYSQL_DATABASE}' },
+        { key: 'MYSQL_USER', value: '${MYSQL_USER}' },
+        { key: 'MYSQL_PASSWORD', value: '${MYSQL_PASSWORD}' },
+        { key: 'MYSQL_ROOT_PASSWORD', value: '${MYSQL_ROOT_PASSWORD}' },
       ],
       items: {
-        type: "object",
-        properties: { key: { type: "string", required: true }, value: { type: "string", required: true } },
-      }
+        type: 'object',
+        properties: {
+          key: { type: 'string', required: true },
+          value: { type: 'string', required: true },
+        },
+      },
     },
-    env_file: { type: "string", required: false, default: ".env" },
+    env_file: { type: 'string', required: false, default: '.env' },
     networks: {
-      type: "array",
-      default: [
-        { network: "{{slug}}-network" }
-      ],
-      items: { type: "object", properties: { network: { type: "number", required: true } } }
+      type: 'array',
+      default: [{ network: '{{slug}}-network' }],
+      items: { type: 'object', properties: { network: { type: 'number', required: true } } },
     },
     volumes: {
-      type: "array",
+      type: 'array',
       items: {
-        type: "object",
+        type: 'object',
         properties: {
-          name: { type: "string", required: true, default: "mysql_data" },
-          path: { type: "string", required: true, default: "/var/lib/mysql" },
-          driver: { type: "string", required: true, default: "local" }
-        }
+          name: { type: 'string', required: true, default: 'mysql_data' },
+          path: { type: 'string', required: true, default: '/var/lib/mysql' },
+          driver: { type: 'string', required: true, default: 'local' },
+        },
       },
       default: [
         {
-          name: "mysql_data",
-          path: "/var/lib/mysql",
-          driver: "local"
-        }
-      ]
+          name: 'mysql_data',
+          path: '/var/lib/mysql',
+          driver: 'local',
+        },
+      ],
     },
-    labels: { type: "array", items: { type: "object", properties: { key: { type: "string", required: true, default: "type" }, value: { type: "string", required: true, default: "database" } } } },
-  }
+    labels: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          key: { type: 'string', required: true, default: 'type' },
+          value: { type: 'string', required: true, default: 'database' },
+        },
+      },
+      default: [
+        {
+          key: 'type',
+          value: 'database',
+        },
+        {
+          key: 'uuid',
+          value: '{{uuid}}',
+        },
+      ],
+    },
+  };
 }

@@ -1,0 +1,126 @@
+<IGRPModalDialog
+  {{#if resourceConfig.properties.title}}
+  title="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.description}}
+  description="{{resourceConfig.properties.description}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.type}}
+  type="{{resourceConfig.properties.type}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.headerClassName}}
+  headerClassName="{{resourceConfig.properties.headerClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showCloseButton}}
+  showCloseButton={ {{resourceConfig.properties.showCloseButton}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.closeOnClickOutside}}
+  closeOnClickOutside={ {{resourceConfig.properties.closeOnClickOutside}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showTrigger}}
+  showTrigger={ {{resourceConfig.properties.showTrigger}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.triggerText}}
+  triggerText="{{resourceConfig.properties.triggerText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.triggerVariant}}
+  triggerVariant="{{resourceConfig.properties.triggerVariant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.triggerButton}}
+  triggerButton={
+    <>
+    {{{resourceConfig.properties.triggerButton}}}
+    </>
+  }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconPlacement}}
+  iconPosition="{{resourceConfig.properties.iconProperties.iconPlacement}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClass="{{resourceConfig.properties.iconClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconSize}}
+  iconSize={ {{resourceConfig.properties.iconProperties.iconSize}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconColor}}
+  iconColor={ {{resourceConfig.properties.iconProperties.iconColor}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showFooter}}
+  showFooter={ {{resourceConfig.properties.showFooter}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.footerClassName}}
+  footerClassName="{{resourceConfig.properties.footerClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.footerDirection}}
+  footerDirection="{{resourceConfig.properties.footerDirection}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.reverseFooterButtons}}
+  reverseFooterButtons={ {{resourceConfig.properties.reverseFooterButtons}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.cancelText}}
+  cancelText="{{resourceConfig.properties.cancelText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.cancelVariant}}
+  cancelVariant="{{resourceConfig.properties.cancelVariant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.confirmText}}
+  confirmText="{{resourceConfig.properties.confirmText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.confirmVariant}}
+  confirmVariant="{{resourceConfig.properties.confirmVariant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.requireConfirmation}}
+  requireConfirmation={ {{resourceConfig.properties.requireConfirmation}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.confirmationText}}
+  confirmationText="{{resourceConfig.properties.confirmationText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.confirmationPlaceholder}}
+  confirmationPlaceholder="{{resourceConfig.properties.confirmationPlaceholder}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.open}}
+  open={ {{resourceConfig.properties.open}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.name}}
+  name="{{resourceConfig.properties.name}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.children}}
+  children={
+    <>
+    {{#if resourceConfig.children}}
+    {{#each resourceConfig.children}}
+    {{{render-layout this}}}
+    {{/each}}
+    {{/if~}}
+    </>
+  }
+  {{/if~}}
+
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if~}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if~}}
+>
+</IGRPModalDialog>

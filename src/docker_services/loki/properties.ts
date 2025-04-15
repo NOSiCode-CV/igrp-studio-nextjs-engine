@@ -47,5 +47,25 @@ export function lokiProperties() {
       type: "array",
       items: { type: "object", properties: { service: { type: "string", required: true, default: "promtail" } } }
     },
+    labels: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          key: { type: 'string', required: true, default: 'type' },
+          value: { type: 'string', required: true, default: 'observability' },
+        },
+      },
+      default: [
+        {
+          key: 'type',
+          value: 'observability',
+        },
+        {
+          key: 'uuid',
+          value: '{{uuid}}',
+        },
+      ],
+    },
   }
 }

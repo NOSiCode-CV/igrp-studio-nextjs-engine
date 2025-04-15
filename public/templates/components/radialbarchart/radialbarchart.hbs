@@ -1,0 +1,144 @@
+<IGRPRadialBarChart
+  bars={
+    [
+    {{#if resourceConfig.properties.bars}}
+      {{#each resourceConfig.properties.bars}}
+        {
+          dataKey: '{{this.dataKey}}',
+          {{#if this.cornerRadius}}
+          cornerRadius: {{this.cornerRadius}},
+          {{/if~}}
+          {{#if this.minAngle}}
+          minAngle: {{this.minAngle}},
+          {{/if~}}
+          {{#if this.background}}
+          background: {{this.background}},
+          {{/if~}}
+          {{#if this.clockWise}}
+          clockWise: {{this.clockWise}},
+          {{/if~}}
+          {{#if this.stackId}}
+          stackId: "{{this.stackId}}",
+          {{/if~}}
+          {{#if this.showLabels}}
+          showLabels: {{this.showLabels}},
+          {{/if~}}
+          {{#if this.labelPosition}}
+          labelPosition: "{{this.labelPosition}}",
+          {{/if~}}
+          {{#if this.labelType}}
+          labelType: "{{this.labelType}}",
+          {{/if~}}
+          {{#if this.labelStyle}}
+          labelStyle: "{{this.labelStyle}}",
+          {{/if~}}
+          {{#if this.name}}
+          name: "{{this.name}}",
+          {{/if~}}
+          {{#if this.color}}
+          color: "{{this.color}}",
+          {{/if~}}
+        },
+      {{/each}}
+    {{/if~}}
+    ]
+  }
+  categoryKey="{{resourceConfig.properties.categoryKey}}"
+  nameKey="{{resourceConfig.properties.nameKey}}"
+  {{#if resourceConfig.properties.title}}
+  title="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.description}}
+  description="{{resourceConfig.properties.description}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showGrid}}
+  showGrid={ {{resourceConfig.properties.showGrid}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showTooltip}}
+  showTooltip={ {{resourceConfig.properties.showTooltip}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showBackground}}
+  showBackground={ {{resourceConfig.properties.showBackground}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showRadiusAxis}}
+  showRadiusAxis={ {{resourceConfig.properties.showRadiusAxis}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.height}}
+  height={ {{resourceConfig.properties.height}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.width}}
+  width={ {{resourceConfig.properties.width}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.startAngle}}
+  startAngle={ {{resourceConfig.properties.startAngle}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.endAngle}}
+  endAngle={ {{resourceConfig.properties.endAngle}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.innerRadius}}
+  innerRadius={ {{resourceConfig.properties.innerRadius}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.outerRadius}}
+  outerRadius={ {{resourceConfig.properties.outerRadius}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.barSize}}
+  barSize={ {{resourceConfig.properties.barSize}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.gridType}}
+  gridType="{{resourceConfig.properties.gridType}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.gridColor}}
+  gridColor="{{resourceConfig.properties.gridColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.backgroundColor}}
+  backgroundColor="{{resourceConfig.properties.backgroundColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.referenceLineColor}}
+  referenceLineColor="{{resourceConfig.properties.referenceLineColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.axisColor}}
+  axisColor="{{resourceConfig.properties.axisColor}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.footer}}
+  footer={
+    {
+      description: "{{resourceConfig.properties.footer.description}}"
+    }
+  }
+  {{/if~}}
+  {{#if resourceConfig.properties.centerText}}
+  centerText={
+    {
+      show: {{resourceConfig.properties.centerText.show}}
+      value: "{{resourceConfig.properties.centerText.value}}"
+      label: "{{resourceConfig.properties.centerText.label}}"
+      formatter: (value: number) => "{{resourceConfig.properties.centerText.formatter}}"
+    }
+  }
+  {{/if~}}
+  {{#if resourceConfig.properties.legendPosition}}
+  legendPosition="{{resourceConfig.properties.legendPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.size}}
+  size="{{resourceConfig.properties.size}}"
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{resourceConfig.properties.className}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{!--loading={ {{resourceConfig.id}}Loading }--}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
+>
+</IGRPRadialBarChart>

@@ -16,9 +16,9 @@ services:
   {{> oracle-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
   {{/if}}
 
-  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}:
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}{{/if}}:
     build: ./projects/{{this.basePath}}
-    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-service{{/if}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}{{/if}}
     {{#if this.dependsOn}}
     depends_on:
     {{#each this.dependsOn}}
@@ -41,6 +41,7 @@ services:
     labels:
       type: "web"
       is_project: true
+      uuid: "{{this.config.id}}"
     {{#if this.config.enableObservability}}
       logging: "promtail"
     {{/if}}
@@ -67,6 +68,7 @@ services:
     labels:
       type: "web"
       is_project: true
+      uuid: "{{this.config.id}}"
 
   {{/if~}}
 
