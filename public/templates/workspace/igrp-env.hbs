@@ -2,10 +2,10 @@
 COMPOSE_PROJECT_NAME={{toLowerCase resourceConfig.workspace}}-workspace
 
 # Access Management
-IGRP_ACCESS_MANAGEMENT_DB_HOSTNAME={{#if resourceConfig.platform.dataSource.dbHostname}}{{resourceConfig.platform.dataSource.dbHostname}}{{else}}igrp_access_management_db{{/if}}
-IGRP_ACCESS_MANAGEMENT_DB_NAME={{resourceConfig.platform.dataSource.dbName}}
-IGRP_ACCESS_MANAGEMENT_DB_USER={{resourceConfig.platform.dataSource.dbUser}}
-IGRP_ACCESS_MANAGEMENT_DB_PASSWORD={{resourceConfig.platform.dataSource.dbPassword}}
+IGRP_ACCESS_MANAGEMENT_DB_HOSTNAME=igrp-access-management-db
+IGRP_ACCESS_MANAGEMENT_DB_NAME=igrp_platform_db
+IGRP_ACCESS_MANAGEMENT_DB_USER=igrp
+IGRP_ACCESS_MANAGEMENT_DB_PASSWORD=1234
 
 # IAM
 IGRP_IAM_DB_HOSTNAME=igrp_iam_db
@@ -17,7 +17,6 @@ IGRP_IAM_ADMIN_USER=admin
 IGRP_IAM_ADMIN_PASSWORD=password
 IGRP_IAM_TENANT=quickstart
 
-IGRP_FILE_MANAGEMENT_USER={{resourceConfig.platform.file.adminUser}}
-IGRP_FILE_MANAGEMENT_PASSWORD={{resourceConfig.platform.file.adminPassword}}
+IGRP_FILE_MANAGEMENT_USER=admin
+IGRP_FILE_MANAGEMENT_PASSWORD=admin12345678
 IGRP_FILE_MANAGEMENT_STORAGE_NAME=igrp
-

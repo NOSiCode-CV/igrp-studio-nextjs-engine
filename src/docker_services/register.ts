@@ -19,8 +19,16 @@ import filebeatModule, { FILEBEAT } from './filebeat/index';
 import metricbeatModule, { METRICBEAT } from './metricbeat/index';
 import apmServerModule, { APMSERVER } from './apmserver/index';
 import fleetServerModule, { FLEETSERVER } from './fleetserver/index';
+import igrpUserManagementModule, { IGRP_USER_MANAGEMENT } from './igrpUserManagement/index';
+import igrpAppManagementModule, { IGRP_APP_MANAGEMENT } from './igrpAppManagement/index';
+import igrpUiModule, { IGRP_UI } from './igrpUi/index';
 
 export function registerAllServices() {
+
+  // iGRP Platform
+  register(IGRP_USER_MANAGEMENT, igrpUserManagementModule.register);
+  register(IGRP_APP_MANAGEMENT, igrpAppManagementModule.register);
+  register(IGRP_UI, igrpUiModule.register);
 
   // Database
   register(POSTGRES, postgresModule.register);

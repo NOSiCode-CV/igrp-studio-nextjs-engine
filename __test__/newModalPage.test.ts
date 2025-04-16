@@ -118,6 +118,25 @@ const modalLayout: Layout = {
 
       ]
     },
+    {
+      id: "modal_dialog_reversed",
+      componentName: "modalDialog",
+      properties: {
+        title: "Reversed Info",
+        description: "This dialog has a reversed button positions.",
+        type: "info",
+        size: "lg",
+        reverseFooterButtons: true,
+        iconProperties: {
+          iconPosition: "top",
+        },
+        triggerText: "Open Reversed",
+        triggerVariant: "primary"
+      },
+      children: [
+
+      ]
+    },
   ]
 };
 

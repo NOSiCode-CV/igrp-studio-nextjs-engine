@@ -7,21 +7,6 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
   // Projects
   let ports: Port[] = context.resourceConfig.projects.map((proj) => proj.ports);
 
-  // Platform
-  ports.push(
-    context.resourceConfig.platform.userManager.ports,
-    context.resourceConfig.platform.appManager.ports,
-    context.resourceConfig.platform.auth.ports,
-    context.resourceConfig.platform.ui.ports,
-    ...context.resourceConfig.platform.file.ports
-  )
-
-  // Datasources
-  ports.push(
-    context.resourceConfig.platform.dataSource.ports,
-    context.resourceConfig.platform.auth.dataSource.ports,
-  )
-
   // Services
 
   const servicePorts = context.resourceConfig.services.map((service) => service.properties.ports).flat();
@@ -52,23 +37,6 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
       .filter((proj) => proj.containerName !== undefined)
       .map((proj) => proj.containerName!);
 
-  // Platform
-  containers.push(
-    context.resourceConfig.platform.userManager.containerName,
-    context.resourceConfig.platform.appManager.containerName,
-    context.resourceConfig.platform.auth.containerName,
-    context.resourceConfig.platform.ui.containerName,
-    context.resourceConfig.platform.file.containerName
-  )
-
-  // Datasources
-
-  if(context.resourceConfig.platform.dataSource.containerName)
-    containers.push(context.resourceConfig.platform.dataSource.containerName)
-
-  if(context.resourceConfig.platform.auth.dataSource.containerName)
-    containers.push(context.resourceConfig.platform.auth.dataSource.containerName)
-
   // Services
 
   const serviceContainers =
@@ -90,19 +58,6 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
   /* volumes */
 
   const volumes: string[] = []
-
-  // Platform
-  volumes.push(
-    context.resourceConfig.platform.auth.volumes.name,
-    context.resourceConfig.platform.file.volumes.name
-  )
-
-  // Datasources
-
-  volumes.push(
-    context.resourceConfig.platform.dataSource.volumes.name,
-    context.resourceConfig.platform.auth.dataSource.volumes.name
-  )
 
   // Services
 
@@ -127,11 +82,6 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
   /* hostnames */
 
   const hostnames: string[] = []
-
-  // Platform
-  hostnames.push(
-    context.resourceConfig.platform.auth.hostname,
-  )
 
   const serviceHostnames =
     context.resourceConfig.services

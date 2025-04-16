@@ -1,6 +1,6 @@
 import {
   ProjectWorkspace, ServiceWorkspace,
-  WorkspaceProjectsConfig,
+  WorkspaceProjectsConfig
 } from '../../interfaces/types';
 import { loadWorkspaceConfig } from '../../utils/helpers';
 

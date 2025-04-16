@@ -5,7 +5,7 @@ import {
   DockerServiceConfig, DockerServiceHealthcheck,
   DockerServiceInstruction, DockerServiceLogging, DockerServiceLoggingOptions,
   DockerServiceResourceLimit,
-  DockerServiceResources, DockerServiceUserLimits, DockerServiceUserLimitsMemLock, Environment,
+  DockerServiceResources, DockerServiceUserLimits, DockerServiceUserLimitsMemLock, Environment, EnvironmentFile,
   Expose, Host,
   Network, Port,
   Profile,
@@ -42,6 +42,18 @@ const environmentSchema: JSONSchemaType<Environment> = {
     },
   },
   required: ['key', 'value'],
+  additionalProperties: false,
+};
+
+const environmentFileSchema: JSONSchemaType<EnvironmentFile> = {
+  type: 'object',
+  properties: {
+    file: {
+      type: 'string',
+      errorMessage: 'The file attribute must be a string.'
+    }
+  },
+  required: ['file'],
   additionalProperties: false,
 };
 
@@ -447,9 +459,10 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
       errorMessage: "The 'environments' attribute must be a valid environments array configuration."
     },
     env_file: {
-      type: 'string',
+      type: 'array',
       nullable: true,
-      errorMessage: "The 'env_file' attribute must be a valid string."
+      items: environmentFileSchema,
+      errorMessage: "The 'env_file' attribute must be a valid environment files array configuration."
     },
     extra_hosts: {
       type: 'array',

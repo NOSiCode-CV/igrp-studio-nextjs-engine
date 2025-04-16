@@ -60,7 +60,10 @@ environment:
 {{/each}}
 {{/if}}
 {{#if resourceConfig.env_file}}
-env_file: "{{resourceConfig.env_file}}"
+env_file:
+{{#each resourceConfig.env_file}}
+  - {{this.file}}
+{{/each}}
 {{/if}}
 {{#if resourceConfig.extra_hosts}}
 extra_hosts:

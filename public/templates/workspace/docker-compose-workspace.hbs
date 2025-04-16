@@ -73,7 +73,7 @@ services:
   {{/if~}}
 
   {{/each}}
-  {{> igrp-docker-services resourceConfig=resourceConfig}}
+  {{!--{{> igrp-docker-services resourceConfig=resourceConfig}}--}}
 
   {{#each resourceConfig.services}}
   {{{render-service this}}}

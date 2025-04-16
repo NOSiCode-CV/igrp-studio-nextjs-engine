@@ -1,5 +1,5 @@
-KC_HOSTNAME=http://${IGRP_IAM_HOSTNAME}:{{resourceConfig.platform.auth.ports.internal}}
-KC_HOSTNAME_PORT={{resourceConfig.platform.auth.ports.internal}}
+KC_HOSTNAME=http://${IGRP_IAM_HOSTNAME}:8080
+KC_HOSTNAME_PORT=8080
 KC_HOSTNAME_STRICT_BACKCHANNEL=false
 KC_HTTP_ENABLED=true
 KC_HOSTNAME_STRICT_HTTPS=false
@@ -8,7 +8,7 @@ KEYCLOAK_ADMIN=${IGRP_IAM_ADMIN_USER}
 KEYCLOAK_ADMIN_PASSWORD=${IGRP_IAM_ADMIN_PASSWORD}
 KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
 KC_DB=postgres
-KC_DB_URL=jdbc:postgresql://${IGRP_IAM_DB_HOSTNAME}:{{resourceConfig.platform.auth.dataSource.ports.internal}}/${IGRP_IAM_DB_NAME}
+KC_DB_URL=jdbc:postgresql://${IGRP_IAM_DB_HOSTNAME}:5433/${IGRP_IAM_DB_NAME}
 KC_DB_USERNAME=${IGRP_IAM_DB_USER}
 KC_DB_PASSWORD=${IGRP_IAM_DB_PASSWORD}
 KEYCLOAK_IMPORT=./igrp-user-management-api/igrp-user-management-api/imports/${IGRP_IAM_TENANT}-realm.json

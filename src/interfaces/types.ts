@@ -1,4 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES } from '../utils/constants';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
 
 interface IdentifiableElement {
   id: string
@@ -313,59 +313,7 @@ export interface WorkspaceConfig extends IdentifiableElement {
 export interface WorkspaceProjectsConfig extends IdentifiableElement {
   workspace: string,
   projects: WorkspaceProject[],
-  services: WorkspaceService[],
-  platform: PlatformServices
-}
-
-export interface PlatformServices {
-  dataSource: ProjectDataSource,
-  appManager: PlatformConfig,
-  userManager: PlatformConfig,
-  ui: PlatformConfig,
-  auth: PlatformAuthConfig,
-  file: PlatformFileConfig,
-  mail: PlatformMailConfig
-}
-
-export interface BasePlatformConfig {
-  version?: string,
-  containerName: string
-}
-
-export interface PlatformConfig extends BasePlatformConfig {
-  ports: Port,
-  observability?: PlatformObservability
-}
-
-export interface PlatformObservability {
-  enableObservability: boolean,
-  collectorPort: number
-}
-
-export interface PlatformAuthConfig extends BasePlatformConfig {
-  ports: Port,
-  dataSource: ProjectDataSource,
-  adminUser: string,
-  adminPassword: string,
-  hostname: string,
-  volumes: Volume
-}
-
-export interface PlatformFileConfig extends BasePlatformConfig {
-  ports: Port[],
-  enableSecurity?: boolean,
-  adminUser: string,
-  adminPassword: string,
-  volumes: Volume,
-}
-
-export interface PlatformMailConfig extends BasePlatformConfig {
-  protocol?: string,
-  sender: string,
-  host: string,
-  port: number,
-  username: string,
-  password: string
+  services: WorkspaceService[]
 }
 
 export interface WorkspaceProject {
@@ -446,6 +394,10 @@ export interface Environment {
   value: string
 }
 
+export interface EnvironmentFile {
+  file: string,
+}
+
 export interface DockerServiceConfig {
   config: string
 }
@@ -473,7 +425,7 @@ export interface DockerServiceResources {
 
 export interface ResourceLimits {
   replicas?: number,
-  restart_policy?: 'always' | 'no' | 'on-failure' | 'unless-stopped',
+  restart_policy?: RestartTypes,
   resources?: DockerServiceResources
 }
 
@@ -500,7 +452,7 @@ export interface DockerContainer {
   image: string,
   build?: string,
   container_name?: string,
-  restart?: 'always' | 'no' | 'on-failure' | 'unless-stopped',
+  restart?: RestartTypes,
   dependsOn?: Dependency[],
   extends?: string,
   hostname?: string,
@@ -510,7 +462,7 @@ export interface DockerContainer {
   networks: Network[],
   domainname?: string,
   environments?: Environment[],
-  env_file?: string,
+  env_file?: EnvironmentFile[],
   extra_hosts?: Host[],
   labels?: Environment[],
   volumes?: Volume[],
@@ -556,3 +508,4 @@ export type FieldTypes = (typeof FIELD_TYPES)[number];
 export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
+export type RestartTypes = (typeof RESTART_TYPES)[number];

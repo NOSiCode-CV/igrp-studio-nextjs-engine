@@ -40,7 +40,7 @@ export function oracleProperties() {
         },
       },
     },
-    env_file: { type: 'string', required: false, default: '.env' },
+    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.env' } } }, required: false, default: [ { file: '.env'} ] },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],

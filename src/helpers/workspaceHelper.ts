@@ -11,11 +11,6 @@ export function extractVolumes(config: WorkspaceProjectsConfig, basePath: string
     if(proj.dataSource) volumes.add(proj.dataSource.volumes)
   })
 
-  volumes.add(config.platform.dataSource.volumes)
-  volumes.add(config.platform.auth.dataSource.volumes)
-  volumes.add(config.platform.auth.volumes)
-  volumes.add(config.platform.file.volumes)
-
   config.services.forEach((serv) => {
     if(serv.properties.volumes)
       serv.properties.volumes.forEach((vol) => {

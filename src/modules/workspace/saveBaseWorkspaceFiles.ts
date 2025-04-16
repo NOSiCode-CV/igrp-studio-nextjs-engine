@@ -2,7 +2,12 @@ import path from 'path';
 import fs from 'fs-extra';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
-import { RenderContext, WorkspaceConfig, WorkspaceProject, WorkspaceProjectsConfig } from '../../interfaces/types';
+import {
+  RenderContext, RestartTypes,
+  WorkspaceConfig,
+  WorkspaceProject,
+  WorkspaceProjectsConfig,
+} from '../../interfaces/types';
 import {
   TEMPLATES,
   SRC_CONFIG_FILES,
@@ -62,7 +67,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
     workspace: baseContext.resourceConfig.slug,
     projects: baseContext.resourceConfig.projects?.map(
       (proj, index): WorkspaceProject => {
-        const isSpringBoot = proj.type === 'stringboot';
+        const isSpringBoot = proj.type === 'springboot';
         const basePort = isSpringBoot ? 8083 : 3001;
         return {
           config: proj,
@@ -89,103 +94,279 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         };
       }
     ) ?? [],
-    services: [],
-    platform: {
-      dataSource: {
-        dbPassword: '1234',
-        dbName: 'igrp_platform_db',
-        ports: {
-          internal: 5432,
-          external: 5432
+    services: [
+      {
+        id: "igrp_access_management_db",
+        name: "postgres",
+        properties: {
+          image: "postgres:16-alpine",
+          container_name: `${baseContext.resourceConfig.slug}-am-db`,
+          restart: "always" as RestartTypes,
+          hostname: "${IGRP_ACCESS_MANAGEMENT_DB_HOSTNAME}",
+          shm_size: "128mb",
+          environments: [
+            { key: "POSTGRES_DB", value: "${IGRP_ACCESS_MANAGEMENT_DB_NAME}" },
+            { key: "POSTGRES_USER", value: "${IGRP_ACCESS_MANAGEMENT_DB_USER}" },
+            { key: "POSTGRES_PASSWORD", value: "${IGRP_ACCESS_MANAGEMENT_DB_PASSWORD}" },
+          ],
+          volumes: [
+            {
+              name: "igrp_access_management_data",
+              path: "/var/lib/postgresql/data2",
+              driver: "local"
+            }
+          ],
+          ports: [
+            {
+              internal: 5432,
+              external: 5432
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'database'}
+          ]
         },
-        volumes: {
-          name: 'igrp_access_management_data',
-          path: '/var/lib/postgresql/data2',
-          driver: 'local'
+      },
+      {
+        id: "igrp_iam_db",
+        name: "postgres",
+        properties: {
+          image: "postgres:16-alpine",
+          container_name: `${baseContext.resourceConfig.slug}-iam-db`,
+          restart: "always" as RestartTypes,
+          hostname: "${IGRP_IAM_DB_HOSTNAME}",
+          shm_size: "128mb",
+          environments: [
+            { key: "POSTGRES_DB", value: "${IGRP_IAM_DB_NAME}" },
+            { key: "POSTGRES_USER", value: "${IGRP_IAM_DB_USER}" },
+            { key: "POSTGRES_PASSWORD", value: "${IGRP_IAM_DB_PASSWORD}" },
+          ],
+          volumes: [
+            {
+              name: "igrp_iam_data",
+              path: "/var/lib/postgresql/data2",
+              driver: "local"
+            }
+          ],
+          ports: [
+            {
+              internal: 5433,
+              external: 5433
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'database'}
+          ]
+        },
+      },
+      {
+        id: "igrp_keycloak",
+        name: "keycloak",
+        properties: {
+          image: "keycloak:25.0.4",
+          container_name: `${baseContext.resourceConfig.slug}-keycloak`,
+          dependsOn: [
+            { service: `${baseContext.resourceConfig.slug}-iam-db` }
+          ],
+          hostname: "${IGRP_IAM_HOSTNAME}",
+          restart: "always" as RestartTypes,
+          env_file: [
+            { file: ".igrp.env" },
+            { file: ".iam.igrp.env" },
+          ],
+          volumes: [
+            {
+              name: "./data/",
+              path: "/opt/keycloak/data/import",
+              driver: "none"
+            }
+          ],
+          extra_hosts: [
+            { hostname: "${IGRP_IAM_HOSTNAME}", ip: "host-gateway" }
+          ],
+          command: [
+            { instruction: 'start' },
+            { instruction: '--import-realm' },
+            { instruction: '--features=admin-fine-grained-authz' },
+          ],
+          ports: [
+            {
+              internal: 8080,
+              external: 8080
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          healthcheck: {
+            test: [
+              {
+                instruction: "CMD-SHELL"
+              },
+              {
+                instruction: "exec 3<>/dev/tcp/localhost/8080;"
+              },
+              { instruction: "echo -e \"GET /health/ready HTTP/1.1" },
+              { instruction: "host: localhost:8080\\n" },
+              { instruction: ">&3;" },
+              { instruction: "timeout --preserve-status 1 cat <&3 | grep -m 1 status | grep -m 1 UP;" },
+              { instruction: "ERROR=$$?;" },
+              { instruction: "exec 3<&-;" },
+              { instruction: "exec 3>&-;" },
+              { instruction: "exit $$ERROR" },
+            ],
+            interval: "10s",
+            timeout: "5s",
+            retries: 5
+          },
+          labels: [
+            { key: 'type', value: 'auth'}
+          ],
+        },
+      },
+      {
+        id: "igrp_minio",
+        name: "minio",
+        properties: {
+          image: "minio/minio:latest",
+          container_name: "igrp-minio",
+          hostname: "igrp-minio",
+          restart: "no" as RestartTypes,
+          env_file: [
+            { file: ".igrp.env" },
+            { file: ".file.igrp.env" },
+          ],
+          volumes: [
+            {
+              name: 'igrp_minio_db_data',
+              path: '/minio_data',
+              driver: 'local'
+            }
+          ],
+          command: [
+            { instruction: 'server' },
+            { instruction: '/data' },
+            { instruction: '--console-address :9001' },
+          ],
+          entrypoint: [
+            { instruction: "/bin/sh -c",},
+            { instruction: "'" },
+            { instruction: "isAlive() { curl -sf http://127.0.0.1:9000/minio/health/live; }" },
+            { instruction: "minio $0 \"$@\" --quiet & echo $! > /tmp/minio.pid" },
+            { instruction: "while ! isAlive; do sleep 0.1; done" },
+            { instruction: "mc alias set minio http://127.0.0.1:9000 ${IGRP_FILE_MANAGEMENT_USER} ${IGRP_FILE_MANAGEMENT_PASSWORD}" },
+            { instruction: "mc mb minio/\${IGRP_FILE_MANAGEMENT_STORAGE_NAME}|| true" },
+            { instruction: "mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME}" },
+            { instruction: "kill -s INT $(cat /tmp/minio.pid) && rm /tmp/minio.pid" },
+            { instruction: "while isAlive; do sleep 0.1; done" },
+            { instruction: "exec minio $0 \"$@\"" },
+            { instruction: "'" },
+          ],
+          ports: [
+            {
+              internal: 9000,
+              external: 9000
+            },
+            {
+              internal: 9001,
+              external: 9001
+            },
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'file'}
+          ]
         }
       },
-      appManager: {
-        containerName: 'igrp_am',
-        ports: {
-          internal: 8082,
-          external: 8082
+      {
+        id: "igrp_um",
+        name: "igrpUserManagement",
+        properties: {
+          image: "registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local",
+          container_name: `${baseContext.resourceConfig.slug}-user-management`,
+          dependsOn: [
+            { service: `${baseContext.resourceConfig.slug}-keycloak` }
+          ],
+          env_file: [
+            { file: '.um.igrp.env' }
+          ],
+          ports: [
+            {
+              internal: 8081,
+              external: 8081
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'web'}
+          ]
         },
       },
-      userManager: {
-        containerName: 'igrp_um',
-        ports: {
-          internal: 8081,
-          external: 8081
+      {
+        id: "igrp_am",
+        name: "igrpAppManagement",
+        properties: {
+          image: "registry.nosi.cv/formacao-igrp/app-manager-api:demo-local",
+          container_name: `${baseContext.resourceConfig.slug}-app-manager`,
+          dependsOn: [
+            { service: `${baseContext.resourceConfig.slug}-keycloak` }
+          ],
+          env_file: [
+            { file: '.am.igrp.env' }
+          ],
+          ports: [
+            {
+              internal: 8082,
+              external: 8082
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'web'}
+          ]
         },
       },
-      ui: {
-        containerName: 'igrp_ui',
-        ports: {
-          internal: 3000,
-          external: 3000
+      {
+        id: "igrp_ui",
+        name: "igrpUi",
+        properties: {
+          image: "registry.nosi.cv/formacao-igrp/igrp-ui-dev:demo-local",
+          container_name: `${baseContext.resourceConfig.slug}-ui`,
+          dependsOn: [
+            { service: `${baseContext.resourceConfig.slug}-user-management` },
+            { service: `${baseContext.resourceConfig.slug}-app-manager` }
+          ],
+          env_file: [
+            { file: '.igrp.env' },
+            { file: '.ui.igrp.env' },
+          ],
+          ports: [
+            {
+              internal: 3000,
+              external: 3000
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'web'}
+          ]
         },
       },
-      auth: {
-        containerName: 'igrp_keycloak',
-        ports: {
-          internal: 8080,
-          external: 8080
-        },
-        dataSource: {
-          imageVersion: '16-alpine',
-          dbUser: 'keycloak',
-          dbPassword: 'password',
-          dbName: 'igrp_keycloak_db',
-          dbHostName: 'keycloak_db',
-          ports: {
-            internal: 5433,
-            external: 5433
-          },
-          volumes: {
-            name: 'igrp_keycloak_db_data',
-            path: '/var/lib/postgresql/data2',
-            driver: 'local'
-          }
-        },
-        adminUser: 'admin',
-        adminPassword: 'password',
-        hostname: 'keycloak_db',
-        volumes: {
-          name: 'igrp_keycloak_data',
-          path: '/opt/keycloak/data/import',
-          driver: 'local'
-        }
-      },
-      file: {
-        containerName: 'igrp_minio',
-        ports: [
-          {
-            internal: 9000,
-            external: 9000
-          },
-          {
-            internal: 9001,
-            external: 9001
-          },
-        ],
-        enableSecurity: false,
-        adminUser: 'admin',
-        adminPassword: 'admin12345678',
-        volumes: {
-          name: 'igrp_minio_db_data',
-          path: '/minio_data',
-          driver: 'local'
-        }
-      },
-      mail: {
-        containerName: 'mailhog',
-        sender: '',
-        host: '',
-        port: 587,
-        username: '',
-        password: ''
-      }
-    },
+    ],
   }
 
   const context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig> = {

@@ -1,34 +1,13 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
 import {
   Dependency,
-  Environment,
-  PlatformAuthConfig,
-  PlatformConfig, PlatformFileConfig, PlatformMailConfig, PlatformObservability,
-  PlatformServices, Port, ProjectDataSource, Volume,
+  Environment, Port, ProjectDataSource, Volume,
   WorkspaceProject,
   WorkspaceProjectsConfig, WorkspaceService,
 } from '../interfaces/types';
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 import { dockerContainerConfigSchema } from './dockerContainerConfig';
-
-const observabilitySchema: JSONSchemaType<PlatformObservability> = {
-  type: 'object',
-  properties: {
-    enableObservability: {
-      type: 'boolean',
-      errorMessage: 'The enable observability attribute must be a valid boolean.'
-    },
-    collectorPort: {
-      type: 'number',
-      maximum: 65535,
-      minimum: 1,
-      errorMessage: 'The collector port must be a number that ranges from 1 to 65535.'
-    },
-  },
-  required: ['enableObservability', 'collectorPort'],
-  additionalProperties: false,
-};
 
 const dependencySchema: JSONSchemaType<Dependency> = {
   type: 'object',
@@ -162,233 +141,6 @@ const dataSourceSchema: JSONSchemaType<ProjectDataSource> = {
   additionalProperties: false,
 };
 
-const platformConfigSchema: JSONSchemaType<PlatformConfig> = {
-  type: 'object',
-  properties: {
-    version: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The version, if provided, must be a valid string.'
-    },
-    containerName: {
-      type: 'string',
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The container name, if provided, must only contain letters and must not have spaces or special characters except underscore (_).'
-    },
-    ports: {
-      type: "object",
-      anyOf: [
-        portSchema
-      ],
-      errorMessage: "The 'ports' field must be a valid Port configuration.",
-    },
-    observability: {
-      type: "object",
-      nullable: true,
-      anyOf: [
-        observabilitySchema
-      ],
-      errorMessage: "The 'observability' field, if provided, must be a valid Observability configuration.",
-    },
-  },
-  required: ['containerName', 'ports'],
-  additionalProperties: false,
-};
-
-const platformAuthConfigSchema: JSONSchemaType<PlatformAuthConfig> = {
-  type: 'object',
-  properties: {
-    version: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The version, if provided, must be a valid string.'
-    },
-    containerName: {
-      type: 'string',
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The container name, if provided, must only contain letters and must not have spaces or special characters except underscore (_).'
-    },
-    ports: {
-      type: "object",
-      anyOf: [
-        portSchema
-      ],
-      errorMessage: "The 'ports' field must be a valid Port configuration.",
-    },
-    dataSource: {
-      type: "object",
-      anyOf: [
-        dataSourceSchema
-      ],
-      errorMessage: "The 'dataSource' field must be a valid Project Data Source configuration.",
-    },
-    adminUser: {
-      type: 'string',
-      errorMessage: 'The admin user must be a valid string.'
-    },
-    adminPassword: {
-      type: 'string',
-      errorMessage: 'The admin password must be a valid string.'
-    },
-    hostname: {
-      type: 'string',
-      errorMessage: 'The hostname must be a valid string.'
-    },
-    volumes: {
-      type: "object",
-      anyOf: [
-        volumeSchema
-      ],
-      errorMessage: "The 'volume' field must be a valid Volume configuration.",
-    },
-  },
-  required: ['containerName', 'ports', 'dataSource', 'adminUser', 'adminPassword', 'hostname', 'volumes'],
-  additionalProperties: false,
-};
-
-const platformFileConfigSchema: JSONSchemaType<PlatformFileConfig> = {
-  type: 'object',
-  properties: {
-    version: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The version, if provided, must be a valid string.'
-    },
-    containerName: {
-      type: 'string',
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The container name, if provided, must only contain letters and must not have spaces or special characters except underscore (_).'
-    },
-    ports: {
-      type: 'array',
-      items: portSchema,
-      errorMessage: "The 'ports' attribute must be a valid port array configuration."
-    },
-    enableSecurity: {
-      type: "boolean",
-      nullable: true,
-      errorMessage: "The 'enableSecurity', if provided, field must be a valid boolean.",
-    },
-    adminUser: {
-      type: 'string',
-      errorMessage: 'The admin user must be a valid string.'
-    },
-    adminPassword: {
-      type: 'string',
-      errorMessage: 'The admin password must be a valid string.'
-    },
-    volumes: {
-      type: "object",
-      anyOf: [
-        volumeSchema
-      ],
-      errorMessage: "The 'volume' field must be a valid Volume configuration.",
-    },
-  },
-  required: ['containerName', 'ports', 'adminUser', 'adminPassword', 'volumes'],
-  additionalProperties: false,
-};
-
-const platformMailConfigSchema: JSONSchemaType<PlatformMailConfig> = {
-  type: 'object',
-  properties: {
-    version: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The version, if provided, must be a valid string.'
-    },
-    containerName: {
-      type: 'string',
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The container name, if provided, must only contain letters and must not have spaces or special characters except underscore (_).'
-    },
-    protocol: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The protocol, if provided, must be a valid string.'
-    },
-    sender: {
-      type: 'string',
-      errorMessage: 'The sender must be a valid string.'
-    },
-    host: {
-      type: 'string',
-      errorMessage: 'The host must be a valid string.'
-    },
-    port: {
-      type: 'number',
-      errorMessage: 'The host must be a valid number.'
-    },
-    username: {
-      type: 'string',
-      errorMessage: 'The username must be a valid string.'
-    },
-    password: {
-      type: 'string',
-      errorMessage: 'The password must be a valid string.'
-    },
-  },
-  required: ['sender', 'host', 'port', 'username', 'password'],
-  additionalProperties: false,
-};
-
-const platformServiceSchema: JSONSchemaType<PlatformServices> = {
-  type: 'object',
-  properties: {
-    dataSource: {
-      type: "object",
-      anyOf: [
-        dataSourceSchema
-      ],
-      errorMessage: "The 'dataSource' field must be a valid Project Data Source configuration.",
-    },
-    appManager: {
-      type: "object",
-      anyOf: [
-        platformConfigSchema
-      ],
-      errorMessage: "The 'appManager' field must be a valid Platform Element configuration.",
-    },
-    userManager: {
-      type: "object",
-      anyOf: [
-        platformConfigSchema
-      ],
-      errorMessage: "The 'userManager' field must be a valid Platform Element configuration.",
-    },
-    ui: {
-      type: "object",
-      anyOf: [
-        platformConfigSchema
-      ],
-      errorMessage: "The 'ui' field must be a valid Platform Element configuration.",
-    },
-    auth: {
-      type: "object",
-      anyOf: [
-        platformAuthConfigSchema
-      ],
-      errorMessage: "The 'auth' field must be a valid Platform Auth configuration.",
-    },
-    file: {
-      type: "object",
-      anyOf: [
-        platformFileConfigSchema
-      ],
-      errorMessage: "The 'file' field must be a valid Platform File Management configuration.",
-    },
-    mail: {
-      type: "object",
-      anyOf: [
-        platformMailConfigSchema
-      ],
-      errorMessage: "The 'mail' field must be a valid Platform Mail configuration.",
-    },
-  },
-  required: ['dataSource', 'appManager', 'userManager', 'auth', 'ui', 'file', 'mail'],
-  additionalProperties: false,
-};
-
 const workspaceProjectSchema: JSONSchemaType<WorkspaceProject> = {
   type: 'object',
   properties: {
@@ -485,15 +237,8 @@ const workspaceProjectConfigSchema: JSONSchemaType<WorkspaceProjectsConfig> = {
       items: workspaceServiceSchema,
       errorMessage: "The 'services' attribute must be a valid workspace service array configuration."
     },
-    platform: {
-      type: "object",
-      anyOf: [
-        platformServiceSchema
-      ],
-      errorMessage: "The 'platform' field must be a valid Platform Service configuration.",
-    }
   },
-  required: ['workspace', 'projects', 'platform'],
+  required: ['workspace', 'projects'],
   additionalProperties: false,
 };
 

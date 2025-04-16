@@ -1,4 +1,4 @@
-import { newWorkspace } from '../src';
+import { initServices, newWorkspace } from '../src';
 import { WorkspaceConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
@@ -12,6 +12,10 @@ const baseConfig: WorkspaceConfig = {
   //projects: [ { type: 'nextjs', name: 'ewewe', description: 'ew' } ],
   //workspace: 'my-workspace'
 };
+
+beforeAll(async () => {
+  await initServices();
+});
 
 describe('Create new workspace module', () => {
 

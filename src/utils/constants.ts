@@ -233,3 +233,11 @@ export const CONFIG_TYPES = [
   'page',
   'component'
 ] as const;
+
+export const RESTART_TYPES = [
+  'always',
+  'no',
+  'on-failure',
+  'unless-stopped'
+] as const;
+
