@@ -3,10 +3,8 @@ import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { RenderContext, WorkspaceProject, WorkspaceProjectsConfig } from '../../interfaces/types';
 import {
-  ERROR_MESSAGE,
   TEMPLATES,
   SRC_CONFIG_FILES,
-  ENVIRONMENT_FILES,
 } from '../../utils/constants';
 import { workspaceProjectsConfigValidate } from '../../schema/workspaceProjectConfig';
 import { checkDuplicated } from './checkDuplicated';

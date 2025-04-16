@@ -212,7 +212,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               {
                 instruction: "exec 3<>/dev/tcp/localhost/8080;"
               },
-              { instruction: "echo -e \"GET /health/ready HTTP/1.1" },
+              { instruction: "echo -e \\\"GET /health/ready HTTP/1.1" },
               { instruction: "host: localhost:8080\\n" },
               { instruction: ">&3;" },
               { instruction: "timeout --preserve-status 1 cat <&3 | grep -m 1 status | grep -m 1 UP;" },
@@ -258,14 +258,14 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { instruction: "/bin/sh -c",},
             { instruction: "'" },
             { instruction: "isAlive() { curl -sf http://127.0.0.1:9000/minio/health/live; }" },
-            { instruction: "minio $0 \"$@\" --quiet & echo $! > /tmp/minio.pid" },
+            { instruction: "minio $0 \\\"$@\\\" --quiet & echo $! > /tmp/minio.pid" },
             { instruction: "while ! isAlive; do sleep 0.1; done" },
             { instruction: "mc alias set minio http://127.0.0.1:9000 ${IGRP_FILE_MANAGEMENT_USER} ${IGRP_FILE_MANAGEMENT_PASSWORD}" },
             { instruction: "mc mb minio/\${IGRP_FILE_MANAGEMENT_STORAGE_NAME}|| true" },
             { instruction: "mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME}" },
             { instruction: "kill -s INT $(cat /tmp/minio.pid) && rm /tmp/minio.pid" },
             { instruction: "while isAlive; do sleep 0.1; done" },
-            { instruction: "exec minio $0 \"$@\"" },
+            { instruction: "exec minio $0 \\\"$@\\\"" },
             { instruction: "'" },
           ],
           ports: [
