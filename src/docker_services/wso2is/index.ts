@@ -5,6 +5,7 @@ export default {
 
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(WSO2IS);
+    dockerService.loadLabel("WSO2 Identity Server")
     dockerService.getProperties(wso2isProperties());
     dockerService.setRenderer(defaultRenderer);
   }

@@ -5,6 +5,7 @@ export default {
 
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(KEYCLOAK);
+    dockerService.loadLabel("Keycloak Server");
     dockerService.getProperties(keycloakProperties());
     dockerService.setRenderer(defaultRenderer);
   }

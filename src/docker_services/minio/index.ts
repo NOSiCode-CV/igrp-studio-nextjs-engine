@@ -5,6 +5,7 @@ export default {
 
   register(dockerService: DockerService) {
     dockerService.loadDefaultName(MINIO);
+    dockerService.loadLabel("minIO")
     dockerService.getProperties(minioProperties());
     dockerService.setRenderer(defaultRenderer);
   }
