@@ -22,6 +22,7 @@ import fleetServerModule, { FLEETSERVER } from './fleetserver/index';
 import igrpUserManagementModule, { IGRP_USER_MANAGEMENT } from './igrpUserManagement/index';
 import igrpAppManagementModule, { IGRP_APP_MANAGEMENT } from './igrpAppManagement/index';
 import igrpUiModule, { IGRP_UI } from './igrpUi/index';
+import wso2isModule, { WSO2IS } from './wso2is/index';
 
 export function registerAllServices() {
 
@@ -37,6 +38,7 @@ export function registerAllServices() {
 
   // Authentication
   register(KEYCLOAK, keycloakModule.register);
+  register(WSO2IS, wso2isModule.register);
 
   // File Management
   register(MINIO, minioModule.register);
@@ -48,7 +50,6 @@ export function registerAllServices() {
   register(RABBITMQ, rabbitMqModule.register);
 
   // Observability
-
   register(OPENTELEMETRY, opentelemetryModule.register);
 
   // Grafana Stack
