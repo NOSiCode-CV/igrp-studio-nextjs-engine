@@ -7,7 +7,7 @@ export function badgeProperties() {
     color: { type: 'string', required: true, default: 'default', enum: ['default', 'primary', 'secondary', 'success', 'error' ] },
     variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
-    children: { type: 'string', required: true },
+    children: { type: 'string', required: true, default: 'Badge' },
     customColor: { type: 'string', required: false },
     style: { type: 'string', required: false },
     className: { type: 'string', required: false },

@@ -295,6 +295,7 @@ export interface ChildComponent {
 
 export interface ProjectWorkspace extends IdentifiableElement {
   config: any,
+  service?: WorkspaceService
 }
 
 export interface ServiceWorkspace extends IdentifiableElement {
@@ -323,7 +324,6 @@ export interface WorkspaceProject {
   environments: Environment[],
   ports: Port,
   dependsOn: Dependency[],
-  dataSource?: ProjectDataSource
 }
 
 export interface WorkspaceService extends IdentifiableElement{

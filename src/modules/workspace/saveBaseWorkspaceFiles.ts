@@ -78,19 +78,6 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             external: basePort + index, // ensure uniqueness by index
           },
           dependsOn: [],
-          dataSource: isSpringBoot? {
-            dbPassword: "password",
-            dbName: `${proj.name}_db`,
-            ports: {
-              internal: 5434 + index,
-              external: 5434 + index,
-            },
-            volumes: {
-              name: `${proj.name}_data`,
-              path: '/var/lib/postgresql/data2',
-              driver: 'local'
-            }
-          } : undefined
         };
       }
     ) ?? [],

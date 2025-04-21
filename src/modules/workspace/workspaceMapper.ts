@@ -1,6 +1,6 @@
 import {
-  ProjectWorkspace, ServiceWorkspace,
-  WorkspaceProjectsConfig
+  ProjectWorkspace, RestartTypes, ServiceWorkspace,
+  WorkspaceProjectsConfig,
 } from '../../interfaces/types';
 import { loadWorkspaceConfig } from '../../utils/helpers';
 
@@ -34,20 +34,46 @@ export const mapProjectToWorkspace = async (
       external: basePort + index, // ensure uniqueness by index
     },
     dependsOn: [],
-    dataSource: isSpringBoot? {
-      dbPassword: "password",
-      dbName: `${config.config.name}_db`,
-      ports: {
-        internal: 5434 + index,
-        external: 5434 + index,
-      },
-      volumes: {
-        name: `${config.config.name}_data`,
-        path: '/var/lib/postgresql/data2',
-        driver: 'local'
-      }
-    } : undefined
   });
+
+  if(isSpringBoot) {
+    workspace.services.push(
+      {
+        id: `${config.config.id}-db`,
+        name: normalizeDatabase(config.config.database),
+        properties: {
+          image: normalizeDatabaseImg(config.config.database),
+          container_name: `${config.config.name}-db`,
+          restart: "always" as RestartTypes,
+          hostname: `${config.config.name}-db`,
+          environments: [
+            { key: "POSTGRES_DB", value: `${config.config.name}_db`, },
+            { key: "POSTGRES_USER", value: "postgres" },
+            { key: "POSTGRES_PASSWORD", value: "password" },
+          ],
+          volumes: [
+            {
+              name: `${config.config.name}_data`,
+              path: '/var/lib/postgresql/data2',
+              driver: 'local'
+            }
+          ],
+          ports: [
+            {
+              internal: 5434 + index,
+              external: 5434 + index,
+            }
+          ],
+          networks: [
+            { network: `${workspace.workspace}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'database'}
+          ]
+        },
+      }
+    )
+  }
 
   return workspace;
 };
@@ -74,12 +100,12 @@ export const updateProjectInWorkspace = async (
   workspace.projects[projectIndex] = {
     config: config.config,
     basePath: `${config.config.name}`,
-    environments: [],
+    environments: config.service && config.service.properties.environments && config.service.properties.environments.length > 0? config.service.properties.environments : [],
     ports: {
-      internal: basePort + index,
-      external: basePort + index,
+      internal: config.service && config.service.properties.ports?.length > 0? config.service.properties.ports[0].internal : basePort + index,
+      external: config.service && config.service.properties.ports?.length > 0? config.service.properties.ports[0].internal : basePort + index,
     },
-    dependsOn: [],
+    dependsOn: config.service && config.service.properties.dependsOn && config.service.properties.dependsOn.length > 0? config.service.properties.dependsOn : [],
   };
 
   return workspace;
@@ -153,3 +179,33 @@ export const removeServiceInWorkspace = async (serviceId: string, basePath: stri
 
   return workspace;
 };
+
+const normalizeDatabase = (database: string) => {
+  switch (database) {
+    case "Postgresql":
+      return "postgres"
+    case "MySQL":
+      return "mysql"
+    case "Oracle":
+      return "oracle"
+    case "H2":
+      return "h2"
+    default:
+      return database
+  }
+}
+
+const normalizeDatabaseImg = (database: string) => {
+  switch (database) {
+    case "Postgresql":
+      return "postgres:16-alpine"
+    case "MySQL":
+      return "mysql:8.0"
+    case "Oracle":
+      return "gvenzl/oracle-free:latest"
+    case "H2":
+      return "oscarfonts/h2:latest"
+    default:
+      return database
+  }
+}
