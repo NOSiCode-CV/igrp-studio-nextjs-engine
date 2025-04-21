@@ -7,10 +7,6 @@ export function extractVolumes(config: WorkspaceProjectsConfig, basePath: string
 
   let volumes: Set<Volume> = new Set<Volume>()
 
-  config.projects.forEach((proj) => {
-    if(proj.dataSource) volumes.add(proj.dataSource.volumes)
-  })
-
   config.services.forEach((serv) => {
     if(serv.properties.volumes)
       serv.properties.volumes.forEach((vol) => {
