@@ -33,10 +33,12 @@ export const mapProjectToWorkspace = async (
       internal: basePort + index,
       external: basePort + index, // ensure uniqueness by index
     },
-    dependsOn: [],
+    dependsOn: isSpringBoot? [
+      { service: `${config.config.name}-db` }
+    ] : [],
   });
 
-  if(isSpringBoot) {
+  if(isSpringBoot && config.config.database !== 'H2') {
     workspace.services.push(
       {
         id: `${config.config.id}-db`,
@@ -188,8 +190,6 @@ const normalizeDatabase = (database: string) => {
       return "mysql"
     case "Oracle":
       return "oracle"
-    case "H2":
-      return "h2"
     default:
       return database
   }
@@ -203,8 +203,6 @@ const normalizeDatabaseImg = (database: string) => {
       return "mysql:8.0"
     case "Oracle":
       return "gvenzl/oracle-free:latest"
-    case "H2":
-      return "oscarfonts/h2:latest"
     default:
       return database
   }
