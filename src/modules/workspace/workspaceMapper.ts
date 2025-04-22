@@ -34,7 +34,7 @@ export const mapProjectToWorkspace = async (
       external: basePort + index, // ensure uniqueness by index
     },
     dependsOn: isSpringBoot? [
-      { service: `${config.config.name}-db` }
+      { service: `${config.config.name.toLowerCase()}-db` }
     ] : [],
   });
 
@@ -45,17 +45,17 @@ export const mapProjectToWorkspace = async (
         name: normalizeDatabase(config.config.database),
         properties: {
           image: normalizeDatabaseImg(config.config.database),
-          container_name: `${config.config.name}-db`,
+          container_name: `${config.config.name.toLowerCase()}-db`,
           restart: "always" as RestartTypes,
-          hostname: `${config.config.name}-db`,
+          hostname: `${config.config.name.toLowerCase()}-db`,
           environments: [
-            { key: "POSTGRES_DB", value: `${config.config.name}_db`, },
+            { key: "POSTGRES_DB", value: `${config.config.name.toLowerCase()}_db`, },
             { key: "POSTGRES_USER", value: "postgres" },
             { key: "POSTGRES_PASSWORD", value: "password" },
           ],
           volumes: [
             {
-              name: `${config.config.name}_data`,
+              name: `${config.config.name.toLowerCase()}_data`,
               path: '/var/lib/postgresql/data2',
               driver: 'local'
             }

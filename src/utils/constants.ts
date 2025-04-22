@@ -143,7 +143,9 @@ export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_NO_EVENT: '() => {}',
   ON_CLICK_WITH_EVENT: '(e) => {}',
   FUNCTION_WITH_VALUE: '(value) => {}',
+  FUNCTION_WITH_STRING_VALUE: `(value) => ''`,
   NULLABLE: 'null',
+  EMPTY_ARRAY: '[]',
 
 }
 

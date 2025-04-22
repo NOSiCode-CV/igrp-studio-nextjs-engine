@@ -1,5 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
-import { INTERACTIONS_TYPES } from '../../utils/constants';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function datePickerProperties() {
   return {
@@ -39,7 +39,7 @@ export function datePickerChildPropertiesMapping() {
 
 export function datePickerInteractions() {
   return {
-    data: { ...baseInteraction('[]', INTERACTIONS_TYPES.DATA), required: true },
+    data: { ...baseInteraction(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
     onDateChange: { ...baseInteraction(), required: true },
   };
 }

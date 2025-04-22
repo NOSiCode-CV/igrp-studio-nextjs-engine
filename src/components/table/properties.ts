@@ -1,4 +1,5 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { INTERACTIONS_DEFAULTS } from '../../utils/constants';
 
 export function tableProperties() {
   return {
@@ -39,7 +40,7 @@ export function tablePropertiesMapping() {
 
 export function tableInteractions() {
   return {
-    data: { ...baseInteraction('[]'), required: true },
+    data: { ...baseInteraction(INTERACTIONS_DEFAULTS.EMPTY_ARRAY), required: true },
   };
 }
 

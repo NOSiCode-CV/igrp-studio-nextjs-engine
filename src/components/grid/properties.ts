@@ -50,19 +50,19 @@ export function gridChildPropertiesMapping() {
 export function gridVariants() {
   return {
     // Basic grid columns
-    cols1: 'grid-cols-1 border rounded-lg p-4',
-    cols2: 'grid-cols-2 border rounded-lg p-4',
-    cols3: 'grid-cols-3 border rounded-lg p-4',
-    cols4: 'grid-cols-4 border rounded-lg p-4',
-    cols5: 'grid-cols-5 border rounded-lg p-4',
-    cols6: 'grid-cols-6 border rounded-lg p-4',
+    cols1: 'grid-cols-1 p-4',
+    cols2: 'grid-cols-2 p-4',
+    cols3: 'grid-cols-3 p-4',
+    cols4: 'grid-cols-4 p-4',
+    cols5: 'grid-cols-5 p-4',
+    cols6: 'grid-cols-6 p-4',
     // Basic grid rows
-    rows1: 'grid-rows-1 border rounded-lg p-4',
-    rows2: 'grid-rows-2 border rounded-lg p-4',
-    rows3: 'grid-rows-3 border rounded-lg p-4',
-    rows4: 'grid-rows-4 border rounded-lg p-4',
-    rows5: 'grid-rows-5 border rounded-lg p-4',
-    rows6: 'grid-rows-6 border rounded-lg p-4',
+    rows1: 'grid-rows-1 p-4',
+    rows2: 'grid-rows-2 p-4',
+    rows3: 'grid-rows-3 p-4',
+    rows4: 'grid-rows-4 p-4',
+    rows5: 'grid-rows-5 p-4',
+    rows6: 'grid-rows-6 p-4',
     // Common layouts
     'holy-grail': 'grid-cols-[200px_1fr_200px] grid-rows-[auto_1fr_auto] min-h-screen',
     'sidebar-left': 'grid-cols-[250px_1fr]',
