@@ -20,6 +20,7 @@ import metricbeatModule, { METRICBEAT } from './metricbeat/index';
 import apmServerModule, { APMSERVER } from './apmserver/index';
 import fleetServerModule, { FLEETSERVER } from './fleetserver/index';
 import igrpUserManagementModule, { IGRP_USER_MANAGEMENT } from './igrpUserManagement/index';
+import igrpAppLogicModule, { IGRP_APP_LOGIC } from './igrpAppLogic/index';
 import igrpAppManagementModule, { IGRP_APP_MANAGEMENT } from './igrpAppManagement/index';
 import igrpUiModule, { IGRP_UI } from './igrpUi/index';
 import wso2isModule, { WSO2IS } from './wso2is/index';
@@ -30,6 +31,7 @@ export function registerAllServices() {
   register(IGRP_USER_MANAGEMENT, igrpUserManagementModule.register);
   register(IGRP_APP_MANAGEMENT, igrpAppManagementModule.register);
   register(IGRP_UI, igrpUiModule.register);
+  register(IGRP_APP_LOGIC, igrpAppLogicModule.register);
 
   // Database
   register(POSTGRES, postgresModule.register);

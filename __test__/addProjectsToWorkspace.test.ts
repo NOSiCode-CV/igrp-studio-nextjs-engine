@@ -7,105 +7,6 @@ export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
 const baseConfig: WorkspaceProjectsConfig = {
   id: 'a03Yl1rsM1P1',
   workspace: 'my-workspace',
-  platform: {
-    dataSource: {
-      imageVersion: '16-alpine',
-      dbUser: 'igrp',
-      dbPassword: '1234',
-      dbName: 'igrp_platform_db',
-      dbHostName: 'igrp_db',
-      ports: {
-        internal: 5432,
-        external: 5432
-      },
-      volumes: {
-        name: 'igrp_access_management_data',
-        path: '/var/lib/postgresql/data2',
-        driver: 'local'
-      }
-    },
-    appManager: {
-      containerName: 'igrp_am',
-      ports: {
-        internal: 8082,
-        external: 8082
-      },
-    },
-    userManager: {
-      containerName: 'igrp_um',
-      ports: {
-        internal: 8081,
-        external: 8081
-      },
-    },
-    ui: {
-      containerName: 'igrp_ui',
-      ports: {
-        internal: 3000,
-        external: 3000
-      },
-    },
-    auth: {
-      containerName: 'igrp_keycloak',
-      ports: {
-        internal: 8080,
-        external: 8080
-      },
-      dataSource: {
-        imageVersion: '16-alpine',
-        dbUser: 'keycloak',
-        dbPassword: 'password',
-        dbName: 'igrp_keycloak_db',
-        dbHostName: 'keycloak_db',
-        ports: {
-          internal: 5433,
-          external: 5433
-        },
-        volumes: {
-          name: 'igrp_keycloak_db_data',
-          path: '/var/lib/postgresql/data2',
-          driver: 'local'
-        }
-      },
-      adminUser: 'admin',
-      adminPassword: 'password',
-      hostname: 'keycloak_db',
-      volumes: {
-        name: 'igrp_keycloak_data',
-        path: '/opt/keycloak/data/import',
-        driver: 'local'
-      }
-    },
-    file: {
-      containerName: 'igrp_minio',
-      ports: [
-        {
-          internal: 9000,
-          external: 9000
-        },
-        {
-          internal: 9001,
-          external: 9001
-        },
-      ],
-      enableSecurity: false,
-      adminUser: 'admin',
-      adminPassword: 'admin12345678',
-      volumes: {
-        name: 'igrp_minio_db_data',
-        path: '/minio_data',
-        driver: 'local'
-      }
-    },
-    mail: {
-      containerName: 'mailhog',
-      sender: '',
-      host: '',
-      port: 587,
-      username: '',
-      password: ''
-    }
-  },
   projects: [
     {
       config: {
@@ -133,22 +34,6 @@ const baseConfig: WorkspaceProjectsConfig = {
       dependsOn: [
 
       ],
-      dataSource: {
-        imageVersion: '16-alpine',
-        dbUser: 'demo',
-        dbPassword: 'password',
-        dbName: 'demodomain_db',
-        dbHostName: 'db_domain',
-        ports: {
-          internal: 5434,
-          external: 5434
-        },
-        volumes: {
-          name: 'domain_db_data',
-          path: '/var/lib/postgresql/data2',
-          driver: 'local'
-        }
-      },
     },
     {
       config: {
@@ -175,22 +60,7 @@ const baseConfig: WorkspaceProjectsConfig = {
       dependsOn: [
 
       ],
-      dataSource: {
-        imageVersion: '16-alpine',
-        dbUser: 'demo',
-        dbPassword: 'password',
-        dbName: 'demotechnical_db',
-        dbHostName: 'db_technical',
-        ports: {
-          internal: 5435,
-          external: 5435
-        },
-        volumes: {
-          name: 'technical_db_data',
-          path: '/var/lib/postgresql/data2',
-          driver: 'local'
-        }
-      },
+
     },
     {
       config: {
@@ -243,7 +113,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         networks: [
           { network: "my-workspace-network" }
         ],
-        env_file: ".env",
+        env_file: [ {file: ".env"} ],
         labels: [
           { key: 'type', value: 'database'}
         ]
@@ -279,7 +149,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         networks: [
           { network: "my-workspace-network" }
         ],
-        env_file: ".env",
+        env_file: [ {file: ".env"} ],
         labels: [
           { key: 'type', value: 'database'}
         ]
@@ -335,7 +205,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         networks: [
           { network: "my-workspace-network" }
         ],
-        env_file: ".env",
+        env_file: [ {file: ".env"} ],
         labels: [
           { key: 'type', value: 'auth'}
         ]
@@ -370,7 +240,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         networks: [
           { network: "my-workspace-network" }
         ],
-        env_file: ".env",
+        env_file: [ {file: ".env"} ],
         labels: [
           { key: 'type', value: 'database'}
         ]
@@ -428,7 +298,7 @@ const baseConfig: WorkspaceProjectsConfig = {
         networks: [
           { network: "my-workspace-network" }
         ],
-        env_file: ".env",
+        env_file: [ {file: ".env"} ],
         labels: [
           { key: 'type', value: 'file'}
         ]
@@ -710,34 +580,30 @@ const projectConfig: ProjectWorkspace = {
 }
 
 const serviceConfig: ServiceWorkspace = {
-  "id": "fa99f803-a81b-429c-9a07-9800390944da",
+  "id": "eb19f803-a81b-429c-9a07-9800390944dd",
   "service": {
-    "id": "svc-1744633175794",
-    "name": "rabbitmq",
+    "id": "svc-1744633175793",
+    "name": "igrpAppLogic",
     "properties": {
-      "image": "rabbitmq:4.1.0-rc.1",
-      "container_name": "rabbitmq",
+      "image": "n8nio/n8n:latest",
+      "container_name": "igrp-app-logic",
       "restart": "always",
       "ports": [
         {
-          "external": 5672,
-          "internal": 5672
+          "external": 5678,
+          "internal": 5678
         },
-        {
-          "external": 15672,
-          "internal": 15672
-        }
       ],
-      "hostname": "rabbitmq",
+      "hostname": "igrp-app-logic",
       "environments": [
-        {
-          "key": "RABBITMQ_DEFAULT_USER",
-          "value": "admin"
-        },
-        {
-          "key": "RABBITMQ_DEFAULT_PASS",
-          "value": "password"
-        }
+        { key: 'DB_TYPE', value: 'postgresdb' },
+        { key: 'DB_POSTGRESDB_HOST', value: 'postgres' },
+        { key: 'DB_POSTGRESDB_PORT', value: '5434' },
+        { key: 'DB_POSTGRESDB_DATABASE', value: 'n8n_db' },
+        { key: 'DB_POSTGRESDB_USER', value: 'postgres' },
+        { key: 'DB_POSTGRESDB_PASSWORD', value: 'password' },
+        { key: 'N8N_ENCRYPTION_KEY', value: 'xTtOy1aHelSW1FqNxFts' },
+        { key: 'N8N_PROXY_HOPS', value: '1' },
       ],
       "networks": [
         {
@@ -746,18 +612,20 @@ const serviceConfig: ServiceWorkspace = {
       ],
       "volumes": [
         {
-          "name": "rabbitmq_data",
-          "path": "/var/lib/rabbitmq",
-          "driver": "none"
+          "name": "igrp_app_logic_storage",
+          "path": "/home/node/.n8n",
+          "driver": "local"
         }
       ],
       "labels": [
         {
           "key": "type",
-          "value": "messaging"
+          "value": "api"
         }
       ],
-      "dependsOn": []
+      "dependsOn": [
+        { service: 'postgres' },
+      ]
     }
   }
 }
