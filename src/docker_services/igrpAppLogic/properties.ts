@@ -21,7 +21,7 @@ export function igrpAppLogicProperties() {
         {
           internal: 5678,
           external: 5678,
-        }
+        },
       ],
     },
     hostname: { type: 'string', required: false, default: 'igrp-app-logic' },
@@ -29,11 +29,11 @@ export function igrpAppLogicProperties() {
       type: 'array',
       default: [
         { key: 'DB_TYPE', value: 'postgresdb' },
-        { key: 'DB_POSTGRESDB_HOST', value: 'postgres' },
-        { key: 'DB_POSTGRESDB_PORT', value: '5434' },
-        { key: 'DB_POSTGRESDB_DATABASE', value: 'n8n_db' },
-        { key: 'DB_POSTGRESDB_USER', value: 'postgres' },
-        { key: 'DB_POSTGRESDB_PASSWORD', value: 'password' },
+        { key: 'DB_POSTGRESDB_HOST', value: '{{slug}}-igrp-db' },
+        { key: 'DB_POSTGRESDB_PORT', value: '5432' },
+        { key: 'DB_POSTGRESDB_DATABASE', value: '${IGRP_APP_LOGIC_DB_NAME}' },
+        { key: 'DB_POSTGRESDB_USER', value: '${IGRP_APP_LOGIC_DB_USER}' },
+        { key: 'DB_POSTGRESDB_PASSWORD', value: '${IGRP_APP_LOGIC_DB_PASSWORD}' },
         { key: 'N8N_ENCRYPTION_KEY', value: generateKey() },
         { key: 'N8N_PROXY_HOPS', value: '1' },
       ],
@@ -45,7 +45,15 @@ export function igrpAppLogicProperties() {
         },
       },
     },
-    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.env' } } }, required: false, default: [ { file: '.env'} ] },
+    env_file: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: { file: { type: 'string', required: true, default: '.env' } },
+      },
+      required: false,
+      default: [{ file: '.env' }],
+    },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],
@@ -70,8 +78,13 @@ export function igrpAppLogicProperties() {
       ],
     },
     dependsOn: {
-      type: "array",
-      items: { type: "object", required: false, properties: { service: { type: "string", required: true, default: "{{slug}}-igrp-db" } }, default: [ { service: '{{slug}}-igrp-db' }] }
+      type: 'array',
+      items: {
+        type: 'object',
+        required: false,
+        properties: { service: { type: 'string', required: true, default: '{{slug}}-igrp-db' } },
+        default: [{ service: '{{slug}}-igrp-db' }],
+      },
     },
     labels: {
       type: 'array',
@@ -86,18 +99,18 @@ export function igrpAppLogicProperties() {
           value: {
             type: 'string',
             required: true,
-            default: 'api'
+            default: 'api',
           },
           default: [
             {
               key: 'type',
-              value: 'api'
+              value: 'api',
             },
             {
               key: 'uuid',
-              value: '{{uuid}}'
-            }
-          ]
+              value: '{{uuid}}',
+            },
+          ],
         },
       },
     },
