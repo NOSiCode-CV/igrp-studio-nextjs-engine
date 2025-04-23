@@ -45,7 +45,7 @@ export function lokiProperties() {
     },
     dependsOn: {
       type: "array",
-      items: { type: "object", properties: { service: { type: "string", required: true, default: "promtail" } } }
+      items: { type: "object", properties: { service: { type: "string", required: true, default: "promtail" } }, default: [ { service: 'promtail' }] }
     },
     labels: {
       type: 'array',

@@ -6,7 +6,7 @@ export function getBaseDockerServiceProperties() {
     restart: { type: "string", required: false, enum: ['always', 'no', 'on-failure', 'unless-stopped'] },
     dependsOn: {
       type: "array",
-      items: { type: "object", properties: { service: { type: "string", required: true } } }
+      items: { type: "object", properties: { service: { type: "string", required: true } }, default: [ { service: 'any' }] }
     },
     extends: { type: "string", required: false },
     hostname: { type: "string", required: false },

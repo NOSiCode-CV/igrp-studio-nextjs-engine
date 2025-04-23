@@ -21,7 +21,7 @@ export function apmserverProperties() {
     hostname: { type: "string", required: false, default: 'apm-server' },
     dependsOn: {
       type: "array",
-      items: { type: "object", properties: { service: { type: "string", required: true, default: "elasticsearch" } } },
+      items: { type: "object", properties: { service: { type: "string", required: true, default: "elasticsearch" } }, default: [ { service: 'elasticsearch' }] },
     },
     networks: {
       type: "array",
