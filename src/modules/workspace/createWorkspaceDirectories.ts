@@ -30,6 +30,7 @@ export const createWorkspaceDirectories = async (context: RenderContext<Workspac
  */
 const getDirectoriesToCreate = (basePath: string): string[] => {
   return [
+    path.join(basePath, DIRECTORIES.IGRPSTUDIO),
     path.join(basePath, DIRECTORIES.PROJECTS),
   ];
 };

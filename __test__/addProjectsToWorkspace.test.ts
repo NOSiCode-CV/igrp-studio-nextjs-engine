@@ -580,41 +580,42 @@ const projectConfig: ProjectWorkspace = {
 }
 
 const serviceConfig: ServiceWorkspace = {
-  "id": "eb19f803-a81b-429c-9a07-9800390944dd",
+  "id": "2fabf785-0659-49f2-b03f-c6ea50659646",
   "service": {
     "id": "svc-1744633175793",
     "name": "igrpAppLogic",
     "properties": {
       "image": "n8nio/n8n:latest",
-      "container_name": "igrp-app-logic",
+      "container_name": "igrpAppLogic",
       "restart": "always",
       "ports": [
         {
           "external": 5678,
           "internal": 5678
-        },
+        }
       ],
       "hostname": "igrp-app-logic",
-      "environments": [
-        { key: 'DB_TYPE', value: 'postgresdb' },
-        { key: 'DB_POSTGRESDB_HOST', value: 'postgres' },
-        { key: 'DB_POSTGRESDB_PORT', value: '5434' },
-        { key: 'DB_POSTGRESDB_DATABASE', value: 'n8n_db' },
-        { key: 'DB_POSTGRESDB_USER', value: 'postgres' },
-        { key: 'DB_POSTGRESDB_PASSWORD', value: 'password' },
-        { key: 'N8N_ENCRYPTION_KEY', value: 'xTtOy1aHelSW1FqNxFts' },
-        { key: 'N8N_PROXY_HOPS', value: '1' },
+      "environments": [],
+      "env_file": [
+        {
+          "file": ".env"
+        }
       ],
       "networks": [
         {
-          "network": "igrp-workspace-workspace"
+          "network": "my-workspace-network"
         }
       ],
       "volumes": [
         {
           "name": "igrp_app_logic_storage",
           "path": "/home/node/.n8n",
-          "driver": "local"
+          "driver": "none"
+        }
+      ],
+      "dependsOn": [
+        {
+          "service": "postgres"
         }
       ],
       "labels": [
@@ -622,9 +623,6 @@ const serviceConfig: ServiceWorkspace = {
           "key": "type",
           "value": "api"
         }
-      ],
-      "dependsOn": [
-        { service: 'postgres' },
       ]
     }
   }

@@ -11,7 +11,7 @@ import {
 import {
   TEMPLATES,
   SRC_CONFIG_FILES,
-  DST_CONFIG_FILES, ENVIRONMENT_FILES,
+  DST_CONFIG_FILES, ENVIRONMENT_FILES, COMMON_FILES, DIRECTORIES,
 } from '../../utils/constants';
 import { workspaceConfigValidate } from '../../schema/baseWorkspace';
 import { getPaths } from '../../index';
@@ -57,6 +57,7 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
 const generateConfigFiles = (context: RenderContext<WorkspaceConfig, WorkspaceConfig>): BASE_CONFIG_FILES => {
   return [
     {src: path.join(getPaths().configs, SRC_CONFIG_FILES.WORKSPACE_GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
+    {src: path.join(getPaths().configs, SRC_CONFIG_FILES.INIT_IGRP_DB), dest: path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, COMMON_FILES.INIT_IGRP_DB)},
   ]
 }
 
@@ -83,24 +84,29 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
     ) ?? [],
     services: [
       {
-        id: "igrp_access_management_db",
+        id: "igrp_db",
         name: "postgres",
         properties: {
           image: "postgres:16-alpine",
-          container_name: `${baseContext.resourceConfig.slug}-am-db`,
+          container_name: `${baseContext.resourceConfig.slug}-igrp-db`,
           restart: "always" as RestartTypes,
-          hostname: "${IGRP_ACCESS_MANAGEMENT_DB_HOSTNAME}",
+          hostname: "${IGRP_DB_HOSTNAME}",
           shm_size: "128mb",
           environments: [
-            { key: "POSTGRES_DB", value: "${IGRP_ACCESS_MANAGEMENT_DB_NAME}" },
-            { key: "POSTGRES_USER", value: "${IGRP_ACCESS_MANAGEMENT_DB_USER}" },
-            { key: "POSTGRES_PASSWORD", value: "${IGRP_ACCESS_MANAGEMENT_DB_PASSWORD}" },
+            { key: "POSTGRES_DB", value: "${IGRP_DB_NAME}" },
+            { key: "POSTGRES_USER", value: "${IGRP_DB_USER}" },
+            { key: "POSTGRES_PASSWORD", value: "${IGRP_DB_PASSWORD}" },
           ],
           volumes: [
             {
-              name: "igrp_access_management_data",
+              name: "igrp_data",
               path: "/var/lib/postgresql/data2",
               driver: "local"
+            },
+            {
+              name: "./.igrpstudio/db-init.sh",
+              path: "/docker-entrypoint-initdb.d/init.sh",
+              driver: "none"
             }
           ],
           ports: [
@@ -118,48 +124,13 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         },
       },
       {
-        id: "igrp_iam_db",
-        name: "postgres",
-        properties: {
-          image: "postgres:16-alpine",
-          container_name: `${baseContext.resourceConfig.slug}-iam-db`,
-          restart: "always" as RestartTypes,
-          hostname: "${IGRP_IAM_DB_HOSTNAME}",
-          shm_size: "128mb",
-          environments: [
-            { key: "POSTGRES_DB", value: "${IGRP_IAM_DB_NAME}" },
-            { key: "POSTGRES_USER", value: "${IGRP_IAM_DB_USER}" },
-            { key: "POSTGRES_PASSWORD", value: "${IGRP_IAM_DB_PASSWORD}" },
-          ],
-          volumes: [
-            {
-              name: "igrp_iam_data",
-              path: "/var/lib/postgresql/data2",
-              driver: "local"
-            }
-          ],
-          ports: [
-            {
-              internal: 5433,
-              external: 5433
-            }
-          ],
-          networks: [
-            { network: `${baseContext.resourceConfig.slug}-network` }
-          ],
-          labels: [
-            { key: 'type', value: 'database'}
-          ]
-        },
-      },
-      {
         id: "igrp_keycloak",
         name: "keycloak",
         properties: {
           image: "keycloak:25.0.4",
           container_name: `${baseContext.resourceConfig.slug}-keycloak`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-iam-db` }
+            { service: `${baseContext.resourceConfig.slug}-igrp-db` }
           ],
           hostname: "${IGRP_IAM_HOSTNAME}",
           restart: "always" as RestartTypes,
@@ -280,7 +251,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           image: "registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local",
           container_name: `${baseContext.resourceConfig.slug}-user-management`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-keycloak` }
+            { service: `${baseContext.resourceConfig.slug}-keycloak` },
+            { service: `${baseContext.resourceConfig.slug}-igrp-db` }
           ],
           env_file: [
             { file: '.um.igrp.env' }
@@ -306,7 +278,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           image: "registry.nosi.cv/formacao-igrp/app-manager-api:demo-local",
           container_name: `${baseContext.resourceConfig.slug}-app-manager`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-keycloak` }
+            { service: `${baseContext.resourceConfig.slug}-keycloak` },
+            { service: `${baseContext.resourceConfig.slug}-igrp-db` }
           ],
           env_file: [
             { file: '.am.igrp.env' }

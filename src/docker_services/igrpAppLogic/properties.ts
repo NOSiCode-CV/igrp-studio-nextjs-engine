@@ -71,7 +71,7 @@ export function igrpAppLogicProperties() {
     },
     dependsOn: {
       type: "array",
-      items: { type: "object", required: false, properties: { service: { type: "string", required: true, default: "postgres" } }, default: [ { service: 'postgres' }] }
+      items: { type: "object", required: false, properties: { service: { type: "string", required: true, default: "{{slug}}-igrp-db" } }, default: [ { service: '{{slug}}-igrp-db' }] }
     },
     labels: {
       type: 'array',
