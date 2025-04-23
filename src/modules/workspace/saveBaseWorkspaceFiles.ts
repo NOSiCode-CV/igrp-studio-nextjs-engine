@@ -97,6 +97,9 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: "POSTGRES_USER", value: "${IGRP_DB_USER}" },
             { key: "POSTGRES_PASSWORD", value: "${IGRP_DB_PASSWORD}" },
           ],
+          env_file: [
+            { file: '.igrp.env' }
+          ],
           volumes: [
             {
               name: "igrp_data",
