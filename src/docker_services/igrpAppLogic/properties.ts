@@ -49,10 +49,10 @@ export function igrpAppLogicProperties() {
       type: 'array',
       items: {
         type: 'object',
-        properties: { file: { type: 'string', required: true, default: '.env' } },
+        properties: { file: { type: 'string', required: true, default: '.igrp.env' } },
       },
       required: false,
-      default: [{ file: '.env' }],
+      default: [{ file: '.igrp.env' }],
     },
     networks: {
       type: 'array',

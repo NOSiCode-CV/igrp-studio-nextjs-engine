@@ -100,6 +100,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           env_file: [
             { file: '.igrp.env' }
           ],
+          /*entrypoint: [
+            { instruction: 'sh' },
+            { instruction: '-c' },
+            { instruction: "chmod +x /docker-entrypoint-initdb.d/init.sh && exec docker-entrypoint.sh \\\"$@\\\"" },
+            { instruction: '--' },
+          ],*/
           volumes: [
             {
               name: "igrp_data",

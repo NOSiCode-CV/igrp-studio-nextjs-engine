@@ -34,3 +34,33 @@ export function indent(this: any, spaces: number, options: HelperOptions): strin
     .map(line => line ? pad + line : line)
     .join('\n');
 }
+
+/**
+ * Normalizes a string to be a valid Docker hostname.
+ * - Lowercases the string
+ * - Replaces invalid characters with hyphens
+ * - Removes leading/trailing hyphens
+ * - Trims to 63 characters
+ */
+export function normalizeHostname(name: string): string {
+  // Convert to lowercase
+  let normalized = name.toLowerCase();
+
+  // Replace invalid characters with hyphen
+  normalized = normalized.replace(/[^a-z0-9-]/g, '-');
+
+  // Remove leading and trailing hyphens
+  normalized = normalized.replace(/^-+|-+$/g, '');
+
+  // Ensure max length of 63 characters
+  if (normalized.length > 63) {
+    normalized = normalized.substring(0, 63);
+  }
+
+  // Edge case: If empty after sanitization, fallback
+  if (normalized.length === 0) {
+    normalized = 'host';
+  }
+
+  return normalized;
+}

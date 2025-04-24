@@ -15,9 +15,9 @@ services:
   {{else if (eq this.config.database "Oracle")}}
   {{> oracle-docker-service resourceConfig=this workspace=../resourceConfig.workspace}}
   {{/if}}--}}
-  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}{{/if}}:
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}{{/if}}:
     build: ./projects/{{this.basePath}}
-    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}{{/if}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}{{/if}}
     {{#if this.dependsOn}}
     depends_on:
     {{#each this.dependsOn}}
@@ -47,9 +47,9 @@ services:
 
   {{/if~}}
   {{#if (eq this.config.type 'nextjs')}}
-  {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}:
+  {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}:
     build: ./projects/{{this.basePath}}
-    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{toLowerCase this.config.name}}-ui{{/if}}
+    container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
     networks:

@@ -3,6 +3,7 @@ import {
   WorkspaceProjectsConfig,
 } from '../../interfaces/types';
 import { loadWorkspaceConfig } from '../../utils/helpers';
+import { normalizeHostname } from '../../helpers/workspaceHelper';
 
 // Projects
 
@@ -34,7 +35,7 @@ export const mapProjectToWorkspace = async (
       external: basePort + index, // ensure uniqueness by index
     },
     dependsOn: isSpringBoot? [
-      { service: `${config.config.name.toLowerCase()}-db` }
+      { service: normalizeHostname(`${config.config.name.toLowerCase()}-db`) }
     ] : [],
   });
 
@@ -45,9 +46,9 @@ export const mapProjectToWorkspace = async (
         name: normalizeDatabase(config.config.database),
         properties: {
           image: normalizeDatabaseImg(config.config.database),
-          container_name: `${config.config.name.toLowerCase()}-db`,
+          container_name: normalizeHostname(`${config.config.name.toLowerCase()}-db`),
           restart: "always" as RestartTypes,
-          hostname: `${config.config.name.toLowerCase()}-db`,
+          hostname: normalizeHostname(`${config.config.name.toLowerCase()}-db`),
           environments: [
             { key: "POSTGRES_DB", value: `${config.config.name.toLowerCase()}_db`, },
             { key: "POSTGRES_USER", value: "postgres" },
