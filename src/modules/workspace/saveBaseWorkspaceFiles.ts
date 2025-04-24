@@ -130,7 +130,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         id: "igrp_keycloak",
         name: "keycloak",
         properties: {
-          image: "keycloak:25.0.4",
+          image: "keycloak/keycloak:25.0.4",
           container_name: `${baseContext.resourceConfig.slug}-keycloak`,
           dependsOn: [
             { service: `${baseContext.resourceConfig.slug}-igrp-db` }

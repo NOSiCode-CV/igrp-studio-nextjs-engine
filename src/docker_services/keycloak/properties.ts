@@ -1,6 +1,6 @@
 export function keycloakProperties() {
   return {
-    image: { type: 'string', required: true, default: 'keycloak:25.0.4' },
+    image: { type: 'string', required: true, default: 'keycloak/keycloak:25.0.4' },
     container_name: { type: 'string', required: false, default: 'keycloak' },
     restart: {
       type: 'string',
