@@ -1,6 +1,8 @@
+import { COMMON_FILES, DIRECTORIES } from '../../utils/constants';
+
 export function igrpAppLogicProperties() {
   return {
-    image: { type: 'string', required: true, default: 'n8nio/n8n:latest' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/formacao-igrp/igrp-app-logic:latest' },
     container_name: { type: 'string', required: false, default: 'igrp-app-logic' },
     restart: {
       type: 'string',
@@ -36,6 +38,7 @@ export function igrpAppLogicProperties() {
         { key: 'DB_POSTGRESDB_PASSWORD', value: '${IGRP_APP_LOGIC_DB_PASSWORD}' },
         { key: 'N8N_ENCRYPTION_KEY', value: generateKey() },
         { key: 'N8N_PROXY_HOPS', value: '1' },
+        { key: 'N8N_SECURE_COOKIE', value: 'false' },
       ],
       items: {
         type: 'object',
@@ -74,6 +77,11 @@ export function igrpAppLogicProperties() {
           name: 'igrp_app_logic_storage',
           path: '/home/node/.n8n',
           driver: 'local',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.INIT_IGRP_APP_LOGIC}`,
+          path: '/docker-entrypoint.sh',
+          driver: 'none',
         },
       ],
     },
