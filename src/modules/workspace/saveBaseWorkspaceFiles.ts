@@ -353,9 +353,18 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
 
   await Promise.all(
     baseConfigFiles.map(async file => {
-      await fs.copyFile(file.src, file.dest);
+      const isShellScript = file.src.endsWith('.sh');
+      if (isShellScript) {
+        // Read, normalize line endings, and write
+        const content = await fs.readFile(file.src, 'utf-8');
+        const normalizedContent = content.replace(/\r\n/g, '\n');
+        await fs.writeFile(file.dest, normalizedContent, { encoding: 'utf-8' });
+      } else {
+        await fs.copyFile(file.src, file.dest);
+      }
     })
-  )
+
+  );
 
   await saveBaseWorkspaceFileConfig(baseConfig, baseContext.basePath);
 

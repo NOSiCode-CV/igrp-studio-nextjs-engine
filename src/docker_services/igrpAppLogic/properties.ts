@@ -104,7 +104,7 @@ export function igrpAppLogicProperties() {
           default: [
             {
               key: 'type',
-              value: 'api',
+              value: 'web',
             },
             {
               key: 'uuid',

@@ -86,6 +86,18 @@ export function minioProperties() {
         },
       ],
     },
+    entrypoint: [
+      "/bin/sh",
+      "-c",
+      "/usr/bin/docker-entrypoint.sh minio server /data --console-address \":9001\" & \
+pid=$!; \
+until mc alias set minio http://localhost:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} 2>/dev/null; do \
+  sleep 1; \
+done; \
+mc mb minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME} || true; \
+mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME} || true; \
+wait $pid"
+    ],
     command: {
       type: 'array',
       default: [
