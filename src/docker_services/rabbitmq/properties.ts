@@ -1,3 +1,5 @@
+import { RABBITMQ } from './index';
+
 export function rabbitmqProperties() {
   return {
     image: { type: 'string', required: true, default: 'rabbitmq:4.1.0-rc.1' },
@@ -76,6 +78,10 @@ export function rabbitmqProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: RABBITMQ,
+        },
         {
           key: 'type',
           value: 'messaging',

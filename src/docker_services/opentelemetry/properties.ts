@@ -110,6 +110,10 @@ export function opentelemetryProperties() {
       },
       default: [
         {
+          key: 'name',
+          value: OPENTELEMETRY,
+        },
+        {
           key: 'type',
           value: 'observability',
         },

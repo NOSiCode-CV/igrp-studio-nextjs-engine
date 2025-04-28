@@ -1,3 +1,5 @@
+import { APMSERVER } from './index';
+
 export function apmserverProperties() {
   return {
     image: { type: "string", required: true, default: "elastic/apm-server:8.17.4" },
@@ -60,6 +62,10 @@ export function apmserverProperties() {
           }
         },
         default: [
+          {
+            key: 'name',
+            value: APMSERVER,
+          },
           {
             key: 'type',
             value: 'observability'

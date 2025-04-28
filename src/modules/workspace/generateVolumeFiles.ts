@@ -13,7 +13,7 @@ export const generateVolumeFiles = (service: WorkspaceService, volume: Volume, b
   if (Object.entries(serviceElement.volumes).length > 0) {
     const file = serviceElement.volumes[volume.path]
     if(!file) return
-    const template = renderServiceTemplate(file.template, { ...file.context, port: service.properties.ports[0] });
+    const template = renderServiceTemplate(file.template, { ...file.context, port: service.properties.ports[0] }, volume.name.endsWith('.sh'));
     const outputPath = path.join(basePath, volume.name);
     saveToFileSync(template, outputPath, false);
   }

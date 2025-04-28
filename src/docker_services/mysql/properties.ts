@@ -1,3 +1,5 @@
+import { MYSQL } from './index';
+
 export function mysqlProperties() {
   return {
     image: { type: 'string', required: true, default: 'mysql:8.0' },
@@ -75,6 +77,10 @@ export function mysqlProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: MYSQL,
+        },
         {
           key: 'type',
           value: 'database',

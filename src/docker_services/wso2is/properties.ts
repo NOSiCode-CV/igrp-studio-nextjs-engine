@@ -1,3 +1,5 @@
+import { WSO2IS } from './index';
+
 export function wso2isProperties() {
   return {
     image: { type: 'string', required: true, default: 'wso2/wso2is:7.1.0' },
@@ -82,6 +84,10 @@ export function wso2isProperties() {
             default: 'auth'
           },
           default: [
+            {
+              key: 'name',
+              value: WSO2IS,
+            },
             {
               key: 'type',
               value: 'auth'

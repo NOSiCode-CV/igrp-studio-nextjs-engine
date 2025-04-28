@@ -58,7 +58,6 @@ const generateConfigFiles = (context: RenderContext<WorkspaceConfig, WorkspaceCo
   return [
     {src: path.join(getPaths().configs, SRC_CONFIG_FILES.WORKSPACE_GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
     {src: path.join(getPaths().configs, SRC_CONFIG_FILES.INIT_IGRP_DB), dest: path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, COMMON_FILES.INIT_IGRP_DB)},
-    {src: path.join(getPaths().configs, SRC_CONFIG_FILES.INIT_IGRP_APP_LOGIC), dest: path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, COMMON_FILES.INIT_IGRP_APP_LOGIC)},
   ]
 }
 

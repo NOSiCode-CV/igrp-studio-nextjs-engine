@@ -1,3 +1,5 @@
+import { ORACLE } from './index';
+
 export function oracleProperties() {
   return {
     image: { type: 'string', required: true, default: 'gvenzl/oracle-free:latest' },
@@ -78,6 +80,10 @@ export function oracleProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: ORACLE,
+        },
         {
           key: 'type',
           value: 'database',

@@ -76,6 +76,10 @@ export function prometheusProperties() {
       },
       default: [
         {
+          key: 'name',
+          value: PROMETHEUS,
+        },
+        {
           key: 'type',
           value: 'observability',
         },

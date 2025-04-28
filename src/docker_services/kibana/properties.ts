@@ -1,3 +1,5 @@
+import { KIBANA } from './index';
+
 export function kibanaProperties() {
   return {
     image: { type: 'string', required: true, default: 'kibana:8.17.4' },
@@ -78,6 +80,10 @@ export function kibanaProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: KIBANA,
+        },
         {
           key: 'type',
           value: 'observability',

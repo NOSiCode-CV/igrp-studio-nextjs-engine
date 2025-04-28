@@ -1,3 +1,5 @@
+import { LOKI } from './index';
+
 export function lokiProperties() {
   return {
     image: { type: "string", required: true, default: "grafana/loki:3.0.0" },
@@ -57,6 +59,10 @@ export function lokiProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: LOKI,
+        },
         {
           key: 'type',
           value: 'observability',

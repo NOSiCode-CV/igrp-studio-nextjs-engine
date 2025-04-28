@@ -8,10 +8,6 @@ FROM base AS deps
 
 COPY package.json .npmrc ./
 
-RUN npm install rollup@4.32.0
-
-RUN npm install @igrp/navbar-library@1.0.7 --registry=https://sonatype.nosi.cv/repository/npm-group/ 
-
 RUN npm install
 
 FROM base AS build

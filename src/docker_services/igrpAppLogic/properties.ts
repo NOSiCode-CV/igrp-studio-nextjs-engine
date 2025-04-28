@@ -1,4 +1,7 @@
-import { COMMON_FILES, DIRECTORIES } from '../../utils/constants';
+import { COMMON_FILES, DIRECTORIES, TEMPLATES } from '../../utils/constants';
+import { VolumeFile } from '../../interfaces/types';
+import { replaceTemplate } from '../../utils/helpers';
+import { IGRP_APP_LOGIC } from './index';
 
 export function igrpAppLogicProperties() {
   return {
@@ -83,6 +86,11 @@ export function igrpAppLogicProperties() {
           path: '/docker-entrypoint.sh',
           driver: 'none',
         },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
+          path: '/data/igrp-app-logic.json',
+          driver: 'none',
+        }
       ],
     },
     dependsOn: {
@@ -107,9 +115,13 @@ export function igrpAppLogicProperties() {
           value: {
             type: 'string',
             required: true,
-            default: 'api',
+            default: 'web',
           },
           default: [
+            {
+              key: 'name',
+              value: IGRP_APP_LOGIC,
+            },
             {
               key: 'type',
               value: 'web',
@@ -136,4 +148,23 @@ function generateKey(length: number = 20): string {
   }
 
   return result;
+}
+
+export function igrpAppLogicVolumes(): Record<string, VolumeFile> {
+  return {
+    '/docker-entrypoint.sh': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: IGRP_APP_LOGIC,
+        volume: 'igrp-init-app-logic.sh',
+      }),
+      context: {},
+    },
+    '/data/igrp-app-logic.json': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: IGRP_APP_LOGIC,
+        volume: 'igrp-app-logic.json',
+      }),
+      context: {},
+    }
+  }
 }

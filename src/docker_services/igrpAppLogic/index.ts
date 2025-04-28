@@ -1,5 +1,5 @@
 import { DockerService, defaultRenderer } from '../index';
-import { igrpAppLogicProperties } from './properties';
+import { igrpAppLogicProperties, igrpAppLogicVolumes } from './properties';
 
 export default {
 
@@ -7,6 +7,7 @@ export default {
     dockerService.loadDefaultName(IGRP_APP_LOGIC);
     dockerService.loadLabel("iGRP App Logic")
     dockerService.getProperties(igrpAppLogicProperties());
+    dockerService.loadVolumes(igrpAppLogicVolumes());
     dockerService.setRenderer(defaultRenderer);
   }
 

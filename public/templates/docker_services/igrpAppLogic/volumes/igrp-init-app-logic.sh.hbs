@@ -101,9 +101,9 @@ if echo "$API_KEYS_RESPONSE" | grep -q '"data":\[\]'; then
 
   echo "✅ API Key created successfully."
 
-  echo "💾  Saving API Key to /data/igrp_app_logic_api_key.json..."
+  echo "💾  Saving API Key to /data/igrp-app-logic.json..."
   mkdir -p /data
-  echo "{\"igrpAppLogicApiKey\": \"$RAW_API_KEY\"}" > /data/igrp_app_logic_api_key.json
+  echo "{\"igrpAppLogicApiKey\": \"$RAW_API_KEY\"}" > /data/igrp-app-logic.json
 
   echo "🎉 API Key saved successfully!"
 

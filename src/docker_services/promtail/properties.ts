@@ -99,6 +99,10 @@ export function promtailProperties() {
       },
       default: [
         {
+          key: 'name',
+          value: PROMTAIL,
+        },
+        {
           key: 'type',
           value: 'observability',
         },

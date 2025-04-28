@@ -1,3 +1,5 @@
+import { POSTGRES } from './index';
+
 export function postgresProperties() {
   return {
     image: { type: 'string', required: true, default: 'postgres:16-alpine' },
@@ -76,6 +78,10 @@ export function postgresProperties() {
         },
       },
       default: [
+        {
+          key: 'postgres',
+          value: POSTGRES,
+        },
         {
           key: 'type',
           value: 'database',

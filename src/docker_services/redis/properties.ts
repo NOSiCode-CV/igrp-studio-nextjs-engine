@@ -1,3 +1,5 @@
+import { REDIS } from './index';
+
 export function redisProperties() {
   return {
     image: { type: 'string', required: true, default: 'redis:8.0-rc1' },
@@ -86,6 +88,10 @@ export function redisProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: REDIS,
+        },
         {
           key: 'type',
           value: 'cache',

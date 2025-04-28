@@ -1,3 +1,5 @@
+import { FILEBEAT } from './index';
+
 export function filebeatProperties() {
   return {
     image: { type: "string", required: true, default: "elastic/filebeat:8.17.4" },
@@ -83,6 +85,10 @@ export function filebeatProperties() {
           }
         } ,
         default: [
+          {
+            key: 'name',
+            value: FILEBEAT,
+          },
           {
             key: 'type',
             value: 'observability'

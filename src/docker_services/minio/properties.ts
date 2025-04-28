@@ -1,3 +1,5 @@
+import { MINIO } from './index';
+
 export function minioProperties() {
   return {
     image: { type: 'string', required: true, default: 'minio/minio:latest' },
@@ -126,6 +128,10 @@ wait $pid"
         },
       },
       default: [
+        {
+          key: 'name',
+          value: MINIO,
+        },
         {
           key: 'type',
           value: 'file',

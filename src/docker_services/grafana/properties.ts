@@ -1,3 +1,5 @@
+import { GRAFANA } from './index';
+
 export function grafanaProperties() {
   return {
     image: { type: "string", required: true, default: "grafana/grafana:10.4.2" },
@@ -74,6 +76,10 @@ export function grafanaProperties() {
         }
       },
       default: [
+        {
+          key: 'name',
+          value: GRAFANA,
+        },
         {
           key: 'type',
           value: 'observability'

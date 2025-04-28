@@ -1,3 +1,5 @@
+import { ELASTICSEARCH } from './index';
+
 export function elasticsearchProperties() {
   return {
     image: { type: "string", required: true, default: "elasticsearch:8.17.4" },
@@ -99,6 +101,10 @@ export function elasticsearchProperties() {
       }
     },
     default: [
+      {
+        key: 'name',
+        value: ELASTICSEARCH,
+      },
       {
         key: 'type',
         value: 'observability'

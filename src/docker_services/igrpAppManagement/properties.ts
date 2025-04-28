@@ -1,3 +1,5 @@
+import { IGRP_APP_MANAGEMENT } from './index';
+
 export function igrpAppManagementProperties() {
   return {
     image: { type: 'string', required: true, default: 'registry.nosi.cv/formacao-igrp/app-manager-api:demo-local' },
@@ -41,6 +43,10 @@ export function igrpAppManagementProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: IGRP_APP_MANAGEMENT,
+        },
         {
           key: 'type',
           value: 'web',

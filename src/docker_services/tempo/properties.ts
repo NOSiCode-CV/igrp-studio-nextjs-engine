@@ -93,6 +93,10 @@ export function tempoProperties() {
       },
       default: [
         {
+          key: 'name',
+          value: TEMPO,
+        },
+        {
           key: 'type',
           value: 'observability',
         },

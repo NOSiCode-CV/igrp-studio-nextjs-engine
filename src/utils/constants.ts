@@ -23,6 +23,7 @@ export const PATTERNS = {
 export const COMMON_FILES = {
   INIT_IGRP_DB: 'db-init.sh',
   INIT_IGRP_APP_LOGIC: 'app-logic-init.sh',
+  JSON_IGRP_APP_LOGIC: 'igrp-app-logic.json',
   WORKSPACE: 'workspace.json',
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
@@ -86,6 +87,7 @@ export const SRC_CONFIG_FILES = {
   IGRP_COMPOSE: 'igrp-compose.yaml',
   INIT_IGRP_DB: 'igrp-init-db.sh',
   INIT_IGRP_APP_LOGIC: 'igrp-init-app-logic.sh',
+  JSON_IGRP_APP_LOGIC: 'igrp-app-logic.json',
   DOCKERIGNORE: 'dockerignore_template',
   DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',

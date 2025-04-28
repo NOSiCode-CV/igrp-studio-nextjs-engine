@@ -1,3 +1,5 @@
+import { FLEETSERVER } from './index';
+
 export function fleetserverProperties() {
   return {
     image: { type: "string", required: true, default: "elastic/elastic-agent:8.17.4" },
@@ -71,6 +73,10 @@ export function fleetserverProperties() {
         }
       },
       default: [
+        {
+          key: 'name',
+          value: FLEETSERVER,
+        },
         {
           key: 'type',
           value: 'observability'

@@ -1,3 +1,5 @@
+import { IGRP_USER_MANAGEMENT } from './index';
+
 export function igrpUserManagementProperties() {
   return {
     image: { type: 'string', required: true, default: 'registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local' },
@@ -41,6 +43,10 @@ export function igrpUserManagementProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: IGRP_USER_MANAGEMENT,
+        },
         {
           key: 'type',
           value: 'web',

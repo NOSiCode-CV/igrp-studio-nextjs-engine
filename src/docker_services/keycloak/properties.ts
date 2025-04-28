@@ -1,3 +1,5 @@
+import { KEYCLOAK } from './index';
+
 export function keycloakProperties() {
   return {
     image: { type: 'string', required: true, default: 'keycloak/keycloak:25.0.4' },
@@ -133,6 +135,10 @@ export function keycloakProperties() {
             default: 'auth'
           },
           default: [
+            {
+              key: 'name',
+              value: KEYCLOAK,
+            },
             {
               key: 'type',
               value: 'auth'

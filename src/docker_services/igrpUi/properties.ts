@@ -1,3 +1,5 @@
+import { IGRP_UI } from './index';
+
 export function igrpUiProperties() {
   return {
     image: {
@@ -53,6 +55,10 @@ export function igrpUiProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: IGRP_UI,
+        },
         {
           key: 'type',
           value: 'web',

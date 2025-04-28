@@ -67,10 +67,11 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
  * Generates content from a template and a context.
  * @param templateName - The name of the template located in the template directory.
  * @param context - An object containing all the variables or information needed to generate content from the template.
+ * @param isShellScript
  * @returns The content generated as a string.
  * @throws Throws an error if the template name is not provided or if the context is empty.
  */
-export const renderServiceTemplate = (templateName: string, context: any) => {
+export const renderServiceTemplate = (templateName: string, context: any, isShellScript: boolean = false) => {
   if (!templateName) {
     throw ERROR_MESSAGE.TEMPLATE_NAME_REQUIRED;
   }
@@ -84,8 +85,14 @@ export const renderServiceTemplate = (templateName: string, context: any) => {
   context.registryService = registryService
 
   const templatePath = path.join(getPaths().template, templateName);
-  const templateContent = fs.readFileSync(templatePath, 'utf-8');
+  let templateContent = fs.readFileSync(templatePath, 'utf-8');
+  
   const template = Handlebars.compile(templateContent);
 
-  return template(context);
+  if (isShellScript) {
+    return template(context).replace(/\r\n/g, '\n');
+  } else {
+    return template(context);
+  }
+
 };

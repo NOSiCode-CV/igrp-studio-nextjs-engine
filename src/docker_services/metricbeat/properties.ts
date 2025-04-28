@@ -1,3 +1,5 @@
+import { METRICBEAT } from './index';
+
 export function metricbeatProperties() {
   return {
     image: { type: 'string', required: true, default: 'elastic/metricbeat:8.17.4' },
@@ -82,6 +84,10 @@ export function metricbeatProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: METRICBEAT,
+        },
         {
           key: 'type',
           value: 'observability',

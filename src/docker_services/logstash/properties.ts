@@ -1,3 +1,5 @@
+import { LOGSTASH } from './index';
+
 export function logstashProperties() {
   return {
     image: { type: 'string', required: true, default: 'logstash:8.17.4' },
@@ -73,6 +75,10 @@ export function logstashProperties() {
         },
       },
       default: [
+        {
+          key: 'name',
+          value: LOGSTASH,
+        },
         {
           key: 'type',
           value: 'observability',
