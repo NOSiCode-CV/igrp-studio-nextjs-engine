@@ -1,6 +1,7 @@
 import { addProjectToWorkspace, addServiceToWorkspace, initServices } from '../src';
 import { ProjectWorkspace, ServiceWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
+import { COMMON_FILES, DIRECTORIES } from '../src/utils/constants';
 
 export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
 
@@ -598,7 +599,7 @@ const serviceConfig: ServiceWorkspace = {
       "environments": [],
       "env_file": [
         {
-          "file": ".env"
+          "file": ".igrp.env"
         }
       ],
       "networks": [
@@ -608,9 +609,19 @@ const serviceConfig: ServiceWorkspace = {
       ],
       "volumes": [
         {
-          "name": "igrp_app_logic_storage",
-          "path": "/home/node/.n8n",
-          "driver": "none"
+          name: 'igrp_app_logic_storage',
+          path: '/home/node/.n8n',
+          driver: 'local',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.INIT_IGRP_APP_LOGIC}`,
+          path: '/docker-entrypoint.sh',
+          driver: 'none',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
+          path: '/data/igrp-app-logic.json',
+          driver: 'none',
         }
       ],
       "dependsOn": [
@@ -621,8 +632,12 @@ const serviceConfig: ServiceWorkspace = {
       "labels": [
         {
           "key": "type",
-          "value": "api"
-        }
+          "value": "web"
+        },
+        {
+          "key": "name",
+          "value": "igrpAppLogic"
+        },
       ]
     }
   }
