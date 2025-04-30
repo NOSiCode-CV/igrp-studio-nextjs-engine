@@ -1,0 +1,29 @@
+#!/bin/sh
+
+WORKFLOW_FILE="/data/applogic/workflows/igrp-app-logic-workflows.json"
+CREDENTIALS_FILE="/data/applogic/workflows/igrp-app-logic-credentials.json"
+HASH_FILE="/data/applogic/workflows/.checksum"
+
+# Export all workflows
+n8n export:workflow --all --output="$WORKFLOW_FILE"
+
+# Export all credentials
+n8n export:credentials --all --output="$CREDENTIALS_FILE"
+
+# Generate new hash from exported files
+NEW_HASH=$(sha1sum "$WORKFLOW_FILE" "$CREDENTIALS_FILE" | sha1sum | awk '{print $1}')
+
+# Load previous hash if it exists
+if [ -f "$HASH_FILE" ]; then
+    OLD_HASH=$(cat "$HASH_FILE")
+else
+    OLD_HASH=""
+fi
+
+# Compare and update if there are changes
+if [ "$NEW_HASH" != "$OLD_HASH" ]; then
+    echo "🆕   Workflows and/or credentials changed. Export files updated."
+    echo "$NEW_HASH" > "$HASH_FILE"
+else
+    echo "✅   No changes detected (workflows and credentials)."
+fi

@@ -124,9 +124,22 @@ export const removeProjectInWorkspace = async (projectId: string, basePath: stri
     throw new Error(`Project with id "${projectId}" not found in workspace`);
   }
 
+  const deletedProject = workspace.projects[projectIndex]
+
   workspace.projects.splice(projectIndex, 1);
 
+  if(deletedProject.config.type === 'springboot') {
+
+    const serviceIndex = workspace.services.findIndex(p => p?.id === `${projectId}-db`);
+
+    if (serviceIndex === 1) {
+      await removeServiceInWorkspace(`${projectId}-db`, basePath);
+    }
+
+  }
+
   return workspace;
+
 };
 
 // Services

@@ -586,8 +586,8 @@ const serviceConfig: ServiceWorkspace = {
     "id": "svc-1744633175793",
     "name": "igrpAppLogic",
     "properties": {
-      "image": "n8nio/n8n:latest",
-      "container_name": "igrpAppLogic",
+      "image": "registry.nosi.cv/formacao-igrp/igrp-app-logic:latest",
+      "container_name": "igrp-app-logic",
       "restart": "always",
       "ports": [
         {
@@ -619,10 +619,25 @@ const serviceConfig: ServiceWorkspace = {
           driver: 'none',
         },
         {
-          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
-          path: '/data/igrp-app-logic.json',
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.IGRP_APP_LOGIC_WORKFLOW_EXPORT}`,
+          path: '/scripts/igrp-app-logic-workflow-export.sh',
           driver: 'none',
-        }
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
+          path: '/data/applogic/igrp-app-logic.json',
+          driver: 'none',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/workflows/${COMMON_FILES.JSON_IGRP_APP_LOGIC_CREDENTIALS}`,
+          path: '/data/applogic/workflows/igrp-app-logic-credentials.json',
+          driver: 'none',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/workflows/${COMMON_FILES.JSON_IGRP_APP_LOGIC_WORKFLOWS}`,
+          path: '/data/applogic/workflows/igrp-app-logic-workflows.json',
+          driver: 'none',
+        },
       ],
       "dependsOn": [
         {

@@ -23,7 +23,10 @@ export const PATTERNS = {
 export const COMMON_FILES = {
   INIT_IGRP_DB: 'db-init.sh',
   INIT_IGRP_APP_LOGIC: 'app-logic-init.sh',
+  IGRP_APP_LOGIC_WORKFLOW_EXPORT: 'igrp-app-logic-workflow-export.sh',
   JSON_IGRP_APP_LOGIC: 'igrp-app-logic.json',
+  JSON_IGRP_APP_LOGIC_CREDENTIALS: 'igrp-app-logic-credentials.json',
+  JSON_IGRP_APP_LOGIC_WORKFLOWS: 'igrp-app-logic-workflows.json',
   WORKSPACE: 'workspace.json',
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',

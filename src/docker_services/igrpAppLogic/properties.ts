@@ -92,10 +92,25 @@ export function igrpAppLogicProperties() {
           driver: 'none',
         },
         {
-          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
-          path: '/data/igrp-app-logic.json',
+          name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.IGRP_APP_LOGIC_WORKFLOW_EXPORT}`,
+          path: '/scripts/igrp-app-logic-workflow-export.sh',
           driver: 'none',
-        }
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
+          path: '/data/applogic/igrp-app-logic.json',
+          driver: 'none',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/workflows/${COMMON_FILES.JSON_IGRP_APP_LOGIC_CREDENTIALS}`,
+          path: '/data/applogic/workflows/igrp-app-logic-credentials.json',
+          driver: 'none',
+        },
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/workflows/${COMMON_FILES.JSON_IGRP_APP_LOGIC_WORKFLOWS}`,
+          path: '/data/applogic/workflows/igrp-app-logic-workflows.json',
+          driver: 'none',
+        },
       ],
     },
     dependsOn: {
@@ -164,13 +179,36 @@ export function igrpAppLogicVolumes(): Record<string, VolumeFile> {
       }),
       context: {},
     },
-    '/data/igrp-app-logic.json': {
+    '/scripts/igrp-app-logic-workflow-export.sh': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: IGRP_APP_LOGIC,
+        volume: 'igrp-app-logic-workflow-export.sh',
+      }),
+      context: {},
+    },
+    '/data/applogic/igrp-app-logic.json': {
       template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
         name: IGRP_APP_LOGIC,
         volume: 'igrp-app-logic.json',
       }),
       context: {
         encryptionKey: encryptionKey
+      },
+    },
+    '/data/applogic/workflows/igrp-app-logic-credentials.json': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: IGRP_APP_LOGIC,
+        volume: 'igrp-app-logic-credentials.json',
+      }),
+      context: {
+      },
+    },
+    '/data/applogic/workflows/igrp-app-logic-workflows.json': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: IGRP_APP_LOGIC,
+        volume: 'igrp-app-logic-workflows.json',
+      }),
+      context: {
       },
     }
   }
