@@ -17,7 +17,7 @@ export type BASE_FILES = BASE_FILE[];
  * @param context 
  */
 export const generateWorkspaceFiles = async (context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig>) => {
-  const environmentFiles = generateFiles(context);
+  const environmentFiles = await generateFiles(context);
 
   await saveBaseWorkspaceFiles(environmentFiles, context);
 
@@ -25,13 +25,15 @@ export const generateWorkspaceFiles = async (context: RenderContext<WorkspacePro
 
 };
 
-const generateFiles = (context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig>): BASE_FILES => {
-
+const generateFiles = async (
+  context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig>,
+): Promise<BASE_FILES> => {
   const isBaseConfigValid = workspaceProjectsConfigValidate(context.resourceConfig);
 
-  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors) throw workspaceProjectsConfigValidate.errors;
+  if (!isBaseConfigValid && workspaceProjectsConfigValidate.errors)
+    throw workspaceProjectsConfigValidate.errors;
 
-  checkDuplicated(context)
+  await checkDuplicated(context);
 
   return [
     //{ output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },
@@ -40,9 +42,12 @@ const generateFiles = (context: RenderContext<WorkspaceProjectsConfig, Workspace
     //{ output: context.basePath, template: TEMPLATES.IAM_IGRP_ENV, name: ENVIRONMENT_FILES.IAM_IGRP_ENV },
     //{ output: context.basePath, template: TEMPLATES.FILE_IGRP_ENV, name: ENVIRONMENT_FILES.FILE_IGRP_ENV },
     //{ output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },
-    { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
+    {
+      output: context.basePath,
+      template: TEMPLATES.WORKSPACE_COMPOSE,
+      name: SRC_CONFIG_FILES.IGRP_COMPOSE,
+    },
   ];
-
 };
 
 const generateServiceEnvironmentFiles = async (context: RenderContext<WorkspaceProjectsConfig, WorkspaceProjectsConfig>) => {

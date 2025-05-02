@@ -128,7 +128,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { network: `${baseContext.resourceConfig.slug}-network` }
           ],
           labels: [
-            { key: 'type', value: 'database'}
+            { key: 'type', value: 'database'},
+            { key: 'name', value: 'postgres'}
           ]
         },
       },
@@ -149,8 +150,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           volumes: [
             {
-              name: "./data/",
-              path: "/opt/keycloak/data/import",
+              name: `./${DIRECTORIES.IGRPSTUDIO}/auth/data/igrp-realm.json`,
+              path: "/opt/keycloak/data/import/igrp-realm.json",
               driver: "none"
             }
           ],
@@ -193,7 +194,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 5
           },
           labels: [
-            { key: 'type', value: 'auth'}
+            { key: 'type', value: 'auth'},
+            { key: 'name', value: 'keycloak'},
           ],
         },
       },
@@ -214,26 +216,21 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               name: 'igrp_minio_db_data',
               path: '/minio_data',
               driver: 'local'
+            },
+            {
+              name: `./${DIRECTORIES.IGRPSTUDIO}/igrp-minio-init.sh`,
+              path: '/docker-entrypoint.sh',
+              driver: 'none'
             }
           ],
           command: [
             { instruction: 'server' },
             { instruction: '/data' },
-            { instruction: '--console-address :9001' },
+            { instruction: '--console-address' },
+            { instruction: ':9001' },
           ],
           entrypoint: [
-            { instruction: "/bin/sh -c",},
-            { instruction: "'" },
-            { instruction: "isAlive() { curl -sf http://127.0.0.1:9000/minio/health/live; }" },
-            { instruction: "minio $0 \\\"$@\\\" --quiet & echo $! > /tmp/minio.pid" },
-            { instruction: "while ! isAlive; do sleep 0.1; done" },
-            { instruction: "mc alias set minio http://127.0.0.1:9000 ${IGRP_FILE_MANAGEMENT_USER} ${IGRP_FILE_MANAGEMENT_PASSWORD}" },
-            { instruction: "mc mb minio/\${IGRP_FILE_MANAGEMENT_STORAGE_NAME}|| true" },
-            { instruction: "mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME}" },
-            { instruction: "kill -s INT $(cat /tmp/minio.pid) && rm /tmp/minio.pid" },
-            { instruction: "while isAlive; do sleep 0.1; done" },
-            { instruction: "exec minio $0 \\\"$@\\\"" },
-            { instruction: "'" },
+            { instruction: '/docker-entrypoint.sh' }
           ],
           ports: [
             {
@@ -245,11 +242,23 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               external: 9001
             },
           ],
+          healthcheck: {
+            test: [
+              { instruction: 'CMD' },
+              { instruction: 'curl' },
+              { instruction: '-f' },
+              { instruction: 'http://localhost:9000/minio/health/live' },
+            ],
+            interval: '30s',
+            timeout: '20s',
+            retries: 3
+          },
           networks: [
             { network: `${baseContext.resourceConfig.slug}-network` }
           ],
           labels: [
-            { key: 'type', value: 'file'}
+            { key: 'type', value: 'file'},
+            { key: 'name', value: 'minio'},
           ]
         }
       },
@@ -276,7 +285,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { network: `${baseContext.resourceConfig.slug}-network` }
           ],
           labels: [
-            { key: 'type', value: 'web'}
+            { key: 'type', value: 'web'},
+            { key: 'name', value: 'igrpUserManagement'},
           ]
         },
       },
@@ -303,7 +313,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { network: `${baseContext.resourceConfig.slug}-network` }
           ],
           labels: [
-            { key: 'type', value: 'web'}
+            { key: 'type', value: 'web'},
+            { key: 'name', value: 'igrpAppManagement'},
           ]
         },
       },
@@ -331,7 +342,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { network: `${baseContext.resourceConfig.slug}-network` }
           ],
           labels: [
-            { key: 'type', value: 'web'}
+            { key: 'type', value: 'web'},
+            { key: 'name', value: 'igrpUi'},
           ]
         },
       },

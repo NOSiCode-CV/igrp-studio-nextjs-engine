@@ -1,4 +1,7 @@
 import { KEYCLOAK } from './index';
+import { VolumeFile } from '../../interfaces/types';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export function keycloakProperties() {
   return {
@@ -152,4 +155,16 @@ export function keycloakProperties() {
       },
     },
   };
+}
+
+export function keycloakVolumes(): Record<string, VolumeFile> {
+  return {
+    '/opt/keycloak/data/import/igrp-realm.json': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: KEYCLOAK,
+        volume: 'igrp-realm.json',
+      }),
+      context: {},
+    },
+  }
 }

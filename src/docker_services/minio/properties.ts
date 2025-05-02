@@ -1,4 +1,7 @@
 import { MINIO } from './index';
+import { VolumeFile } from '../../interfaces/types';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export function minioProperties() {
   return {
@@ -64,7 +67,20 @@ export function minioProperties() {
         },
       },
     },
-    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.env' } } }, required: false, default: [ { file: '.env'} ] },
+    env_file: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: { file: { type: 'string', required: true, default: '.env' } },
+      },
+      required: false,
+      default: [{ file: '.env' }],
+    },
+    entrypoint: {
+      type: 'array',
+      items: { type: 'object', properties: { instruction: { type: 'string', required: true } } },
+      default: [{ instruction: '/docker-entrypoint.sh' }],
+    },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],
@@ -88,24 +104,13 @@ export function minioProperties() {
         },
       ],
     },
-    entrypoint: [
-      "/bin/sh",
-      "-c",
-      "/usr/bin/docker-entrypoint.sh minio server /data --console-address \":9001\" & \
-pid=$!; \
-until mc alias set minio http://localhost:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} 2>/dev/null; do \
-  sleep 1; \
-done; \
-mc mb minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME} || true; \
-mc anonymous set public minio/${IGRP_FILE_MANAGEMENT_STORAGE_NAME} || true; \
-wait $pid"
-    ],
     command: {
       type: 'array',
       default: [
         { instruction: 'start' },
         { instruction: '/data' },
-        { instruction: '--console-address :9003' },
+        { instruction: '--console-address' },
+        { instruction: ':9003' },
       ],
       items: {
         type: 'object',
@@ -117,6 +122,27 @@ wait $pid"
         },
       },
       required: false,
+    },
+    healthcheck: {
+      type: 'object',
+      properties: {
+        test: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { instruction: { type: 'string', required: true } },
+          },
+          default: [
+            { instruction: 'CMD' },
+            { instruction: 'curl' },
+            { instruction: '-f' },
+            { instruction: 'http://localhost:9002/minio/health/live' },
+          ],
+        },
+        interval: { type: 'string', required: true, default: '30s' },
+        timeout: { type: 'string', required: true, default: '20s' },
+        retries: { type: 'number', required: true, default: 3 },
+      },
     },
     labels: {
       type: 'array',
@@ -141,6 +167,18 @@ wait $pid"
           value: '{{uuid}}',
         },
       ],
+    },
+  };
+}
+
+export function minioVolumes(): Record<string, VolumeFile> {
+  return {
+    '/docker-entrypoint.sh': {
+      template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
+        name: MINIO,
+        volume: 'igrp-minio-init.sh',
+      }),
+      context: {},
     },
   };
 }

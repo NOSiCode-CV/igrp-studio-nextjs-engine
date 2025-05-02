@@ -41,9 +41,7 @@ import { componentRegistrationValidate } from './schema/componentRegisterConfig'
 import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
 import { createWorkspaceDirectories } from './modules/workspace/createWorkspaceDirectories';
-import { extractBaseWorkspace } from './modules/workspace/extractBaseWorkspace';
 import path from 'path';
-import { workspaceProjectsConfigValidate } from './schema/workspaceProjectConfig';
 import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
 import { registerAllServices } from './docker_services/register';
 import { dockerServiceRegistrationValidate } from './schema/serviceRegisterConfig';

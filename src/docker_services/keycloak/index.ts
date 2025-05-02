@@ -1,5 +1,5 @@
 import { DockerService, defaultRenderer } from '../index';
-import { keycloakProperties } from './properties';
+import { keycloakProperties, keycloakVolumes } from './properties';
 
 export default {
 
@@ -7,6 +7,7 @@ export default {
     dockerService.loadDefaultName(KEYCLOAK);
     dockerService.loadLabel("Keycloak Server");
     dockerService.getProperties(keycloakProperties());
+    dockerService.loadVolumes(keycloakVolumes());
     dockerService.setRenderer(defaultRenderer);
   }
 
