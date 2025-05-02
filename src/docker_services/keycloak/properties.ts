@@ -102,6 +102,12 @@ export function keycloakProperties() {
             default: 'host-gateway',
           },
         },
+        default: [
+          {
+            hostname: "${KEYCLOAK_HOSTNAME}",
+            ip: 'host-gateway'
+          }
+        ]
       },
     },
     command: {

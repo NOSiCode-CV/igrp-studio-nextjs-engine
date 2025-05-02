@@ -136,8 +136,8 @@ export const removeProjectInWorkspace = async (projectId: string, basePath: stri
 
     const serviceIndex = workspace.services.findIndex(p => p?.id === `${projectId}-db`);
 
-    if (serviceIndex === 1) {
-      await removeServiceInWorkspace(`${projectId}-db`, basePath);
+    if (serviceIndex !== -1) {
+      return await removeServiceInWorkspace(`${projectId}-db`, basePath, workspace);
     }
 
   }
@@ -185,11 +185,13 @@ export const updateServiceInWorkspace = async (
   return workspace;
 };
 
-export const removeServiceInWorkspace = async (serviceId: string, basePath: string): Promise<WorkspaceProjectsConfig> => {
+export const removeServiceInWorkspace = async (serviceId: string, basePath: string, ws?: WorkspaceProjectsConfig): Promise<WorkspaceProjectsConfig> => {
 
-  const workspace = await loadWorkspaceConfig(basePath);
+  const workspace = ws? ws : await loadWorkspaceConfig(basePath);
 
   const serviceIndex = workspace.services.findIndex((s) => s.id === serviceId);
+
+  console.log("Service id:", serviceId)
 
   if (serviceIndex === -1) {
     throw new Error(`Service with id "${serviceId}" not found in workspace`);

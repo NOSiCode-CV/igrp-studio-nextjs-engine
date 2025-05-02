@@ -1,4 +1,4 @@
-import { addProjectToWorkspace, addServiceToWorkspace, initServices } from '../src';
+import { addProjectToWorkspace, addServiceToWorkspace, initServices, removeProjectFromWorkspace } from '../src';
 import { ProjectWorkspace, ServiceWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 import { COMMON_FILES, DIRECTORIES } from '../src/utils/constants';
@@ -564,8 +564,9 @@ const baseConfig: WorkspaceProjectsConfig = {
 };
 
 const projectConfig: ProjectWorkspace = {
-  id: 'my_workspace',
+  id: "2fabf785-0659-49f2-b03f-c6ea50659646",
   config: {
+    id: "2fabf785-0659-49f2-b03f-c6ea50659666",
     type: 'springboot',
     name: 'demoDomain',
     group: 'com.petshop',
@@ -668,6 +669,15 @@ describe('Add projects to workspace module', () => {
      await addProjectToWorkspace(projectConfig, OUTPUT_DIR);
   });
 });
+
+describe('Remove projects from workspace module', () => {
+
+  test('Should generate the compose and environment variables file for workspace', async () => {
+     await removeProjectFromWorkspace("2fabf785-0659-49f2-b03f-c6ea50659666", OUTPUT_DIR);
+  });
+});
+
+
 
 describe('Add services to workspace module', () => {
 
