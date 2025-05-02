@@ -22,9 +22,12 @@ export const mapProjectToWorkspace = async (
 
   const isSpringBoot = config.config.type === 'springboot';
   const basePort = isSpringBoot ? 8083 : 3001;
+
   const index = isSpringBoot
     ? workspace.projects.filter((proj) => proj.config.type === 'springboot').length
     : workspace.projects.filter((proj) => !(proj.config.type === 'springboot')).length;
+
+  const indexService = workspace.services.filter((serv) => serv.name === normalizeDatabase(config.config.database)).length
 
   workspace.projects.push({
     config: config.config,
@@ -63,15 +66,16 @@ export const mapProjectToWorkspace = async (
           ],
           ports: [
             {
-              internal: 5434 + index,
-              external: 5434 + index,
+              internal: normalizeDefaultPort(config.config.database) + indexService,
+              external: normalizeDefaultPort(config.config.database) + indexService,
             }
           ],
           networks: [
             { network: `${workspace.workspace}-network` }
           ],
           labels: [
-            { key: 'type', value: 'database'}
+            { key: 'type', value: 'database'},
+            { key: 'name', value: normalizeDatabase(config.config.database) }
           ]
         },
       }
@@ -206,6 +210,19 @@ const normalizeDatabase = (database: string) => {
       return "oracle"
     default:
       return database
+  }
+}
+
+const normalizeDefaultPort = (database: string) => {
+  switch (database) {
+    case "Postgresql":
+      return 5434
+    case "MySQL":
+      return 3306
+    case "Oracle":
+      return 1521
+    default:
+      return 6000
   }
 }
 

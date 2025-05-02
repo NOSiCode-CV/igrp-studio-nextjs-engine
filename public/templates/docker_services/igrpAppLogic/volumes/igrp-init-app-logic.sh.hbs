@@ -145,7 +145,7 @@ if [ "$IGRP_APP_LOGIC_ENV" = "dev" ]; then
   # 1. Cria o arquivo crontab em tempo de execução
   mkdir -p /etc/cron.d
 
-  echo "* * * * * /bin/sh /scripts/export-workflow-cli.sh >> /scripts/cron.log 2>&1" > /etc/cron.d/n8n-export
+  echo "* * * * * /bin/sh /scripts/igrp-app-logic-workflow-export.sh >> /scripts/cron.log 2>&1" > /etc/cron.d/n8n-export
 
   # Corrige permissões
   chmod 0644 /etc/cron.d/n8n-export
