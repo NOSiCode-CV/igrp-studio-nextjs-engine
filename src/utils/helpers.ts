@@ -33,7 +33,7 @@ export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
 
   return path.join(
     context.basePath,
-    DIRECTORIES.APP,
+    DIRECTORIES.GENERATED,
     ...segments,
     COMMON_FILES.PAGE_TSX
   );
@@ -43,6 +43,7 @@ export const getComponentDir = (context: RenderContext<ComponentConfig, Componen
   const name = context.resourceConfig.name.toLowerCase();
   return path.join(
     context.basePath,
+    DIRECTORIES.GENERATED,
     DIRECTORIES.COMPONENTS,
     `${context.resourceConfig.name}`.toLowerCase(),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),

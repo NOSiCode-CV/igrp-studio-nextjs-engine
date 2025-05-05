@@ -44,6 +44,7 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
     //{ output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX },
     //{ output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT, name: COMMON_FILES.MAIN_LAYOUT_TSX },
     //{ output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT_CSS, name: COMMON_FILES.MAIN_LAYOUT_CSS },
+    { output: mainPath, template: TEMPLATES.PAYLOAD_FILE, name: COMMON_FILES.PAYLOAD_FILE },
     { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S}

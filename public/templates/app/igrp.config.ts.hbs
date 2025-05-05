@@ -1,0 +1,51 @@
+/**
+ * Configuration registry for Payload CMS custom elements such as types, server actions, and client functions.
+ *
+ * This file serves as the central declaration point for registering:
+ * - **Types**: TypeScript interfaces or type aliases used for defining structured data models.
+ * - **Actions**: Server-side logic that handles backend operations.
+ * - **Functions**: Client-side logic to be used in the frontend application.
+ *
+ * Each of the above must be **manually registered** as an array of relative string paths.
+ * These paths are used to locate files that reside inside the `src/app/(myapp)/...` folder.
+ *
+ * ### Path Conventions
+ * All entries must follow the format of importable strings from the `src/app/(myapp)` package,
+ * and **must not use file extensions**. The paths will be resolved via `@/app/(myapp)/...`.
+ *
+ * ✅ **Examples**:
+ * ```ts
+ * types: [
+ *   'types/User',
+ *   'types/Product',
+ * ],
+ * actions: [
+ *   'server/actions/createOrder',
+ *   'server/actions/deleteUser',
+ * ],
+ * functions: [
+ *   'client/functions/useCart',
+ *   'client/functions/formatDate',
+ * ]
+ * ```
+ *
+ * ❌ **Invalid**:
+ * - `'./types/User.ts'` → do not use relative paths or file extensions.
+ * - `'src/app/(myapp)/types/User'` → the `src/app/(myapp)` prefix is implied.
+ *
+ * ### Location Requirement
+ * All registered files must exist **under `src/app/(myapp)`**. Files outside of this folder
+ * will not be parsed or loaded.
+ *
+ * ### Purpose
+ * This registry allows code automation and analysis tools to locate, extract, and expose metadata
+ * such as type definitions, function signatures, and input/output schemas in a structured format (e.g., JSON).
+ *
+ * @see {@link https://payloadcms.com/docs} for Payload CMS plugin customization patterns.
+ */
+
+export default ({
+  types: [],
+  actions: [],
+  functions: [],
+});

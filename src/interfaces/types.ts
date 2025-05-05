@@ -495,6 +495,46 @@ export interface PathConfig {
   genericPartials: string,
 }
 
+// Payload configuration
+
+export interface ElementField {
+  name: string;
+  type: string;
+  required: boolean;
+}
+
+export interface TypeDef {
+  name: string;
+  path: string;
+  tags?: string[];
+  fields: ElementField[];
+}
+
+export interface Argument {
+  name: string;
+  type: string;
+}
+
+export interface ActionDef {
+  name: string;
+  path: string;
+  args: Argument[];
+  returnType: string;
+}
+
+export interface FunctionDef {
+  name: string;
+  path: string;
+  args: Argument[];
+  returnType: string;
+}
+
+export interface PayloadConfig {
+  types: TypeDef[];
+  actions: ActionDef[];
+  functions: FunctionDef[];
+}
+
 export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
   parentResourceConfig?: P;

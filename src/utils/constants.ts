@@ -44,6 +44,7 @@ export const COMMON_FILES = {
   MAIN_LAYOUT_TSX: 'MainLayout.tsx',
   MAIN_LAYOUT_CSS: 'MainLayout.module.css',
   LAYOUT_TSX: 'layout.tsx',
+  PAYLOAD_FILE: 'igrp.config.ts',
   SERVICE: 'Service.ts',
   DEPLOYMENT: 'deployment.yaml',
   INGRESS: 'ingress.yaml',
@@ -60,6 +61,7 @@ export const TEMPLATES = {
   CONFIG_LAYOUT: 'config/layout.hbs',
   CONFIG_PACKGE_JSON: 'config/package.json.hbs',
   PAGE: 'app/page/page.hbs',
+  PAYLOAD_FILE: 'app/igrp.config.ts.hbs',
   COMPONENT: 'app/component/component.hbs',
   ACTION: 'app/page/actions/action.hbs',
   SERVICE: 'app/page/service.hbs',
@@ -170,6 +172,8 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 
 export const DIRECTORIES = {
   APP: 'src/app',
+  GENERATED: 'src/app/(generated)',
+  MYAPP: 'src/app/(myapp)',
   SERVICES: 'src/services',
   LAYOUTS: 'src/layouts',
   ASSETS: 'src/assets',
@@ -185,7 +189,8 @@ export const DIRECTORIES = {
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   KUBERNETES: 'k8s',
-  COMPONENTS: 'src/components',
+  BASE_COMPONENTS: 'src/components',
+  COMPONENTS: 'src/app/(generated)/components',
 };
 
 export const ERROR_MESSAGE = {
