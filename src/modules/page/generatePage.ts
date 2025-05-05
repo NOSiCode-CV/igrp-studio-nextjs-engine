@@ -1,4 +1,4 @@
-import { getPageDir } from '../../utils/helpers';
+import { getPageDir, loadConfig, loadPageConfig, loadPagesConfig } from '../../utils/helpers';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { DIRECTORIES, ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
@@ -11,6 +11,18 @@ import { PageConfig, RenderContext } from '../../interfaces/types';
 export const generatePage = async (context: RenderContext<PageConfig, PageConfig>) => {
   const page = await renderPage(context);
   const pageOutputPath = getPageDir(context);
+
+  const pages = await loadPagesConfig(context.basePath)
+
+  if(!pages.find(it => it.id === context.resourceConfig.id)) {
+
+    const pageAlready = pages.find(it => it.path === context.resourceConfig.path);
+
+    if(pageAlready) {
+      throw Error(`There's already a page with the same path: '${pageAlready.pageName}'`)
+    }
+
+  }
 
   await saveToFile(page, pageOutputPath, true, DIRECTORIES.PAGES, context.resourceConfig.id, context.basePath);
 };

@@ -33,8 +33,7 @@ export const saveToFile = async (content: string, outputPath: string, override: 
           sourcePath = join(getDirectoryPath(outputPath), page.pageName.concat(extension));
         else {
           sourcePath = join(
-            getDirectoryPath(getDirectoryPath(outputPath)),
-            page.pageName.toLowerCase(),
+            getDirectoryPath(getDirectoryPath(outputPath))
           );
         }
 
@@ -104,8 +103,9 @@ export const saveToFileSync = (content: string, outputPath: string, override: bo
           sourcePath = join(getDirectoryPath(outputPath), page.pageName.concat(extension));
         else {
           sourcePath = join(
-            getDirectoryPath(getDirectoryPath(outputPath)),
-            page.pageName.toLowerCase(),
+            basePath,
+            DIRECTORIES.APP,
+            page.path
           );
         }
 

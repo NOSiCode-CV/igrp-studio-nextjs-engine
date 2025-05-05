@@ -14,6 +14,7 @@ export interface AppConfig extends IdentifiableElement {
 export interface PageConfig extends IdentifiableElement {
   type: 'page';
   path: string;
+  description?: string;
   pageName: string;
   components?: Layout | {};
 }
@@ -236,7 +237,7 @@ export interface CommonProperties extends LayoutProperties{
   visibility?: "visible" | "invisible" | "hidden"; // Tailwind visibility classes
 }
 
-export interface DeleteConfig {
+export interface DeleteConfig extends IdentifiableElement {
   name: string,
   type: ConfigTypes
 }

@@ -20,6 +20,14 @@ export const PATTERNS = {
   DOCKER_SERVICE_VALIDATION_PATTERN: '^[a-zA-Z][a-zA-Z0-9_-]*$'
 }
 
+export const VALID_SEGMENT_REGEXES = [
+  /^[a-zA-Z0-9-_]+$/,               // static
+  /^\[[a-zA-Z0-9-_]+]$/,           // dynamic
+  /^\[\.\.\.[a-zA-Z0-9-_]+]$/,     // catch-all
+  /^\[\[\.\.\.[a-zA-Z0-9-_]+]]$/, // optional catch-all
+  /^\([a-zA-Z0-9-_]+\)$/,           // group
+];
+
 export const COMMON_FILES = {
   INIT_IGRP_DB: 'db-init.sh',
   INIT_IGRP_APP_LOGIC: 'app-logic-init.sh',

@@ -7,6 +7,11 @@ import { CONFIG_TYPES, PATTERNS } from '../utils/constants';
 const deleteSchema: JSONSchemaType<DeleteConfig> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      errorMessage:
+        'The id attribute must be a valid string.',
+    },
     type: {
       type: "string",
       enum: CONFIG_TYPES,
@@ -27,7 +32,7 @@ const deleteSchema: JSONSchemaType<DeleteConfig> = {
       }
     }
   },
-  required: ["type", "name"],
+  required: ["id", "type", "name"],
   additionalProperties: false,
   errorMessage: {
     required: {

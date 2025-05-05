@@ -241,11 +241,17 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       errorMessage:
         'The page name must only contain letters and must not have spaces or special characters.',
     },
+    description: {
+      type: 'string',
+      nullable: true,
+      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
+      errorMessage:
+        'The description, if provided, must only contain letters, numbers and spaces and must not have special characters.',
+    },
     path: {
       type: 'string',
-      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage:
-        'The path attribute must only contain letters and must not have spaces or special characters.',
+        'The path attribute must follow Next.js path conventions.',
     },
     components: {
       type: 'object',

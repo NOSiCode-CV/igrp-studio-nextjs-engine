@@ -78,7 +78,8 @@ const pageConfig: PageConfig = {
   id: 'e76Typ9lm2m1',
   type: 'page',
   pageName: 'registros',
-  path: 'registros',
+  description: "Registros",
+  path: '[[...teste]]/[param]/(auth)/login',
   components: dashboardLayout,
 };
 

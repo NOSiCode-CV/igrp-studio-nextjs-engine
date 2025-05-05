@@ -7,20 +7,37 @@ import {
   RenderContext, WorkspaceProjectsConfig,
 } from '../interfaces/types';
 import path from 'path';
-import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
+import { COMMON_FILES, DIRECTORIES, EXTENSIONS, VALID_SEGMENT_REGEXES } from './constants';
 import { Component } from '../components';
 import { TABLE } from '../components/table';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 
-export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) =>
-  path.join(
+function isValidNextSegment(segment: string): boolean {
+  return VALID_SEGMENT_REGEXES.some((regex) => regex.test(segment));
+}
+
+export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
+  const segments = context.resourceConfig.path
+    .split('/')
+    .filter(Boolean);
+
+  for (const segment of segments) {
+    if (!isValidNextSegment(segment)) {
+      throw new Error(
+        `Invalid path segment "${segment}". Must follow Next.js conventions: static, [param], [...param], [[...param]], or (group).`
+      );
+    }
+  }
+
+  return path.join(
     context.basePath,
-    DIRECTORIES.PAGES,
-    `${context.resourceConfig.pageName}`.toLowerCase(),
-    COMMON_FILES.PAGE_TSX,
+    DIRECTORIES.APP,
+    ...segments,
+    COMMON_FILES.PAGE_TSX
   );
+};
 
 export const getComponentDir = (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const name = context.resourceConfig.name.toLowerCase();
@@ -102,6 +119,26 @@ export const loadWorkspaceConfig = async (basePath: string) => {
   if(workspaces.length > 0)
     return workspaces[0]
   else throw Error(`Could not find any workspace configuration file on path: ${basePath}`)
+
+}
+
+export const loadPageConfig = async (basePath: string, id: string) => {
+  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES))
+
+  if(pages.length > 0)
+    return pages.find(it => it.id === id)
+
+  return undefined
+
+}
+
+export const loadPagesConfig = async (basePath: string) => {
+  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+
+  if(pages.length > 0)
+    return pages
+
+  return []
 
 }
 
