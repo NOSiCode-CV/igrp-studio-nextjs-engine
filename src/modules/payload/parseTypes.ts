@@ -1,47 +1,46 @@
-import fs from 'fs';
+import { Project, ts } from 'ts-morph';
+import { TypeDef } from "../../interfaces/types";
 import path from 'path';
-import ts from 'typescript';
-import { ElementField, TypeDef } from '../../interfaces/types';
 
 export function parseTypeFile(filePath: string): TypeDef {
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const source = ts.createSourceFile(filePath, content, ts.ScriptTarget.ESNext, true);
+  const project = new Project();
+  const sourceFile = project.addSourceFileAtPath(filePath);
 
-  const fields: ElementField[] = [];
-  let name = path.basename(filePath, '.ts');
+  const typeDef: TypeDef = {
+    name: path.basename(filePath, '.ts'),
+    path: filePath,
+    fields: []
+  };
 
-  ts.forEachChild(source, node => {
-    if (ts.isInterfaceDeclaration(node)) {
-      name = node.name.text;
-
-      node.members.forEach((member: any) => {
-        const fieldName = member.name?.text;
-        const type = member.type?.getText(source) ?? 'any';
-        const required = !member.questionToken;
-
-        if (fieldName) {
-          fields.push({ name: fieldName, type, required });
-        }
+  // Handle interfaces
+  sourceFile.getInterfaces().forEach(interfaceDec => {
+    typeDef.name = interfaceDec.getName();
+    interfaceDec.getProperties().forEach(property => {
+      typeDef.fields.push({
+        name: property.getName(),
+        type: property.getType().getText(property),
+        required: !property.hasQuestionToken()
       });
+    });
+  });
 
-    } else if (ts.isTypeAliasDeclaration(node) && ts.isTypeLiteralNode(node.type)) {
-      name = node.name.text;
-
-      node.type.members.forEach((member: any) => {
-        const fieldName = member.name?.text;
-        const type = member.type?.getText(source) ?? 'any';
-        const required = !member.questionToken;
-
-        if (fieldName) {
-          fields.push({ name: fieldName, type, required });
+  // Handle type aliases with object literals
+  sourceFile.getTypeAliases().forEach(typeAlias => {
+    const typeNode = typeAlias.getTypeNode();
+    if (typeNode?.isKind(ts.SyntaxKind.TypeLiteral)) {
+      typeDef.name = typeAlias.getName();
+      typeNode.getMembers().forEach(member => {
+        if (member.isKind(ts.SyntaxKind.PropertySignature)) {
+          const prop = member.asKindOrThrow(ts.SyntaxKind.PropertySignature);
+          typeDef.fields.push({
+            name: prop.getName(),
+            type: prop.getType().getText(prop),
+            required: !prop.hasQuestionToken()
+          });
         }
       });
     }
   });
 
-  return {
-    name,
-    path: filePath,
-    fields,
-  };
+  return typeDef;
 }

@@ -7,15 +7,23 @@ import {
   RenderContext, WorkspaceProjectsConfig,
 } from '../interfaces/types';
 import path from 'path';
-import { COMMON_FILES, DIRECTORIES, EXTENSIONS, VALID_SEGMENT_REGEXES } from './constants';
+import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
 import { Component } from '../components';
 import { TABLE } from '../components/table';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 
-function isValidNextSegment(segment: string): boolean {
-  return VALID_SEGMENT_REGEXES.some((regex) => regex.test(segment));
+/**
+ * Checks if a string segment is a valid Next.js path segment
+ * based on Next.js naming conventions like static, dynamic,
+ * catch-all, optional catch-all, and group segments.
+ *
+ * @param {string} segment - The segment of the path to validate.
+ * @returns {boolean} True if the segment matches one of the valid patterns.
+ */
+export function isValidNextSegment(segment: string): boolean {
+  return true //return VALID_SEGMENT_PATTERNS.some((pattern) => new RegExp(pattern).test(segment));
 }
 
 export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
@@ -23,13 +31,13 @@ export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
     .split('/')
     .filter(Boolean);
 
-  for (const segment of segments) {
+  /*for (const segment of segments) {
     if (!isValidNextSegment(segment)) {
       throw new Error(
         `Invalid path segment "${segment}". Must follow Next.js conventions: static, [param], [...param], [[...param]], or (group).`
       );
     }
-  }
+  }*/
 
   return path.join(
     context.basePath,

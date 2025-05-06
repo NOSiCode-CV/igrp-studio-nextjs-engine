@@ -1,32 +1,31 @@
-import fs from 'fs';
-import ts from 'typescript';
-import { Argument, ActionDef } from '../../interfaces/types';
+import { Project } from "ts-morph";
+import { ActionDef } from "../../interfaces/types";
 
 export function parseActionFile(filePath: string): ActionDef {
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const source = ts.createSourceFile(filePath, content, ts.ScriptTarget.ESNext, true);
+  const project = new Project();
+  const sourceFile = project.addSourceFileAtPath(filePath);
 
-  let name = '';
-  const args: Argument[] = [];
-  let returnType = 'void';
+  const actionDef: ActionDef = {
+    name: '',
+    path: filePath,
+    args: [],
+    returnType: 'void'
+  };
 
-  ts.forEachChild(source, node => {
-    if (ts.isFunctionDeclaration(node) && node.name) {
-      name = node.name.text;
-      node.parameters.forEach(param => {
-        args.push({
-          name: (param.name as ts.Identifier).text,
-          type: param.type?.getText(source) || 'any',
-        });
+  sourceFile.getFunctions().forEach(func => {
+    if (!func.getName()) return;
+
+    actionDef.name = func.getName()!;
+    actionDef.returnType = func.getReturnType().getText(func);
+
+    func.getParameters().forEach(param => {
+      actionDef.args.push({
+        name: param.getName(),
+        type: param.getType().getText(param),
+        optional: param.isOptional()
       });
-      returnType = node.type?.getText(source) || 'void';
-    }
+    });
   });
 
-  return {
-    name,
-    path: filePath,
-    args,
-    returnType,
-  };
+  return actionDef;
 }

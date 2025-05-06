@@ -513,6 +513,7 @@ export interface TypeDef {
 export interface Argument {
   name: string;
   type: string;
+  optional: boolean;
 }
 
 export interface ActionDef {

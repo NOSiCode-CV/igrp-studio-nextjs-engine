@@ -5,7 +5,7 @@ import {
   IActionConfig,
   Layout, LayoutProperties, CommonProperties,
 } from '../interfaces/types';
-import { COMPONENTS, COMPONENTS_NAMES, PATTERNS } from '../utils/constants';
+import { COMPONENTS, COMPONENTS_NAMES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
 const actionConfigSchema: JSONSchemaType<IActionConfig> = {
@@ -250,8 +250,10 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
     },
     path: {
       type: 'string',
-      errorMessage:
-        'The path attribute must follow Next.js path conventions.',
+      pattern: VALID_SEGMENT_PATTERN,
+      errorMessage: {
+        anyOf: 'The path attribute must follow Next.js path conventions: static, [param], [...param], [[...param]], or (group).',
+      },
     },
     components: {
       type: 'object',
