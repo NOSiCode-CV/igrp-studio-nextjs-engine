@@ -7,6 +7,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const tableLayout: Layout = {
   id: 'section_tables',
+  tag: 'section_tables',
   componentName: 'section',
   properties: {
     variant: 'compact',
@@ -15,6 +16,7 @@ const tableLayout: Layout = {
   children: [
     {
       id: 'headline',
+      tag: 'headline',
       componentName: 'headline',
       properties: {
         variant: 'h4',
@@ -24,6 +26,7 @@ const tableLayout: Layout = {
     },
     {
       id: 'table_default',
+      tag: 'table_default',
       componentName: 'table',
       properties: {
         showFilter: true,
@@ -33,11 +36,13 @@ const tableLayout: Layout = {
       children: [
         {
           id: 'expand',
+          tag: 'expand',
           componentName: 'tableColumns',
           properties: {},
           children: [
             {
               id: 'check',
+              tag: 'check',
               componentName: 'tableCheckboxCell',
               properties: {
                 headerType: "rowsSelect"
@@ -45,12 +50,14 @@ const tableLayout: Layout = {
             },
             {
               id: 'expand',
+              tag: 'expand',
               componentName: 'tableExpanderCell',
               properties: {
               }
             },
             {
               id: 'name',
+              tag: 'name',
               componentName: 'tableTextCell',
               properties: {
                 headerTitle: "Name",
@@ -58,6 +65,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'email',
+              tag: 'email',
               componentName: 'tableTextCell',
               properties: {
                 headerTitle: "Email",
@@ -66,6 +74,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'role',
+              tag: 'role',
               componentName: 'tableTextCell',
               properties: {
                 headerTitle: "Role",
@@ -74,6 +83,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'salary',
+              tag: 'salary',
               componentName: 'tableAmountCell',
               properties: {
                 headerTitle: "Salary",

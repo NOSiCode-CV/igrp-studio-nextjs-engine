@@ -18,6 +18,7 @@ export default {
     component.loadVariants(formVariants());
     component.loadGroup('containers')
     component.loadLabel('Form')
+    component.setAllowTypes(true)
     component.getInteractions(formInteractions())
     component.getInteractionsMapping(formInteractionsMapping())
     component.getProperties(formProperties());

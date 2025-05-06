@@ -6,6 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const modalLayout: Layout = {
   id: "grid_modals",
+  tag: "grid_modals",
   componentName: "grid",
   properties: {
     variant: "cols3",
@@ -16,6 +17,7 @@ const modalLayout: Layout = {
   children: [
     {
       id: "modal_dialog_default",
+      tag: "modal_dialog_default",
       componentName: "modalDialog",
       properties: {
         title: "Icon Position Start",
@@ -33,6 +35,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_success",
+      tag: "modal_dialog_success",
       componentName: "modalDialog",
       properties: {
         title: "Icon Position End",
@@ -50,6 +53,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_destructive",
+      tag: "modal_dialog_destructive",
       componentName: "modalDialog",
       properties: {
         title: "Delete Confirmation",
@@ -66,6 +70,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_warning",
+      tag: "modal_dialog_warning",
       componentName: "modalDialog",
       properties: {
         title: "Careful",
@@ -84,6 +89,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_full",
+      tag: "modal_dialog_full",
       componentName: "modalDialog",
       properties: {
         title: "Icon Position Start",
@@ -102,6 +108,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_small",
+      tag: "modal_dialog_small",
       componentName: "modalDialog",
       properties: {
         title: "Small Alert",
@@ -120,6 +127,7 @@ const modalLayout: Layout = {
     },
     {
       id: "modal_dialog_reversed",
+      tag: "modal_dialog_reversed",
       componentName: "modalDialog",
       properties: {
         title: "Reversed Info",
@@ -143,6 +151,7 @@ const modalLayout: Layout = {
 const pageConfig: PageConfig = {
   id: 'm12Djk0zp2q4',
   type: 'page',
+  types: [],
   pageName: 'modals',
   path: 'modals',
   components: modalLayout,

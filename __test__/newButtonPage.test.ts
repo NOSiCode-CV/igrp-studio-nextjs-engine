@@ -6,6 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const buttonLayout: Layout = {
   id: "grid_buttons",
+  tag: "grid_buttons",
   componentName: "grid",
   properties: {
     variant: "cols3",
@@ -16,6 +17,7 @@ const buttonLayout: Layout = {
   children: [
     {
       id: "button_default",
+      tag: "button_default",
       componentName: "button",
       properties: {
         variant: 'default',
@@ -25,6 +27,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_default_disabled",
+      tag: "button_default_disabled",
       componentName: "button",
       properties: {
         variant: 'default',
@@ -35,6 +38,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_destructive",
+      tag: "button_destructive",
       componentName: "button",
       properties: {
         variant: 'destructive',
@@ -44,6 +48,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_outline",
+      tag: "button_outline",
       componentName: "button",
       properties: {
         variant: 'outline',
@@ -53,6 +58,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_secondary",
+      tag: "button_secondary",
       componentName: "button",
       properties: {
         variant: 'secondary',
@@ -62,6 +68,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_ghost",
+      tag: "button_ghost",
       componentName: "button",
       properties: {
         variant: 'ghost',
@@ -71,6 +78,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_link",
+      tag: "button_link",
       componentName: "button",
       properties: {
         variant: 'link',
@@ -80,6 +88,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_icon_start",
+      tag: "button_icon_start",
       componentName: "button",
       properties: {
         variant: 'default',
@@ -94,6 +103,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_icon_end",
+      tag: "button_icon_end",
       componentName: "button",
       properties: {
         variant: 'default',
@@ -108,6 +118,7 @@ const buttonLayout: Layout = {
     },
     {
       id: "button_icon_size",
+      tag: "button_icon_size",
       componentName: "button",
       properties: {
         variant: 'default',
@@ -123,6 +134,7 @@ const buttonLayout: Layout = {
 const pageConfig: PageConfig = {
   id: 'b76Typ9lm2m1',
   type: 'page',
+  types: [],
   pageName: 'buttons',
   path: 'buttons',
   components: buttonLayout,

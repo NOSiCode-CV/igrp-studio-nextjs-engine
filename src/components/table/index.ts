@@ -20,6 +20,7 @@ export default {
     component.loadChildrenMax(2)
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
+    component.setAllowTypes(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
     component.getInteractions(tableInteractions());

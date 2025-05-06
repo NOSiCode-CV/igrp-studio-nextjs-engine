@@ -16,6 +16,7 @@ export interface PageConfig extends IdentifiableElement {
   path: string;
   description?: string;
   pageName: string;
+  types: TypeDef[];
   components?: Layout | {};
 }
 
@@ -195,6 +196,7 @@ export interface Layout<S = any> extends IdentifiableElement{
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
   content?: string,
+  tag: string,
   children?: Layout[];
 }
 
@@ -264,6 +266,7 @@ export interface ComponentRegisterConfig {
   name: string,
   imports: string[],
   defaultValue: boolean,
+  allowTypes: boolean,
   group: string,
   label: string,
   customClassName?: string,

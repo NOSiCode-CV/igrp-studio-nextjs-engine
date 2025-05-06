@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(verticalBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Vertical Bar Chart')
+    component.setAllowTypes(true)
     component.getProperties(verticalBarChartProperties());
     component.getPropertiesMapping(verticalBarChartPropertiesMapping());
     component.getInteractions(verticalBarChartInteractions());

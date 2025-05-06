@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(areaChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Area Chart')
+    component.setAllowTypes(true)
     component.getProperties(areaChartProperties());
     component.getPropertiesMapping(areaChartPropertiesMapping());
     component.getInteractions(areaChartInteractions());

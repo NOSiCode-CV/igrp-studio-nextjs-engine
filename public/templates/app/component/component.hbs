@@ -1,6 +1,6 @@
 'use client'
 
-{{{resolve-imports resourceConfig.components registry resourceConfig.name basePath false}}}
+{{{resolve-imports (emptyArray) resourceConfig.components registry resourceConfig.name basePath false}}}
 
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}: {{{this.type}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {
 {{#if (notNullOrEmpty resourceConfig.components)}}

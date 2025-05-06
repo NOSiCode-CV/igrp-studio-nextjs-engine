@@ -1,10 +1,10 @@
-import { ActionConfig, DeleteConfig, Layout, RenderContext } from '../interfaces/types';
-import { capitalize, extractComponentData } from '../utils/helpers';
+import { ActionConfig, Layout, RenderContext, TypeDef } from '../interfaces/types';
+import { capitalize, extractComponentData, resolveExportedPath } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
 import { toLowerCase } from './stringHelpers';
 
-export function resolveImports(config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, isPage: boolean = true): string {
+export function resolveImports(types: TypeDef[], config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, isPage: boolean = true): string {
 
   if(!config) return ''
 
@@ -15,13 +15,19 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   if(isPage)
     imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)
 
-  const components = new Set<{ componentName: string, id: string, interactions: Record<string, any> }>();
+  const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any> }>();
   extractComponentData(config, components, registry);
 
   components.forEach((component) => {
     const metadata = registry[component.componentName];
     if (metadata?.imports) {
       metadata.imports.forEach((imp) => imports.add(imp));
+    }
+  });
+
+  types.forEach((type) => {
+    if (type.path) {
+      imports.add(`import { ${type.name} } from "${resolveExportedPath(type.path)}";`);
     }
   });
 

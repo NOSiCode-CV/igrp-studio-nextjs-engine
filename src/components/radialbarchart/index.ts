@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(radialBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Radial Bar Chart')
+    component.setAllowTypes(true)
     component.getProperties(radialBarChartProperties());
     component.getPropertiesMapping(radialBarChartPropertiesMapping());
     component.getInteractions(radialBarChartInteractions());

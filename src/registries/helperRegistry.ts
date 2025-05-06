@@ -80,6 +80,7 @@ Handlebars.registerHelper("typeResolution", typeResolution);
 Handlebars.registerHelper("length", length);
 Handlebars.registerHelper("getIndex", getIndex);
 Handlebars.registerHelper("getAttribute", getAttribute);
+Handlebars.registerHelper('emptyArray', () => []);
 
 // Comparison
 Handlebars.registerHelper("gt", greaterThan);

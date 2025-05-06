@@ -3,10 +3,59 @@ import {
   PageConfig,
   IAction,
   IActionConfig,
-  Layout, LayoutProperties, CommonProperties,
+  Layout, LayoutProperties, CommonProperties, TypeDef, ElementField,
 } from '../interfaces/types';
-import { COMPONENTS, COMPONENTS_NAMES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
+import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+const elementFieldSchema: JSONSchemaType<ElementField> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    required: {
+      type: 'boolean',
+      errorMessage: 'The required must be a valid boolean.'
+    },
+  },
+  required: ['name', 'type', 'required'],
+  additionalProperties: false,
+};
+
+const typeDefSchema: JSONSchemaType<TypeDef> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    path: {
+      type: 'string',
+      errorMessage: 'The path must be a valid string.'
+    },
+    tags: {
+      type: 'array',
+      nullable: true,
+      items: {
+        type: 'string'
+      },
+      errorMessage: 'The tag must be a valid string array.'
+    },
+    fields: {
+      type: 'array',
+      items: elementFieldSchema,
+      errorMessage: 'The fields must be an array of valid field configuration.'
+    },
+  },
+  required: ['name', 'path', 'fields'],
+  additionalProperties: false,
+};
 
 const actionConfigSchema: JSONSchemaType<IActionConfig> = {
   type: 'object',
@@ -203,6 +252,10 @@ const componentSchema: JSONSchemaType<Layout> = {
       nullable: true,
       errorMessage: 'The Content must be a string.',
     },
+    tag: {
+      type: 'string',
+      errorMessage: "The tag must be a string.",
+    },
     children: {
       type: 'array',
       nullable: true,
@@ -261,8 +314,13 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
     },
+    types: {
+      type: 'array',
+      items: typeDefSchema,
+      errorMessage: 'The types attribute must be an array of valid type definition configuration.'
+    }
   },
-  required: ['type', 'pageName', 'path'],
+  required: ['type', 'pageName', 'path', 'types'],
   additionalProperties: false
 };
 

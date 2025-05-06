@@ -2,7 +2,7 @@ import { IGRP_USER_MANAGEMENT } from './index';
 
 export function igrpUserManagementProperties() {
   return {
-    image: { type: 'string', required: true, default: 'registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/igrp-user-management-api:latest' },
     container_name: { type: 'string', required: false, default: 'igrp-user-management' },
     restart: {
       type: 'string',

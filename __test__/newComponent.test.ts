@@ -17,6 +17,7 @@ const componentConfig: ComponentConfig = {
   ],
   components: {
     id: 'section_todo',
+    tag: 'section_todo',
     componentName: 'section',
     properties: {
       spaceY: '3',
@@ -51,6 +52,7 @@ const componentConfig: ComponentConfig = {
     children: [
       {
         id: 'dynamic-list',
+        tag: 'dynamic-list',
         componentName: 'repetitiveList',
         properties: {
           data: 'todos',
@@ -60,6 +62,7 @@ const componentConfig: ComponentConfig = {
         children: [
           {
             id: 'flex-group',
+            tag: 'flex-group',
             componentName: 'flex',
             properties: {
               className:
@@ -69,6 +72,7 @@ const componentConfig: ComponentConfig = {
             children: [
               {
                 id: 'flex-checkbox',
+                tag: 'flex-checkbox',
                 componentName: 'flex',
                 properties: {
                   className: 'items-center gap-4 flex-1 min-w-0',
@@ -76,6 +80,7 @@ const componentConfig: ComponentConfig = {
                 children: [
                   {
                     id: 'checkbox',
+                    tag: 'checkbox',
                     componentName: 'checkbox',
                     properties: {
                       className: 'h-5 w-5 rounded-md border-2 transition-colors',
@@ -136,6 +141,7 @@ const componentConfig: ComponentConfig = {
                   //Edit Case
                   {
                     id: 'flex-edit',
+                    tag: 'flex-edit',
                     componentName: 'section',
                     properties: {
                       className: 'flex-1 min-w-0',
@@ -291,6 +297,7 @@ const componentConfig: ComponentConfig = {
               // editingId !== todo.id && ...
               {
                 id: 'fragment-todo-actions',
+                tag: 'fragment-todo-actions',
                 componentName: 'fragment',
                 properties: {
 

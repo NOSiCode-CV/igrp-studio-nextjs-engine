@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(horizontalBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Horizontal Bar Chart')
+    component.setAllowTypes(true)
     component.getProperties(horizontalBarChartProperties());
     component.getPropertiesMapping(horizontalBarChartPropertiesMapping());
     component.getInteractions(horizontalBarChartInteractions());

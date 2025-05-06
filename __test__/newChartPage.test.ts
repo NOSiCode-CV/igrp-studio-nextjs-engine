@@ -8,6 +8,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 export const chartLayout: Layout = {
   id: 'default_section',
+  tag: 'default_section',
   componentName: 'section',
   properties: {
     spaceY: 6,
@@ -15,6 +16,7 @@ export const chartLayout: Layout = {
   children: [
     {
       id: 'grid_inputs',
+      tag: 'grid_inputs',
       componentName: 'grid',
       properties: {
         variant: 'cols3',
@@ -28,6 +30,7 @@ export const chartLayout: Layout = {
       children: [
         {
           id: 'chart_area',
+          tag: 'chart_area',
           componentName: 'areachart',
           properties: {
             areas: [
@@ -76,6 +79,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'hor_chart_bar',
+          tag: 'hor_chart_bar',
           componentName: 'horizontalBarchart',
           properties: {
             bars: [
@@ -112,6 +116,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'ver_chart_bar',
+          tag: 'ver_chart_bar',
           componentName: 'verticalBarchart',
           properties: {
             bars: [
@@ -148,6 +153,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'rad_chart_bar',
+          tag: 'rad_chart_bar',
           componentName: 'radialBarchart',
           properties: {
             bars: [
@@ -200,6 +206,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'line_chart',
+          tag: 'line_chart',
           componentName: 'linechart',
           properties: {
             lines: [
@@ -235,6 +242,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'pie_chart',
+          tag: 'pie_chart',
           componentName: 'piechart',
           properties: {
             nameKey: 'browser',
@@ -283,6 +291,7 @@ export const chartLayout: Layout = {
         },
         {
           id: 'radar_chart',
+          tag: 'radar_chart',
           componentName: 'radarchart',
           properties: {
             radars: [
@@ -325,6 +334,7 @@ export const chartLayout: Layout = {
 const pageConfig: PageConfig = {
   id: 'i89Ayp9lmL2p',
   type: 'page',
+  types: [],
   pageName: 'charts',
   path: 'charts',
   components: chartLayout,

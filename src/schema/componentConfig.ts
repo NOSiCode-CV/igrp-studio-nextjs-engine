@@ -471,6 +471,10 @@ const componentSchema: JSONSchemaType<Layout> = {
       nullable: true,
       errorMessage: "The Content must be a string.",
     },
+    tag: {
+      type: 'string',
+      errorMessage: "The tag must be a string.",
+    },
     children: {
       type: 'array',
       nullable: true,

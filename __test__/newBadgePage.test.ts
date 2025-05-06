@@ -6,6 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const badgeLayout: Layout = {
   id: "grid_badges",
+  tag: "grid_badges",
   componentName: "grid",
   properties: {
     variant: "cols3",
@@ -21,6 +22,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_default_solid_sm",
+      tag: "badge_default_solid_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -31,6 +33,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_outline_sm",
+      tag: "badge_default_outline_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -41,6 +44,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_soft_sm",
+      tag: "badge_default_soft_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -54,6 +58,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_primary_solid_sm",
+      tag: "badge_primary_solid_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -64,6 +69,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_outline_sm",
+      tag: "badge_primary_outline_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -74,6 +80,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_soft_sm",
+      tag: "badge_primary_soft_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -88,6 +95,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_secondary_solid_sm",
+      tag: "badge_secondary_solid_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -98,6 +106,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_outline_sm",
+      tag: "badge_secondary_outline_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -108,6 +117,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_soft_sm",
+      tag: "badge_secondary_soft_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -121,6 +131,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_success_solid_sm",
+      tag: "badge_success_solid_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -131,6 +142,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_outline_sm",
+      tag: "badge_success_outline_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -141,6 +153,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_soft_sm",
+      tag: "badge_success_soft_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -155,6 +168,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_error_solid_sm",
+      tag: "badge_error_solid_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -165,6 +179,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_outline_sm",
+      tag: "badge_error_outline_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -175,6 +190,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_soft_sm",
+      tag: "badge_error_soft_sm",
       componentName: "badge",
       properties: {
         size: "sm",
@@ -190,6 +206,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_default_solid_md",
+      tag: "badge_default_solid_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -200,6 +217,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_outline_md",
+      tag: "badge_default_outline_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -210,6 +228,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_soft_md",
+      tag: "badge_default_soft_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -223,6 +242,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_primary_solid_md",
+      tag: "badge_primary_solid_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -233,6 +253,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_outline_md",
+      tag: "badge_primary_outline_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -243,6 +264,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_soft_md",
+      tag: "badge_primary_soft_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -257,6 +279,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_secondary_solid_md",
+      tag: "badge_secondary_solid_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -267,6 +290,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_outline_md",
+      tag: "badge_secondary_outline_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -277,6 +301,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_soft_md",
+      tag: "badge_secondary_soft_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -290,6 +315,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_success_solid_md",
+      tag: "badge_success_solid_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -300,6 +326,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_outline_md",
+      tag: "badge_success_outline_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -310,6 +337,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_soft_md",
+      tag: "badge_success_soft_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -324,6 +352,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_error_solid_md",
+      tag: "badge_error_solid_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -334,6 +363,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_outline_md",
+      tag: "badge_error_outline_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -344,6 +374,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_soft_md",
+      tag: "badge_error_soft_md",
       componentName: "badge",
       properties: {
         size: "md",
@@ -359,6 +390,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_default_solid_lg",
+      tag: "badge_default_solid_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -369,6 +401,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_outline_lg",
+      tag: "badge_default_outline_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -379,6 +412,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_default_soft_lg",
+      tag: "badge_default_soft_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -392,6 +426,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_primary_solid_lg",
+      tag: "badge_primary_solid_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -402,6 +437,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_outline_lg",
+      tag: "badge_primary_outline_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -412,6 +448,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_primary_soft_lg",
+      tag: "badge_primary_soft_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -426,6 +463,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_secondary_solid_lg",
+      tag: "badge_secondary_solid_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -436,6 +474,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_outline_lg",
+      tag: "badge_secondary_outline_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -446,6 +485,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_secondary_soft_lg",
+      tag: "badge_secondary_soft_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -459,6 +499,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_success_solid_lg",
+      tag: "badge_success_solid_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -469,6 +510,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_outline_lg",
+      tag: "badge_success_outline_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -479,6 +521,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_success_soft_lg",
+      tag: "badge_success_soft_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -493,6 +536,7 @@ const badgeLayout: Layout = {
 
     {
       id: "badge_error_solid_lg",
+      tag: "badge_error_solid_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -503,6 +547,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_outline_lg",
+      tag: "badge_error_outline_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -513,6 +558,7 @@ const badgeLayout: Layout = {
     },
     {
       id: "badge_error_soft_lg",
+      tag: "badge_error_soft_lg",
       componentName: "badge",
       properties: {
         size: "lg",
@@ -521,12 +567,12 @@ const badgeLayout: Layout = {
         children: 'Error Soft'
       },
     },
-    
   ]
 };
 
 const pageConfig: PageConfig = {
   id: 'v91Qsm1rb210',
+  types: [],
   type: 'page',
   pageName: 'badges',
   path: 'badges',

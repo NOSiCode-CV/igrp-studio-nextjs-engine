@@ -17,6 +17,7 @@ const componentConfig: ComponentConfig = {
   ],
   components: {
     id: 'form_add_todo',
+    tag: 'form_add_todo',
     componentName: 'form',
     properties: {
       className: "flex space-x-2"
@@ -24,6 +25,7 @@ const componentConfig: ComponentConfig = {
     children: [
       {
         id: 'input_add_todo',
+        tag: 'input_add_todo',
         componentName: "inputText",
         properties: {
           placeholder: "Add a new task...",
@@ -37,6 +39,7 @@ const componentConfig: ComponentConfig = {
       },
       {
         id: 'button_add_todo',
+        tag: 'button_add_todo',
         componentName: "button",
         properties: {
           type: "submit",

@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(radarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Radar Chart')
+    component.setAllowTypes(true)
     component.getProperties(radarChartProperties());
     component.getPropertiesMapping(radarChartPropertiesMapping());
     component.getInteractions(radarChartInteractions());

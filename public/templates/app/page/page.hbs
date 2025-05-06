@@ -1,6 +1,6 @@
 'use client'
 
-{{{resolve-imports resourceConfig.components registry resourceConfig.pageName basePath}}}
+{{{resolve-imports resourceConfig.types resourceConfig.components registry resourceConfig.pageName basePath}}}
 
 export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.pageName)}}Component() {
 {{#if (notNullOrEmpty resourceConfig.components)}}

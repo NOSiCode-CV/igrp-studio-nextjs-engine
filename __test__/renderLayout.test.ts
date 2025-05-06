@@ -3,6 +3,7 @@ import { Layout } from '../src/interfaces/types';
 
 const dashboardLayout: Layout = {
   id: "grid_dashboard",
+  tag: "grid_dashboard",
   componentName: "grid",
   properties: {
     variant: "cols2",
@@ -12,6 +13,7 @@ const dashboardLayout: Layout = {
   children: [
     {
       id: "flex_sidebar",
+      tag: "flex_sidebar",
       componentName: "flex",
       properties: {
         variant: "col",
@@ -22,6 +24,7 @@ const dashboardLayout: Layout = {
       children: [
         {
           id: "card_profile",
+          tag: "card_profile",
           componentName: "card",
           properties: {
             variant: "bordered"
@@ -31,6 +34,7 @@ const dashboardLayout: Layout = {
     },
     {
       id: "container_main",
+      tag: "container_main",
       componentName: "container",
       properties: {
         variant: "default"
@@ -38,6 +42,7 @@ const dashboardLayout: Layout = {
       children: [
         {
           id: "section_content",
+          tag: "section_content",
           componentName: "section",
           properties: {
             className: "bg-gray-100 rounded-lg",

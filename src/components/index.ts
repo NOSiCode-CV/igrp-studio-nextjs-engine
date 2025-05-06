@@ -23,6 +23,7 @@ export type Component = {
   onTableComponent?: string;
   defaultValue: boolean;
   noClassName: boolean;
+  allowTypes: boolean;
   label: string;
   group: string;
   parent: string;
@@ -40,6 +41,7 @@ export type Component = {
   loadOnTableComponent:(component: string) => void;
   loadDefault:(defaultValue: boolean) => void;
   setNoClassName:(value: boolean) => void;
+  setAllowTypes:(value: boolean) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -84,6 +86,7 @@ function initComponent(): Component {
     onTableComponent: undefined,
     defaultValue: false,
     noClassName: false,
+    allowTypes: false,
     label: 'Component',
     group: '',
     parent: '',
@@ -114,6 +117,10 @@ function initComponent(): Component {
 
     setNoClassName(value: boolean) {
       this.noClassName = value
+    },
+
+    setAllowTypes(value: boolean) {
+      this.allowTypes = value
     },
 
     loadDefault(defaultValue: boolean) {
@@ -223,6 +230,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     name: key,
     imports: [],
     defaultValue: isDefault ?? defaultValue,
+    allowTypes: value.allowTypes,
     group: value.group,
     label: value.label,
     customClassName: value.customClassName,
@@ -238,7 +246,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
       registry[it.name], it.isDefault)),
     acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),
-    states: [],
+    states: Array.from(value.states),
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
     templatePath: value.templatePath
   }

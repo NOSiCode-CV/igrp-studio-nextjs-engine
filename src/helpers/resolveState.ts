@@ -9,19 +9,24 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   const stateDefinitions = new Set<string>();
 
-  const components = new Set<{ componentName: string, id: string, properties: Record<string, any>, interactions: Record<string, any>, }>();
+  const components = new Set<{ componentName: string, id: string, tag: string, properties: Record<string, any>, interactions: Record<string, any>, }>();
   extractComponentData(config, components, registry);
 
   // add default component states
-  /*components.forEach((component) => {
-    const metadata = registry[component.componentName];
-    if (metadata?.states) {
-      const id = component.id
-      const value = isBool(component.componentName) ? component.properties?.disabled ?? 'false'
-        : component.properties?.value ?? ''
-      metadata.states.forEach((imp: string) => stateDefinitions.add(replaceTemplate(imp, { id, value })));
+  components.forEach((component) => {
+    if(config.properties?.generateState) {
+      const metadata = registry[component.componentName];
+      if (metadata?.states) {
+        const id = component.id;
+        const value = isBool(component.componentName)
+          ? (component.properties?.disabled ?? 'false')
+          : (component.properties?.value ?? '');
+        metadata.states.forEach((imp: string) =>
+          stateDefinitions.add(replaceTemplate(imp, { id, value })),
+        );
+      }
     }
-  });*/
+  });
 
   // Define actions imports
   const actionsConfigs: Layout[] | undefined = Array.from(components)?.filter((it) => it.interactions);

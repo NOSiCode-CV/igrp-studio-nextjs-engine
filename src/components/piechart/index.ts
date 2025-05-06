@@ -15,6 +15,7 @@ export default {
     //component.loadVariants(pieChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Pie Chart')
+    component.setAllowTypes(true)
     component.getProperties(pieChartProperties());
     component.getPropertiesMapping(pieChartPropertiesMapping());
     component.getInteractions(pieChartInteractions());

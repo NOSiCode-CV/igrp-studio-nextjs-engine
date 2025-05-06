@@ -168,7 +168,7 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
 
 export function extractComponentData(
   layout: Layout,
-  components: Set<{ componentName: string; id: string; properties?: Record<string, any>; interactions?: Record<string, any> }>,
+  components: Set<{ componentName: string; id: string; tag: string; properties?: Record<string, any>; interactions?: Record<string, any> }>,
   registry: Record<string, Component>,
   parent?: Layout,
 ) {
@@ -178,6 +178,7 @@ export function extractComponentData(
         ? (registry[layout.componentName]?.onTableComponent ?? layout.componentName)
         : layout.componentName,
     id: layout.id,
+    tag: layout.tag,
     properties: layout.properties,
     interactions: layout.interactions,
   });
@@ -196,6 +197,45 @@ export function removeQuotes(jsonString: any) {
     match.slice(1, -1),
   );
 }
+
+/**
+ * Converts an absolute file path to a package-style path using @ alias from the `src` root.
+ *
+ * @param {string} fullPath - The full file path.
+ * @returns {string} The path relative to `src` using `@/` aliasing.
+ *
+ * @example
+ * // returns "@/app/(myapp)/types/User.ts"
+ * resolveExportedPath("C:\\project\\src\\app\\(myapp)\\types\\User.ts");
+ */
+export function resolveExportedPath(fullPath: string): string {
+  const normalized = fullPath.replace(/\\/g, '/');
+  const srcIndex = normalized.indexOf('/src/');
+  if (srcIndex === -1) {
+    throw new Error("Path must include 'src' directory.");
+  }
+  return '@' + normalized.substring(srcIndex + 4).replace(/\.[^.]+$/, ''); // +4 to skip '/src'
+}
+
+/**
+ * Converts an absolute file path to a package-style path using @ alias from the `src/app/(myapp)` root.
+ *
+ * @param {string} fullPath - The full file path.
+ * @returns {string} The path relative to `src/app/(myapp)` using `@/app/(myapp)/...` aliasing.
+ *
+ * @example
+ * // returns "@/app/(myapp)/types/User.ts"
+ * resolveFromMyAppPath("C:\\project\\src\\app\\(myapp)\\types\\User.ts");
+ */
+export function resolveFromMyAppPath(fullPath: string): string {
+  const normalized = fullPath.replace(/\\/g, '/');
+  const match = normalized.match(/\/src\/app\/\([^)]+\)/);
+  if (!match) {
+    throw new Error("Path must include 'src/app/(myapp)' group.");
+  }
+  return '@' + normalized.substring(normalized.indexOf(match[0]) + 4).replace(/\.[^.]+$/, ''); // skip '/src'
+}
+
 
 /**
  * Extracts the directory path from a given full file path.

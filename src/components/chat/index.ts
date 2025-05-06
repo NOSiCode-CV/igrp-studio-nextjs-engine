@@ -17,6 +17,7 @@ export default {
     component.loadVariants(chatVariants());
     component.loadGroup('formElements')
     component.loadLabel('Chat')
+    component.setAllowTypes(true)
     component.getProperties(chatProperties());
     component.getPropertiesMapping(chatPropertiesMapping());
     component.getChildProperties(chatChildProperties());

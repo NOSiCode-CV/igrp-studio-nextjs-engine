@@ -20,6 +20,10 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       type: 'boolean',
       errorMessage: "The default value attribute must be a boolean."
     },
+    allowTypes: {
+      type: 'boolean',
+      errorMessage: "The allow types attribute must be a boolean."
+    },
     group: {
       type: 'string',
       errorMessage: "The group attribute must be a valid string."
@@ -87,7 +91,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       errorMessage: "The template path attribute must be a valid path string."
     },
   },
-  required: ['name', 'imports', 'defaultValue', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'],
+  required: ['name', 'imports', 'defaultValue', 'allowTypes', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'],
   additionalProperties: false,
 }
 

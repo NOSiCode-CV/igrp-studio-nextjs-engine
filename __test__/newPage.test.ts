@@ -6,6 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const dashboardLayout: Layout = {
   id: "grid_dashboard",
+  tag: "grid_dashboard",
   componentName: "grid",
   properties: {
     variant: "cols2",
@@ -15,6 +16,7 @@ const dashboardLayout: Layout = {
   children: [
     {
       id: "flex_sidebar",
+      tag: "flex_sidebar",
       componentName: "flex",
       properties: {
         variant: "col",
@@ -25,6 +27,7 @@ const dashboardLayout: Layout = {
       children: [
         {
           id: "card_profile",
+          tag: "card_profile",
           componentName: "card",
           properties: {
             variant: "bordered"
@@ -34,6 +37,7 @@ const dashboardLayout: Layout = {
     },
     {
       id: "container_main",
+      tag: "container_main",
       componentName: "container",
       properties: {
         variant: "default"
@@ -41,6 +45,7 @@ const dashboardLayout: Layout = {
       children: [
         {
           id: "section_content",
+          tag: "section_content",
           componentName: "section",
           properties: {
             className: "bg-gray-100 rounded-lg",
@@ -49,11 +54,13 @@ const dashboardLayout: Layout = {
         },
         {
           id: "label_field",
+          tag: "label_field",
           componentName: 'label',
           content: "Name",
         },
         {
           id: "input_field",
+          tag: "input_field",
           componentName: 'input',
           properties: {
             placeholder: "Enter the name"
@@ -61,10 +68,12 @@ const dashboardLayout: Layout = {
         },
         {
           id: "checkbox_1",
+          tag: "checkbox_1",
           componentName: 'checkbox'
         },
         {
           id: "button_submit",
+          tag: "button_submit",
           componentName: 'button',
           content: "Submit"
         },
@@ -77,6 +86,7 @@ const dashboardLayout: Layout = {
 const pageConfig: PageConfig = {
   id: 'e76Typ9lm2m1',
   type: 'page',
+  types: [],
   pageName: 'registros',
   description: "Registros",
   path: '[[...teste]]/[param]/(auth)/login',
