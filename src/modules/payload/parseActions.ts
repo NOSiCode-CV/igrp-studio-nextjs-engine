@@ -1,31 +1,25 @@
-import { Project } from "ts-morph";
-import { ActionDef } from "../../interfaces/types";
+import fs from 'fs-extra';
+import { ActionDef } from '../../interfaces/types';
 
-export function parseActionFile(filePath: string): ActionDef {
-  const project = new Project();
-  const sourceFile = project.addSourceFileAtPath(filePath);
+export function parseActions(actionFilePath: string): ActionDef {
+  const content = fs.readFileSync(actionFilePath, 'utf-8');
 
-  const actionDef: ActionDef = {
-    name: '',
-    path: filePath,
-    args: [],
-    returnType: 'void'
-  };
+  // Extract function declaration
+  const funcMatch = content.match(/function\s+(\w+)\s*\(([^)]*)\)\s*(?::\s*([^{]+))?/);
+  if (!funcMatch) return { name: '', args: [], returnType: 'void', path: '' };
 
-  sourceFile.getFunctions().forEach(func => {
-    if (!func.getName()) return;
-
-    actionDef.name = func.getName()!;
-    actionDef.returnType = func.getReturnType().getText(func);
-
-    func.getParameters().forEach(param => {
-      actionDef.args.push({
-        name: param.getName(),
-        type: param.getType().getText(param),
-        optional: param.isOptional()
-      });
+  const args = funcMatch[2].split(',')
+    .map(arg => arg.trim())
+    .filter(Boolean)
+    .map(arg => {
+      const [name, type] = arg.split(':').map(s => s.trim());
+      return { name, type: type || 'any', optional: false };
     });
-  });
 
-  return actionDef;
+  return {
+    name: funcMatch[1],
+    args,
+    path: actionFilePath,
+    returnType: funcMatch[3]?.trim() || 'void'
+  };
 }

@@ -1,46 +1,19 @@
-import { Project, ts } from 'ts-morph';
-import { TypeDef } from "../../interfaces/types";
+import fs from 'fs-extra';
 import path from 'path';
+import { TypeDef } from '../../interfaces/types';
 
-export function parseTypeFile(filePath: string): TypeDef {
-  const project = new Project();
-  const sourceFile = project.addSourceFileAtPath(filePath);
+// For other parsers (types, actions, functions), we'll use similar lightweight approaches
+export function parseTypes(typeFilePath: string): TypeDef {
+  const content = fs.readFileSync(typeFilePath, 'utf-8');
+  const name = path.basename(typeFilePath, '.ts');
 
-  const typeDef: TypeDef = {
-    name: path.basename(filePath, '.ts'),
-    path: filePath,
-    fields: []
-  };
+  // Simple interface/type extraction
+  const fields = [...content.matchAll(/(\w+)\??:\s*([^\n;]+)/g)]
+    .map(match => ({
+      name: match[1],
+      type: match[2].trim(),
+      required: !match[0].includes('?')
+    }));
 
-  // Handle interfaces
-  sourceFile.getInterfaces().forEach(interfaceDec => {
-    typeDef.name = interfaceDec.getName();
-    interfaceDec.getProperties().forEach(property => {
-      typeDef.fields.push({
-        name: property.getName(),
-        type: property.getType().getText(property),
-        required: !property.hasQuestionToken()
-      });
-    });
-  });
-
-  // Handle type aliases with object literals
-  sourceFile.getTypeAliases().forEach(typeAlias => {
-    const typeNode = typeAlias.getTypeNode();
-    if (typeNode?.isKind(ts.SyntaxKind.TypeLiteral)) {
-      typeDef.name = typeAlias.getName();
-      typeNode.getMembers().forEach(member => {
-        if (member.isKind(ts.SyntaxKind.PropertySignature)) {
-          const prop = member.asKindOrThrow(ts.SyntaxKind.PropertySignature);
-          typeDef.fields.push({
-            name: prop.getName(),
-            type: prop.getType().getText(prop),
-            required: !prop.hasQuestionToken()
-          });
-        }
-      });
-    }
-  });
-
-  return typeDef;
+  return { name, fields, path: typeFilePath};
 }

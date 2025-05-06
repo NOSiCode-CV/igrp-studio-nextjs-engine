@@ -1,8 +1,8 @@
 import path from 'path';
 import { PayloadConfig } from '../../interfaces/types';
-import { parseTypeFile } from './parseTypes';
-import { parseFunctionFile } from './parseFunctions';
-import { parseActionFile } from './parseActions';
+import { parseTypes } from './parseTypes';
+import { parseFunctions } from './parseFunctions';
+import { parseActions } from './parseActions';
 
 export async function parsePayloadConfig(config: any, basePath: string): Promise<PayloadConfig> {
   const srcRoot = path.join(basePath, 'src/app/(myapp)');
@@ -17,8 +17,8 @@ export async function parsePayloadConfig(config: any, basePath: string): Promise
   };
 
   return {
-    types: await parseMultiple(config.types || [], parseTypeFile),
-    actions: await parseMultiple(config.actions || [], parseActionFile),
-    functions: await parseMultiple(config.functions || [], parseFunctionFile),
+    types: await parseMultiple(config.types || [], parseTypes),
+    actions: await parseMultiple(config.actions || [], parseActions),
+    functions: await parseMultiple(config.functions || [], parseFunctions),
   };
 }

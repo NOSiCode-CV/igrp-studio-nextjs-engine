@@ -1,47 +1,24 @@
-import { Project, ts } from 'ts-morph';
+import fs from 'fs-extra';
 
-export async function loadPayloadConfig(configPath: string): Promise<any> {
-  const project = new Project();
-  const sourceFile = project.addSourceFileAtPath(configPath);
+export function loadPayloadConfig(configPath: string) {
+  const configContent = fs.readFileSync(configPath, 'utf-8');
 
-  const defaultExport = sourceFile.getDefaultExportSymbol()?.getDeclarations()[0];
+  // Extract all quoted strings after each property name
+  const extract = (prop: string) => {
+    const regex = new RegExp(`${prop}:\\s*\\[([^\\]]*)\\]`, 's');
+    const match = configContent.match(regex);
+    return match
+      ? [...match[1].matchAll(/'([^']+)'/g)].map(m => m[1])
+      : [];
+  };
 
-  if (!defaultExport) {
-    throw new Error("No default export found in config file");
-  }
+  const result = {
+    types: extract('types'),
+    actions: extract('actions'),
+    functions: extract('functions')
+  };
 
-  // Handle object literal default export
-  if (defaultExport.isKind(ts.SyntaxKind.ExportAssignment)) {
-    const exportAssignment = defaultExport.asKindOrThrow(ts.SyntaxKind.ExportAssignment);
-    const expression = exportAssignment.getExpression();
+  console.log("result: ", result)
 
-    if (expression.isKind(ts.SyntaxKind.ObjectLiteralExpression)) {
-      const configObject = expression.asKindOrThrow(ts.SyntaxKind.ObjectLiteralExpression);
-      const result: any = {};
-
-      configObject.getProperties().forEach(property => {
-        if (property.isKind(ts.SyntaxKind.PropertyAssignment)) {
-          const prop = property.asKindOrThrow(ts.SyntaxKind.PropertyAssignment);
-          const name = prop.getName();
-          const initializer = prop.getInitializer();
-
-          if (initializer?.isKind(ts.SyntaxKind.ArrayLiteralExpression)) {
-            result[name] = initializer.getElements().map(el => stripQuotes(el.getText()));
-          } else {
-            result[name] = initializer? stripQuotes(initializer.getText()) : undefined;
-          }
-        }
-      });
-
-      console.log("result: ", result)
-
-      return result;
-    }
-  }
-
-  throw new Error("Config file must have an object literal default export");
-}
-
-function stripQuotes(str: string): string {
-  return str.replace(/^['"]|['"]$/g, '');
+  return result
 }

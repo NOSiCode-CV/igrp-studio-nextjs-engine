@@ -1,31 +1,25 @@
-import { Project } from "ts-morph";
-import { FunctionDef } from "../../interfaces/types";
+import fs from 'fs-extra';
+import { FunctionDef } from '../../interfaces/types';
 
-export function parseFunctionFile(filePath: string): FunctionDef {
-  const project = new Project();
-  const sourceFile = project.addSourceFileAtPath(filePath);
+export function parseFunctions(functionFilePath: string): FunctionDef {
+  const content = fs.readFileSync(functionFilePath, 'utf-8');
 
-  const functionDef: FunctionDef = {
-    name: '',
-    path: filePath,
-    args: [],
-    returnType: 'void'
-  };
+  // Extract function declaration
+  const funcMatch = content.match(/function\s+(\w+)\s*\(([^)]*)\)\s*(?::\s*([^{]+))?/);
+  if (!funcMatch) return { name: '', args: [], returnType: 'void', path: '' };
 
-  sourceFile.getFunctions().forEach(func => {
-    if (!func.getName()) return;
-
-    functionDef.name = func.getName()!;
-    functionDef.returnType = func.getReturnType().getText(func);
-
-    func.getParameters().forEach(param => {
-      functionDef.args.push({
-        name: param.getName(),
-        type: param.getType().getText(param),
-        optional: param.isOptional()
-      });
+  const args = funcMatch[2].split(',')
+    .map(arg => arg.trim())
+    .filter(Boolean)
+    .map(arg => {
+      const [name, type] = arg.split(':').map(s => s.trim());
+      return { name, type: type || 'any', optional: false };
     });
-  });
 
-  return functionDef;
+  return {
+    name: funcMatch[1],
+    args,
+    path: functionFilePath,
+    returnType: funcMatch[3]?.trim() || 'void'
+  };
 }
