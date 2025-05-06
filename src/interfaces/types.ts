@@ -530,12 +530,32 @@ export interface FunctionDef {
   returnType: string;
 }
 
+export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';
+
 export interface PayloadConfig {
-  types: TypeDef[];
-  actions: ActionDef[];
-  functions: FunctionDef[];
+  form?: {
+    types: TypeDef[];
+    actions: ActionDef[];
+    functions: FunctionDef[];
+  };
+  table?: {
+    types: TypeDef[];
+    actions: ActionDef[];
+    functions: FunctionDef[];
+  };
+  chart?: {
+    types: TypeDef[];
+    actions: ActionDef[];
+    functions: FunctionDef[];
+  };
+  select?: {
+    types: TypeDef[];
+    actions: ActionDef[];
+    functions: FunctionDef[];
+  };
 }
 
+// Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same
 export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
   parentResourceConfig?: P;

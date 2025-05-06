@@ -1,19 +1,43 @@
 import fs from 'fs-extra';
 import { ActionDef } from '../../interfaces/types';
 
-export function parseActions(actionFilePath: string): ActionDef {
+export function parseActions(actionFilePath: string): ActionDef | undefined {
   const content = fs.readFileSync(actionFilePath, 'utf-8');
 
-  // Extract function declaration
-  const funcMatch = content.match(/function\s+(\w+)\s*\(([^)]*)\)\s*(?::\s*([^{]+))?/);
-  if (!funcMatch) return { name: '', args: [], returnType: 'void', path: '' };
+  // Enhanced function regex that handles:
+  // - Multi-line declarations
+  // - Various spacing patterns
+  const funcMatch = content.match(
+    /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/s
+  );
 
-  const args = funcMatch[2].split(',')
-    .map(arg => arg.trim())
-    .filter(Boolean)
-    .map(arg => {
-      const [name, type] = arg.split(':').map(s => s.trim());
-      return { name, type: type || 'any', optional: false };
+  if (!funcMatch) return undefined
+
+  // Improved parameter parsing
+  const args = funcMatch[2]
+    .split(',')
+    .reduce<string[]>((acc, param) => {
+      const trimmed = param.trim();
+      if (trimmed) {
+        // Handle parameters that might span multiple lines
+        const lines = trimmed.split('\n').map(l => l.trim());
+        acc.push(...lines.filter(l => l));
+      }
+      return acc;
+    }, [])
+    .map(param => {
+      const [namePart, ...typeParts] = param.split(':');
+      const name = namePart.trim().replace(/\?$/, '');
+      const optional = namePart.endsWith('?');
+      const type = typeParts.length > 0
+        ? typeParts.join(':').trim()
+        : 'any';
+
+      return {
+        name,
+        type,
+        optional
+      };
     });
 
   return {

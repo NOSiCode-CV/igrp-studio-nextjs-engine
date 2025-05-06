@@ -10,7 +10,7 @@ describe('Load Payload', () => {
   });
 
   test('Get payload', async () => {
-     console.log(await loadPayloadMetadata(OUTPUT_DIR));
+     console.log(JSON.stringify(await loadPayloadMetadata(OUTPUT_DIR)));
     //console.log((await loadPayloadMetadata(OUTPUT_DIR)).actions.map((action) => action.args));
     //console.log((await loadPayloadMetadata(OUTPUT_DIR)).types.map((type) => type.fields));
   });
