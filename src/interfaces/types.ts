@@ -532,7 +532,7 @@ export interface FunctionDef {
 
 export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';
 
-export interface PayloadConfig {
+export interface AppExportsConfig {
   form?: {
     types: TypeDef[];
     actions: ActionDef[];

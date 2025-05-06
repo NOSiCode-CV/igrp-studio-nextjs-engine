@@ -1,7 +1,10 @@
 import fs from 'fs-extra';
 
-export function loadPayloadConfig(configPath: string) {
-  const configContent = fs.readFileSync(configPath, 'utf-8');
+export function loadExportsConfig(configPath: string) {
+  let configContent = fs.readFileSync(configPath, 'utf-8');
+
+  // Remove all comment blocks first
+  configContent = configContent.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
   // Enhanced extractor that handles:
   // - Multi-line arrays

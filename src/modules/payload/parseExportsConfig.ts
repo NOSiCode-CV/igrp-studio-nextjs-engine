@@ -1,10 +1,10 @@
 import path from 'path';
-import { PayloadConfig } from '../../interfaces/types';
+import { AppExportsConfig } from '../../interfaces/types';
 import { parseTypes } from './parseTypes';
 import { parseFunctions } from './parseFunctions';
 import { parseActions } from './parseActions';
 
-export async function parsePayloadConfig(config: any, basePath: string): Promise<PayloadConfig> {
+export async function parseExportsConfig(config: any, basePath: string): Promise<AppExportsConfig> {
   const srcRoot = path.join(basePath, 'src/app/(myapp)');
 
   const parseCategory = async (category: any) => {

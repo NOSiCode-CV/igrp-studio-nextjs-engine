@@ -18,7 +18,7 @@ import {
   PageConfig,
   PageMetaConfig,
   PathConfig,
-  PayloadConfig,
+  AppExportsConfig,
   ProjectWorkspace,
   RenderContext,
   ServiceWorkspace,
@@ -57,8 +57,8 @@ import {
   updateProjectInWorkspace,
   updateServiceInWorkspace,
 } from './modules/workspace/workspaceMapper';
-import { loadPayloadConfig } from './modules/payload/loadPayloadConfig';
-import { parsePayloadConfig } from './modules/payload/parsePayloadConfig';
+import { loadExportsConfig } from './modules/payload/loadExportsConfig';
+import { parseExportsConfig } from './modules/payload/parseExportsConfig';
 
 export function getPaths(): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV;
@@ -407,10 +407,10 @@ export const loadServiceRegistry = () => {
  * Loads and parses the Payload configuration from the given base path.
  *
  * @param {string} basePath - The root path of the target project.
- * @returns {Promise<PayloadConfig>} The structured JSON output.
+ * @returns {Promise<AppExportsConfig>} The structured JSON output.
  */
-export async function loadPayloadMetadata(basePath: string): Promise<PayloadConfig> {
-  const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.PAYLOAD_FILE}`);
-  const resolvedConfig = await loadPayloadConfig(configPath);
-  return await parsePayloadConfig(resolvedConfig, basePath);
+export async function loadAppExports(basePath: string): Promise<AppExportsConfig> {
+  const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.EXPORTS_FILE}`);
+  const resolvedConfig = await loadExportsConfig(configPath);
+  return await parseExportsConfig(resolvedConfig, basePath);
 }
