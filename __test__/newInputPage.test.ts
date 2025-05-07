@@ -6,6 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 export const inputLayout: Layout = {
   id: 'default_section',
+  tag: 'default_section',
   componentName: 'section',
   properties: {
     spaceY: 6,
@@ -13,6 +14,7 @@ export const inputLayout: Layout = {
   children: [
     {
       id: 'grid_inputs',
+      tag: 'grip_inputs',
       componentName: 'grid',
       properties: {
         variant: 'cols3',
@@ -26,6 +28,7 @@ export const inputLayout: Layout = {
       children: [
         {
           id: 'input_text',
+          tag: 'input_text',
           componentName: 'inputText',
           properties: {
             placeholder: 'Enter your text',
@@ -33,6 +36,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_password',
+          tag: 'input_password',
           componentName: 'inputPassword',
           properties: {
             type: 'password',
@@ -42,6 +46,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_readonly',
+          tag: 'input_readonly',
           componentName: 'inputText',
           properties: {
             type: 'text',
@@ -52,6 +57,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_date_start_req',
+          tag: 'input_date_start_req',
           componentName: 'inputDatePicker',
           properties: {
             labelText: 'Registration Date',
@@ -78,6 +84,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_date_end_not_req',
+          tag: 'input_date_end_not_req',
           componentName: 'inputDatePicker',
           properties: {
             labelText: 'Birthdate',
@@ -106,6 +113,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_text_label_not_req',
+          tag: 'input_text_label_not_req',
           componentName: 'inputText',
           properties: {
             labelText: 'Name',
@@ -115,6 +123,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_text_label_floating_req',
+          tag: 'input_text_label_floating_req',
           componentName: 'inputText',
           properties: {
             labelText: 'Category',
@@ -125,6 +134,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_text_label_icon_start',
+          tag: 'input_text_label_icon_start',
           componentName: 'inputText',
           properties: {
             labelText: 'Location',
@@ -137,6 +147,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_text_label_icon_end',
+          tag: 'input_text_label_icon_end',
           componentName: 'inputText',
           properties: {
             labelText: 'Address',
@@ -150,6 +161,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_select',
+          tag: 'input_select',
           componentName: 'select',
           properties: {
             labelText: 'Type',
@@ -185,6 +197,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_combobox',
+          tag: 'input_combobox',
           componentName: 'combobox',
           properties: {
             labelText: 'Type',
@@ -220,6 +233,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_color',
+          tag: 'input_color',
           componentName: 'inputColor',
           properties: {
             name: 'input_color',
@@ -251,6 +265,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_file_single',
+          tag: 'input_file_single',
           componentName: 'inputFile',
           properties: {
             name: 'input_file_single',
@@ -277,6 +292,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_file_multiple',
+          tag: 'input_file_multiple',
           componentName: 'inputFile',
           properties: {
             name: 'input_file_multiple',
@@ -304,6 +320,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_number',
+          tag: 'input_number',
           componentName: 'inputNumber',
           properties: {
             name: 'input_number',
@@ -334,6 +351,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_phone',
+          tag: 'input_phone',
           componentName: 'inputPhone',
           properties: {
             name: 'input_phone',
@@ -362,6 +380,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_time',
+          tag: 'input_time',
           componentName: 'inputTime',
           properties: {
             name: 'input_time',
@@ -388,6 +407,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_add_on',
+          tag: 'input_add_on',
           componentName: 'inputAddOn',
           properties: {
             labelText: 'Add On',
@@ -418,6 +438,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_url',
+          tag: 'input_url',
           componentName: 'inputUrl',
           properties: {
             name: 'input_url',
@@ -446,6 +467,7 @@ export const inputLayout: Layout = {
         },
         {
           id: 'input_hidden',
+          tag: 'input_hidden',
           componentName: 'inputHidden',
           properties: {
             name: 'input_hidden',
@@ -457,6 +479,7 @@ export const inputLayout: Layout = {
     },
     {
       id: 'input_textarea',
+      tag: 'input_textarea',
       componentName: 'inputTextarea',
       properties: {
         name: 'input_textarea',
@@ -485,6 +508,7 @@ export const inputLayout: Layout = {
 
 const pageConfig: PageConfig = {
   id: 'i76Typ9lm2m1',
+  types: [],
   type: 'page',
   pageName: 'inputs',
   path: 'inputs',

@@ -6,6 +6,7 @@ export const PARTIALS = [
   'workspace/observability-docker-volumes.hbs',
   'workspace/observability-docker-env.hbs',
   'workspace/observability-env.hbs',
+  'form/zod-blocks.hbs',
 ];
 
 export const PATTERNS = {
@@ -146,6 +147,7 @@ export const INTERACTIONS_TYPES = {
   ON_OPEN: 'On open',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
+  ON_SUBMIT: 'On submit',
   ON_PICK: 'On pick',
   ON_SELECT_CHANGE: 'On select',
   ON_CHECK: "On check",
@@ -153,6 +155,7 @@ export const INTERACTIONS_TYPES = {
   ACTION: "Action",
   LABEL_FORMATTER: "Label Formatter",
   VALUE_FORMATTER: "Label Formatter",
+  EXPOSE_SUBMIT: "Expose Submit",
 
   // Values
   CHECKED: "Checked",
@@ -166,6 +169,7 @@ export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_WITH_EVENT: '(e) => {}',
   FUNCTION_WITH_VALUE: '(value) => {}',
   FUNCTION_WITH_STRING_VALUE: `(value) => ''`,
+  EXPOSE_FORM_SUBMIT: `(fn) => (submitFn{{id}}Ref.current = fn)`,
   NULLABLE: 'null',
   EMPTY_ARRAY: '[]',
 

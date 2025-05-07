@@ -1,0 +1,7 @@
+{{#each resourceConfig.types}}
+const {{toCamelCase this.name}} = z.object({
+  {{#each this.fields}}
+    {{this.name}}: z.{{this.type}}(){{#if @last}}{{else}},{{/if}}
+  {{/each}}
+})
+{{/each}}

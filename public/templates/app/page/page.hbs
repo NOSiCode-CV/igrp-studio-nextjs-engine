@@ -8,7 +8,10 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
   const service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {{capitalize resourceConfig.pageName}}Service;
 
   {{{resolve-states resourceConfig.components registry}}}
-  {{{resolve-code-blocks resourceConfig.components registry}}}
+  {{{resolve-code-blocks resourceConfig resourceConfig.components registry}}}
+  {{#if resourceConfig.types}}
+  {{> zod-blocks }}
+  {{/if}}
 
   return (
 {{{render-layout resourceConfig.components}}}

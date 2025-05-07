@@ -4,6 +4,8 @@ import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
+import { loadPagesConfigSync } from '../utils/helpers';
+import { toCamelCase } from './stringHelpers';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 

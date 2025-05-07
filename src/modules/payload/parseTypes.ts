@@ -30,6 +30,7 @@ export function parseTypes(typeFilePath: string): TypeDef {
   }
 
   return {
+    componentId: '',
     name,
     fields,
     path: typeFilePath

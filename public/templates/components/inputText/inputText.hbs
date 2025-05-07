@@ -1,10 +1,13 @@
 <IGRPInputText
+  {{#if resourceConfig.tag}}
+  name="{{resourceConfig.tag}}"
+  {{/if~}}
   placeholder="{{resourceConfig.properties.placeholder}}"
   {{#if resourceConfig.properties.disabled}}
   disabled
   {{/if~}}
   {{#if resourceConfig.properties.labelText}}
-  labelText="{{resourceConfig.properties.labelText}}"
+  label="{{resourceConfig.properties.labelText}}"
   {{/if~}}
   {{#if resourceConfig.properties.floatingLabel}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }

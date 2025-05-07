@@ -151,6 +151,18 @@ export const loadPagesConfig = async (basePath: string) => {
 
 }
 
+export const loadPagesConfigSync = (basePath: string) => {
+  const pages = loadConfigSync<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+
+  if(pages.length > 0)
+    return pages
+
+  return []
+
+}
+
+
+
 export const loadConfigSync = function <T>(basePath: string): T[] {
   if (!fs.pathExistsSync(basePath)) {
     return [];

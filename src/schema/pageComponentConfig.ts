@@ -1,11 +1,10 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
 import {
-  PageConfig,
   IAction,
   IActionConfig,
   Layout, LayoutProperties, CommonProperties, PageComponentConfig,
 } from '../interfaces/types';
-import { COMPONENTS, COMPONENTS_NAMES, PATTERNS } from '../utils/constants';
+import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
 const actionConfigSchema: JSONSchemaType<IActionConfig> = {
@@ -205,6 +204,11 @@ const componentSchema: JSONSchemaType<Layout> = {
     tag: {
       type: 'string',
       errorMessage: "The tag must be a string.",
+    },
+    dataType: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The data type, if provided, must be a string.",
     },
     children: {
       type: 'array',

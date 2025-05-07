@@ -24,7 +24,7 @@ export default {
     component.getInteractionsMapping(inputNumberInteractionsMapping())
 
     component.loadStates([
-      'const [inputNumber{{id}}Value, setInputNumber{{id}}Value] = useState("{{value}}");'
+      'const [inputNumber{{id}}Value, setInputNumber{{id}}Value] = useState(0);'
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -13,6 +13,8 @@ import { HEADLINE } from '../headline';
 export default {
   register(component: Component) {
     component.loadImports([
+      'import { IGRPForm } from "@igrp/igrp-framework-react-design-system";',
+      'import { z } from "zod";'
     ]);
 
     component.loadVariants(formVariants());
@@ -29,7 +31,7 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
-
+      `const submitFn{{id}}Ref = useRef<(() => void) | null>(null)`
     ]);
 
     component.setRenderer(hbsRenderer);

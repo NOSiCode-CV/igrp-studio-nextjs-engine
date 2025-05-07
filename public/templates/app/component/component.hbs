@@ -5,7 +5,7 @@
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}: {{{this.type}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
   {{{resolve-states resourceConfig.components registry}}}
-  {{{resolve-code-blocks resourceConfig.components registry}}}
+  {{{resolve-code-blocks resourceConfig resourceConfig.components registry}}}
 
   return (
 {{{render-layout resourceConfig.components}}}

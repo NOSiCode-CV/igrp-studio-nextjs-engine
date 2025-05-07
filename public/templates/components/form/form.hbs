@@ -1,7 +1,28 @@
-<form
-  {{#if resourceConfig.interactions}}
-  {{{render-interactions resourceConfig.interactions}}}
+<IGRPForm
+  {{#if resourceConfig.dataType}}
+  schema={ {{toCamelCase resourceConfig.dataType}} }
   {{/if}}
+  {{#if resourceConfig.properties.validadeMode}}
+  validadeMode="{{resourceConfig.properties.validadeMode}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.formClassName}}
+  formClassName="{{resourceConfig.properties.formClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.gridClassName}}
+  gridClassName="{{resourceConfig.properties.gridClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.resetAfterSubmit}}
+  resetAfterSubmit={ {{resourceConfig.properties.resetAfterSubmit}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showAction}}
+  showAction={ {{resourceConfig.properties.showAction}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.submitText}}
+  submitText="{{resourceConfig.properties.submitText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.submitVariant}}
+  submitVariant="{{resourceConfig.properties.submitVariant}}"
+  {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
@@ -13,10 +34,18 @@
   {{/if~}}
   {{/if}}
   {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.properties.customProperties}}
+  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{/if}}
 >
+  <>
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
   {{{render-layout this}}}
   {{/each}}
   {{/if~}}
-</form>
+  </>
+</IGRPForm>

@@ -1,8 +1,32 @@
-import { Layout } from '../interfaces/types';
+import { Layout, PageConfig } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 
-export function resolveCodeBlocks(config: Layout, registry: Record<string, Component>): string {
+export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Record<string, Component>): string {
+
+  let codeBlock : string = ''
+
+  if (config) {
+    codeBlock += resolveComponentCodeBlocks(page, config, registry);
+  }
+
+  if(page.functions) {
+    page.functions.forEach((fun) => {
+      codeBlock += '\n' + fun.code + '\n'
+    });
+  }
+
+  if(page.actions) {
+    page.actions.forEach((act) => {
+      codeBlock += '\n' + act.code + '\n'
+    });
+  }
+  
+  return codeBlock
+
+}
+
+function resolveComponentCodeBlocks(page: PageConfig, config: Layout, registry: Record<string, Component>): string {
 
   if(!config) return ''
 
@@ -21,7 +45,7 @@ export function resolveCodeBlocks(config: Layout, registry: Record<string, Compo
       })
     }
 
-    config.children?.forEach((child) => codeBlock += resolveCodeBlocks(child, registry))
+    config.children?.forEach((child) => codeBlock += resolveComponentCodeBlocks(page, child, registry))
   }
 
   return codeBlock

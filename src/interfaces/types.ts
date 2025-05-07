@@ -17,6 +17,8 @@ export interface PageConfig extends IdentifiableElement {
   description?: string;
   pageName: string;
   types: TypeDef[];
+  functions?: CustomFunctionConfig[];
+  actions?: CustomFunctionConfig[];
   components?: Layout | {};
 }
 
@@ -197,6 +199,7 @@ export interface Layout<S = any> extends IdentifiableElement{
   parentProperties?: Record<string, any>;
   content?: string,
   tag: string,
+  dataType?: string,
   children?: Layout[];
 }
 
@@ -503,10 +506,13 @@ export interface PathConfig {
 export interface ElementField {
   name: string;
   type: string;
+  validation?: string,
+  defaultValue?: string,
   required: boolean;
 }
 
 export interface TypeDef {
+  componentId: string;
   name: string;
   path: string;
   tags?: string[];
@@ -556,6 +562,14 @@ export interface AppExportsConfig {
     actions: ActionDef[];
     functions: FunctionDef[];
   };
+}
+
+export interface CustomCodeConfig {
+  code: string
+}
+
+export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
+  name: string,
 }
 
 // Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same

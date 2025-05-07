@@ -3,10 +3,31 @@ import {
   PageConfig,
   IAction,
   IActionConfig,
-  Layout, LayoutProperties, CommonProperties, TypeDef, ElementField,
+  Layout, LayoutProperties, CommonProperties, TypeDef, ElementField, CustomFunctionConfig,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    code: {
+      type: 'string',
+      errorMessage: 'The code must be a valid string.'
+    }
+  },
+  required: ['name', 'code', 'id'],
+  additionalProperties: false,
+};
 
 const elementFieldSchema: JSONSchemaType<ElementField> = {
   type: 'object',
@@ -23,6 +44,16 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
       type: 'boolean',
       errorMessage: 'The required must be a valid boolean.'
     },
+    validation: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The validation, if provided, must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
   },
   required: ['name', 'type', 'required'],
   additionalProperties: false,
@@ -34,6 +65,10 @@ const typeDefSchema: JSONSchemaType<TypeDef> = {
     name: {
       type: 'string',
       errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
     },
     path: {
       type: 'string',
@@ -256,6 +291,11 @@ const componentSchema: JSONSchemaType<Layout> = {
       type: 'string',
       errorMessage: "The tag must be a string.",
     },
+    dataType: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The data type, if provided, must be a string.",
+    },
     children: {
       type: 'array',
       nullable: true,
@@ -318,6 +358,18 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       type: 'array',
       items: typeDefSchema,
       errorMessage: 'The types attribute must be an array of valid type definition configuration.'
+    },
+    functions: {
+      type: 'array',
+      nullable: true,
+      items: functionSchema,
+      errorMessage: 'The functions attribute must be an array of valid function definition configuration.'
+    },
+    actions: {
+      type: 'array',
+      nullable: true,
+      items: functionSchema,
+      errorMessage: 'The actions attribute must be an array of valid function definition configuration.'
     }
   },
   required: ['type', 'pageName', 'path', 'types'],

@@ -51,7 +51,7 @@
   showStickyFooter={ {{resourceConfig.properties.showStickyFooter}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName="{{resourceConfig.properties.iconClassName}}"
+  iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"

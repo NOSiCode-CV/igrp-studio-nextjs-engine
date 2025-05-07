@@ -2,6 +2,9 @@
   {{#if resourceConfig.properties.disabled}}
   disabled
   {{/if~}}
+  {{#if resourceConfig.tag}}
+  name="{{resourceConfig.tag}}"
+  {{/if~}}
   {{#if resourceConfig.properties.labelText}}
   labelText="{{resourceConfig.properties.labelText}}"
   {{/if~}}
