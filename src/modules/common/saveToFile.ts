@@ -29,12 +29,10 @@ export const saveToFile = async (content: string, outputPath: string, override: 
       const page = pages.find((it) => it.id === id);
       if (page) {
         let sourcePath;
-        if(extension === EXTENSIONS.JSON)
+        if (extension === EXTENSIONS.JSON) {
           sourcePath = join(getDirectoryPath(outputPath), page.pageName.concat(extension));
-        else {
-          sourcePath = join(
-            getDirectoryPath(getDirectoryPath(outputPath))
-          );
+        } else {
+          sourcePath = join(getDirectoryPath(outputPath));
         }
 
         if(sourcePath != outputPath && sourcePath != getDirectoryPath(outputPath)) {

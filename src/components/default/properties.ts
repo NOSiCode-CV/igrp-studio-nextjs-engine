@@ -74,7 +74,7 @@ export function inputCommonProperties() {
   return {
     dataProperties: {
       isVirtual: { type: 'boolean', required: false, default: false},
-      isType: { type: 'boolean', required: false, default: false}
+      isType: { type: 'boolean', required: false, default: true}
     }
   };
 }
