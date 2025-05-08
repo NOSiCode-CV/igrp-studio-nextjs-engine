@@ -10,7 +10,7 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
   {{{resolve-states resourceConfig.components registry}}}
   {{{resolve-code-blocks resourceConfig resourceConfig.components registry}}}
   {{#if resourceConfig.types}}
-  {{> zod-blocks }}
+  {{{resolve-types this}}}
   {{/if}}
 
   return (

@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+  inputCommonProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputAddOnProperties() {
@@ -15,6 +21,7 @@ export function inputAddOnProperties() {
     required: { type: 'boolean', required: true, default: false },
     classNameGlobal: { type: 'string', required: false },
     classNameLabel: { type: 'string', required: false },
+    ...inputCommonProperties(),
     ...commonProperties(),
   };
 }

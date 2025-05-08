@@ -1,6 +1,11 @@
 export function commonProperties() {
   return {
     commonProperties: {
+      //isVirtual: { type: 'boolean', required: false, default: false}
+    }
+  };
+  /*return {
+    commonProperties: {
       padding: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64'], default: '3' },
       paddingHorizontal: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64'] },
       paddingVertical: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64'] },
@@ -22,11 +27,14 @@ export function commonProperties() {
 
       visibility: { type: 'string', required: false, enum: ['visible', 'invisible', 'hidden'] }
     }
-  };
+  };*/
 }
 
 export function commonPropertiesMapping() {
   return {
+
+  };
+  /*return {
     padding: { className: 'p-' },
     paddingHorizontal: { className: 'px-' },
     paddingVertical: { className: 'py-' },
@@ -47,7 +55,7 @@ export function commonPropertiesMapping() {
     height: { className: 'h-' },
 
     visibility: { className: '' } // Visibility classes don't need a prefix
-  };
+  };*/
 }
 
 export function iconProperties() {
@@ -60,6 +68,15 @@ export function iconProperties() {
       iconSize: { type: 'number', required: false },
     }
   }
+}
+
+export function inputCommonProperties() {
+  return {
+    dataProperties: {
+      isVirtual: { type: 'boolean', required: false, default: false},
+      isType: { type: 'boolean', required: false, default: false}
+    }
+  };
 }
 
 export function baseInteraction(defaultCustomSet?: string, label?: string) {

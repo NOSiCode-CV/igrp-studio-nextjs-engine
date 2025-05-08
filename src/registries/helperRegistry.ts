@@ -8,7 +8,7 @@ import {
   toProps,
   concat,
   toCamelCaseFromNatural,
-  typeResolution, trim, toCamelCase,
+  typeResolution, trim, toCamelCase, typeFormatter,
 } from '../helpers/stringHelpers';
 import { getAttribute, getIndex, length } from '../helpers/arrayHelpers';
 import { greaterThan, equals, and, not, or } from '../helpers/comparisonHelpers';
@@ -38,10 +38,12 @@ import { getPaths } from '../index';
 import { extractVolumes, indent, normalizeHostname } from '../helpers/workspaceHelper';
 import { PARTIALS } from '../utils/constants';
 import { renderService } from '../utils/renderService';
+import { resolveTypes } from '../helpers/resolveTypes';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
 Handlebars.registerHelper("resolve-states", resolveStates);
+Handlebars.registerHelper("resolve-types", resolveTypes);
 Handlebars.registerHelper("resolve-code-blocks", resolveCodeBlocks);
 Handlebars.registerHelper("resolve-service-interface-methods", resolveServiceInterfaceMethods);
 Handlebars.registerHelper("component-name-helper", componentNameHelper);
@@ -75,6 +77,7 @@ Handlebars.registerHelper("toProps", toProps);
 Handlebars.registerHelper("concat", concat);
 Handlebars.registerHelper("toCamelCaseFromNatural", toCamelCaseFromNatural);
 Handlebars.registerHelper("typeResolution", typeResolution);
+Handlebars.registerHelper("typeFormatter", typeFormatter);
 
 // Array
 Handlebars.registerHelper("length", length);

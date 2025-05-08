@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+  inputCommonProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function inputDatePickerProperties() {
@@ -16,6 +22,7 @@ export function inputDatePickerProperties() {
     fromDate: { type: 'date', required: false, default: '1900-01-01' },
     toDate: { type: 'date', required: false, default: '2099-12-31' },
     className: { type: 'string', required: false },
+    ...inputCommonProperties(),
     ...commonProperties(),
   };
 }

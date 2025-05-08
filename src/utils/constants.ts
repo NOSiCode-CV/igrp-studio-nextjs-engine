@@ -6,7 +6,6 @@ export const PARTIALS = [
   'workspace/observability-docker-volumes.hbs',
   'workspace/observability-docker-env.hbs',
   'workspace/observability-env.hbs',
-  'form/zod-blocks.hbs',
 ];
 
 export const PATTERNS = {
@@ -79,6 +78,7 @@ export const TEMPLATES = {
   DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.hbs',
   DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.hbs',
   CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
+  TYPE_ELEMENT: 'components/{{element}}/types/type.hbs',
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',

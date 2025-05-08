@@ -43,3 +43,7 @@ export function typeResolution(...data: any[]): string {
   data.pop();
   return `<${data.join(', ')}>`
 }
+
+export function typeFormatter(type: string | undefined): string {
+  return `<${type ?? 'any'}>`
+}
