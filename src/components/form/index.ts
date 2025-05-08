@@ -31,7 +31,7 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
-      `const submitFn{{id}}Ref = useRef<(() => void) | null>(null)`
+      `const form{{id}}Ref = useRef<UseFormReturn<AdvancedFormValues> | null>(null)`
     ]);
 
     component.setRenderer(hbsRenderer);

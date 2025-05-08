@@ -155,7 +155,8 @@ export const INTERACTIONS_TYPES = {
   ACTION: "Action",
   LABEL_FORMATTER: "Label Formatter",
   VALUE_FORMATTER: "Label Formatter",
-  EXPOSE_SUBMIT: "Expose Submit",
+  EXPOSE_FORM: "Expose Form",
+  CANCEL_ACTION: "Cancel Action",
 
   // Values
   CHECKED: "Checked",
@@ -169,7 +170,7 @@ export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_WITH_EVENT: '(e) => {}',
   FUNCTION_WITH_VALUE: '(value) => {}',
   FUNCTION_WITH_STRING_VALUE: `(value) => ''`,
-  EXPOSE_FORM_SUBMIT: `(fn) => (submitFn{{id}}Ref.current = fn)`,
+  EXPOSE_FORM: `(form) => (form{{id}}Ref.current = form)`,
   NULLABLE: 'null',
   EMPTY_ARRAY: '[]',
 

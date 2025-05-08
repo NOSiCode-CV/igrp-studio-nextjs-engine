@@ -1,7 +1,10 @@
 export function commonProperties() {
   return {
     commonProperties: {
-      //isVirtual: { type: 'boolean', required: false, default: false}
+      type: 'object',
+      properties: {
+        //isVirtual: { type: 'boolean', required: false, default: false}
+      }
     }
   };
   /*return {
@@ -61,11 +64,14 @@ export function commonPropertiesMapping() {
 export function iconProperties() {
   return {
     iconProperties: {
-      showIcon: { type: 'boolean', required: false, default: false },
-      iconName: { type: 'string', required: false },
-      iconPlacement: { type: 'string', required: false, enum: ['start', 'end']  },
-      iconClassName: { type: 'string', required: false },
-      iconSize: { type: 'number', required: false },
+      type: 'object',
+      properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
+        iconName: { type: 'string', required: false },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'end']  },
+        iconClassName: { type: 'string', required: false },
+        iconSize: { type: 'number', required: false },
+      }
     }
   }
 }
@@ -73,8 +79,11 @@ export function iconProperties() {
 export function inputCommonProperties() {
   return {
     dataProperties: {
-      isVirtual: { type: 'boolean', required: false, default: false},
-      isType: { type: 'boolean', required: false, default: true}
+      type: 'object',
+      properties: {
+        isVirtual: { type: 'boolean', required: false, default: false},
+        isType: { type: 'boolean', required: false, default: true}
+      }
     }
   };
 }
