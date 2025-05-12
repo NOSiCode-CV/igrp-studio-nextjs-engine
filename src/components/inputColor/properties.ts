@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputColorProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputColor Text' },
+    label: { type: 'string', required: false, default: 'InputColor Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'color' },
     error: { type: 'string', required: false },

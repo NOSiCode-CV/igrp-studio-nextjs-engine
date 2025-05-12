@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputTextProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputText Text' },
+    label: { type: 'string', required: false, default: 'InputText Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },

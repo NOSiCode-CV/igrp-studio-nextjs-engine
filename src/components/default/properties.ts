@@ -88,7 +88,7 @@ export function inputCommonProperties() {
   };
 }
 
-export function baseInteraction(defaultCustomSet?: string, label?: string) {
+export function baseInteraction(defaultCustomSet?: string, label?: string, defaultStates?: {state: string}[] ) {
   return {
     type: 'object',
     label: label,
@@ -126,6 +126,7 @@ export function baseInteraction(defaultCustomSet?: string, label?: string) {
                 }
               }
             },
+            default: defaultStates
           },
           fnCode: {
             type: 'string', required: false

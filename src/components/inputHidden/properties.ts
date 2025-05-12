@@ -10,7 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 export function inputHiddenProperties() {
   return {
     name: { type: 'string', required: true, default: 'hidden' },
-    labelText: { type: 'string', required: false, default: 'Hidden Text' },
+    label: { type: 'string', required: false, default: 'Hidden Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     ...iconProperties(),

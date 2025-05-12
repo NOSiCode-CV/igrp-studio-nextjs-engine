@@ -36,7 +36,8 @@ export function parseFunctions(functionFilePath: string): FunctionDef | undefine
       return {
         name,
         type,
-        optional
+        isNullable: !optional,
+        id: ''
       };
     });
 

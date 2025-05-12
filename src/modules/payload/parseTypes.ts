@@ -23,6 +23,7 @@ export function parseTypes(typeFilePath: string): TypeDef {
     fieldType = fieldType.replace(/,\s*$/, '').trim();
 
     fields.push({
+      componentId: '',
       name: fieldName,
       type: fieldType,
       required: !match[0].includes('?')

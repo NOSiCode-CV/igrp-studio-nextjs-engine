@@ -1,0 +1,5 @@
+function {{resourceConfig.name}} ({{#each resourceConfig.arguments}}{{this.name}}{{#if this.isNullable}}?{{/if}}: {{this.type}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}}, {{/if}}{{/each}}): {{resourceConfig.returnValue.type}}{{#if resourceConfig.returnValue.isList}}[]{{/if}}{{#if resourceConfig.returnValue.isNullable}}  | undefined{{/if}} {
+
+  {{{resourceConfig.code}}}
+
+}

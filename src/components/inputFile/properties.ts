@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputFileProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputFile Text' },
+    label: { type: 'string', required: false, default: 'InputFile Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'file' },
     error: { type: 'string', required: false },

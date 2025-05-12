@@ -79,6 +79,7 @@ export const TEMPLATES = {
   DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.hbs',
   CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
   TYPE_ELEMENT: 'components/{{element}}/types/type.hbs',
+  DEFAULT_FUNCTION: 'components/default/functions/function.hbs',
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',

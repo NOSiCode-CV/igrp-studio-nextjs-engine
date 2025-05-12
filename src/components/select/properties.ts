@@ -3,7 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function selectProperties() {
   return {
-    labelText: { type: 'string', required: false, default: "Select Input" },
+    label: { type: 'string', required: false, default: "Select Input" },
     variant: { type: 'string', required: false, default: 'single', enum: ['single', 'multiple'] },
     //floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false, default: "Select an option..." },

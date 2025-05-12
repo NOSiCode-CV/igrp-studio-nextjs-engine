@@ -21,11 +21,17 @@ export const formLayout: Layout = {
       componentName: 'form',
       properties: {
         formClassName: 'flex flex-col',
-        gridClassName: 'flex flex-col'
+        gridClassName: 'flex flex-col',
+        formRef: 'formform_1Ref'
       },
       interactions: {
         onSubmit: {
-          fnCustomSet: '(values) => alert(`Submitted: ${JSON.stringify(values)}`)'
+          fnCustomSet: '(values) => alert(`Submitted externally: ${JSON.stringify(values)}`)',
+          fnCustomCode: {
+            states: [
+              { state: `const formform_1Ref = useRef<IGRPFormHandle<typeof user> | null>(null)` }
+            ]
+          },
         }
       },
       childProperties: {
@@ -63,7 +69,7 @@ export const formLayout: Layout = {
               tag: 'name',
               componentName: 'inputText',
               properties: {
-                labelText: "Name",
+                label: "Name",
                 placeholder: 'Enter your name',
                 required: true,
               },
@@ -88,7 +94,7 @@ export const formLayout: Layout = {
               tag: 'isActive',
               componentName: 'checkbox',
               properties: {
-                labelText: 'User Active?',
+                label: 'User Active?',
                 className: 'h-5 w-5 rounded-md border-2 transition-colors',
                 required: true,
               },
@@ -97,6 +103,21 @@ export const formLayout: Layout = {
         },
       ],
     },
+    {
+      id: 'button_submit',
+      tag: 'button_submit',
+      componentName: "button",
+      properties: {
+        type: "submit",
+        label: 'Submit'
+      },
+      interactions: {
+        onClick: {
+          fnCustomSet: `() => formform_1Ref.current?.handleSubmit((values: any) => submitForm1(values))()`,
+          type: 'function'
+        }
+      }
+    }
   ]
 };
 
@@ -114,11 +135,13 @@ const pageConfig: PageConfig = {
           "required": true
         },*/
         {
+          componentId: "input_text",
           "name": "name",
           "type": "string",
           "required": true
         },
         {
+          componentId: "input_number",
           "name": "age",
           "type": "number",
           "required": true
@@ -129,6 +152,25 @@ const pageConfig: PageConfig = {
           "required": true
         }*/
       ]
+    }
+  ],
+  functions: [
+    {
+      id: 'function1',
+      name: 'submitForm1',
+      code: 'alert(JSON.stringify(data))',
+      arguments: [
+        {
+          id: "arg1",
+          name: 'data',
+          type: 'any',
+          isNullable: false
+        }
+      ],
+      returnValue: {
+        type: 'void',
+        isNullable: false
+      }
     }
   ],
   type: 'page',

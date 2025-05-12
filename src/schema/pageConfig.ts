@@ -3,10 +3,93 @@ import {
   PageConfig,
   IAction,
   IActionConfig,
-  Layout, LayoutProperties, CommonProperties, TypeDef, ElementField, CustomFunctionConfig,
+  Layout,
+  LayoutProperties,
+  CommonProperties,
+  TypeDef,
+  ElementField,
+  CustomFunctionConfig,
+  ReturnValue,
+  Argument,
+  Import, State,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+const importSchema: JSONSchemaType<Import> = {
+  type: 'object',
+  properties: {
+    namespace: {
+      type: 'string',
+      errorMessage: 'The namespace must be a valid string.'
+    },
+  },
+  required: ['namespace'],
+  additionalProperties: false,
+}
+
+const stateSchema: JSONSchemaType<State> = {
+  type: 'object',
+  properties: {
+    state: {
+      type: 'string',
+      errorMessage: 'The state must be a valid string.'
+    },
+  },
+  required: ['state'],
+  additionalProperties: false,
+}
+
+const returnValueSchema: JSONSchemaType<ReturnValue> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+    isNullable: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+  },
+  required: ['type', 'isNullable'],
+  additionalProperties: false,
+}
+
+const argumentSchema: JSONSchemaType<Argument> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+    isNullable: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+  },
+  required: ['name', 'type', 'id', 'isNullable'],
+  additionalProperties: false,
+}
 
 const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   type: 'object',
@@ -23,9 +106,15 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
     code: {
       type: 'string',
       errorMessage: 'The code must be a valid string.'
-    }
+    },
+    returnValue: returnValueSchema,
+    arguments: {
+      type: 'array',
+      items: argumentSchema,
+      errorMessage: 'The fields must be an array of valid field configuration.'
+    },
   },
-  required: ['name', 'code', 'id'],
+  required: ['name', 'code', 'id', 'returnValue', 'arguments'],
   additionalProperties: false,
 };
 
@@ -35,6 +124,10 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
     name: {
       type: 'string',
       errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
     },
     type: {
       type: 'string',
@@ -55,7 +148,7 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
       errorMessage: 'The default value, if provided, must be a valid string.'
     },
   },
-  required: ['name', 'type', 'required'],
+  required: ['name', 'componentId', 'type', 'required'],
   additionalProperties: false,
 };
 
@@ -370,6 +463,18 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       nullable: true,
       items: functionSchema,
       errorMessage: 'The actions attribute must be an array of valid function definition configuration.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+    states: {
+      type: 'array',
+      nullable: true,
+      items: stateSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
     }
   },
   required: ['type', 'pageName', 'path', 'types'],

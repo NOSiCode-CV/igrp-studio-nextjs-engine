@@ -10,10 +10,10 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
 
   const imports = new Set<string>();
 
-  imports.add(`import { useState, useEffect } from 'react';`)
+  imports.add(`import { useState, useEffect, useRef } from 'react';`)
 
-  if(isPage)
-    imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)
+  /*if(isPage)
+    imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)*/
 
   const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any> }>();
   extractComponentData(config, components, registry);

@@ -60,7 +60,7 @@ export const inputLayout: Layout = {
           tag: 'input_date_start_req',
           componentName: 'inputDatePicker',
           properties: {
-            labelText: 'Registration Date',
+            label: 'Registration Date',
             format: 'dd/MM/yyyy',
             locale: 'pt',
             iconPlacement: 'start',
@@ -87,7 +87,7 @@ export const inputLayout: Layout = {
           tag: 'input_date_end_not_req',
           componentName: 'inputDatePicker',
           properties: {
-            labelText: 'Birthdate',
+            label: 'Birthdate',
             placeholder: 'Enter the birthdate',
             //floatingLabel: true,
             format: 'yyyy-MM-dd',
@@ -116,7 +116,7 @@ export const inputLayout: Layout = {
           tag: 'input_text_label_not_req',
           componentName: 'inputText',
           properties: {
-            labelText: 'Name',
+            label: 'Name',
             placeholder: 'Enter your text',
             required: false,
           },
@@ -126,7 +126,7 @@ export const inputLayout: Layout = {
           tag: 'input_text_label_floating_req',
           componentName: 'inputText',
           properties: {
-            labelText: 'Category',
+            label: 'Category',
             //floatingLabel: true,
             placeholder: 'Enter your text',
             required: true,
@@ -137,7 +137,7 @@ export const inputLayout: Layout = {
           tag: 'input_text_label_icon_start',
           componentName: 'inputText',
           properties: {
-            labelText: 'Location',
+            label: 'Location',
             showIcon: true,
             iconName: 'House',
             iconSize: '16',
@@ -150,7 +150,7 @@ export const inputLayout: Layout = {
           tag: 'input_text_label_icon_end',
           componentName: 'inputText',
           properties: {
-            labelText: 'Address',
+            label: 'Address',
             showIcon: true,
             iconName: 'House',
             iconSize: '16',
@@ -164,7 +164,7 @@ export const inputLayout: Layout = {
           tag: 'input_select',
           componentName: 'select',
           properties: {
-            labelText: 'Type',
+            label: 'Type',
             placeholder: 'Choose an option',
             showSearch: true,
             showGroup: true,
@@ -200,7 +200,7 @@ export const inputLayout: Layout = {
           tag: 'input_combobox',
           componentName: 'combobox',
           properties: {
-            labelText: 'Type',
+            label: 'Type',
             placeholder: 'Choose an option',
             showSearch: true,
             showGroup: true,
@@ -237,7 +237,7 @@ export const inputLayout: Layout = {
           componentName: 'inputColor',
           properties: {
             name: 'input_color',
-            labelText: 'Color',
+            label: 'Color',
             showIcon: true,
             iconName: 'House',
             iconSize: '16',
@@ -269,7 +269,7 @@ export const inputLayout: Layout = {
           componentName: 'inputFile',
           properties: {
             name: 'input_file_single',
-            labelText: 'File',
+            label: 'File',
             placeholder: 'Upload a file...',
             error: 'Unsupported file extension',
             required: true,
@@ -296,7 +296,7 @@ export const inputLayout: Layout = {
           componentName: 'inputFile',
           properties: {
             name: 'input_file_multiple',
-            labelText: 'Files',
+            label: 'Files',
             placeholder: 'Upload many files...',
             multiple: true,
             error: 'Unsupported file(s) extension(s)',
@@ -324,7 +324,7 @@ export const inputLayout: Layout = {
           componentName: 'inputNumber',
           properties: {
             name: 'input_number',
-            labelText: 'Number',
+            label: 'Number',
             description: 'A number from 1 to 10',
             placeholder: 'Enter a number...',
             min: 1,
@@ -355,7 +355,7 @@ export const inputLayout: Layout = {
           componentName: 'inputPhone',
           properties: {
             name: 'input_phone',
-            labelText: 'Phone Number',
+            label: 'Phone Number',
             placeholder: 'Enter a phone number...',
             error: 'Invalid phone number',
             countries: ['CV', 'PT', 'US', 'BR'],
@@ -384,7 +384,7 @@ export const inputLayout: Layout = {
           componentName: 'inputTime',
           properties: {
             name: 'input_time',
-            labelText: 'Time',
+            label: 'Time',
             helperText: 'Enter the time',
             error: 'Invalid time format',
             required: true,
@@ -410,7 +410,7 @@ export const inputLayout: Layout = {
           tag: 'input_add_on',
           componentName: 'inputAddOn',
           properties: {
-            labelText: 'Add On',
+            label: 'Add On',
             helperText: 'Select an option',
             error: 'Invalid option',
             options: [
@@ -442,7 +442,7 @@ export const inputLayout: Layout = {
           componentName: 'inputUrl',
           properties: {
             name: 'input_url',
-            labelText: 'Website',
+            label: 'Website',
             helperText: 'Enter the website',
             error: 'Invalid URL format',
             defaultProtocol: 'https://',
@@ -471,7 +471,7 @@ export const inputLayout: Layout = {
           componentName: 'inputHidden',
           properties: {
             name: 'input_hidden',
-            labelText: 'Input Hidden',
+            label: 'Input Hidden',
             helperText: 'This is hidden',
           },
         },
@@ -483,7 +483,7 @@ export const inputLayout: Layout = {
       componentName: 'inputTextarea',
       properties: {
         name: 'input_textarea',
-        labelText: 'Text Area',
+        label: 'Text Area',
         helperText: 'Describe your problem',
         rows: 6
       },

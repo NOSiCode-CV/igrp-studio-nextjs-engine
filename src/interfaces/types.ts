@@ -17,6 +17,8 @@ export interface PageConfig extends IdentifiableElement {
   description?: string;
   pageName: string;
   types: TypeDef[];
+  imports?: Import[];
+  states?: State[];
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
   components?: Layout | {};
@@ -215,8 +217,12 @@ export interface ActionConfig extends IdentifiableElement {
   code: string
 }
 
-interface Import {
+export interface Import {
   namespace: string
+}
+
+export interface State {
+  state: string
 }
 
 export interface CommonProperties extends LayoutProperties{
@@ -504,6 +510,7 @@ export interface PathConfig {
 // Payload configuration
 
 export interface ElementField {
+  componentId: string;
   name: string;
   type: string;
   validation?: string,
@@ -519,10 +526,17 @@ export interface TypeDef {
   fields: ElementField[];
 }
 
-export interface Argument {
+export interface Argument extends IdentifiableElement {
   name: string;
   type: string;
-  optional: boolean;
+  isList?: boolean,
+  isNullable: boolean;
+}
+
+export interface ReturnValue {
+  type: string;
+  isList?: boolean;
+  isNullable: boolean;
 }
 
 export interface ActionDef {
@@ -570,6 +584,8 @@ export interface CustomCodeConfig {
 
 export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
   name: string,
+  arguments: Argument[],
+  returnValue: ReturnValue;
 }
 
 // Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same

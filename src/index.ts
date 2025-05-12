@@ -213,7 +213,7 @@ export const newPage = async (pageConfig: PageConfig, basePath: string) => {
   };
 
   await generatePage(context);
-  await generateService(context);
+  //await generateService(context);
 
   await savePageConfig(pageConfig, basePath);
 };

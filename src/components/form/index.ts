@@ -14,6 +14,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPForm } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPFormHandle } from "@igrp/igrp-framework-react-design-system";',
       'import { z } from "zod";'
     ]);
 
@@ -31,7 +32,6 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
-      `const form{{id}}Ref = useRef<UseFormReturn<AdvancedFormValues> | null>(null)`
     ]);
 
     component.setRenderer(hbsRenderer);

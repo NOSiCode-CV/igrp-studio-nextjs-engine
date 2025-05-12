@@ -4,7 +4,6 @@ export function headlineProperties() {
   return {
     title: { type: 'string', required: true, default: 'Page Title' },
     description: { type: 'string', required: false, default: 'Page Description' },
-    icon: { type: 'string', required: false, default: "ArrowRight" },
     variant: { type: 'string', required: false, enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], default: 'h3' },
     className: { type: 'string', required: false },
     ...commonProperties(),

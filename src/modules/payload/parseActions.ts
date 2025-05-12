@@ -36,7 +36,8 @@ export function parseActions(actionFilePath: string): ActionDef | undefined {
       return {
         name,
         type,
-        optional
+        isNullable: !optional,
+        id: ''
       };
     });
 

@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputDatePickerProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputDatePicker Text' },
+    label: { type: 'string', required: false, default: 'InputDatePicker Text' },
     placeholder: { type: 'string', required: false, default: 'Please select a date...' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },

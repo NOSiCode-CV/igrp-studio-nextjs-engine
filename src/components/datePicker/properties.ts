@@ -10,7 +10,7 @@ export function datePickerProperties() {
         'week',
         'time',
     ]},*/
-    labelText: { type: 'string', required: false },
+    label: { type: 'string', required: false },
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     locale: { type: 'string', required: false, default: 'pt' },

@@ -8,7 +8,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputPasswordProperties() {
   return {
-    labelText: { type: 'string', required: false, default: 'InputPassword Text' },
+    label: { type: 'string', required: false, default: 'InputPassword Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'password' },
     placeholder: { type: 'string', required: false, default: '' },

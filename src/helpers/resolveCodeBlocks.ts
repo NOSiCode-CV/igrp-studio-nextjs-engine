@@ -1,6 +1,14 @@
-import { Layout, PageConfig } from '../interfaces/types';
+import {
+  CustomFunctionConfig,
+  FunctionDef,
+  Layout,
+  PageConfig,
+  TypeDef,
+} from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
+import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { TEMPLATES } from '../utils/constants';
 
 export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Record<string, Component>): string {
 
@@ -12,7 +20,7 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
 
   if(page.functions) {
     page.functions.forEach((fun) => {
-      codeBlock += '\n' + fun.code + '\n'
+      codeBlock += renderFunction(fun)
     });
   }
 
@@ -51,3 +59,10 @@ function resolveComponentCodeBlocks(page: PageConfig, config: Layout, registry: 
   return codeBlock
 
 }
+
+const renderFunction = (fun: CustomFunctionConfig) => {
+  return renderSyncTemplate(
+    TEMPLATES.DEFAULT_FUNCTION,
+    { resourceConfig: fun },
+  );
+};

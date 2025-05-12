@@ -18,7 +18,7 @@ export function inputProperties() {
         'url',
         'color'
       ] },
-    labelText: { type: 'string', required: false, default: 'Input Text' },
+    label: { type: 'string', required: false, default: 'Input Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },

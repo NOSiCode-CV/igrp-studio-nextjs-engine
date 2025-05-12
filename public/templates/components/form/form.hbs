@@ -23,6 +23,7 @@
   {{#if resourceConfig.properties.submitVariant}}
   submitVariant="{{resourceConfig.properties.submitVariant}}"
   {{/if~}}
+  formRef={ form{{resourceConfig.tag}}Ref }
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
   {{else}}
