@@ -217,11 +217,11 @@ export interface ActionConfig extends IdentifiableElement {
   code: string
 }
 
-export interface Import {
+export interface Import extends IdentifiableElement {
   namespace: string
 }
 
-export interface State {
+export interface State extends IdentifiableElement {
   state: string
 }
 

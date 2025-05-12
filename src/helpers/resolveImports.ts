@@ -1,8 +1,7 @@
 import { ActionConfig, Layout, RenderContext, TypeDef } from '../interfaces/types';
-import { capitalize, extractComponentData, resolveExportedPath } from '../utils/helpers';
+import { extractComponentData, resolveExportedPath } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
-import { toLowerCase } from './stringHelpers';
 
 export function resolveImports(types: TypeDef[], config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, isPage: boolean = true): string {
 
@@ -15,7 +14,7 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
   /*if(isPage)
     imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)*/
 
-  const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any> }>();
+  const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any>, forceStateLoad: boolean, dataType?: string }>();
   extractComponentData(config, components, registry);
 
   components.forEach((component) => {

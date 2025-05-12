@@ -1,5 +1,5 @@
 import { Layout } from '../interfaces/types';
-import { capitalize, extractComponentData, replaceTemplate } from '../utils/helpers';
+import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 
 export function resolveServiceInterfaceMethods(config: Layout, registry: Record<string, Component>): string {

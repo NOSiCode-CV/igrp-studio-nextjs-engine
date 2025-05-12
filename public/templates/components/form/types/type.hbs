@@ -4,4 +4,7 @@ const {{toCamelCase this.name}} = z.object({
     {{this.name}}: z.{{this.type}}(){{#if @last}}{{else}},{{/if}}
   {{/each}}
 })
+
+type {{capitalize this.name}} = typeof {{toCamelCase this.name}};
+
 {{/each}}

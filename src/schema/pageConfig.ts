@@ -19,6 +19,11 @@ import { ajvInstance } from '../utils/ajv-instance';
 const importSchema: JSONSchemaType<Import> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
     namespace: {
       type: 'string',
       errorMessage: 'The namespace must be a valid string.'
@@ -31,6 +36,11 @@ const importSchema: JSONSchemaType<Import> = {
 const stateSchema: JSONSchemaType<State> = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
     state: {
       type: 'string',
       errorMessage: 'The state must be a valid string.'

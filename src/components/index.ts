@@ -24,6 +24,7 @@ export type Component = {
   defaultValue: boolean;
   noClassName: boolean;
   allowTypes: boolean;
+  forceStateLoad: boolean;
   label: string;
   group: string;
   parent: string;
@@ -42,6 +43,7 @@ export type Component = {
   loadDefault:(defaultValue: boolean) => void;
   setNoClassName:(value: boolean) => void;
   setAllowTypes:(value: boolean) => void;
+  setForceStateLoad:(value: boolean) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -87,6 +89,7 @@ function initComponent(): Component {
     defaultValue: false,
     noClassName: false,
     allowTypes: false,
+    forceStateLoad: false,
     label: 'Component',
     group: '',
     parent: '',
@@ -121,6 +124,10 @@ function initComponent(): Component {
 
     setAllowTypes(value: boolean) {
       this.allowTypes = value
+    },
+
+    setForceStateLoad(value: boolean) {
+      this.forceStateLoad = value
     },
 
     loadDefault(defaultValue: boolean) {

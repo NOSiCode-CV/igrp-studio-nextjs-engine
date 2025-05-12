@@ -22,6 +22,7 @@ export default {
     component.loadGroup('containers')
     component.loadLabel('Form')
     component.setAllowTypes(true)
+    component.setForceStateLoad(true)
     component.getInteractions(formInteractions())
     component.getInteractionsMapping(formInteractionsMapping())
     component.getProperties(formProperties());
@@ -32,6 +33,7 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
+      `const form{{id}}Ref = useRef<IGRPFormHandle<{{type}}> | null>(null)`
     ]);
 
     component.setRenderer(hbsRenderer);

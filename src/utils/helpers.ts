@@ -180,7 +180,7 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
 
 export function extractComponentData(
   layout: Layout,
-  components: Set<{ componentName: string; id: string; tag: string; properties?: Record<string, any>; interactions?: Record<string, any> }>,
+  components: Set<{ componentName: string; id: string; tag: string; properties?: Record<string, any>; interactions?: Record<string, any>; forceStateLoad: boolean, dataType?: string }>,
   registry: Record<string, Component>,
   parent?: Layout,
 ) {
@@ -193,6 +193,8 @@ export function extractComponentData(
     tag: layout.tag,
     properties: layout.properties,
     interactions: layout.interactions,
+    forceStateLoad: registry[layout.componentName].forceStateLoad,
+    dataType: layout.dataType
   });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components, registry, layout));

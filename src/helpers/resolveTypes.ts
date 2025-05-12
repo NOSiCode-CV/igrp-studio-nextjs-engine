@@ -14,6 +14,8 @@ export function resolveTypes(context: any): string {
     tag: string;
     properties: Record<string, any>;
     interactions: Record<string, any>;
+    forceStateLoad: boolean;
+    dataType?: string;
   }>();
   extractComponentData(context.resourceConfig.components, components, context.registry);
 

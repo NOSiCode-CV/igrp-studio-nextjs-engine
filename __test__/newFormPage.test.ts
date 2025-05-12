@@ -27,11 +27,6 @@ export const formLayout: Layout = {
       interactions: {
         onSubmit: {
           fnCustomSet: '(values) => alert(`Submitted externally: ${JSON.stringify(values)}`)',
-          fnCustomCode: {
-            states: [
-              { state: `const formform_1Ref = useRef<IGRPFormHandle<typeof user> | null>(null)` }
-            ]
-          },
         }
       },
       childProperties: {

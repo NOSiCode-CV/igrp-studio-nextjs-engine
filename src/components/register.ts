@@ -106,7 +106,6 @@ export function registerAllComponents() {
   register(HEADLINE, headlineModule.register);
   register(HORIZONTAL_BAR_CHART, horizontalBarChartModule.register);
   register(ICON, iconModule.register);
-  register(INPUT, inputModule.register);
   register(INPUT_ADD_ON, inputAddOnModule.register);
   register(INPUT_COLOR, inputColorModule.register);
   register(INPUT_DATE_PICKER, inputDatePickerModule.register);

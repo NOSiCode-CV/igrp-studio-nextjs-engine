@@ -2,6 +2,7 @@ import { ActionConfig, Layout, RenderContext } from '../interfaces/types';
 import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
+import { capitalize } from './stringHelpers';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
 
@@ -9,20 +10,20 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   const stateDefinitions = new Set<string>();
 
-  const components = new Set<{ componentName: string, id: string, tag: string, properties: Record<string, any>, interactions: Record<string, any>, }>();
+  const components = new Set<{ componentName: string, id: string, tag: string, properties: Record<string, any>, interactions: Record<string, any>, forceStateLoad: boolean, dataType?: string}>();
   extractComponentData(config, components, registry);
 
   // add default component states
   components.forEach((component) => {
-    if(config.properties?.generateState) {
+    if(config.properties?.generateState || component.forceStateLoad) {
       const metadata = registry[component.componentName];
       if (metadata?.states) {
-        const id = component.id;
         const value = isBool(component.componentName)
           ? (component.properties?.disabled ?? 'false')
           : (component.properties?.value ?? '');
+        const type = component.dataType ? capitalize(component.dataType) : 'any';
         metadata.states.forEach((imp: string) =>
-          stateDefinitions.add(replaceTemplate(imp, { id, value })),
+          stateDefinitions.add(replaceTemplate(imp, { id: component.tag, value, type: type })),
         );
       }
     }
