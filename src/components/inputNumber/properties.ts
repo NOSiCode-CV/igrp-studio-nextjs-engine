@@ -9,8 +9,8 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputNumberProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputNumber Text' },
-    description: { type: 'string', required: false, default: 'A number input text' },
+    label: { type: 'string', required: false, default: 'Input Number' },
+    description: { type: 'string', required: false },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'number' },
     errorMessage: { type: 'string', required: false },
@@ -44,7 +44,7 @@ export function inputNumberChildPropertiesMapping() {
 
 export function inputNumberInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }

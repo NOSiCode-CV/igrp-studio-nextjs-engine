@@ -9,12 +9,11 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputDatePickerProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputDatePicker Text' },
+    label: { type: 'string', required: false, default: 'Date Picker' },
     placeholder: { type: 'string', required: false, default: 'Please select a date...' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
-    defaultValue: { type: 'string', required: false, default: '2025-01-01' },
     helperText: { type: 'string', required: false, default: '' },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
@@ -43,7 +42,7 @@ export function inputDatePickerChildPropertiesMapping() {
 
 export function inputDatePickerInteractions() {
   return {
-    date: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.DATE), required: true },
+    date: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE), required: true },
     onDateChange: { ...baseInteraction, required: true },
   };
 }

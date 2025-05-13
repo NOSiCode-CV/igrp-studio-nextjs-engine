@@ -1,4 +1,9 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  inputCommonProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function selectProperties() {
@@ -25,6 +30,7 @@ export function selectProperties() {
     iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },
+    ...inputCommonProperties(),
     ...commonProperties(),
   };
 }
@@ -43,7 +49,7 @@ export function selectChildPropertiesMapping() {
 
 export function selectInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_OPEN), required: false },
   };

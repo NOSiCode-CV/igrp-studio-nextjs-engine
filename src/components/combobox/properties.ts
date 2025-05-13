@@ -1,4 +1,9 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  inputCommonProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function comboboxProperties() {
@@ -25,6 +30,7 @@ export function comboboxProperties() {
     iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },
+    ...inputCommonProperties(),
     ...commonProperties(),
   };
 }
@@ -43,7 +49,7 @@ export function comboboxChildPropertiesMapping() {
 
 export function comboboxInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }

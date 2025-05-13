@@ -8,7 +8,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputPasswordProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputPassword Text' },
+    label: { type: 'string', required: false, default: 'Input Password' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'password' },
     placeholder: { type: 'string', required: false, default: '' },
@@ -40,7 +40,7 @@ export function inputPasswordChildPropertiesMapping() {
 
 export function inputPasswordInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onKeyDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_KEY_DOWN), required: false },
   };

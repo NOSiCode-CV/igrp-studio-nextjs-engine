@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputTextProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputText Text' },
+    label: { type: 'string', required: false, default: 'Input Text' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
@@ -38,7 +38,7 @@ export function inputTextChildPropertiesMapping() {
 
 export function inputTextInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onKeyDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_KEY_DOWN), required: false },
   };

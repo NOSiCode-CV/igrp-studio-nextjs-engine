@@ -37,7 +37,7 @@ export function checkboxChildPropertiesMapping() {
 
 export function checkboxInteractions() {
   return {
-    checked: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.CHECKED), required: true },
+    checked: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.CHECKED), required: true },
     onCheckedChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHECK), required: true },
   };
 }

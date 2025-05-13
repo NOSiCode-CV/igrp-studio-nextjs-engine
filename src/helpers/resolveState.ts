@@ -1,8 +1,10 @@
-import { ActionConfig, Layout, RenderContext } from '../interfaces/types';
+import { ActionConfig, CustomFunctionConfig, Layout, RenderContext, State } from '../interfaces/types';
 import { extractComponentData, replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
 import { capitalize } from './stringHelpers';
+import { renderSyncTemplate } from '../modules/common/renderTemplate';
+import { TEMPLATES } from '../utils/constants';
 
 export function resolveStates(config: Layout, registry: Record<string, Component>): string {
 

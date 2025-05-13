@@ -222,7 +222,9 @@ export interface Import extends IdentifiableElement {
 }
 
 export interface State extends IdentifiableElement {
-  state: string
+  name: string,
+  type: string,
+  defaultValue?: string,
 }
 
 export interface CommonProperties extends LayoutProperties{
@@ -586,6 +588,31 @@ export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElem
   name: string,
   arguments: Argument[],
   returnValue: ReturnValue;
+}
+
+// Code Snippets
+
+export interface CodeSnippetConfig extends IdentifiableElement {
+  name: string;
+  properties?: Record<string, any>;
+}
+
+export interface CodeSnippetsRegisterConfig {
+  name: string,
+  title: string,
+  description: string,
+  code: string,
+  defaultProperties: Record<string, any>,
+  properties: Record<string, any>,
+  propertiesMapping: Record<string, any>,
+  renderer: 'default' | 'hbs' | 'custom',
+  templatePath?: string,
+  imports: string[],
+  states: string[],
+}
+
+export interface CodeSnippetsRegistrationConfig {
+  codes: CodeSnippetsRegisterConfig[]
 }
 
 // Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same

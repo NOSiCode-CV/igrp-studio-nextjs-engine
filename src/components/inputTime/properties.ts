@@ -10,7 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 export function inputTimeProperties() {
   return {
     name: { type: 'string', required: true, default: 'time' },
-    label: { type: 'string', required: false, default: 'InputTime Text' },
+    label: { type: 'string', required: false, default: 'Input Time' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '' },
@@ -39,7 +39,7 @@ export function inputTimeChildPropertiesMapping() {
 
 export function inputTimeInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onKeyDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_KEY_DOWN), required: false },
   };

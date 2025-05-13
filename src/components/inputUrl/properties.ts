@@ -20,7 +20,7 @@ export function inputUrlProperties() {
 
   return {
     name: { type: 'string', required: true, default: 'url' },
-    label: { type: 'string', required: false, default: 'InputUrl Text' },
+    label: { type: 'string', required: false, default: 'Input URL' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     defaultValue: { type: 'string', required: false, default: '' },
@@ -51,7 +51,7 @@ export function inputUrlChildPropertiesMapping() {
 
 export function inputUrlInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onKeyDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_KEY_DOWN), required: false },
   };

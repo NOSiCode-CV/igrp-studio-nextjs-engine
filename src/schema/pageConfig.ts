@@ -41,12 +41,21 @@ const stateSchema: JSONSchemaType<State> = {
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
-    state: {
+    type: {
       type: 'string',
-      errorMessage: 'The state must be a valid string.'
+      errorMessage: 'The type must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
     },
   },
-  required: ['state'],
+  required: ['id', 'type', 'name'],
   additionalProperties: false,
 }
 

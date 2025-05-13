@@ -29,8 +29,8 @@ export function inputPhoneProperties() {
   ]
 
   return {
-    label: { type: 'string', required: false, default: 'InputPhone Text' },
-    description: { type: 'string', required: false, default: 'A number input text' },
+    label: { type: 'string', required: false, default: 'Input Phone' },
+    description: { type: 'string', required: false },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'phone' },
     dir: { type: 'string', required: false, default: 'ltr' },
@@ -64,7 +64,7 @@ export function inputPhoneChildPropertiesMapping() {
 
 export function inputPhoneInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }

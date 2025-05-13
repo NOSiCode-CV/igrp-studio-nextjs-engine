@@ -23,7 +23,7 @@ import {
   RenderContext,
   ServiceWorkspace,
   WorkspaceConfig,
-  WorkspaceProjectsConfig,
+  WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -40,6 +40,7 @@ import { registerAllComponents } from './components/register';
 import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import defaultModule from './components/default';
 import defaultServiceModule from './docker_services/default';
+import defaultCodeModule from './code_snippets/default';
 import { componentRegistrationValidate } from './schema/componentRegisterConfig';
 import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
@@ -59,6 +60,10 @@ import {
 } from './modules/workspace/workspaceMapper';
 import { loadExportsConfig } from './modules/payload/loadExportsConfig';
 import { parseExportsConfig } from './modules/payload/parseExportsConfig';
+import { registerAllCodeSnippets } from './code_snippets/register';
+import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
+import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
+import { renderCode } from './utils/renderCode';
 
 export function getPaths(): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV;
@@ -373,6 +378,15 @@ export const initServices = async () => {
   }
 };
 
+export const initCodeSnippets = async () => {
+  try {
+    registerAllCodeSnippets();
+    console.log(`✅ Registered Code snippets`);
+  } catch (error) {
+    console.error(`❌ Failed to load Code snippets`, error);
+  }
+};
+
 export const registerComponents = (config: ComponentRegistrationConfig) => {
   const isConfigValid = componentRegistrationValidate(config);
 
@@ -395,6 +409,17 @@ export const registerServices = (config: DockerServiceRegistrationConfig) => {
   );
 };
 
+export const registerCodeSnippets = (config: CodeSnippetsRegistrationConfig) => {
+  const isConfigValid = codeSnippetsRegistrationValidate(config);
+
+  if (!isConfigValid && codeSnippetsRegistrationValidate.errors)
+    throw codeSnippetsRegistrationValidate.errors;
+
+  config.codes.forEach((code) =>
+    registerCode(code.name, (e) => defaultCodeModule.register(e, code)),
+  );
+};
+
 export const loadRegistry = () => {
   return registryAsObject();
 };
@@ -402,6 +427,14 @@ export const loadRegistry = () => {
 export const loadServiceRegistry = () => {
   return dockerRegistryAsObject();
 };
+
+export const loadCodeSnippetsRegistry = () => {
+  return codeRegistryAsObject();
+};
+
+export const addCodeSnippet = (config: CodeSnippetConfig): string => {
+  return renderCode(config)
+}
 
 /**
  * Loads and parses the Payload configuration from the given base path.

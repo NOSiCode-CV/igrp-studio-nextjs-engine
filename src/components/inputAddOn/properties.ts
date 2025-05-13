@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputAddOnProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputAddOn Text' },
+    label: { type: 'string', required: false, default: 'Input Add On' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     optionLabel: { type: 'string', required: false, default: 'Add On Option' },
     //helperText: { type: 'string', required: false, default: '' },
@@ -42,7 +42,7 @@ export function inputAddOnChildPropertiesMapping() {
 
 export function inputAddOnInteractions() {
   return {
-    selectValue: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true },
+    selectValue: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onSelectValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_SELECT_CHANGE), required: true },
   };
 }

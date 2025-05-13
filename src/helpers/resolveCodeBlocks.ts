@@ -2,7 +2,7 @@ import {
   CustomFunctionConfig,
   FunctionDef,
   Layout,
-  PageConfig,
+  PageConfig, State,
   TypeDef,
 } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
@@ -21,6 +21,12 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
   if(page.functions) {
     page.functions.forEach((fun) => {
       codeBlock += renderFunction(fun)
+    });
+  }
+
+  if(page.states) {
+    page.states.forEach((state) => {
+      codeBlock += renderState(state)
     });
   }
 
@@ -65,4 +71,8 @@ const renderFunction = (fun: CustomFunctionConfig) => {
     TEMPLATES.DEFAULT_FUNCTION,
     { resourceConfig: fun },
   );
+};
+
+const renderState = (state: State) => {
+  return renderSyncTemplate(TEMPLATES.DEFAULT_STATE, { resourceConfig: { defaultValue: state.defaultValue ?? 'any', ...state } });
 };

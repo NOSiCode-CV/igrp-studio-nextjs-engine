@@ -9,7 +9,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputColorProperties() {
   return {
-    label: { type: 'string', required: false, default: 'InputColor Text' },
+    label: { type: 'string', required: false, default: 'Input Color' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'color' },
     error: { type: 'string', required: false },
@@ -40,7 +40,7 @@ export function inputColorChildPropertiesMapping() {
 
 export function inputColorInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.NULLABLE, INTERACTIONS_TYPES.VALUE), required: true, default: 'value' },
+    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true, default: 'value' },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true, default: '(e) => set{{id}}Value(e)' },
   };
 }
