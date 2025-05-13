@@ -560,26 +560,9 @@ export interface FunctionDef {
 export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';
 
 export interface AppExportsConfig {
-  form?: {
-    types: TypeDef[];
-    actions: ActionDef[];
-    functions: FunctionDef[];
-  };
-  table?: {
-    types: TypeDef[];
-    actions: ActionDef[];
-    functions: FunctionDef[];
-  };
-  chart?: {
-    types: TypeDef[];
-    actions: ActionDef[];
-    functions: FunctionDef[];
-  };
-  select?: {
-    types: TypeDef[];
-    actions: ActionDef[];
-    functions: FunctionDef[];
-  };
+  types: TypeDef[];
+  actions: ActionDef[];
+  functions: FunctionDef[];
 }
 
 export interface CustomCodeConfig {

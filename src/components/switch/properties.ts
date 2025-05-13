@@ -3,8 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function switchProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
+    label: { type: 'string', required: false, default: 'Switch' },
     helperText: { type: 'string', required: false },
     required: { type: 'boolean', required: false },
     error: { type: 'string', required: false },

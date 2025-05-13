@@ -43,7 +43,7 @@ export function inputDatePickerChildPropertiesMapping() {
 export function inputDatePickerInteractions() {
   return {
     date: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE), required: true },
-    onDateChange: { ...baseInteraction, required: true },
+    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
 

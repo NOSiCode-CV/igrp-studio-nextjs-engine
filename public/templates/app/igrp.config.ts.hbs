@@ -6,13 +6,6 @@
  * - **Actions**: Actions logic for operations
  * - **Functions**: Custom functions logic for application
  *
- * ### Categorization
- * Elements are organized by their primary UI context:
- * - `form`: For form-related data structures and logic
- * - `table`: For tabular data components
- * - `chart`: For data visualization components
- * - `select`: For select options components
- *
  * ### Registration Rules
  * 1. All entries must be arrays of importable paths (no extensions)
  * 2. Paths are relative to `src/app/(myapp)`
@@ -20,14 +13,10 @@
  *
  * ✅ **Examples**:
  * ```ts
- * form: {
+ * {
  *   types: ['types/User'],
  *   actions: ['server/actions/saveUser'],
  *   functions: ['client/forms/useUserForm']
- * },
- * table: {
- *   types: ['types/DataTable'],
- *   actions: ['server/actions/fetchTable']
  * }
  * ```
  *
@@ -51,24 +40,7 @@
  */
 
 export default {
-  form: {
-    types: [],
-    actions: [],
-    functions: []
-  },
-  table: {
-    types: [],
-    actions: [],
-    functions: []
-  },
-  chart: {
-    types: [],
-    actions: [],
-    functions: []
-  },
-  select: {
-    types: [],
-    actions: [],
-    functions: []
-  },
+  types: [],
+  actions: [],
+  functions: []
 };
