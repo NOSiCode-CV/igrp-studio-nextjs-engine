@@ -3,15 +3,14 @@ import {
   switchProperties,
   switchVariants,
   switchChildProperties,
-  switchChildPropertiesMapping,
+  switchChildPropertiesMapping, switchInteractions, switchInteractionsMapping,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { Switch } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPSwitch } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(switchVariants());
@@ -21,9 +20,10 @@ export default {
     component.getPropertiesMapping(switchPropertiesMapping());
     component.getChildProperties(switchChildProperties());
     component.getChildPropertiesMapping(switchChildPropertiesMapping());
+    component.getInteractions(switchInteractions())
+    component.getInteractionsMapping(switchInteractionsMapping())
 
     component.loadStates([
-      'const [isChecked, setIsChecked] = useState(false);'
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -40,6 +40,38 @@ export function resolveFirstType(data: any[]): string {
   return (!data || Object.entries(data).length == 0)? 'any' : `${data[0].type}`;
 }
 
+/**
+ * Resolves a default state value from a string representation.
+ *
+ * - Wraps plain strings with double quotes.
+ * - Returns arrays, objects, booleans, numbers, and `null` as-is.
+ *
+ * @param {string} defaultValue - The string representing the default value.
+ * @returns {string} A string suitable for inclusion as a default state value in code.
+ */
+export function resolveStateDefault(defaultValue: string): string {
+  const trimmed = defaultValue.trim();
+
+  // If it's clearly an array, object, number, boolean or null, return as-is
+  if (
+    trimmed === 'null' ||
+    trimmed === 'undefined' ||
+    trimmed === 'true' ||
+    trimmed === 'false' ||
+    trimmed === '[]' ||
+    trimmed === '{}' ||
+    !isNaN(Number(trimmed)) ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+  ) {
+    return trimmed;
+  }
+
+  // Otherwise, treat it as a plain string literal
+  return `"${trimmed.replace(/"/g, '\\"')}"`;
+}
+
+
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);
 }

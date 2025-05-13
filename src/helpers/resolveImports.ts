@@ -44,6 +44,12 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(page?.states) {
+    page.states.forEach((st) => {
+      st.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
   // Define actions imports
   const actionConfigs: Layout[] | undefined = Array.from(components)?.filter((it) => it.interactions);
 

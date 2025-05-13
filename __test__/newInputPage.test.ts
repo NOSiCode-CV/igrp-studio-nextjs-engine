@@ -475,6 +475,16 @@ export const inputLayout: Layout = {
             helperText: 'This is hidden',
           },
         },
+        {
+          id: 'input_switch',
+          tag: 'input_switch',
+          componentName: 'switch',
+          properties: {
+            name: 'switch_1',
+            label: 'Switch',
+            helperText: 'Enable or disable',
+          },
+        },
       ],
     },
     {

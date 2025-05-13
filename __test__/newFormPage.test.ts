@@ -173,6 +173,7 @@ function loadContext(codeSnippet: string): PageConfig {
     ],
     type: 'page',
     pageName: 'forms',
+    forceDynamic: true,
     path: 'forms',
     components: formLayout,
   };

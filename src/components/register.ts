@@ -132,7 +132,7 @@ export function registerAllComponents() {
   register(SELECT, selectModule.register);
   register(SLIDER, sliderModule.register);
   register(STACK, stackModule.register);
-  //register(SWITCH, switchModule.register);
+  register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
   register(VERTICAL_BAR_CHART, verticalBarChartModule.register);
 

@@ -54,6 +54,12 @@ const stateSchema: JSONSchemaType<State> = {
       nullable: true,
       errorMessage: 'The default value, if provided, must be a valid string.'
     },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
   },
   required: ['id', 'type', 'name'],
   additionalProperties: false,

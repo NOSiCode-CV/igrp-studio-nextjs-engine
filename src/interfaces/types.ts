@@ -225,6 +225,7 @@ export interface Import extends IdentifiableElement {
 export interface State extends IdentifiableElement {
   name: string,
   type: string,
+  imports?: Import[],
   defaultValue?: string,
 }
 
