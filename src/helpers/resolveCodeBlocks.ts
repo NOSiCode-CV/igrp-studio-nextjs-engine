@@ -18,19 +18,30 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
     codeBlock += resolveComponentCodeBlocks(page, config, registry);
   }
 
-  if(page.functions) {
-    page.functions.forEach((fun) => {
-      codeBlock += renderFunction(fun)
+  if(page.states) {
+    page.states.forEach((state) => {
+      codeBlock += '\n' + renderState(state) + '\n'
     });
   }
 
-  if(page.states) {
-    page.states.forEach((state) => {
-      codeBlock += renderState(state)
+  if(page.functions) {
+
+    page.functions.flatMap((fn) => fn.states ?? []).forEach((state) => {
+      codeBlock += '\n' + renderState(state) + '\n'
     });
+
+    page.functions.forEach((fun) => {
+      codeBlock += '\n' + renderFunction(fun) + '\n'
+    });
+
   }
 
   if(page.actions) {
+
+    page.actions.flatMap((fn) => fn.states ?? []).forEach((state) => {
+      codeBlock += '\n' + renderState(state) + '\n'
+    });
+
     page.actions.forEach((act) => {
       codeBlock += '\n' + act.code + '\n'
     });

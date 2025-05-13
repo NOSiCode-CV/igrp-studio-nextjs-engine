@@ -132,6 +132,18 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
       items: argumentSchema,
       errorMessage: 'The fields must be an array of valid field configuration.'
     },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+    states: {
+      type: 'array',
+      nullable: true,
+      items: stateSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+    }
   },
   required: ['name', 'code', 'id', 'returnValue', 'arguments'],
   additionalProperties: false,
@@ -439,6 +451,11 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       type: 'string',
       const: 'page',
       errorMessage: "The Page type must be 'page'.",
+    },
+    forceDynamic: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: "The force dynamic attribute, if provided, must be valid boolean.",
     },
     pageName: {
       type: 'string',

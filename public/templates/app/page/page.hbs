@@ -1,6 +1,10 @@
 'use client'
 
-{{{resolve-imports resourceConfig.types resourceConfig.components registry resourceConfig.pageName basePath}}}
+{{{resolve-imports resourceConfig.components registry resourceConfig.pageName basePath resourceConfig}}}
+
+{{#if resourceConfig.forceDynamic}}
+export const dynamic = 'force-dynamic'
+{{/if}}
 
 export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.pageName)}}Component() {
 {{#if (notNullOrEmpty resourceConfig.components)}}

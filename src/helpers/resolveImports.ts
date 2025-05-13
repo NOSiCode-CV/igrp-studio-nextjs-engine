@@ -1,9 +1,9 @@
-import { ActionConfig, Layout, RenderContext, TypeDef } from '../interfaces/types';
+import { ActionConfig, Layout, PageConfig, RenderContext, TypeDef } from '../interfaces/types';
 import { extractComponentData, resolveExportedPath } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
 
-export function resolveImports(types: TypeDef[], config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, isPage: boolean = true): string {
+export function resolveImports(config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, page?: PageConfig): string {
 
   if(!config) return ''
 
@@ -24,11 +24,25 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
     }
   });
 
-  types.forEach((type) => {
-    if (type.path) {
-      imports.add(`import { ${type.name} } from "${resolveExportedPath(type.path)}";`);
-    }
-  });
+  if(page?.types) {
+    page.types.forEach((type) => {
+      if (type.path) {
+        imports.add(`import { ${type.name} } from "${resolveExportedPath(type.path)}";`);
+      }
+    });
+  }
+
+  if(page?.functions) {
+    page.functions.forEach((fun) => {
+      fun.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
+  if(page?.actions) {
+    page.actions.forEach((act) => {
+      act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
 
   // Define actions imports
   const actionConfigs: Layout[] | undefined = Array.from(components)?.filter((it) => it.interactions);
@@ -56,7 +70,7 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
 
             if (actionConfig.actionName) {
               imports.add(
-                isPage?
+                !page?
                 `import { ${actionConfig.actionName} } from "@/app/pages/${pageName.toLowerCase()}/actions/${actionConfig.actionName.toLowerCase()}"`
                   :
                 `import { ${actionConfig.actionName} } from "@/components/${pageName.toLowerCase()}/actions/${actionConfig.actionName.toLowerCase()}"`
@@ -65,7 +79,7 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
               console.error("actionName is undefined for", actionConfig);
             }
 
-            generateAction(context, !isPage)
+            generateAction(context, !page)
 
           }
 
@@ -76,8 +90,6 @@ export function resolveImports(types: TypeDef[], config: Layout, registry: Recor
       })
     });
   }
-
-
 
   return Array.from(imports).join('\n');
 }

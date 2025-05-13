@@ -16,6 +16,7 @@ export interface PageConfig extends IdentifiableElement {
   path: string;
   description?: string;
   pageName: string;
+  forceDynamic?: boolean;
   types: TypeDef[];
   imports?: Import[];
   states?: State[];
@@ -587,6 +588,8 @@ export interface CustomCodeConfig {
 export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
   name: string,
   arguments: Argument[],
+  imports?: Import[];
+  states?: State[];
   returnValue: ReturnValue;
 }
 

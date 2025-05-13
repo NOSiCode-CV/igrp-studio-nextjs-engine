@@ -23,11 +23,11 @@
   {{#if resourceConfig.properties.helperText}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.fromDate}}
-  fromDate="{{resourceConfig.properties.fromDate}}"
+  {{#if resourceConfig.properties.startDate}}
+  startDate={ new Date("{{resourceConfig.properties.startDate}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.toDate}}
-  toDate="{{resourceConfig.properties.toDate}}"
+  {{#if resourceConfig.properties.endDate}}
+  endDate={ new Date("{{resourceConfig.properties.endDate}}") }
   {{/if~}}
   {{#if resourceConfig.properties.showIcon}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
