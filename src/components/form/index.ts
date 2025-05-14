@@ -3,7 +3,7 @@ import {
   formProperties,
   formVariants,
   formInteractions,
-  formInteractionsMapping,
+  formInteractionsMapping, formData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { formChildProperties, formChildPropertiesMapping } from '../flex/properties';
@@ -22,9 +22,10 @@ export default {
     component.loadGroup('containers')
     component.loadLabel('Form')
     component.setAllowTypes(true)
-    component.setForceStateLoad(true)
+    component.setForceReferenceLoad(true)
     component.getInteractions(formInteractions())
     component.getInteractionsMapping(formInteractionsMapping())
+    component.getData(formData());
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
     component.getChildProperties(formChildProperties());
@@ -33,7 +34,18 @@ export default {
     component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
-      `const form{{id}}Ref = useRef<IGRPFormHandle<{{type}}> | null>(null)`
+    ]);
+
+    component.loadReferences([
+      {
+        ref: {
+          id: '',
+          name: 'form{{id}}Ref',
+          type: 'IGRPFormHandle<{{type}}> | null',
+          defaultValue: 'null',
+        },
+        required: true,
+      },
     ]);
 
     component.setRenderer(hbsRenderer);

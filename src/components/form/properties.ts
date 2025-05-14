@@ -31,6 +31,12 @@ export function formInteractions() {
   };
 }
 
+export function formData() {
+  return {
+    defaultValue: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+  };
+}
+
 export function formInteractionsMapping() {
   return {
 

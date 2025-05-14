@@ -22,7 +22,15 @@ export default {
     component.getChildPropertiesMapping(rangeSliderChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
 
     component.loadStates([
-      'const [value, setValue] = useState([0, 100]);' // example range for the slider
+      {
+        state: {
+          id: '',
+          name: '{{id}}Value',
+          type: 'array',
+          defaultValue: '[0, 100]'
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

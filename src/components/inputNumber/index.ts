@@ -3,7 +3,7 @@ import {
   inputNumberProperties,
   inputNumberVariants,
   inputNumberChildProperties,
-  inputNumberChildPropertiesMapping, inputNumberInteractions, inputNumberInteractionsMapping,
+  inputNumberChildPropertiesMapping, inputNumberInteractions, inputNumberInteractionsMapping, inputNumberData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputNumberChildPropertiesMapping());
     component.getInteractions(inputNumberInteractions())
     component.getInteractionsMapping(inputNumberInteractionsMapping())
+    component.getData(inputNumberData());
 
     component.loadStates([
-      'const [inputNumber{{id}}Value, setInputNumber{{id}}Value] = useState(0);'
+      {
+        state: {
+          id: '',
+          name: 'inputNumber{{id}}Value',
+          type: 'number',
+          defaultValue: '0'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

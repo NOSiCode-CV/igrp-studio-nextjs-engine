@@ -3,7 +3,7 @@ import {
   inputTextProperties,
   inputTextVariants,
   inputTextChildProperties,
-  inputTextChildPropertiesMapping,
+  inputTextChildPropertiesMapping, inputTextData, inputTextInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -21,9 +21,19 @@ export default {
     component.getPropertiesMapping(inputTextPropertiesMapping());
     component.getChildProperties(inputTextChildProperties());
     component.getChildPropertiesMapping(inputTextChildPropertiesMapping());
+    component.getInteractions(inputTextInteractions());
+    component.getData(inputTextData());
 
     component.loadStates([
-      'const [inputText{{id}}Value, setInputText{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputText{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.loadOnTableComponent(TABLE_TEXT_CELL)

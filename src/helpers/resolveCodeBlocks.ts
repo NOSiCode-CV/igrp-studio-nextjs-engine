@@ -2,7 +2,7 @@ import {
   CustomFunctionConfig,
   FunctionDef,
   Layout,
-  PageConfig, State,
+  PageConfig, Reference, State,
   TypeDef,
 } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
@@ -84,6 +84,11 @@ const renderFunction = (fun: CustomFunctionConfig) => {
   );
 };
 
-const renderState = (state: State) => {
+export const renderState = (state: State) => {
   return renderSyncTemplate(TEMPLATES.DEFAULT_STATE, { resourceConfig: { defaultValue: state.defaultValue ?? 'any', ...state } });
 };
+
+export const renderReference = (reference: Reference) => {
+  return renderSyncTemplate(TEMPLATES.DEFAULT_REFERENCE, { resourceConfig: { defaultValue: reference.defaultValue ?? 'any', ...reference } });
+};
+

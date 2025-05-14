@@ -1,2 +1,2 @@
-const [{{resourceConfig.name}}, set{{capitalize resourceConfig.name}}] = useState{{#if resourceConfig.type}}<{{resourceConfig.type}}>{{/if}}({{{resolveStateDefault
+const [{{resourceConfig.name}}, set{{capitalize resourceConfig.name}}] = useState{{#if resourceConfig.type}}<{{{resourceConfig.type}}}>{{/if}}({{{resolveStateDefault
   resourceConfig.defaultValue}}});

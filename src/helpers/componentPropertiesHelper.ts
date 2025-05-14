@@ -49,7 +49,10 @@ export function resolveFirstType(data: any[]): string {
  * @param {string} defaultValue - The string representing the default value.
  * @returns {string} A string suitable for inclusion as a default state value in code.
  */
-export function resolveStateDefault(defaultValue: string): string {
+export function resolveStateDefault(defaultValue?: string): string {
+
+  if(!defaultValue) return 'undefined'
+
   const trimmed = defaultValue.trim();
 
   // If it's clearly an array, object, number, boolean or null, return as-is
@@ -115,7 +118,16 @@ export function renderProperties(customProperties: Record<string, any>) {
 export function renderInteractions(interactions: Record<string, any>) {
   return interactions
     ? Object.entries(interactions).map(([key, value]) => {
-      return `${key}={ ${value.fnName ?? value.fnCustomSet} }`;
+      return `${key}={ ${value.fnName ?? value.fnCustomSet ?? value.state.name} }`;
     }).join("\n")
     : ``
 }
+
+export function renderData(data: Record<string, any>) {
+  return data
+    ? Object.entries(data).map(([key, value]) => {
+      return `${key}={ ${value.state?.name ?? 'undefined'} }`;
+    }).join("\n")
+    : ``
+}
+

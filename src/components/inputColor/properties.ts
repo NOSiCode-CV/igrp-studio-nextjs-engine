@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -40,7 +41,6 @@ export function inputColorChildPropertiesMapping() {
 
 export function inputColorInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true, default: 'value' },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true, default: '(e) => set{{id}}Value(e)' },
   };
 }
@@ -48,6 +48,13 @@ export function inputColorInteractions() {
 export function inputColorInteractionsMapping() {
   return {};
 }
+
+export function inputColorData() {
+  return {
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+  };
+}
+
 
 export function checkboxInteractionsMapping() {
   return {

@@ -3,7 +3,10 @@ import {
   inputDatePickerProperties,
   inputDatePickerVariants,
   inputDatePickerChildProperties,
-  inputDatePickerChildPropertiesMapping, inputDatePickerInteractions, inputDatePickerInteractionsMapping,
+  inputDatePickerChildPropertiesMapping,
+  inputDatePickerInteractions,
+  inputDatePickerInteractionsMapping,
+  inputDatePickerData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +25,18 @@ export default {
     component.getChildPropertiesMapping(inputDatePickerChildPropertiesMapping());
     component.getInteractions(inputDatePickerInteractions())
     component.getInteractionsMapping(inputDatePickerInteractionsMapping())
-    
+    component.getData(inputDatePickerData());
+
     component.loadStates([
-      'const [inputDatePicker{{id}}Value, setInputDatePicker{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputDatePicker{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

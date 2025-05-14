@@ -24,9 +24,15 @@ export default {
     component.getChildPropertiesMapping(buttonChildPropertiesMapping());
 
     component.loadStates([
-      //'const [{{id}}Loading, set{{id}}Loading] = useState(false);',
-      'const [{{id}}Disabled, set{{id}}Disabled] = useState({{value}});',
-      'const handle{{id}}Click = (e: any) => { service.handle{{id}}Click(e) };',
+      {
+        state: {
+          id: '',
+          name: '{{id}}Disabled',
+          type: 'boolean',
+          defaultValue: '{{value}}'
+        },
+        required: true
+      },
     ]);
 
     component.loadServiceMethods(

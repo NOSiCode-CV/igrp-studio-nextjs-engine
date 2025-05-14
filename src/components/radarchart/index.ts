@@ -2,7 +2,7 @@ import {
   radarChartPropertiesMapping,
   radarChartProperties,
   radarChartChildProperties,
-  radarChartChildPropertiesMapping, radarChartInteractions,
+  radarChartChildPropertiesMapping, radarChartInteractions, radarChartData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,6 +21,7 @@ export default {
     component.getInteractions(radarChartInteractions());
     component.getChildProperties(radarChartChildProperties());
     component.getChildPropertiesMapping(radarChartChildPropertiesMapping());
+    component.getData(radarChartData());
 
     component.loadStates([
     ]);

@@ -24,6 +24,15 @@ export default {
     component.getInteractionsMapping(switchInteractionsMapping())
 
     component.loadStates([
+      {
+        state: {
+          id: '',
+          name: 'is{{id}}Checked',
+          type: 'boolean',
+          defaultValue: 'false'
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

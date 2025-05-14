@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -44,7 +45,6 @@ export function inputNumberChildPropertiesMapping() {
 
 export function inputNumberInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
@@ -53,12 +53,11 @@ export function inputNumberInteractionsMapping() {
   return {};
 }
 
-export function checkboxInteractionsMapping() {
+export function inputNumberData() {
   return {
-
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
-
 
 export function inputNumberVariants() {
   return {};

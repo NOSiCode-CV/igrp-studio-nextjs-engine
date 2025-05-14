@@ -454,6 +454,21 @@ const componentSchema: JSONSchemaType<Layout> = {
       },
       errorMessage: "The 'interactions' field must be an object mapping of actions.",
     },
+    data: {
+      type: "object",
+      required: [],
+      nullable: true,
+      additionalProperties: {
+        type: "object",
+        errorMessage: "Data fields are invalid",
+        required: [],
+        nullable: true,
+        anyOf: [
+          { type: "object" }, // For dynamic content types
+        ],
+      },
+      errorMessage: "The 'data' field must be an object mapping of data.",
+    },
     childProperties: {
       type: "object",
       nullable: true,

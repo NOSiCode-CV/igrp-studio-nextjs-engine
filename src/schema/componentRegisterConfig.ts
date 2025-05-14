@@ -1,7 +1,75 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { ComponentRegisterConfig, ComponentRegistrationConfig } from '../interfaces/types';
+import {
+  ComponentRegisterConfig,
+  ComponentRegistrationConfig,
+  Import,
+  RegisterState,
+  State,
+} from '../interfaces/types';
 import { PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+const importSchema: JSONSchemaType<Import> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    namespace: {
+      type: 'string',
+      errorMessage: 'The namespace must be a valid string.'
+    },
+  },
+  required: ['namespace'],
+  additionalProperties: false,
+}
+
+const stateSchema: JSONSchemaType<State> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+  },
+  required: ['id', 'type', 'name'],
+  additionalProperties: false,
+}
+
+const registryStateSchema: JSONSchemaType<RegisterState> = {
+  type: 'object',
+  properties: {
+    state: stateSchema,
+    required: {
+      type: 'boolean',
+      errorMessage: "The code must be a boolean."
+    },
+  },
+  required: ['state', 'required'],
+  additionalProperties: false,
+};
 
 const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
   type: 'object',
@@ -57,6 +125,12 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     interactionsMapping: {
       type: 'object'
     },
+    data: {
+      type: 'object'
+    },
+    dataMapping: {
+      type: 'object'
+    },
     childProperties: {
       type: 'object',
       nullable: true
@@ -67,8 +141,8 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     },
     states: {
       type: 'array',
-      items: { type: 'string' },
-      errorMessage: "The states must be an array of strings"
+      items: registryStateSchema,
+      errorMessage: "The states must be an array of valid register state definitions"
     },
     childrenTypes: {
       type: 'array',

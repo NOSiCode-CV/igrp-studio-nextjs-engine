@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -42,7 +43,6 @@ export function inputDatePickerChildPropertiesMapping() {
 
 export function inputDatePickerInteractions() {
   return {
-    date: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE), required: true },
     onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
@@ -51,12 +51,11 @@ export function inputDatePickerInteractionsMapping() {
   return {};
 }
 
-export function checkboxInteractionsMapping() {
+export function inputDatePickerData() {
   return {
-
+    date: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE), required: true },
   };
 }
-
 
 export function inputDatePickerVariants() {
   return {};

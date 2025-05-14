@@ -3,7 +3,7 @@ import {
   checkboxProperties,
   checkboxVariants,
   checkboxChildProperties,
-  checkboxChildPropertiesMapping, checkboxInteractions, checkboxInteractionsMapping,
+  checkboxChildPropertiesMapping, checkboxInteractions, checkboxInteractionsMapping, checkboxData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,11 +20,20 @@ export default {
     component.getPropertiesMapping(checkboxPropertiesMapping());
     component.getInteractions(checkboxInteractions());
     component.getInteractionsMapping(checkboxInteractionsMapping());
+    component.getData(checkboxData());
     component.getChildProperties(checkboxChildProperties()); // TODO: handle a way to fetch parent properties
     component.getChildPropertiesMapping(checkboxChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
 
     component.loadStates([
-      'const [isChecked, setIsChecked] = useState(false);'
+      {
+        state: {
+          id: '',
+          name: 'is{{id}}Checked',
+          type: 'boolean',
+          defaultValue: 'false'
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

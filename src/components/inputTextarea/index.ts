@@ -3,7 +3,7 @@ import {
   inputTextareaProperties,
   inputTextareaVariants,
   inputTextareaChildProperties,
-  inputTextareaChildPropertiesMapping, inputTextareaInteractions, inputTextareaInteractionsMapping,
+  inputTextareaChildPropertiesMapping, inputTextareaInteractions, inputTextareaInteractionsMapping, inputTextareaData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputTextareaChildPropertiesMapping());
     component.getInteractions(inputTextareaInteractions());
     component.getInteractionsMapping(inputTextareaInteractionsMapping());
+    component.getData(inputTextareaData());
 
     component.loadStates([
-      'const [inputTextarea{{id}}Value, setInputTextarea{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputTextarea{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function checkboxProperties() {
@@ -35,7 +35,6 @@ export function checkboxChildPropertiesMapping() {
 
 export function checkboxInteractions() {
   return {
-    checked: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.CHECKED), required: true },
     onCheckedChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHECK), required: true },
   };
 }
@@ -45,6 +44,14 @@ export function checkboxInteractionsMapping() {
 
   };
 }
+
+
+export function checkboxData() {
+  return {
+    checked: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.CHECKED), required: true },
+  };
+}
+
 
 export function checkboxVariants() {
   return {};

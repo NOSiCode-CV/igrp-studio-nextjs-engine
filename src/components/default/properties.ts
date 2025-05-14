@@ -1,3 +1,6 @@
+import { PATTERNS } from '../../utils/constants';
+import { State } from '../../interfaces/types';
+
 export function commonProperties() {
   return {
     commonProperties: {
@@ -141,6 +144,60 @@ export function baseInteraction(defaultCustomSet?: string, label?: string, defau
         required: true,
         enum: ["function", "action", "both"],
         default: "function"
+      }
+    }
+  };
+}
+
+export function baseData(defaultValue?: string, label?: string, state?: State, isStateRequired?: boolean) {
+  return {
+    type: 'object',
+    label: label,
+    properties: {
+      state: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+            required: true,
+            default: state?.id ?? ''
+          },
+          type: {
+            type: 'string',
+            required: true,
+            default: state?.type ?? 'any'
+          },
+          name: {
+            type: 'string',
+            required: true,
+            default: state?.name ?? ''
+          },
+          defaultValue: {
+            type: 'string',
+            required: false,
+            default: state?.defaultValue ?? defaultValue ?? 'undefined'
+          },
+          imports: {
+            type: 'array',
+            required: false,
+            items: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  required: true,
+                  default: ''
+                },
+                namespace: {
+                  type: 'string',
+                  required: true,
+                  default: ''
+                },
+              },
+            }
+          },
+        },
+        required: isStateRequired ?? false
       }
     }
   };

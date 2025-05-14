@@ -3,7 +3,7 @@ import {
   inputAddOnProperties,
   inputAddOnVariants,
   inputAddOnChildProperties,
-  inputAddOnChildPropertiesMapping, inputAddOnInteractions, inputAddOnInteractionsMapping,
+  inputAddOnChildPropertiesMapping, inputAddOnInteractions, inputAddOnInteractionsMapping, inputAddOnData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputAddOnChildPropertiesMapping());
     component.getInteractions(inputAddOnInteractions());
     component.getInteractionsMapping(inputAddOnInteractionsMapping());
+    component.getData(inputAddOnData());
 
     component.loadStates([
-      'const [inputAddOn{{id}}Value, setInputAddOn{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputAddOn{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

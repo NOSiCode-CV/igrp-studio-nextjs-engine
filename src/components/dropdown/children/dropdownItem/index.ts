@@ -28,7 +28,6 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: DROPDOWN, name: DROPDOWN_ITEM }))
 
     component.loadStates([
-      'const handle{{id}}Click = (e: any) => { service.handle{{id}}Click(e) };',
     ]);
 
     component.loadServiceMethods(

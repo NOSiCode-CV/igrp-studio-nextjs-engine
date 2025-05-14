@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -13,8 +14,6 @@ export function comboboxProperties() {
     //floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false, default: "Select an option..." },
     helperText: { type: 'string', required: false },
-    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
-        color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false },
     required: { type: 'boolean', required: true },
     message: { type: 'string', required: false },
@@ -49,7 +48,6 @@ export function comboboxChildPropertiesMapping() {
 
 export function comboboxInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
@@ -57,6 +55,23 @@ export function comboboxInteractions() {
 export function comboboxInteractionsMapping() {
   return {
 
+  };
+}
+
+export function comboboxData() {
+  return {
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
+        id: '',
+        name: 'select{{id}}Value',
+        type: 'string',
+        defaultValue: '{{value}}'
+      }), required: true },
+    options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
+        id: '',
+        name: 'select{{id}}Options',
+        type: 'array',
+        defaultValue: '[]'
+      }, true), required: true },
   };
 }
 

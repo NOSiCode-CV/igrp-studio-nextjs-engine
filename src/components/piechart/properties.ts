@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function pieChartProperties() {
@@ -99,5 +99,11 @@ export function pieChartInteractions() {
     labelFormatter: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.LABEL_FORMATTER), required: false },
     valueFormatter: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.VALUE_FORMATTER), required: false },
     data: { ...baseInteraction(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
+  };
+}
+
+export function pieChartData() {
+  return {
+    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
   };
 }

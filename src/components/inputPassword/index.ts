@@ -3,7 +3,7 @@ import {
   inputPasswordProperties,
   inputPasswordVariants,
   inputPasswordChildProperties,
-  inputPasswordChildPropertiesMapping, inputPasswordInteractions, inputPasswordInteractionsMapping,
+  inputPasswordChildPropertiesMapping, inputPasswordInteractions, inputPasswordInteractionsMapping, inputPasswordData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getInteractionsMapping(inputPasswordInteractionsMapping());
     component.getChildProperties(inputPasswordChildProperties());
     component.getChildPropertiesMapping(inputPasswordChildPropertiesMapping());
+    component.getData(inputPasswordData());
 
     component.loadStates([
-      'const [inputPassword{{id}}Value, setInputPassword{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputPassword{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

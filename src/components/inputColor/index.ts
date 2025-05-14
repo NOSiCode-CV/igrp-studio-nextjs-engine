@@ -3,7 +3,7 @@ import {
   inputColorProperties,
   inputColorVariants,
   inputColorChildProperties,
-  inputColorChildPropertiesMapping, inputColorInteractions, inputColorInteractionsMapping,
+  inputColorChildPropertiesMapping, inputColorInteractions, inputColorInteractionsMapping, inputColorData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,10 +21,20 @@ export default {
     component.getChildProperties(inputColorChildProperties());
     component.getChildPropertiesMapping(inputColorChildPropertiesMapping());
     component.getInteractions(inputColorInteractions())
-    component.getInteractionsMapping(inputColorInteractionsMapping())
+    component.getInteractionsMapping(inputColorInteractionsMapping());
+    component.getData(inputColorData());
+
 
     component.loadStates([
-      'const [inputColor{{id}}Value, setInputColor{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputColor{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

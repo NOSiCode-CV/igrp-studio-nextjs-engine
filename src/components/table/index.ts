@@ -3,7 +3,7 @@ import {
   tableProperties,
   tableVariants,
   tableChildProperties,
-  tableChildPropertiesMapping, tableInteractions, tableInteractionsMapping,
+  tableChildPropertiesMapping, tableInteractionsMapping, tableData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
@@ -24,10 +24,9 @@ export default {
     component.setForceStateLoad(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
-    component.getInteractions(tableInteractions());
-    component.getInteractionsMapping(tableInteractionsMapping());
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
+    component.getData(tableData());
 
     component.loadChildrenTypes([
       { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
@@ -38,7 +37,15 @@ export default {
     ])
 
     component.loadStates([
-      'const [contentTable{{id}}, setContentTable{{id}}] = useState<any>([]);'
+      {
+        state: {
+          id: '',
+          name: 'contentTable{{id}}',
+          type: '{{type}}',
+          defaultValue: '[]',
+        },
+        required: true,
+      },
     ]);
 
     /*component.loadServiceMethods([

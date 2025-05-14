@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -49,7 +50,6 @@ export function selectChildPropertiesMapping() {
 
 export function selectInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
     onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_OPEN), required: false },
   };
@@ -58,6 +58,23 @@ export function selectInteractions() {
 export function selectInteractionsMapping() {
   return {
 
+  };
+}
+
+export function selectData() {
+  return {
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
+        id: '',
+        name: 'select{{id}}Value',
+        type: 'string',
+        defaultValue: '{{value}}'
+      }), required: true },
+    options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
+        id: '',
+        name: 'select{{id}}Options',
+        type: 'array',
+        defaultValue: '[]'
+      }, true), required: true },
   };
 }
 

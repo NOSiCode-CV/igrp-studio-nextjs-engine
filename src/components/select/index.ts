@@ -3,7 +3,7 @@ import {
   selectProperties,
   selectVariants,
   selectChildProperties,
-  selectChildPropertiesMapping, selectInteractions, selectInteractionsMapping,
+  selectChildPropertiesMapping, selectInteractions, selectInteractionsMapping, selectData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getInteractionsMapping(selectInteractionsMapping());
     component.getChildProperties(selectChildProperties());
     component.getChildPropertiesMapping(selectChildPropertiesMapping());
+    component.getData(selectData());
 
     component.loadStates([
-      'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'select{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

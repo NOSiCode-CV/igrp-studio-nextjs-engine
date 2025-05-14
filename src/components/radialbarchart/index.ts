@@ -2,7 +2,7 @@ import {
   radialBarChartPropertiesMapping,
   radialBarChartProperties,
   radialBarChartChildProperties,
-  radialBarChartChildPropertiesMapping, radialBarChartInteractions,
+  radialBarChartChildPropertiesMapping, radialBarChartInteractions, radialBarChartData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,6 +21,7 @@ export default {
     component.getInteractions(radialBarChartInteractions());
     component.getChildProperties(radialBarChartChildProperties());
     component.getChildPropertiesMapping(radialBarChartChildPropertiesMapping());
+    component.getData(radialBarChartData());
 
     component.loadStates([
     ]);

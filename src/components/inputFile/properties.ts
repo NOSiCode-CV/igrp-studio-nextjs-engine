@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -41,7 +42,6 @@ export function inputFileChildPropertiesMapping() {
 
 export function inputFileInteractions() {
   return {
-    value: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     onChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE), required: true },
   };
 }
@@ -50,12 +50,11 @@ export function inputFileInteractionsMapping() {
   return {};
 }
 
-export function checkboxInteractionsMapping() {
+export function inputFileData() {
   return {
-
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
-
 
 export function inputFileVariants() {
   return {};

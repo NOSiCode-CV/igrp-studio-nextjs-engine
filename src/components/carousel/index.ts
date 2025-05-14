@@ -22,7 +22,15 @@ export default {
     component.getChildPropertiesMapping(carouselChildPropertiesMapping());
 
     component.loadStates([
-      'const [currentIndex, setCurrentIndex] = useState(0);'
+      {
+        state: {
+          id: '',
+          name: 'current{{id}}Index',
+          type: 'number',
+          defaultValue: '0'
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

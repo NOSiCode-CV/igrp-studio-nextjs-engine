@@ -3,7 +3,7 @@ import {
   inputTimeProperties,
   inputTimeVariants,
   inputTimeChildProperties,
-  inputTimeChildPropertiesMapping, inputTimeInteractions, inputTimeInteractionsMapping,
+  inputTimeChildPropertiesMapping, inputTimeInteractions, inputTimeInteractionsMapping, inputTimeData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputTimeChildPropertiesMapping());
     component.getInteractions(inputTimeInteractions());
     component.getInteractionsMapping(inputTimeInteractionsMapping());
+    component.getData(inputTimeData());
 
     component.loadStates([
-      'const [inputTime{{id}}Value, setInputTime{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputTime{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

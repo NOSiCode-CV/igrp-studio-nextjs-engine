@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
@@ -44,12 +45,11 @@ export function inputTextInteractions() {
   };
 }
 
-export function checkboxInteractionsMapping() {
+export function inputTextData() {
   return {
-
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
-
 
 export function inputTextVariants() {
   return {};

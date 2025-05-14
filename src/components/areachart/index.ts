@@ -2,7 +2,7 @@ import {
   areaChartPropertiesMapping,
   areaChartProperties,
   areaChartChildProperties,
-  areaChartChildPropertiesMapping, areaChartInteractions,
+  areaChartChildPropertiesMapping, areaChartInteractions, areaChartData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -19,6 +19,7 @@ export default {
     component.getProperties(areaChartProperties());
     component.getPropertiesMapping(areaChartPropertiesMapping());
     component.getInteractions(areaChartInteractions());
+    component.getData(areaChartData());
     component.getChildProperties(areaChartChildProperties());
     component.getChildPropertiesMapping(areaChartChildPropertiesMapping());
 

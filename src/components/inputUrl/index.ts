@@ -3,7 +3,7 @@ import {
   inputUrlProperties,
   inputUrlVariants,
   inputUrlChildProperties,
-  inputUrlChildPropertiesMapping, inputUrlInteractions, inputUrlInteractionsMapping,
+  inputUrlChildPropertiesMapping, inputUrlInteractions, inputUrlInteractionsMapping, inputUrlData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputUrlChildPropertiesMapping());
     component.getInteractions(inputUrlInteractions());
     component.getInteractionsMapping(inputUrlInteractionsMapping());
+    component.getData(inputUrlData());
 
     component.loadStates([
-      'const [inputUrl{{id}}Value, setInputUrl{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputUrl{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

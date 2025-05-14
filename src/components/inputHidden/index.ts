@@ -22,7 +22,15 @@ export default {
     component.getChildPropertiesMapping(inputHiddenChildPropertiesMapping());
 
     component.loadStates([
-      'const [inputHidden{{id}}Value, setInputHidden{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputHidden{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

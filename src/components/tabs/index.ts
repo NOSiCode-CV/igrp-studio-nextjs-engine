@@ -23,7 +23,15 @@ export default {
     component.getChildPropertiesMapping(tabsChildPropertiesMapping());
 
     component.loadStates([
-      'const [activeTab, setActiveTab] = useState("tab1");',
+      {
+        state: {
+          id: '',
+          name: 'activeTab{{id}}',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

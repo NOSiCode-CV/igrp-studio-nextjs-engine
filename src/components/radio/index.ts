@@ -22,7 +22,14 @@ export default {
     component.getChildPropertiesMapping(radioGroupChildPropertiesMapping());
 
     component.loadStates([
-      'const [selectedRadio, setSelectedRadio] = useState("");'
+      {
+        state: {
+          id: '',
+          name: 'selected{{id}}Radio',
+          type: 'string',
+        },
+        required: true
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -3,7 +3,7 @@ import {
   inputPhoneProperties,
   inputPhoneVariants,
   inputPhoneChildProperties,
-  inputPhoneChildPropertiesMapping, inputPhoneInteractions, inputPhoneInteractionsMapping,
+  inputPhoneChildPropertiesMapping, inputPhoneInteractions, inputPhoneInteractionsMapping, inputPhoneData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputPhoneChildPropertiesMapping());
     component.getInteractions(inputPhoneInteractions())
     component.getInteractionsMapping(inputPhoneInteractionsMapping())
+    component.getData(inputPhoneData());
 
     component.loadStates([
-      'const [inputPhone{{id}}Value, setInputPhone{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputPhone{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

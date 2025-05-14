@@ -198,12 +198,14 @@ export interface Layout<S = any> extends IdentifiableElement{
   componentName: string;
   properties?: Record<string, any>;
   interactions?: Record<string, any>;
+  data?: Record<string, any>;
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
   content?: string,
   tag: string,
   dataType?: string,
   children?: Layout[];
+
 }
 
 export interface LayoutProperties {
@@ -230,7 +232,19 @@ export interface State extends IdentifiableElement {
 }
 
 export interface RegisterState {
-  code: string,
+  state: State,
+  required: boolean
+}
+
+export interface Reference extends IdentifiableElement {
+  name: string,
+  type: string,
+  imports?: Import[],
+  defaultValue?: string,
+}
+
+export interface RegisterReference {
+  ref: Reference,
   required: boolean
 }
 
@@ -294,6 +308,8 @@ export interface ComponentRegisterConfig {
   propertiesMapping: Record<string, any>,
   interactions: Record<string, any>,
   interactionsMapping: Record<string, any>,
+  data: Record<string, any>,
+  dataMapping: Record<string, any>,
   childProperties?: Record<string, any>,
   childPropertiesMapping?: Record<string, any>,
   states: RegisterState[],

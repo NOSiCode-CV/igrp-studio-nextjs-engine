@@ -83,6 +83,7 @@ export const TEMPLATES = {
   TYPE_ELEMENT: 'components/{{element}}/types/type.hbs',
   DEFAULT_FUNCTION: 'components/default/functions/function.hbs',
   DEFAULT_STATE: 'components/default/states/state.hbs',
+  DEFAULT_REFERENCE: 'components/default/references/reference.hbs',
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.hbs',
@@ -169,7 +170,8 @@ export const INTERACTIONS_TYPES = {
   CHECKED: "Checked",
   DATA: "Data",
   DATE: "Date",
-  VALUE: "Value"
+  VALUE: "Value",
+  OPTIONS: "Options"
 }
 
 export const INTERACTIONS_DEFAULTS = {

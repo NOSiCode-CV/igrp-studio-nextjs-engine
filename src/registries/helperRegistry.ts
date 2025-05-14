@@ -22,7 +22,7 @@ import {
   addClassNameFromChildProperties,
   addClassNameFromProperties, extractCardContent, extractCardFooter,
   extractTableColumns,
-  extractTableFilters,
+  extractTableFilters, renderData,
   renderInteractions,
   renderProperties,
   resolveComponent,
@@ -39,10 +39,12 @@ import { extractVolumes, indent, normalizeHostname } from '../helpers/workspaceH
 import { PARTIALS } from '../utils/constants';
 import { renderService } from '../utils/renderService';
 import { resolveTypes } from '../helpers/resolveTypes';
+import { resolveReferences } from '../helpers/resolveReference';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
 Handlebars.registerHelper("resolve-states", resolveStates);
+Handlebars.registerHelper("resolve-references", resolveReferences);
 Handlebars.registerHelper("resolve-types", resolveTypes);
 Handlebars.registerHelper("resolve-code-blocks", resolveCodeBlocks);
 Handlebars.registerHelper("resolve-service-interface-methods", resolveServiceInterfaceMethods);
@@ -61,6 +63,7 @@ Handlebars.registerHelper("extractCardFooter", extractCardFooter);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
+Handlebars.registerHelper("render-data", renderData);
 
 // Workspace
 Handlebars.registerHelper("extractVolumes", extractVolumes)

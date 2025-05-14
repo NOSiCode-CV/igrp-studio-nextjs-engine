@@ -2,7 +2,7 @@ import {
   ChildComponent,
   ComponentRegisterConfig,
   ComponentRegistrationConfig,
-  Layout,
+  Layout, RegisterReference,
   RegisterState,
 } from '../interfaces/types';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
@@ -14,6 +14,8 @@ export type Component = {
   imports: Set<string>;
   interactions: Record<string, any>;
   interactionsMapping: Record<string, any>;
+  data: Record<string, any>;
+  dataMapping: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
   childProperties: Record<string, any>;
@@ -22,6 +24,7 @@ export type Component = {
   childrenTypes: Set<ChildComponent>;
   acceptedChildren: Set<ChildComponent>;
   states: Set<RegisterState>;
+  references: Set<RegisterReference>;
   serviceMethods: Set<string>;
   customClassName?: string;
   customComponentTag?: string;
@@ -31,6 +34,7 @@ export type Component = {
   noClassName: boolean;
   allowTypes: boolean;
   forceStateLoad: boolean;
+  forceReferenceLoad: boolean;
   label: string;
   group: string;
   parent: string;
@@ -50,6 +54,7 @@ export type Component = {
   setNoClassName:(value: boolean) => void;
   setAllowTypes:(value: boolean) => void;
   setForceStateLoad:(value: boolean) => void;
+  setForceReferenceLoad:(value: boolean) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -60,6 +65,8 @@ export type Component = {
   loadVariants: (variants: Record<string, any>) => void;
   getInteractions: (interactions: Record<string, any>) => void;
   getInteractionsMapping: (mapping: Record<string, any>) => void;
+  getData: (data: Record<string, any>) => void;
+  getDataMapping: (mapping: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
@@ -67,6 +74,7 @@ export type Component = {
   loadChildrenTypes: (types: ChildComponent[]) => void;
   loadAcceptedChildren: (types: ChildComponent[]) => void;
   loadStates: (states: RegisterState[]) => void;
+  loadReferences: (refs: RegisterReference[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
   setRenderer: (fn: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string)) => void;
@@ -81,12 +89,15 @@ function initComponent(): Component {
     properties: {},
     interactions: {},
     interactionsMapping: {},
+    data: {},
+    dataMapping: {},
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
     acceptedChildren: new Set(),
     childrenTypes: new Set(),
     states: new Set(),
+    references: new Set(),
     serviceMethods: new Set(),
     customClassName: undefined,
     customComponentTag: undefined,
@@ -96,6 +107,7 @@ function initComponent(): Component {
     noClassName: false,
     allowTypes: false,
     forceStateLoad: false,
+    forceReferenceLoad: false,
     label: 'Component',
     group: '',
     parent: '',
@@ -134,6 +146,10 @@ function initComponent(): Component {
 
     setForceStateLoad(value: boolean) {
       this.forceStateLoad = value
+    },
+
+    setForceReferenceLoad(value: boolean) {
+      this.forceReferenceLoad = value
     },
 
     loadDefault(defaultValue: boolean) {
@@ -180,6 +196,14 @@ function initComponent(): Component {
       Object.assign(this.interactionsMapping, mapping);
     },
 
+    getData(data) {
+      Object.assign(this.data, data);
+    },
+
+    getDataMapping(mapping) {
+      Object.assign(this.dataMapping, mapping);
+    },
+
     getProperties(properties) {
       Object.assign(this.properties, properties);
     },
@@ -198,6 +222,10 @@ function initComponent(): Component {
 
     loadStates(states) {
       states.forEach((state) => this.states.add(state));
+    },
+
+    loadReferences(references) {
+      references.forEach((ref) => this.references.add(ref));
     },
 
     loadChildrenTypes(types) {
@@ -254,6 +282,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     propertiesMapping: {},
     interactions: value.interactions,
     interactionsMapping: value.interactionsMapping,
+    data: value.data,
+    dataMapping: value.dataMapping,
     childPropertiesMapping: {},
     childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),
@@ -296,14 +326,14 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let classNames = common
     ? Object.entries(common)
-        .map(([key, value]) => {
-          return element.propertiesMapping[key]?.className
-            ? ` ${element.propertiesMapping[key]?.className ?? key}${value}`
-            : ``;
-        })
-        .join('')
+      .map(([key, value]) => {
+        return element.propertiesMapping[key]?.className
+          ? ` ${element.propertiesMapping[key]?.className ?? key}${value}`
+          : ``;
+      })
+      .join('')
     : ``;
-  
+
   if(cn) classNames += ` ${cn}`;
 
   let childProps = ``
@@ -318,30 +348,30 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
     childProps = childCommon
       ? Object.entries(childCommon)
-          .map(([key, value]) => {
-            return parentElement?.childPropertiesMapping[key]?.property
-              ? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"`
-              : ``;
-          })
-          .join('')
+        .map(([key, value]) => {
+          return parentElement?.childPropertiesMapping[key]?.property
+            ? ` ${parentElement.childPropertiesMapping[key]?.property ?? key}="${value}"`
+            : ``;
+        })
+        .join('')
       : ``;
 
     childProps += childCustomProperties
       ? Object.entries(childCustomProperties)
-          .map(([key, value]) => {
-            return ` ${key}="${value}"`;
-          })
-          .join('')
+        .map(([key, value]) => {
+          return ` ${key}="${value}"`;
+        })
+        .join('')
       : ``;
 
     childClassNames = childCommon
       ? Object.entries(childCommon)
-          .map(([key, value]) => {
-            return parentElement?.childPropertiesMapping[key]?.className
-              ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
-              : ``;
-          })
-          .join('')
+        .map(([key, value]) => {
+          return parentElement?.childPropertiesMapping[key]?.className
+            ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
+            : ``;
+        })
+        .join('')
       : ``;
 
   }

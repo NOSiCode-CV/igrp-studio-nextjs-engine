@@ -2,7 +2,7 @@ import {
   lineChartPropertiesMapping,
   lineChartProperties,
   lineChartChildProperties,
-  lineChartChildPropertiesMapping, lineChartInteractions,
+  lineChartChildPropertiesMapping, lineChartInteractions, lineChartData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,6 +20,7 @@ export default {
     component.getInteractions(lineChartInteractions());
     component.getChildProperties(lineChartChildProperties());
     component.getChildPropertiesMapping(lineChartChildPropertiesMapping());
+    component.getData(lineChartData());
 
     component.loadStates([
     ]);

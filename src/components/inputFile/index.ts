@@ -3,7 +3,7 @@ import {
   inputFileProperties,
   inputFileVariants,
   inputFileChildProperties,
-  inputFileChildPropertiesMapping, inputFileInteractions, inputFileInteractionsMapping,
+  inputFileChildPropertiesMapping, inputFileInteractions, inputFileInteractionsMapping, inputFileData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,9 +22,18 @@ export default {
     component.getChildPropertiesMapping(inputFileChildPropertiesMapping());
     component.getInteractions(inputFileInteractions())
     component.getInteractionsMapping(inputFileInteractionsMapping())
+    component.getData(inputFileData());
 
     component.loadStates([
-      'const [inputFile{{id}}Value, setInputFile{{id}}Value] = useState("{{value}}");'
+      {
+        state: {
+          id: '',
+          name: 'inputFile{{id}}Value',
+          type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

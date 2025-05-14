@@ -2,7 +2,7 @@ import {
   verticalBarChartPropertiesMapping,
   verticalBarChartProperties,
   verticalBarChartChildProperties,
-  verticalBarChartChildPropertiesMapping, verticalBarChartInteractions,
+  verticalBarChartChildPropertiesMapping, verticalBarChartInteractions, verticalBarChartData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,6 +21,7 @@ export default {
     component.getInteractions(verticalBarChartInteractions());
     component.getChildProperties(verticalBarChartChildProperties());
     component.getChildPropertiesMapping(verticalBarChartChildPropertiesMapping());
+    component.getData(verticalBarChartData());
 
     component.loadStates([
     ]);
