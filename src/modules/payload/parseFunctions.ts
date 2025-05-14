@@ -58,14 +58,17 @@ function parseFunctionSignature(
       const [namePart, ...typeParts] = param.split(':');
       const name = namePart.trim().replace(/\?$/, '');
       const optional = namePart.endsWith('?');
-      const type = typeParts.length > 0
+      let type = typeParts.length > 0
         ? typeParts.join(':').trim()
         : 'any';
+      const isList = type.endsWith('[]');
+      type = type.replace(/\[]$/, '')
 
       return {
         name,
         type,
         isNullable: optional,
+        isList,
         id: ''
       };
     });
