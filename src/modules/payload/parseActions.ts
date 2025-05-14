@@ -65,7 +65,7 @@ function parseActionSignature(
       return {
         name,
         type,
-        isNullable: !optional,
+        isNullable: optional,
         id: ''
       };
     });

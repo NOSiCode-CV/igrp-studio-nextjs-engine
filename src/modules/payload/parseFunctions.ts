@@ -65,7 +65,7 @@ function parseFunctionSignature(
       return {
         name,
         type,
-        isNullable: !optional,
+        isNullable: optional,
         id: ''
       };
     });
