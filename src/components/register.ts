@@ -39,6 +39,7 @@ import inputUrlModule, { INPUT_URL } from './inputUrl';
 import labelModule, { LABEL } from './label';
 import lineChartModule, { LINECHART } from './linechart';
 import modalDialogModule, { MODAL_DIALOG } from './modalDialog/index';
+import pageModule, { PAGE } from './page';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import paragraphModule, { PARAGRAPH } from './paragraph';
 import pieChartModule, { PIECHART } from './piechart';
@@ -121,6 +122,7 @@ export function registerAllComponents() {
   register(LABEL, labelModule.register);
   register(LINECHART, lineChartModule.register);
   register(MODAL_DIALOG, modalDialogModule.register);
+  register(PAGE, pageModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(PARAGRAPH, paragraphModule.register);
   register(PIECHART, pieChartModule.register);

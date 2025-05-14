@@ -189,14 +189,14 @@ export const newApp = async (baseConfig: AppConfig, basePath: string): Promise<v
    */
   await saveFileConfig(context);
 
-  const pageMetaConfig: PageMetaConfig = {
+  /*const pageMetaConfig: PageMetaConfig = {
     type: 'UI',
     url: '',
     description: baseConfig.description || 'Web description',
     resourceItems: [],
   };
 
-  await savePagesMeta(pageMetaConfig, basePath);
+  await savePagesMeta(pageMetaConfig, basePath);*/
 };
 
 /**

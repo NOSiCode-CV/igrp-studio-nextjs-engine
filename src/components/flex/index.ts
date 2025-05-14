@@ -1,22 +1,22 @@
 import {
-  formPropertiesMapping,
-  formProperties,
-  formVariants,
-  formChildProperties,
-  formChildPropertiesMapping,
+  flexPropertiesMapping,
+  flexProperties,
+  flexVariants,
+  flexChildProperties,
+  flexChildPropertiesMapping,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([]);
-    component.loadVariants(formVariants())
+    component.loadVariants(flexVariants())
     component.loadGroup('structure')
     component.loadLabel('Flex')
-    component.getProperties(formProperties());
-    component.getPropertiesMapping(formPropertiesMapping());
-    component.getChildProperties(formChildProperties());
-    component.getChildPropertiesMapping(formChildPropertiesMapping());
+    component.getProperties(flexProperties());
+    component.getPropertiesMapping(flexPropertiesMapping());
+    component.getChildProperties(flexChildProperties());
+    component.getChildPropertiesMapping(flexChildPropertiesMapping());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

@@ -84,69 +84,123 @@ const dashboardLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  id: 'e76Typ9lm2m1',
-  type: 'page',
-  types: [],
-  functions: [
-    {
-      id: 'a8ke20LoP1m3',
-      name: 'Normalize Hostname',
-      code: `
-    /**
-     * Normalizes a string to be a valid Docker hostname.
-     * - Lowercases the string
-     * - Replaces invalid characters with hyphens
-     * - Removes leading/trailing hyphens
-     * - Trims to 63 characters
-     */      
-    const normalizeHostname(name: string): string {
-      // Convert to lowercase
-      let normalized = name.toLowerCase();
-    
-      // Replace invalid characters with hyphen
-      normalized = normalized.replace(/[^a-z0-9-]/g, '-');
-    
-      // Remove leading and trailing hyphens
-      normalized = normalized.replace(/^-+|-+$/g, '');
-    
-      // Ensure max length of 63 characters
-      if (normalized.length > 63) {
-        normalized = normalized.substring(0, 63);
-      }
-    
-      // Edge case: If empty after sanitization, fallback
-      if (normalized.length === 0) {
-        normalized = 'host';
-      }
-    
-      return normalized;
-    }        
-    `,
+  "id": "p2o6p3dyxf",
+  "type": "page",
+  "path": "teste",
+  "pageName": "teste",
+  "components": {
+    "id": "container_89db3l",
+    "componentName": "container",
+    "label": "container",
+    "properties": {
+      "variant": "default"
     },
+    "children": [
+      {
+        "id": "section_4r8j2x",
+        "componentName": "section",
+        "label": "section",
+        "properties": {
+          "variant": "default"
+        },
+        "children": [
+          {
+            "id": "pageheader_5u79tu",
+            "tag": "pageHeader1",
+            "componentName": "pageHeader",
+            "label": "Page Header",
+            "type": "group",
+            "properties": {
+              "title": "Page Title",
+              "description": "Page Description",
+              "variant": "h3",
+              "commonProperties": {}
+            },
+            "children": [
+              {
+                "id": "button_xw0r3t",
+                "tag": "button1",
+                "componentName": "button",
+                "label": "Button",
+                "type": "group",
+                "properties": {
+                  "label": "Button",
+                  "variant": "default",
+                  "size": "default",
+                  "iconProperties": {
+                    "showIcon": false
+                  },
+                  "disabled": false,
+                  "commonProperties": {}
+                },
+                "children": [],
+                "interactions": {
+                  "onClick": {
+                    "fnCustomSet": "() => {}"
+                  }
+                },
+                "allowTypes": false
+              }
+            ],
+            "interactions": {},
+            "allowTypes": false
+          },
+          {
+            "id": "combobox_jjqdsp",
+            "tag": "combobox1",
+            "componentName": "combobox",
+            "label": "Combobox",
+            "type": "group",
+            "children": [],
+            "interactions": {
+              "onChange": {
+                "fnCustomSet": "() => {}"
+              }
+            },
+            "allowTypes": false,
+            "data": {
+              "value": {},
+              "options": {
+                "state": {
+                  "id": "",
+                  "type": "array",
+                  "name": "select{{id}}Options",
+                  "defaultValue": "[]",
+                  "imports": []
+                }
+              }
+            },
+            "properties": {
+              "label": "Combobox Input",
+              "variant": "single",
+              "placeholder": "Select an option...",
+              "selectLabel": "No option found",
+              "dataProperties": {
+                "isVirtual": false,
+                "isType": true
+              },
+              "commonProperties": {}
+            }
+          }
+        ],
+        "interactions": [],
+        "tag": ""
+      }
+    ],
+    "interactions": [],
+    "tag": ""
+  },
+  "functions": [],
+  "types": [],
+  "states": [
     {
-      id: 'b9lf31MpQ2n4',
-      name: 'Indent Code',
-      code: `
-    /**
-     * Indents each line of a block by the given number of spaces.
-     * @param spaces - Number of spaces to indent.
-     * @param options - Handlebars options object containing the block content.
-     * @returns Indented string.
-     */
-    const indent(this: any, spaces: number, options: HelperOptions): string {
-      const pad = ' '.repeat(spaces);
-      return options.fn(this)
-        .split('\\n')
-        .map(line => line ? pad + line : line)
-        .join('\\n');
-    }
-    `,
+      "id": "_drtane",
+      "name": "select{{id}}Value",
+      "type": "string",
+      "defaultValue": "{{value}}"
     }
   ],
-  pageName: 'registros',
-  description: "Registros",
-  path: '[[...teste]]/[param]/(auth)/login',
-  components: dashboardLayout,
+  "imports": []
 };
 
 beforeAll(async () => {

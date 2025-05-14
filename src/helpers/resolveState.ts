@@ -64,11 +64,11 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
           const type = c.dataType ? capitalize(c.dataType) : 'any';
 
-          s.state.name = replaceTemplate(s.state.name, { id: c.tag, });
-          s.state.defaultValue = s.state.defaultValue? replaceTemplate(s.state.defaultValue, { value }) : undefined;
-          s.state.type = replaceTemplate(s.state.type, { type });
+          s.name = replaceTemplate(s.name, { id: c.tag, });
+          s.defaultValue = s.defaultValue? replaceTemplate(s.defaultValue, { value }) : undefined;
+          s.type = replaceTemplate(s.type, { type });
 
-          stateDefinitions.add(renderState(s.state));
+          stateDefinitions.add(renderState(s));
 
         });
       })

@@ -124,8 +124,25 @@ export function baseInteraction(defaultCustomSet?: string, label?: string, defau
             items: {
               type: 'object',
               properties: {
-                state: {
-                  type: 'string', required: true
+                id: {
+                  type: 'string',
+                  required: true,
+                  default: ''
+                },
+                type: {
+                  type: 'string',
+                  required: true,
+                  default: 'any'
+                },
+                name: {
+                  type: 'string',
+                  required: true,
+                  default: ''
+                },
+                defaultValue: {
+                  type: 'string',
+                  required: false,
+                  default: 'undefined'
                 }
               }
             },

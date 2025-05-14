@@ -153,6 +153,7 @@ export const INTERACTIONS_TYPES = {
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
   ON_OPEN: 'On open',
+  ON_LOAD: 'On load',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
   ON_SUBMIT: 'On submit',

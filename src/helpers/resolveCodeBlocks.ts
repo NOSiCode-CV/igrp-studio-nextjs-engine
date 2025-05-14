@@ -31,7 +31,9 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
     });
 
     page.functions.forEach((fun) => {
-      codeBlock += '\n' + renderFunction(fun) + '\n'
+      if(!fun.path) {
+        codeBlock += '\n' + renderFunction(fun) + '\n';
+      }
     });
 
   }

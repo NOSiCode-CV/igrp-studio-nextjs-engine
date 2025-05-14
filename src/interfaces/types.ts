@@ -595,6 +595,7 @@ export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElem
   arguments: Argument[],
   imports?: Import[];
   states?: State[];
+  path?: string;
   returnValue: ReturnValue;
 }
 

@@ -1,6 +1,6 @@
 import { commonProperties, commonPropertiesMapping } from '../default/properties';
 
-export function formProperties() {
+export function flexProperties() {
   return {
     variant: { type: 'string', required: true, enum: [
         'auto',
@@ -41,21 +41,21 @@ export function formProperties() {
   }
 }
 
-export function formPropertiesMapping() {
+export function flexPropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   }
 }
 
-export function formChildProperties() {
+export function flexChildProperties() {
   return {}
 }
 
-export function formChildPropertiesMapping() {
+export function flexChildPropertiesMapping() {
   return {}
 }
 
-export function formVariants() {
+export function flexVariants() {
   return {
     auto: 'flex-auto',
     initial: 'flex-initial',
@@ -68,6 +68,7 @@ export function formVariants() {
     'flex-2-third': 'flex-[0.66]',
     'flex-quarter': 'flex-[0.25]',
     'flex-3-quarter': 'flex-[0.75]',
+    wrap: 'flex-wrap',
     row: 'flex-row',
     'row-reverse': 'flex-row-reverse',
     col: 'flex-col',

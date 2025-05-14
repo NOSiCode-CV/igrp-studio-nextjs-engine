@@ -132,6 +132,11 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
       type: 'string',
       errorMessage: 'The code must be a valid string.'
     },
+    path: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The path, if provided, must be a valid string.'
+    },
     returnValue: returnValueSchema,
     arguments: {
       type: 'array',
