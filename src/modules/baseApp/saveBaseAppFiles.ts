@@ -66,6 +66,7 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.PT), dest: path.join(context.basePath, DST_CONFIG_FILES.PT)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.NPMRC), dest: path.join(context.basePath, DST_CONFIG_FILES.NPMRC)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.LOCAL_ENV), dest: path.join(context.basePath, DST_CONFIG_FILES.ENV)},
+    {src: path.join(CONFIGS, SRC_CONFIG_FILES.VSCODE_SETTINGS), dest: path.join(context.basePath, DST_CONFIG_FILES.VSCODE_SETTINGS)},
     //{src: path.join(CONFIGS, SRC_CONFIG_FILES.README), dest: path.join(context.basePath, DST_CONFIG_FILES.README)},
     //{src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTENV), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTENV)},
     //{src: path.join(CONFIGS, SRC_CONFIG_FILES.TSCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.TSCONFIG)},

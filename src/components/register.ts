@@ -130,7 +130,7 @@ export function registerAllComponents() {
   register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);
-  register(SLIDER, sliderModule.register);
+  //register(SLIDER, sliderModule.register);
   register(STACK, stackModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);

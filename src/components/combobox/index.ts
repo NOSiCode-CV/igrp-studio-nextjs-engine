@@ -24,7 +24,14 @@ export default {
     component.getChildPropertiesMapping(comboboxChildPropertiesMapping());
 
     component.loadStates([
-      'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");'
+      {
+        code: 'const [input{{id}}Value, setInput{{id}}Value] = useState("{{value}}");',
+        required: false
+      },
+      {
+        code: 'const [input{{id}}Options, setInput{{id}}Options] = useState([]);',
+        required: false
+      }
     ]);
 
     component.setRenderer(hbsRenderer);

@@ -124,6 +124,7 @@ export const SRC_CONFIG_FILES = {
   ES: 'es',
   PT: 'pt',
   EN: 'en',
+  VSCODE_SETTINGS: 'vscode_settings.json',
 };
 
 export const DST_CONFIG_FILES ={
@@ -140,6 +141,7 @@ export const DST_CONFIG_FILES ={
   ES: 'messages/es.json',
   PT: 'messages/pt.json',
   EN: 'messages/en.json',
+  VSCODE_SETTINGS: '.vscode/settings.json',
 }
 
 export const INTERACTIONS_TYPES = {
@@ -199,6 +201,7 @@ export const DIRECTORIES = {
   ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
   STUDIO: 'public/studio',
   IGRPSTUDIO: '.igrpstudio',
+  VSCODE: '.vscode',
   MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',

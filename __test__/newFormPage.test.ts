@@ -1,7 +1,6 @@
 import { addCodeSnippet, initCodeSnippets, initComponents, newPage } from '../src';
 import { CodeSnippetConfig, Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
-import { registry } from '../src/code_snippets/index';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 

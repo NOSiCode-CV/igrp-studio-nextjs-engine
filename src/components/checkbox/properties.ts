@@ -3,8 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function checkboxProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
+    label: { type: 'string', required: false, default: 'Check' },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     message: { type: 'string', required: false },
@@ -14,7 +13,6 @@ export function checkboxProperties() {
 
 export function checkboxPropertiesMapping() {
   return {
-    name: 'name',
     label: 'label',
     description: 'description',
     disabled: 'disabled',

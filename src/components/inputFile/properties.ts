@@ -14,7 +14,7 @@ export function inputFileProperties() {
     name: { type: 'string', required: true, default: 'file' },
     error: { type: 'string', required: false },
     accept: { type: 'string', required: false, default: 'application/pdf' },
-    customId: { type: 'string', required: false, default: '{{id}}' },
+    //customId: { type: 'string', required: false, default: '{{id}}' },
     //helperText: { type: 'string', required: false, default: '' },
     multiple: { type: 'boolean', required: false, default: false },
     disabled: { type: 'boolean', required: false, default: false },

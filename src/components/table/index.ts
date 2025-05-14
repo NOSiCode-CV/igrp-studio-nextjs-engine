@@ -21,6 +21,7 @@ export default {
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
     component.setAllowTypes(true)
+    component.setForceStateLoad(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
     component.getInteractions(tableInteractions());
@@ -40,9 +41,9 @@ export default {
       'const [contentTable{{id}}, setContentTable{{id}}] = useState<any>([]);'
     ]);
 
-    component.loadServiceMethods([
+    /*component.loadServiceMethods([
       '{{id}}: { populate: () => Promise<{ rows: any[] }>; };',
-    ]);
+    ]);*/
 
     component.setRenderer(hbsRenderer);
   },

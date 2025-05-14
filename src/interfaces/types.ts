@@ -229,6 +229,11 @@ export interface State extends IdentifiableElement {
   defaultValue?: string,
 }
 
+export interface RegisterState {
+  code: string,
+  required: boolean
+}
+
 export interface CommonProperties extends LayoutProperties{
   padding?: string; // p-1, p-2, etc.
   paddingX?: string; // px-1, px-2, etc.
@@ -291,7 +296,7 @@ export interface ComponentRegisterConfig {
   interactionsMapping: Record<string, any>,
   childProperties?: Record<string, any>,
   childPropertiesMapping?: Record<string, any>,
-  states: string[],
+  states: RegisterState[],
   childrenTypes: ComponentRegisterConfig[],
   acceptedChildren: ComponentRegisterConfig[],
   renderer: 'default' | 'hbs' | 'custom',

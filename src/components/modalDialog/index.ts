@@ -15,7 +15,7 @@ export default {
     ]);
 
     component.loadVariants(modalDialogVariants());
-    component.loadGroup('formElements')
+    component.loadGroup('basicElements')
     component.loadLabel('Modal Dialog')
     component.getProperties(modalDialogProperties());
     component.getPropertiesMapping(modalDialogPropertiesMapping());

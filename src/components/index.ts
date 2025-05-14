@@ -1,4 +1,10 @@
-import { ChildComponent, ComponentRegisterConfig, ComponentRegistrationConfig, Layout } from '../interfaces/types';
+import {
+  ChildComponent,
+  ComponentRegisterConfig,
+  ComponentRegistrationConfig,
+  Layout,
+  RegisterState,
+} from '../interfaces/types';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { replaceTemplate } from '../utils/helpers';
@@ -15,7 +21,7 @@ export type Component = {
   variants: Record<string, any>;
   childrenTypes: Set<ChildComponent>;
   acceptedChildren: Set<ChildComponent>;
-  states: Set<string>;
+  states: Set<RegisterState>;
   serviceMethods: Set<string>;
   customClassName?: string;
   customComponentTag?: string;
@@ -60,7 +66,7 @@ export type Component = {
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
   loadChildrenTypes: (types: ChildComponent[]) => void;
   loadAcceptedChildren: (types: ChildComponent[]) => void;
-  loadStates: (states: string[]) => void;
+  loadStates: (states: RegisterState[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
   setRenderer: (fn: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string)) => void;
