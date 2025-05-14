@@ -1,20 +1,49 @@
 import fs from 'fs-extra';
 import { ActionDef } from '../../interfaces/types';
 
-export function parseActions(actionFilePath: string): ActionDef | undefined {
-  const content = fs.readFileSync(actionFilePath, 'utf-8');
+export function parseActions(actionFilePath: string): ActionDef[] {
+  let content = fs.readFileSync(actionFilePath, 'utf-8');
+  const actions: ActionDef[] = [];
 
-  // Enhanced function regex that handles:
-  // - Multi-line declarations
-  // - Various spacing patterns
-  const funcMatch = content.match(
-    /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/s
-  );
+  // Remove all comment blocks first
+  content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  if (!funcMatch) return undefined
+  // 1. Parse traditional action declarations
+  const actionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/gs;
+  let actionMatch;
 
-  // Improved parameter parsing
-  const args = funcMatch[2]
+  while ((actionMatch = actionRegex.exec(content)) !== null) {
+    actions.push(parseActionSignature(
+      actionMatch[1],
+      actionMatch[2],
+      actionMatch[3],
+      actionFilePath
+    ));
+  }
+
+  // 2. Parse arrow action declarations
+  const constActionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=>]+))?\s*=>/gs;
+  let constActionMatch;
+
+  while ((constActionMatch = constActionRegex.exec(content)) !== null) {
+    actions.push(parseActionSignature(
+      constActionMatch[1],
+      constActionMatch[2],
+      constActionMatch[3],
+      actionFilePath
+    ));
+  }
+
+  return actions;
+}
+
+function parseActionSignature(
+  name: string,
+  argsString: string,
+  returnType: string | undefined,
+  filePath: string
+): ActionDef {
+  const args = argsString
     .split(',')
     .reduce<string[]>((acc, param) => {
       const trimmed = param.trim();
@@ -42,9 +71,9 @@ export function parseActions(actionFilePath: string): ActionDef | undefined {
     });
 
   return {
-    name: funcMatch[1],
+    name,
     args,
-    path: actionFilePath,
-    returnType: funcMatch[3]?.trim() || 'void'
+    path: filePath,
+    returnType: returnType?.trim() || 'void'
   };
 }

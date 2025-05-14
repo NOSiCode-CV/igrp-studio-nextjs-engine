@@ -1,20 +1,49 @@
 import fs from 'fs-extra';
 import { FunctionDef } from '../../interfaces/types';
 
-export function parseFunctions(functionFilePath: string): FunctionDef | undefined {
-  const content = fs.readFileSync(functionFilePath, 'utf-8');
+export function parseFunctions(functionFilePath: string): FunctionDef[] {
+  let content = fs.readFileSync(functionFilePath, 'utf-8');
+  const functions: FunctionDef[] = [];
 
-  // Enhanced function regex that handles:
-  // - Multi-line declarations
-  // - Various spacing patterns
-  const funcMatch = content.match(
-    /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/s
-  );
+  // Remove all comment blocks first
+  content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  if (!funcMatch) return undefined
+  // 1. Parse traditional function declarations
+  const functionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/gs;
+  let functionMatch;
 
-  // Improved parameter parsing
-  const args = funcMatch[2]
+  while ((functionMatch = functionRegex.exec(content)) !== null) {
+    functions.push(parseFunctionSignature(
+      functionMatch[1],
+      functionMatch[2],
+      functionMatch[3],
+      functionFilePath
+    ));
+  }
+
+  // 2. Parse arrow function declarations
+  const constFunctionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=>]+))?\s*=>/gs;
+  let constFunctionMatch;
+
+  while ((constFunctionMatch = constFunctionRegex.exec(content)) !== null) {
+    functions.push(parseFunctionSignature(
+      constFunctionMatch[1],
+      constFunctionMatch[2],
+      constFunctionMatch[3],
+      functionFilePath
+    ));
+  }
+
+  return functions;
+}
+
+function parseFunctionSignature(
+  name: string,
+  argsString: string,
+  returnType: string | undefined,
+  filePath: string
+): FunctionDef {
+  const args = argsString
     .split(',')
     .reduce<string[]>((acc, param) => {
       const trimmed = param.trim();
@@ -42,9 +71,9 @@ export function parseFunctions(functionFilePath: string): FunctionDef | undefine
     });
 
   return {
-    name: funcMatch[1],
+    name,
     args,
-    path: functionFilePath,
-    returnType: funcMatch[3]?.trim() || 'void'
+    path: filePath,
+    returnType: returnType?.trim() || 'void'
   };
 }

@@ -17,8 +17,8 @@ export async function parseExportsConfig(config: any, basePath: string): Promise
   };
 
   return {
-    types: (await parseMultiple(config.types || [], parseTypes)).filter((it: any) => it !== undefined && it !== null),
-    actions: (await parseMultiple(config.actions || [], parseActions)).filter((it: any) => it !== undefined && it !== null),
-    functions: (await parseMultiple(config.functions || [], parseFunctions)).filter((it: any) => it !== undefined && it !== null),
+    types: (await parseMultiple(config.types || [], parseTypes)).flatMap((type) => type).filter((it: any) => it !== undefined && it !== null),
+    actions: (await parseMultiple(config.actions || [], parseActions)).flatMap((act) => act).filter((it: any) => it !== undefined && it !== null),
+    functions: (await parseMultiple(config.functions || [], parseFunctions)).flatMap((fn) => fn).filter((it: any) => it !== undefined && it !== null),
   };
 }

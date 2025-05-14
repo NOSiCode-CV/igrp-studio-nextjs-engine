@@ -1,32 +1,59 @@
 import fs from 'fs-extra';
-import path from 'path';
 import { TypeDef } from '../../interfaces/types';
 
-export function parseTypes(typeFilePath: string): TypeDef {
-  const content = fs.readFileSync(typeFilePath, 'utf-8');
-  const name = path.basename(typeFilePath, '.ts');
+export function parseTypes(typeFilePath: string): TypeDef[] {
+  let content = fs.readFileSync(typeFilePath, 'utf-8');
+  const typeDefs: TypeDef[] = [];
 
-  // Improved regex that handles:
-  // - Multiple properties on same line
-  // - Various spacing patterns
-  // - Optional properties
+  // Remove all comment blocks first
+  content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+
+  // 1. Parse interface declarations
+  const interfaceRegex = /interface\s+(\w+)\s*{([^}]*)}/gs;
+  let interfaceMatch;
+
+  while ((interfaceMatch = interfaceRegex.exec(content)) !== null) {
+    typeDefs.push(parseTypeDefinition(
+      interfaceMatch[1],
+      interfaceMatch[2],
+      typeFilePath
+    ));
+  }
+
+  // 2. Parse type declarations with object literals
+  const typeLiteralRegex = /type\s+(\w+)\s*=\s*{([^}]*)}/gs;
+  let typeLiteralMatch;
+
+  while ((typeLiteralMatch = typeLiteralRegex.exec(content)) !== null) {
+    typeDefs.push(parseTypeDefinition(
+      typeLiteralMatch[1],
+      typeLiteralMatch[2],
+      typeFilePath
+    ));
+  }
+
+  return typeDefs;
+}
+
+function parseTypeDefinition(
+  name: string,
+  bodyContent: string,
+  filePath: string
+): TypeDef {
   const fieldRegex = /(\w+)\s*\??\s*:\s*([^;\n,]+)(?:\s*,\s*|;|\n|$)/g;
-
   const fields: TypeDef['fields'] = [];
-  let match;
+  let fieldMatch;
 
-  while ((match = fieldRegex.exec(content)) !== null) {
-    const fieldName = match[1].trim();
-    let fieldType = match[2].trim();
-
-    // Clean up type by removing trailing commas and whitespace
+  while ((fieldMatch = fieldRegex.exec(bodyContent)) !== null) {
+    const fieldName = fieldMatch[1].trim();
+    let fieldType = fieldMatch[2].trim();
     fieldType = fieldType.replace(/,\s*$/, '').trim();
 
     fields.push({
       componentId: '',
       name: fieldName,
       type: fieldType,
-      required: !match[0].includes('?')
+      required: !fieldMatch[0].includes('?')
     });
   }
 
@@ -34,6 +61,6 @@ export function parseTypes(typeFilePath: string): TypeDef {
     componentId: '',
     name,
     fields,
-    path: typeFilePath
+    path: filePath
   };
 }
