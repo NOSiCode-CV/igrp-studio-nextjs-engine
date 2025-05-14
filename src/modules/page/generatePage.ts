@@ -2,7 +2,8 @@ import { getPageDir, loadConfig, loadPageConfig, loadPagesConfig } from '../../u
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
 import { DIRECTORIES, ERROR_MESSAGE, TEMPLATES } from '../../utils/constants';
-import { PageConfig, RenderContext } from '../../interfaces/types';
+import { Layout, PageConfig, RenderContext } from '../../interfaces/types';
+import { checkDuplicatedLayouts } from './checkDuplicatedLayouts';
 
 /**
  *
@@ -24,6 +25,10 @@ export const generatePage = async (context: RenderContext<PageConfig, PageConfig
 
   }
 
+  if (isLayout(context.resourceConfig.components)) {
+    checkDuplicatedLayouts([context.resourceConfig.components]);
+  }
+
   await saveToFile(page, pageOutputPath, true, DIRECTORIES.PAGES, context.resourceConfig.id, context.basePath);
 };
 
@@ -37,3 +42,7 @@ const renderPage = async (context: RenderContext<PageConfig, PageConfig>) => {
 
   return await renderTemplate(TEMPLATES.PAGE, context);
 };
+
+function isLayout(obj: any): obj is Layout {
+  return obj && typeof obj === 'object' && 'componentName' in obj && 'tag' in obj;
+}

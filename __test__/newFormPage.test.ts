@@ -187,7 +187,6 @@ beforeAll(async () => {
 
 describe('Form module',() =>{
   it('should save the form page configuration file', async()=> {
-    console.log(registry)
     const formRefCodeSnippet: CodeSnippetConfig = {
       id: 'code_1',
       name: 'formReferenceUsage',
