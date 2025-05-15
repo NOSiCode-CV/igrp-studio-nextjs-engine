@@ -51,7 +51,7 @@ export function resolveFirstType(data: any[]): string {
  */
 export function resolveStateDefault(defaultValue?: string): string {
 
-  if(!defaultValue) return 'undefined'
+  if(defaultValue === undefined) return 'undefined'
 
   const trimmed = defaultValue.trim();
 
@@ -63,7 +63,7 @@ export function resolveStateDefault(defaultValue?: string): string {
     trimmed === 'false' ||
     trimmed === '[]' ||
     trimmed === '{}' ||
-    !isNaN(Number(trimmed)) ||
+    (!isNaN(Number(trimmed)) && trimmed !== '') ||
     (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
     (trimmed.startsWith('{') && trimmed.endsWith('}'))
   ) {
@@ -71,7 +71,7 @@ export function resolveStateDefault(defaultValue?: string): string {
   }
 
   // Otherwise, treat it as a plain string literal
-  return `"${trimmed.replace(/"/g, '\\"')}"`;
+  return `\"${trimmed.replace(/"/g, '\\"')}\"`;
 }
 
 
@@ -114,7 +114,8 @@ export function renderProperties(customProperties: Record<string, any>) {
 export function renderInteractions(interactions: Record<string, any>) {
   return interactions
     ? Object.entries(interactions).map(([key, value]) => {
-      return `${key}={ ${value.fnName ?? value.fnCustomSet ?? value.state.name} }`;
+      if(!(value.fnName || value.fnCustomSet || value.state)) return
+      return `${key}={ ${value.fnName ?? value.fnCustomSet ?? value.state?.name} }`;
     }).join("\n")
     : ``
 }

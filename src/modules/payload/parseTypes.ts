@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import { TypeDef } from '../../interfaces/types';
+import { resolveExportedPath } from '../../utils/helpers';
 
 export function parseTypes(typeFilePath: string): TypeDef[] {
   let content = fs.readFileSync(typeFilePath, 'utf-8');
@@ -61,6 +62,6 @@ function parseTypeDefinition(
     componentId: '',
     name,
     fields,
-    path: filePath
+    path: resolveExportedPath(filePath)
   };
 }

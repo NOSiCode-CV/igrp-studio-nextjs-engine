@@ -1,5 +1,5 @@
-import { ActionConfig, Layout, PageConfig, RenderContext, TypeDef } from '../interfaces/types';
-import { extractComponentData, resolveExportedPath } from '../utils/helpers';
+import { ActionConfig, Layout, PageConfig, RenderContext } from '../interfaces/types';
+import { extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
 
@@ -27,7 +27,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   if(page?.types) {
     page.types.forEach((type) => {
       if (type.path) {
-        imports.add(`import { ${type.name} } from "${resolveExportedPath(type.path)}";`);
+        imports.add(`import { ${type.name} } from "${type.path}";`);
       }
     });
   }
@@ -36,7 +36,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     page.functions.forEach((fun) => {
       fun.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
       if (fun.path) {
-        imports.add(`import { ${fun.name} } from "${resolveExportedPath(fun.path)}";`);
+        imports.add(`import { ${fun.name} } from "${fun.path}";`);
       }
     });
   }
@@ -45,7 +45,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     page.actions.forEach((act) => {
       act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
       if (act.path) {
-        imports.add(`import { ${act.name} } from "${resolveExportedPath(act.path)}";`);
+        imports.add(`import { ${act.name} } from "${act.path}";`);
       }
     });
   }

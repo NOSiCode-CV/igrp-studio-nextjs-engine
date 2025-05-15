@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import { FunctionDef } from '../../interfaces/types';
+import { resolveExportedPath } from '../../utils/helpers';
 
 export function parseFunctions(functionFilePath: string): FunctionDef[] {
   let content = fs.readFileSync(functionFilePath, 'utf-8');
@@ -76,7 +77,7 @@ function parseFunctionSignature(
   return {
     name,
     args,
-    path: filePath,
+    path: resolveExportedPath(filePath),
     returnType: returnType?.trim() || 'void'
   };
 }

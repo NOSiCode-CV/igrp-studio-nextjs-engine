@@ -30,11 +30,11 @@ const tableLayout: Layout = {
           },
         },
         {
-          id: 'nif',
-          tag: 'nif',
+          id: 'numero',
+          tag: 'numero',
           componentName: 'tableTextCell',
           properties: {
-            headerTitle: "NIF",
+            headerTitle: "Número",
             headerType: "sortToggle",
           }
         },
@@ -48,39 +48,42 @@ const tableLayout: Layout = {
           }
         },
         {
-          id: 'setor',
-          tag: 'setor',
+          id: 'regime',
+          tag: 'regime',
           componentName: 'tableBadgeCell',
           properties: {
-            headerTitle: 'Setor',
+            headerTitle: 'Regime',
+            variant: 'outline',
             headerType: 'sortToggle'
+          }
+        },
+        {
+          id: 'legal_status',
+          tag: 'estatuto',
+          componentName: 'tableBadgeCell',
+          properties: {
+            headerTitle: 'Estatuto Jurídico',
+            variant: 'outline',
+            headerType: 'sortToggle'
+          }
+        },
+        {
+          id: 'activity_date',
+          tag: 'dataInicio',
+          componentName: 'tableDateCell',
+          properties: {
+            headerTitle: "Data de Início de Actividade",
+            headerType: "sortToggle",
           }
         },
         {
           id: 'status',
-          tag: 'status',
+          tag: 'estado',
           componentName: 'tableBadgeCell',
           properties: {
-            headerTitle: 'Status',
+            headerTitle: 'Estado',
+            // TODO: check dynamic variants
             headerType: 'sortToggle'
-          }
-        },
-        {
-          id: 'email',
-          tag: 'email',
-          componentName: 'tableTextCell',
-          properties: {
-            headerTitle: "Email",
-            headerType: "sortToggle",
-          }
-        },
-        {
-          id: 'telefone',
-          tag: 'telefone',
-          componentName: 'tableTextCell',
-          properties: {
-            headerTitle: "Telefone",
-            headerType: "sortToggle",
           }
         },
         {
@@ -137,30 +140,44 @@ const tableLayout: Layout = {
                   }
                 },
                 {
-                  id: 'doc',
-                  tag: 'declaracao',
-                  componentName: 'tableLinkDropdownItem',
-                  properties: {
-                    iconProperties: {
-                      iconName: 'Link',
-                    },
-                    showIcon: true,
-                    labelTrigger: 'Declaração',
-                    href: "https://igrp.cv/",
-                    type: "link"
-                  }
-                },
-                {
                   id: 'delete',
-                  tag: 'excluir',
+                  tag: 'cessar',
                   componentName: 'tableAlertDropdownItem',
                   properties: {
                     iconProperties: {
                       iconName: 'Trash',
                     },
                     showIcon: true,
-                    labelTrigger: 'Excluir',
+                    labelTrigger: 'Cessar',
                     type: "alert"
+                  }
+                },
+                {
+                  id: 'advantages',
+                  tag: 'beneficios',
+                  componentName: 'tableLinkDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'LifeBuoy',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Benefícios',
+                    href: "https://nosi.cv/",
+                    type: "link"
+                  }
+                },
+                {
+                  id: 'doc',
+                  tag: 'declaracao',
+                  componentName: 'tableLinkDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'FileText',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Declaração',
+                    href: "https://igrp.cv/",
+                    type: "link"
                   }
                 },
               ]
@@ -176,29 +193,51 @@ const tableLayout: Layout = {
       properties: {},
       children: [
         {
-          id: 'status_flt',
-          tag: 'status_flt',
+          id: 'legal_status_flt',
+          tag: 'legal_status_flt',
           componentName: 'tableDropdownFilter',
           properties: {
-            columnId: 'status',
-            placeholder: 'Todos Status',
+            columnId: 'estatuto',
+            placeholder: 'Todos Estatutos',
             options: [
-              { value: 'Ativo', label: 'Ativos' },
-              { value: 'Inativo', label: 'Inativos' }
+              { value: 'EMPRESA', label: 'Empresa' },
+              { value: 'INDIVIDUAL', label: 'Individual' },
+              { value: 'INSTITUICAO', label: 'Instituição' }
             ],
           }
         },
         {
-          id: 'setor_flt',
-          tag: 'setor_flt',
+          id: 'regime_flt',
+          tag: 'regime_flt',
           componentName: 'tableDropdownFilter',
           properties: {
-            columnId: 'setor',
-            placeholder: 'Todos Setores',
+            columnId: 'regime',
+            placeholder: 'Todos Regimes',
             options: [
-              { value: 'Público', label: 'Público' },
-              { value: 'Público', label: 'Público' }
+              { value: 'REGIME_GERAL', label: 'Regime Geral' },
+              { value: 'CONTA_PROPRIA', label: 'Conta Própria' }
             ],
+          }
+        },
+        {
+          id: 'status_flt',
+          tag: 'status_flt',
+          componentName: 'tableDropdownFilter',
+          properties: {
+            columnId: 'estado',
+            placeholder: 'Todos Status',
+            options: [
+              { value: 'ATIVO', label: 'Ativos' },
+              { value: 'INATIVO', label: 'Inativos' }
+            ],
+          }
+        },
+        {
+          id: 'registration_date',
+          tag: 'data_inicio_flt',
+          componentName: 'tableDateFilter',
+          properties: {
+            columnId: 'dataInicio'
           }
         },
       ],
@@ -225,53 +264,73 @@ export const taxPayerLayout: Layout = {
       fnCustomCode: {
         fnCode: `
         
-const totalContribuintes = mockTaxPayerList().length
-const ativosCount = mockTaxPayerList().filter((c) => c.status === "Ativo").length
-const inativosCount = mockTaxPayerList().filter((c) => c.status === "Inativo").length
-const publicoCount = mockTaxPayerList().filter((c) => c.setor === "Público").length
-const privadoCount = mockTaxPayerList().filter((c) => c.setor === "Privado").length
+const totalContribuintes = contentTabletable_taxpayers.length
+const ativosCount = contentTabletable_taxpayers.filter((c) => c.estado === "ATIVO").length
+const regimeCount = contentTabletable_taxpayers.filter((c) => c.regime === "REGIME_GERAL").length
+const privadoCount = contentTabletable_taxpayers.filter((c) => c.regime === "CONTA_PROPRIA").length
 
 useEffect(() => {
   updateTabletable_taxpayers()
+  loadLegalStatusFltCombobox()
+  loadRegimeFltCombobox()
   loadStatusFltCombobox()
-  loadSetorFltCombobox()
-},[statusFilter, sectorFilter])
+},[statusFilter, legalStatusFilter, regimeFilter, dateFilter, filterValue])
 
 const updateTabletable_taxpayers = async () => {
  
-  let data: TaxPayer[] = mockTaxPayerList();
+  let data: TaxPayer[] = await getTaxPayers();
   
   setHasActiveFilters(false)
+  
+  if(filterValue) {
+    data = data.filter((it) =>
+      removeAccents(it.nome).toLowerCase().includes(removeAccents(filterValue).toLowerCase())
+    );
+
+    setHasActiveFilters(true)
+  }
   
   if(statusFilter) {
     data = data.filter((it) => it.status === statusFilter);
     setHasActiveFilters(true)
   }
   
-  if(sectorFilter) {
-    data = data.filter((it) => it.setor === sectorFilter);
+  if(legalStatusFilter) {
+    data = data.filter((it) => it.estatuto === legalStatusFilter);
+    setHasActiveFilters(true)
+  }
+  
+  if(regimeFilter) {
+    data = data.filter((it) => it.regime === regimeFilter);
+    setHasActiveFilters(true)
+  }
+ 
+  if(dateFilter) {
+    //data = data.filter((it) => it.dataInicio.between(dateFilter));
     setHasActiveFilters(true)
   }
   
   setContentTabletable_taxpayers(data)
   
 }
-        
-        
+             
 const loadStatusFltCombobox = async () => {
  
-  setSelectStatus_fltOptions(mockStatusCombobox())
+  setSelectStatus_fltOptions(await getStatusOptions())
   
 }
 
-const loadSetorFltCombobox = async () => {
+const loadLegalStatusFltCombobox = async () => {
  
-  setSelectSector_fltOptions(mockSetorCombobox())
+  setSelectLegalStatus_fltOptions(await getLegalStatusOptions())
   
 }
 
-
-        
+const loadRegimeFltCombobox = async () => {
+ 
+  setSelectRegime_fltOptions(await getRegimeOptions())
+  
+}
         
         `,
       },
@@ -410,7 +469,7 @@ const loadSetorFltCombobox = async () => {
           componentName: 'grid',
           properties: {
             variant: 'cols4',
-            className: 'sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4 px-6 w-full',
+            className: 'sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4 px-6 w-full',
           },
           children: [
             {
@@ -418,7 +477,7 @@ const loadSetorFltCombobox = async () => {
               tag: 'total_stat_box',
               componentName: 'card',
               properties: {
-                className: 'overflow-hidden',
+                className: 'overflow-hidden p-0',
               },
               children: [
                 // TODO: <div className="h-1 bg-blue-500 w-full" />
@@ -461,7 +520,7 @@ const loadSetorFltCombobox = async () => {
                               properties: {
                                 className: 'text-xs text-muted-foreground font-medium',
                               },
-                              content: 'Total',
+                              content: 'Total Geral',
                             },
                             {
                               id: 'total_stat_box_total_v',
@@ -505,7 +564,7 @@ const loadSetorFltCombobox = async () => {
               tag: 'ativos_stat_box',
               componentName: 'card',
               properties: {
-                className: 'overflow-hidden',
+                className: 'overflow-hidden p-0',
               },
               children: [
                 // TODO: <div className="h-1 bg-green-500 w-full" />
@@ -548,7 +607,7 @@ const loadSetorFltCombobox = async () => {
                               properties: {
                                 className: 'text-xs text-muted-foreground font-medium',
                               },
-                              content: 'Ativos',
+                              content: 'Total Ativos',
                             },
                             {
                               id: 'ativos_stat_box_total_v',
@@ -587,12 +646,12 @@ const loadSetorFltCombobox = async () => {
                 },
               ],
             },
-            {
+            /*{
               id: 'inativos_stat_box',
               tag: 'inativos_stat_box',
               componentName: 'card',
               properties: {
-                className: 'overflow-hidden',
+                className: 'overflow-hidden p-0',
               },
               children: [
                 // TODO: <div className="h-1 bg-red-500 w-full" />
@@ -673,35 +732,35 @@ const loadSetorFltCombobox = async () => {
                   ],
                 },
               ],
-            },
+            },*/
             {
-              id: 'publico_stat_box',
-              tag: 'publico_stat_box',
+              id: 'regime_stat_box',
+              tag: 'regime_stat_box',
               componentName: 'card',
               properties: {
-                className: 'overflow-hidden',
+                className: 'overflow-hidden p-0',
               },
               children: [
                 // TODO: <div className="h-1 bg-blue-500 w-full" />
                 {
-                  id: 'publico_stat_box_colored_line',
-                  tag: 'publico_stat_box_colored_line',
+                  id: 'regime_stat_box_colored_line',
+                  tag: 'regime_stat_box_colored_line',
                   componentName: 'section',
                   properties: {
                     className: 'h-1 bg-purple-500 w-full',
                   },
                 },
                 {
-                  id: 'publico_stat_box_content',
-                  tag: 'publico_stat_box_content',
+                  id: 'regime_stat_box_content',
+                  tag: 'regime_stat_box_content',
                   componentName: 'cardContent',
                   properties: {
                     className: 'p-3',
                   },
                   children: [
                     {
-                      id: 'publico_stat_box_content_row',
-                      tag: 'publico_stat_box_content_row',
+                      id: 'regime_stat_box_content_row',
+                      tag: 'regime_stat_box_content_row',
                       componentName: 'flex',
                       properties: {
                         variant: 'justify-between',
@@ -710,34 +769,34 @@ const loadSetorFltCombobox = async () => {
                       children: [
                         // TODO: handle this with div instead of section
                         {
-                          id: 'publico_stat_box_texts',
-                          tag: 'publico_stat_box_texts',
+                          id: 'regime_stat_box_texts',
+                          tag: 'regime_stat_box_texts',
                           componentName: 'section',
                           properties: {},
                           children: [
                             {
-                              id: 'publico_stat_box_total_p',
-                              tag: 'publico_stat_box_total_p',
+                              id: 'regime_stat_box_total_p',
+                              tag: 'regime_stat_box_total_p',
                               componentName: 'paragraph',
                               properties: {
                                 className: 'text-xs text-muted-foreground font-medium',
                               },
-                              content: 'Setor Público',
+                              content: 'Total Regime Geral',
                             },
                             {
-                              id: 'publico_stat_box_total_v',
-                              tag: 'publico_stat_box_total_v',
+                              id: 'regime_stat_box_total_v',
+                              tag: 'regime_stat_box_total_v',
                               componentName: 'paragraph',
                               properties: {
                                 className: 'text-2xl font-bold',
                               },
-                              content: '{publicoCount}',
+                              content: '{regimeCount}',
                             },
                           ],
                         },
                         {
-                          id: 'publico_stat_box_icon',
-                          tag: 'publico_stat_box_icon',
+                          id: 'regime_stat_box_icon',
+                          tag: 'regime_stat_box_icon',
                           componentName: 'section',
                           properties: {
                             className:
@@ -745,8 +804,8 @@ const loadSetorFltCombobox = async () => {
                           },
                           children: [
                             {
-                              id: 'publico_briefcase_icon',
-                              tag: 'publico_briefcase_icon',
+                              id: 'regime_briefcase_icon',
+                              tag: 'regime_briefcase_icon',
                               componentName: 'icon',
                               properties: {
                                 iconName: 'Briefcase',
@@ -766,7 +825,7 @@ const loadSetorFltCombobox = async () => {
               tag: 'privado_stat_box',
               componentName: 'card',
               properties: {
-                className: 'overflow-hidden',
+                className: 'overflow-hidden p-0',
               },
               children: [
                 // TODO: <div className="h-1 bg-amber-500 w-full" />
@@ -809,7 +868,7 @@ const loadSetorFltCombobox = async () => {
                               properties: {
                                 className: 'text-xs text-muted-foreground font-medium',
                               },
-                              content: 'Setor Privado',
+                              content: 'Total Conta Própria',
                             },
                             {
                               id: 'privado_stat_box_total_v',
@@ -949,7 +1008,7 @@ const loadSetorFltCombobox = async () => {
                               Filtros
                                   {hasActiveFilters && (
                     <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-                      {(statusFilter !== "" ? 1 : 0) + (sectorFilter !== "" ? 1 : 0)}
+                      {(statusFilter !== "" ? 1 : 0) + (regimeFilter !== "" ? 1 : 0) + (dateFilter !== undefined ? 1 : 0) + (legalStatusFilter !== "" ? 1 : 0)}
                     </span>
                   )}
                                   `
@@ -1045,7 +1104,6 @@ const loadSetorFltCombobox = async () => {
                         },
                       ],
                     },
-
                     {
                       id: 'filter_expanded_btn_fragment',
                       tag: 'filter_expanded_btn_fragment',
@@ -1056,42 +1114,52 @@ const loadSetorFltCombobox = async () => {
                 <div className="flex flex-wrap items-end gap-4">
                   <div className="space-y-1 min-w-[160px]">
                     <IGRPSelect 
+                      name="legal_status_flt"
+                      label="Estatuto Jurídico"
+                      value={legalStatusFilter} 
+                      onValueChange={setLegalStatusFilter}
+                      placeholder="Todos Estatutos"
+                      options={selectLegalStatus_fltOptions}
+                    >
+                    </IGRPSelect>
+                  </div>
+                  <div className="space-y-1 min-w-[160px]">
+                    <IGRPSelect 
+                      name="regime_flt"
+                      label="Regime"
+                      value={regimeFilter} 
+                      onValueChange={setRegimeFilter}
+                      placeholder="Todos Regimes"
+                      options={selectRegime_fltOptions}
+                    >
+                    </IGRPSelect>
+                  </div>
+                  
+                  <div className="space-y-1 min-w-[160px]">
+                    <IGRPSelect 
                       name="status_flt"
-                      label="Status"
+                      label="Estado do Contribuinte"
                       value={statusFilter} 
                       onValueChange={setStatusFilter}
-                      placeholder="Status"
+                      placeholder="Todos Estados"
                       options={selectStatus_fltOptions}
                     >
                     </IGRPSelect>
                   </div>
 
                   <div className="space-y-1 min-w-[160px]">
-                    <IGRPSelect 
-                      name="sector_flt"
-                      label="Setor"
-                      value={sectorFilter} 
-                      onValueChange={setSectorFilter}
-                      placeholder="Setor"
-                      options={selectSector_fltOptions}
+                    <IGRPDatePicker 
+                      name="date_flt"
+                      label="Período de Inscrição"
+                      startDate={new Date('1900-01-01')}
+                      endDate={new Date('2099-12-31')}
+                      className=""
+                      onDateChange={(e) => setDateFilter(e)}
+                      date={dateFilter}
                     >
-                    </IGRPSelect>
+                    </IGRPDatePicker>
                   </div>
-
-                  <div className="space-y-1 min-w-[160px]">
-                    <IGRPSelect 
-                      name="status_flt"
-                      label="Região"
-                      disabled
-                      value={regiaoFilter} 
-                      onValueChange={setRegiaoFilter}
-                      placeholder="Todas Regiões"
-                      options={selectRegiao_fltOptions}
-                    >
-                    </IGRPSelect>
-                  </div>
-
-                 
+                  
                   <div className="ml-auto">
                     <IGRPButton
                       variant="outline"
@@ -1103,7 +1171,10 @@ const loadSetorFltCombobox = async () => {
                       onClick={() => {
                         setResetFilters(true);
                         setStatusFilter("");
-                        setSectorFilter("");
+                        setLegalStatusFilter("");
+                        setRegimeFilter("");
+                        setDateFilter(undefined);
+                        setFilterValue("");
                       }}
                       disabled={!hasActiveFilters}
                     >
@@ -1124,18 +1195,34 @@ const loadSetorFltCombobox = async () => {
               <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2 px-4">
                 <span className="text-xs text-muted-foreground">Filtros ativos:</span>
 
-                {statusFilter !== "" && (
+                {legalStatusFilter !== "" && (
                   <IGRPBadge variant="soft" className="px-2 py-1 h-6">
-                    Status: {statusFilter === "Ativo" ? "Ativos" : "Inativos"}
-                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("")}>
+                    Estatuto Jurídico: {legalStatusFilter === "EMPRESA" ? "Empresa" : legalStatusFilter === "INDIVIDUAL" ? "Individual" : "Instituição"}
+                    <IGRPButton variant="ghost" size="icon" showIcon={true} iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setLegalStatusFilter("")}>
                     </IGRPButton>
                   </IGRPBadge>
                 )}
 
-                {sectorFilter !== "" && (
+                {regimeFilter !== "" && (
                   <IGRPBadge variant="soft" className="px-2 py-1 h-6">
-                    Setor: {sectorFilter === "Público" ? "Público" : "Privado"}
-                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setSectorFilter("")}>
+                    Regime: {regimeFilter === "REGIME_GERAL" ? "Regime Geral" : "Conta Própria"}
+                    <IGRPButton variant="ghost" size="icon" showIcon={true} iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setRegimeFilter("")}>
+                    </IGRPButton>
+                  </IGRPBadge>
+                )}
+
+                {statusFilter !== "" && (
+                  <IGRPBadge variant="soft" className="px-2 py-1 h-6">
+                    Estado do Contribuinte: {statusFilter === "ATIVO" ? "Ativo" : statusFilter === "CESSADO" ? "Cessado" : "Suspenso"}
+                    <IGRPButton variant="ghost" size="icon" showIcon={true} iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("")}>
+                    </IGRPButton>
+                  </IGRPBadge>
+                )}
+
+                {dateFilter !== undefined && (
+                  <IGRPBadge variant="soft" className="px-2 py-1 h-6">
+                    Período de Inscrição: {dateFilter}
+                    <IGRPButton variant="ghost" size="icon" showIcon={true} iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setDateFilter(undefined)}>
                     </IGRPButton>
                   </IGRPBadge>
                 )}
@@ -1194,25 +1281,32 @@ const pageConfig: PageConfig = {
   imports: [
     { id: 'igrp_select', namespace: 'import { IGRPSelect } from "@igrp/igrp-framework-react-design-system";' },
     { id: 'igrp_badge', namespace: 'import { IGRPBadge } from "@igrp/igrp-framework-react-design-system";' },
+    { id: 'igrp_datepicker', namespace: 'import { IGRPDatePicker } from "@igrp/igrp-framework-react-design-system";' },
   ],
   states: [
+    {
+      id: 'legal_status_filter_st',
+      name: 'legalStatusFilter',
+      type: 'string',
+      defaultValue: ''
+    },
     {
       id: 'status_filter_st',
       name: 'statusFilter',
       type: 'string',
-      defaultValue: ' '
+      defaultValue: ''
     },
     {
-      id: 'setor_filter_st',
-      name: 'sectorFilter',
+      id: 'regime_filter_st',
+      name: 'regimeFilter',
       type: 'string',
-      defaultValue: ' '
+      defaultValue: ''
     },
     {
-      id: 'regiao_filter_st',
-      name: 'regiaoFilter',
-      type: 'string',
-      defaultValue: ' '
+      id: 'date_filter_st',
+      name: 'dateFilter',
+      type: 'Date | undefined',
+      defaultValue: 'undefined'
     },
     {
       id: 'reset_filters_st',
@@ -1227,20 +1321,20 @@ const pageConfig: PageConfig = {
       defaultValue: 'false'
     },
     {
+      id: 'slt_legal_status_filter_st',
+      name: 'selectLegalStatus_fltOptions',
+      type: 'SelectOptions[]',
+      defaultValue: '[]'
+    },
+    {
       id: 'slt_status_filter_st',
       name: 'selectStatus_fltOptions',
       type: 'SelectOptions[]',
       defaultValue: '[]'
     },
     {
-      id: 'slt_setor_filter_st',
-      name: 'selectSector_fltOptions',
-      type: 'SelectOptions[]',
-      defaultValue: '[]'
-    },
-    {
-      id: 'slt_regiao_filter_st',
-      name: 'selectRegiao_fltOptions',
+      id: 'slt_regime_filter_st',
+      name: 'selectRegime_fltOptions',
       type: 'SelectOptions[]',
       defaultValue: '[]'
     },
@@ -1264,7 +1358,7 @@ const pageConfig: PageConfig = {
         },
         {
           "componentId": "",
-          "name": "nif",
+          "name": "numero",
           "type": "string",
           "required": true
         },
@@ -1276,19 +1370,25 @@ const pageConfig: PageConfig = {
         },
         {
           "componentId": "",
-          "name": "setor",
+          "name": "regime",
           "type": "string",
           "required": true
         },
         {
           "componentId": "",
-          "name": "status",
+          "name": "estatuto",
           "type": "string",
           "required": true
         },
         {
           "componentId": "",
-          "name": "dataRegistro",
+          "name": "estado",
+          "type": "string",
+          "required": true
+        },
+        {
+          "componentId": "",
+          "name": "dataInicio",
           "type": "string",
           "required": true
         },
@@ -1351,38 +1451,21 @@ const pageConfig: PageConfig = {
       },
     },
     {
-      id: 'mock_tax_payer_list_fn',
-      name: 'mockTaxPayerList',
+      id: 'remove_accents_util_fn',
+      name: 'removeAccents',
       code: '',
-      arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
+      arguments: [
+        {
+          id: 'arg1',
+          name: 'str',
+          type: 'string',
+          isNullable: false
+        }
+      ],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\utils\\utils.ts',
       returnValue: {
-        type: 'TaxPayer',
-        isList: true,
-        isNullable: false,
-      },
-    },
-    {
-      id: 'mock_status_combobox_fn',
-      name: 'mockStatusCombobox',
-      code: '',
-      arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
-      returnValue: {
-        type: 'SelectOptions',
-        isList: true,
-        isNullable: false,
-      },
-    },
-    {
-      id: 'mock_setor_combobox_fn',
-      name: 'mockSetorCombobox',
-      code: '',
-      arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
-      returnValue: {
-        type: 'SelectOptions',
-        isList: true,
+        type: 'string',
+        isList: false,
         isNullable: false,
       },
     },
@@ -1419,6 +1502,56 @@ const pageConfig: PageConfig = {
       code: `updateTabletable_taxpayers();`,
       returnValue: {
         type: 'void',
+        isNullable: false,
+      },
+    },
+  ],
+  actions: [
+    {
+      id: 'mock_tax_payer_list_act',
+      name: 'getTaxPayers',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      returnValue: {
+        type: 'TaxPayer',
+        isList: true,
+        isNullable: false,
+      },
+    },
+    {
+      id: 'mock_status_combobox_act',
+      name: 'getStatusOptions',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      returnValue: {
+        type: 'SelectOptions',
+        isList: true,
+        isNullable: false,
+      },
+    },
+    {
+      id: 'mock_legal_status_combobox_act',
+      name: 'getLegalStatusOptions',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      returnValue: {
+        type: 'SelectOptions',
+        isList: true,
+        isNullable: false,
+      },
+    },
+    {
+      id: 'mock_regime_combobox_act',
+      name: 'getRegimeOptions',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      returnValue: {
+        type: 'SelectOptions',
+        isList: true,
         isNullable: false,
       },
     },

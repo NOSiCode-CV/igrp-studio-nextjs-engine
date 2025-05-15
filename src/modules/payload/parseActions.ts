@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import { ActionDef } from '../../interfaces/types';
+import { resolveExportedPath } from '../../utils/helpers';
 
 export function parseActions(actionFilePath: string): ActionDef[] {
   let content = fs.readFileSync(actionFilePath, 'utf-8');
@@ -76,7 +77,7 @@ function parseActionSignature(
   return {
     name,
     args,
-    path: filePath,
+    path: resolveExportedPath(filePath),
     returnType: returnType?.trim() || 'void'
   };
 }

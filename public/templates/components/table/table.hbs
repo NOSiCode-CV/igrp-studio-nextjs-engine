@@ -30,7 +30,7 @@
         {{#each this.children}}
         {
           {{#if (or this.properties.headerTitle this.properties.headerType)}}header: {{> tableHeader this ~}},{{/if~}}
-          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.id}}',
+          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.tag}}',
           {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,{{/if~}}
           cell: ({ row }) => {
           {{{render-table-row this ../../registry}}}

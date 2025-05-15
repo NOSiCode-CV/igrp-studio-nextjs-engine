@@ -84,69 +84,27 @@ const dashboardLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  "id": "p2o6p3dyxf",
+  "id": "hzdreww0i4",
   "type": "page",
-  "path": "teste",
-  "pageName": "teste",
+  "path": "test12",
   "components": {
-    "id": "container_89db3l",
-    "componentName": "container",
-    "label": "container",
+    "id": "page_2g43kv",
+    "componentName": "page",
+    "label": "page",
     "properties": {
-      "variant": "default"
+      "commonProperties": {}
     },
     "children": [
       {
-        "id": "section_4r8j2x",
+        "id": "section_qeffl2",
         "componentName": "section",
         "label": "section",
         "properties": {
-          "variant": "default"
+          "commonProperties": {}
         },
         "children": [
           {
-            "id": "pageheader_5u79tu",
-            "tag": "pageHeader1",
-            "componentName": "pageHeader",
-            "label": "Page Header",
-            "type": "group",
-            "properties": {
-              "title": "Page Title",
-              "description": "Page Description",
-              "variant": "h3",
-              "commonProperties": {}
-            },
-            "children": [
-              {
-                "id": "button_xw0r3t",
-                "tag": "button1",
-                "componentName": "button",
-                "label": "Button",
-                "type": "group",
-                "properties": {
-                  "label": "Button",
-                  "variant": "default",
-                  "size": "default",
-                  "iconProperties": {
-                    "showIcon": false
-                  },
-                  "disabled": false,
-                  "commonProperties": {}
-                },
-                "children": [],
-                "interactions": {
-                  "onClick": {
-                    "fnCustomSet": "() => {}"
-                  }
-                },
-                "allowTypes": false
-              }
-            ],
-            "interactions": {},
-            "allowTypes": false
-          },
-          {
-            "id": "combobox_jjqdsp",
+            "id": "combobox_s12by7",
             "tag": "combobox1",
             "componentName": "combobox",
             "label": "Combobox",
@@ -154,7 +112,8 @@ const pageConfig: PageConfig = {
             "children": [],
             "interactions": {
               "onChange": {
-                "fnCustomSet": "() => {}"
+                "fnCustomSet": "() => {}",
+                "type": "function"
               }
             },
             "allowTypes": false,
@@ -164,7 +123,7 @@ const pageConfig: PageConfig = {
                 "state": {
                   "id": "",
                   "type": "array",
-                  "name": "select{{id}}Options",
+                  "name": "selectOptions",
                   "defaultValue": "[]",
                   "imports": []
                 }
@@ -181,26 +140,76 @@ const pageConfig: PageConfig = {
               },
               "commonProperties": {}
             }
+          },
+          {
+            "id": "inputsearch_xi4ash",
+            "tag": "inputSearch1",
+            "componentName": "inputSearch",
+            "label": "Input Search",
+            "type": "group",
+            "children": [],
+            "interactions": {
+              "onSearch": {
+                "type": "function"
+              }
+            },
+            "allowTypes": false,
+            "data": {},
+            "properties": {
+              "label": "Input Search",
+              "placeholder": "",
+              "helperText": "",
+              "iconProperties": {
+                "showStartIcon": false,
+                "startIcon": "Search",
+                "submitIcon": "ArrowRight"
+              },
+              "showSubmitButton": false,
+              "disabled": false,
+              "required": false,
+              "dataProperties": {
+                "isVirtual": false,
+                "isType": true
+              },
+              "commonProperties": {}
+            }
           }
         ],
-        "interactions": [],
-        "tag": ""
+        "tag": "section2",
+        "data": {},
+        "interactions": {
+          "onLoad": {
+            "fnCustomCode": {
+              "imports": [],
+              "states": []
+            },
+            "type": "function"
+          }
+        }
       }
     ],
-    "interactions": [],
-    "tag": ""
+    "tag": "page2",
+    "data": {},
+    "interactions": {
+      "onLoad": {
+        "fnCustomCode": {
+          "fnCode": "const pageService = new PageTesteService();\npageService.loadPage({\n  setSelectOptions:setSelectOptions,\n  selectOptions: selectOptions\n});",
+          "imports": [
+            {
+              "id": "import_TC4URm",
+              "namespace": "import { PageTesteService } from '@/app/(myapp)/functions/page-service';"
+            }
+          ]
+        },
+        "type": "function"
+      }
+    }
   },
   "functions": [],
   "types": [],
-  "states": [
-    {
-      "id": "_drtane",
-      "name": "select{{id}}Value",
-      "type": "string",
-      "defaultValue": "{{value}}"
-    }
-  ],
-  "imports": []
+  "states": [],
+  "imports": [],
+  "pageName": "teste"
 };
 
 beforeAll(async () => {
