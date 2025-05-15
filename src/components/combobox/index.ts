@@ -27,7 +27,7 @@ export default {
         state: {
           id: '',
           name: 'select{{id}}Options',
-          type: 'array',
+          type: 'Array<any>',
           defaultValue: '[]'
         },
         required: true

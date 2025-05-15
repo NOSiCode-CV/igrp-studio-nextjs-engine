@@ -26,7 +26,7 @@ export default {
         state: {
           id: '',
           name: '{{id}}Value',
-          type: 'array',
+          type: 'Array<any>',
           defaultValue: '[0, 100]'
         },
         required: true

@@ -21,11 +21,11 @@
   {{#if resourceConfig.properties.helperText}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
+  {{#if (eq resourceConfig.properties.showSubmitButton false)}}
+  showSubmitButton={ {{resourceConfig.properties.showSubmitButton}} }
+  {{/if~}}
   {{#if resourceConfig.properties.iconProperties.showStartIcon}}
   showStartIcon={ {{resourceConfig.properties.iconProperties.showStartIcon}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.showSubmitButton}}
-  showSubmitButton={ {{resourceConfig.properties.showSubmitButton}} }
   {{/if~}}
   {{#if resourceConfig.properties.required}}
   required={ {{resourceConfig.properties.required}} }

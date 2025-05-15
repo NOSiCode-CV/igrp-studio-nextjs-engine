@@ -319,6 +319,24 @@ export interface ComponentRegisterConfig {
   templatePath?: string
 }
 
+export interface Visibility {
+  visible: boolean
+}
+
+export interface InteractionCustomCodeFieldVisibility {
+  imports: Visibility,
+  states: Visibility,
+  fnCode: Visibility,
+  actionCode: Visibility
+}
+
+export interface InteractionFieldVisibility {
+  fnName: Visibility,
+  actionName: Visibility,
+  fnCustomSet: Visibility,
+  fnCustomCode: InteractionCustomCodeFieldVisibility,
+}
+
 export interface PartialConfig {
   name: string,
   path: string

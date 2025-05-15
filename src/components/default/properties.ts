@@ -1,5 +1,5 @@
 import { PATTERNS } from '../../utils/constants';
-import { State } from '../../interfaces/types';
+import { InteractionFieldVisibility, State } from '../../interfaces/types';
 
 export function commonProperties() {
   return {
@@ -7,8 +7,8 @@ export function commonProperties() {
       type: 'object',
       properties: {
         //isVirtual: { type: 'boolean', required: false, default: false}
-      }
-    }
+      },
+    },
   };
   /*return {
     commonProperties: {
@@ -37,9 +37,7 @@ export function commonProperties() {
 }
 
 export function commonPropertiesMapping() {
-  return {
-
-  };
+  return {};
   /*return {
     padding: { className: 'p-' },
     paddingHorizontal: { className: 'px-' },
@@ -71,12 +69,12 @@ export function iconProperties() {
       properties: {
         showIcon: { type: 'boolean', required: false, default: false },
         iconName: { type: 'string', required: false },
-        iconPlacement: { type: 'string', required: false, enum: ['start', 'end']  },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
         iconClassName: { type: 'string', required: false },
         iconSize: { type: 'number', required: false },
-      }
-    }
-  }
+      },
+    },
+  };
 }
 
 export function inputCommonProperties() {
@@ -84,89 +82,123 @@ export function inputCommonProperties() {
     dataProperties: {
       type: 'object',
       properties: {
-        isVirtual: { type: 'boolean', required: false, default: false},
-        isType: { type: 'boolean', required: false, default: true}
-      }
-    }
+        isVirtual: { type: 'boolean', required: false, default: false },
+        isType: { type: 'boolean', required: false, default: true },
+      },
+    },
   };
 }
 
-export function baseInteraction(defaultCustomSet?: string, label?: string, defaultStates?: {state: string}[] ) {
+export function baseInteraction(
+  defaultCustomSet?: string,
+  label?: string,
+  defaultStates?: {
+    state: string;
+  }[],
+  visibility?: InteractionFieldVisibility,
+) {
   return {
     type: 'object',
     label: label,
     properties: {
       fnName: {
-        type: 'string', required: false
+        type: 'string',
+        required: false,
+        visible: visibility?.fnName.visible ?? false,
       },
       actionName: {
-        type: 'string', required: false
+        type: 'string',
+        required: false,
+        visible: visibility?.actionName.visible ?? false,
       },
       fnCustomSet: {
-        type: 'string', required: false, default: defaultCustomSet
+        type: 'string',
+        required: false,
+        default: defaultCustomSet,
+        visible: visibility?.fnCustomSet.visible ?? false,
       },
       fnCustomCode: {
         type: 'object',
+        visible:
+          (visibility?.fnCustomCode.imports.visible ||
+          visibility?.fnCustomCode.states.visible ||
+          visibility?.fnCustomCode.fnCode.visible ||
+          visibility?.fnCustomCode.actionCode.visible) ?? false,
+        required: false,
         properties: {
           imports: {
-            type: 'array', required: false,
+            type: 'array',
+            required: false,
+            visible: visibility?.fnCustomCode.imports.visible ?? false,
             items: {
               type: 'object',
               properties: {
                 namespace: {
-                  type: 'string', required: true
-                }
-              }
+                  type: 'string',
+                  required: true,
+                },
+              },
             },
           },
           states: {
-            type: 'array', required: false,
+            type: 'array',
+            required: false,
+            visible: visibility?.fnCustomCode.states.visible ?? false,
             items: {
               type: 'object',
               properties: {
                 id: {
                   type: 'string',
                   required: true,
-                  default: ''
+                  default: '',
                 },
                 type: {
                   type: 'string',
                   required: true,
-                  default: 'any'
+                  default: 'any',
                 },
                 name: {
                   type: 'string',
                   required: true,
-                  default: ''
+                  default: '',
                 },
                 defaultValue: {
                   type: 'string',
                   required: false,
-                  default: 'undefined'
-                }
-              }
+                  default: 'undefined',
+                },
+              },
             },
-            default: defaultStates
+            default: defaultStates,
           },
           fnCode: {
-            type: 'string', required: false
+            type: 'string',
+            required: false,
+            visible: visibility?.fnCustomCode.fnCode.visible ?? false,
           },
           actionCode: {
-            type: 'string', required: false
+            type: 'string',
+            required: false,
+            visible: visibility?.fnCustomCode.actionCode.visible ?? false,
           },
-        }
+        },
       },
       type: {
         type: 'string',
         required: true,
-        enum: ["function", "action", "both"],
-        default: "function"
-      }
-    }
+        enum: ['function', 'action', 'both'],
+        default: 'function',
+      },
+    },
   };
 }
 
-export function baseData(defaultValue?: string, label?: string, state?: State, isStateRequired?: boolean) {
+export function baseData(
+  defaultValue?: string,
+  label?: string,
+  state?: State,
+  isStateRequired?: boolean,
+) {
   return {
     type: 'object',
     label: label,
@@ -177,22 +209,22 @@ export function baseData(defaultValue?: string, label?: string, state?: State, i
           id: {
             type: 'string',
             required: true,
-            default: state?.id ?? ''
+            default: state?.id ?? '',
           },
           type: {
             type: 'string',
             required: true,
-            default: state?.type ?? 'any'
+            default: state?.type ?? 'any',
           },
           name: {
             type: 'string',
             required: true,
-            default: state?.name ?? ''
+            default: state?.name ?? '',
           },
           defaultValue: {
             type: 'string',
             required: false,
-            default: state?.defaultValue ?? defaultValue ?? 'undefined'
+            default: state?.defaultValue ?? defaultValue ?? 'undefined',
           },
           imports: {
             type: 'array',
@@ -203,19 +235,19 @@ export function baseData(defaultValue?: string, label?: string, state?: State, i
                 id: {
                   type: 'string',
                   required: true,
-                  default: ''
+                  default: '',
                 },
                 namespace: {
                   type: 'string',
                   required: true,
-                  default: ''
+                  default: '',
                 },
               },
-            }
+            },
           },
         },
-        required: isStateRequired ?? false
-      }
-    }
+        required: isStateRequired ?? false,
+      },
+    },
   };
 }

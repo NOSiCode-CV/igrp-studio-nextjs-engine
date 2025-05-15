@@ -14,10 +14,6 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
 
   let codeBlock : string = ''
 
-  if (config) {
-    codeBlock += resolveComponentCodeBlocks(page, config, registry);
-  }
-
   if(page.states) {
     page.states.forEach((state) => {
       codeBlock += '\n' + renderState(state) + '\n'
@@ -47,6 +43,10 @@ export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Re
     page.actions.forEach((act) => {
       codeBlock += '\n' + act.code + '\n'
     });
+  }
+
+  if (config) {
+    codeBlock += resolveComponentCodeBlocks(page, config, registry);
   }
   
   return codeBlock

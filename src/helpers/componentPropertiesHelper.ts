@@ -93,10 +93,6 @@ export function extractCardFooter(children: Layout[]) {
 
 export function resolveComponent(componentName: string, registry: Record<string, Component>, type?: string): string {
 
-  console.log("compeontne name : ", componentName, " type", type)
-  console.log("registry : ", registry)
-  console.log("class : ", registry[componentName]?.componentClass)
-
   if(!type) return registry[componentName]?.componentClass ?? 'any'
 
   if(type === 'button') {

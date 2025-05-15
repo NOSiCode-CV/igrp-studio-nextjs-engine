@@ -233,13 +233,45 @@ const privadoCount = mockTaxPayerList().filter((c) => c.setor === "Privado").len
 
 useEffect(() => {
   updateTabletable_taxpayers()
-},[])
+  loadStatusFltCombobox()
+  loadSetorFltCombobox()
+},[statusFilter, sectorFilter])
 
 const updateTabletable_taxpayers = async () => {
  
-  setContentTabletable_taxpayers(mockTaxPayerList())
+  let data: TaxPayer[] = mockTaxPayerList();
+  
+  setHasActiveFilters(false)
+  
+  if(statusFilter) {
+    data = data.filter((it) => it.status === statusFilter);
+    setHasActiveFilters(true)
+  }
+  
+  if(sectorFilter) {
+    data = data.filter((it) => it.setor === sectorFilter);
+    setHasActiveFilters(true)
+  }
+  
+  setContentTabletable_taxpayers(data)
   
 }
+        
+        
+const loadStatusFltCombobox = async () => {
+ 
+  setSelectStatus_fltOptions(mockStatusCombobox())
+  
+}
+
+const loadSetorFltCombobox = async () => {
+ 
+  setSelectSector_fltOptions(mockSetorCombobox())
+  
+}
+
+
+        
         
         `,
       },
@@ -293,6 +325,7 @@ const updateTabletable_taxpayers = async () => {
                     size: 'sm',
                     variant: 'outline',
                     iconProperties: {
+                      showIcon: true,
                       iconName: 'Plus',
                     },
                   },
@@ -311,6 +344,7 @@ const updateTabletable_taxpayers = async () => {
                     label: 'Ação Rápida',
                     size: 'sm',
                     iconProperties: {
+                      showIcon: true,
                       iconName: 'Plus',
                     },
                   },
@@ -375,7 +409,7 @@ const updateTabletable_taxpayers = async () => {
           tag: 'stats_grid',
           componentName: 'grid',
           properties: {
-            variant: 'cols2',
+            variant: 'cols4',
             className: 'sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4 px-6 w-full',
           },
           children: [
@@ -865,11 +899,11 @@ const updateTabletable_taxpayers = async () => {
                               tag: 'search_input_text',
                               componentName: 'inputSearch',
                               properties: {
-                                submitButtonLabel: 'Filtros',
-                                showSubmitButton: true,
+                                //submitButtonLabel: 'Filtros',
+                                showSubmitButton: false,
                                 iconProperties: {
                                   showStartIcon: true,
-                                  submitIcon: "SlidersHorizontal",
+                                  //submitIcon: "SlidersHorizontal",
                                 },
                                 placeholder: 'Pesquisar contribuintes...',
                                 required: false,
@@ -886,39 +920,57 @@ const updateTabletable_taxpayers = async () => {
                                 },
                               },
                               interactions: {
-                                onValueChange: {
+                                setValueChange: {
                                   fnCustomSet: '(value) => setFilterValue(value)',
                                   type: 'function'
                                 },
-                                onSearch: {
-                                  fnCustomCode: {
-                                    states: [
-                                      {
-                                        id: 'filter_table_btn_state',
-                                        name: 'showFilters',
-                                        type: 'boolean',
-                                        defaultValue: 'false'
-                                      }
-                                    ],
-                                  },
-                                  fnCustomSet: '() => setShowFilters(!showFilters)',
-                                  type: 'function'
-                                }
                               }
                             },
+                          ],
+                        },
+                        {
+                          id: 'filter_table_button',
+                          tag: 'filter_table_button',
+                          componentName: 'button',
+                          properties: {
+                            size: 'sm',
+                            variant: 'ghost',
+                            iconProperties: {
+                              showIcon: true,
+                              iconName: 'SlidersHorizontal',
+                            },
+                          },
+                          children: [
                             {
                               id: 'filter_btn_fragment',
                               tag: 'filter_btn_fragment',
                               componentName: 'fragment',
                               content: `
+                              Filtros
                                   {hasActiveFilters && (
                     <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-                      {(statusFilter !== "all" ? 1 : 0) + (sectorFilter !== "all" ? 1 : 0)}
+                      {(statusFilter !== "" ? 1 : 0) + (sectorFilter !== "" ? 1 : 0)}
                     </span>
                   )}
                                   `
                             }
                           ],
+                          interactions: {
+                            onClick: {
+                              fnCustomCode: {
+                                states: [
+                                  {
+                                    id: 'filter_table_btn_state',
+                                    name: 'showFilters',
+                                    type: 'boolean',
+                                    defaultValue: 'false'
+                                  }
+                                ],
+                              },
+                              fnCustomSet: '() => setShowFilters(!showFilters)',
+                              type: 'function'
+                            }
+                          },
                         },
                         {
                           id: 'actions_table_row',
@@ -1048,7 +1100,11 @@ const updateTabletable_taxpayers = async () => {
                       className="h-9"
                       iconName="X"
                       iconClassName="mr-2 h-4 w-4"
-                      onClick={() => setResetFilters(true)}
+                      onClick={() => {
+                        setResetFilters(true);
+                        setStatusFilter("");
+                        setSectorFilter("");
+                      }}
                       disabled={!hasActiveFilters}
                     >
                     Limpar Filtros
@@ -1065,21 +1121,21 @@ const updateTabletable_taxpayers = async () => {
                       componentName: 'fragment',
                       content: `
               {hasActiveFilters && !showFilters && (
-              <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2">
+              <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2 px-4">
                 <span className="text-xs text-muted-foreground">Filtros ativos:</span>
 
-                {statusFilter !== "all" && (
+                {statusFilter !== "" && (
                   <IGRPBadge variant="soft" className="px-2 py-1 h-6">
-                    Status: {statusFilter === "active" ? "Ativos" : "Inativos"}
-                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
+                    Status: {statusFilter === "Ativo" ? "Ativos" : "Inativos"}
+                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("")}>
                     </IGRPButton>
                   </IGRPBadge>
                 )}
 
-                {sectorFilter !== "all" && (
+                {sectorFilter !== "" && (
                   <IGRPBadge variant="soft" className="px-2 py-1 h-6">
-                    Setor: {sectorFilter === "public" ? "Público" : "Privado"}
-                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
+                    Setor: {sectorFilter === "Público" ? "Público" : "Privado"}
+                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setSectorFilter("")}>
                     </IGRPButton>
                   </IGRPBadge>
                 )}
@@ -1302,6 +1358,30 @@ const pageConfig: PageConfig = {
       path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
       returnValue: {
         type: 'TaxPayer',
+        isList: true,
+        isNullable: false,
+      },
+    },
+    {
+      id: 'mock_status_combobox_fn',
+      name: 'mockStatusCombobox',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
+      returnValue: {
+        type: 'SelectOptions',
+        isList: true,
+        isNullable: false,
+      },
+    },
+    {
+      id: 'mock_setor_combobox_fn',
+      name: 'mockSetorCombobox',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
+      returnValue: {
+        type: 'SelectOptions',
         isList: true,
         isNullable: false,
       },
