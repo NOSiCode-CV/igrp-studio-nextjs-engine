@@ -4,6 +4,215 @@ import { OUTPUT_TAXPAYER_TEST } from '../../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TAXPAYER_TEST;
 
+const tableLayout: Layout = {
+  id: 'table_taxpayers',
+  tag: 'table_taxpayers',
+  componentName: 'table',
+  properties: {
+    showFilter: false,
+    showPagination: true,
+    showToggleColumn: true
+  },
+  children: [
+    {
+      id: 'expand',
+      tag: 'expand',
+      componentName: 'tableColumns',
+      properties: {},
+      children: [
+        {
+          id: 'check',
+          tag: 'check',
+          componentName: 'tableCheckboxCell',
+          properties: {
+            headerType: "rowsSelect"
+          },
+        },
+        {
+          id: 'nif',
+          tag: 'nif',
+          componentName: 'tableTextCell',
+          properties: {
+            headerTitle: "NIF",
+            headerType: "sortToggle",
+          }
+        },
+        {
+          id: 'nome',
+          tag: 'nome',
+          componentName: 'tableTextCell',
+          properties: {
+            headerTitle: "Nome",
+            headerType: "sortToggle",
+          }
+        },
+        {
+          id: 'sector',
+          tag: 'sector',
+          componentName: 'tableBadgeCell',
+          properties: {
+            headerTitle: 'Setor',
+            headerType: 'sortToggle'
+          }
+        },
+        {
+          id: 'status',
+          tag: 'status',
+          componentName: 'tableBadgeCell',
+          properties: {
+            headerTitle: 'Status',
+            headerType: 'sortToggle'
+          }
+        },
+        {
+          id: 'email',
+          tag: 'email',
+          componentName: 'tableTextCell',
+          properties: {
+            headerTitle: "Email",
+            headerType: "sortToggle",
+          }
+        },
+        {
+          id: 'telefone',
+          tag: 'telefone',
+          componentName: 'tableTextCell',
+          properties: {
+            headerTitle: "Telefone",
+            headerType: "sortToggle",
+          }
+        },
+        {
+          id: 'actions',
+          tag: 'tbl_actions',
+          componentName: 'tableActionListCell',
+          properties: {
+            type: 'inline',
+            headerTitle: 'Actions'
+          },
+          children: [
+            {
+              id: 'dropdown',
+              tag: 'dropdown',
+              componentName: 'tableDropdownMenuCell',
+              children: [
+                {
+                  id: 'view',
+                  tag: 'visualizar',
+                  componentName: 'tableModalDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'Eye',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Visualizar',
+                    type: "modal"
+                  }
+                },
+                {
+                  id: 'edit',
+                  tag: 'editar',
+                  componentName: 'tableModalDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'Pencil',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Editar',
+                    type: "modal"
+                  }
+                },
+                {
+                  id: 'suspend',
+                  tag: 'suspender',
+                  componentName: 'tableAlertDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'Pause',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Suspender',
+                    type: "alert"
+                  }
+                },
+                {
+                  id: 'doc',
+                  tag: 'declaracao',
+                  componentName: 'tableLinkDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'Link',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Declaração',
+                    href: "https://igrp.cv/",
+                    type: "link"
+                  }
+                },
+                {
+                  id: 'delete',
+                  tag: 'excluir',
+                  componentName: 'tableAlertDropdownItem',
+                  properties: {
+                    iconProperties: {
+                      iconName: 'Trash',
+                    },
+                    showIcon: true,
+                    labelTrigger: 'Excluir',
+                    type: "alert"
+                  }
+                },
+              ]
+            },
+          ]
+        },
+      ],
+    },
+    {
+      id: 'table_taxpayers_filters',
+      tag: 'table_taxpayers_filters',
+      componentName: 'tableFilters',
+      properties: {},
+      children: [
+        {
+          id: 'status_flt',
+          tag: 'status_flt',
+          componentName: 'tableDropdownFilter',
+          properties: {
+            placeholder: 'Todos Status',
+            options: [
+              { value: 'Ativo', label: 'Ativos' },
+              { value: 'Inativo', label: 'Inativos' }
+            ],
+          }
+        },
+        {
+          id: 'setor_flt',
+          tag: 'setor_flt',
+          componentName: 'tableDropdownFilter',
+          properties: {
+            placeholder: 'Todos Setores',
+            options: [
+              { value: 'Público', label: 'Público' },
+              { value: 'Público', label: 'Público' }
+            ],
+          }
+        },
+      ],
+    },
+  ],
+  data: {
+    data: {
+      state: {
+        id: '',
+        name: 'contentTabletable_taxpayers',
+        type: 'TaxPayer',
+        defaultValue: '[]'
+      },
+    },
+  }
+}
+
 export const taxPayerLayout: Layout = {
   id: 'main_page',
   tag: 'main_page',
@@ -13,11 +222,21 @@ export const taxPayerLayout: Layout = {
       fnCustomCode: {
         fnCode: `
         
-        const totalContribuintes = mockTaxPayerList().length
-        const ativosCount = mockTaxPayerList().filter((c) => c.status === "Ativo").length
-        const inativosCount = mockTaxPayerList().filter((c) => c.status === "Inativo").length
-        const publicoCount = mockTaxPayerList().filter((c) => c.setor === "Público").length
-        const privadoCount = mockTaxPayerList().filter((c) => c.setor === "Privado").length
+const totalContribuintes = mockTaxPayerList().length
+const ativosCount = mockTaxPayerList().filter((c) => c.status === "Ativo").length
+const inativosCount = mockTaxPayerList().filter((c) => c.status === "Inativo").length
+const publicoCount = mockTaxPayerList().filter((c) => c.setor === "Público").length
+const privadoCount = mockTaxPayerList().filter((c) => c.setor === "Privado").length
+
+useEffect(() => {
+  updateTabletable_taxpayers()
+},[])
+
+const updateTabletable_taxpayers = async () => {
+ 
+  setContentTabletable_taxpayers(mockTaxPayerList())
+  
+}
         
         `,
       },
@@ -94,9 +313,19 @@ export const taxPayerLayout: Layout = {
                   },
                   interactions: {
                     onClick: {
+                      fnCustomCode: {
+                        states: [
+                          {
+                            id: 'quick_action_btn_state',
+                            name: 'isAddDialogOpen',
+                            type: 'boolean',
+                            defaultValue: 'false'
+                          }
+                        ],
+                      },
                       fnCustomSet: '() => setIsAddDialogOpen(true)',
-                      type: 'function',
-                    },
+                      type: 'function'
+                    }
                   },
                 },
                 /*{
@@ -603,8 +832,8 @@ export const taxPayerLayout: Layout = {
               children: [
                 // TODO: replace with div instead of section
                 {
-                  id: 'search_bar_section',
-                  tag: 'search_bar_section',
+                  id: 'table_section',
+                  tag: 'table_section',
                   componentName: 'section',
                   properties: {
                     className: 'p4 border-b bg-white',
@@ -674,11 +903,251 @@ export const taxPayerLayout: Layout = {
                                 }
                               }
                             },
-
+                            {
+                              id: 'filter_table_button',
+                              tag: 'filter_table_button',
+                              componentName: 'button',
+                              properties: {
+                                label: 'Filtros',
+                                size: 'sm',
+                                variant: 'ghost',
+                                iconProperties: {
+                                  iconName: 'SliderHorizontal',
+                                },
+                              },
+                              children: [
+                                {
+                                  id: 'filter_btn_fragment',
+                                  tag: 'filter_btn_fragment',
+                                  componentName: 'fragment',
+                                  content: `
+                                  {hasActiveFilters && (
+                    <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                      {(statusFilter !== "all" ? 1 : 0) + (sectorFilter !== "all" ? 1 : 0)}
+                    </span>
+                  )}
+                                  `
+                                }
+                              ],
+                              interactions: {
+                                onClick: {
+                                  fnCustomCode: {
+                                    states: [
+                                      {
+                                        id: 'filter_table_btn_state',
+                                        name: 'showFilters',
+                                        type: 'boolean',
+                                        defaultValue: 'false'
+                                      }
+                                    ],
+                                  },
+                                  fnCustomSet: '() => setShowFilters(!showFilters)',
+                                  type: 'function'
+                                }
+                              },
+                            },
                           ],
                         },
+                        {
+                          id: 'actions_table_row',
+                          tag: 'actions_table_row',
+                          componentName: 'flex',
+                          properties: {
+                            variant: 'items-center',
+                            className: 'gap-2',
+                          },
+                          children: [
+                            {
+                              id: 'button_download',
+                              tag: 'button_download',
+                              componentName: 'button',
+                              properties: {
+                                label: 'Exportar contribuintes',
+                                size: 'icon',
+                                variant: 'outline',
+                                className: 'h-10 w-10',
+                                iconProperties: {
+                                  iconName: 'Download',
+                                },
+                              },
+                              interactions: {
+                                onClick: {
+                                  fnName: 'handleDownloadClick',
+                                  type: 'function',
+                                },
+                              },
+                            },
+                            {
+                              id: 'button_import',
+                              tag: 'button_import',
+                              componentName: 'button',
+                              properties: {
+                                label: 'Importar contribuintes',
+                                size: 'icon',
+                                variant: 'outline',
+                                className: 'h-10 w-10',
+                                iconProperties: {
+                                  iconName: 'Upload',
+                                },
+                              },
+                              interactions: {
+                                onClick: {
+                                  fnName: 'handleImportClick',
+                                  type: 'function',
+                                },
+                              },
+                            },
+                            {
+                              id: 'button_refresh',
+                              tag: 'button_refresh',
+                              componentName: 'button',
+                              properties: {
+                                label: 'Atualizar lista',
+                                size: 'icon',
+                                variant: 'outline',
+                                className: 'h-10 w-10',
+                                iconProperties: {
+                                  iconName: 'RefreshCw',
+                                },
+                              },
+                              interactions: {
+                                onClick: {
+                                  fnName: 'handleRefreshClick',
+                                  type: 'function',
+                                },
+                              },
+                            },
+                          ]
+                        },
+                        {
+                          id: 'filter_expanded_btn_fragment',
+                          tag: 'filter_expanded_btn_fragment',
+                          componentName: 'fragment',
+                          content: `
+              {showFilters && (
+              <div className="mt-3 pt-3 border-t">
+                <div className="flex flex-wrap items-end gap-4">
+                  <div className="space-y-1 min-w-[160px]">
+                    <IGRPSelect 
+                      name="status_flt"
+                      label="Status"
+                      value={statusFilter} 
+                      onValueChange={setStatusFilter}
+                      placeholder="Status"
+                      options={selectStatus_fltOptions}
+                    >
+                    </IGRPSelect>
+                  </div>
+
+                  <div className="space-y-1 min-w-[160px]">
+                    <IGRPSelect 
+                      name="sector_flt"
+                      label="Setor"
+                      value={sectorFilter} 
+                      onValueChange={setSectorFilter}
+                      placeholder="Setor"
+                      options={selectSector_fltOptions}
+                    >
+                    </IGRPSelect>
+                  </div>
+
+                  <div className="space-y-1 min-w-[160px]">
+                    <IGRPSelect 
+                      name="status_flt"
+                      label="Região"
+                      disabled
+                      value={regiaoFilter} 
+                      onValueChange={setRegiaoFilter}
+                      placeholder="Todas Regiões"
+                      options={selectRegiao_fltOptions}
+                    >
+                    </IGRPSelect>
+                  </div>
+
+                 
+                  <div className="ml-auto">
+                    <IGRPButton
+                      variant="outline"
+                      size="sm"
+                      className="h-9"
+                      label="Limpar Filtros"
+                      iconName="X"
+                      iconClassName="mr-2 h-4 w-4"
+                      onClick={resetFilters}
+                      disabled={!hasActiveFilters}
+                    >
+                    </IGRPButton>
+                  </div>
+                </div>
+              </div>
+            )}
+                                  `
+                        },
+                        {
+                          id: 'filter_actives_btn_fragment',
+                          tag: 'filter_actives_btn_fragment',
+                          componentName: 'fragment',
+                          content: `
+              {hasActiveFilters && !showFilters && (
+              <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2">
+                <span className="text-xs text-muted-foreground">Filtros ativos:</span>
+
+                {statusFilter !== "all" && (
+                  <IGRPBadge variant="secondary" className="px-2 py-1 h-6">
+                    Status: {statusFilter === "active" ? "Ativos" : "Inativos"}
+                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
+                    </IGRPButton>
+                  </IGRPBadge>
+                )}
+
+                {sectorFilter !== "all" && (
+                  <IGRPBadge variant="secondary" className="px-2 py-1 h-6">
+                    Setor: {sectorFilter === "public" ? "Público" : "Privado"}
+                    <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
+                    </IGRPButton>
+                  </IGRPBadge>
+                )}
+
+                <IGRPButton
+                  label="Limpar Todos"
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
+                  onClick={resetFilters}
+                >
+                </IGRPButton>
+              </div>
+            )}
+                                  `
+                        },
+                        {
+                          id: 'table_select_rows_fragment',
+                          tag: 'table_select_rows_fragment',
+                          componentName: 'fragment',
+                          content: `
+              {selectedRows.length > 0 && (
+              <div className="mt-3 pt-3 border-t flex flex-wrap items-center justify-between gap-3">
+                <div className="text-sm font-medium">{selectedRows.length} item(s) selecionado(s)</div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <IGRPButton label="Suspender" iconName="AlertCircle" iconClassName="mr-2 h-3.5 w-3.5 text-amber-500" variant="outline" size="sm" className="h-8">
+                  </IGRPButton>
+                  <IGRPButton
+                    label="Excluir"
+                    iconName="Trash"
+                    iconClassName="mr-2 h-3.5 w-3.5"
+                    variant="outline"
+                    size="sm"
+                    className="h-8 text-destructive border-destructive hover:bg-destructive/10"
+                  >
+                  </IGRPButton>
+                </div>
+              </div>
+            )}
+                                  `
+                        }
                       ],
                     },
+                    tableLayout
                   ],
                 },
               ],

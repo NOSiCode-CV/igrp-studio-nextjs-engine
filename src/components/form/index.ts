@@ -6,7 +6,6 @@ import {
   formInteractionsMapping, formData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
-import { formChildProperties, formChildPropertiesMapping } from '../flex/properties';
 import { GRID } from '../grid';
 import { HEADLINE } from '../headline';
 
@@ -28,10 +27,8 @@ export default {
     component.getData(formData());
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
-    component.getChildProperties(formChildProperties());
     component.loadChildrenTypes([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
     component.loadAcceptedChildren([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
-    component.getPropertiesMapping(formChildPropertiesMapping());
 
     component.loadStates([
     ]);
