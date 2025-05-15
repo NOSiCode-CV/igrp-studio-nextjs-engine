@@ -32,6 +32,7 @@ import inputHiddenModule, { INPUT_HIDDEN } from './inputHidden/index';
 import inputNumberModule, { INPUT_NUMBER } from './inputNumber';
 import inputPasswordModule, { INPUT_PASSWORD } from './inputPassword';
 import inputPhoneModule, { INPUT_PHONE } from './inputPhone';
+import inputSearchModule, { INPUT_SEARCH } from './inputSearch';
 import inputTextModule, { INPUT_TEXT } from './inputText';
 import inputTextareaModule, { INPUT_TEXTAREA } from './inputTextarea';
 import inputTimeModule, { INPUT_TIME } from './inputTime';
@@ -115,6 +116,7 @@ export function registerAllComponents() {
   register(INPUT_NUMBER, inputNumberModule.register);
   register(INPUT_PASSWORD, inputPasswordModule.register);
   register(INPUT_PHONE, inputPhoneModule.register);
+  register(INPUT_SEARCH, inputSearchModule.register);
   register(INPUT_TEXT, inputTextModule.register);
   register(INPUT_TEXTAREA, inputTextareaModule.register);
   register(INPUT_TIME, inputTimeModule.register);

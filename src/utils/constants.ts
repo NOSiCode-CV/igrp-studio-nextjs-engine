@@ -153,6 +153,7 @@ export const INTERACTIONS_TYPES = {
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
   ON_OPEN: 'On open',
+  ON_SEARCH: 'On search',
   ON_LOAD: 'On load',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
@@ -166,12 +167,14 @@ export const INTERACTIONS_TYPES = {
   VALUE_FORMATTER: "Label Formatter",
   EXPOSE_FORM: "Expose Form",
   CANCEL_ACTION: "Cancel Action",
+  VALUE_CHANGE: "Value Change",
 
   // Values
   CHECKED: "Checked",
   DATA: "Data",
   DATE: "Date",
   VALUE: "Value",
+  DEFAULT_VALUE: "Default Value",
   OPTIONS: "Options"
 }
 

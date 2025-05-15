@@ -12,7 +12,7 @@ const tableLayout: Layout = {
   properties: {
     showFilter: false,
     showPagination: true,
-    showToggleColumn: true
+    showToggleColumn: false
   },
   children: [
     {
@@ -848,7 +848,7 @@ const updateTabletable_taxpayers = async () => {
                       componentName: 'flex',
                       properties: {
                         variant: 'wrap',
-                        className: 'items-center gap-3',
+                        className: 'items-center gap-3  px-4',
                       },
                       children: [
                         // TODO: replace with div instead of section
@@ -861,30 +861,16 @@ const updateTabletable_taxpayers = async () => {
                           },
                           children: [
                             {
-                              id: 'absolute_search_bar',
-                              tag: 'absolute_search_bar',
-                              componentName: 'section',
-                              properties: {
-                                className:
-                                  'absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none',
-                              },
-                              children: [
-                                {
-                                  id: 'search_input_icon',
-                                  tag: 'search_input_icon',
-                                  componentName: 'icon',
-                                  properties: {
-                                    iconName: 'Search',
-                                    className: 'h-4 w-4 text-muted-foreground',
-                                  },
-                                },
-                              ],
-                            },
-                            {
                               id: 'search_input_text',
                               tag: 'search_input_text',
-                              componentName: 'inputText',
+                              componentName: 'inputSearch',
                               properties: {
+                                submitButtonLabel: 'Filtros',
+                                showSubmitButton: true,
+                                iconProperties: {
+                                  showStartIcon: true,
+                                  submitIcon: "SlidersHorizontal",
+                                },
                                 placeholder: 'Pesquisar contribuintes...',
                                 required: false,
                                 className: 'pl-10 pr-16 h-10 w-full'
@@ -900,40 +886,11 @@ const updateTabletable_taxpayers = async () => {
                                 },
                               },
                               interactions: {
-                                onChange: {
-                                  fnCustomSet: '(e) => setFilterValue(e.target.value)',
+                                onValueChange: {
+                                  fnCustomSet: '(value) => setFilterValue(value)',
                                   type: 'function'
-                                }
-                              }
-                            },
-                            {
-                              id: 'filter_table_button',
-                              tag: 'filter_table_button',
-                              componentName: 'button',
-                              properties: {
-                                label: 'Filtros',
-                                size: 'sm',
-                                variant: 'ghost',
-                                iconProperties: {
-                                  iconName: 'SlidersHorizontal',
                                 },
-                              },
-                              children: [
-                                {
-                                  id: 'filter_btn_fragment',
-                                  tag: 'filter_btn_fragment',
-                                  componentName: 'fragment',
-                                  content: `
-                                  {hasActiveFilters && (
-                    <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-                      {(statusFilter !== "all" ? 1 : 0) + (sectorFilter !== "all" ? 1 : 0)}
-                    </span>
-                  )}
-                                  `
-                                }
-                              ],
-                              interactions: {
-                                onClick: {
+                                onSearch: {
                                   fnCustomCode: {
                                     states: [
                                       {
@@ -947,8 +904,20 @@ const updateTabletable_taxpayers = async () => {
                                   fnCustomSet: '() => setShowFilters(!showFilters)',
                                   type: 'function'
                                 }
-                              },
+                              }
                             },
+                            {
+                              id: 'filter_btn_fragment',
+                              tag: 'filter_btn_fragment',
+                              componentName: 'fragment',
+                              content: `
+                                  {hasActiveFilters && (
+                    <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                      {(statusFilter !== "all" ? 1 : 0) + (sectorFilter !== "all" ? 1 : 0)}
+                    </span>
+                  )}
+                                  `
+                            }
                           ],
                         },
                         {
@@ -1022,13 +991,16 @@ const updateTabletable_taxpayers = async () => {
                             },
                           ]
                         },
-                        {
-                          id: 'filter_expanded_btn_fragment',
-                          tag: 'filter_expanded_btn_fragment',
-                          componentName: 'fragment',
-                          content: `
+                      ],
+                    },
+
+                    {
+                      id: 'filter_expanded_btn_fragment',
+                      tag: 'filter_expanded_btn_fragment',
+                      componentName: 'fragment',
+                      content: `
               {showFilters && (
-              <div className="mt-3 pt-3 border-t">
+              <div className="mt-3 pt-3 border-t  px-4">
                 <div className="flex flex-wrap items-end gap-4">
                   <div className="space-y-1 min-w-[160px]">
                     <IGRPSelect 
@@ -1072,25 +1044,26 @@ const updateTabletable_taxpayers = async () => {
                     <IGRPButton
                       variant="outline"
                       size="sm"
+                      showIcon={ true }
                       className="h-9"
-                      label="Limpar Filtros"
                       iconName="X"
                       iconClassName="mr-2 h-4 w-4"
                       onClick={() => setResetFilters(true)}
                       disabled={!hasActiveFilters}
                     >
+                    Limpar Filtros
                     </IGRPButton>
                   </div>
                 </div>
               </div>
             )}
                                   `
-                        },
-                        {
-                          id: 'filter_actives_btn_fragment',
-                          tag: 'filter_actives_btn_fragment',
-                          componentName: 'fragment',
-                          content: `
+                    },
+                    {
+                      id: 'filter_actives_btn_fragment',
+                      tag: 'filter_actives_btn_fragment',
+                      componentName: 'fragment',
+                      content: `
               {hasActiveFilters && !showFilters && (
               <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2">
                 <span className="text-xs text-muted-foreground">Filtros ativos:</span>
@@ -1122,12 +1095,12 @@ const updateTabletable_taxpayers = async () => {
               </div>
             )}
                                   `
-                        },
-                        {
-                          id: 'table_select_rows_fragment',
-                          tag: 'table_select_rows_fragment',
-                          componentName: 'fragment',
-                          content: `
+                    },
+                    {
+                      id: 'table_select_rows_fragment',
+                      tag: 'table_select_rows_fragment',
+                      componentName: 'fragment',
+                      content: `
               {selectedRows.length > 0 && (
               <div className="mt-3 pt-3 border-t flex flex-wrap items-center justify-between gap-3">
                 <div className="text-sm font-medium">{selectedRows.length} item(s) selecionado(s)</div>
@@ -1147,8 +1120,6 @@ const updateTabletable_taxpayers = async () => {
               </div>
             )}
                                   `
-                        }
-                      ],
                     },
                     tableLayout
                   ],
