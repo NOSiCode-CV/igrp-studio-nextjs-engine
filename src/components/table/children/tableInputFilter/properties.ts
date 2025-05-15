@@ -2,6 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 
 export function tableInputFilterProperties() {
   return {
+    columnId: { type: 'string', required: true, default: '{{id}}' },
     ...commonProperties(),
   };
 }

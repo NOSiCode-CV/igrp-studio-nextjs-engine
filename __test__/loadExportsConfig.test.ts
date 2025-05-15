@@ -1,7 +1,7 @@
 import { initComponents, loadAppExports } from '../src';
-import { OUTPUT_TEST } from '../src/utils/testPath';
+import { OUTPUT_TAXPAYER_TEST, OUTPUT_TEST } from '../src/utils/testPath';
 
-const OUTPUT_DIR = OUTPUT_TEST;
+const OUTPUT_DIR = OUTPUT_TAXPAYER_TEST;
 
 describe('Load Exports', () => {
 

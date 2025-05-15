@@ -21,7 +21,6 @@ export default {
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
     component.setAllowTypes(true)
-    component.setForceStateLoad(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
     component.getChildProperties(tableChildProperties());

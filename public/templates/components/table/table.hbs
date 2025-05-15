@@ -48,7 +48,7 @@
       {{#each (extractTableFilters resourceConfig.children)}}
         {{#each this.children}}
         {
-          {{#if this.id}}columnId: "{{this.id}}",{{/if}}
+          {{#if this.properties.columnId}}columnId: "{{this.properties.columnId}}",{{/if}}
           component: (column) => (
           {{{render-table-row this ../../registry}}}
           )
@@ -60,5 +60,8 @@
   }
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
   {{/if}}
 />

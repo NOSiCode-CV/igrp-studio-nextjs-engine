@@ -2,6 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 
 export function tableMinMaxFilterProperties() {
   return {
+    columnId: { type: 'string', required: true, default: '{{id}}' },
     ...commonProperties(),
   };
 }

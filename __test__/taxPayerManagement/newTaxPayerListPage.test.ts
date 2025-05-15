@@ -8,6 +8,7 @@ const tableLayout: Layout = {
   id: 'table_taxpayers',
   tag: 'table_taxpayers',
   componentName: 'table',
+  dataType: 'TaxPayer',
   properties: {
     showFilter: false,
     showPagination: true,
@@ -47,8 +48,8 @@ const tableLayout: Layout = {
           }
         },
         {
-          id: 'sector',
-          tag: 'sector',
+          id: 'setor',
+          tag: 'setor',
           componentName: 'tableBadgeCell',
           properties: {
             headerTitle: 'Setor',
@@ -128,7 +129,7 @@ const tableLayout: Layout = {
                   componentName: 'tableAlertDropdownItem',
                   properties: {
                     iconProperties: {
-                      iconName: 'Pause',
+                      iconName: 'CircleAlert',
                     },
                     showIcon: true,
                     labelTrigger: 'Suspender',
@@ -179,6 +180,7 @@ const tableLayout: Layout = {
           tag: 'status_flt',
           componentName: 'tableDropdownFilter',
           properties: {
+            columnId: 'status',
             placeholder: 'Todos Status',
             options: [
               { value: 'Ativo', label: 'Ativos' },
@@ -191,6 +193,7 @@ const tableLayout: Layout = {
           tag: 'setor_flt',
           componentName: 'tableDropdownFilter',
           properties: {
+            columnId: 'setor',
             placeholder: 'Todos Setores',
             options: [
               { value: 'Público', label: 'Público' },
@@ -206,7 +209,7 @@ const tableLayout: Layout = {
       state: {
         id: '',
         name: 'contentTabletable_taxpayers',
-        type: 'TaxPayer',
+        type: 'TaxPayer[]',
         defaultValue: '[]'
       },
     },
@@ -892,7 +895,7 @@ const updateTabletable_taxpayers = async () => {
                                     id: '',
                                     name: 'filterValue',
                                     type: 'string',
-                                    defaultValue: ''
+                                    defaultValue: ' '
                                   },
                                 },
                               },
@@ -912,7 +915,7 @@ const updateTabletable_taxpayers = async () => {
                                 size: 'sm',
                                 variant: 'ghost',
                                 iconProperties: {
-                                  iconName: 'SliderHorizontal',
+                                  iconName: 'SlidersHorizontal',
                                 },
                               },
                               children: [
@@ -1073,7 +1076,7 @@ const updateTabletable_taxpayers = async () => {
                       label="Limpar Filtros"
                       iconName="X"
                       iconClassName="mr-2 h-4 w-4"
-                      onClick={resetFilters}
+                      onClick={() => setResetFilters(true)}
                       disabled={!hasActiveFilters}
                     >
                     </IGRPButton>
@@ -1093,7 +1096,7 @@ const updateTabletable_taxpayers = async () => {
                 <span className="text-xs text-muted-foreground">Filtros ativos:</span>
 
                 {statusFilter !== "all" && (
-                  <IGRPBadge variant="secondary" className="px-2 py-1 h-6">
+                  <IGRPBadge variant="soft" className="px-2 py-1 h-6">
                     Status: {statusFilter === "active" ? "Ativos" : "Inativos"}
                     <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
                     </IGRPButton>
@@ -1101,7 +1104,7 @@ const updateTabletable_taxpayers = async () => {
                 )}
 
                 {sectorFilter !== "all" && (
-                  <IGRPBadge variant="secondary" className="px-2 py-1 h-6">
+                  <IGRPBadge variant="soft" className="px-2 py-1 h-6">
                     Setor: {sectorFilter === "public" ? "Público" : "Privado"}
                     <IGRPButton iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setStatusFilter("all")}>
                     </IGRPButton>
@@ -1113,7 +1116,7 @@ const updateTabletable_taxpayers = async () => {
                   variant="ghost"
                   size="sm"
                   className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
-                  onClick={resetFilters}
+                  onClick={() => setResetFilters(true)}
                 >
                 </IGRPButton>
               </div>
@@ -1129,7 +1132,7 @@ const updateTabletable_taxpayers = async () => {
               <div className="mt-3 pt-3 border-t flex flex-wrap items-center justify-between gap-3">
                 <div className="text-sm font-medium">{selectedRows.length} item(s) selecionado(s)</div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <IGRPButton label="Suspender" iconName="AlertCircle" iconClassName="mr-2 h-3.5 w-3.5 text-amber-500" variant="outline" size="sm" className="h-8">
+                  <IGRPButton label="Suspender" iconName="CircleAlert" iconClassName="mr-2 h-3.5 w-3.5 text-amber-500" variant="outline" size="sm" className="h-8">
                   </IGRPButton>
                   <IGRPButton
                     label="Excluir"
@@ -1161,15 +1164,81 @@ const updateTabletable_taxpayers = async () => {
 
 const pageConfig: PageConfig = {
   id: 'gb6Typ9lm2m1',
+  imports: [
+    { id: 'igrp_select', namespace: 'import { IGRPSelect } from "@igrp/igrp-framework-react-design-system";' },
+    { id: 'igrp_badge', namespace: 'import { IGRPBadge } from "@igrp/igrp-framework-react-design-system";' },
+  ],
+  states: [
+    {
+      id: 'status_filter_st',
+      name: 'statusFilter',
+      type: 'string',
+      defaultValue: ' '
+    },
+    {
+      id: 'setor_filter_st',
+      name: 'sectorFilter',
+      type: 'string',
+      defaultValue: ' '
+    },
+    {
+      id: 'regiao_filter_st',
+      name: 'regiaoFilter',
+      type: 'string',
+      defaultValue: ' '
+    },
+    {
+      id: 'reset_filters_st',
+      name: 'resetFilters',
+      type: 'boolean',
+      defaultValue: 'false'
+    },
+    {
+      id: 'active_filters_st',
+      name: 'hasActiveFilters',
+      type: 'boolean',
+      defaultValue: 'false'
+    },
+    {
+      id: 'slt_status_filter_st',
+      name: 'selectStatus_fltOptions',
+      type: 'SelectOptions[]',
+      defaultValue: '[]'
+    },
+    {
+      id: 'slt_setor_filter_st',
+      name: 'selectSector_fltOptions',
+      type: 'SelectOptions[]',
+      defaultValue: '[]'
+    },
+    {
+      id: 'slt_regiao_filter_st',
+      name: 'selectRegiao_fltOptions',
+      type: 'SelectOptions[]',
+      defaultValue: '[]'
+    },
+    {
+      id: 'slt_rows_filter_st',
+      name: 'selectedRows',
+      type: 'number[]',
+      defaultValue: '[]'
+    },
+  ],
   types: [
     {
-      componentId: "",
+      "componentId": "",
       "name": "TaxPayer",
       "fields": [
         {
           "componentId": "",
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "componentId": "",
           "name": "nif",
-          "type": "number",
+          "type": "string",
           "required": true
         },
         {
@@ -1192,6 +1261,12 @@ const pageConfig: PageConfig = {
         },
         {
           "componentId": "",
+          "name": "dataRegistro",
+          "type": "string",
+          "required": true
+        },
+        {
+          "componentId": "",
           "name": "email",
           "type": "string",
           "required": true
@@ -1199,6 +1274,31 @@ const pageConfig: PageConfig = {
         {
           "componentId": "",
           "name": "telefone",
+          "type": "string",
+          "required": true
+        },
+        {
+          "componentId": "",
+          "name": "endereco",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "path": "C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\types.ts"
+    },
+    {
+      "componentId": "",
+      "name": "SelectOptions",
+      "fields": [
+        {
+          "componentId": "",
+          "name": "value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "componentId": "",
+          "name": "label",
           "type": "string",
           "required": true
         }
@@ -1214,27 +1314,63 @@ const pageConfig: PageConfig = {
       imports: [
         {
           id: 'router_new_button',
-          namespace: 'import {router} from "next/client";'
-        }
+          namespace: 'import {router} from "next/client";',
+        },
       ],
       code: 'router.push("/contribuintes/novo-form")',
       returnValue: {
         type: 'void',
-        isNullable: false
-      }
+        isNullable: false,
+      },
     },
     {
-      "id": 'mock_tax_payer_list_fn',
-      "name": "mockTaxPayerList",
-      "code": '',
-      "arguments": [],
-      "path": "C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts",
-      "returnValue": {
-        type: "TaxPayer",
+      id: 'mock_tax_payer_list_fn',
+      name: 'mockTaxPayerList',
+      code: '',
+      arguments: [],
+      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\mockData.ts',
+      returnValue: {
+        type: 'TaxPayer',
         isList: true,
-        isNullable: false
-      }
-    }
+        isNullable: false,
+      },
+    },
+    {
+      id: 'download_button_fn',
+      name: 'handleDownloadClick',
+      arguments: [],
+      imports: [
+      ],
+      code: `console.log("Handling Download")`,
+      returnValue: {
+        type: 'void',
+        isNullable: false,
+      },
+    },
+    {
+      id: 'import_button_fn',
+      name: 'handleImportClick',
+      arguments: [],
+      imports: [
+      ],
+      code: `console.log("Handling Import")`,
+      returnValue: {
+        type: 'void',
+        isNullable: false,
+      },
+    },
+    {
+      id: 'refresh_button_fn',
+      name: 'handleRefreshClick',
+      arguments: [],
+      imports: [
+      ],
+      code: `updateTabletable_taxpayers();`,
+      returnValue: {
+        type: 'void',
+        isNullable: false,
+      },
+    },
   ],
   type: 'page',
   pageName: 'contribuintes',
