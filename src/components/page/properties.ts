@@ -4,7 +4,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function pageProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'] },
+    variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'], default: 'default' },
     ...commonProperties(),
   }
 }
@@ -46,8 +46,8 @@ export function pageInteractions() {
 
 export function pageVariants() {
   return {
-    default: 'mx-auto px-4',
-    narrow: 'mx-auto px-4 max-w-4xl',
-    wide: 'mx-auto px-4 max-w-7xl',
+    default: 'mx-auto px-4 space-y-6',
+    narrow: 'mx-auto px-4 max-w-4xl space-y-6',
+    wide: 'mx-auto px-4 max-w-7xl space-y-6',
   }
 }

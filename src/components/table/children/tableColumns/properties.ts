@@ -62,6 +62,14 @@ export function dropdownItemProperties(labelTrigger?: string) {
     labelTrigger: { type: 'string', required: true, default: labelTrigger ?? 'New Action' },
     icon: { type: 'string', required: false, default: "ArrowRight" },
     showIcon: { type: 'boolean', required: false, default: true },
+    iconProperties: {
+      type: 'object',
+      properties: {
+        iconName: { type: 'string', required: false },
+        iconClassName: { type: 'string', required: false },
+      },
+      required: false
+    },
     className: { type: 'string', required: false },
     variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
   };

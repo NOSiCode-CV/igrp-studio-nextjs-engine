@@ -1,5 +1,5 @@
 return <IGRPDataTableCellDate
-  date={ row.getValue('{{resourceConfig.tag}}') }
+  date={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}row.getValue('{{resourceConfig.tag}}'){{/if}} }
   {{#if resourceConfig.properties.dateFormat}}dateFormat="{{resourceConfig.properties.dateFormat}}"{{/if}}
 >
 </IGRPDataTableCellDate>

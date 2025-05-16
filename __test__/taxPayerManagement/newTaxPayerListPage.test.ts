@@ -36,7 +36,7 @@ const tableLayout: Layout = {
           properties: {
             headerTitle: "Número",
             headerType: "sortToggle",
-          }
+          },
         },
         {
           id: 'nome',
@@ -55,6 +55,12 @@ const tableLayout: Layout = {
             headerTitle: 'Regime',
             variant: 'outline',
             headerType: 'sortToggle'
+          },
+          data: {
+            value: {
+              id: 'row_regime_value',
+              code: `getRegimeLabel(row.getValue("regime"))`
+            }
           }
         },
         {
@@ -65,6 +71,12 @@ const tableLayout: Layout = {
             headerTitle: 'Estatuto Jurídico',
             variant: 'outline',
             headerType: 'sortToggle'
+          },
+          data: {
+            value: {
+              id: 'row_legal_status_value',
+              code: `getLegalStatusLabel(row.getValue("estatuto"))`
+            }
           }
         },
         {
@@ -84,6 +96,12 @@ const tableLayout: Layout = {
             headerTitle: 'Estado',
             // TODO: check dynamic variants
             headerType: 'sortToggle'
+          },
+          data: {
+            value: {
+              id: 'row_status_value',
+              code: `getStatusLabel(row.getValue("estado"))`
+            }
           }
         },
         {
@@ -107,6 +125,7 @@ const tableLayout: Layout = {
                   properties: {
                     iconProperties: {
                       iconName: 'Eye',
+                      className: ''
                     },
                     showIcon: true,
                     labelTrigger: 'Visualizar',
@@ -133,6 +152,7 @@ const tableLayout: Layout = {
                   properties: {
                     iconProperties: {
                       iconName: 'CircleAlert',
+                      iconClassName: 'text-amber-500',
                     },
                     showIcon: true,
                     labelTrigger: 'Suspender',
@@ -146,6 +166,7 @@ const tableLayout: Layout = {
                   properties: {
                     iconProperties: {
                       iconName: 'Trash',
+                      iconClassName: 'text-red-500',
                     },
                     showIcon: true,
                     labelTrigger: 'Cessar',
@@ -159,6 +180,7 @@ const tableLayout: Layout = {
                   properties: {
                     iconProperties: {
                       iconName: 'LifeBuoy',
+                      iconClassName: 'text-purple-500',
                     },
                     showIcon: true,
                     labelTrigger: 'Benefícios',
@@ -291,7 +313,7 @@ const updateTabletable_taxpayers = async () => {
   }
   
   if(statusFilter) {
-    data = data.filter((it) => it.status === statusFilter);
+    data = data.filter((it) => it.estado === statusFilter);
     setHasActiveFilters(true)
   }
   
@@ -306,7 +328,7 @@ const updateTabletable_taxpayers = async () => {
   }
  
   if(dateFilter) {
-    //data = data.filter((it) => it.dataInicio.between(dateFilter));
+    data = data.filter((it) => it.dataInicio === dateFilter.toISOString().split("T")[0]);
     setHasActiveFilters(true)
   }
   
@@ -1411,7 +1433,7 @@ const pageConfig: PageConfig = {
           "required": true
         }
       ],
-      "path": "C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\types.ts"
+      "path": "@/app/(myapp)/data/types"
     },
     {
       "componentId": "",
@@ -1430,7 +1452,7 @@ const pageConfig: PageConfig = {
           "required": true
         }
       ],
-      "path": "C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\data\\types.ts"
+      "path": "@/app/(myapp)/data/types"
     }
   ],
   functions: [
@@ -1451,6 +1473,73 @@ const pageConfig: PageConfig = {
       },
     },
     {
+      id: 'legal_status_label_fn',
+      name: 'getLegalStatusLabel',
+      arguments: [
+        {
+          id: 'arg_value1',
+          name: 'value',
+          type: 'string',
+          isNullable: true
+        }
+      ],
+      imports: [
+      ],
+      code: `
+      if(!value) return 'N/A'
+      return selectLegalStatus_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      `,
+      returnValue: {
+        type: 'string',
+        isNullable: false,
+      },
+    },
+    {
+      id: 'regime_label_fn',
+      name: 'getRegimeLabel',
+      arguments: [
+        {
+          id: 'arg_value1',
+          name: 'value',
+          type: 'string',
+          isNullable: true
+        }
+      ],
+      imports: [
+      ],
+      code: `
+      if(!value) return 'N/A'
+      return selectRegime_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      `,
+      returnValue: {
+        type: 'string',
+        isNullable: false,
+      },
+    },
+    {
+      id: 'status_label_fn',
+      name: 'getStatusLabel',
+      arguments: [
+        {
+          id: 'arg_value1',
+          name: 'value',
+          type: 'string',
+          isNullable: true
+        }
+      ],
+      imports: [
+      ],
+      code: `
+      if(!value) return 'N/A'
+      return selectStatus_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      `,
+      returnValue: {
+        type: 'string',
+        isNullable: false,
+      },
+    },
+
+    {
       id: 'remove_accents_util_fn',
       name: 'removeAccents',
       code: '',
@@ -1462,7 +1551,7 @@ const pageConfig: PageConfig = {
           isNullable: false
         }
       ],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\utils\\utils.ts',
+      path: "@/app/(myapp)/utils/utils",
       returnValue: {
         type: 'string',
         isList: false,
@@ -1512,7 +1601,7 @@ const pageConfig: PageConfig = {
       name: 'getTaxPayers',
       code: '',
       arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'TaxPayer',
         isList: true,
@@ -1524,7 +1613,7 @@ const pageConfig: PageConfig = {
       name: 'getStatusOptions',
       code: '',
       arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'SelectOptions',
         isList: true,
@@ -1536,7 +1625,7 @@ const pageConfig: PageConfig = {
       name: 'getLegalStatusOptions',
       code: '',
       arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'SelectOptions',
         isList: true,
@@ -1548,7 +1637,7 @@ const pageConfig: PageConfig = {
       name: 'getRegimeOptions',
       code: '',
       arguments: [],
-      path: 'C:\\nextjs-engine\\taxPayerManagement\\src\\app\\(myapp)\\actions\\mock-actions.ts',
+      path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'SelectOptions',
         isList: true,

@@ -31,9 +31,9 @@ export function sectionChildPropertiesMapping() {
 
 export function sectionVariants() {
   return {
-    default: 'py-12',
-    compact: 'py-6',
-    spacious: 'py-24',
+    default: 'space-y-12',
+    compact: 'space-y-6',
+    spacious: 'space-y-24',
     // ...
   }
 }

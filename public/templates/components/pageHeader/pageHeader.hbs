@@ -16,9 +16,11 @@
   {{{render-properties resourceConfig.properties.customProperties}}}
   {{/if}}
 >
-  {{#if resourceConfig.children}}
-  {{#each resourceConfig.children}}
-  {{{render-layout this}}}
-  {{/each}}
-  {{/if~}}
+  <div className="flex items-center gap-2">
+    {{#if resourceConfig.children}}
+    {{#each resourceConfig.children}}
+    {{{render-layout this}}}
+    {{/each}}
+    {{/if~}}
+  </div>
 </IGRPPageHeader>

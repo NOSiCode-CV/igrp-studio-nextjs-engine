@@ -7,7 +7,7 @@ export function switchProperties() {
     helperText: { type: 'string', required: false },
     required: { type: 'boolean', required: false },
     error: { type: 'string', required: false },
-    IGRPGridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
+    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     labelClassName: { type: 'string', required: false },

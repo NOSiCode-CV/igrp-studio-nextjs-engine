@@ -37,17 +37,17 @@ export function columnChildPropertiesMapping() {
 
 export function columnVariants() {
   return {
-    span1: "col-span-1 flex flex-col border rounded-lg p-4",
-    span2: "col-span-2 flex flex-col border rounded-lg p-4",
-    span3: "col-span-3 flex flex-col border rounded-lg p-4",
-    span4: "col-span-4 flex flex-col border rounded-lg p-4",
-    span5: "col-span-5 flex flex-col border rounded-lg p-4",
-    span6: "col-span-6 flex flex-col border rounded-lg p-4",
-    span7: "col-span-7 flex flex-col border rounded-lg p-4",
-    span8: "col-span-8 flex flex-col border rounded-lg p-4",
-    span9: "col-span-9 flex flex-col border rounded-lg p-4",
-    span10: "col-span-10 flex flex-col border rounded-lg p-4",
-    span11: "col-span-11 flex flex-col border rounded-lg p-4",
-    span12: "col-span-12 flex flex-col border rounded-lg p-4",
+    span1: "col-span-1 flex flex-col gap-6",
+    span2: "col-span-2 flex flex-col gap-6",
+    span3: "col-span-3 flex flex-col gap-6",
+    span4: "col-span-4 flex flex-col gap-6",
+    span5: "col-span-5 flex flex-col gap-6",
+    span6: "col-span-6 flex flex-col gap-6",
+    span7: "col-span-7 flex flex-col gap-6",
+    span8: "col-span-8 flex flex-col gap-6",
+    span9: "col-span-9 flex flex-col gap-6",
+    span10: "col-span-10 flex flex-col gap-6",
+    span11: "col-span-11 flex flex-col gap-6",
+    span12: "col-span-12 flex flex-col gap-6",
   }
 }

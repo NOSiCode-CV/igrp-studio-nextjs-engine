@@ -248,6 +248,22 @@ export function baseData(
         },
         required: isStateRequired ?? false,
       },
+      value: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+            required: true,
+            default: '',
+          },
+          code: {
+            type: 'string',
+            required: true,
+            default: '',
+          },
+        },
+        required: false,
+      },
     },
   };
 }
