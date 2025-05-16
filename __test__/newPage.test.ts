@@ -148,7 +148,7 @@ const pageConfig: PageConfig = {
                 "interactions": {
                   "onClick": {
                     "type": "function",
-                    "fnCustomSet": "formform1Ref.current?.handleSubmit((values: any) => someFunction(values))()",
+                    "fnCustomSet": "formform1Ref.current?.submit((values: any) => someFunction(values))()",
                     "fnCustomCode": {
                       "imports": []
                     }

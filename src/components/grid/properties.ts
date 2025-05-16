@@ -44,6 +44,7 @@ export function gridChildProperties() {
 
 export function gridChildPropertiesMapping() {
   return {
+    className: { className: '' },
     ...commonPropertiesMapping()
   }
 }

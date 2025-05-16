@@ -6,6 +6,9 @@ export function commonProperties() {
     commonProperties: {
       type: 'object',
       properties: {
+        customProperties: {
+          type: 'object'
+        },
         //isVirtual: { type: 'boolean', required: false, default: false}
       },
     },

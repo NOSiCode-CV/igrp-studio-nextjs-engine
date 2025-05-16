@@ -12,8 +12,8 @@
   {{#if resourceConfig.properties.headlineClassName}}
   headlineClassName="{{resourceConfig.properties.headlineClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.customProperties}}
-  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{#if resourceConfig.properties.commonProperties.customProperties}}
+  {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
 >
   <div className="flex items-center gap-2">

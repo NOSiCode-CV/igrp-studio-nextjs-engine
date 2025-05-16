@@ -4,8 +4,6 @@ import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
-import { loadPagesConfigSync } from '../utils/helpers';
-import { toCamelCase } from './stringHelpers';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -17,8 +15,7 @@ export function addClassNameFromChildProperties(parent: Layout, registry: Record
     .map(([key, value]) => {
       return parentElement?.childPropertiesMapping[key]?.className
         ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
-        : parentElement?.childProperties[key]?
-          `${value}` : ``;
+        : ``;
     })
     .join('')
 }
@@ -107,7 +104,7 @@ export function resolveComponent(componentName: string, registry: Record<string,
 export function renderProperties(customProperties: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return `${key}="${value}"`;
+      return `${key}={ ${resolveStateDefault(value)} }`;
     }).join("\n")
     : ``
 }

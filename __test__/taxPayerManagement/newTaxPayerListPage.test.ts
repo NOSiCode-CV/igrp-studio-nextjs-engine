@@ -95,6 +95,7 @@ const tableLayout: Layout = {
           properties: {
             headerTitle: 'Estado',
             // TODO: check dynamic variants
+            variant: 'secondary',
             headerType: 'sortToggle'
           },
           data: {

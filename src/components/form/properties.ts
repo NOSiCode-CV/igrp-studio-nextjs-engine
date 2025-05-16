@@ -5,7 +5,6 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function formProperties() {
   return {
     validationMode: { type: 'string', required: false, default: 'onBlur', enum: ['onBlur'] },
-    formClassName: { type: 'string', required: true, default: 'flex flex-col' },
     gridClassName: { type: 'string', required: true, default: 'flex flex-col' },
     //formRef: { type: 'string', required: true, default: 'form{{id}}Ref' },
     resetAfterSubmit: { type: 'boolean', required: false, default: false },

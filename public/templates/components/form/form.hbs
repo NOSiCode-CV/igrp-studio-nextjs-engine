@@ -5,9 +5,6 @@
   {{#if resourceConfig.properties.validationMode}}
   validationMode="{{resourceConfig.properties.validationMode}}"
   {{/if~}}
-  {{#if resourceConfig.properties.formClassName}}
-  formClassName="{{resourceConfig.properties.formClassName}}"
-  {{/if~}}
   {{#if resourceConfig.properties.gridClassName}}
   gridClassName="{{resourceConfig.properties.gridClassName}}"
   {{/if~}}
@@ -38,8 +35,8 @@
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
   {{/if}}
-  {{#if resourceConfig.properties.customProperties}}
-  {{{render-properties resourceConfig.properties.customProperties}}}
+  {{#if resourceConfig.properties.commonProperties.customProperties}}
+  {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
 >
   <>
