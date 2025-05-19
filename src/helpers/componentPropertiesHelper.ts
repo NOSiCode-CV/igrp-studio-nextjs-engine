@@ -13,7 +13,8 @@ export function addClassNameFromChildProperties(parent: Layout, registry: Record
 
   return Object.entries(parent.childProperties)
     .map(([key, value]) => {
-      return parentElement?.childPropertiesMapping[key]?.className
+      console.log(key , value)
+      return parentElement?.childPropertiesMapping[key]?.className !== undefined
         ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
         : ``;
     })
@@ -27,7 +28,7 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
 
   return Object.entries(component.properties)
     .map(([key, value]) => {
-      return componentElement?.propertiesMapping[key]?.className
+      return componentElement?.propertiesMapping[key]?.className !== undefined
         ? ` ${componentElement.propertiesMapping[key]?.className ?? key}${value}`
         : ``;
     })
@@ -45,9 +46,10 @@ export function resolveFirstType(data: any[]): string {
  * - Returns arrays, objects, booleans, numbers, and `null` as-is.
  *
  * @param {string} defaultValue - The string representing the default value.
+ * @param {string} type - The string representing the type.
  * @returns {string} A string suitable for inclusion as a default state value in code.
  */
-export function resolveStateDefault(defaultValue?: string): string {
+export function resolveStateDefault(defaultValue?: string, type?: string): string {
 
   if(defaultValue === undefined) return 'undefined'
 
@@ -68,8 +70,8 @@ export function resolveStateDefault(defaultValue?: string): string {
     return trimmed;
   }
 
-  // Otherwise, treat it as a plain string literal
-  return `\"${trimmed.replace(/"/g, '\\"')}\"`;
+  // Otherwise, treat it as a plain string literal in case type is not present and is a string
+  return type && type === 'string' ? `\"${trimmed.replace(/"/g, '\\"')}\"` : trimmed;
 }
 
 

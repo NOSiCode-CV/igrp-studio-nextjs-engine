@@ -7,4 +7,10 @@ const {{toCamelCase this.name}} = z.object({
 
 type {{capitalize this.name}} = typeof {{toCamelCase this.name}};
 
+const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}> = {
+  {{#each this.fields}}
+    {{this.name}}: {{{resolveStateDefault this.defaultValue this.type}}}{{#if @last}}{{else}},{{/if}}
+  {{/each}}
+}
+
 {{/each}}

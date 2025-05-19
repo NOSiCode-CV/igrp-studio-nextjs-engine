@@ -1,2 +1,2 @@
 const {{resourceConfig.name}} = useRef{{#if resourceConfig.type}}<{{{resourceConfig.type}}}>{{/if}}({{{resolveStateDefault
-  resourceConfig.defaultValue}}});
+  resourceConfig.defaultValue resourceConfig.type}}});

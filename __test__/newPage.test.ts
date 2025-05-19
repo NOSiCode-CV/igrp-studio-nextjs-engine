@@ -1,8 +1,8 @@
 import { initComponents, newPage } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../src/utils/testPath';
+import { OUTPUT_TEST2 } from '../src/utils/testPath';
 
-export const OUTPUT_DIR = OUTPUT_TEST;
+export const OUTPUT_DIR = OUTPUT_TEST2;
 
 const dashboardLayout: Layout = {
   id: "grid_dashboard",

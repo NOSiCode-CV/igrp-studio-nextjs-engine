@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
@@ -47,7 +47,7 @@ export function formInteractions() {
 
 export function formData() {
   return {
-    defaultValue: { ...baseInteraction(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    defaultValues: { ...baseData(undefined, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

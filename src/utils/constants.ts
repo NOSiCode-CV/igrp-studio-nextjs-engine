@@ -185,6 +185,7 @@ export const INTERACTIONS_DEFAULTS = {
   FUNCTION_WITH_STRING_VALUE: `(value) => ''`,
   EXPOSE_FORM: `(form) => (form{{id}}Ref.current = form)`,
   UNDEFINED: 'undefined',
+  INIT_TYPE: 'init{{type}}',
   NULLABLE: 'null',
   EMPTY_ARRAY: '[]',
 

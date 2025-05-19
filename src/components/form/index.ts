@@ -31,6 +31,15 @@ export default {
     component.loadAcceptedChildren([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
 
     component.loadStates([
+      {
+        state: {
+          id: '',
+          name: 'contentForm{{id}}',
+          type: 'z.infer<{{type}}>',
+          defaultValue: 'init{{type}}',
+        },
+        required: true,
+      },
     ]);
 
     component.loadReferences([

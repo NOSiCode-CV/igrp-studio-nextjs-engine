@@ -31,6 +31,16 @@ function loadContext(codeSnippet: string): PageConfig {
             fnCustomSet: '(values) => alert(`Submitted externally: ${JSON.stringify(values)}`)',
           }
         },
+        data: {
+          defaultValues: {
+            state: {
+              id: 'state_Form_1',
+              name: 'contentFormform_1',
+              type: 'z.infer<User>',
+              defaultValue: 'initUser',
+            },
+          }
+        },
         childProperties: {
         },
         children: [
@@ -135,12 +145,14 @@ function loadContext(codeSnippet: string): PageConfig {
             componentId: "input_text",
             "name": "name",
             "type": "string",
+            defaultValue: "",
             "required": true
           },
           {
             componentId: "input_number",
             "name": "age",
             "type": "number",
+            defaultValue: "18",
             "required": true
           },
           /*{

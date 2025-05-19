@@ -35,7 +35,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
         const type = component.dataType ? capitalize(component.dataType) : 'any';
         metadata.states.forEach((imp: RegisterState) => {
             imp.state.name = replaceTemplate(imp.state.name, { id: component.tag, });
-            imp.state.defaultValue = imp.state.defaultValue? replaceTemplate(imp.state.defaultValue, { value }) : undefined;
+            imp.state.defaultValue = imp.state.defaultValue? replaceTemplate(imp.state.defaultValue, { value, type }) : undefined;
             imp.state.type = replaceTemplate(imp.state.type, { type });
             if(imp.required) {
               stateDefinitions.add(renderState(imp.state));
@@ -65,7 +65,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
           const type = c.dataType ? capitalize(c.dataType) : 'any';
 
           s.name = replaceTemplate(s.name, { id: c.tag, });
-          s.defaultValue = s.defaultValue? replaceTemplate(s.defaultValue, { value }) : undefined;
+          s.defaultValue = s.defaultValue? replaceTemplate(s.defaultValue, { value, type }) : undefined;
           s.type = replaceTemplate(s.type, { type });
 
           stateDefinitions.add(renderState(s));
