@@ -40,7 +40,7 @@ export default {
         state: {
           id: '',
           name: 'contentTable{{id}}',
-          type: '{{type}}',
+          type: '{{type}}[]',
           defaultValue: '[]',
         },
         required: true,

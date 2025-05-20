@@ -1,9 +1,10 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { commonProperties, commonPropertiesMapping, dataCommonProperties } from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableTextCellProperties() {
   return {
     ...cellProperties('Text Column'),
+    ...dataCommonProperties(),
     variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
     ...commonProperties(),
   };

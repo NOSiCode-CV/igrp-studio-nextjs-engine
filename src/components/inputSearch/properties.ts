@@ -3,7 +3,7 @@ import {
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
-  inputCommonProperties,
+  dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -26,7 +26,7 @@ export function inputSearchProperties() {
     required: { type: 'boolean', required: true, default: false },
     submitButtonLabel: { type: 'string', required: false },
     submitButtonClassName: { type: 'string', required: false },
-    ...inputCommonProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }

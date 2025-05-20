@@ -84,6 +84,7 @@ export const TEMPLATES = {
   DEFAULT_FUNCTION: 'components/default/functions/function.hbs',
   DEFAULT_STATE: 'components/default/states/state.hbs',
   DEFAULT_REFERENCE: 'components/default/references/reference.hbs',
+  DEFAULT_NAVIGATE: 'components/default/navigation/navigate.hbs',
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.hbs',

@@ -1,7 +1,7 @@
 import {
   CustomFunctionConfig,
   FunctionDef,
-  Layout,
+  Layout, Navigate,
   PageConfig, Reference, State,
   TypeDef,
 } from '../interfaces/types';
@@ -68,7 +68,8 @@ function resolveComponentCodeBlocks(page: PageConfig, config: Layout, registry: 
 
     if(config.interactions) {
       Object.entries(config.interactions).forEach(([_, value]) => {
-        if(value.type !== 'action' && value.fnCustomCode?.fnCode) codeBlock += ('\n' + value.fnCustomCode.fnCode + '\n')
+        if(value.type === 'function' && value.function?.fnCustomCode?.fnCode) codeBlock += ('\n' + value.function.fnCustomCode.fnCode + '\n')
+        if(value.type === 'navigate' && value.navigate?.path) codeBlock += '\n' + renderNavigate({ id: '', tag: config.tag, name: replaceTemplate(value.navigate.name, { id: config.tag }), path: value.navigate.path }) + '\n'
       })
     }
 
@@ -94,3 +95,6 @@ export const renderReference = (reference: Reference) => {
   return renderSyncTemplate(TEMPLATES.DEFAULT_REFERENCE, { resourceConfig: { defaultValue: reference.defaultValue ?? 'any', ...reference } });
 };
 
+export const renderNavigate = (navigate: Navigate) => {
+  return renderSyncTemplate(TEMPLATES.DEFAULT_NAVIGATE, { resourceConfig: navigate });
+};

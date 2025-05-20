@@ -248,6 +248,17 @@ export interface RegisterReference {
   required: boolean
 }
 
+export interface Navigate extends IdentifiableElement {
+  name: string,
+  tag: string,
+  path: string,
+}
+
+export interface RegisterNavigate {
+  navigate: Navigate,
+  required: boolean
+}
+
 export interface CommonProperties extends LayoutProperties{
   padding?: string; // p-1, p-2, etc.
   paddingX?: string; // px-1, px-2, etc.

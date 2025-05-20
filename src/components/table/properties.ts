@@ -1,5 +1,5 @@
 import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
-import { INTERACTIONS_DEFAULTS } from '../../utils/constants';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function tableProperties() {
   return {
@@ -40,7 +40,14 @@ export function tablePropertiesMapping() {
 
 export function tableData() {
   return {
-    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY), required: true },
+    data: { ...baseData(undefined, INTERACTIONS_TYPES.DATA,
+        {
+          id: '',
+          name: 'contentTable{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

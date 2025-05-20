@@ -284,8 +284,9 @@ export const taxPayerLayout: Layout = {
   componentName: 'page',
   interactions: {
     onLoad: {
-      fnCustomCode: {
-        fnCode: `
+      function: {
+        fnCustomCode: {
+          fnCode: `
         
 const totalContribuintes = contentTabletable_taxpayers.length
 const ativosCount = contentTabletable_taxpayers.filter((c) => c.estado === "ATIVO").length
@@ -356,6 +357,7 @@ const loadRegimeFltCombobox = async () => {
 }
         
         `,
+        },
       },
       type: 'function',
     },
@@ -413,7 +415,9 @@ const loadRegimeFltCombobox = async () => {
                   },
                   interactions: {
                     onClick: {
-                      fnName: 'handleNovoClick',
+                      function: {
+                        fnName: 'handleNovoClick',
+                      },
                       type: 'function',
                     },
                   },
@@ -432,17 +436,19 @@ const loadRegimeFltCombobox = async () => {
                   },
                   interactions: {
                     onClick: {
-                      fnCustomCode: {
-                        states: [
-                          {
-                            id: 'quick_action_btn_state',
-                            name: 'isAddDialogOpen',
-                            type: 'boolean',
-                            defaultValue: 'false'
-                          }
-                        ],
+                      function: {
+                        fnCustomCode: {
+                          states: [
+                            {
+                              id: 'quick_action_btn_state',
+                              name: 'isAddDialogOpen',
+                              type: 'boolean',
+                              defaultValue: 'false'
+                            }
+                          ],
+                        },
+                        fnCustomSet: '() => setIsAddDialogOpen(true)',
                       },
-                      fnCustomSet: '() => setIsAddDialogOpen(true)',
                       type: 'function'
                     }
                   },
@@ -467,17 +473,19 @@ const loadRegimeFltCombobox = async () => {
                   ],
                   interactions: {
                     onOpenChange: {
-                      fnCustomCode: {
-                        states: [
-                          {
-                            id: 'quick_action_btn_state',
-                            name: 'isAddDialogOpen',
-                            type: 'boolean',
-                            defaultValue: 'false'
-                          }
-                        ],
+                      function: {
+                        fnCustomCode: {
+                          states: [
+                            {
+                              id: 'quick_action_btn_state',
+                              name: 'isAddDialogOpen',
+                              type: 'boolean',
+                              defaultValue: 'false'
+                            }
+                          ],
+                        },
+                        fnCustomSet: '() => setIsAddDialogOpen(true)',
                       },
-                      fnCustomSet: '() => setIsAddDialogOpen(true)',
                       type: 'function'
                     }
                   }
@@ -517,7 +525,7 @@ const loadRegimeFltCombobox = async () => {
                   tag: 'total_stat_box_content',
                   componentName: 'cardContent',
                   properties: {
-                    className: 'p-3',
+                    className: 'p-3'
                   },
                   children: [
                     {
@@ -1003,7 +1011,9 @@ const loadRegimeFltCombobox = async () => {
                               },
                               interactions: {
                                 setValueChange: {
-                                  fnCustomSet: '(value) => setFilterValue(value)',
+                                  function: {
+                                    fnCustomSet: '(value) => setFilterValue(value)',
+                                  },
                                   type: 'function'
                                 },
                               }
@@ -1039,17 +1049,19 @@ const loadRegimeFltCombobox = async () => {
                           ],
                           interactions: {
                             onClick: {
-                              fnCustomCode: {
-                                states: [
-                                  {
-                                    id: 'filter_table_btn_state',
-                                    name: 'showFilters',
-                                    type: 'boolean',
-                                    defaultValue: 'false'
-                                  }
-                                ],
+                              function: {
+                                fnCustomCode: {
+                                  states: [
+                                    {
+                                      id: 'filter_table_btn_state',
+                                      name: 'showFilters',
+                                      type: 'boolean',
+                                      defaultValue: 'false'
+                                    }
+                                  ],
+                                },
+                                fnCustomSet: '() => setShowFilters(!showFilters)',
                               },
-                              fnCustomSet: '() => setShowFilters(!showFilters)',
                               type: 'function'
                             }
                           },
@@ -1078,7 +1090,9 @@ const loadRegimeFltCombobox = async () => {
                               },
                               interactions: {
                                 onClick: {
-                                  fnName: 'handleDownloadClick',
+                                  function: {
+                                    fnName: 'handleDownloadClick',
+                                  },
                                   type: 'function',
                                 },
                               },
@@ -1098,7 +1112,9 @@ const loadRegimeFltCombobox = async () => {
                               },
                               interactions: {
                                 onClick: {
-                                  fnName: 'handleImportClick',
+                                  function: {
+                                    fnName: 'handleImportClick',
+                                  },
                                   type: 'function',
                                 },
                               },
@@ -1118,7 +1134,9 @@ const loadRegimeFltCombobox = async () => {
                               },
                               interactions: {
                                 onClick: {
-                                  fnName: 'handleRefreshClick',
+                                  function: {
+                                    fnName: 'handleRefreshClick',
+                                  },
                                   type: 'function',
                                 },
                               },

@@ -3,7 +3,7 @@ import {
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
-  inputCommonProperties,
+  dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -31,7 +31,7 @@ export function selectProperties() {
     iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },
-    ...inputCommonProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }
@@ -72,7 +72,7 @@ export function selectData() {
     options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
         id: '',
         name: 'select{{id}}Options',
-        type: 'array',
+        type: 'IGRPOptionsProps[]',
         defaultValue: '[]'
       }, true), required: true },
   };

@@ -4,6 +4,9 @@ import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
+import { renderReference } from './resolveCodeBlocks';
+import { capitalize } from './stringHelpers';
+import { renderCode } from '../utils/renderCode';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -114,8 +117,30 @@ export function renderProperties(customProperties: Record<string, any>) {
 export function renderInteractions(interactions: Record<string, any>) {
   return interactions
     ? Object.entries(interactions).map(([key, value]) => {
-      if(!(value.fnName || value.fnCustomSet || value.state)) return
-      return `${key}={ ${value.fnName ?? value.fnCustomSet ?? value.state?.name} }`;
+      if(value.function && value.type === 'function') {
+        if (!(value.function.fnName || value.function.fnCustomSet || value.function.state)) return;
+        return `${key}={ ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name} }`;
+      }
+      if(value.action && value.type === 'action') {
+        if (!(value.action.actionName || value.action.actionCustomSet || value.action.state)) return;
+        return `${key}={ ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name} }`;
+      }
+      if(value.formSubmit && value.type === 'formSubmit') {
+        if (!(value.formSubmit.targetForm)) return;
+        return `${key}={ () => ${
+          renderCode({
+            id: '',
+            name: `formReferenceUsage`,
+            properties: {
+              formTag: value.formSubmit.targetForm
+            }
+          })
+        } }`;
+      }
+      if(value.navigate && value.type === 'navigate') {
+        if(!value.navigate.path) return
+        return `${key}={ () => ${value.navigate.name}() }`;
+      }
     }).join("\n")
     : ``
 }

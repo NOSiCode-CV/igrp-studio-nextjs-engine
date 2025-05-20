@@ -20,10 +20,12 @@ export const todoLayout: Layout = {
       },
       interactions: {
         custom: {
-          fnCustomCode: {
-            imports: [
-              { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
-            ]
+          function: {
+            fnCustomCode: {
+              imports: [
+                { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
+              ],
+            },
           },
           type: 'function'
         }
@@ -107,6 +109,7 @@ export const todoLayout: Layout = {
                           children: [
                             {
                               id: 'addTodo',
+                              tag: 'addTodo',
                               componentName: 'addTodo',
                               properties: {
                                 customProperties: {
@@ -115,11 +118,11 @@ export const todoLayout: Layout = {
                               },
                               interactions: {
                                 custom: {
-                                  fnName: 'handleAddTodo',
-                                  actionName: 'getTodos',
-                                  fnCustomCode: {
-                                    states: [{ state: `const [todos, setTodos] = useState<Todo[]>([]);` }],
-                                    fnCode: `
+                                  function: {
+                                    fnName: 'handleAddTodo',
+                                    fnCustomCode: {
+                                      states: [{ state: `const [todos, setTodos] = useState<Todo[]>([]);` }],
+                                      fnCode: `
   useEffect(() => {
     const loadTodos = async () => {
       const initialTodos = await getTodos();
@@ -132,7 +135,12 @@ export const todoLayout: Layout = {
     setTodos(prevTodos => [newTodo, ...prevTodos]);
   };
                           `,
-                                    actionCode: `
+                                  }
+                                  },
+                                    action: {
+                                      actionName: 'getTodos',
+                                      actionCustomCode: {
+                                        actionCode: `
   export type Todo = {
     id: string;
     title: string;
@@ -182,7 +190,8 @@ export const todoLayout: Layout = {
   }
 
                           `
-                                  },
+                                      }
+                                    },
                                   type: 'both'
                                 },
 

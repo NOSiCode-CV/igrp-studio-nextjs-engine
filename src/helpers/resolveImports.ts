@@ -69,14 +69,14 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
           if(!value.type) return
 
-          if(value?.type !== 'function') {
+          if(value?.type === 'action') {
 
             const actionConfig: ActionConfig = {
-              id: value.fnName,
+              id: value.action.actionName,
               pageName: pageName,
-              actionName: value.actionName,
-              imports: value.fnCustomCode.imports,
-              code: value.fnCustomCode.actionCode
+              actionName: value.action.actionName,
+              imports: value.action.actionCustomCode.imports,
+              code: value.action.actionCustomCode.actionCode
             }
 
             const context: RenderContext<ActionConfig, ActionConfig> = {
@@ -100,7 +100,12 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
           }
 
           if (value?.type !== 'action') {
-            value?.fnCustomCode?.imports?.forEach((imp: any) => imports.add(imp.namespace));
+            if(value.function && value.type === 'function') {
+              value?.function.fnCustomCode?.imports?.forEach((imp: any) => imports.add(imp.namespace));
+            }
+            if(value.navigate && value.type === 'navigate') {
+              imports.add(`import { router } from "next/client";`)
+            }
           }
 
       })

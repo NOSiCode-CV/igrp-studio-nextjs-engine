@@ -2,7 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 
 export function sectionProperties() {
   return {
-    variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'], default: 'compact' },
+    //variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'], default: 'compact' },
       spaceX: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
       spaceY: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
     ...commonProperties(),
@@ -31,9 +31,6 @@ export function sectionChildPropertiesMapping() {
 
 export function sectionVariants() {
   return {
-    default: 'space-y-12',
-    compact: 'space-y-6',
-    spacious: 'space-y-24',
     // ...
   }
 }

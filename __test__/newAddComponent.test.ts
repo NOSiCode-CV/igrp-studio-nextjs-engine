@@ -33,7 +33,9 @@ const componentConfig: ComponentConfig = {
         },
         interactions: {
           onChange: {
-            fnCustomSet: `(e) => setTitle(e.target.value)`,
+            function: {
+              fnCustomSet: `(e) => setTitle(e.target.value)`,
+            }
           }
         }
       },
@@ -52,16 +54,21 @@ const componentConfig: ComponentConfig = {
     ],
     interactions: {
       onSubmit: {
-        fnName: 'handleSubmit',
-        actionName: "addTodo",
-        fnCustomCode: {
-          imports: [
-            { namespace: `import { useRouter } from 'next/navigation'`},
-            { namespace: `import { toast } from 'sonner'`},
-            { namespace: `interface AddTodoProps { onAdd?: (todo: any) => void}`},
-          ],
-          states: [{ state: `const [title, setTitle] = useState('');` }],
-          actionCode: `
+        function: {
+          fnName: 'handleSubmit',
+          fnCustomCode: {
+            imports: [
+              { namespace: `import { useRouter } from 'next/navigation'`},
+              { namespace: `import { toast } from 'sonner'`},
+              { namespace: `interface AddTodoProps { onAdd?: (todo: any) => void}`},
+            ],
+            states: [{ state: `const [title, setTitle] = useState('');` }],
+          },
+        },
+        action: {
+          actionName: "addTodo",
+          actionCustomCode: {
+            actionCode: `
           
   import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
           
@@ -79,7 +86,7 @@ const componentConfig: ComponentConfig = {
     return newTodo;
   }        
           `,
-          fnCode: `
+            fnCode: `
           
   const router = useRouter()
           
@@ -99,6 +106,7 @@ const componentConfig: ComponentConfig = {
     });
   }
           `
+          }
         },
         type: "both"
       }

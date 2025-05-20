@@ -47,7 +47,14 @@ export function formInteractions() {
 
 export function formData() {
   return {
-    defaultValues: { ...baseData(undefined, INTERACTIONS_TYPES.VALUE), required: true },
+    defaultValues: { ...baseData(undefined, INTERACTIONS_TYPES.VALUE,
+        {
+          id: '',
+          name: 'contentForm{{id}}',
+          type: 'z.infer<{{type}}>',
+          defaultValue: '{}',
+        }, true
+      ), required: true },
   };
 }
 

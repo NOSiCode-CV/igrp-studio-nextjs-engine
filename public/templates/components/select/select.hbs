@@ -12,11 +12,6 @@
   {{#if resourceConfig.properties.floatingLabel}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.options}}
-  options={ {{{json resourceConfig.properties.options}}} }
-  {{else}}
-  options={ [] }
-  {{/if~}}
   {{#if resourceConfig.properties.required}}
   required = { {{resourceConfig.properties.required}} }
   {{/if~}}
@@ -54,16 +49,21 @@
   iconName="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
-  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
-  {{/if}}
+  className="{{concat (concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)) (addClassNameFromProperties resourceConfig registry)}}"
+  {{else}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
-  className="{{resourceConfig.properties.className}}"
-  {{/if}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromProperties resourceConfig registry)}}"
+  {{else}}
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
-  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  className="{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry)}}"
   {{/if~}}
+  {{/if}}
+  {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

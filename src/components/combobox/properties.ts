@@ -3,7 +3,7 @@ import {
   baseInteraction,
   commonProperties,
   commonPropertiesMapping,
-  inputCommonProperties,
+  dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -30,7 +30,7 @@ export function comboboxProperties() {
     iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },
-    ...inputCommonProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }
@@ -84,7 +84,7 @@ export function comboboxData() {
     options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
         id: '',
         name: 'select{{id}}Options',
-        type: '{{type}}',
+        type: 'IGRPOptionsProps[]',
         defaultValue: '[]'
       }, true), required: true },
   };

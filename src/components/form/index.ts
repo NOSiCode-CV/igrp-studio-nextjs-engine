@@ -36,7 +36,7 @@ export default {
           id: '',
           name: 'contentForm{{id}}',
           type: 'z.infer<{{type}}>',
-          defaultValue: 'init{{type}}',
+          defaultValue: '{}',
         },
         required: true,
       },

@@ -23,21 +23,23 @@ const componentConfig: ComponentConfig = {
     },
     interactions: {
       custom: {
-        fnCustomCode: {
-          imports: [
-            { namespace: 'import {useRouter} from "next/navigation";' },
-            { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
-          ],
-          states: [
-            { state: `const [todos, setTodos] = useState<Todo[]>([]);` }
-          ],
-          fnCode: `
+        function: {
+          fnCustomCode: {
+            imports: [
+              { namespace: 'import {useRouter} from "next/navigation";' },
+              { namespace: 'import { Todo } from "@/app/pages/todolist/actions/gettodos";' },
+            ],
+            states: [
+              { state: `const [todos, setTodos] = useState<Todo[]>([]);` }
+            ],
+            fnCode: `
   const router = useRouter();
   
   useEffect(() => {
     setTodos(initialTodos);
   }, [initialTodos]);
               `,
+          },
         },
         type: 'function'
       }
@@ -76,7 +78,9 @@ const componentConfig: ComponentConfig = {
                     },
                     interactions: {
                       checked: {
-                        fnCustomSet: 'todo.completed',
+                        function: {
+                          fnCustomSet: 'todo.completed',
+                        },
                         type: 'function'
                       },
                       onCheckedChange: {
@@ -199,11 +203,13 @@ const componentConfig: ComponentConfig = {
                     `,
                     interactions: {
                       value: {
-                        fnName: 'editValue',
-                        fnCustomCode: {
-                          states: [
-                            { state: `const [editingId, setEditingId] = useState<string | null>(null);`}
-                          ],
+                        function: {
+                          fnName: 'editValue',
+                          fnCustomCode: {
+                            states: [
+                              { state: `const [editingId, setEditingId] = useState<string | null>(null);`}
+                            ],
+                          },
                         },
                         type: 'function',
                       },
@@ -339,26 +345,28 @@ const componentConfig: ComponentConfig = {
                 `,
                 interactions: {
                   onClickEdit: {
-                    fnCustomSet: '() => startEditing(todo)',
-                    fnCustomCode: {
-                      imports: [
-                        { namespace: 'import { IGRPButton } from "@igrp/igrp-framework-react-design-system";'},
-                        { namespace: 'import { IGRPIcon } from "@igrp/igrp-framework-react-design-system";'}
-                      ],
-                      fnCode: `
+                    function: {
+                      fnCustomSet: '() => startEditing(todo)',
+                      fnCustomCode: {
+                        imports: [
+                          { namespace: 'import { IGRPButton } from "@igrp/igrp-framework-react-design-system";'},
+                          { namespace: 'import { IGRPIcon } from "@igrp/igrp-framework-react-design-system";'}
+                        ],
+                        fnCode: `
   const startEditing = (todo: Todo) => {
     setEditingId(todo.id);
     setEditValue(todo.title);
   };
 `,
+                      },
                     },
                     type: 'function',
                   },
                   onClickDelete: {
-                    actionName: 'deleteTodo',
-                    fnCustomSet: '() => handleDelete(todo.id, todo.title)',
-                    fnCustomCode: {
-                      fnCode: `
+                    function: {
+                      fnCustomSet: '() => handleDelete(todo.id, todo.title)',
+                      fnCustomCode: {
+                        fnCode: `
   const handleDelete = async (id: string, title: string) => {
     await deleteTodo(id);
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -369,7 +377,12 @@ const componentConfig: ComponentConfig = {
     });
   };
 `,
-                      actionCode: `
+                      }
+                    },
+                    action: {
+                      actionName: 'deleteTodo',
+                      actionCustomCode: {
+                        actionCode: `
                       
   import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
 
@@ -388,6 +401,7 @@ const componentConfig: ComponentConfig = {
     await setTodos(todos.filter((todo) => todo.id !== id));
   }                
                       `,
+                      },
                     },
                     type: 'both',
                   },

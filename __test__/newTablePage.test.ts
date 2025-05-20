@@ -215,7 +215,7 @@ const tableLayout: Layout = {
               id: 'contractDate',
               componentName: 'tableDateFilter',
               properties: {
-
+                columnId: 'contractDate'
               }
             },
             {
@@ -273,10 +273,11 @@ const tableLayout: Layout = {
       ],
       interactions: {
         data: {
-          fnCustomSet: 'contentTabletable_default',
-          fnCustomCode: {
-            states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }],
-            fnCode: `
+          function: {
+            fnCustomSet: 'contentTabletable_default',
+            fnCustomCode: {
+              states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }],
+              fnCode: `
   useEffect(() => {
     updateTabletable_default()
   },[])
@@ -288,6 +289,7 @@ const tableLayout: Layout = {
     }
   }
             `
+            },
           },
           type: 'function'
         },

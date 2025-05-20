@@ -31,7 +31,9 @@ const componentConfig: ComponentConfig = {
         },
         interactions: {
           onChange: {
-            fnCustomSet: `(e) => setTitle(e.target.value)`,
+            function: {
+              fnCustomSet: `(e) => setTitle(e.target.value)`,
+            }
           }
         }
       },
@@ -49,16 +51,44 @@ const componentConfig: ComponentConfig = {
     ],
     interactions: {
       onSubmit: {
-        fnName: 'handleSubmit',
-        actionName: "addTodo",
-        fnCustomCode: {
-          imports: [
-            { namespace: `import { useRouter } from 'next/navigation'`},
-            { namespace: `import { toast } from 'sonner'`},
-            { namespace: `interface AddTodoProps { onAdd?: (todo: any) => void}`},
-          ],
-          states: [{ state: `const [title, setTitle] = useState('');` }],
-          actionCode: `
+        function: {
+          fnName: 'handleSubmit',
+          fnCustomCode: {
+            imports: [
+              { namespace: `import { useRouter } from 'next/navigation'`},
+              { namespace: `import { toast } from 'sonner'`},
+              { namespace: `interface AddTodoProps { onAdd?: (todo: any) => void}`},
+            ],
+            states: [{ state: `const [title, setTitle] = useState('');` }],
+            fnCode: `
+          
+  const router = useRouter()
+          
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+
+    const newTodo = await addTodo(title);
+    if (!newTodo) return;
+
+    if (onAdd) {
+        onAdd(newTodo);
+    }
+
+    setTitle('');
+    router.refresh();
+
+    toast.success(\`Added: \${title}\`, {
+        icon: "➕"
+    });
+  };
+          `
+          }
+        },
+        action: {
+          actionName: "addTodo",
+          actionCustomCode: {
+            actionCode: `
           
   import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
 
@@ -97,29 +127,7 @@ const componentConfig: ComponentConfig = {
     return createdTodo;
   }      
           `,
-          fnCode: `
-          
-  const router = useRouter()
-          
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title.trim()) return;
-
-    const newTodo = await addTodo(title);
-    if (!newTodo) return;
-
-    if (onAdd) {
-        onAdd(newTodo);
-    }
-
-    setTitle('');
-    router.refresh();
-
-    toast.success(\`Added: \${title}\`, {
-        icon: "➕"
-    });
-  };
-          `
+          }
         },
         type: "both"
       }

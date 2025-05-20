@@ -6,9 +6,17 @@
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.className}}
-  className="{{resourceConfig.properties.className}}"
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className="{{concat (concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)) (addClassNameFromProperties resourceConfig registry)}}"
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className="{{concat resourceConfig.properties.className (addClassNameFromProperties resourceConfig registry)}}"
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className="{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry)}}"
   {{/if~}}
+  {{/if}}
+  {{/if}}
   {{#if resourceConfig.properties.headlineClassName}}
   headlineClassName="{{resourceConfig.properties.headlineClassName}}"
   {{/if~}}

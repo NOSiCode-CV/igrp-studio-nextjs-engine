@@ -11,6 +11,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPCombobox } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadStates([
@@ -27,7 +28,7 @@ export default {
         state: {
           id: '',
           name: 'select{{id}}Options',
-          type: 'Array<any>',
+          type: 'IGRPOptionsProps[]',
           defaultValue: '[]'
         },
         required: true

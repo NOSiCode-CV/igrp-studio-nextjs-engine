@@ -80,7 +80,7 @@ export function iconProperties() {
   };
 }
 
-export function inputCommonProperties() {
+export function dataCommonProperties() {
   return {
     dataProperties: {
       type: 'object',
@@ -104,94 +104,191 @@ export function baseInteraction(
     type: 'object',
     label: label,
     properties: {
-      fnName: {
-        type: 'string',
-        required: false,
-        visible: visibility?.fnName.visible ?? false,
-      },
-      actionName: {
-        type: 'string',
-        required: false,
-        visible: visibility?.actionName.visible ?? false,
-      },
-      fnCustomSet: {
-        type: 'string',
-        required: false,
-        default: defaultCustomSet,
-        visible: visibility?.fnCustomSet.visible ?? false,
-      },
-      fnCustomCode: {
-        type: 'object',
-        visible:
-          (visibility?.fnCustomCode.imports.visible ||
-          visibility?.fnCustomCode.states.visible ||
-          visibility?.fnCustomCode.fnCode.visible ||
-          visibility?.fnCustomCode.actionCode.visible) ?? false,
-        required: false,
-        properties: {
-          imports: {
-            type: 'array',
-            required: false,
-            visible: visibility?.fnCustomCode.imports.visible ?? false,
-            items: {
-              type: 'object',
-              properties: {
-                namespace: {
-                  type: 'string',
-                  required: true,
-                },
-              },
-            },
-          },
-          states: {
-            type: 'array',
-            required: false,
-            visible: visibility?.fnCustomCode.states.visible ?? false,
-            items: {
-              type: 'object',
-              properties: {
-                id: {
-                  type: 'string',
-                  required: true,
-                  default: '',
-                },
-                type: {
-                  type: 'string',
-                  required: true,
-                  default: 'any',
-                },
-                name: {
-                  type: 'string',
-                  required: true,
-                  default: '',
-                },
-                defaultValue: {
-                  type: 'string',
-                  required: false,
-                  default: 'undefined',
-                },
-              },
-            },
-            default: defaultStates,
-          },
-          fnCode: {
-            type: 'string',
-            required: false,
-            visible: visibility?.fnCustomCode.fnCode.visible ?? false,
-          },
-          actionCode: {
-            type: 'string',
-            required: false,
-            visible: visibility?.fnCustomCode.actionCode.visible ?? false,
-          },
-        },
-      },
       type: {
         type: 'string',
         required: true,
         enum: ['function', 'action', 'both'],
         default: 'function',
       },
+      function: {
+        type: 'object',
+        properties: {
+          fnName: {
+            type: 'string',
+            required: false,
+            visible: visibility?.fnName.visible ?? false,
+          },
+          actionName: {
+            type: 'string',
+            required: false,
+            visible: visibility?.actionName.visible ?? false,
+          },
+          fnCustomSet: {
+            type: 'string',
+            required: false,
+            default: defaultCustomSet,
+            visible: visibility?.fnCustomSet.visible ?? false,
+          },
+          fnCustomCode: {
+            type: 'object',
+            visible:
+              (visibility?.fnCustomCode.imports.visible ||
+                visibility?.fnCustomCode.states.visible ||
+                visibility?.fnCustomCode.fnCode.visible ||
+                visibility?.fnCustomCode.actionCode.visible) ?? false,
+            required: false,
+            properties: {
+              imports: {
+                type: 'array',
+                required: false,
+                visible: visibility?.fnCustomCode.imports.visible ?? false,
+                items: {
+                  type: 'object',
+                  properties: {
+                    namespace: {
+                      type: 'string',
+                      required: true,
+                    },
+                  },
+                },
+              },
+              states: {
+                type: 'array',
+                required: false,
+                visible: visibility?.fnCustomCode.states.visible ?? false,
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      required: true,
+                      default: '',
+                    },
+                    type: {
+                      type: 'string',
+                      required: true,
+                      default: 'any',
+                    },
+                    name: {
+                      type: 'string',
+                      required: true,
+                      default: '',
+                    },
+                    defaultValue: {
+                      type: 'string',
+                      required: false,
+                      default: 'undefined',
+                    },
+                  },
+                },
+                default: defaultStates,
+              },
+              fnCode: {
+                type: 'string',
+                required: false,
+                visible: visibility?.fnCustomCode.fnCode.visible ?? false,
+              },
+              actionCode: {
+                type: 'string',
+                required: false,
+                visible: visibility?.fnCustomCode.actionCode.visible ?? false,
+              },
+            },
+          },
+          type: {
+            type: 'string',
+            required: true,
+            enum: ['function', 'action', 'both'],
+            default: 'function',
+          },
+        },
+      },
+      action: {
+        type: 'object',
+        properties: {
+          actionName: {
+            type: 'string',
+            required: false,
+            visible: visibility?.actionName.visible ?? false,
+          },
+          actionCustomSet: {
+            type: 'string',
+            required: false,
+            default: defaultCustomSet,
+            visible: visibility?.fnCustomSet.visible ?? false,
+          },
+          actionCustomCode: {
+            type: 'object',
+            visible:
+              (visibility?.fnCustomCode.imports.visible ||
+                visibility?.fnCustomCode.states.visible ||
+                visibility?.fnCustomCode.fnCode.visible ||
+                visibility?.fnCustomCode.actionCode.visible) ?? false,
+            required: false,
+            properties: {
+              imports: {
+                type: 'array',
+                required: false,
+                visible: visibility?.fnCustomCode.imports.visible ?? false,
+                items: {
+                  type: 'object',
+                  properties: {
+                    namespace: {
+                      type: 'string',
+                      required: true,
+                    },
+                  },
+                },
+              },
+              states: {
+                type: 'array',
+                required: false,
+                visible: visibility?.fnCustomCode.states.visible ?? false,
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      required: true,
+                      default: '',
+                    },
+                    type: {
+                      type: 'string',
+                      required: true,
+                      default: 'any',
+                    },
+                    name: {
+                      type: 'string',
+                      required: true,
+                      default: '',
+                    },
+                    defaultValue: {
+                      type: 'string',
+                      required: false,
+                      default: 'undefined',
+                    },
+                  },
+                },
+                default: defaultStates,
+              },
+              actionCode: {
+                type: 'string',
+                required: false,
+                visible: visibility?.fnCustomCode.actionCode.visible ?? false,
+              },
+            },
+          },
+
+        },
+      },
+      navigate: {
+        type: 'object',
+        required: false,
+        properties: {
+          name: { type: 'string', required: true, default: 'handle{{id}}Navigation' },
+          path: { type: 'string', required: true, default: '/' }
+        }
+      }
     },
   };
 }

@@ -56,13 +56,16 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}°C`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}°C`",
+              },
               type: "function"
             },
             data: {
-              fnName: 'dadosVisitantes',
-              fnCustomCode: {
-                fnCode: `
+              function: {
+                fnName: 'dadosVisitantes',
+                fnCustomCode: {
+                  fnCode: `
   const dadosVisitantes = [
     { mes: "Jan", temperature: 420 },
     { mes: "Fev", temperature: 520 },
@@ -72,6 +75,7 @@ export const chartLayout: Layout = {
     { mes: "Jun", temperature: 520 },
   ];
                 `,
+                },
               },
               type: "function"
             },
@@ -105,11 +109,15 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}°C`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}°C`",
+              },
               type: "function"
             },
             data: {
-              fnCustomSet: 'dadosVisitantes',
+              function: {
+                fnCustomSet: 'dadosVisitantes',
+              },
               type: "function"
             },
           }
@@ -142,11 +150,15 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}°C`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}°C`",
+              },
               type: "function"
             },
             data: {
-              fnCustomSet: 'dadosVisitantes',
+              function: {
+                fnCustomSet: 'dadosVisitantes',
+              },
               type: "function"
             },
           }
@@ -183,13 +195,16 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}`",
+              },
               type: "function"
             },
             data: {
-              fnName: 'dadosMensais',
-              fnCustomCode: {
-                fnCode: `
+              function: {
+                fnName: 'dadosMensais',
+                fnCustomCode: {
+                  fnCode: `
   const dadosMensais = [
     { month: "January", desktop: 186, mobile: 80 },
     { month: "February", desktop: 305, mobile: 200 },
@@ -199,6 +214,7 @@ export const chartLayout: Layout = {
     { month: "June", desktop: 214, mobile: 140 },
   ];
                 `,
+                },
               },
               type: "function"
             },
@@ -231,11 +247,15 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}°C`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}°C`",
+              },
               type: "function"
             },
             data: {
-              fnCustomSet: 'dadosVisitantes',
+              function: {
+                fnCustomSet: 'dadosVisitantes',
+              },
               type: "function"
             },
           }
@@ -269,13 +289,16 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}`",
+              },
               type: "function"
             },
             data: {
-              fnName: 'dadosNavegadores',
-              fnCustomCode: {
-                fnCode: `
+              function: {
+                fnName: 'dadosNavegadores',
+                fnCustomCode: {
+                  fnCode: `
   const dadosNavegadores = [
     { browser: "Chrome", users: 620 },
     { browser: "Safari", users: 480 },
@@ -284,6 +307,7 @@ export const chartLayout: Layout = {
     { browser: "Other", users: 150 },
   ];
                 `,
+                },
               },
               type: "function"
             },
@@ -317,11 +341,15 @@ export const chartLayout: Layout = {
           },
           interactions: {
             valueFormatter: {
-              fnCustomSet: "(value: number) => `${value}`",
+              function: {
+                fnCustomSet: "(value: number) => `${value}`",
+              },
               type: "function"
             },
             data: {
-              fnCustomSet: 'dadosNavegadores',
+              function: {
+                fnCustomSet: 'dadosNavegadores',
+              },
               type: "function"
             },
           }

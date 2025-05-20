@@ -56,21 +56,24 @@ export function resolveStates(config: Layout, registry: Record<string, Component
   if(actionsConfigs) {
     actionsConfigs.forEach((c) => {
       Object.entries(c.interactions!).forEach(([_, value]) => {
-        value?.fnCustomCode?.states?.forEach((s: any) => {
+        
+        if(value?.function && value?.type === 'function') {
+          value?.function.fnCustomCode?.states?.forEach((s: any) => {
+            const value = isBool(c.componentName)
+              ? (c.properties?.disabled ?? 'false')
+              : (c.properties?.value ?? '');
 
-          const value = isBool(c.componentName)
-            ? (c.properties?.disabled ?? 'false')
-            : (c.properties?.value ?? '');
+            const type = c.dataType ? capitalize(c.dataType) : 'any';
 
-          const type = c.dataType ? capitalize(c.dataType) : 'any';
+            s.name = replaceTemplate(s.name, { id: c.tag });
+            s.defaultValue = s.defaultValue
+              ? replaceTemplate(s.defaultValue, { value, type })
+              : undefined;
+            s.type = replaceTemplate(s.type, { type });
 
-          s.name = replaceTemplate(s.name, { id: c.tag, });
-          s.defaultValue = s.defaultValue? replaceTemplate(s.defaultValue, { value, type }) : undefined;
-          s.type = replaceTemplate(s.type, { type });
-
-          stateDefinitions.add(renderState(s));
-
-        });
+            stateDefinitions.add(renderState(s));
+          });
+        }
       })
     })
   }
@@ -89,7 +92,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
           value.state.name = replaceTemplate(value.state.name, { id: c.tag });
           value.state.defaultValue = value.state.defaultValue
-            ? replaceTemplate(value.state.defaultValue, { defaultValue })
+            ? replaceTemplate(value.state.defaultValue, { defaultValue, type })
             : undefined;
           value.state.type = replaceTemplate(value.state.type, { type });
 

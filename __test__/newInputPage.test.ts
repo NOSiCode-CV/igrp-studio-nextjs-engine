@@ -68,11 +68,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onDateChange: {
-              fnCustomSet: '(e) => setInputRegDate(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputRegDate, setInputRegDate] = useState < Date | undefined > (new Date());` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputRegDate(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputRegDate, setInputRegDate] = useState < Date | undefined > (new Date());` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -97,11 +99,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onDateChange: {
-              fnCustomSet: '(e) => setInputBirthdate(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputBirthdate, setInputBirthdate] = useState < Date | undefined > (new Date());` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputBirthdate(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputBirthdate, setInputBirthdate] = useState < Date | undefined > (new Date());` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -181,11 +185,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onValueChange: {
-              fnCustomSet: '(e) => setSelect(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [select, setSelect] = useState("");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setSelect(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [select, setSelect] = useState("");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -217,11 +223,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setCombobox(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [combobox, setCombobox] = useState(null);` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setCombobox(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [combobox, setCombobox] = useState(null);` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -249,11 +257,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setColor(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [color, setColor] = useState("#6366f1");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setColor(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [color, setColor] = useState("#6366f1");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -276,11 +286,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setFileSingle(e.target.value)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [fileSingle, setFileSingle] = useState(null);` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setFileSingle(e.target.value)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [fileSingle, setFileSingle] = useState(null);` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -304,11 +316,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setFileMultiple(e.target.value)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [fileMultiple, setFileMultiple] = useState(null);` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setFileMultiple(e.target.value)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [fileMultiple, setFileMultiple] = useState(null);` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -335,11 +349,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setInputNumber(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputNumber, setInputNumber] = useState(0);` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputNumber(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputNumber, setInputNumber] = useState(0);` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -364,11 +380,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setPhoneNumber(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [phoneNumber, setPhoneNumber] = useState("");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setPhoneNumber(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [phoneNumber, setPhoneNumber] = useState("");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -391,11 +409,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setInputTime(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputTime, setInputTime] = useState("");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputTime(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputTime, setInputTime] = useState("");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -422,11 +442,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onSelectValueChange: {
-              fnCustomSet: '(e) => setInputAddOn(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputAddOn, setInputAddOn] = useState("");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputAddOn(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputAddOn, setInputAddOn] = useState("");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -451,11 +473,13 @@ export const inputLayout: Layout = {
           },
           interactions: {
             onChange: {
-              fnCustomSet: '(e) => setInputUrl(e)',
-              fnCustomCode: {
-                states: [
-                  { state: `const [inputUrl, setInputUrl] = useState("");` }
-                ]
+              function: {
+                fnCustomSet: '(e) => setInputUrl(e)',
+                fnCustomCode: {
+                  states: [
+                    { state: `const [inputUrl, setInputUrl] = useState("");` }
+                  ]
+                },
               },
               type: 'function'
             },
@@ -499,11 +523,13 @@ export const inputLayout: Layout = {
       },
       interactions: {
         onChange: {
-          fnCustomSet: '(e) => setTextarea(e.target.value)',
-          fnCustomCode: {
-            states: [
-              { state: `const [textarea, setTextarea] = useState("");` }
-            ]
+          function: {
+            fnCustomSet: '(e) => setTextarea(e.target.value)',
+            fnCustomCode: {
+              states: [
+                { state: `const [textarea, setTextarea] = useState("");` }
+              ]
+            },
           },
           type: 'function'
         },

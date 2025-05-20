@@ -93,9 +93,9 @@ const buttonLayout: Layout = {
       properties: {
         variant: 'default',
         size: 'default',
-        showIcon: true,
         label: 'Left',
         iconProperties: {
+          showIcon: true,
           iconName: 'ArrowLeft',
           iconPlacement: 'start'
         }
@@ -108,9 +108,9 @@ const buttonLayout: Layout = {
       properties: {
         variant: 'default',
         size: 'default',
-        showIcon: true,
         label: 'Right',
         iconProperties: {
+          showIcon: true,
           iconName: 'ArrowRight',
           iconPlacement: 'end'
         }
@@ -125,6 +125,30 @@ const buttonLayout: Layout = {
         size: 'icon',
         iconProperties: {
           iconName: 'Eye'
+        }
+      }
+    },
+    {
+      id: "button_navigate",
+      tag: "button_navigate",
+      componentName: "button",
+      properties: {
+        variant: 'default',
+        size: 'default',
+        label: 'Navigate to Input Page',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Globe',
+          iconPlacement: 'end'
+        },
+      },
+      interactions: {
+        onClick: {
+          type: 'navigate',
+          navigate: {
+            name: 'handlebutton_navigateNavigation',
+            path: '/inputs'
+          }
         }
       }
     },
@@ -148,5 +172,4 @@ describe('Buttons module',() =>{
   it('should save the button page configuration file', async()=> {
     await newPage(pageConfig, OUTPUT_DIR);
   })
-
 })

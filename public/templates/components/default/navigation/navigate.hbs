@@ -1,0 +1,3 @@
+function {{#if resourceConfig.name}}{{resourceConfig.name}}{{else}}handle{{capitalize resourceConfig.tag}}Navigation{{/if}} (): void {
+  router.push("{{resourceConfig.path}}");
+}

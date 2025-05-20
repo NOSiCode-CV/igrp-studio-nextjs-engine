@@ -24,14 +24,15 @@ const componentConfig: ComponentConfig = {
     },
     interactions: {
       custom: {
-        fnCustomCode: {
-          imports: [
-            { namespace: 'import {useRouter} from "next/navigation";' },
-          ],
-          states: [
-            { state: `const [todos, setTodos] = useState([]);` }
-          ],
-          fnCode: `
+        function: {
+          fnCustomCode: {
+            imports: [
+              { namespace: 'import {useRouter} from "next/navigation";' },
+            ],
+            states: [
+              { state: `const [todos, setTodos] = useState([]);` }
+            ],
+            fnCode: `
   const router = useRouter();
   
   type Todo = {
@@ -45,6 +46,7 @@ const componentConfig: ComponentConfig = {
     setTodos(initialTodos);
   }, [initialTodos]);
               `,
+          },
         },
         type: 'function'
       }
@@ -87,17 +89,19 @@ const componentConfig: ComponentConfig = {
                     },
                     interactions: {
                       checked: {
-                        fnCustomSet: 'todo.completed',
+                        function: {
+                          fnCustomSet: 'todo.completed',
+                        },
                         type: 'function'
                       },
                       onCheckedChange: {
-                        actionName: 'toggleTodo',
-                        fnCustomSet: '() => handleToggle(todo.id, todo.title)',
-                        fnCustomCode: {
-                          imports: [
-                            { namespace: 'import {toast} from "sonner";' },
-                          ],
-                          fnCode: `
+                        function: {
+                          fnCustomSet: '() => handleToggle(todo.id, todo.title)',
+                          fnCustomCode: {
+                            imports: [
+                              { namespace: 'import {toast} from "sonner";' },
+                            ],
+                            fnCode: `
                       
   const handleToggle = async (id: string, title: string) => {
     const todo = todos.find(t => t.id === id);
@@ -120,7 +124,12 @@ const componentConfig: ComponentConfig = {
     );
   };
             `,
-                          actionCode: `
+                          }
+                        },
+                        action: {
+                          actionName: 'toggleTodo',
+                          actionCustomCode: {
+                            actionCode: `
 
   import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
 
@@ -133,6 +142,7 @@ const componentConfig: ComponentConfig = {
     );
   }
             `,
+                          },
                         },
                         type: 'both',
                       },
@@ -201,38 +211,44 @@ const componentConfig: ComponentConfig = {
                     `,
                     interactions: {
                       value: {
-                        fnName: 'editValue',
-                        fnCustomCode: {
-                          states: [
-                            { state: `const [editingId, setEditingId] = useState<string | null>(null);`}
-                          ],
+                        function: {
+                          fnName: 'editValue',
+                          fnCustomCode: {
+                            states: [
+                              { state: `const [editingId, setEditingId] = useState<string | null>(null);`}
+                            ],
+                          },
                         },
                         type: 'function',
                       },
                       onChange: {
-                        fnCustomSet: '(e) => setEditValue(e.target.value)',
-                        fnCustomCode: {
-                          states: [{ state: `const [editValue, setEditValue] = useState('');` }],
+                        function: {
+                          fnCustomSet: '(e) => setEditValue(e.target.value)',
+                          fnCustomCode: {
+                            states: [{ state: `const [editValue, setEditValue] = useState('');` }],
+                          },
                         },
                         type: 'function',
                       },
                       onKeyDown: {
-                        fnCustomCode: {
-                          imports: [ { namespace: 'import { IGRPInputText } from "@igrp/igrp-framework-react-design-system";'}],
-                        },
-                        fnCustomSet: `
+                        function: {
+                          fnCustomCode: {
+                            imports: [ { namespace: 'import { IGRPInputText } from "@igrp/igrp-framework-react-design-system";'}],
+                          },
+                          fnCustomSet: `
                         (e) => {
                           if (e.key === 'Enter') handleEdit(todo.id);
                           if (e.key === 'Escape') cancelEditing();
                         }
                         `,
+                        },
                         type: 'function',
                       },
                       onClickEdit: {
-                        fnCustomSet: '() => handleEdit(todo.id)',
-                        actionName: 'editTodo',
-                        fnCustomCode: {
-                          fnCode: `
+                        function: {
+                          fnCustomSet: '() => handleEdit(todo.id)',
+                          fnCustomCode: {
+                            fnCode: `
   const handleEdit = async (id: string) => {
     if (!editValue.trim()) {
       return cancelEditing();
@@ -253,7 +269,12 @@ const componentConfig: ComponentConfig = {
     router.refresh();
   };
                               `,
-                          actionCode: `
+                          }
+                        },
+                        action: {
+                          actionName: 'editTodo',
+                          actionCustomCode: {
+                            actionCode: `
                               
 
   import { getTodos, setTodos } from "@/app/pages/todolist/actions/gettodos";
@@ -267,26 +288,31 @@ const componentConfig: ComponentConfig = {
     return todos.find(todo => todo.id === id);
   }                           
                               `,
+                          },
                         },
                         type: 'both',
                       },
                       onClickCancel: {
-                        fnName: 'cancelEditing',
-                        fnCustomCode: {
-                          fnCode: `
+                        function: {
+                          fnName: 'cancelEditing',
+                          fnCustomCode: {
+                            fnCode: `
   const cancelEditing = () => {
     setEditingId(null);
     setEditValue('');
   };
                               `,
+                          }
                         },
                         type: 'function',
                       },
                       custom: {
-                        fnCustomCode: {
-                          imports: [
-                            { namespace: "import { format } from 'date-fns';" },
-                          ],
+                        function: {
+                          fnCustomCode: {
+                            imports: [
+                              { namespace: "import { format } from 'date-fns';" },
+                            ],
+                          },
                         },
                         type: 'function',
                       },
@@ -326,18 +352,20 @@ const componentConfig: ComponentConfig = {
                 `,
                 interactions: {
                   onClickEdit: {
-                    fnCustomSet: '() => startEditing(todo)',
-                    fnCustomCode: {
-                      imports: [
-                        { namespace: 'import { IGRPButton } from "@igrp/igrp-framework-react-design-system";'},
-                        { namespace: 'import { IGRPIcon } from "@igrp/igrp-framework-react-design-system";'}
-                      ],
-                      fnCode: `
+                    function: {
+                      fnCustomSet: '() => startEditing(todo)',
+                      fnCustomCode: {
+                        imports: [
+                          { namespace: 'import { IGRPButton } from "@igrp/igrp-framework-react-design-system";'},
+                          { namespace: 'import { IGRPIcon } from "@igrp/igrp-framework-react-design-system";'}
+                        ],
+                        fnCode: `
   const startEditing = (todo: Todo) => {
     setEditingId(todo.id);
     setEditValue(todo.title);
   };
 `,
+                      },
                     },
                     type: 'function',
                   },
