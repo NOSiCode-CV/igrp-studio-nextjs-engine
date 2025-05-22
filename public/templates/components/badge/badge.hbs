@@ -1,6 +1,5 @@
 <IGRPBadge
   color="{{resourceConfig.properties.color}}"
-  children="{{resourceConfig.properties.children}}"
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
@@ -12,6 +11,15 @@
   {{/if~}}
   {{#if resourceConfig.properties.style}}
   style="{{resourceConfig.properties.style}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconPlacement}}
+  iconPlacement="{{resourceConfig.properties.iconProperties.iconPlacement}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className="{{concat (concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)) (addClassNameFromProperties resourceConfig registry)}}"
@@ -25,4 +33,13 @@
   {{/if}}
   {{/if}}
 >
+  {{#if resourceConfig.properties.label}}
+  {{resourceConfig.properties.label}}
+  {{else}}
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+  {{/if~}}
 </IGRPBadge>

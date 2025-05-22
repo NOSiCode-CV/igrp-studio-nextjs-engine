@@ -1,4 +1,4 @@
-import { initComponents, newPage, registerComponents } from '../../src';
+import { initCodeSnippets, initComponents, newPage, registerComponents } from '../../src';
 import { Layout, PageConfig } from '../../src/interfaces/types';
 import { OUTPUT_TAXPAYER_TEST } from '../../src/utils/testPath';
 
@@ -20,7 +20,7 @@ const formLayout: Layout = {
       properties: {
         className: 'shadow-sm',
         customProperties: {
-          ref: 'sectionRefs.basic',
+          ref: 'basicRef',
         },
       },
       children: [
@@ -59,9 +59,135 @@ const formLayout: Layout = {
                 variant: 'outline',
                 color: 'secondary',
                 className: 'font-normal text-xs',
-                children: 'Obrigatório',
+                label: 'Obrigatório',
               },
             },
+          ],
+        },
+        {
+          id: 'basic_information_card_content',
+          tag: 'basic_information_card_content',
+          componentName: 'cardContent',
+          properties: {
+            className: 'p-4',
+          },
+          children: [
+            {
+              id: 'basic_information_form_grid',
+              tag: 'basic_information_form_grid',
+              componentName: 'grid',
+              childProperties: {
+                className: 'col-span-1'
+              },
+              properties: {
+                variant: 'cols1',
+                className: 'md:grid-cols-2 gap-4'
+              },
+              children: [
+                // inputs
+                {
+                  id: 'basic_information_tp_documento',
+                  tag: 'tipo_documento',
+                  componentName: 'combobox',
+                  properties: {
+                    label: 'Tipo Documento',
+                    required: true,
+                    placeholder: 'Selecione o tipo de documento'
+                  },
+                  /*interactions: {
+                    onValueChange: {
+                      type: 'function',
+                      function: {
+                        fnName: 'setSelectTipo_documentoValue'
+                      }
+                    }
+                  },*/
+                  data: {
+                    options: {
+                      state: {
+                        id: 'basic_information_tp_documento_opt_st',
+                        name: 'selectTipo_documentoOptions',
+                        type: 'IGRPOptionsProps[]',
+                        defaultValue: '[]'
+                      }
+                    },
+                    /*value: {
+                      state: {
+                        id: 'basic_information_tp_documento_val_st',
+                        name: 'selectTipo_documentoValue',
+                        type: 'string',
+                        defaultValue: ''
+                      }
+                    },*/
+                  }
+                },
+                {
+                  id: 'numero_documento',
+                  tag: 'numero_documento',
+                  componentName: 'inputText',
+                  properties: {
+                    label: "Número de documento de inscrição",
+                    required: true,
+                  },
+                },
+                {
+                  id: 'denominacao_social',
+                  tag: 'denominacao_social',
+                  componentName: 'inputText',
+                  properties: {
+                    label: "Denominação Social",
+                    required: true,
+                  },
+                },
+                {
+                  id: 'nome_comercial',
+                  tag: 'nome_comercial',
+                  componentName: 'inputText',
+                  properties: {
+                    label: "Nome Comercial",
+                    required: true,
+                  },
+                },
+                {
+                  id: 'basic_information_estatuto',
+                  tag: 'estatuto',
+                  componentName: 'combobox',
+                  properties: {
+                    label: 'Estatuto Jurídico',
+                    required: true,
+                    placeholder: 'Selecione o estatuto jurídico'
+                  },
+                  data: {
+                    options: {
+                      state: {
+                        id: 'basic_information_estatuto_opt_st',
+                        name: 'selectEstatutoOptions',
+                        type: 'IGRPOptionsProps[]',
+                        defaultValue: '[]'
+                      }
+                    },
+                  },
+                  /*interactions: {
+                    onValueChange: {
+                      type: 'function',
+                      function: {
+                        fnName: 'setSelectTipo_documentoValue'
+                      }
+                    }
+                  },*/
+                },
+                {
+                  id: 'dt_inicio_actividade',
+                  tag: 'dt_inicio_actividade',
+                  componentName: 'inputDatePicker',
+                  properties: {
+                    label: "Data de Início de Atividade",
+                    placeholder: 'Escolha uma data',
+                    required: true,
+                  },
+                },
+              ]
+            }
           ],
         },
       ],
@@ -71,12 +197,12 @@ const formLayout: Layout = {
     onSubmit: {
       type: 'function',
       function: {
-        fnCustomSet: '(values) => newTaxPayerRequest.handleSubmit(values)',
+        fnCustomSet: 'async (values) => await onSubmit(values)',
       },
     },
   },
   data: {
-    data: {
+    defaultValues: {
       state: {
         id: 'form_tax_payer_content_st',
         name: 'contentForm{{id}}',
@@ -85,6 +211,155 @@ const formLayout: Layout = {
       },
     },
   },
+};
+
+const pageContent: Layout = {
+  id: 'main_content',
+  tag: 'main_content',
+  componentName: 'container',
+  properties: {
+    className: 'relative',
+  },
+  children: [
+    {
+      id: 'main_grid',
+      tag: 'main_grid',
+      componentName: 'grid',
+      properties: {
+        variant: 'cols1',
+        gap: 4,
+        className: 'lg:grid-cols-4',
+      },
+      children: [
+        // TODO: sidebar navigation
+        {
+          id: 'main_form_content',
+          tag: 'main_form_content',
+          componentName: 'section',
+          properties: {
+            className: 'lg:col-span-3',
+          },
+          children: [formLayout],
+        },
+      ],
+    },
+    {
+      id: 'footer_with_actions',
+      tag: 'footer_with_actions',
+      componentName: 'stack', // TODO: replace with 'sticky'?
+      properties: {
+        className:
+          'bottom-0 left-0 right-0 mt-6 bg-background border-t shadow-md py-2 px-4 z-10',
+      },
+      children: [
+        {
+          id: 'footer_flex',
+          tag: 'footer_flex',
+          componentName: 'flex',
+          properties: {
+            variant: 'justify-between',
+            className: 'items-center w-full',
+          },
+          children: [
+            {
+              id: 'footer_flex_child1',
+              tag: 'footer_flex_child1',
+              componentName: 'flex',
+              properties: {
+                variant: 'items-center',
+                className: 'gap-2',
+              },
+              children: [
+                {
+                  id: 'footer_badge_fragment',
+                  tag: 'footer_badge_fragment',
+                  componentName: 'fragment',
+                  content: `
+              {isEdit ? (
+                <IGRPBadge variant="outline" showIcon={true} iconName="CircleCheck" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Editando Contribuinte
+                </IGRPBadge>
+              ) : (
+                <IGRPBadge variant="outline" showIcon={true} iconName="Plus" className="bg-green-50 text-green-700 border-green-200">
+                  Novo Contribuinte
+                </IGRPBadge>
+              )}
+                                  `,
+                },
+                {
+                  id: 'footer_filling_info',
+                  tag: 'footer_filling_info',
+                  componentName: 'paragraph',
+                  properties: {
+                    className: 'text-xs text-muted-foreground',
+                  },
+                  content: 'Preencha os campos obrigatórios marcados com *',
+                },
+              ],
+            },
+            {
+              id: 'footer_flex_child2',
+              tag: 'footer_flex_child2',
+              componentName: 'flex',
+              properties: {
+                className: 'gap-3',
+              },
+              children: [
+                {
+                  id: 'footer_cancel_fragment',
+                  tag: 'footer_cancel_fragment',
+                  componentName: 'fragment',
+                  content: `
+              {onCancel && (
+                <IGRPButton type="button" variant="outline" onClick={onCancel}>
+                  Cancelar
+                </IGRPButton>
+              )}
+                                  `,
+                },
+                {
+                  id: 'button_form_tax_payer_submit',
+                  tag: 'button_form_tax_payer_submit',
+                  componentName: 'button',
+                  properties: {
+                    type: 'submit',
+                    disabled: 'isSubmitting',
+                    className: 'min-w-[150px]',
+                  },
+                  children: [
+                    {
+                      id: 'button_submit_content_fragment',
+                      tag: 'button_submit_content_fragment',
+                      componentName: 'fragment',
+                      content: `
+              {isSubmitting ? (
+                <>
+                  <span className="animate-pulse">Processando...</span>
+                </>
+              ) : isEdit ? (
+                "Salvar Alterações"
+              ) : (
+                "Salvar Contribuinte"
+              )}
+                                  `,
+                    },
+                  ],
+                  interactions: {
+                    onClick: {
+                      formSubmit: {
+                        targetForm: 'form_taxpayers',
+                      },
+                      type: 'formSubmit',
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export const taxPayerLayout: Layout = {
@@ -97,21 +372,21 @@ export const taxPayerLayout: Layout = {
         fnCustomCode: {
           imports: [
             {
-              namespace: 'import { useIGRPToast } from "@igrp/igrp-framework-react-design-system";'
-            }
+              namespace: 'import { useIGRPToast } from "@igrp/igrp-framework-react-design-system";',
+            },
           ],
           fnCode: `
         
   const { igrpToast } = useIGRPToast()  
   // Field arrays for multiple items
-  const {
+  /*const {
     fields: actividadesFields,
     append: appendActividade,
     remove: removeActividade,
     update: updateActividade,
   } = useFieldArray({
     control: formform_taxpayersRef.current?.control,
-    name: "actividades",
+    name: "atividades",
   })
 
   const {
@@ -131,7 +406,7 @@ export const taxPayerLayout: Layout = {
     update: updateContato,
   } = useFieldArray({
     control: formform_taxpayersRef.current?.control,
-    name: "contactos",
+    name: "contatos",
   })
 
   const {
@@ -151,10 +426,10 @@ export const taxPayerLayout: Layout = {
   } = useFieldArray({
     control: formform_taxpayersRef.current?.control,
     name: "anexos",
-  })
+  })*/
 
 useEffect(() => {
-  const actividades = formform_taxpayersRef.current?.getValues("actividades")
+  const actividades = formform_taxpayersRef.current?.getValues("atividades") as Atividade[]
   if (actividades && actividades.length > 0) {
     const total = actividades.reduce((sum, act) => sum + (Number.parseFloat(act.soat) || 0), 0)
     const weighted = (total / actividades.length).toFixed(2)
@@ -162,7 +437,17 @@ useEffect(() => {
   } else {
     setSoatPonderado("0.00")
   }
-}, [newTaxPayerRequest.watch("actividades")])
+  
+  loadFormFields()
+  
+}, [formform_taxpayersRef.current?.watch("atividades")])
+        
+const loadFormFields = async () => {
+ 
+  setSelectTipo_documentoOptions(await getTiposDocumentoOptions())
+  setSelectEstatutoOptions(await getEstatutoJuridicosOptions())
+  
+}      
         
         `,
         },
@@ -174,151 +459,141 @@ useEffect(() => {
     {
       id: 'main_layout',
       tag: 'main_layout',
-      componentName: 'container',
+      componentName: 'flex',
       properties: {
-        className: 'relative',
+        variant: 'col',
+        className: 'min-h-full'
       },
       children: [
         {
-          id: 'main_grid',
-          tag: 'main_grid',
-          componentName: 'grid',
+          id: 'main_sticky',
+          tag: 'main_sticky',
+          componentName: 'stack',
           properties: {
-            variant: 'cols1',
-            gap: 4,
-            className: 'lg:grid-cols-4',
-          },
-          children: [
-            // TODO: sidebar navigation
-            {
-              id: 'main_form_content',
-              tag: 'main_form_content',
-              componentName: 'section',
-              properties: {
-                className: 'lg:col-span-3',
-              },
-              children: [formLayout],
-            },
-          ],
-        },
-        {
-          id: 'footer_with_actions',
-          tag: 'footer_with_actions',
-          componentName: 'stack', // TODO: replace with 'sticky'?
-          properties: {
-            className:
-              'bottom-0 left-0 right-0 mt-6 bg-background border-t shadow-md py-2 px-4 z-10',
+            className: 'top-0 z-10 bg-background'
           },
           children: [
             {
-              id: 'footer_flex',
-              tag: 'footer_flex',
+              id: 'main_flex',
+              tag: 'main_flex',
               componentName: 'flex',
               properties: {
-                variant: 'justify-between',
-                className: 'items-center w-full',
+                variant: 'items-center',
+                className: 'justify-between mb-4'
               },
               children: [
                 {
-                  id: 'footer_flex_child1',
-                  tag: 'footer_flex_child1',
+                  id: 'main_flex_child1',
+                  tag: 'main_flex_child1',
                   componentName: 'flex',
                   properties: {
                     variant: 'items-center',
-                    className: 'gap-2',
+                    className: 'gap-2'
                   },
                   children: [
                     {
-                      id: 'footer_badge_fragment',
-                      tag: 'footer_badge_fragment',
-                      componentName: 'fragment',
-                      content: `
-              {isEdit ? (
-                <IGRPBadge variant="outline" showIcon={true} iconName="CircleCheck" className="bg-blue-50 text-blue-700 border-blue-200">
-                  Editando Contribuinte
-                </IGRPBadge>
-              ) : (
-                <IGRPBadge variant="outline" showIcon={true} iconName="Plus" className="bg-green-50 text-green-700 border-green-200">
-                  Novo Contribuinte
-                </IGRPBadge>
-              )}
-                                  `,
+                      id: "button_nav_back",
+                      tag: "button_nav_back",
+                      componentName: "button",
+                      properties: {
+                        variant: 'outline',
+                        size: 'icon',
+                        iconProperties: {
+                          showIcon: true,
+                          iconName: 'ArrowLeft'
+                        }
+                      },
+                      interactions: {
+                        onClick: {
+                          type: 'navigate',
+                          navigate: {
+                            name: 'handlebutton_nav_backNavigation',
+                            path: '/contribuintes'
+                          }
+                        }
+                      }
                     },
                     {
-                      id: 'footer_filling_info',
-                      tag: 'footer_filling_info',
-                      componentName: 'paragraph',
+                      id: 'page_headline',
+                      tag: 'page_headline',
+                      componentName: 'headline',
                       properties: {
-                        className: 'text-xs text-muted-foreground',
+                        variant: 'h3',
+                        title: 'Novo Contribuinte',
                       },
-                      content: 'Preencha os campos obrigatórios marcados com *',
                     },
                   ],
                 },
                 {
-                  id: 'footer_flex_child2',
-                  tag: 'footer_flex_child2',
+                  id: 'main_flex_child2',
+                  tag: 'main_flex_child2',
                   componentName: 'flex',
                   properties: {
-                    className: 'gap-3',
+                    variant: 'items-center',
+                    className: 'gap-2'
                   },
                   children: [
                     {
-                      id: 'footer_cancel_fragment',
-                      tag: 'footer_cancel_fragment',
-                      componentName: 'fragment',
-                      content: `
-              {onCancel && (
-                <IGRPButton type="button" variant="outline" onClick={onCancel}>
-                  Cancelar
-                </IGRPButton>
-              )}
-                                  `,
-                    },
-                    {
-                      id: 'button_form_tax_payer_submit',
-                      tag: 'button_form_tax_payer_submit',
+                      id: 'button_cancelar',
+                      tag: 'button_cancelar',
                       componentName: 'button',
                       properties: {
-                        type: 'submit',
-                        disabled: 'isSubmitting',
-                        className: 'min-w-[150px]',
-                      },
-                      children: [
-                        {
-                          id: 'button_submit_content_fragment',
-                          tag: 'button_submit_content_fragment',
-                          componentName: 'fragment',
-                          content: `
-              {isSubmitting ? (
-                <>
-                  <span className="animate-pulse">Processando...</span>
-                </>
-              ) : isEdit ? (
-                "Salvar Alterações"
-              ) : (
-                "Salvar Contribuinte"
-              )}
-                                  `,
+                        label: 'Cancelar',
+                        size: 'sm',
+                        variant: 'outline',
+                        iconProperties: {
                         },
-                      ],
+                      },
+                      interactions: {
+                        onClick: {
+                          navigate: {
+                            name: 'handlebutton_cancelarNavigation',
+                            path: '/contribuintes'
+                          },
+                          type: 'navigate',
+                        },
+                      },
+                    },
+                    {
+                      id: 'button_save',
+                      tag: 'button_save',
+                      componentName: 'button',
+                      properties: {
+                        label: 'Salvar Contribuinte',
+                        size: 'sm',
+                        iconProperties: {
+
+                        },
+                      },
                       interactions: {
                         onClick: {
                           formSubmit: {
                             targetForm: 'form_taxpayers',
                           },
-                          type: 'function',
+                          type: 'formSubmit',
                         },
                       },
                     },
                   ],
-                },
+                }
               ],
             },
+            {
+              id: 'main_content_flex',
+              tag: 'main_content_flex',
+              componentName: 'flex',
+              properties: {
+                variant: 'flex1',
+                className: 'px-4 pb-6'
+              },
+              children: [
+                pageContent
+              ]
+            }
           ],
-        },
+        }
       ],
-    },
+    }
   ],
 };
 
@@ -492,6 +767,13 @@ const pageConfig: PageConfig = {
           type: 'boolean',
           required: true,
           defaultValue: 'true',
+        },
+        {
+          componentId: '',
+          name: 'soat',
+          type: 'string',
+          required: true,
+          defaultValue: '0.00',
         },
       ],
       path: '@/app/(myapp)/data/types',
@@ -814,7 +1096,7 @@ const pageConfig: PageConfig = {
         igrpToast({
           title: "Erro",
           description: "Ocorreu um erro ao processar o formulário.",
-          variant: "destructive",
+          type: "error",
         })
       } finally {
         setIsSubmitting(false)
@@ -832,12 +1114,12 @@ const pageConfig: PageConfig = {
       arguments: [],
       imports: [],
       code: `
-      const numeroDocumento = formform_taxpayersRef.current?.getValues("numero_documento")
+      const numeroDocumento: string | undefined = formform_taxpayersRef.current?.getValues("numero_documento")
       if (!numeroDocumento) {
         igrpToast({
           title: "Erro",
           description: "Por favor, insira um número de documento para pesquisar.",
-          variant: "destructive",
+          type: "error",
         })
         return
       }
@@ -855,7 +1137,6 @@ const pageConfig: PageConfig = {
           formform_taxpayersRef.current?.setValue("denominacao_social", "Empresa Exemplo, Lda")
           formform_taxpayersRef.current?.setValue("nome_comercial", "Empresa Exemplo")
           formform_taxpayersRef.current?.setValue("estatuto_juridico", "7")
-          formform_taxpayersRef.current?.setValue("nome_resp", "João Silva")
   
           igrpToast({
             title: "Sucesso",
@@ -865,7 +1146,7 @@ const pageConfig: PageConfig = {
           igrpToast({
             title: "Não encontrado",
             description: "Nenhum contribuinte encontrado com este NIF.",
-            variant: "destructive",
+            type: "error",
           })
         }
       }, 1000)
@@ -888,12 +1169,13 @@ const pageConfig: PageConfig = {
       ],
       imports: [],
       code: `
-      actividadesFields.forEach((_, i) => {
+      /*actividadesFields.forEach((_, i) => {
+        const actividade: Atividade = formform_taxpayersRef.current?.getValues(\`atividades.\${i}\`)
         updateActividade(i, {
-          ...formform_taxpayersRef.current?.getValues(\`actividades.\${i}\`),
+          ...actividade,
           principal: i === index,
         })
-      })
+      })*/
       `,
       returnValue: {
         type: 'void',
@@ -914,12 +1196,13 @@ const pageConfig: PageConfig = {
       ],
       imports: [],
       code: `
-      enderecosFields.forEach((_, i) => {
+      /*enderecosFields.forEach((_, i) => {
+        const endereco = formform_taxpayersRef.current?.getValues(\`enderecos.\${i}\`) as Endereco
         updateEndereco(i, {
-          ...formform_taxpayersRef.current?.getValues(\`enderecos.\${i}\`),
+          ...endereco,
           isPrincipal: i === index,
         })
-      })
+      })*/
       `,
       returnValue: {
         type: 'void',
@@ -940,12 +1223,13 @@ const pageConfig: PageConfig = {
       ],
       imports: [],
       code: `
-      contatosFields.forEach((_, i) => {
+      /*contatosFields.forEach((_, i) => {
+        const contato = formform_taxpayersRef.current?.getValues(\`contatos.\${i}\`) as Contato
         updateContato(i, {
-          ...formform_taxpayersRef.current?.getValues(\`contactos.\${i}\`),
+          ...contato,
           principal: i === index,
         })
-      })
+      })*/
       `,
       returnValue: {
         type: 'void',
@@ -966,19 +1250,19 @@ const pageConfig: PageConfig = {
       ],
       imports: [],
       code: `
-      contasBancariasFields.forEach((_, i) => {
+      /*contasBancariasFields.forEach((_, i) => {
+        const contaBancaria = formform_taxpayersRef.current?.getValues(\`contas_bancarias.\${i}\`) as ContaBancaria
         updateContaBancaria(i, {
-          ...formform_taxpayersRef.current?.getValues(\`contas_bancarias.\${i}\`),
+          ...contaBancaria,
           principal: i === index,
         })
-      })
+      })*/
       `,
       returnValue: {
         type: 'void',
         isNullable: false,
       },
     },
-
     {
       id: 'scroll_to_section_fn',
       name: 'scrollToSection',
@@ -1005,6 +1289,19 @@ const pageConfig: PageConfig = {
       if (sectionRef?.current) {
         sectionRef.current.scrollIntoView({ behavior: "smooth" });
       }
+      `,
+      returnValue: {
+        type: 'void',
+        isNullable: false,
+      },
+    },
+    {
+      id: 'on_cancel_fn',
+      name: 'onCancel',
+      arguments: [],
+      imports: [],
+      code: `
+      
       `,
       returnValue: {
         type: 'void',
@@ -1184,6 +1481,7 @@ const pageConfig: PageConfig = {
 
 beforeAll(async () => {
   await initComponents();
+  await initCodeSnippets();
   /*registerComponents({
     components: [
       {

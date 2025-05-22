@@ -189,6 +189,7 @@ export const INTERACTIONS_DEFAULTS = {
   UNDEFINED: 'undefined',
   INIT_TYPE: 'init{{type}}',
   NULLABLE: 'null',
+  ZERO: '0',
   EMPTY_ARRAY: '[]',
 
 }

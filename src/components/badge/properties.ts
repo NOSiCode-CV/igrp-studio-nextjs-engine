@@ -4,12 +4,20 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 export function badgeProperties() {
   return {
     //intent: { type: 'string', required: true, default: 'default', enum: ['default', 'secondary', 'success', 'info', 'warning', 'error', 'custom'] },
-    color: { type: 'string', required: true, default: 'default', enum: ['default', 'primary', 'secondary', 'success', 'error' ] },
+    color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
-    children: { type: 'string', required: true, default: 'Badge' },
-    customColor: { type: 'string', required: false },
-    style: { type: 'string', required: false },
+    label: { type: 'string', required: false, default: 'Badge' },
+    dot: { type: 'boolean', required: false, default: false },
+    //customColor: { type: 'string', required: false },
+    iconProperties: {
+      type: 'object',
+      properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
+        iconName: { type: 'string', required: false, default: 'Info' },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
+      },
+    },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

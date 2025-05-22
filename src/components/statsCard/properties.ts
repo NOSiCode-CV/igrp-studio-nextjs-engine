@@ -73,12 +73,12 @@ export function statsCardInteractionsMapping() {
 export function statsCardData() {
   return {
     value: {
-      ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
+      ...baseData(INTERACTIONS_DEFAULTS.ZERO, INTERACTIONS_TYPES.VALUE, {
         id: '',
         name: 'stat{{id}}Value',
-        type: 'string',
-        defaultValue: '{{value}}'
-      }), required: true
+        type: 'string | number',
+        defaultValue: '0'
+      }, true), required: true
     },
   }
 }

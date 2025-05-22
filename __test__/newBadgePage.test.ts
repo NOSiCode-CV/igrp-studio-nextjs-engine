@@ -27,8 +27,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'solid',
-        color: 'default',
-        children: 'Default Solid'
+        color: 'primary',
+        label: 'Default Solid'
       },
     },
     {
@@ -38,8 +38,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'outline',
-        color: 'default',
-        children: 'Default Outline'
+        color: 'primary',
+        label: 'Default Outline'
       },
     },
     {
@@ -49,8 +49,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'soft',
-        color: 'default',
-        children: 'Default Soft'
+        color: 'primary',
+        label: 'Default Soft'
       },
     },
 
@@ -64,7 +64,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'primary',
-        children: 'Primary Solid'
+        label: 'Primary Solid'
       },
     },
     {
@@ -75,7 +75,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'primary',
-        children: 'Primary Outline'
+        label: 'Primary Outline'
       },
     },
     {
@@ -86,7 +86,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'primary',
-        children: 'Primary Soft'
+        label: 'Primary Soft'
       },
     },
 
@@ -101,7 +101,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'secondary',
-        children: 'Secondary Solid'
+        label: 'Secondary Solid'
       },
     },
     {
@@ -112,7 +112,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'secondary',
-        children: 'Secondary Outline'
+        label: 'Secondary Outline'
       },
     },
     {
@@ -123,7 +123,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'secondary',
-        children: 'Secondary Soft'
+        label: 'Secondary Soft'
       },
     },
 
@@ -137,7 +137,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'success',
-        children: 'Success Solid'
+        label: 'Success Solid'
       },
     },
     {
@@ -148,7 +148,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'success',
-        children: 'Success Outline'
+        label: 'Success Outline'
       },
     },
     {
@@ -159,7 +159,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'success',
-        children: 'Success Soft'
+        label: 'Success Soft'
       },
     },
 
@@ -173,8 +173,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'solid',
-        color: 'error',
-        children: 'Error Solid'
+        color: 'destructive',
+        label: 'Error Solid'
       },
     },
     {
@@ -184,8 +184,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'outline',
-        color: 'error',
-        children: 'Error Outline'
+        color: 'destructive',
+        label: 'Error Outline'
       },
     },
     {
@@ -195,8 +195,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "sm",
         variant: 'soft',
-        color: 'error',
-        children: 'Error Soft'
+        color: 'destructive',
+        label: 'Error Soft'
       },
     },
 
@@ -211,8 +211,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'solid',
-        color: 'default',
-        children: 'Default Solid'
+        color: 'primary',
+        label: 'Default Solid'
       },
     },
     {
@@ -222,8 +222,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'outline',
-        color: 'default',
-        children: 'Default Outline'
+        color: 'primary',
+        label: 'Default Outline'
       },
     },
     {
@@ -233,8 +233,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'soft',
-        color: 'default',
-        children: 'Default Soft'
+        color: 'primary',
+        label: 'Default Soft'
       },
     },
 
@@ -248,7 +248,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'primary',
-        children: 'Primary Solid'
+        label: 'Primary Solid'
       },
     },
     {
@@ -259,7 +259,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'primary',
-        children: 'Primary Outline'
+        label: 'Primary Outline'
       },
     },
     {
@@ -270,7 +270,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'primary',
-        children: 'Primary Soft'
+        label: 'Primary Soft'
       },
     },
 
@@ -285,7 +285,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'secondary',
-        children: 'Secondary Solid'
+        label: 'Secondary Solid'
       },
     },
     {
@@ -296,7 +296,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'secondary',
-        children: 'Secondary Outline'
+        label: 'Secondary Outline'
       },
     },
     {
@@ -307,7 +307,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'secondary',
-        children: 'Secondary Soft'
+        label: 'Secondary Soft'
       },
     },
 
@@ -321,7 +321,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'success',
-        children: 'Success Solid'
+        label: 'Success Solid'
       },
     },
     {
@@ -332,7 +332,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'success',
-        children: 'Success Outline'
+        label: 'Success Outline'
       },
     },
     {
@@ -343,7 +343,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'success',
-        children: 'Success Soft'
+        label: 'Success Soft'
       },
     },
 
@@ -357,8 +357,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'solid',
-        color: 'error',
-        children: 'Error Solid'
+        color: 'destructive',
+        label: 'Error Solid'
       },
     },
     {
@@ -368,8 +368,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'outline',
-        color: 'error',
-        children: 'Error Outline'
+        color: 'destructive',
+        label: 'Error Outline'
       },
     },
     {
@@ -379,8 +379,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "md",
         variant: 'soft',
-        color: 'error',
-        children: 'Error Soft'
+        color: 'destructive',
+        label: 'Error Soft'
       },
     },
 
@@ -395,8 +395,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'solid',
-        color: 'default',
-        children: 'Default Solid'
+        color: 'primary',
+        label: 'Default Solid'
       },
     },
     {
@@ -406,8 +406,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'outline',
-        color: 'default',
-        children: 'Default Outline'
+        color: 'primary',
+        label: 'Default Outline'
       },
     },
     {
@@ -417,8 +417,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'soft',
-        color: 'default',
-        children: 'Default Soft'
+        color: 'primary',
+        label: 'Default Soft'
       },
     },
 
@@ -432,7 +432,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'primary',
-        children: 'Primary Solid'
+        label: 'Primary Solid'
       },
     },
     {
@@ -443,7 +443,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'primary',
-        children: 'Primary Outline'
+        label: 'Primary Outline'
       },
     },
     {
@@ -454,7 +454,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'primary',
-        children: 'Primary Soft'
+        label: 'Primary Soft'
       },
     },
 
@@ -469,7 +469,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'secondary',
-        children: 'Secondary Solid'
+        label: 'Secondary Solid'
       },
     },
     {
@@ -480,7 +480,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'secondary',
-        children: 'Secondary Outline'
+        label: 'Secondary Outline'
       },
     },
     {
@@ -491,7 +491,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'secondary',
-        children: 'Secondary Soft'
+        label: 'Secondary Soft'
       },
     },
 
@@ -505,7 +505,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'success',
-        children: 'Success Solid'
+        label: 'Success Solid'
       },
     },
     {
@@ -516,7 +516,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'success',
-        children: 'Success Outline'
+        label: 'Success Outline'
       },
     },
     {
@@ -527,7 +527,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'success',
-        children: 'Success Soft'
+        label: 'Success Soft'
       },
     },
 
@@ -541,8 +541,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'solid',
-        color: 'error',
-        children: 'Error Solid'
+        color: 'destructive',
+        label: 'Error Solid'
       },
     },
     {
@@ -552,8 +552,8 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'outline',
-        color: 'error',
-        children: 'Error Outline'
+        color: 'destructive',
+        label: 'Error Outline'
       },
     },
     {
@@ -563,10 +563,790 @@ const badgeLayout: Layout = {
       properties: {
         size: "lg",
         variant: 'soft',
-        color: 'error',
-        children: 'Error Soft'
+        color: 'destructive',
+        label: 'Error Soft'
       },
     },
+
+    /* ===================================== With icons ====================================== */
+
+    /* SMALL */
+
+    // Default color
+
+    {
+      id: "badge_default_solid_sm_icon",
+      tag: "badge_default_solid_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Solid'
+      },
+    },
+    {
+      id: "badge_default_outline_sm_icon",
+      tag: "badge_default_outline_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Default Outline'
+      },
+    },
+    {
+      id: "badge_default_soft_sm_icon",
+      tag: "badge_default_soft_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Soft'
+      },
+    },
+
+    // Primary color
+
+    {
+      id: "badge_primary_solid_sm_icon",
+      tag: "badge_primary_solid_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Solid'
+      },
+    },
+    {
+      id: "badge_primary_outline_sm_icon",
+      tag: "badge_primary_outline_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Primary Outline'
+      },
+    },
+    {
+      id: "badge_primary_soft_sm_icon",
+      tag: "badge_primary_soft_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Soft'
+      },
+    },
+
+
+    // Secondary color
+
+    {
+      id: "badge_secondary_solid_sm_icon",
+      tag: "badge_secondary_solid_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Solid'
+      },
+    },
+    {
+      id: "badge_secondary_outline_sm_icon",
+      tag: "badge_secondary_outline_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'secondary',
+        label: 'Secondary Outline'
+      },
+    },
+    {
+      id: "badge_secondary_soft_sm_icon",
+      tag: "badge_secondary_soft_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Soft'
+      },
+    },
+
+    // Success color
+
+    {
+      id: "badge_success_solid_sm_icon",
+      tag: "badge_success_solid_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Solid'
+      },
+    },
+    {
+      id: "badge_success_outline_sm_icon",
+      tag: "badge_success_outline_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'success',
+        label: 'Success Outline'
+      },
+    },
+    {
+      id: "badge_success_soft_sm_icon",
+      tag: "badge_success_soft_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Soft'
+      },
+    },
+
+
+    // Error color
+
+    {
+      id: "badge_error_solid_sm_icon",
+      tag: "badge_error_solid_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Solid'
+      },
+    },
+    {
+      id: "badge_error_outline_sm_icon",
+      tag: "badge_error_outline_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'destructive',
+        label: 'Error Outline'
+      },
+    },
+    {
+      id: "badge_error_soft_sm_icon",
+      tag: "badge_error_soft_sm_icon",
+      componentName: "badge",
+      properties: {
+        size: "sm",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Soft'
+      },
+    },
+
+    /* MEDIUM */
+
+    // Default color
+
+    {
+      id: "badge_default_solid_md_icon",
+      tag: "badge_default_solid_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Solid'
+      },
+    },
+    {
+      id: "badge_default_outline_md_icon",
+      tag: "badge_default_outline_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Default Outline'
+      },
+    },
+    {
+      id: "badge_default_soft_md_icon",
+      tag: "badge_default_soft_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Soft'
+      },
+    },
+
+    // Primary color
+
+    {
+      id: "badge_primary_solid_md_icon",
+      tag: "badge_primary_solid_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Solid'
+      },
+    },
+    {
+      id: "badge_primary_outline_md_icon",
+      tag: "badge_primary_outline_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Primary Outline'
+      },
+    },
+    {
+      id: "badge_primary_soft_md_icon",
+      tag: "badge_primary_soft_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Soft'
+      },
+    },
+
+
+    // Secondary color
+
+    {
+      id: "badge_secondary_solid_md_icon",
+      tag: "badge_secondary_solid_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Solid'
+      },
+    },
+    {
+      id: "badge_secondary_outline_md_icon",
+      tag: "badge_secondary_outline_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'secondary',
+        label: 'Secondary Outline'
+      },
+    },
+    {
+      id: "badge_secondary_soft_md_icon",
+      tag: "badge_secondary_soft_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Soft'
+      },
+    },
+
+    // Success color
+
+    {
+      id: "badge_success_solid_md_icon",
+      tag: "badge_success_solid_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Solid'
+      },
+    },
+    {
+      id: "badge_success_outline_md_icon",
+      tag: "badge_success_outline_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'success',
+        label: 'Success Outline'
+      },
+    },
+    {
+      id: "badge_success_soft_md_icon",
+      tag: "badge_success_soft_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Soft'
+      },
+    },
+
+
+    // Error color
+
+    {
+      id: "badge_error_solid_md_icon",
+      tag: "badge_error_solid_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Solid'
+      },
+    },
+    {
+      id: "badge_error_outline_md_icon",
+      tag: "badge_error_outline_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'destructive',
+        label: 'Error Outline'
+      },
+    },
+    {
+      id: "badge_error_soft_md_icon",
+      tag: "badge_error_soft_md_icon",
+      componentName: "badge",
+      properties: {
+        size: "md",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Soft'
+      },
+    },
+
+    /* LARGE */
+
+    // Default color
+
+    {
+      id: "badge_default_solid_lg_icon",
+      tag: "badge_default_solid_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Solid'
+      },
+    },
+    {
+      id: "badge_default_outline_lg_icon",
+      tag: "badge_default_outline_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Default Outline'
+      },
+    },
+    {
+      id: "badge_default_soft_lg_icon",
+      tag: "badge_default_soft_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Default Soft'
+      },
+    },
+
+    // Primary color
+
+    {
+      id: "badge_primary_solid_lg_icon",
+      tag: "badge_primary_solid_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Solid'
+      },
+    },
+    {
+      id: "badge_primary_outline_lg_icon",
+      tag: "badge_primary_outline_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'primary',
+        label: 'Primary Outline'
+      },
+    },
+    {
+      id: "badge_primary_soft_lg_icon",
+      tag: "badge_primary_soft_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'primary',
+        label: 'Primary Soft'
+      },
+    },
+
+
+    // Secondary color
+
+    {
+      id: "badge_secondary_solid_lg_icon",
+      tag: "badge_secondary_solid_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Solid'
+      },
+    },
+    {
+      id: "badge_secondary_outline_lg_icon",
+      tag: "badge_secondary_outline_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'secondary',
+        label: 'Secondary Outline'
+      },
+    },
+    {
+      id: "badge_secondary_soft_lg_icon",
+      tag: "badge_secondary_soft_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'secondary',
+        label: 'Secondary Soft'
+      },
+    },
+
+    // Success color
+
+    {
+      id: "badge_success_solid_lg_icon",
+      tag: "badge_success_solid_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Solid'
+      },
+    },
+    {
+      id: "badge_success_outline_lg_icon",
+      tag: "badge_success_outline_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'success',
+        label: 'Success Outline'
+      },
+    },
+    {
+      id: "badge_success_soft_lg_icon",
+      tag: "badge_success_soft_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'success',
+        label: 'Success Soft'
+      },
+    },
+
+
+    // Error color
+
+    {
+      id: "badge_error_solid_lg_icon",
+      tag: "badge_error_solid_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'solid',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Solid'
+      },
+    },
+    {
+      id: "badge_error_outline_lg_icon",
+      tag: "badge_error_outline_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'outline',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'end'
+        },
+        color: 'destructive',
+        label: 'Error Outline'
+      },
+    },
+    {
+      id: "badge_error_soft_lg_icon",
+      tag: "badge_error_soft_lg_icon",
+      componentName: "badge",
+      properties: {
+        size: "lg",
+        variant: 'soft',
+        iconProperties: {
+          showIcon: true,
+          iconName: 'Info',
+          iconPlacement: 'start'
+        },
+        color: 'destructive',
+        label: 'Error Soft'
+      },
+    },
+
   ]
 };
 

@@ -12,6 +12,7 @@ import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
+import { isLayout } from '../modules/page/generatePage';
 
 export function resolveCodeBlocks(
   page: PageConfig,
@@ -30,6 +31,14 @@ export function resolveCodeBlocks(
     page.references.forEach((ref) => {
       codeBlock += '\n' + renderReference(ref) + '\n';
     });
+  }
+
+  if(isLayout(page.components)) {
+    const containsNavigations = hasNavigationInteraction(page.components);
+
+    if (containsNavigations) {
+      codeBlock += '\n' + `const router = useRouter()` + '\n';
+    }
   }
 
   if (page.functions) {
@@ -82,11 +91,6 @@ function resolveComponentCodeBlocks(
     if (baseComponent.codeBlock) codeBlock += replaceTemplate(baseComponent.codeBlock, { id });
 
     if (config.interactions) {
-      const containsNavigations = Object.entries(config.interactions).some(([_, value]) => value.type === 'navigate' && value.navigate?.path);
-
-      if(containsNavigations) {
-        codeBlock += '\n' + `const router = useRouter()` + '\n'
-      }
 
       Object.entries(config.interactions).forEach(([_, value]) => {
         if (value.type === 'function' && value.function?.fnCustomCode?.fnCode)
@@ -133,3 +137,14 @@ export const renderReference = (reference: Reference) => {
 export const renderNavigate = (navigate: Navigate) => {
   return renderSyncTemplate(TEMPLATES.DEFAULT_NAVIGATE, { resourceConfig: navigate });
 };
+
+function hasNavigationInteraction(layout: Layout): boolean {
+
+  const containsNavigate = Object.values(layout.interactions || {}).some(
+    (interaction) => interaction.type === 'navigate' && !!interaction.navigate?.path
+  );
+
+  if (containsNavigate) return true;
+
+  return (layout.children || []).some(hasNavigationInteraction);
+}

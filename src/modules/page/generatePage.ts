@@ -43,6 +43,6 @@ const renderPage = async (context: RenderContext<PageConfig, PageConfig>) => {
   return await renderTemplate(TEMPLATES.PAGE, context);
 };
 
-function isLayout(obj: any): obj is Layout {
+export function isLayout(obj: any): obj is Layout {
   return obj && typeof obj === 'object' && 'componentName' in obj && 'tag' in obj;
 }
