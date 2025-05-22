@@ -176,7 +176,8 @@ export const INTERACTIONS_TYPES = {
   DATE: "Date",
   VALUE: "Value",
   DEFAULT_VALUE: "Default Value",
-  OPTIONS: "Options"
+  OPTIONS: "Options",
+  CUSTOMIZE: "Customize"
 }
 
 export const INTERACTIONS_DEFAULTS = {

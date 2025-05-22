@@ -56,10 +56,12 @@ const tableLayout: Layout = {
             variant: 'outline',
             headerType: 'sortToggle'
           },
-          data: {
-            value: {
-              id: 'row_regime_value',
-              code: `getRegimeLabel(row.getValue("regime"))`
+          interactions: {
+            customize: {
+              type: 'function',
+              function: {
+                fnName: 'getRegimeLabel'
+              }
             }
           }
         },
@@ -72,10 +74,12 @@ const tableLayout: Layout = {
             variant: 'outline',
             headerType: 'sortToggle'
           },
-          data: {
-            value: {
-              id: 'row_legal_status_value',
-              code: `getLegalStatusLabel(row.getValue("estatuto"))`
+          interactions: {
+            customize: {
+              type: 'function',
+              function: {
+                fnName: 'getLegalStatusLabel'
+              }
             }
           }
         },
@@ -98,10 +102,12 @@ const tableLayout: Layout = {
             variant: 'secondary',
             headerType: 'sortToggle'
           },
-          data: {
-            value: {
-              id: 'row_status_value',
-              code: `getStatusLabel(row.getValue("estado"))`
+          interactions: {
+            customize: {
+              type: 'function',
+              function: {
+                fnName: 'getStatusBadge'
+              }
             }
           }
         },
@@ -1145,18 +1151,19 @@ const pageConfig: PageConfig = {
         {
           id: 'arg_value1',
           name: 'value',
-          type: 'string',
+          type: 'TaxPayer',
           isNullable: true
         }
       ],
       imports: [
       ],
       code: `
-      if(!value) return 'N/A'
-      return selectLegalStatus_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      if(!value) return {}
+      const label = selectLegalStatus_fltOptions.find((it) => it.value === value.estatuto)?.label ?? 'N/E'
+      return { label }
       `,
       returnValue: {
-        type: 'string',
+        type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
         isNullable: false,
       },
     },
@@ -1167,44 +1174,46 @@ const pageConfig: PageConfig = {
         {
           id: 'arg_value1',
           name: 'value',
-          type: 'string',
+          type: 'TaxPayer',
           isNullable: true
         }
       ],
       imports: [
       ],
       code: `
-      if(!value) return 'N/A'
-      return selectRegime_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      if(!value) return {}
+      const label = selectRegime_fltOptions.find((it) => it.value === value.regime)?.label ?? 'N/E'
+      return { label }
       `,
       returnValue: {
-        type: 'string',
+        type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
         isNullable: false,
       },
     },
     {
       id: 'status_label_fn',
-      name: 'getStatusLabel',
+      name: 'getStatusBadge',
       arguments: [
         {
           id: 'arg_value1',
           name: 'value',
-          type: 'string',
+          type: 'TaxPayer',
           isNullable: true
         }
       ],
       imports: [
       ],
       code: `
-      if(!value) return 'N/A'
-      return selectStatus_fltOptions.find((it) => it.value === value)?.label ?? 'N/E'
+      if(!value) return {}
+      const label = selectStatus_fltOptions.find((it) => it.value === value.estado)?.label ?? 'N/E'
+      const bgClass = value.estado === 'ATIVO'? 'bg-green-500' : value.estado === 'CESSADO'? 'bg-yellow-500' : 'bg-red-500' 
+      return { label, bgClass }
       `,
       returnValue: {
-        type: 'string',
+        type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
         isNullable: false,
       },
     },
-
     {
       id: 'remove_accents_util_fn',
       name: 'removeAccents',

@@ -1,5 +1,12 @@
-import { commonProperties, commonPropertiesMapping, dataCommonProperties } from '../../../default/properties';
+import {
+  baseInteraction,
+  commonProperties,
+  commonPropertiesMapping,
+  dataCommonProperties,
+} from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
+import { InteractionFieldVisibility } from '../../../../interfaces/types';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
 export function tableBadgeCellProperties() {
   return {
@@ -32,6 +39,25 @@ export function tableBadgeCellChildPropertiesMapping() {
   };
 }
 
+function customizeConfirmInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: false },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: false },
+      fnCode: { visible: true },
+      actionCode: { visible: false }
+    },
+  }
+}
+
+export function tableBadgeCellInteractions() {
+  return {
+    customize: { ...baseInteraction(undefined, INTERACTIONS_TYPES.CUSTOMIZE, undefined, customizeConfirmInteractionFieldVisibility()), required: true },
+  };
+}
 
 export function tableBadgeCellVariants() {
   return {
