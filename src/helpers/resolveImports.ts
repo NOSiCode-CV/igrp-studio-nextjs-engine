@@ -56,6 +56,12 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(page?.references) {
+    page.references.forEach((ref) => {
+      ref.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
   if(page?.imports) {
     page.imports.map((it) => it.namespace).forEach((imp) => imports.add(imp));
   }
@@ -104,7 +110,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
               value?.function.fnCustomCode?.imports?.forEach((imp: any) => imports.add(imp.namespace));
             }
             if(value.navigate && value.type === 'navigate') {
-              imports.add(`import { router } from "next/client";`)
+              imports.add(`import { useRouter } from "next/navigation";`)
             }
           }
 

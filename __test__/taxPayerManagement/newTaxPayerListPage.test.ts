@@ -287,18 +287,13 @@ export const taxPayerLayout: Layout = {
       function: {
         fnCustomCode: {
           fnCode: `
-        
-const totalContribuintes = contentTabletable_taxpayers.length
-const ativosCount = contentTabletable_taxpayers.filter((c) => c.estado === "ATIVO").length
-const regimeCount = contentTabletable_taxpayers.filter((c) => c.regime === "REGIME_GERAL").length
-const privadoCount = contentTabletable_taxpayers.filter((c) => c.regime === "CONTA_PROPRIA").length
 
 useEffect(() => {
   updateTabletable_taxpayers()
   loadLegalStatusFltCombobox()
   loadRegimeFltCombobox()
   loadStatusFltCombobox()
-},[statusFilter, legalStatusFilter, regimeFilter, dateFilter, filterValue])
+},[statusFilter, legalStatusFilter, regimeFilter, dateFilter, filterValue, contentTabletable_taxpayers])
 
 const updateTabletable_taxpayers = async () => {
  
@@ -335,6 +330,11 @@ const updateTabletable_taxpayers = async () => {
   }
   
   setContentTabletable_taxpayers(data)
+  
+  setTotalContribuintes(contentTabletable_taxpayers.length)
+  setAtivosCount(contentTabletable_taxpayers.filter((c) => c.estado === "ATIVO").length)
+  setRegimeCount(contentTabletable_taxpayers.filter((c) => c.regime === "REGIME_GERAL").length)
+  setPrivadoCount(contentTabletable_taxpayers.filter((c) => c.regime === "CONTA_PROPRIA").length)
   
 }
              
@@ -506,437 +506,102 @@ const loadRegimeFltCombobox = async () => {
             {
               id: 'total_stat_box',
               tag: 'total_stat_box',
-              componentName: 'card',
+              componentName: 'statsCard',
               properties: {
-                className: 'overflow-hidden p-0',
+                title: 'Total Geral',
+                iconProperties: {
+                  iconName: 'Building',
+                  showIcon: true
+                },
+                border: true,
+                borderPosition: 'top',
+                variant: 'primary'
               },
-              children: [
-                // TODO: <div className="h-1 bg-blue-500 w-full" />
-                {
-                  id: 'total_stat_box_colored_line',
-                  tag: 'total_stat_box_colored_line',
-                  componentName: 'section',
-                  properties: {
-                    className: 'h-1 bg-blue-500 w-full',
-                  },
-                },
-                {
-                  id: 'total_stat_box_content',
-                  tag: 'total_stat_box_content',
-                  componentName: 'cardContent',
-                  properties: {
-                    className: 'p-3'
-                  },
-                  children: [
-                    {
-                      id: 'total_stat_box_content_row',
-                      tag: 'total_stat_box_content_row',
-                      componentName: 'flex',
-                      properties: {
-                        variant: 'justify-between',
-                        className: 'items-center',
-                      },
-                      children: [
-                        // TODO: handle this with div instead of section
-                        {
-                          id: 'total_stat_box_texts',
-                          tag: 'total_stat_box_texts',
-                          componentName: 'section',
-                          properties: {},
-                          children: [
-                            {
-                              id: 'total_stat_box_total_p',
-                              tag: 'total_stat_box_total_p',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-xs text-muted-foreground font-medium',
-                              },
-                              content: 'Total Geral',
-                            },
-                            {
-                              id: 'total_stat_box_total_v',
-                              tag: 'total_stat_box_total_v',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-2xl font-bold',
-                              },
-                              content: '{totalContribuintes}',
-                            },
-                          ],
-                        },
-                        {
-                          id: 'total_stat_box_icon',
-                          tag: 'total_stat_box_icon',
-                          componentName: 'section',
-                          properties: {
-                            className:
-                              'h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center',
-                          },
-                          children: [
-                            {
-                              id: 'total_building_icon',
-                              tag: 'total_building_icon',
-                              componentName: 'icon',
-                              properties: {
-                                iconName: 'Building',
-                                className: 'h-4 w-4 text-blue-500',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
+              data: {
+                value: {
+                  state: {
+                    id: 'total_statbox_value_st',
+                    name: 'totalContribuintes',
+                    type: 'number',
+                    defaultValue: '0'
+                  }
+                }
+              }
             },
             {
               id: 'ativos_stat_box',
               tag: 'ativos_stat_box',
-              componentName: 'card',
+              componentName: 'statsCard',
               properties: {
-                className: 'overflow-hidden p-0',
+                title: 'Total Ativos',
+                iconProperties: {
+                  iconName: 'CircleCheck',
+                  showIcon: true
+                },
+                border: true,
+                borderPosition: 'top',
+                variant: 'success'
               },
-              children: [
-                // TODO: <div className="h-1 bg-green-500 w-full" />
-                {
-                  id: 'ativos_stat_box_colored_line',
-                  tag: 'ativos_stat_box_colored_line',
-                  componentName: 'section',
-                  properties: {
-                    className: 'h-1 bg-green-500 w-full',
-                  },
-                },
-                {
-                  id: 'ativos_stat_box_content',
-                  tag: 'ativos_stat_box_content',
-                  componentName: 'cardContent',
-                  properties: {
-                    className: 'p-3',
-                  },
-                  children: [
-                    {
-                      id: 'ativos_stat_box_content_row',
-                      tag: 'ativos_stat_box_content_row',
-                      componentName: 'flex',
-                      properties: {
-                        variant: 'justify-between',
-                        className: 'items-center',
-                      },
-                      children: [
-                        // TODO: handle this with div instead of section
-                        {
-                          id: 'ativos_stat_box_texts',
-                          tag: 'ativos_stat_box_texts',
-                          componentName: 'section',
-                          properties: {},
-                          children: [
-                            {
-                              id: 'ativos_stat_box_total_p',
-                              tag: 'ativos_stat_box_total_p',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-xs text-muted-foreground font-medium',
-                              },
-                              content: 'Total Ativos',
-                            },
-                            {
-                              id: 'ativos_stat_box_total_v',
-                              tag: 'ativos_stat_box_total_v',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-2xl font-bold',
-                              },
-                              content: '{ativosCount}',
-                            },
-                          ],
-                        },
-                        {
-                          id: 'ativos_stat_box_icon',
-                          tag: 'ativos_stat_box_icon',
-                          componentName: 'section',
-                          properties: {
-                            className:
-                              'h-8 w-8 rounded-full bg-green-100 flex items-center justify-center',
-                          },
-                          children: [
-                            {
-                              id: 'total_check_circle_icon',
-                              tag: 'total_check_circle_icon',
-                              componentName: 'icon',
-                              properties: {
-                                iconName: 'CircleCheck',
-                                className: 'h-4 w-4 text-green-500',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
+              data: {
+                value: {
+                  state: {
+                    id: 'ativos_statbox_value_st',
+                    name: 'ativosCount',
+                    type: 'number',
+                    defaultValue: '0'
+                  }
+                }
+              }
             },
-            /*{
-              id: 'inativos_stat_box',
-              tag: 'inativos_stat_box',
-              componentName: 'card',
-              properties: {
-                className: 'overflow-hidden p-0',
-              },
-              children: [
-                // TODO: <div className="h-1 bg-red-500 w-full" />
-                {
-                  id: 'inativos_stat_box_colored_line',
-                  tag: 'inativos_stat_box_colored_line',
-                  componentName: 'section',
-                  properties: {
-                    className: 'h-1 bg-red-500 w-full',
-                  },
-                },
-                {
-                  id: 'inativos_stat_box_content',
-                  tag: 'inativos_stat_box_content',
-                  componentName: 'cardContent',
-                  properties: {
-                    className: 'p-3',
-                  },
-                  children: [
-                    {
-                      id: 'inativos_stat_box_content_row',
-                      tag: 'inativos_stat_box_content_row',
-                      componentName: 'flex',
-                      properties: {
-                        variant: 'justify-between',
-                        className: 'items-center',
-                      },
-                      children: [
-                        // TODO: handle this with div instead of section
-                        {
-                          id: 'inativos_stat_box_texts',
-                          tag: 'inativos_stat_box_texts',
-                          componentName: 'section',
-                          properties: {},
-                          children: [
-                            {
-                              id: 'inativos_stat_box_total_p',
-                              tag: 'inativos_stat_box_total_p',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-xs text-muted-foreground font-medium',
-                              },
-                              content: 'Inativos',
-                            },
-                            {
-                              id: 'inativos_stat_box_total_v',
-                              tag: 'inativos_stat_box_total_v',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-2xl font-bold',
-                              },
-                              content: '{inativosCount}',
-                            },
-                          ],
-                        },
-                        {
-                          id: 'inativos_stat_box_icon',
-                          tag: 'inativos_stat_box_icon',
-                          componentName: 'section',
-                          properties: {
-                            className:
-                              'h-8 w-8 rounded-full bg-red-100 flex items-center justify-center',
-                          },
-                          children: [
-                            {
-                              id: 'inativos_check_circle_icon',
-                              tag: 'inativos_check_circle_icon',
-                              componentName: 'icon',
-                              properties: {
-                                iconName: 'CircleX',
-                                className: 'h-4 w-4 text-red-500',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },*/
             {
               id: 'regime_stat_box',
               tag: 'regime_stat_box',
-              componentName: 'card',
+              componentName: 'statsCard',
               properties: {
-                className: 'overflow-hidden p-0',
+                title: 'Total Regime Geral',
+                iconProperties: {
+                  iconName: 'Briefcase',
+                  showIcon: true
+                },
+                border: true,
+                borderPosition: 'top',
+                variant: 'secondary'
               },
-              children: [
-                // TODO: <div className="h-1 bg-blue-500 w-full" />
-                {
-                  id: 'regime_stat_box_colored_line',
-                  tag: 'regime_stat_box_colored_line',
-                  componentName: 'section',
-                  properties: {
-                    className: 'h-1 bg-purple-500 w-full',
-                  },
-                },
-                {
-                  id: 'regime_stat_box_content',
-                  tag: 'regime_stat_box_content',
-                  componentName: 'cardContent',
-                  properties: {
-                    className: 'p-3',
-                  },
-                  children: [
-                    {
-                      id: 'regime_stat_box_content_row',
-                      tag: 'regime_stat_box_content_row',
-                      componentName: 'flex',
-                      properties: {
-                        variant: 'justify-between',
-                        className: 'items-center',
-                      },
-                      children: [
-                        // TODO: handle this with div instead of section
-                        {
-                          id: 'regime_stat_box_texts',
-                          tag: 'regime_stat_box_texts',
-                          componentName: 'section',
-                          properties: {},
-                          children: [
-                            {
-                              id: 'regime_stat_box_total_p',
-                              tag: 'regime_stat_box_total_p',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-xs text-muted-foreground font-medium',
-                              },
-                              content: 'Total Regime Geral',
-                            },
-                            {
-                              id: 'regime_stat_box_total_v',
-                              tag: 'regime_stat_box_total_v',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-2xl font-bold',
-                              },
-                              content: '{regimeCount}',
-                            },
-                          ],
-                        },
-                        {
-                          id: 'regime_stat_box_icon',
-                          tag: 'regime_stat_box_icon',
-                          componentName: 'section',
-                          properties: {
-                            className:
-                              'h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center',
-                          },
-                          children: [
-                            {
-                              id: 'regime_briefcase_icon',
-                              tag: 'regime_briefcase_icon',
-                              componentName: 'icon',
-                              properties: {
-                                iconName: 'Briefcase',
-                                className: 'h-4 w-4 text-purple-500',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
+              data: {
+                value: {
+                  state: {
+                    id: 'regime_statbox_value_st',
+                    name: 'regimeCount',
+                    type: 'number',
+                    defaultValue: '0'
+                  }
+                }
+              }
             },
             {
               id: 'privado_stat_box',
               tag: 'privado_stat_box',
-              componentName: 'card',
+              componentName: 'statsCard',
               properties: {
-                className: 'overflow-hidden p-0',
+                title: 'Total Conta Própria',
+                iconProperties: {
+                  iconName: 'Users',
+                  showIcon: true
+                },
+                border: true,
+                borderPosition: 'top',
+                variant: 'indigo'
               },
-              children: [
-                // TODO: <div className="h-1 bg-amber-500 w-full" />
-                {
-                  id: 'privado_stat_box_colored_line',
-                  tag: 'privado_stat_box_colored_line',
-                  componentName: 'section',
-                  properties: {
-                    className: 'h-1 bg-amber-500 w-full',
-                  },
-                },
-                {
-                  id: 'privado_stat_box_content',
-                  tag: 'privado_stat_box_content',
-                  componentName: 'cardContent',
-                  properties: {
-                    className: 'p-3',
-                  },
-                  children: [
-                    {
-                      id: 'privado_stat_box_content_row',
-                      tag: 'privado_stat_box_content_row',
-                      componentName: 'flex',
-                      properties: {
-                        variant: 'justify-between',
-                        className: 'items-center',
-                      },
-                      children: [
-                        // TODO: handle this with div instead of section
-                        {
-                          id: 'privado_stat_box_texts',
-                          tag: 'privado_stat_box_texts',
-                          componentName: 'section',
-                          properties: {},
-                          children: [
-                            {
-                              id: 'privado_stat_box_total_p',
-                              tag: 'privado_stat_box_total_p',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-xs text-muted-foreground font-medium',
-                              },
-                              content: 'Total Conta Própria',
-                            },
-                            {
-                              id: 'privado_stat_box_total_v',
-                              tag: 'privado_stat_box_total_v',
-                              componentName: 'paragraph',
-                              properties: {
-                                className: 'text-2xl font-bold',
-                              },
-                              content: '{privadoCount}',
-                            },
-                          ],
-                        },
-                        {
-                          id: 'privado_stat_box_icon',
-                          tag: 'privado_stat_box_icon',
-                          componentName: 'section',
-                          properties: {
-                            className:
-                              'h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center',
-                          },
-                          children: [
-                            {
-                              id: 'privado_users_icon',
-                              tag: 'privado_users_icon',
-                              componentName: 'icon',
-                              properties: {
-                                iconName: 'Users',
-                                className: 'h-4 w-4 text-amber-500',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
+              data: {
+                value: {
+                  state: {
+                    id: 'privado_statbox_value_st',
+                    name: 'privadoCount',
+                    type: 'number',
+                    defaultValue: '0'
+                  }
+                }
+              }
             },
           ],
         },
@@ -1323,6 +988,7 @@ const pageConfig: PageConfig = {
     { id: 'igrp_select', namespace: 'import { IGRPSelect } from "@igrp/igrp-framework-react-design-system";' },
     { id: 'igrp_badge', namespace: 'import { IGRPBadge } from "@igrp/igrp-framework-react-design-system";' },
     { id: 'igrp_datepicker', namespace: 'import { IGRPDatePicker } from "@igrp/igrp-framework-react-design-system";' },
+    { id: 'igrp_options_props', namespace: 'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";' },
   ],
   states: [
     {
@@ -1364,19 +1030,19 @@ const pageConfig: PageConfig = {
     {
       id: 'slt_legal_status_filter_st',
       name: 'selectLegalStatus_fltOptions',
-      type: 'SelectOptions[]',
+      type: 'IGRPOptionsProps[]',
       defaultValue: '[]'
     },
     {
       id: 'slt_status_filter_st',
       name: 'selectStatus_fltOptions',
-      type: 'SelectOptions[]',
+      type: 'IGRPOptionsProps[]',
       defaultValue: '[]'
     },
     {
       id: 'slt_regime_filter_st',
       name: 'selectRegime_fltOptions',
-      type: 'SelectOptions[]',
+      type: 'IGRPOptionsProps[]',
       defaultValue: '[]'
     },
     {
@@ -1454,25 +1120,6 @@ const pageConfig: PageConfig = {
       ],
       "path": "@/app/(myapp)/data/types"
     },
-    {
-      "componentId": "",
-      "name": "SelectOptions",
-      "fields": [
-        {
-          "componentId": "",
-          "name": "value",
-          "type": "string",
-          "required": true
-        },
-        {
-          "componentId": "",
-          "name": "label",
-          "type": "string",
-          "required": true
-        }
-      ],
-      "path": "@/app/(myapp)/data/types"
-    }
   ],
   functions: [
     {
@@ -1634,7 +1281,7 @@ const pageConfig: PageConfig = {
       arguments: [],
       path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
-        type: 'SelectOptions',
+        type: 'IGRPOptionsProps',
         isList: true,
         isNullable: false,
       },
@@ -1646,7 +1293,7 @@ const pageConfig: PageConfig = {
       arguments: [],
       path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
-        type: 'SelectOptions',
+        type: 'IGRPOptionsProps',
         isList: true,
         isNullable: false,
       },
@@ -1658,7 +1305,7 @@ const pageConfig: PageConfig = {
       arguments: [],
       path: "@/app/(myapp)/actions/mock-actions",
       returnValue: {
-        type: 'SelectOptions',
+        type: 'IGRPOptionsProps',
         isList: true,
         isNullable: false,
       },

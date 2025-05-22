@@ -3,7 +3,7 @@ import {
   tableAlertDropdownItemProperties,
   tableAlertDropdownItemVariants,
   tableAlertDropdownItemChildProperties,
-  tableAlertDropdownItemChildPropertiesMapping,
+  tableAlertDropdownItemChildPropertiesMapping, tableAlertDropdownItemInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -26,6 +26,7 @@ export default {
     component.loadLabel('Alert Item')
     component.getProperties(tableAlertDropdownItemProperties());
     component.getPropertiesMapping(tableAlertDropdownItemPropertiesMapping());
+    component.getInteractions(tableAlertDropdownItemInteractions());
     component.getChildProperties(tableAlertDropdownItemChildProperties());
     component.getChildPropertiesMapping(tableAlertDropdownItemChildPropertiesMapping());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_ALERT_DROPDOWN_ITEM }))

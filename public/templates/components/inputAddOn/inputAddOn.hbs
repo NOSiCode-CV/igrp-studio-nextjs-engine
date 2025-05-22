@@ -17,11 +17,6 @@
   {{#if resourceConfig.properties.floatingLabel}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.options}}
-  options={ {{{json resourceConfig.properties.options}}} }
-  {{else}}
-  options={ [] }
-  {{/if~}}
   {{#if resourceConfig.properties.helperText}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
@@ -68,6 +63,9 @@
   {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

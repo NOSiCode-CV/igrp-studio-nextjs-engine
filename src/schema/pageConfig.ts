@@ -11,7 +11,7 @@ import {
   CustomFunctionConfig,
   ReturnValue,
   Argument,
-  Import, State,
+  Import, State, Reference,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -34,6 +34,38 @@ const importSchema: JSONSchemaType<Import> = {
 }
 
 const stateSchema: JSONSchemaType<State> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+  },
+  required: ['id', 'type', 'name'],
+  additionalProperties: false,
+}
+
+const referenceSchema: JSONSchemaType<Reference> = {
   type: 'object',
   properties: {
     id: {
@@ -154,7 +186,12 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
       nullable: true,
       items: stateSchema,
       errorMessage: 'The states attribute must be an array of valid state definition configuration.'
-    }
+    },
+    isAsync: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is async argument must be a valid boolean.'
+    },
   },
   required: ['name', 'code', 'id', 'returnValue', 'arguments'],
   additionalProperties: false,
@@ -178,6 +215,11 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
     required: {
       type: 'boolean',
       errorMessage: 'The required must be a valid boolean.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is list attribute must be a valid boolean.'
     },
     validation: {
       type: 'string',
@@ -221,6 +263,11 @@ const typeDefSchema: JSONSchemaType<TypeDef> = {
       type: 'array',
       items: elementFieldSchema,
       errorMessage: 'The fields must be an array of valid field configuration.'
+    },
+    isMainType: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The main type check, if provided, must be a valid boolean.'
     },
   },
   required: ['name', 'path', 'fields'],
@@ -536,6 +583,12 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       type: 'array',
       nullable: true,
       items: stateSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+    },
+    references: {
+      type: 'array',
+      nullable: true,
+      items: referenceSchema,
       errorMessage: 'The states attribute must be an array of valid state definition configuration.'
     }
   },

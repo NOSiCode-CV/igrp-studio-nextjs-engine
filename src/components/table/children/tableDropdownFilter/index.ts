@@ -3,7 +3,7 @@ import {
   tableDropdownFilterProperties,
   tableDropdownFilterVariants,
   tableDropdownFilterChildProperties,
-  tableDropdownFilterChildPropertiesMapping,
+  tableDropdownFilterChildPropertiesMapping, tableDropdownFilterData,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -14,6 +14,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPDataTableFilterDropdown } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableDropdownFilterVariants());
@@ -24,6 +25,7 @@ export default {
     component.getPropertiesMapping(tableDropdownFilterPropertiesMapping());
     component.getChildProperties(tableDropdownFilterChildProperties());
     component.getChildPropertiesMapping(tableDropdownFilterChildPropertiesMapping());
+    component.getData(tableDropdownFilterData())
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_DROPDOWN_FILTER }))
 
     component.loadStates([]);

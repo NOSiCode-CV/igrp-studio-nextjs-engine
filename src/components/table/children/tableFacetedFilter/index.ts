@@ -3,7 +3,7 @@ import {
   tableFacetedFilterProperties,
   tableFacetedFilterVariants,
   tableFacetedFilterChildProperties,
-  tableFacetedFilterChildPropertiesMapping,
+  tableFacetedFilterChildPropertiesMapping, tableFacetedFilterData,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -14,6 +14,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPDataTableFilterFaceted } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableFacetedFilterVariants());
@@ -24,6 +25,7 @@ export default {
     component.getPropertiesMapping(tableFacetedFilterPropertiesMapping());
     component.getChildProperties(tableFacetedFilterChildProperties());
     component.getChildPropertiesMapping(tableFacetedFilterChildPropertiesMapping());
+    component.getData(tableFacetedFilterData())
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_FACETED_FILTER }))
 
     component.loadStates([]);

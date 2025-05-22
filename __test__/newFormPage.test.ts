@@ -36,7 +36,7 @@ const formLayout: Layout = {
           state: {
             id: 'state_Form_1',
             name: 'contentFormform_1',
-            type: 'z.infer<User>',
+            type: 'z.infer<UserZodType>',
             defaultValue: 'initUser',
           },
         }

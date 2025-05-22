@@ -49,11 +49,13 @@ function parseTypeDefinition(
     const fieldName = fieldMatch[1].trim();
     let fieldType = fieldMatch[2].trim();
     fieldType = fieldType.replace(/,\s*$/, '').trim();
-
+    const isList = fieldType.endsWith('[]');
+    fieldType = fieldType.replace(/\[]$/, '')
     fields.push({
       componentId: '',
       name: fieldName,
       type: fieldType,
+      isList,
       required: !fieldMatch[0].includes('?')
     });
   }

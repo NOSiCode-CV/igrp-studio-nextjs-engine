@@ -37,7 +37,7 @@ export function actionProperties(labelTrigger?: string) {
     iconProperties: {
       type: 'object',
       properties: {
-        icon: { type: 'string', required: false, default: "ArrowRight" },
+        iconName: { type: 'string', required: false, default: "ArrowRight" },
       },
     },
     className: { type: 'string', required: false },

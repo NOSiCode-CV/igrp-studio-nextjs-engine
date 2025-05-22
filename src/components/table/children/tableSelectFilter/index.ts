@@ -3,7 +3,7 @@ import {
   tableSelectFilterProperties,
   tableSelectFilterVariants,
   tableSelectFilterChildProperties,
-  tableSelectFilterChildPropertiesMapping,
+  tableSelectFilterChildPropertiesMapping, tableSelectFilterData,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -14,6 +14,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPDataTableFilterSelect } from "@igrp/igrp-framework-react-design-system";',
+      'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadVariants(tableSelectFilterVariants());
@@ -22,6 +23,7 @@ export default {
     component.loadGroup('Filters')
     component.getProperties(tableSelectFilterProperties());
     component.getPropertiesMapping(tableSelectFilterPropertiesMapping());
+    component.getData(tableSelectFilterData());
     component.getChildProperties(tableSelectFilterChildProperties());
     component.getChildPropertiesMapping(tableSelectFilterChildPropertiesMapping());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_SELECT_FILTER }))

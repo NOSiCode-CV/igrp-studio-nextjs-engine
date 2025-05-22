@@ -52,6 +52,7 @@ import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
 import sliderModule, { SLIDER } from './slider';
 import stackModule, { STACK } from './stack';
+import statsCardModule, { STATS_CARD } from './statsCard';
 import switchModule, { SWITCH } from './switch';
 import tableModule, { TABLE } from './table';
 import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCell';
@@ -136,6 +137,7 @@ export function registerAllComponents() {
   register(SELECT, selectModule.register);
   //register(SLIDER, sliderModule.register);
   register(STACK, stackModule.register);
+  register(STATS_CARD, statsCardModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
   register(VERTICAL_BAR_CHART, verticalBarChartModule.register);

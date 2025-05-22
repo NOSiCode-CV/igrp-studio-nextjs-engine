@@ -20,6 +20,7 @@ export interface PageConfig extends IdentifiableElement {
   types: TypeDef[];
   imports?: Import[];
   states?: State[];
+  references?: Reference[];
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
   components?: Layout | {};
@@ -569,6 +570,7 @@ export interface ElementField {
   type: string;
   validation?: string,
   defaultValue?: string,
+  isList?: boolean,
   required: boolean;
 }
 
@@ -577,6 +579,7 @@ export interface TypeDef {
   name: string;
   path: string;
   tags?: string[];
+  isMainType?: boolean,
   fields: ElementField[];
 }
 
@@ -624,6 +627,7 @@ export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElem
   arguments: Argument[],
   imports?: Import[];
   states?: State[];
+  isAsync?: boolean;
   path?: string;
   returnValue: ReturnValue;
 }

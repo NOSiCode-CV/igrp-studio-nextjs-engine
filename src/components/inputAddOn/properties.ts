@@ -56,6 +56,12 @@ export function inputAddOnInteractionsMapping() {
 export function inputAddOnData() {
   return {
     selectValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
+        id: '',
+        name: 'inputAddOn{{id}}Options',
+        type: 'IGRPOptionsProps[]',
+        defaultValue: '[]'
+      }, true), required: true },
   };
 }
 

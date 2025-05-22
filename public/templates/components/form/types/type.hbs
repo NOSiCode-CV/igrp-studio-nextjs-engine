@@ -1,16 +1,22 @@
 {{#each resourceConfig.types}}
 const {{toCamelCase this.name}} = z.object({
   {{#each this.fields}}
-    {{this.name}}: z.{{this.type}}(){{#if @last}}{{else}},{{/if}}
+    {{this.name}}: {{resolveZodTypes this}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
 })
 
-type {{capitalize this.name}} = typeof {{toCamelCase this.name}};
+type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
 
-const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}> = {
+const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {
   {{#each this.fields}}
     {{this.name}}: {{{resolveStateDefault this.defaultValue this.type}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
 }
 
+{{!--{{#if this.isMainType}}
+const form{{capitalize this.name}} = useForm<z.infer<{{capitalize this.name}}ZodType>>({
+    resolver: zodResolver({{toCamelCase this.name}}),
+    defaultValues: init{{capitalize this.name}}
+})
+{{/if}}--}}
 {{/each}}

@@ -123,4 +123,9 @@
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if~}}
 >
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
 </IGRPModalDialog>

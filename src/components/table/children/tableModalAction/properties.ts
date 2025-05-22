@@ -1,11 +1,13 @@
 import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
+import { InteractionFieldVisibility } from '../../../../interfaces/types';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
 export function tableModalActionProperties() {
   return {
     ...actionProperties('Modal'),
     type: { type: 'string', required: true, default: 'modal' },
-    title: { type: 'string', required: false, default: 'New Modal' },
+    modalTitle: { type: 'string', required: false, default: 'New Modal' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
     classNameCancel: { type: 'string', required: false },
@@ -37,9 +39,24 @@ export function tableModalActionChildPropertiesMapping() {
   };
 }
 
+function onClickConfirmInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
+
 export function tableModalActionInteractions() {
   return {
-    onClickConfirm: { ...baseInteraction, required: true, default: "(e) => handle{{id}}Click(e)" },
+    onClickConfirm: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ON_CLICK_CONFIRM, undefined, onClickConfirmInteractionFieldVisibility()), required: true },
   };
 }
 

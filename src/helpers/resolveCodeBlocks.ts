@@ -1,8 +1,11 @@
 import {
   CustomFunctionConfig,
   FunctionDef,
-  Layout, Navigate,
-  PageConfig, Reference, State,
+  Layout,
+  Navigate,
+  PageConfig,
+  Reference,
+  State,
   TypeDef,
 } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
@@ -10,89 +13,121 @@ import { Component } from '../components';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 
-export function resolveCodeBlocks(page: PageConfig, config: Layout, registry: Record<string, Component>): string {
+export function resolveCodeBlocks(
+  page: PageConfig,
+  config: Layout,
+  registry: Record<string, Component>,
+): string {
+  let codeBlock: string = '';
 
-  let codeBlock : string = ''
-
-  if(page.states) {
+  if (page.states) {
     page.states.forEach((state) => {
-      codeBlock += '\n' + renderState(state) + '\n'
+      codeBlock += '\n' + renderState(state) + '\n';
     });
   }
 
-  if(page.functions) {
-
-    page.functions.flatMap((fn) => fn.states ?? []).forEach((state) => {
-      codeBlock += '\n' + renderState(state) + '\n'
+  if (page.references) {
+    page.references.forEach((ref) => {
+      codeBlock += '\n' + renderReference(ref) + '\n';
     });
+  }
+
+  if (page.functions) {
+    page.functions
+      .flatMap((fn) => fn.states ?? [])
+      .forEach((state) => {
+        codeBlock += '\n' + renderState(state) + '\n';
+      });
 
     page.functions.forEach((fun) => {
-      if(!fun.path) {
+      if (!fun.path) {
         codeBlock += '\n' + renderFunction(fun) + '\n';
       }
     });
-
   }
 
-  if(page.actions) {
-
-    page.actions.flatMap((fn) => fn.states ?? []).forEach((state) => {
-      codeBlock += '\n' + renderState(state) + '\n'
-    });
+  if (page.actions) {
+    page.actions
+      .flatMap((fn) => fn.states ?? [])
+      .forEach((state) => {
+        codeBlock += '\n' + renderState(state) + '\n';
+      });
 
     page.actions.forEach((act) => {
-      codeBlock += '\n' + act.code + '\n'
+      codeBlock += '\n' + act.code + '\n';
     });
   }
 
   if (config) {
     codeBlock += resolveComponentCodeBlocks(page, config, registry);
   }
-  
-  return codeBlock
 
+  return codeBlock;
 }
 
-function resolveComponentCodeBlocks(page: PageConfig, config: Layout, registry: Record<string, Component>): string {
+function resolveComponentCodeBlocks(
+  page: PageConfig,
+  config: Layout,
+  registry: Record<string, Component>,
+): string {
+  if (!config) return '';
 
-  if(!config) return ''
+  let codeBlock: string = '';
 
-  let codeBlock : string = ''
+  const baseComponent = registry[config.componentName];
 
-  const baseComponent = registry[config.componentName]
+  if (baseComponent) {
+    const id = config.id;
 
-  if(baseComponent) {
-    const id = config.id
+    if (baseComponent.codeBlock) codeBlock += replaceTemplate(baseComponent.codeBlock, { id });
 
-    if(baseComponent.codeBlock) codeBlock += replaceTemplate(baseComponent.codeBlock, { id })
+    if (config.interactions) {
+      const containsNavigations = Object.entries(config.interactions).some(([_, value]) => value.type === 'navigate' && value.navigate?.path);
 
-    if(config.interactions) {
+      if(containsNavigations) {
+        codeBlock += '\n' + `const router = useRouter()` + '\n'
+      }
+
       Object.entries(config.interactions).forEach(([_, value]) => {
-        if(value.type === 'function' && value.function?.fnCustomCode?.fnCode) codeBlock += ('\n' + value.function.fnCustomCode.fnCode + '\n')
-        if(value.type === 'navigate' && value.navigate?.path) codeBlock += '\n' + renderNavigate({ id: '', tag: config.tag, name: replaceTemplate(value.navigate.name, { id: config.tag }), path: value.navigate.path }) + '\n'
-      })
+        if (value.type === 'function' && value.function?.fnCustomCode?.fnCode)
+          codeBlock += '\n' + value.function.fnCustomCode.fnCode + '\n';
+        if (value.type === 'navigate' && value.navigate?.path) {
+          codeBlock +=
+            '\n' +
+            renderNavigate({
+              id: '',
+              tag: config.tag,
+              name: replaceTemplate(value.navigate.name, { id: config.tag }),
+              path: value.navigate.path,
+            }) +
+            '\n';
+        }
+      });
+
     }
 
-    config.children?.forEach((child) => codeBlock += resolveComponentCodeBlocks(page, child, registry))
+    config.children?.forEach(
+      (child) => (codeBlock += resolveComponentCodeBlocks(page, child, registry)),
+    );
   }
 
-  return codeBlock
-
+  return codeBlock;
 }
 
 const renderFunction = (fun: CustomFunctionConfig) => {
-  return renderSyncTemplate(
-    TEMPLATES.DEFAULT_FUNCTION,
-    { resourceConfig: fun },
-  );
+  return renderSyncTemplate(TEMPLATES.DEFAULT_FUNCTION, { resourceConfig: fun });
 };
 
 export const renderState = (state: State) => {
-  return renderSyncTemplate(TEMPLATES.DEFAULT_STATE, { resourceConfig: { defaultValue: state.defaultValue ?? 'any', ...state } });
+  return renderSyncTemplate(TEMPLATES.DEFAULT_STATE, {
+    resourceConfig: { defaultValue: state.defaultValue ?? 'any', ...state },
+  });
 };
 
 export const renderReference = (reference: Reference) => {
-  return renderSyncTemplate(TEMPLATES.DEFAULT_REFERENCE, { resourceConfig: { defaultValue: reference.defaultValue ?? 'any', ...reference } });
+  return renderSyncTemplate(TEMPLATES.DEFAULT_REFERENCE, {
+    resourceConfig: { defaultValue: reference.defaultValue ?? 'any', ...reference },
+  });
 };
 
 export const renderNavigate = (navigate: Navigate) => {

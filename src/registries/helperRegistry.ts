@@ -26,7 +26,7 @@ import {
   renderInteractions,
   renderProperties,
   resolveComponent,
-  resolveFirstType, resolveStateDefault,
+  resolveFirstType, resolveStateDefault, resolveZodTypes,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -56,6 +56,7 @@ Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperti
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
+Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);

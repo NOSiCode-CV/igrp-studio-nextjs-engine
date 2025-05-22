@@ -14,7 +14,9 @@ export default {
     component.loadImports([
       'import { IGRPForm } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPFormHandle } from "@igrp/igrp-framework-react-design-system";',
-      'import { z } from "zod";'
+      'import { z } from "zod";',
+      //'import { useForm } from "react-hook-form";',
+      //'import { zodResolver } from "@hookform/resolvers/zod";'
     ]);
 
     component.loadVariants(formVariants());
@@ -35,7 +37,7 @@ export default {
         state: {
           id: '',
           name: 'contentForm{{id}}',
-          type: 'z.infer<{{type}}>',
+          type: 'z.infer<{{type}}ZodType>',
           defaultValue: '{}',
         },
         required: true,
@@ -47,7 +49,7 @@ export default {
         ref: {
           id: '',
           name: 'form{{id}}Ref',
-          type: 'IGRPFormHandle<{{type}}> | null',
+          type: 'IGRPFormHandle<{{type}}ZodType> | null',
           defaultValue: 'null',
         },
         required: true,

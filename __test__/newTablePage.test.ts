@@ -35,8 +35,8 @@ const tableLayout: Layout = {
       },
       children: [
         {
-          id: 'expand',
-          tag: 'expand',
+          id: 'table_default_columns',
+          tag: 'table_default_columns',
           componentName: 'tableColumns',
           properties: {},
           children: [
@@ -73,7 +73,7 @@ const tableLayout: Layout = {
               }
             },
             {
-              id: 'role',
+              id: 'role_text',
               tag: 'role',
               componentName: 'tableTextCell',
               properties: {
@@ -92,6 +92,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'contractDate',
+              tag: 'contractDate',
               componentName: 'tableDateCell',
               properties: {
                 headerTitle: "Contract Date",
@@ -101,6 +102,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'department',
+              tag: 'department',
               componentName: 'tableBadgeCell',
               properties: {
                 headerTitle: 'Department',
@@ -109,6 +111,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'subRole',
+              tag: 'subRole',
               componentName: 'tableBadgeCell',
               properties: {
                 headerTitle: 'Sub-Role',
@@ -117,6 +120,7 @@ const tableLayout: Layout = {
             },
             {
               id: 'actions',
+              tag: 'actions',
               componentName: 'tableActionListCell',
               properties: {
                 type: 'inline',
@@ -125,6 +129,7 @@ const tableLayout: Layout = {
               children: [
                 {
                   id: 'delete',
+                  tag: 'delete',
                   componentName: 'tableAlertAction',
                   properties: {
                     labelTrigger: 'Delete',
@@ -136,10 +141,12 @@ const tableLayout: Layout = {
                 },
                 {
                   id: 'dropdown',
+                  tag: 'dropdown',
                   componentName: 'tableDropdownMenuCell',
                   children: [
                     {
                       id: 'disable',
+                      tag: 'disable',
                       componentName: 'tableAlertDropdownItem',
                       properties: {
                         iconProperties: {
@@ -152,6 +159,7 @@ const tableLayout: Layout = {
                     },
                     {
                       id: 'edit',
+                      tag: 'edit',
                       componentName: 'tableModalDropdownItem',
                       properties: {
                         iconProperties: {
@@ -164,6 +172,7 @@ const tableLayout: Layout = {
                     },
                     {
                       id: 'external',
+                      tag: 'external',
                       componentName: 'tableLinkDropdownItem',
                       properties: {
                         iconProperties: {
@@ -179,6 +188,7 @@ const tableLayout: Layout = {
                 },
                 {
                   id: 'view',
+                  tag: 'view',
                   componentName: 'tableModalAction',
                   properties: {
                     labelTrigger: 'View',
@@ -208,52 +218,70 @@ const tableLayout: Layout = {
         },
         {
           id: 'table_default_filters',
+          tag: 'table_default_filters',
           componentName: 'tableFilters',
           properties: {},
           children: [
             {
-              id: 'contractDate',
+              id: 'contractDate_filter',
+              tag: 'contractDate_filter',
               componentName: 'tableDateFilter',
               properties: {
                 columnId: 'contractDate'
               }
             },
             {
-              id: 'subRole',
+              id: 'subRole_filter',
+              tag: 'subRoleFilter',
               componentName: 'tableDropdownFilter',
               properties: {
+                columnId: 'subRole',
                 placeholder: 'Filter by option...',
-                options: [
-                  { value: 'Master', label: 'Master' },
-                  { value: 'Default', label: 'Default' },
-                  { value: 'Temporary', label: 'Temporary' },
-                ],
-              }
+              },
+              data: {
+                options: {
+                  state: {
+                    id: 'state_filter_1',
+                    name: 'dropdownFiltersubRoleFilterOptions',
+                    type: 'IGRPOptionsProps[]',
+                    defaultValue: '[]'
+                  },
+                }
+              },
             },
             {
-              id: 'role',
+              id: 'role_filter',
+              tag: 'roleFilter',
               componentName: 'tableFacetedFilter',
               properties: {
+                columnId: 'role',
                 placeholder: 'Selecionar',
-                options: [
-                  { value: 'Admin', label: 'Admin' },
-                  { value: 'User', label: 'User' },
-                  { value: 'Guest', label: 'Guest' },
-                ],
-              }
+              },
+              data: {
+                options: {
+                  state: {
+                    id: 'state_filter_2',
+                    name: 'dropdownFilterroleFilterOptions',
+                    type: 'IGRPOptionsProps[]',
+                    defaultValue: '[]'
+                  },
+                }
+              },
             },
             {
-              id: 'department',
+              id: 'department_filter',
+              tag: 'department_filter',
               componentName: 'tableInputFilter',
               properties: {
-
+                columnId: 'department'
               }
             },
             {
-              id: 'salary',
+              id: 'salary_filter',
+              tag: 'salary_filter',
               componentName: 'tableMinMaxFilter',
               properties: {
-
+                columnId: 'salary'
               }
             },
             /*{
@@ -276,18 +304,69 @@ const tableLayout: Layout = {
           function: {
             fnCustomSet: 'contentTabletable_default',
             fnCustomCode: {
-              states: [{ state: `const [contentTabletable_default, setContentTabletable_default] = useState<any>([]);` }],
+              states: [
+                {
+                  id: 'table_default_content_st',
+                  name: 'contentTabletable_default',
+                  type: 'any',
+                  defaultValue: '[]',
+                }
+              ],
               fnCode: `
   useEffect(() => {
+    loadsubRoleFilterFilterOptions()
+    loadroleFilterFilterOptions()
     updateTabletable_default()
   },[])
 
+  const loadsubRoleFilterFilterOptions = () => {
+    setDropdownFiltersubRoleFilterOptions([
+      { value: 'Master', label: 'Master' },
+      { value: 'Default', label: 'Default' },
+      { value: 'Temporary', label: 'Temporary' },
+    ])
+  }
+  
+  const loadroleFilterFilterOptions = () => {
+    setDropdownFilterroleFilterOptions([
+      { value: 'Admin', label: 'Admin' },
+      { value: 'User', label: 'User' },
+      { value: 'Guest', label: 'Guest' },
+    ])
+  }
+
   const updateTabletable_default = async () => {
-    if (service.table_default && service.table_default.populate) {
-      const data = (await service.table_default.populate()).rows
+      const data = [
+        {
+          name: 'John Doe',
+          email: 'john@example.com',
+          role: 'Admin',
+          salary: 220000,
+          contractDate: '01/01/2025',
+          department: 'Administration',
+          subRole: 'Master',
+        },
+        {
+          name: 'Jane Smith',
+          email: 'jane@example.com',
+          role: 'User',
+          salary: 40000,
+          contractDate: '01/02/2025',
+          department: 'HR',
+          subRole: 'Default',
+        },
+        {
+          name: 'Bob Johnson',
+          email: 'bob@example.com',
+          role: 'Guest',
+          salary: 15000,
+          contractDate: '01/03/2025',
+          department: 'Collaborators',
+          subRole: 'Temporary',
+        },
+      ]
       setContentTabletable_default(data)
     }
-  }
             `
             },
           },
@@ -300,6 +379,7 @@ const tableLayout: Layout = {
 
 const pageConfig: PageConfig = {
   id: 't21Mus9lm2m1',
+  types: [],
   type: 'page',
   pageName: 'tables',
   path: 'tables',

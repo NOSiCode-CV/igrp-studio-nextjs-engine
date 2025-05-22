@@ -1,11 +1,11 @@
 import { Component } from '../components';
-import { Layout } from '../interfaces/types';
+import { ElementField, Layout } from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
 import { renderReference } from './resolveCodeBlocks';
-import { capitalize } from './stringHelpers';
+import { capitalize, toCamelCase } from './stringHelpers';
 import { renderCode } from '../utils/renderCode';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
@@ -60,7 +60,8 @@ export function resolveStateDefault(defaultValue?: string, type?: string): strin
 
   // If it's clearly an array, object, number, boolean or null, return as-is
   if (
-    trimmed === 'null' ||
+    type !== 'string' &&
+    (trimmed === 'null' ||
     trimmed === 'undefined' ||
     trimmed === 'true' ||
     trimmed === 'false' ||
@@ -68,7 +69,7 @@ export function resolveStateDefault(defaultValue?: string, type?: string): strin
     trimmed === '{}' ||
     (!isNaN(Number(trimmed)) && trimmed !== '') ||
     (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+    (trimmed.startsWith('{') && trimmed.endsWith('}')))
   ) {
     return trimmed;
   }
@@ -77,6 +78,59 @@ export function resolveStateDefault(defaultValue?: string, type?: string): strin
   return type && type === 'string' ? `\"${trimmed.replace(/"/g, '\\"')}\"` : trimmed;
 }
 
+
+export function resolveZodTypes(field?: ElementField): string {
+  if (!field) {
+    return 'z.unknown()';
+  }
+
+  const { type, isList, required, validation } = field;
+  let zodType: string;
+
+  // Handle primitive types
+  switch (type.toLowerCase()) {
+    case 'string':
+      zodType = 'z.string()';
+      break;
+    case 'number':
+      zodType = 'z.number()';
+      break;
+    case 'boolean':
+      zodType = 'z.boolean()';
+      break;
+    case 'date':
+      zodType = 'z.date()';
+      break;
+    case 'any':
+      zodType = 'z.any()';
+      break;
+    case 'unknown':
+      zodType = 'z.unknown()';
+      break;
+    default:
+      // Assume it's a custom type that will be defined elsewhere
+      zodType = `${toCamelCase(type)}`;
+  }
+
+  // Handle validation if present
+  if (validation) {
+    // This is a simple implementation - you might want to parse the validation string
+    // and apply appropriate Zod validations
+    zodType += `.refine(${validation})`;
+  }
+
+  // Handle arrays
+  if (isList) {
+    zodType = `z.array(${zodType})`;
+  }
+
+  // Handle required/optional
+  if (!required) {
+    zodType += '.optional()';
+  }
+
+  return zodType;
+}
 
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);

@@ -1,9 +1,21 @@
-<IGRPDataTableFilterDropdown
-  column={column}
-  placeholder="{{resourceConfig.properties.placeholder}}"
-  {{!--onChange={setInput{{resourceConfig.tag}}Value}--}}
-  {{#if resourceConfig.properties.disabled}}
-  disabled
+<IGRPStatsCard
+  {{#if resourceConfig.properties.variant}}
+  variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.title}}
+  title="{{resourceConfig.properties.title}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.border}}
+  border={ {{resourceConfig.properties.border}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.borderPosition}}
+  borderPosition="{{resourceConfig.properties.borderPosition}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconName}}
+  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
@@ -22,4 +34,5 @@
   {{/if~}}
   {{/if}}
   {{/if}}
-/>
+>
+</IGRPStatsCard>

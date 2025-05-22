@@ -51,7 +51,7 @@ export function formData() {
         {
           id: '',
           name: 'contentForm{{id}}',
-          type: 'z.infer<{{type}}>',
+          type: 'z.infer<{{type}}ZodType>',
           defaultValue: '{}',
         }, true
       ), required: true },
