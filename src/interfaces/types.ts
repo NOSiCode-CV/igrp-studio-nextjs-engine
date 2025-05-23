@@ -200,13 +200,13 @@ export interface Layout<S = any> extends IdentifiableElement{
   properties?: Record<string, any>;
   interactions?: Record<string, any>;
   data?: Record<string, any>;
+  style?: StyleDefinition,
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
   content?: string,
   tag: string,
   dataType?: string,
   children?: Layout[];
-
 }
 
 export interface LayoutProperties {
@@ -322,6 +322,8 @@ export interface ComponentRegisterConfig {
   interactionsMapping: Record<string, any>,
   data: Record<string, any>,
   dataMapping: Record<string, any>,
+  style: Record<string, any>,
+  styleMapping: Record<string, any>,
   childProperties?: Record<string, any>,
   childPropertiesMapping?: Record<string, any>,
   states: RegisterState[],
@@ -358,6 +360,76 @@ export interface ChildComponent {
   name: string,
   isDefault: boolean
 }
+
+// Style
+
+// First, update your types.ts (or wherever you define LayoutStyle)
+export interface FlexProperties {
+  direction?: string;
+  wrap?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  gap?: string;
+}
+
+export interface GridProperties {
+  templateColumns?: string;
+  templateRows?: string;
+  gap?: string;
+  justifyItems?: string;
+  alignItems?: string;
+  direction?: string;
+  dense?: boolean;
+}
+
+export interface BlockProperties {
+  // Add block-specific properties here if needed
+}
+
+export type LayoutType = 'block' | 'flex' | 'grid' | 'inline-block' | 'inline-flex' | 'inline-grid' | 'inline' | 'none';
+
+export interface LayoutStyle {
+  type: LayoutType;
+  flex?: FlexProperties;
+  grid?: GridProperties;
+  block?: BlockProperties;
+}
+
+export interface SizeValue {
+  value: string;
+  unit: string;
+}
+
+export interface SizeStyle {
+  width: SizeValue;
+  height: SizeValue;
+  minWidth: SizeValue;
+  maxWidth: SizeValue;
+  minHeight: SizeValue;
+  maxHeight: SizeValue;
+  aspectRatio: string;
+  overflowX: string;
+  overflowY: string;
+  aspectRatioLocked: boolean;
+}
+
+export interface StyleDefinition {
+  layout?: LayoutStyle;
+  spacing?: SpacingState;
+  size?: SizeStyle
+}
+
+export type Side = 'top' | 'right' | 'bottom' | 'left';
+export type SpacingType = 'margin' | 'padding';
+export type Unit = 'px' | 'rem' | '%' | 'em' | 'auto';
+
+export interface SpacingValue {
+  value?: string;
+  unit?: Unit;
+}
+
+type SpacingValues = Record<Side, SpacingValue>;
+export type SpacingState = Record<SpacingType, SpacingValues>;
 
 // Workspace API
 

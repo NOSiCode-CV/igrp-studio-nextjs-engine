@@ -90,297 +90,116 @@ const dashboardLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  'id': 'qfjxyks2qu',
-  'type': 'page',
-  'path': 'listacontibuiente',
-  'components': {
-    'id': 'page_zuvuk4',
-    'componentName': 'page',
-    'label': 'page',
-    'properties': {
-      'variant': 'default',
-      'commonProperties': {},
+  id: 'i6g2datcmk',
+  type: 'page',
+  path: 'todolist',
+  components: {
+    id: 'page_plnw6v',
+    componentName: 'page',
+    label: 'page',
+    properties: {
+      variant: 'default',
+      commonProperties: {},
     },
-    'children': [
+    children: [
       {
-        'id': 'section_ctc4mc',
-        'componentName': 'section',
-        'label': 'section',
-        'properties': {
-          'variant': 'compact',
-          'spaceX': '3',
-          'spaceY': '3',
-          'commonProperties': {},
+        id: 'section_ulvula',
+        componentName: 'section',
+        label: 'section',
+        properties: {
+          spaceX: '3',
+          spaceY: '3',
+          commonProperties: {},
         },
-        'children': [
+        children: [
           {
-            'id': 'pageheader_sbryx6',
-            'tag': 'pageHeader1',
-            'componentName': 'pageHeader',
-            'label': 'Page Header',
-            'type': 'group',
-            'children': [],
-            'interactions': {},
-            'allowTypes': false,
-            'data': {},
-            'properties': {
-              'title': 'Lista de Contribuiente',
-              'description': 'Page Description',
-              'variant': 'h3',
-              'commonProperties': {},
-            },
-            'childProperties': {},
-          },
-          {
-            'id': 'table_3gpn4x',
-            'tag': 'table1',
-            'componentName': 'table',
-            'label': 'Table',
-            'type': 'group',
-            'children': [
-              {
-                'id': 'tablecolumns_j5tw2i',
-                'tag': 'tableColumns1',
-                'componentName': 'tableColumns',
-                'label': 'Table Column',
-                'children': [
-                  {
-                    'id': 'tableactionlistcell_54zgyi',
-                    'tag': 'tableActionListCell1',
-                    'componentName': 'tableActionListCell',
-                    'label': 'Actions Column',
-                    'type': '',
-                    'children': [
-                      {
-                        'id': 'tablealertaction_mfe1to',
-                        'tag': 'tableAlertAction1',
-                        'componentName': 'tableAlertAction',
-                        'label': 'Alert Action',
-                        'type': '',
-                        'children': [],
-                        'interactions': {
-                          'onClickConfirm': '(e) => handle{{id}}Click(e)',
-                        },
-                        'allowTypes': false,
-                        'data': {},
-                        'properties': {
-                          'labelTrigger': 'Alert',
-                          'icon': 'ArrowRight',
-                          'variant': 'default',
-                          'type': 'alert',
-                          'title': 'New Alert',
-                          'showCancel': true,
-                          'labelCancel': 'Cancel',
-                          'variantCancel': 'default',
-                          'showConfirm': true,
-                          'labelConfirm': 'Confirm',
-                          'variantConfirm': 'default',
-                          'commonProperties': {},
-                        },
-                      },
-                      {
-                        'id': 'tablemodalaction_24lxqn',
-                        'tag': 'tableModalAction1',
-                        'componentName': 'tableModalAction',
-                        'label': 'Modal Action',
-                        'type': '',
-                        'children': [],
-                        'interactions': {
-                          'onClickConfirm': '(e) => handle{{id}}Click(e)',
-                        },
-                        'allowTypes': false,
-                        'data': {},
-                        'properties': {
-                          'labelTrigger': 'Modal',
-                          'icon': 'ArrowRight',
-                          'variant': 'default',
-                          'type': 'modal',
-                          'title': 'New Modal',
-                          'showCancel': true,
-                          'labelCancel': 'Cancel',
-                          'variantCancel': 'default',
-                          'showConfirm': true,
-                          'labelConfirm': 'Confirm',
-                          'variantConfirm': 'default',
-                          'commonProperties': {},
-                        },
-                      },
-                      {
-                        'id': 'tabledropdownmenucell_1qbkai',
-                        'tag': 'tableDropdownMenuCell1',
-                        'componentName': 'tableDropdownMenuCell',
-                        'label': 'Dropdown Column',
-                        'type': '',
-                        'children': [],
-                        'interactions': {},
-                        'allowTypes': false,
-                        'data': {},
-                        'properties': {
-                          'labelTrigger': 'Dropdown Actions',
-                          'icon': 'ArrowRight',
-                          'variant': 'default',
-                          'commonProperties': {},
-                        },
-                      },
-                      {
-                        'id': 'tabledropdownmenucell_p2t88g',
-                        'tag': 'tableDropdownMenuCell2',
-                        'componentName': 'tableDropdownMenuCell',
-                        'label': 'Dropdown Column',
-                        'type': '',
-                        'children': [],
-                        'interactions': {},
-                        'allowTypes': false,
-                        'data': {},
-                        'properties': {
-                          'labelTrigger': 'Dropdown Actions',
-                          'icon': 'ArrowRight',
-                          'variant': 'default',
-                          'commonProperties': {},
-                        },
-                      },
-                    ],
-                    'interactions': {},
-                    'allowTypes': false,
-                    'data': {},
-                    'properties': {
-                      'headerTitle': 'Actions Column',
-                      'type': 'inline',
-                      'commonProperties': {},
-                    },
-                    'childProperties': {},
-                  },
-                  {
-                    'id': 'tabletextcell_jdqrw2',
-                    'tag': 'tableTextCell1',
-                    'componentName': 'tableTextCell',
-                    'label': 'Text Column',
-                    'type': '',
-                    'children': [],
-                    'interactions': {},
-                    'allowTypes': false,
-                    'data': {},
-                    'properties': {
-                      'headerTitle': 'Text Column',
-                      'dataProperties': {
-                        'isVirtual': false,
-                        'isType': true,
-                      },
-                      'variant': 'default',
-                      'commonProperties': {},
-                    },
-                  },
-                ],
-                'interactions': {},
-                'allowTypes': false,
-                'data': {},
-                'properties': {
-                  'commonProperties': {},
-                },
-                'childProperties': {},
-              },
-              {
-                'id': 'tablefilters_wwrr3x',
-                'tag': 'tableFilters1',
-                'componentName': 'tableFilters',
-                'label': 'Table Filter',
-                'children': [
-                  {
-                    'id': 'tableinputfilter_cdtw2v',
-                    'tag': 'tableInputFilter1',
-                    'componentName': 'tableInputFilter',
-                    'label': 'Input Filter',
-                    'type': '',
-                    'children': [],
-                    'interactions': {},
-                    'allowTypes': false,
-                    'data': {},
-                    'properties': {
-                      'columnId': '{{id}}',
-                      'commonProperties': {},
-                    },
-                    'childProperties': {},
-                  },
-                ],
-                'interactions': {},
-                'allowTypes': false,
-                'data': {},
-                'properties': {
-                  'commonProperties': {},
+            id: 'inputsearch_w6ntra',
+            tag: 'inputSearch1',
+            componentName: 'inputSearch',
+            label: 'Input Search',
+            type: 'group',
+            children: [],
+            style: {
+              layout: {
+                type: 'flex',
+                flex: {
+                  direction: 'row',
+                  wrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
                 },
               },
-            ],
-            'interactions': {},
-            'allowTypes': true,
-            'data': {
-              'data': {
-                'state': {
-                  'id': '',
-                  'type': 'any',
-                  'name': 'contentTabletable1',
-                  'defaultValue': '[]',
-                  'imports': [],
+              spacing: {
+                margin: {
+                  top: {
+                    value: 10,
+                    unit: 'px',
+                  },
+                  bottom: {
+                    value: 10,
+                    unit: 'px',
+                  },
+                },
+                padding: {
+                  left: {
+                    value: 20,
+                    unit: 'px',
+                  },
+                  right: {
+                    value: 20,
+                    unit: 'px',
+                  },
                 },
               },
             },
-            'properties': {
-              'data': [],
-              'showFilter': false,
-              'showPagination': false,
-              'showToggleColumn': false,
-              'isNumericPagination': false,
-              'isServerSide': false,
-              'commonProperties': {},
+            interactions: {
+              onSearch: {
+                type: 'function',
+              },
             },
-            'dataType': 'table1',
+            allowTypes: false,
+            data: {},
+            properties: {
+              label: 'Input Search',
+              placeholder: '',
+              helperText: '',
+              iconProperties: {
+                showStartIcon: false,
+                startIcon: 'Search',
+                submitIcon: 'ArrowRight',
+              },
+              showSubmitButton: false,
+              disabled: false,
+              required: false,
+              dataProperties: {
+                isVirtual: false,
+                isType: true,
+              },
+              className: 'flex flex-col',
+              commonProperties: {},
+            },
           },
         ],
-        'tag': 'section2',
-        'data': {},
-        'interactions': {},
+        tag: 'section2',
+        data: {},
+        interactions: {},
       },
     ],
-    'tag': 'page2',
-    'data': {},
-    'interactions': {
-      'onLoad': {
-        'type': 'function',
-        'function': {
-          'fnCustomCode': {
-            'imports': [
-              {
-                'namespace': 'import {loadPageList} from \'@/app/(myapp)/functions/page-service\'',
-                'id': 'i4vyhy1s3m',
-              },
-            ],
-            'fnCode': '  // begin fnCode Carrega os dados quando o componente monta\n  useEffect(() => {\n    const loadData = async () => {\n      await loadPageList({\n        setContentTabletable1\n      });\n    };\n\n    loadData();\n  }, []);\n  //end',
-          },
-        },
+    tag: 'page2',
+    data: {},
+    interactions: {
+      onLoad: {
+        type: 'function',
       },
     },
-    'childProperties': {},
+
   },
-  'functions': [],
-  'types': [
-    {
-      'componentId': 'table_3gpn4x',
-      'name': 'table1',
-      'path': '',
-      'fields': [
-        {
-          'componentId': 'tabletextcell_jdqrw2',
-          'name': 'tableTextCell1',
-          'type': 'string',
-          'required': false,
-          'validation': '',
-          'defaultValue': '',
-        },
-      ],
-    },
-  ],
-  'states': [],
-  'imports': [],
-  'pageName': 'ListaContibuiente',
+  functions: [],
+  types: [],
+  states: [],
+  imports: [],
+  pageName: 'todoList',
 };
 
 beforeAll(async () => {

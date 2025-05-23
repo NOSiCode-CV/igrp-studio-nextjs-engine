@@ -50,6 +50,7 @@ import radioModule, { RADIO } from './radio';
 import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
 import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
+import separatorModule, { SEPARATOR } from './separator/index';
 import sliderModule, { SLIDER } from './slider';
 import stackModule, { STACK } from './stack';
 import statsCardModule, { STATS_CARD } from './statsCard';
@@ -135,6 +136,7 @@ export function registerAllComponents() {
   register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);
+  register(SEPARATOR, separatorModule.register);
   //register(SLIDER, sliderModule.register);
   register(STACK, stackModule.register);
   register(STATS_CARD, statsCardModule.register);

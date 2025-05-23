@@ -1,5 +1,5 @@
 import { Component } from '../components';
-import { ElementField, Layout } from '../interfaces/types';
+import { ElementField, Layout, StyleDefinition } from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
@@ -7,6 +7,9 @@ import { CARD_FOOTER } from '../components/card/children/cardFooter';
 import { renderReference } from './resolveCodeBlocks';
 import { capitalize, toCamelCase } from './stringHelpers';
 import { renderCode } from '../utils/renderCode';
+import { layoutStyleToClasses } from './layoutStyleToClasses';
+import { spacingToClasses } from './spacingToClasses';
+import { sizeToClasses } from './sizeToClasses';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -18,7 +21,7 @@ export function addClassNameFromChildProperties(parent: Layout, registry: Record
     .map(([key, value]) => {
       console.log(key , value)
       return parentElement?.childPropertiesMapping[key]?.className !== undefined
-        ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
+        ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${value}',`
         : ``;
     })
     .join('')
@@ -32,10 +35,32 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
   return Object.entries(component.properties)
     .map(([key, value]) => {
       return componentElement?.propertiesMapping[key]?.className !== undefined
-        ? ` ${componentElement.propertiesMapping[key]?.className ?? key}${value}`
+        ? `'${componentElement.propertiesMapping[key]?.className ?? key}${value}',`
         : ``;
     })
     .join('')
+}
+
+export function addClassNameFromStyle(style: StyleDefinition) {
+
+  const classes: string[] = []
+
+  let { layout, spacing, size } = style ?? {}
+
+  if(layout) {
+    classes.push(`'${layoutStyleToClasses(layout)}',`);
+  }
+
+  if(spacing) {
+    classes.push(`'${spacingToClasses(spacing)}',`);
+  }
+
+  if(size) {
+    classes.push(`'${sizeToClasses(size)}',`);
+  }
+
+  return classes.join('')
+
 }
 
 export function resolveFirstType(data: any[]): string {

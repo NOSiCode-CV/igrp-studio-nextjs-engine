@@ -23,8 +23,9 @@ export function toProps(context: any): string {
   return `{${JSON.stringify(context)}}`
 }
 
-export function concat(str1: string, str2: string) {
-  return str1 + str2;
+export function concat(...strings: any[]): string {
+  strings.pop();
+  return strings.join('');
 }
 
 export function toCamelCaseFromNatural (str: string) {

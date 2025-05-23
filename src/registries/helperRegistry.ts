@@ -20,7 +20,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties, extractCardContent, extractCardFooter,
+  addClassNameFromProperties, addClassNameFromStyle, extractCardContent, extractCardFooter,
   extractTableColumns,
   extractTableFilters, renderData,
   renderInteractions,
@@ -54,6 +54,7 @@ Handlebars.registerHelper("render-layout", renderLayout);
 Handlebars.registerHelper("render-table-row", renderTableRow);
 Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperties);
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
+Handlebars.registerHelper("addClassNameFromStyle", addClassNameFromStyle);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
 Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);

@@ -9,6 +9,9 @@ import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { replaceTemplate } from '../utils/helpers';
 import { renderLayout } from '../utils/renderLayout';
+import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
+import { spacingToClasses } from '../helpers/spacingToClasses';
+import { sizeToClasses } from '../helpers/sizeToClasses';
 
 export type Component = {
   imports: Set<string>;
@@ -16,6 +19,8 @@ export type Component = {
   interactionsMapping: Record<string, any>;
   data: Record<string, any>;
   dataMapping: Record<string, any>;
+  style: Record<string, any>;
+  styleMapping: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
   childProperties: Record<string, any>;
@@ -67,6 +72,8 @@ export type Component = {
   getInteractionsMapping: (mapping: Record<string, any>) => void;
   getData: (data: Record<string, any>) => void;
   getDataMapping: (mapping: Record<string, any>) => void;
+  getStyle: (style: Record<string, any>) => void;
+  getStyleMapping: (mapping: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
@@ -91,6 +98,8 @@ function initComponent(): Component {
     interactionsMapping: {},
     data: {},
     dataMapping: {},
+    style: {},
+    styleMapping: {},
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
@@ -204,6 +213,14 @@ function initComponent(): Component {
       Object.assign(this.dataMapping, mapping);
     },
 
+    getStyle(style) {
+      Object.assign(this.style, style);
+    },
+
+    getStyleMapping(mapping) {
+      Object.assign(this.styleMapping, mapping);
+    },
+
     getProperties(properties) {
       Object.assign(this.properties, properties);
     },
@@ -284,6 +301,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     interactionsMapping: value.interactionsMapping,
     data: value.data,
     dataMapping: value.dataMapping,
+    style: value.style,
+    styleMapping: value.styleMapping,
     childPropertiesMapping: {},
     childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),
@@ -310,6 +329,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
+  let { layout, spacing, size } = component.style ?? {}
   let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
 
   let props = common
@@ -336,9 +356,24 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   if(cn) classNames += ` ${cn}`;
 
+  let displayClasses = ``
+  let spacingClasses = ``
+  let sizeClasses = ``
   let childProps = ``
   let childClassNames = ``
   let childVariant = ``
+
+  if(layout) {
+    displayClasses += layoutStyleToClasses(layout)
+  }
+
+  if(spacing) {
+    spacingClasses += spacingToClasses(spacing);
+  }
+
+  if(size) {
+    sizeClasses += sizeToClasses(size);
+  }
 
   if (parentComponent?.childProperties) {
 
@@ -378,7 +413,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${ element.noClassName? `` : `className="${element.customClassName !== undefined ? element.customClassName : component.componentName}` } ${variant ? element.variants[variant] : ``} ${classNames ? classNames : ``} ${childVariant ? element.variants[childVariant] : ``} ${childClassNames ? childClassNames : ``} ${element.noClassName? `` : `"`} ${props} ${childProps} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function gridProperties() {
   return {
@@ -164,5 +164,11 @@ export function gridVariants() {
     'rows-auto': 'auto-rows-auto',
     'rows-min': 'auto-rows-min',
     'rows-max': 'auto-rows-max',
+  }
+}
+
+export function gridStyle() {
+  return {
+    ...baseStyle()
   }
 }

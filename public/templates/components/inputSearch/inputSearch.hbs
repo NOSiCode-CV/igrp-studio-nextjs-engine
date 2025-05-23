@@ -40,13 +40,13 @@
   readOnly
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
-  className="{{concat resourceConfig.properties.className (addClassNameFromChildProperties parentResourceConfig registry)}}"
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
-  className="{{resourceConfig.properties.className}}"
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
   {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
-  className="{{addClassNameFromChildProperties parentResourceConfig registry}}"
+  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
   {{/if}}

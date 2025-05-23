@@ -7,7 +7,7 @@ export function commonProperties() {
       type: 'object',
       properties: {
         customProperties: {
-          type: 'object'
+          type: 'object',
         },
         //isVirtual: { type: 'boolean', required: false, default: false}
       },
@@ -135,7 +135,8 @@ export function baseInteraction(
               (visibility?.fnCustomCode.imports.visible ||
                 visibility?.fnCustomCode.states.visible ||
                 visibility?.fnCustomCode.fnCode.visible ||
-                visibility?.fnCustomCode.actionCode.visible) ?? false,
+                visibility?.fnCustomCode.actionCode.visible) ??
+              false,
             required: false,
             properties: {
               imports: {
@@ -223,7 +224,8 @@ export function baseInteraction(
               (visibility?.fnCustomCode.imports.visible ||
                 visibility?.fnCustomCode.states.visible ||
                 visibility?.fnCustomCode.fnCode.visible ||
-                visibility?.fnCustomCode.actionCode.visible) ?? false,
+                visibility?.fnCustomCode.actionCode.visible) ??
+              false,
             required: false,
             properties: {
               imports: {
@@ -278,7 +280,6 @@ export function baseInteraction(
               },
             },
           },
-
         },
       },
       navigate: {
@@ -286,9 +287,9 @@ export function baseInteraction(
         required: false,
         properties: {
           name: { type: 'string', required: true, default: 'handle{{id}}Navigation' },
-          path: { type: 'string', required: true, default: '/' }
-        }
-      }
+          path: { type: 'string', required: true, default: '/' },
+        },
+      },
     },
   };
 }
@@ -364,6 +365,231 @@ export function baseData(
         },
         required: false,
       },
+    },
+  };
+}
+
+export function baseStyle() {
+  return {
+    type: 'object',
+    properties: {
+      layout: {
+        type: 'object',
+        properties: {
+          type: {
+            type: 'string',
+            enum: [
+              'block',
+              'flex',
+              'grid',
+              'inline-block',
+              'inline-flex',
+              'inline-grid',
+              'inline',
+              'none',
+            ],
+            required: true,
+          },
+          flex: {
+            type: 'object',
+            properties: {
+              direction: { type: 'string', required: true },
+              wrap: { type: 'string', required: true },
+              alignItems: { type: 'string', required: true },
+              justifyContent: { type: 'string', required: true },
+              gap: { type: 'string', required: true },
+            },
+          },
+          grid: {
+            type: 'object',
+            properties: {
+              templateColumns: { type: 'string', required: true },
+              templateRows: { type: 'string', required: true },
+              gap: { type: 'string', required: true },
+              justifyItems: { type: 'string', required: true },
+              alignItems: { type: 'string', required: true },
+              direction: { type: 'string', required: true },
+              dense: { type: 'boolean', required: true },
+            },
+          },
+          block: {
+            type: 'object',
+          },
+        },
+      },
+      spacing: {
+        type: 'object',
+        properties: {
+          margin: {
+            type: 'object',
+            properties: {
+              top: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              right: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              bottom: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              left: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+            },
+          },
+          padding: {
+            type: 'object',
+            properties: {
+              top: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              right: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              bottom: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+              left: {
+                type: 'object',
+                properties: {
+                  value: { type: 'number', required: true },
+                  unit: {
+                    type: 'string',
+                    enum: ['px', 'rem', '%', 'em', 'auto'],
+                    required: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      size: {
+        type: 'object',
+        required: false,
+        properties: {
+          width: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          height: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          minWidth: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          maxWidth: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          minHeight: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          maxHeight: {
+            type: 'object',
+            required: false,
+            properties: {
+              value: { type: 'string', required: true },
+              unit: { type: 'string', required: true },
+            }
+          },
+          aspectRatio: {
+            type: 'string',
+            required: false
+          },
+          overflowX: {
+            type: 'string',
+            required: false
+          },
+          overflowY: {
+            type: 'string',
+            required: false
+          },
+          aspectRatioLocked: {
+            type: 'boolean',
+            required: false
+          },
+        }
+      }
     },
   };
 }

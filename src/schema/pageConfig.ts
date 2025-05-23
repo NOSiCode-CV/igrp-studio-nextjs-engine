@@ -11,7 +11,7 @@ import {
   CustomFunctionConfig,
   ReturnValue,
   Argument,
-  Import, State, Reference,
+  Import, State, Reference, StyleDefinition, LayoutStyle, BlockProperties, GridProperties, FlexProperties,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -417,6 +417,179 @@ const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
   },
 };
 
+/*const unitEnumSchema = {
+  type: 'string',
+  enum: ['px', 'rem', '%', 'em', 'auto'],
+  errorMessage: 'Unit must be one of: px, rem, %, em, auto'
+};
+
+const spacingValueSchema = {
+  type: 'object',
+  properties: {
+    value: {
+      type: 'number',
+      errorMessage: 'Spacing value must be a number'
+    },
+    unit: unitEnumSchema
+  },
+  required: ['value', 'unit'],
+  additionalProperties: false,
+  errorMessage: 'Spacing value must be an object with value and unit properties'
+};
+
+const spacingSideSchema = {
+  type: 'object',
+  properties: {
+    top: {
+      ...spacingValueSchema,
+      nullable: true
+    },
+    right: {
+      ...spacingValueSchema,
+      nullable: true
+    },
+    bottom: {
+      ...spacingValueSchema,
+      nullable: true
+    },
+    left: {
+      ...spacingValueSchema,
+      nullable: true
+    }
+  },
+  additionalProperties: false
+};
+
+const spacingTypeSchema = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    margin: {
+      ...spacingSideSchema,
+      nullable: true
+    },
+    padding: {
+      ...spacingSideSchema,
+      nullable: true
+    }
+  },
+  additionalProperties: false
+};
+
+const flexPropertiesSchema: JSONSchemaType<FlexProperties> = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    direction: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Flex direction must be a string'
+    },
+    wrap: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Flex wrap must be a string'
+    },
+    alignItems: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Align items must be a string'
+    },
+    justifyContent: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Justify content must be a string'
+    },
+    gap: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Gap must be a string'
+    }
+  },
+  additionalProperties: false
+};
+
+const gridPropertiesSchema: JSONSchemaType<GridProperties> = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    templateColumns: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Template columns must be a string'
+    },
+    templateRows: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Template rows must be a string'
+    },
+    gap: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Gap must be a string'
+    },
+    justifyItems: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Justify items must be a string'
+    },
+    alignItems: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Align items must be a string'
+    },
+    direction: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'Direction must be a string'
+    },
+    dense: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'Dense must be a boolean'
+    }
+  },
+  additionalProperties: false
+};
+
+const blockPropertiesSchema: JSONSchemaType<BlockProperties> = {
+  type: 'object',
+  nullable: true,
+  properties: {},
+  additionalProperties: false
+};
+
+const layoutTypeEnum = ['block', 'flex', 'grid', 'inline-block', 'inline-flex', 'inline-grid', 'inline', 'none'] as const;
+
+const layoutTypeSchema = {
+  type: 'string',
+  nullable: true,
+  enum: [...layoutTypeEnum],
+  errorMessage: 'Layout type must be one of: block, flex, grid, inline-block, inline-flex, inline-grid, inline, none'
+};
+
+const layoutStyleSchema: JSONSchemaType<LayoutStyle> = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    type: layoutTypeSchema,
+    flex: flexPropertiesSchema,
+    grid: gridPropertiesSchema,
+    block: blockPropertiesSchema
+  },
+  additionalProperties: false
+};
+
+const styleSchema: JSONSchemaType<StyleDefinition> = {
+  type: 'object',
+  nullable: true,
+  properties: {
+    layout: layoutStyleSchema,
+    spacing: spacingTypeSchema
+  },
+  additionalProperties: false
+};*/
+
 // Schema para Component (los componentes que contienen filas)
 const componentSchema: JSONSchemaType<Layout> = {
   type: 'object',
@@ -466,6 +639,12 @@ const componentSchema: JSONSchemaType<Layout> = {
         ],
       },
       errorMessage: "The 'data' field must be an object mapping of data.",
+    },
+    style: {
+      type: "object",
+      required: [],
+      nullable: true,
+      errorMessage: "The 'style' field must be an object mapping of style.",
     },
     childProperties: {
       type: 'object',

@@ -26,6 +26,7 @@ export function inputSearchProperties() {
     required: { type: 'boolean', required: true, default: false },
     submitButtonLabel: { type: 'string', required: false },
     submitButtonClassName: { type: 'string', required: false },
+    className: { type: 'string', required: false },
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -54,8 +55,13 @@ export function inputSearchInteractions() {
 
 export function inputSearchData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: false },
-    defaultValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DEFAULT_VALUE), required: false },
+    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
+        id: '',
+        name: 'inputSearch{{id}}Value',
+        type: 'string',
+        defaultValue: ''
+      }, true), required: true },
+    //defaultValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DEFAULT_VALUE), required: false },
   };
 }
 

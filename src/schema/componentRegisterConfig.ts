@@ -131,6 +131,12 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     dataMapping: {
       type: 'object'
     },
+    style: {
+      type: 'object'
+    },
+    styleMapping: {
+      type: 'object'
+    },
     childProperties: {
       type: 'object',
       nullable: true

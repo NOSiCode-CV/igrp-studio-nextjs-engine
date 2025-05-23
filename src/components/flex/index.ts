@@ -3,7 +3,7 @@ import {
   flexProperties,
   flexVariants,
   flexChildProperties,
-  flexChildPropertiesMapping,
+  flexChildPropertiesMapping, flexStyle,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -18,6 +18,7 @@ export default {
     component.getChildProperties(flexChildProperties());
     component.getChildPropertiesMapping(flexChildPropertiesMapping());
     component.loadStates([]);
+    component.getStyle(flexStyle())
     component.setRenderer(defaultRenderer);
   },
 };

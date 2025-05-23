@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function flexProperties() {
   return {
@@ -37,6 +37,7 @@ export function flexProperties() {
         'center-col',
       ]
     },
+    className: {type: 'string', required: false },
     ...commonProperties(),
   }
 }
@@ -90,5 +91,11 @@ export function flexVariants() {
     center: 'items-center justify-center',
     between: 'items-center justify-between',
     'center-col': 'flex-col items-center justify-center',
+  }
+}
+
+export function flexStyle() {
+  return {
+    ...baseStyle()
   }
 }

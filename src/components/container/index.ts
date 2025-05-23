@@ -2,7 +2,7 @@ import {
   containerPropertiesMapping,
   containerProperties,
   containerVariants,
-  containerChildProperties, containerChildPropertiesMapping,
+  containerChildProperties, containerChildPropertiesMapping, containerStyle,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -11,11 +11,13 @@ export default {
     component.loadImports([]);
     component.loadVariants(containerVariants())
     component.loadGroup('structure')
+    component.loadCustomClassName('')
     component.loadLabel('Container')
     component.getProperties(containerProperties());
     component.getPropertiesMapping(containerPropertiesMapping());
     component.getChildProperties(containerChildProperties());
     component.getChildPropertiesMapping(containerChildPropertiesMapping());
+    component.getStyle(containerStyle());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

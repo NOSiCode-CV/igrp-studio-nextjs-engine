@@ -199,6 +199,12 @@ const componentSchema: JSONSchemaType<Layout> = {
       },
       errorMessage: "The 'data' field must be an object mapping of data.",
     },
+    style: {
+      type: "object",
+      required: [],
+      nullable: true,
+      errorMessage: "The 'style' field must be an object mapping of style.",
+    },
     childProperties: {
       type: "object",
       nullable: true,
