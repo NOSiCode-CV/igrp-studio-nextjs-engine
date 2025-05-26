@@ -1,5 +1,5 @@
 <IGRPDatePicker
-  {{#if resourceConfig.properties.name}}
+  {{#if resourceConfig.properties.placeholder}}
   placeholder="{{resourceConfig.properties.placeholder}}"
   {{/if~}}
   {{#if resourceConfig.tag}}
@@ -29,9 +29,9 @@
   {{#if resourceConfig.properties.endDate}}
   endDate={ new Date("{{resourceConfig.properties.endDate}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.showIcon}}
+  {{!--{{#if resourceConfig.properties.showIcon}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
-  {{/if~}}
+  {{/if~}}--}}
   {{#if resourceConfig.properties.required}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
@@ -44,7 +44,7 @@
   {{#if resourceConfig.properties.dateFormat}}
   dateFormat="{{resourceConfig.properties.dateFormat}}"
   {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconName}}
+  {{!--{{#if resourceConfig.properties.iconProperties.iconName}}
   iconName="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconSize}}
@@ -55,6 +55,69 @@
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
+  {{/if~}}--}}
+  {{#if resourceConfig.properties.dateFormat}}
+  dateFormat="{{resourceConfig.properties.dateFormat}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.today}}
+  today={ new Date("{{resourceConfig.properties.today}}") }
+  {{/if~}}
+  {{#if resourceConfig.properties.defaultMonth}}
+  defaultMonth={ new Date("{{resourceConfig.properties.defaultMonth}}") }
+  {{/if~}}
+  {{#if resourceConfig.properties.startMonth}}
+  startMonth={ new Date("{{resourceConfig.properties.startMonth}}") }
+  {{/if~}}
+  {{#if resourceConfig.properties.month}}
+  month={ new Date("{{resourceConfig.properties.month}}") }
+  {{/if~}}
+  {{#if resourceConfig.properties.endMonth}}
+  endMonth={ new Date("{{resourceConfig.properties.endMonth}}") }
+  {{/if~}}
+  {{#if resourceConfig.properties.numberOfMonths}}
+  numberOfMonths={ {{resourceConfig.properties.numberOfMonths}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.weekStartsOn}}
+  weekStartsOn={ {{resourceConfig.properties.weekStartsOn}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.pagedNavigation}}
+  pagedNavigation={ {{resourceConfig.properties.pagedNavigation}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.reverseMonths}}
+  reverseMonths={ {{resourceConfig.properties.reverseMonths}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.hideNavigation}}
+  hideNavigation={ {{resourceConfig.properties.hideNavigation}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.disableNavigation}}
+  disableNavigation={ {{resourceConfig.properties.disableNavigation}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.fixedWeeks}}
+  fixedWeeks={ {{resourceConfig.properties.fixedWeeks}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.hideWeekdays}}
+  hideWeekdays={ {{resourceConfig.properties.hideWeekdays}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showOutsideDays}}
+  showOutsideDays={ {{resourceConfig.properties.showOutsideDays}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showWeekNumber}}
+  showWeekNumber={ {{resourceConfig.properties.showWeekNumber}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.animate}}
+  animate={ {{resourceConfig.properties.animate}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.broadcastCalendar}}
+  broadcastCalendar={ {{resourceConfig.properties.broadcastCalendar}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.ISOWeek}}
+  ISOWeek={ {{resourceConfig.properties.ISOWeek}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.captionLayout}}
+  captionLayout="{{resourceConfig.properties.captionLayout}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.navLayout}}
+  navLayout="{{resourceConfig.properties.navLayout}}"
   {{/if~}}
   {{#if resourceConfig.properties.readOnly}}
   readOnly

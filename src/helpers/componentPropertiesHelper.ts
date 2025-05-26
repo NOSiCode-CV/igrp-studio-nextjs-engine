@@ -79,7 +79,7 @@ export function resolveFirstType(data: any[]): string {
  */
 export function resolveStateDefault(defaultValue?: string, type?: string): string {
 
-  if(defaultValue === undefined) return 'undefined'
+  if(defaultValue === undefined || (defaultValue?.trim() === '' && type !== 'string')) return 'undefined'
 
   const trimmed = defaultValue.trim();
 

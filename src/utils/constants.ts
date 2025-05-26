@@ -12,7 +12,7 @@ export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
   VALID_APP_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_WORKSPACE_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
-  VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[a-zA-Z0-9_ ]+$",
+  VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[\\p{L}\\p{N}_ ]+$",
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/ ]*$',
   BUILD_PATH_VALIDATION_PATTERN: '^[A-Za-z0-9._/-]+$',
@@ -150,9 +150,12 @@ export const INTERACTIONS_TYPES = {
 
   // Events
   ON_CLICK: 'Mouse click (tap)',
+  ON_NEXT_CLICK: 'On next click (tap)',
   ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
+  ON_DATE_CHANGE: 'On date change',
+  ON_MONTH_CHANGE: 'On month change',
   ON_OPEN: 'On open',
   ON_SEARCH: 'On search',
   ON_LOAD: 'On load',

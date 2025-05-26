@@ -92,6 +92,7 @@ const dashboardLayout: Layout = {
 const pageConfig: PageConfig = {
   id: 'i6g2datcmk',
   type: 'page',
+  description: 'Meu Projetão em Português',
   path: 'todolist',
   components: {
     id: 'page_plnw6v',

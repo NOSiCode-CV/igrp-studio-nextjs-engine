@@ -31,6 +31,12 @@
   {{#if resourceConfig.properties.errorText}}
   errorText="{{resourceConfig.properties.errorText}}"
   {{/if~}}
+  {{#if resourceConfig.properties.searchText}}
+  searchText="{{resourceConfig.properties.searchText}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.gridSize}}
+  gridSize="{{resourceConfig.properties.gridSize}}"
+  {{/if~}}
   {{#if resourceConfig.properties.showSearch}}
   showSearch = { {{resourceConfig.properties.showSearch}} }
   {{/if~}}
@@ -40,8 +46,8 @@
   {{#if resourceConfig.properties.showStatus}}
   showStatus = { {{resourceConfig.properties.showStatus}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showIcon}}
-  showIcon = { {{resourceConfig.properties.showIcon}} }
+  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  showIcon = { {{resourceConfig.properties.iconProperties.showIcon}} }
   {{/if~}}
   {{#if resourceConfig.properties.formContext}}
   formContext = { {{resourceConfig.properties.formContext}} }

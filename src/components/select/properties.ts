@@ -11,27 +11,25 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function selectProperties() {
   return {
     label: { type: 'string', required: false, default: "Select Input" },
-    variant: { type: 'string', required: false, default: 'single', enum: ['single', 'multiple'] },
-    //floatingLabel: { type: 'boolean', required: false },
     placeholder: { type: 'string', required: false, default: "Select an option..." },
     helperText: { type: 'string', required: false },
     options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false },
     required: { type: 'boolean', required: true },
-    message: { type: 'string', required: false },
     selectClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
+    className: { type: 'string', required: false },
     selectLabel: { type: 'string', required: false, default: "No option found" },
-    errorText: { type: 'string', required: false },
+    error: { type: 'string', required: false },
     showSearch: { type: 'boolean', required: false },
     showGroup: { type: 'boolean', required: false },
     showStatus: { type: 'boolean', required: false },
     showIcon: { type: 'boolean', required: false },
-    formContext: { type: 'boolean', required: false },
-    iconProperties: {
+    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
+    /*iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
-    },
+    },*/
     ...dataCommonProperties(),
     ...commonProperties(),
   };
