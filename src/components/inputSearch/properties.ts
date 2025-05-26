@@ -6,6 +6,7 @@ import {
   dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function inputSearchProperties() {
   return {
@@ -46,10 +47,38 @@ export function inputSearchChildPropertiesMapping() {
   return {};
 }
 
+function setValueChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
+function onSearchInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: false },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: true },
+      fnCode: { visible: true },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function inputSearchInteractions() {
   return {
-    onSearch: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.ON_SEARCH), required: true },
-    setValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.VALUE_CHANGE), required: false },
+    onSearch: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.ON_SEARCH, undefined, onSearchInteractionFieldVisibility()), required: false },
+    setValueChange: { ...baseInteraction("(e) => setInputSearch{{id}}Value(e.target.value)", INTERACTIONS_TYPES.VALUE_CHANGE, undefined, setValueChangeInteractionFieldVisibility()), required: true },
   };
 }
 

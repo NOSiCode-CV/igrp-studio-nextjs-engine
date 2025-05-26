@@ -19,7 +19,7 @@ export function addClassNameFromChildProperties(parent: Layout, registry: Record
 
   return Object.entries(parent.childProperties)
     .map(([key, value]) => {
-      console.log(key , value)
+
       return parentElement?.childPropertiesMapping[key]?.className !== undefined
         ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${value}',`
         : ``;

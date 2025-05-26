@@ -14,7 +14,15 @@ export function tableBadgeCellProperties() {
     ...dataCommonProperties(),
     field: { type: 'string', required: true },
     label: { type: 'string', required: true },
-    variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
+    iconProperties: {
+      type: 'object',
+      properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
+        iconName: { type: 'string', required: false, default: 'Info' },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
+      },
+    },
+    variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'soft', 'outline'] },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

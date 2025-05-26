@@ -52,7 +52,7 @@ export function formData() {
           id: '',
           name: 'contentForm{{id}}',
           type: 'z.infer<{{type}}ZodType>',
-          defaultValue: '{}',
+          defaultValue: 'null',
         }, true
       ), required: true },
   };

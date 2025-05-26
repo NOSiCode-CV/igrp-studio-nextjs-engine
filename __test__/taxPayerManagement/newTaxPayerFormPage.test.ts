@@ -37,7 +37,7 @@ const formLayout: Layout = {
               tag: 'basic_information_building_icon',
               componentName: 'icon',
               properties: {
-                iconName: 'Building',
+                name: 'Building',
                 className: 'h-4 w-4 text-muted-foreground',
               },
             },
@@ -88,9 +88,9 @@ const formLayout: Layout = {
                 {
                   id: 'basic_information_tp_documento',
                   tag: 'tipo_documento',
-                  componentName: 'combobox',
+                  componentName: 'select',
                   properties: {
-                    label: 'Tipo Documento',
+                    label: 'Tipo de documento de inscrição',
                     required: true,
                     placeholder: 'Selecione o tipo de documento'
                   },
@@ -151,7 +151,7 @@ const formLayout: Layout = {
                 {
                   id: 'basic_information_estatuto',
                   tag: 'estatuto',
-                  componentName: 'combobox',
+                  componentName: 'select',
                   properties: {
                     label: 'Estatuto Jurídico',
                     required: true,
@@ -162,6 +162,34 @@ const formLayout: Layout = {
                       state: {
                         id: 'basic_information_estatuto_opt_st',
                         name: 'selectEstatutoOptions',
+                        type: 'IGRPOptionsProps[]',
+                        defaultValue: '[]'
+                      }
+                    },
+                  },
+                  /*interactions: {
+                    onValueChange: {
+                      type: 'function',
+                      function: {
+                        fnName: 'setSelectTipo_documentoValue'
+                      }
+                    }
+                  },*/
+                },
+                {
+                  id: 'basic_information_tipo_representacao',
+                  tag: 'tipo_representacao',
+                  componentName: 'select',
+                  properties: {
+                    label: 'Tipo de representação',
+                    required: true,
+                    placeholder: 'Selecione o tipo de representação'
+                  },
+                  data: {
+                    options: {
+                      state: {
+                        id: 'basic_information_tipo_representacao_opt_st',
+                        name: 'selectTipo_representacaoOptions',
                         type: 'IGRPOptionsProps[]',
                         defaultValue: '[]'
                       }

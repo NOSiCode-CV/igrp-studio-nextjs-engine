@@ -65,7 +65,6 @@ export function dropdownItemPropertiesMapping() {
 export function dropdownItemProperties(labelTrigger?: string) {
   return {
     labelTrigger: { type: 'string', required: true, default: labelTrigger ?? 'New Action' },
-    icon: { type: 'string', required: false, default: "ArrowRight" },
     showIcon: { type: 'boolean', required: false, default: true },
     iconProperties: {
       type: 'object',

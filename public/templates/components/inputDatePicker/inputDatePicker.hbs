@@ -35,8 +35,14 @@
   {{#if resourceConfig.properties.required}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
-  {{#if resourceConfig.properties.calendarClassName}}
-  calendarClassName="{{resourceConfig.properties.calendarClassName}}"
+  {{#if resourceConfig.properties.labelClassName}}
+  labelClassName="{{resourceConfig.properties.labelClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.gridSize}}
+  gridSize="{{resourceConfig.properties.gridSize}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.dateFormat}}
+  dateFormat="{{resourceConfig.properties.dateFormat}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
   iconName="{{resourceConfig.properties.iconProperties.iconName}}"

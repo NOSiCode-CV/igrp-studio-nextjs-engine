@@ -1206,7 +1206,7 @@ const pageConfig: PageConfig = {
       code: `
       if(!value) return {}
       const label = selectStatus_fltOptions.find((it) => it.value === value.estado)?.label ?? 'N/E'
-      const bgClass = value.estado === 'ATIVO'? 'bg-green-200' : value.estado === 'CESSADO'? 'bg-yellow-200' : 'bg-red-200' 
+      const bgClass = value.estado === 'ATIVO'? 'bg-green-200' : value.estado === 'CESSADO'? 'bg-red-200' : 'bg-yellow-200' 
       return { label, bgClass }
       `,
       returnValue: {

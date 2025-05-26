@@ -49,7 +49,7 @@ export default {
         ref: {
           id: '',
           name: 'form{{id}}Ref',
-          type: 'IGRPFormHandle<{{type}}ZodType> | null',
+          type: 'IGRPFormHandle<z.infer<{{type}}ZodType>> | null',
           defaultValue: 'null',
         },
         required: true,

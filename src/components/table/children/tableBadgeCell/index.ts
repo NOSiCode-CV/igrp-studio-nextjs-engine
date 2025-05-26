@@ -3,7 +3,7 @@ import {
   tableBadgeCellProperties,
   tableBadgeCellVariants,
   tableBadgeCellChildProperties,
-  tableBadgeCellChildPropertiesMapping,
+  tableBadgeCellChildPropertiesMapping, tableBadgeCellInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -24,6 +24,7 @@ export default {
     component.getPropertiesMapping(tableBadgeCellPropertiesMapping());
     component.getChildProperties(tableBadgeCellChildProperties());
     component.getChildPropertiesMapping(tableBadgeCellChildPropertiesMapping());
+    component.getInteractions(tableBadgeCellInteractions());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_BADGE_CELL }))
 
     component.loadStates([]);

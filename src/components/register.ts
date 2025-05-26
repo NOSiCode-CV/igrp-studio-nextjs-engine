@@ -180,5 +180,5 @@ export function registerAllComponents() {
   register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
 
-  register(TABS, tabsModule.register);
+  //register(TABS, tabsModule.register);
 }
