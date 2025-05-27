@@ -5,6 +5,7 @@
  * - **Types**: TypeScript interfaces/type aliases for structured data models
  * - **Actions**: Actions logic for operations
  * - **Functions**: Custom functions logic for application
+ * - **Components**: Custom React components for application
  *
  * ### Registration Rules
  * 1. All entries must be arrays of importable paths (no extensions)
@@ -16,7 +17,8 @@
  * {
  *   types: ['types/User'],
  *   actions: ['server/actions/saveUser'],
- *   functions: ['client/forms/useUserForm']
+ *   functions: ['client/forms/useUserForm'],
+ *   components: ['components/userInfoCard']
  * }
  * ```
  *
@@ -42,5 +44,6 @@
 export default {
   types: [],
   actions: [],
-  functions: []
+  functions: [],
+  components: []
 };

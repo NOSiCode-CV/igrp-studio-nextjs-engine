@@ -37,6 +37,12 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             imp.state.name = replaceTemplate(imp.state.name, { id: component.tag, });
             imp.state.defaultValue = imp.state.defaultValue? replaceTemplate(imp.state.defaultValue, { value, type }) : undefined;
             imp.state.type = replaceTemplate(imp.state.type, { type });
+
+            // TODO: find a better way to handle any type
+            if(imp.state.type === 'z.infer<anyZodType>') {
+              imp.state.type = 'z.infer<any>'
+            }
+
             if(imp.required) {
               stateDefinitions.add(renderState(imp.state));
             }
@@ -71,6 +77,11 @@ export function resolveStates(config: Layout, registry: Record<string, Component
               : undefined;
             s.type = replaceTemplate(s.type, { type });
 
+            // TODO: find a better way to handle any type
+            if(s.type === 'z.infer<anyZodType>') {
+              s.type = 'z.infer<any>'
+            }
+
             stateDefinitions.add(renderState(s));
           });
         }
@@ -95,6 +106,11 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             ? replaceTemplate(value.state.defaultValue, { defaultValue, type })
             : undefined;
           value.state.type = replaceTemplate(value.state.type, { type });
+
+          // TODO: find a better way to handle any type
+          if(value.state.type === 'z.infer<anyZodType>') {
+            value.state.type = 'z.infer<any>'
+          }
 
           stateDefinitions.add(renderState(value.state));
         }

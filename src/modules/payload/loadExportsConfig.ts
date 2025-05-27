@@ -6,7 +6,7 @@ export function loadExportsConfig(configPath: string) {
   // Remove all comment blocks first
   configContent = configContent.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  // Extract all quoted strings after each property name
+  // Enhanced extractor that handles multi-line arrays
   const extract = (prop: string) => {
     const regex = new RegExp(`${prop}:\\s*\\[([^\\]]*)\\]`, 's');
     const match = configContent.match(regex);
@@ -15,13 +15,10 @@ export function loadExportsConfig(configPath: string) {
       : [];
   };
 
-  const result = {
+  return {
     types: extract('types'),
     actions: extract('actions'),
-    functions: extract('functions')
+    functions: extract('functions'),
+    components: extract('components')
   };
-
-  console.log("result: ", result)
-
-  return result
 }

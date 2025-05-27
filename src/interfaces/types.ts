@@ -682,12 +682,30 @@ export interface FunctionDef {
   returnType: string;
 }
 
+export interface ComponentDef {
+  name: string;
+  path: string;
+  props: {
+    name: string;
+    type: string;
+    isList: boolean;
+    isOptional: boolean;
+    isInterface: boolean;
+    isFunction: boolean;
+    isState: boolean;
+    defaultValue?: string;
+  }[];
+  hooks: string[]; // Names of hooks used
+  children: string[]; // Names of child components used
+}
+
 export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';
 
 export interface AppExportsConfig {
   types: TypeDef[];
   actions: ActionDef[];
   functions: FunctionDef[];
+  components: ComponentDef[];
 }
 
 export interface CustomCodeConfig {

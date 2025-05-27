@@ -3,6 +3,7 @@ import { AppExportsConfig } from '../../interfaces/types';
 import { parseTypes } from './parseTypes';
 import { parseFunctions } from './parseFunctions';
 import { parseActions } from './parseActions';
+import { parseComponents } from './parseComponents';
 
 export async function parseExportsConfig(config: any, basePath: string): Promise<AppExportsConfig> {
   const srcRoot = path.join(basePath, 'src/app/(myapp)');
@@ -17,8 +18,9 @@ export async function parseExportsConfig(config: any, basePath: string): Promise
   };
 
   return {
-    types: (await parseMultiple(config.types || [], parseTypes)).flatMap((type) => type).filter((it: any) => it !== undefined && it !== null),
-    actions: (await parseMultiple(config.actions || [], parseActions)).flatMap((act) => act).filter((it: any) => it !== undefined && it !== null),
-    functions: (await parseMultiple(config.functions || [], parseFunctions)).flatMap((fn) => fn).filter((it: any) => it !== undefined && it !== null),
+    types: (await parseMultiple(config.types || [], parseTypes)).flat().filter(Boolean),
+    actions: (await parseMultiple(config.actions || [], parseActions)).flat().filter(Boolean),
+    functions: (await parseMultiple(config.functions || [], parseFunctions)).flat().filter(Boolean),
+    components: (await parseMultiple(config.components || [], parseComponents)).flat().filter(Boolean)
   };
 }
