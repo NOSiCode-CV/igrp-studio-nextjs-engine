@@ -221,7 +221,7 @@ const tableLayout: Layout = {
       componentName: 'tableFilters',
       properties: {},
       children: [
-        {
+        /*{
           id: 'legal_status_flt',
           tag: 'legal_status_flt',
           componentName: 'tableDropdownFilter',
@@ -268,7 +268,7 @@ const tableLayout: Layout = {
           properties: {
             columnId: 'dataInicio'
           }
-        },
+        },*/
       ],
     },
   ],
@@ -299,7 +299,7 @@ useEffect(() => {
   loadLegalStatusFltCombobox()
   loadRegimeFltCombobox()
   loadStatusFltCombobox()
-},[statusFilter, legalStatusFilter, regimeFilter, dateFilter, filterValue, contentTabletable_taxpayers])
+},[statusFilter, legalStatusFilter, regimeFilter, dateFilter, filterValue])
 
 const updateTabletable_taxpayers = async () => {
  
@@ -331,16 +331,28 @@ const updateTabletable_taxpayers = async () => {
   }
  
   if(dateFilter) {
-    data = data.filter((it) => it.dataInicio === dateFilter.toISOString().split("T")[0]);
+    data = data.filter((it) => {
+      const itemDate = new Date(it.dataInicio);
+    
+      if (!dateFilter.from && !dateFilter.to) {
+        return true; // no filtering
+      }
+    
+      const fromDate = dateFilter.from ?? new Date(0); // if null, use epoch
+      const toDate = dateFilter.to ?? new Date(); // if null, use today
+
+      return itemDate >= fromDate && itemDate <= toDate;
+    });
+
     setHasActiveFilters(true)
   }
   
   setContentTabletable_taxpayers(data)
   
-  setTotalContribuintes(contentTabletable_taxpayers.length)
-  setAtivosCount(contentTabletable_taxpayers.filter((c) => c.estado === "ATIVO").length)
-  setRegimeCount(contentTabletable_taxpayers.filter((c) => c.regime === "REGIME_GERAL").length)
-  setPrivadoCount(contentTabletable_taxpayers.filter((c) => c.regime === "CONTA_PROPRIA").length)
+  setTotalContribuintes(data.length)
+  setAtivosCount(data.filter((c) => c.estado === "ATIVO").length)
+  setRegimeCount(data.filter((c) => c.regime === "REGIME_GERAL").length)
+  setPrivadoCount(data.filter((c) => c.regime === "CONTA_PROPRIA").length)
   
 }
              
@@ -817,92 +829,255 @@ const loadRegimeFltCombobox = async () => {
                       ],
                     },
                     {
-                      id: 'filter_expanded_btn_fragment',
-                      tag: 'filter_expanded_btn_fragment',
-                      componentName: 'fragment',
-                      content: `
-              {showFilters && (
-              <div className="mt-3 pt-3 border-t  px-4">
-                <div className="flex flex-wrap items-end gap-4">
-                  <div className="space-y-1 min-w-[160px]">
-                    <IGRPSelect 
-                      name="legal_status_flt"
-                      label="Estatuto Jurídico"
-                      value={legalStatusFilter} 
-                      onValueChange={setLegalStatusFilter}
-                      placeholder="Todos Estatutos"
-                      options={selectLegalStatus_fltOptions}
-                    >
-                    </IGRPSelect>
-                  </div>
-                  <div className="space-y-1 min-w-[160px]">
-                    <IGRPSelect 
-                      name="regime_flt"
-                      label="Regime"
-                      value={regimeFilter} 
-                      onValueChange={setRegimeFilter}
-                      placeholder="Todos Regimes"
-                      options={selectRegime_fltOptions}
-                    >
-                    </IGRPSelect>
-                  </div>
-                  
-                  <div className="space-y-1 min-w-[160px]">
-                    <IGRPSelect 
-                      name="status_flt"
-                      label="Estado do Contribuinte"
-                      value={statusFilter} 
-                      onValueChange={setStatusFilter}
-                      placeholder="Todos Estados"
-                      options={selectStatus_fltOptions}
-                    >
-                    </IGRPSelect>
-                  </div>
-
-                  <div className="space-y-1 min-w-[160px]">
-                    <IGRPDatePicker 
-                      name="date_flt"
-                      label="Período de Inscrição"
-                      startDate={new Date('1900-01-01')}
-                      endDate={new Date('2099-12-31')}
-                      className=""
-                      onDateChange={(e) => setDateFilter(e)}
-                      date={dateFilter}
-                    >
-                    </IGRPDatePicker>
-                  </div>
-                  
-                  <div className="ml-auto">
-                    <IGRPButton
-                      variant="outline"
-                      size="sm"
-                      showIcon={ true }
-                      className="h-9"
-                      iconName="X"
-                      iconClassName="mr-2 h-4 w-4"
-                      onClick={() => {
-                        setResetFilters(true);
-                        setStatusFilter("");
-                        setLegalStatusFilter("");
-                        setRegimeFilter("");
-                        setDateFilter(undefined);
-                        setFilterValue("");
-                      }}
-                      disabled={!hasActiveFilters}
-                    >
-                    Limpar Filtros
-                    </IGRPButton>
-                  </div>
-                </div>
-              </div>
-            )}
-                                  `
+                      id: 'filter_container',
+                      tag: 'filter_container',
+                      componentName: 'container',
+                      properties: {
+                        className: 'mt-3 pt-3 border-t px-4'
+                      },
+                      children: [
+                        {
+                          id: 'filter_container_flex',
+                          tag: 'filter_container_flex',
+                          componentName: 'flex',
+                          properties: {
+                            className: 'items-end gap-4',
+                            variant: 'wrap'
+                          },
+                          children: [
+                            {
+                              id: 'filter_inputs_container_legal_status',
+                              tag: 'filter_inputs_container_legal_status',
+                              componentName: 'container',
+                              properties: {
+                                className: 'space-y-1 min-w-[160px]'
+                              },
+                              children: [
+                                {
+                                  id: 'legal_status_flt',
+                                  tag: 'legal_status_flt',
+                                  componentName: 'select',
+                                  properties: {
+                                    label: 'Estatuto Jurídico',
+                                    placeholder: 'Todos Estatutos'
+                                  },
+                                  data: {
+                                    options: {
+                                      state: {
+                                        id: 'legal_status_flt_opt_st',
+                                        name: 'selectLegalStatus_fltOptions',
+                                        type: 'IGRPOptionsProps[]',
+                                        defaultValue: '[]'
+                                      }
+                                    },
+                                    value: {
+                                      state: {
+                                        id: 'legal_status_flt_val_st',
+                                        name: 'legalStatusFilter',
+                                        type: 'string',
+                                        defaultValue: ''
+                                      }
+                                    },
+                                  },
+                                  interactions: {
+                                    onValueChange: {
+                                      type: 'function',
+                                      function: {
+                                        fnName: 'setLegalStatusFilter'
+                                      }
+                                    }
+                                  },
+                                },
+                              ],
+                            },
+                            {
+                              id: 'filter_inputs_container_regime',
+                              tag: 'filter_inputs_container_regime',
+                              componentName: 'container',
+                              properties: {
+                                className: 'space-y-1 min-w-[160px]'
+                              },
+                              children: [
+                                {
+                                  id: 'regime_flt',
+                                  tag: 'regime_flt',
+                                  componentName: 'select',
+                                  properties: {
+                                    label: 'Regime',
+                                    placeholder: 'Todos Regimes'
+                                  },
+                                  data: {
+                                    options: {
+                                      state: {
+                                        id: 'regime_flt_opt_st',
+                                        name: 'selectRegime_fltOptions',
+                                        type: 'IGRPOptionsProps[]',
+                                        defaultValue: '[]'
+                                      }
+                                    },
+                                    value: {
+                                      state: {
+                                        id: 'regime_flt_val_st',
+                                        name: 'regimeFilter',
+                                        type: 'string',
+                                        defaultValue: ''
+                                      }
+                                    },
+                                  },
+                                  interactions: {
+                                    onValueChange: {
+                                      type: 'function',
+                                      function: {
+                                        fnName: 'setRegimeFilter'
+                                      }
+                                    }
+                                  },
+                                },
+                              ],
+                            },
+                            {
+                              id: 'filter_inputs_container_status',
+                              tag: 'filter_inputs_container_status',
+                              componentName: 'container',
+                              properties: {
+                                className: 'space-y-1 min-w-[160px]'
+                              },
+                              children: [
+                                {
+                                  id: 'status_flt',
+                                  tag: 'status_flt',
+                                  componentName: 'select',
+                                  properties: {
+                                    label: 'Estado do Contribuinte',
+                                    placeholder: 'Todos Estados'
+                                  },
+                                  data: {
+                                    options: {
+                                      state: {
+                                        id: 'estado_flt_opt_st',
+                                        name: 'selectStatus_fltOptions',
+                                        type: 'IGRPOptionsProps[]',
+                                        defaultValue: '[]'
+                                      }
+                                    },
+                                    value: {
+                                      state: {
+                                        id: 'status_flt_val_st',
+                                        name: 'statusFilter',
+                                        type: 'string',
+                                        defaultValue: ''
+                                      }
+                                    },
+                                  },
+                                  interactions: {
+                                    onValueChange: {
+                                      type: 'function',
+                                      function: {
+                                        fnName: 'setStatusFilter'
+                                      }
+                                    }
+                                  },
+                                },
+                              ],
+                            },
+                            {
+                              id: 'filter_inputs_container_date',
+                              tag: 'filter_inputs_container_date',
+                              componentName: 'container',
+                              properties: {
+                                className: 'space-y-1 min-w-[160px]'
+                              },
+                              children: [
+                                {
+                                  id: 'date_flt',
+                                  tag: 'date_flt',
+                                  componentName: 'datePickerRange',
+                                  properties: {
+                                    label: 'Período de Inscrição',
+                                    placeholder: 'Escolha uma data',
+                                    startDate: '2017-01-01',
+                                    endDate: '2025-12-31'
+                                  },
+                                  data: {
+                                    date: {
+                                      state: {
+                                        id: 'date_flt_val_st',
+                                        name: 'dateFilter',
+                                        type: 'DateRange | undefined',
+                                        defaultValue: 'undefined'
+                                      }
+                                    },
+                                  },
+                                  interactions: {
+                                    onDateChange: {
+                                      type: 'function',
+                                      function: {
+                                        fnName: 'setDateFilter'
+                                      }
+                                    }
+                                  },
+                                },
+                              ],
+                            },
+                            {
+                              id: 'filter_button_container_clean',
+                              tag: 'filter_button_container_clean',
+                              componentName: 'container',
+                              properties: {
+                                className: 'ml-auto'
+                              },
+                              children: [
+                                {
+                                  id: 'button_clear_filter',
+                                  tag: 'button_clear_filter',
+                                  componentName: 'button',
+                                  properties: {
+                                    label: 'Limpar Filtros',
+                                    size: 'sm',
+                                    variant: 'outline',
+                                    className: 'h-9',
+                                    disabled: '!hasActiveFilters',
+                                    iconProperties: {
+                                      iconName: 'X',
+                                      showIcon: true
+                                    },
+                                  },
+                                  interactions: {
+                                    onClick: {
+                                      function: {
+                                        fnCustomCode: {
+                                          fnCustomSet: `
+                                          setResetFilters(true);
+                                          setStatusFilter("");
+                                          setLegalStatusFilter("");
+                                          setRegimeFilter("");
+                                          setDateFilter(undefined);
+                                          setFilterValue("");                                          
+                                          `
+                                        },
+                                      },
+                                      type: 'function',
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ]
+                        },
+                      ],
+                      rules: [
+                        {
+                          type: 'visibility',
+                          condition: 'showFilters'
+                        }
+                      ]
                     },
                     {
                       id: 'filter_actives_btn_fragment',
                       tag: 'filter_actives_btn_fragment',
                       componentName: 'fragment',
                       content: `
+
               {hasActiveFilters && !showFilters && (
               <div className="mt-3 pt-3 border-t flex flex-wrap items-center gap-2 px-4">
                 <span className="text-xs text-muted-foreground">Filtros ativos:</span>
@@ -933,7 +1108,7 @@ const loadRegimeFltCombobox = async () => {
 
                 {dateFilter !== undefined && (
                   <IGRPBadge variant="soft" className="px-2 py-1 h-6">
-                    Período de Inscrição: {dateFilter}
+                    Período de Inscrição: {dateFilter.from} a {dateFilter.to ?? 'hoje'}
                     <IGRPButton variant="ghost" size="icon" showIcon={true} iconName="X" iconClassName="h-3 w-3" className="ml-1 hover:text-destructive" onClick={() => setDateFilter(undefined)}>
                     </IGRPButton>
                   </IGRPBadge>
@@ -993,34 +1168,10 @@ const pageConfig: PageConfig = {
   imports: [
     { id: 'igrp_select', namespace: 'import { IGRPSelect } from "@igrp/igrp-framework-react-design-system";' },
     { id: 'igrp_badge', namespace: 'import { IGRPBadge } from "@igrp/igrp-framework-react-design-system";' },
-    { id: 'igrp_datepicker', namespace: 'import { IGRPDatePicker } from "@igrp/igrp-framework-react-design-system";' },
+    { id: 'igrp_datepicker_range', namespace: 'import { IGRPDatePickerRange } from "@igrp/igrp-framework-react-design-system";' },
     { id: 'igrp_options_props', namespace: 'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";' },
   ],
   states: [
-    {
-      id: 'legal_status_filter_st',
-      name: 'legalStatusFilter',
-      type: 'string',
-      defaultValue: ''
-    },
-    {
-      id: 'status_filter_st',
-      name: 'statusFilter',
-      type: 'string',
-      defaultValue: ''
-    },
-    {
-      id: 'regime_filter_st',
-      name: 'regimeFilter',
-      type: 'string',
-      defaultValue: ''
-    },
-    {
-      id: 'date_filter_st',
-      name: 'dateFilter',
-      type: 'Date | undefined',
-      defaultValue: 'undefined'
-    },
     {
       id: 'reset_filters_st',
       name: 'resetFilters',
@@ -1032,24 +1183,6 @@ const pageConfig: PageConfig = {
       name: 'hasActiveFilters',
       type: 'boolean',
       defaultValue: 'false'
-    },
-    {
-      id: 'slt_legal_status_filter_st',
-      name: 'selectLegalStatus_fltOptions',
-      type: 'IGRPOptionsProps[]',
-      defaultValue: '[]'
-    },
-    {
-      id: 'slt_status_filter_st',
-      name: 'selectStatus_fltOptions',
-      type: 'IGRPOptionsProps[]',
-      defaultValue: '[]'
-    },
-    {
-      id: 'slt_regime_filter_st',
-      name: 'selectRegime_fltOptions',
-      type: 'IGRPOptionsProps[]',
-      defaultValue: '[]'
     },
     {
       id: 'slt_rows_filter_st',

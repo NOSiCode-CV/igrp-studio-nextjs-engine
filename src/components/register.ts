@@ -14,6 +14,7 @@ import columnModule, { COLUMN } from './column';
 import columnsModule, { COLUMNS } from './columns';
 import comboboxModule, { COMBOBOX } from './combobox';
 import containerModule, { CONTAINER } from './container';
+import datePickerRangeModule, { DATE_PICKER_RANGE } from './datePickerRange/index';
 import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
 import flexModule, { FLEX } from './flex';
@@ -101,6 +102,7 @@ export function registerAllComponents() {
   register(COLUMNS, columnsModule.register);
   register(COMBOBOX, comboboxModule.register);
   register(CONTAINER, containerModule.register);
+  register(DATE_PICKER_RANGE, datePickerRangeModule.register);
   register(DROPDOWN, dropdownModule.register);
   register(DROPDOWN_ITEM, dropdownItemModule.register);
   register(FLEX, flexModule.register);

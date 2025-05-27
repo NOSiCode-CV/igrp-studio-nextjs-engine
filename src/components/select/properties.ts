@@ -20,7 +20,7 @@ export function selectProperties() {
     selectClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
-    selectLabel: { type: 'string', required: false, default: "No option found" },
+    //selectLabel: { type: 'string', required: false, default: "No option found" },
     error: { type: 'string', required: false },
     showSearch: { type: 'boolean', required: false },
     showGroup: { type: 'boolean', required: false },

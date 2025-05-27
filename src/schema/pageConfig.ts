@@ -646,6 +646,17 @@ const componentSchema: JSONSchemaType<Layout> = {
       nullable: true,
       errorMessage: "The 'style' field must be an object mapping of style.",
     },
+    rules: {
+      type: 'array',
+      items: {
+        type: "object",
+        required: [],
+        nullable: true,
+        errorMessage: "The 'rule' field must be an object mapping of rules.",
+      },
+      errorMessage: "The 'rules' field must be an array of object mapping of rules.",
+      nullable: true
+    },
     childProperties: {
       type: 'object',
       nullable: true,

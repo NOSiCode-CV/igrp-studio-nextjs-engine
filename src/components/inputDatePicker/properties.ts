@@ -13,7 +13,6 @@ export function inputDatePickerProperties() {
     label: { type: 'string', required: false, default: 'Date Picker' },
     placeholder: { type: 'string', required: false, default: 'Please select a date...' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     helperText: { type: 'string', required: false, default: '' },
     disabled: { type: 'boolean', required: false, default: false },

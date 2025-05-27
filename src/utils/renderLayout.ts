@@ -22,8 +22,12 @@ export const renderLayout = function (config: Layout, parent?: Layout): string {
       );
     }
   }
-  
-  str += component.render(config, component, parent, componentParent)
+
+  const rendered = component.render(config, component, parent, componentParent)
+
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
+
+  str += config.rules && visibilityRules.length > 0 ? `{ ${visibilityRules.map((it) => it.condition)[0]} && (` + rendered + ')}' : rendered
 
   return str
 

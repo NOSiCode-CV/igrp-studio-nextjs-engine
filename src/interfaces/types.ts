@@ -201,12 +201,18 @@ export interface Layout<S = any> extends IdentifiableElement{
   interactions?: Record<string, any>;
   data?: Record<string, any>;
   style?: StyleDefinition,
+  rules?: RuleDefinition[],
   childProperties?: Record<string, any>;
   parentProperties?: Record<string, any>;
   content?: string,
   tag: string,
   dataType?: string,
   children?: Layout[];
+}
+
+export interface RuleDefinition {
+  type: 'visibility',
+  condition: string
 }
 
 export interface LayoutProperties {
