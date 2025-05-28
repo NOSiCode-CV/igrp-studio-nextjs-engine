@@ -4,31 +4,37 @@ import { ComponentDef } from '../../interfaces/types';
 import { resolveExportedPath } from '../../utils/helpers';
 
 export function parseComponents(componentFilePath: string): ComponentDef[] {
-  let content = fs.readFileSync(componentFilePath + "x", 'utf-8');
+  let content = fs.readFileSync(componentFilePath.endsWith('.tsx') ? componentFilePath : componentFilePath + 'x', 'utf-8');
   const components: ComponentDef[] = [];
 
   // Remove all comment blocks first
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  // First extract the entire component function signature
-  const componentRegex = /export\s+default\s+function\s+(\w+)\s*\(([\s\S]*?)\)\s*{[\s\S]*?return\s*\(([\s\S]*?)\)[\s\S]*?}/g;
-  let componentMatch;
+  // 1. Parse traditional function components (exported or not)
+  const functionRegex = /(?:export\s+default\s+|export\s+)?function\s+(\w+)\s*\(([^)]*)\)\s*(?::\s*React\.ReactElement)?/g;
+  let functionMatch;
 
-  while ((componentMatch = componentRegex.exec(content)) !== null) {
-    const componentName = componentMatch[1];
-    const propsContent = componentMatch[2];
-    const returnContent = componentMatch[3];
-
-    const props = parseComponentProps(propsContent);
-    const hooks = parseHooks(content);
-    const children = parseChildComponents(returnContent);
-
+  while ((functionMatch = functionRegex.exec(content)) !== null) {
     components.push({
-      name: componentName,
+      name: functionMatch[1],
       path: resolveExportedPath(componentFilePath),
-      props,
-      hooks,
-      children
+      props: parseComponentProps(functionMatch[2]),
+      hooks: [], // Will be populated separately if needed
+      children: [] // Will be populated separately if needed
+    });
+  }
+
+  // 2. Parse arrow function components (const declarations)
+  const arrowRegex = /(?:export\s+)?const\s+(\w+)\s*=\s*(?:async\s*)?\(([^)]*)\)\s*(?::\s*React\.ReactElement)?\s*=>/g;
+  let arrowMatch;
+
+  while ((arrowMatch = arrowRegex.exec(content)) !== null) {
+    components.push({
+      name: arrowMatch[1],
+      path: resolveExportedPath(componentFilePath),
+      props: parseComponentProps(arrowMatch[2]),
+      hooks: [],
+      children: []
     });
   }
 

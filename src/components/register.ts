@@ -134,7 +134,7 @@ export function registerAllComponents() {
   register(PIECHART, pieChartModule.register);
   register(RADARCHART, radarChartModule.register);
   register(RADIAL_BAR_CHART, radialBarChartModule.register);
-  //register(RADIO, radioModule.register);
+  register(RADIO, radioModule.register);
   register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);

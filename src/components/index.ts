@@ -21,6 +21,8 @@ export type Component = {
   dataMapping: Record<string, any>;
   style: Record<string, any>;
   styleMapping: Record<string, any>;
+  rules: Record<string, any>;
+  rulesMapping: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
   childProperties: Record<string, any>;
@@ -74,6 +76,8 @@ export type Component = {
   getDataMapping: (mapping: Record<string, any>) => void;
   getStyle: (style: Record<string, any>) => void;
   getStyleMapping: (mapping: Record<string, any>) => void;
+  getRules: (rule: Record<string, any>) => void;
+  getRulesMapping: (mapping: Record<string, any>) => void;
   getProperties: (properties: Record<string, any>) => void;
   getPropertiesMapping: (mapping: Record<string, any>) => void;
   getChildProperties: (properties?: Record<string, any>) => void;
@@ -100,6 +104,8 @@ function initComponent(): Component {
     dataMapping: {},
     style: {},
     styleMapping: {},
+    rules: {},
+    rulesMapping: {},
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
@@ -221,6 +227,14 @@ function initComponent(): Component {
       Object.assign(this.styleMapping, mapping);
     },
 
+    getRules(rules) {
+      Object.assign(this.rules, rules);
+    },
+
+    getRulesMapping(mapping) {
+      Object.assign(this.rulesMapping, mapping);
+    },
+
     getProperties(properties) {
       Object.assign(this.properties, properties);
     },
@@ -303,6 +317,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     dataMapping: value.dataMapping,
     style: value.style,
     styleMapping: value.styleMapping,
+    rules: value.rules,
+    rulesMapping: value.rulesMapping,
     childPropertiesMapping: {},
     childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),

@@ -1,4 +1,4 @@
-import { baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function gridProperties() {
   return {
@@ -172,3 +172,10 @@ export function gridStyle() {
     ...baseStyle()
   }
 }
+
+export function gridRules() {
+  return {
+    ...baseRules()
+  }
+}
+

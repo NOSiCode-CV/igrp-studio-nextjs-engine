@@ -1,4 +1,4 @@
-import { baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function containerProperties() {
   return {
@@ -32,3 +32,10 @@ export function containerStyle() {
     ...baseStyle()
   }
 }
+
+export function containerRules() {
+  return {
+    ...baseRules()
+  }
+}
+

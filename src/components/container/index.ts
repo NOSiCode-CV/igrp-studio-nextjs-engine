@@ -2,7 +2,7 @@ import {
   containerPropertiesMapping,
   containerProperties,
   containerVariants,
-  containerChildProperties, containerChildPropertiesMapping, containerStyle,
+  containerChildProperties, containerChildPropertiesMapping, containerStyle, containerRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -18,6 +18,7 @@ export default {
     component.getChildProperties(containerChildProperties());
     component.getChildPropertiesMapping(containerChildPropertiesMapping());
     component.getStyle(containerStyle());
+    component.getRules(containerRules());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

@@ -15,7 +15,7 @@ export default {
     ]);
 
     component.loadVariants(chatVariants());
-    component.loadGroup('formElements')
+    component.loadGroup('basicElements')
     component.loadLabel('Chat')
     component.setAllowTypes(true)
     component.getProperties(chatProperties());

@@ -593,3 +593,25 @@ export function baseStyle() {
     },
   };
 }
+
+export function baseRules() {
+  return {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        type: {
+          type: 'string',
+          enum: ['visibility'],
+          required: true,
+          default: 'visibility',
+        },
+        condition: {
+          type: 'string',
+          required: true,
+          default: 'true',
+        },
+      },
+    }
+  };
+}

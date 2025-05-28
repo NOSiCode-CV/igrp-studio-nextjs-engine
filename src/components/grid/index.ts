@@ -3,7 +3,7 @@ import {
   gridProperties,
   gridVariants,
   gridChildProperties,
-  gridChildPropertiesMapping, gridStyle,
+  gridChildPropertiesMapping, gridStyle, gridRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -18,7 +18,8 @@ export default {
     component.getChildProperties(gridChildProperties());
     component.getChildPropertiesMapping(gridChildPropertiesMapping());
     component.loadStates([]);
-    component.getStyle(gridStyle())
+    component.getStyle(gridStyle());
+    component.getRules(gridRules());
     component.setRenderer(defaultRenderer);
   },
 };

@@ -2,15 +2,14 @@ import {
   radioGroupPropertiesMapping,
   radioGroupProperties,
   radioGroupVariants,
-  radioGroupChildProperties, radioGroupChildPropertiesMapping,
+  radioGroupChildProperties, radioGroupChildPropertiesMapping, radioGroupInteractions, radioGroupData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { RadioGroup, Radio } from "@igrp/igrp-framework-react-design-system";',
-      'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
+      'import { IGRPRadioGroup } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadVariants(radioGroupVariants());
@@ -20,13 +19,25 @@ export default {
     component.getPropertiesMapping(radioGroupPropertiesMapping());
     component.getChildProperties(radioGroupChildProperties());
     component.getChildPropertiesMapping(radioGroupChildPropertiesMapping());
+    component.getInteractions(radioGroupInteractions());
+    component.getData(radioGroupData());
 
     component.loadStates([
       {
         state: {
           id: '',
-          name: 'selected{{id}}Radio',
+          name: 'radio{{id}}Value',
           type: 'string',
+          defaultValue: '{{value}}'
+        },
+        required: true
+      },
+      {
+        state: {
+          id: '',
+          name: 'radio{{id}}Options',
+          type: 'IGRPOptionsProps[]',
+          defaultValue: '[]'
         },
         required: true
       }

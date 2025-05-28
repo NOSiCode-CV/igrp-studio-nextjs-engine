@@ -1,4 +1,4 @@
-import { baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function flexProperties() {
   return {
@@ -99,3 +99,10 @@ export function flexStyle() {
     ...baseStyle()
   }
 }
+
+export function flexRules() {
+  return {
+    ...baseRules()
+  }
+}
+

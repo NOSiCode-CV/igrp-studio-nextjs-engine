@@ -330,6 +330,8 @@ export interface ComponentRegisterConfig {
   dataMapping: Record<string, any>,
   style: Record<string, any>,
   styleMapping: Record<string, any>,
+  rules: Record<string, any>,
+  rulesMapping: Record<string, any>,
   childProperties?: Record<string, any>,
   childPropertiesMapping?: Record<string, any>,
   states: RegisterState[],

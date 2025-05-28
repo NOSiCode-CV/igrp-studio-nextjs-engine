@@ -3,6 +3,7 @@ import { commonProperties, commonPropertiesMapping } from '../default/properties
 export function aspectProperties() {
   return {
     variant: { type: 'string', required: true, enum: ['square', 'video', 'auto', 'portrait', 'landscape'] },
+    className: { type: 'string', required: false },
     ...commonProperties(),
   }
 }
