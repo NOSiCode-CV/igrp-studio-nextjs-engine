@@ -21,6 +21,7 @@ import apmServerModule, { APMSERVER } from './apmserver/index';
 import fleetServerModule, { FLEETSERVER } from './fleetserver/index';
 import igrpUserManagementModule, { IGRP_USER_MANAGEMENT } from './igrpUserManagement/index';
 import igrpAppLogicModule, { IGRP_APP_LOGIC } from './igrpAppLogic/index';
+import igrpAppLogicMiddlewareModule, { IGRP_APP_LOGIC_MIDDLEWARE } from './igrpAppLogicMiddleware/index';
 import igrpAppManagementModule, { IGRP_APP_MANAGEMENT } from './igrpAppManagement/index';
 import igrpUiModule, { IGRP_UI } from './igrpUi/index';
 import wso2isModule, { WSO2IS } from './wso2is/index';
@@ -32,6 +33,7 @@ export function registerAllServices() {
   register(IGRP_APP_MANAGEMENT, igrpAppManagementModule.register);
   register(IGRP_UI, igrpUiModule.register);
   register(IGRP_APP_LOGIC, igrpAppLogicModule.register);
+  register(IGRP_APP_LOGIC_MIDDLEWARE, igrpAppLogicMiddlewareModule.register);
 
   // Database
   register(POSTGRES, postgresModule.register);
