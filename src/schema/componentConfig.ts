@@ -543,13 +543,19 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       const: "component",
       errorMessage: "The Component type must be 'component'.",
     },
+    scope: {
+      type: "string",
+      enum: ['app', 'page'],
+      errorMessage: "The Component scope must be 'app' or 'page'.",
+    },
     name: {
       type: "string",
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage: 'The component name must only contain letters and must not have spaces or special characters.',
     },
-    path: {
+    pagePath: {
       type: "string",
+      nullable: true,
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage: 'The path attribute must only contain letters and must not have spaces or special characters.',
     },
@@ -558,6 +564,12 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       nullable: true,
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage: 'The icon attribute must only contain alphanumeric characters.',
+    },
+    pageName: {
+      type: "string",
+      nullable: true,
+      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
+      errorMessage: 'The page name must only contain letters and must not have spaces or special characters.'
     },
     components: {
       type: 'object',
@@ -574,7 +586,7 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       errorMessage: 'Arguments must contain valid args configuration.',
     },
   },
-  required: ['type', 'name', 'path'],
+  required: ['type', 'name'],
   additionalProperties: false,
 };
 

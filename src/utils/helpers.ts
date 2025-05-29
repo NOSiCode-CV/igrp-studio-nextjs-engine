@@ -49,10 +49,16 @@ export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
 
 export const getComponentDir = (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const name = context.resourceConfig.name.toLowerCase();
-  return path.join(
+  const pagePath = context.resourceConfig.pagePath;
+  return pagePath? path.join(
     context.basePath,
     DIRECTORIES.GENERATED,
-    DIRECTORIES.COMPONENTS,
+    pagePath,
+    'components',
+    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+  ) : path.join(
+    context.basePath,
+    DIRECTORIES.BASE_COMPONENTS,
     `${context.resourceConfig.name}`.toLowerCase(),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );

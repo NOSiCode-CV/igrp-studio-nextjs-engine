@@ -39,7 +39,9 @@ export interface Arguments {
 export interface ComponentConfig extends IdentifiableElement {
   type: 'component';
   name: string;
-  path: string;
+  pagePath?: string;
+  scope: 'app' | 'page';
+  pageName?: string;
   icon?: string;
   args?: Arguments[];
   components?: Layout | {};

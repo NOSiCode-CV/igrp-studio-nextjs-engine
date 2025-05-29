@@ -8,7 +8,7 @@ const componentConfig: ComponentConfig = {
   id: 'e34RfF3',
   type: 'component',
   name: 'AddTodo',
-  path: 'addtodo',
+  pagePath: 'addtodo',
   args: [
     {
       name: '{ onAdd }',

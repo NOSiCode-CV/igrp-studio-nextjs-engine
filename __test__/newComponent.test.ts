@@ -8,7 +8,7 @@ const componentConfig: ComponentConfig = {
   id: 'e34RfF3',
   type: 'component',
   name: 'todolist',
-  path: 'todo',
+  pagePath: 'todo',
   args: [
     {
       name: '{ initialTodos }',

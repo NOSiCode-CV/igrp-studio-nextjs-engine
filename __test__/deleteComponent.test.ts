@@ -6,7 +6,7 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 const componentConfig: ComponentConfig = {
   type: 'component',
   name: 'card',
-  path: 'card',
+  pagePath: 'card',
   components: [],
 };
 
