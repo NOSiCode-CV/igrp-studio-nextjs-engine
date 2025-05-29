@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseInteraction, baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function modalDialogProperties() {
@@ -64,4 +70,16 @@ export function modalDialogInteractionsMapping() {
   return {
 
   };
+}
+
+export function modalDialogStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function modalDialogRules() {
+  return {
+    ...baseRules()
+  }
 }

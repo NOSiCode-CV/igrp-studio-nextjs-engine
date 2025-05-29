@@ -3,7 +3,11 @@ import {
   modalDialogProperties,
   modalDialogVariants,
   modalDialogChildProperties,
-  modalDialogChildPropertiesMapping, modalDialogInteractions, modalDialogInteractionsMapping,
+  modalDialogChildPropertiesMapping,
+  modalDialogInteractions,
+  modalDialogInteractionsMapping,
+  modalDialogStyle,
+  modalDialogRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -23,7 +27,8 @@ export default {
     component.getChildPropertiesMapping(modalDialogChildPropertiesMapping());
     component.getInteractions(modalDialogInteractions());
     component.getInteractionsMapping(modalDialogInteractionsMapping());
-
+    component.getStyle(modalDialogStyle())
+    component.getRules(modalDialogRules())
     component.loadStates([
     ]);
 

@@ -3,7 +3,12 @@ import {
   checkboxProperties,
   checkboxVariants,
   checkboxChildProperties,
-  checkboxChildPropertiesMapping, checkboxInteractions, checkboxInteractionsMapping, checkboxData,
+  checkboxChildPropertiesMapping,
+  checkboxInteractions,
+  checkboxInteractionsMapping,
+  checkboxData,
+  checkboxRules,
+  checkboxStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,7 +28,8 @@ export default {
     component.getData(checkboxData());
     component.getChildProperties(checkboxChildProperties()); // TODO: handle a way to fetch parent properties
     component.getChildPropertiesMapping(checkboxChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
-
+    component.getRules(checkboxRules())
+    component.getStyle(checkboxStyle())
     component.loadStates([
       {
         state: {

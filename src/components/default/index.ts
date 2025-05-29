@@ -21,6 +21,12 @@ export default {
     component.getChildProperties(config.childProperties);
     component.getChildPropertiesMapping(config.childPropertiesMapping);
     component.loadStates(config.states);
+    component.getInteractions(config.interactions)
+    component.getInteractionsMapping(config.interactionsMapping)
+    component.getStyle(config.style)
+    component.getStyleMapping(config.styleMapping)
+    component.getRules(config.rules)
+    component.getRulesMapping(config.rulesMapping)
     component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : customRenderer);
   }
 };

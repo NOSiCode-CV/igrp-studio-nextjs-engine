@@ -3,7 +3,11 @@ import {
   inputPasswordProperties,
   inputPasswordVariants,
   inputPasswordChildProperties,
-  inputPasswordChildPropertiesMapping, inputPasswordInteractions, inputPasswordInteractionsMapping, inputPasswordData,
+  inputPasswordChildPropertiesMapping,
+  inputPasswordInteractions,
+  inputPasswordInteractionsMapping,
+  inputPasswordData,
+  inputPasswordRules, inputPasswordStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +27,8 @@ export default {
     component.getChildProperties(inputPasswordChildProperties());
     component.getChildPropertiesMapping(inputPasswordChildPropertiesMapping());
     component.getData(inputPasswordData());
+    component.getRules(inputPasswordRules())
+    component.getStyle(inputPasswordStyle())
 
     component.loadStates([
       {

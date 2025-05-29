@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function tabsProperties() {
   return {
@@ -52,4 +52,16 @@ export function tabsChildPropertiesMapping() {
 
 export function tabsVariants() {
   return {};
+}
+
+export function tabsStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function tabsRules() {
+  return {
+    ...baseRules()
+  }
 }

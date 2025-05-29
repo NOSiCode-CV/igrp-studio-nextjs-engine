@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseInteraction, baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
@@ -64,4 +70,16 @@ export function buttonInteractionsMapping() {
   return {
 
   };
+}
+
+export function buttonStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function buttonRules() {
+  return {
+    ...baseRules()
+  }
 }

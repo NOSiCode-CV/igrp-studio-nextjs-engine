@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function iconProperties() {
   return {
@@ -25,4 +25,16 @@ export function iconChildPropertiesMapping() {
 
 export function iconVariants() {
   return {};
+}
+
+export function iconStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function iconRules() {
+  return {
+    ...baseRules()
+  }
 }

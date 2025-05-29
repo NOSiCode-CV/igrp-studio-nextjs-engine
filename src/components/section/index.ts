@@ -3,7 +3,7 @@ import {
   sectionProperties,
   sectionVariants,
   sectionChildProperties,
-  sectionChildPropertiesMapping,
+  sectionChildPropertiesMapping, sectionStyle, sectionRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -17,6 +17,8 @@ export default {
     component.getPropertiesMapping(sectionPropertiesMapping());
     component.getChildProperties(sectionChildProperties());
     component.getChildPropertiesMapping(sectionChildPropertiesMapping());
+    component.getStyle(sectionStyle())
+    component.getRules(sectionRules())
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

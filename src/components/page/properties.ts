@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
@@ -49,5 +55,17 @@ export function pageVariants() {
     default: 'mx-auto px-4 space-y-6',
     narrow: 'mx-auto px-4 max-w-4xl space-y-6',
     wide: 'mx-auto px-4 max-w-7xl space-y-6',
+  }
+}
+
+export function pageStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function pageRules() {
+  return {
+    ...baseRules()
   }
 }

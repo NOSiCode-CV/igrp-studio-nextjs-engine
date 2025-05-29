@@ -3,7 +3,12 @@ import {
   inputUrlProperties,
   inputUrlVariants,
   inputUrlChildProperties,
-  inputUrlChildPropertiesMapping, inputUrlInteractions, inputUrlInteractionsMapping, inputUrlData,
+  inputUrlChildPropertiesMapping,
+  inputUrlInteractions,
+  inputUrlInteractionsMapping,
+  inputUrlData,
+  inputUrlRules,
+  inputUrlStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +28,8 @@ export default {
     component.getInteractions(inputUrlInteractions());
     component.getInteractionsMapping(inputUrlInteractionsMapping());
     component.getData(inputUrlData());
+    component.getRules(inputUrlRules());
+    component.getStyle(inputUrlStyle());
 
     component.loadStates([
       {

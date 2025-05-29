@@ -3,7 +3,7 @@ import {
   inputSearchProperties,
   inputSearchVariants,
   inputSearchChildProperties,
-  inputSearchChildPropertiesMapping, inputSearchData, inputSearchInteractions,
+  inputSearchChildPropertiesMapping, inputSearchData, inputSearchInteractions, inputSearchStyle, inputSearchRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,6 +22,8 @@ export default {
     component.getChildPropertiesMapping(inputSearchChildPropertiesMapping());
     component.getInteractions(inputSearchInteractions());
     component.getData(inputSearchData());
+    component.getStyle(inputSearchStyle())
+    component.getRules(inputSearchRules())
 
     component.loadStates([
       {

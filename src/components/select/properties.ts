@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -96,4 +96,16 @@ export function selectVariants() {
     single: "single",
     multiple: "multiple",
   };
+}
+
+export function selectStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function selectRules() {
+  return {
+    ...baseRules()
+  }
 }

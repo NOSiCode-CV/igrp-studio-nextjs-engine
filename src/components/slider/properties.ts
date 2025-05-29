@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function rangeSliderProperties() {
   return {
@@ -56,4 +56,16 @@ export function rangeSliderChildPropertiesMapping() {
 
 export function rangeSliderVariants() {
   return {};
+}
+
+export function rangeSliderStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function rangeSliderRules() {
+  return {
+    ...baseRules()
+  }
 }

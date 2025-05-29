@@ -3,7 +3,7 @@ import {
   headlineProperties,
   headlineVariants,
   headlineChildProperties,
-  headlineChildPropertiesMapping,
+  headlineChildPropertiesMapping, headlineStyle, headlineRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,7 +20,8 @@ export default {
     component.getPropertiesMapping(headlinePropertiesMapping());
     component.getChildProperties(headlineChildProperties());
     component.getChildPropertiesMapping(headlineChildPropertiesMapping());
-
+    component.getStyle(headlineStyle())
+    component.getRules(headlineRules())
     component.loadStates([]);
 
     component.setRenderer(hbsRenderer);

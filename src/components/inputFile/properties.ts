@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -58,4 +58,16 @@ export function inputFileData() {
 
 export function inputFileVariants() {
   return {};
+}
+
+export function inputFileStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputFileRules() {
+  return {
+    ...baseRules()
+  }
 }

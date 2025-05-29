@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
@@ -80,4 +87,16 @@ export function radioGroupData() {
       }, true), required: true },
     //defaultValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DEFAULT_VALUE), required: false },
   };
+}
+
+export function radioStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function radioRules() {
+  return {
+    ...baseRules()
+  }
 }

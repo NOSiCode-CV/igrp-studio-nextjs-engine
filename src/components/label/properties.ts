@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function labelProperties() {
   return {
@@ -26,4 +26,16 @@ export function labelChildPropertiesMapping() {
 
 export function labelVariants() {
   return {};
+}
+
+export function labelStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function labelRules() {
+  return {
+    ...baseRules()
+  }
 }

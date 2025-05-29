@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function cardHeaderProperties() {
   return {
@@ -23,4 +23,16 @@ export function cardHeaderChildPropertiesMapping() {
 
 export function cardHeaderVariants() {
   return {};
+}
+
+export function cardHeaderStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function cardHeaderRules() {
+  return {
+    ...baseRules()
+  }
 }

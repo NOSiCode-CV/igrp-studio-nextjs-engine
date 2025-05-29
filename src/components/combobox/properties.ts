@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -98,4 +98,16 @@ export function comboboxVariants() {
     single: "single",
     multiple: "multiple",
   };
+}
+
+export function comboboxStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function comboboxRules() {
+  return {
+    ...baseRules()
+  }
 }

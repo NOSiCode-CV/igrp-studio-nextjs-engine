@@ -2,7 +2,12 @@ import {
   radioGroupPropertiesMapping,
   radioGroupProperties,
   radioGroupVariants,
-  radioGroupChildProperties, radioGroupChildPropertiesMapping, radioGroupInteractions, radioGroupData,
+  radioGroupChildProperties,
+  radioGroupChildPropertiesMapping,
+  radioGroupInteractions,
+  radioGroupData,
+  radioStyle,
+  radioRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,6 +26,8 @@ export default {
     component.getChildPropertiesMapping(radioGroupChildPropertiesMapping());
     component.getInteractions(radioGroupInteractions());
     component.getData(radioGroupData());
+    component.getStyle(radioStyle())
+    component.getRules(radioRules())
 
     component.loadStates([
       {

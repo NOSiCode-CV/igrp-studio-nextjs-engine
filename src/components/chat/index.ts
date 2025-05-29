@@ -3,7 +3,7 @@ import {
   chatProperties,
   chatVariants,
   chatChildProperties,
-  chatChildPropertiesMapping,
+  chatChildPropertiesMapping, chatStyle, chatRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -22,7 +22,8 @@ export default {
     component.getPropertiesMapping(chatPropertiesMapping());
     component.getChildProperties(chatChildProperties());
     component.getChildPropertiesMapping(chatChildPropertiesMapping());
-
+    component.getStyle(chatStyle())
+    component.getRules(chatRules())
     component.loadStates([
     ]);
 

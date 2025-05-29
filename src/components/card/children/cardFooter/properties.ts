@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function cardFooterProperties() {
   return {
@@ -23,4 +23,16 @@ export function cardFooterChildPropertiesMapping() {
 
 export function cardFooterVariants() {
   return {};
+}
+
+export function cardFooterStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function cardFooterRules() {
+  return {
+    ...baseRules()
+  }
 }

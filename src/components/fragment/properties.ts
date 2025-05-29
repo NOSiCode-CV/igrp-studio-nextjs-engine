@@ -1,3 +1,5 @@
+import { baseRules, baseStyle } from '../default/properties';
+
 export function fragmentProperties() {
   return {
   }
@@ -19,5 +21,17 @@ export function fragmentChildPropertiesMapping() {
 export function fragmentVariants() {
   return {
 
+  }
+}
+
+export function fragmentStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function fragmentRules() {
+  return {
+    ...baseRules()
   }
 }

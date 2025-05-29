@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function pageHeaderProperties() {
   return {
@@ -36,4 +36,16 @@ export function pageHeaderVariants() {
   return {
     default: ''
   };
+}
+
+export function pageHeaderStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function pageHeaderRules() {
+  return {
+    ...baseRules()
+  }
 }

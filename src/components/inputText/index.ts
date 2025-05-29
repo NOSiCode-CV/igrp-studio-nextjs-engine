@@ -3,7 +3,7 @@ import {
   inputTextProperties,
   inputTextVariants,
   inputTextChildProperties,
-  inputTextChildPropertiesMapping, inputTextData, inputTextInteractions,
+  inputTextChildPropertiesMapping, inputTextData, inputTextInteractions, inputTextRules, inputTextStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -23,6 +23,8 @@ export default {
     component.getChildPropertiesMapping(inputTextChildPropertiesMapping());
     component.getInteractions(inputTextInteractions());
     component.getData(inputTextData());
+    component.getRules(inputTextRules())
+    component.getStyle(inputTextStyle())
 
     component.loadStates([
       {

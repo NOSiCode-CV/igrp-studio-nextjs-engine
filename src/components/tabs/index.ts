@@ -3,7 +3,7 @@ import {
   tabsProperties,
   tabsVariants,
   tabsChildProperties,
-  tabsChildPropertiesMapping,
+  tabsChildPropertiesMapping, tabsStyle, tabsRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -21,7 +21,8 @@ export default {
     component.getPropertiesMapping(tabsPropertiesMapping());
     component.getChildProperties(tabsChildProperties()); // TODO: handle a way to fetch parent properties
     component.getChildPropertiesMapping(tabsChildPropertiesMapping());
-
+    component.getStyle(tabsStyle())
+    component.getRules(tabsRules())
     component.loadStates([
       {
         state: {

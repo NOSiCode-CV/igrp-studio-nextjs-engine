@@ -3,7 +3,7 @@ import {
   paragraphProperties,
   paragraphVariants,
   paragraphChildProperties,
-  paragraphChildPropertiesMapping,
+  paragraphChildPropertiesMapping, paragraphStyle, paragraphRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -19,6 +19,8 @@ export default {
     component.getPropertiesMapping(paragraphPropertiesMapping());
     component.getChildProperties(paragraphChildProperties());
     component.getChildPropertiesMapping(paragraphChildPropertiesMapping());
+    component.getStyle(paragraphStyle())
+    component.getRules(paragraphRules())
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

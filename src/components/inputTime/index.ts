@@ -3,7 +3,12 @@ import {
   inputTimeProperties,
   inputTimeVariants,
   inputTimeChildProperties,
-  inputTimeChildPropertiesMapping, inputTimeInteractions, inputTimeInteractionsMapping, inputTimeData,
+  inputTimeChildPropertiesMapping,
+  inputTimeInteractions,
+  inputTimeInteractionsMapping,
+  inputTimeData,
+  inputTimeRules,
+  inputTimeStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +28,8 @@ export default {
     component.getInteractions(inputTimeInteractions());
     component.getInteractionsMapping(inputTimeInteractionsMapping());
     component.getData(inputTimeData());
+    component.getRules(inputTimeRules());
+    component.getStyle(inputTimeStyle());
 
     component.loadStates([
       {

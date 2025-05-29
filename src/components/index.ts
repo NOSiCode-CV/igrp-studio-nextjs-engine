@@ -7,11 +7,12 @@ import {
 } from '../interfaces/types';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
-import { replaceTemplate } from '../utils/helpers';
+import { isString, replaceTemplate } from '../utils/helpers';
 import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
+import { resolveStateDefault } from '../helpers/componentPropertiesHelper';
 
 export type Component = {
   imports: Set<string>;
@@ -459,7 +460,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return ` ${key}=${value}`;
+      return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
     }).join("")
     : ``
 

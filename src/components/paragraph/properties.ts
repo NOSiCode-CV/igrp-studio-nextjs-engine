@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function paragraphProperties() {
   return {
@@ -22,5 +22,17 @@ export function paragraphChildPropertiesMapping() {
 
 export function paragraphVariants() {
   return {
+  }
+}
+
+export function paragraphStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function paragraphRules() {
+  return {
+    ...baseRules()
   }
 }

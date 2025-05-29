@@ -10,106 +10,109 @@ export function parseComponents(componentFilePath: string): ComponentDef[] {
   // Remove all comment blocks first
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  // 1. Parse traditional function components (exported or not)
-  const functionRegex = /(?:export\s+default\s+|export\s+)?function\s+(\w+)\s*\(([^)]*)\)\s*(?::\s*React\.ReactElement)?/g;
+  // Match function declarations
+  const functionRegex = /(?:export\s+default\s+|export\s+)?function\s+(\w+)\s*\(/g;
   let functionMatch;
-
   while ((functionMatch = functionRegex.exec(content)) !== null) {
-    components.push({
-      name: functionMatch[1],
-      path: resolveExportedPath(componentFilePath),
-      props: parseComponentProps(functionMatch[2]),
-      hooks: [], // Will be populated separately if needed
-      children: [] // Will be populated separately if needed
-    });
+    const name = functionMatch[1];
+    const start = functionMatch.index + functionMatch[0].length - 1;
+    const extracted = extractBalancedParams(content, start);
+    if (!extracted) continue;
+
+    const { props, argumentsInterface } = parseComponentProps(extracted.params);
+    if (props || argumentsInterface) {
+      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [] });
+    }
   }
 
-  // 2. Parse arrow function components (const declarations)
-  const arrowRegex = /(?:export\s+)?const\s+(\w+)\s*=\s*(?:async\s*)?\(([^)]*)\)\s*(?::\s*React\.ReactElement)?\s*=>/g;
+  // Match arrow functions
+  const arrowRegex = /(?:export\s+)?const\s+(\w+)\s*=\s*(?:async\s*)?\(/g;
   let arrowMatch;
-
   while ((arrowMatch = arrowRegex.exec(content)) !== null) {
-    components.push({
-      name: arrowMatch[1],
-      path: resolveExportedPath(componentFilePath),
-      props: parseComponentProps(arrowMatch[2]),
-      hooks: [],
-      children: []
-    });
+    const name = arrowMatch[1];
+    const start = arrowMatch.index + arrowMatch[0].length - 1;
+    const extracted = extractBalancedParams(content, start);
+    if (!extracted) continue;
+
+    const { props, argumentsInterface } = parseComponentProps(extracted.params);
+    if (props || argumentsInterface) {
+      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [] });
+    }
   }
 
   return components;
 }
 
-function parseComponentProps(propsContent: string): ComponentDef['props'] {
-  const props: ComponentDef['props'] = [];
-
-  // First handle destructured props with type ({ a, b }: Type)
-  const destructuredMatch = propsContent.match(/^{\s*([^}]*)\s*}\s*:\s*\w+/);
-  if (destructuredMatch) {
-    const innerProps = destructuredMatch[1].split(',').map(p => p.trim());
-    for (const prop of innerProps) {
-      if (prop) {
-        const isOptional = prop.includes('?');
-        props.push(createPropDefinition(prop.replace('?', ''), 'any', isOptional));
-      }
-    }
-    return props;
-  }
-
-  // Handle regular parameter list
-  let currentPos = 0;
+function extractBalancedParams(str: string, startIndex: number): { params: string, endIndex: number } | null {
+  let i = startIndex;
+  if (str[i] !== '(') return null;
   let depth = 0;
-  let startPos = 0;
-  const result: string[] = [];
-
-  // Split by commas but respect nested structures
-  while (currentPos < propsContent.length) {
-    const char = propsContent[currentPos];
-    if (char === '(' || char === '{' || char === '[') depth++;
-    if (char === ')' || char === '}' || char === ']') depth--;
-
-    if (char === ',' && depth === 0) {
-      result.push(propsContent.slice(startPos, currentPos).trim());
-      startPos = currentPos + 1;
-    }
-    currentPos++;
+  let params = '';
+  while (i < str.length) {
+    const char = str[i];
+    if (char === '(') depth++;
+    if (char === ')') depth--;
+    params += char;
+    i++;
+    if (depth === 0) break;
   }
-  result.push(propsContent.slice(startPos).trim());
-
-  // Parse each individual prop
-  for (const propStr of result) {
-    if (!propStr) continue;
-
-    const propMatch = propStr.match(/^(\w+)(\??)(?:\s*:\s*((?:[^{}=>]|\([^)]*\)\s*=>\s*[^{}=>]+)+))?(?:\s*=\s*([^;]+))?/);
-    if (propMatch) {
-      const name = propMatch[1].trim();
-      const isOptional = !!propMatch[2];
-      let type = propMatch[3]?.trim() || 'any';
-      const defaultValue = propMatch[4]?.trim();
-
-      // Clean up function type formatting
-      if (type.includes('=>')) {
-        type = type.replace(/\s+/g, ' ').trim();
-      }
-
-      props.push({
-        name,
-        type,
-        isList: type.includes('[]') && !type.startsWith('('),
-        isOptional,
-        isInterface: /^[A-Z][a-zA-Z]*$/.test(type.replace('[]', '')),
-        isFunction: type.includes('=>') || type.includes('()') || /Function$/.test(type),
-        isState: /State$/.test(type) || /Dispatch$/.test(type),
-        defaultValue: defaultValue && !defaultValue.includes('>') ? defaultValue : undefined
-      });
-    }
-  }
-
-  return props;
+  if (depth !== 0) return null;
+  return { params: params.slice(1, -1), endIndex: i };
 }
 
-function createPropDefinition(name: string, type: string, isOptional: boolean): ComponentDef['props'][0] {
+function parseComponentProps(propsContent: string): { props: ComponentDef['props']; argumentsInterface?: string } {
+  const props: ComponentDef['props'] = [];
+  let argumentsInterface: string | undefined;
+
+  const cleanContent = propsContent.trim();
+
+  // Destructured with type reference ({ a, b }: Type)
+  const refMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*([A-Z][a-zA-Z0-9_]*)/);
+  if (refMatch) {
+    const propNames = refMatch[1].split(',').map(p => parseNameDefault(p.trim()));
+    for (const { name, optional, defaultValue } of propNames) {
+      props.push(createPropDefinition(name, 'any', optional, defaultValue));
+    }
+    argumentsInterface = refMatch[2];
+    return { props, argumentsInterface };
+  }
+
+  // Destructured with inline type definition
+  const inlineMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*(\{[\s\S]*?\})(?:\s*[^}])?/);
+  if (inlineMatch) {
+    const propNames = inlineMatch[1].split(',').map(p => parseNameDefault(p.trim()));
+    const typeContent = inlineMatch[2];
+    const typeRegex = /(\w+)(\??)\s*:\s*([^;\n}]+)(?=\s*(?:;|\}|\n|$))/g;
+    const typeMap = new Map<string, { type: string; optional: boolean }>();
+    let typeMatch;
+    while ((typeMatch = typeRegex.exec(typeContent)) !== null) {
+      typeMap.set(typeMatch[1].trim(), {
+        type: typeMatch[3].trim(),
+        optional: !!typeMatch[2]
+      });
+    }
+    for (const { name, optional, defaultValue } of propNames) {
+      if (typeMap.has(name)) {
+        const typeDef = typeMap.get(name)!;
+        props.push(createPropDefinition(name, typeDef.type, optional || typeDef.optional, defaultValue));
+      } else {
+        props.push(createPropDefinition(name, 'any', optional, defaultValue));
+      }
+    }
+    return { props };
+  }
+
+  return { props: [], argumentsInterface: undefined };
+}
+
+function parseNameDefault(raw: string): { name: string; optional: boolean; defaultValue?: string } {
+  const [namePart, defaultValue] = raw.split('=');
+  const name = namePart.trim().replace('?', '');
+  const optional = namePart.includes('?');
+  return { name, optional, defaultValue: defaultValue?.trim() };
+}
+
+function createPropDefinition(name: string, type: string, isOptional: boolean, defaultValue?: string): ComponentDef['props'][0] {
   return {
     name,
     type,
@@ -118,9 +121,10 @@ function createPropDefinition(name: string, type: string, isOptional: boolean): 
     isInterface: /^[A-Z][a-zA-Z]*$/.test(type.replace('[]', '')),
     isFunction: type.includes('=>') || /Function$/.test(type),
     isState: /State$/.test(type) || /Dispatch$/.test(type),
-    defaultValue: undefined
+    defaultValue
   };
 }
+
 function parseHooks(content: string): string[] {
   const hookRegex = /(use[A-Z][a-zA-Z]*)\s*\(/g;
   const hooks = new Set<string>();

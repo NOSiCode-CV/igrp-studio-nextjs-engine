@@ -2,7 +2,7 @@ import {
   pagePropertiesMapping,
   pageProperties,
   pageVariants,
-  pageChildProperties, pageChildPropertiesMapping, pageInteractions,
+  pageChildProperties, pageChildPropertiesMapping, pageInteractions, pageStyle, pageRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -19,6 +19,8 @@ export default {
     component.getInteractions(pageInteractions());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
+    component.getStyle(pageStyle());
+    component.getRules(pageRules());
   },
 };
 

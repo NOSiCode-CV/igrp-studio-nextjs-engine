@@ -3,7 +3,7 @@ import {
   stackProperties,
   stackVariants,
   stackChildProperties,
-  stackChildPropertiesMapping,
+  stackChildPropertiesMapping, stackStyle, stackRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -18,6 +18,8 @@ export default {
     component.getChildProperties(stackChildProperties());
     component.getChildPropertiesMapping(stackChildPropertiesMapping());
     component.loadStates([]);
+    component.getStyle(stackStyle())
+    component.getRules(stackRules())
     component.setRenderer(defaultRenderer);
   },
 };

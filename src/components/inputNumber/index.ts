@@ -3,7 +3,11 @@ import {
   inputNumberProperties,
   inputNumberVariants,
   inputNumberChildProperties,
-  inputNumberChildPropertiesMapping, inputNumberInteractions, inputNumberInteractionsMapping, inputNumberData,
+  inputNumberChildPropertiesMapping,
+  inputNumberInteractions,
+  inputNumberInteractionsMapping,
+  inputNumberData,
+  inputNumberStyle, inputNumberRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +27,8 @@ export default {
     component.getInteractions(inputNumberInteractions())
     component.getInteractionsMapping(inputNumberInteractionsMapping())
     component.getData(inputNumberData());
+    component.getStyle(inputNumberStyle())
+    component.getRules(inputNumberRules())
 
     component.loadStates([
       {

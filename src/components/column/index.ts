@@ -3,7 +3,7 @@ import {
   columnProperties,
   columnVariants,
   columnChildProperties,
-  columnChildPropertiesMapping,
+  columnChildPropertiesMapping, columnStyle, columnRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 import { COLUMNS } from '../columns';
@@ -22,6 +22,8 @@ export default {
     component.getChildPropertiesMapping(columnChildPropertiesMapping());
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
+    component.getStyle(columnStyle())
+    component.getRules(columnRules())
   },
 };
 

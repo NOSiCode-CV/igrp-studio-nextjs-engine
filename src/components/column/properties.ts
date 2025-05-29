@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function columnProperties() {
   return {
@@ -49,5 +49,17 @@ export function columnVariants() {
     span10: "col-span-10 flex flex-col gap-6",
     span11: "col-span-11 flex flex-col gap-6",
     span12: "col-span-12 flex flex-col gap-6",
+  }
+}
+
+export function columnStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function columnRules() {
+  return {
+    ...baseRules()
   }
 }

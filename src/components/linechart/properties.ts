@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function lineChartProperties() {
@@ -99,4 +106,16 @@ export function lineChartData() {
   return {
     data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
   };
+}
+
+export function lineChartStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function lineChartRules() {
+  return {
+    ...baseRules()
+  }
 }

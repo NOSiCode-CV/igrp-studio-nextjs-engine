@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function tableProperties() {
@@ -62,4 +69,16 @@ export function tableVariants() {
     striped: "striped",
     compact: "compact"
   };
+}
+
+export function tableStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function tableRules() {
+  return {
+    ...baseRules()
+  }
 }

@@ -3,7 +3,7 @@ import {
   buttonProperties,
   buttonVariants,
   buttonChildProperties,
-  buttonChildPropertiesMapping, buttonInteractions, buttonInteractionsMapping,
+  buttonChildPropertiesMapping, buttonInteractions, buttonInteractionsMapping, buttonStyle, buttonRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,7 +22,8 @@ export default {
     component.getPropertiesMapping(buttonPropertiesMapping());
     component.getChildProperties(buttonChildProperties());
     component.getChildPropertiesMapping(buttonChildPropertiesMapping());
-
+    component.getStyle(buttonStyle())
+    component.getRules(buttonRules())
     component.loadStates([
       {
         state: {

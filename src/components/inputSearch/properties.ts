@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -96,4 +96,16 @@ export function inputSearchData() {
 
 export function inputSearchVariants() {
   return {};
+}
+
+export function inputSearchStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputSearchRules() {
+  return {
+    ...baseRules()
+  }
 }

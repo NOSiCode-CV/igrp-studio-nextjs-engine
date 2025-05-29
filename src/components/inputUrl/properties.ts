@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -72,4 +72,16 @@ export function inputUrlData() {
 
 export function inputUrlVariants() {
   return {};
+}
+
+export function inputUrlStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputUrlRules() {
+  return {
+    ...baseRules()
+  }
 }

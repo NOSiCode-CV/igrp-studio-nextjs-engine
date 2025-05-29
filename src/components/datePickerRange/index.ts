@@ -6,7 +6,7 @@ import {
   datePickerRangeChildPropertiesMapping,
   datePickerRangeInteractions,
   datePickerRangeInteractionsMapping,
-  datePickerRangeData,
+  datePickerRangeData, datePickerRangeStyle, datePickerRangeRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -27,7 +27,8 @@ export default {
     component.getData(datePickerRangeData());
     component.getChildProperties(datePickerRangeChildProperties());
     component.getChildPropertiesMapping(datePickerRangeChildPropertiesMapping());
-
+    component.getStyle(datePickerRangeStyle())
+    component.getRules(datePickerRangeRules())
     component.loadStates([
       {
         state: {

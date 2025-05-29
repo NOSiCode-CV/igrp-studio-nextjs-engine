@@ -2,7 +2,7 @@ import {
   pieChartPropertiesMapping,
   pieChartProperties,
   pieChartChildProperties,
-  pieChartChildPropertiesMapping, pieChartInteractions, pieChartData,
+  pieChartChildPropertiesMapping, pieChartInteractions, pieChartData, pieChartRules, pieChartStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,6 +22,8 @@ export default {
     component.getChildProperties(pieChartChildProperties());
     component.getChildPropertiesMapping(pieChartChildPropertiesMapping());
     component.getData(pieChartData());
+    component.getRules(pieChartRules())
+    component.getStyle(pieChartStyle())
 
     component.loadStates([
     ]);

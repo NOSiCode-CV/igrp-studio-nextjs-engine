@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function chatProperties() {
   return {
@@ -25,4 +25,16 @@ export function chatChildPropertiesMapping() {
 
 export function chatVariants() {
   return {};
+}
+
+export function chatStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function chatRules() {
+  return {
+    ...baseRules()
+  }
 }

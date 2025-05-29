@@ -3,7 +3,7 @@ import {
   cardProperties,
   cardVariants,
   cardChildProperties,
-  cardChildPropertiesMapping,
+  cardChildPropertiesMapping, cardStyle, cardRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { CARD_CONTENT } from './children/cardContent';
@@ -24,7 +24,8 @@ export default {
     component.getPropertiesMapping(cardPropertiesMapping());
     component.getChildProperties(cardChildProperties());
     component.getChildPropertiesMapping(cardChildPropertiesMapping());
-
+    component.getStyle(cardStyle())
+    component.getRules(cardRules())
     component.loadChildrenTypes([
       { name: CARD_HEADER, isDefault: true }, { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true },
     ]);

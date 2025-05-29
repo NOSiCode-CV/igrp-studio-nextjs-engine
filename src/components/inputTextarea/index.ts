@@ -3,7 +3,11 @@ import {
   inputTextareaProperties,
   inputTextareaVariants,
   inputTextareaChildProperties,
-  inputTextareaChildPropertiesMapping, inputTextareaInteractions, inputTextareaInteractionsMapping, inputTextareaData,
+  inputTextareaChildPropertiesMapping,
+  inputTextareaInteractions,
+  inputTextareaInteractionsMapping,
+  inputTextareaData,
+  inputTextareaStyle, inputTextareaRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +27,8 @@ export default {
     component.getInteractions(inputTextareaInteractions());
     component.getInteractionsMapping(inputTextareaInteractionsMapping());
     component.getData(inputTextareaData());
+    component.getStyle(inputTextareaStyle());
+    component.getRules(inputTextareaRules());
 
     component.loadStates([
       {

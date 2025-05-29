@@ -3,7 +3,7 @@ import {
   fragmentProperties,
   fragmentVariants,
   fragmentChildProperties,
-  fragmentChildPropertiesMapping,
+  fragmentChildPropertiesMapping, fragmentRules, fragmentStyle,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -20,6 +20,8 @@ export default {
     component.getPropertiesMapping(fragmentPropertiesMapping());
     component.getChildProperties(fragmentChildProperties());
     component.getChildPropertiesMapping(fragmentChildPropertiesMapping());
+    component.getRules(fragmentRules())
+    component.getStyle(fragmentStyle())
     component.loadStates([]);
     component.setRenderer(defaultRenderer);
   },

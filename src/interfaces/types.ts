@@ -693,6 +693,7 @@ export interface FunctionDef {
 export interface ComponentDef {
   name: string;
   path: string;
+  argumentsInterface?: string;
   props: {
     name: string;
     type: string;

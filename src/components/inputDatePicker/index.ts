@@ -6,7 +6,7 @@ import {
   inputDatePickerChildPropertiesMapping,
   inputDatePickerInteractions,
   inputDatePickerInteractionsMapping,
-  inputDatePickerData,
+  inputDatePickerData, inputDatePickerStyle, inputDatePickerRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -26,6 +26,8 @@ export default {
     component.getInteractions(inputDatePickerInteractions())
     component.getInteractionsMapping(inputDatePickerInteractionsMapping())
     component.getData(inputDatePickerData());
+    component.getStyle(inputDatePickerStyle())
+    component.getRules(inputDatePickerRules())
 
     component.loadStates([
       {

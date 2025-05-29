@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function switchProperties() {
@@ -45,4 +51,16 @@ export function switchInteractionsMapping() {
 
 export function switchVariants() {
   return {};
+}
+
+export function switchStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function switchRules() {
+  return {
+    ...baseRules()
+  }
 }

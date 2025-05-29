@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
 export function dropdownProperties() {
   return {
@@ -36,4 +36,16 @@ export function dropdownVariants() {
     ghost: "ghost",
     link: "link",
   };
+}
+
+export function dropdownStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function dropdownRules() {
+  return {
+    ...baseRules()
+  }
 }

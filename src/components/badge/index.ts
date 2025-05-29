@@ -3,7 +3,7 @@ import {
   badgeProperties,
   badgeVariants,
   badgeChildProperties,
-  badgeChildPropertiesMapping, badgeInteractions, badgeInteractionsMapping,
+  badgeChildPropertiesMapping, badgeInteractions, badgeInteractionsMapping, badgeStyle, badgeRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -25,7 +25,8 @@ export default {
 
     component.loadStates([
     ]);
-
+    component.getStyle(badgeStyle())
+    component.getRules(badgeRules())
     component.setRenderer(hbsRenderer);
   },
 };

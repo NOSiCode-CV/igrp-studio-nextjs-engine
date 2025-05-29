@@ -1,5 +1,5 @@
 import {
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -56,4 +56,16 @@ export function dropdownItemVariants() {
     ghost: "ghost",
     link: "link",
   };
+}
+
+export function dropdownItemStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function dropdownItemRules() {
+  return {
+    ...baseRules()
+  }
 }

@@ -3,7 +3,7 @@ import {
   separatorProperties,
   separatorVariants,
   separatorChildProperties,
-  separatorChildPropertiesMapping,
+  separatorChildPropertiesMapping, separatorStyle, separatorRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -21,6 +21,8 @@ export default {
     component.getPropertiesMapping(separatorPropertiesMapping());
     component.getChildProperties(separatorChildProperties());
     component.getChildPropertiesMapping(separatorChildPropertiesMapping());
+    component.getStyle(separatorStyle())
+    component.getRules(separatorRules())
 
     component.loadStates([
     ]);

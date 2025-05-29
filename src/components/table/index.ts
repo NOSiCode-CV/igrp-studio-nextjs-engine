@@ -3,7 +3,7 @@ import {
   tableProperties,
   tableVariants,
   tableChildProperties,
-  tableChildPropertiesMapping, tableInteractionsMapping, tableData,
+  tableChildPropertiesMapping, tableInteractionsMapping, tableData, tableStyle, tableRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
@@ -51,6 +51,8 @@ export default {
       '{{id}}: { populate: () => Promise<{ rows: any[] }>; };',
     ]);*/
 
+    component.getStyle(tableStyle())
+    component.getRules(tableRules())
     component.setRenderer(hbsRenderer);
   },
 };

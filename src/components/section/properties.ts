@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function sectionProperties() {
   return {
@@ -32,5 +32,17 @@ export function sectionChildPropertiesMapping() {
 export function sectionVariants() {
   return {
     // ...
+  }
+}
+
+export function sectionStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function sectionRules() {
+  return {
+    ...baseRules()
   }
 }

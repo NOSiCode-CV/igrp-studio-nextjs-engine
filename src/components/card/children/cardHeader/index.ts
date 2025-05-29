@@ -3,7 +3,7 @@ import {
   cardHeaderProperties,
   cardHeaderVariants,
   cardHeaderChildProperties,
-  cardHeaderChildPropertiesMapping,
+  cardHeaderChildPropertiesMapping, cardHeaderStyle, cardHeaderRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { CARD } from '../../index';
@@ -25,7 +25,8 @@ export default {
     component.getChildProperties(cardHeaderChildProperties());
     component.getChildPropertiesMapping(cardHeaderChildPropertiesMapping());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: CARD, name: CARD_HEADER }))
-
+    component.getStyle(cardHeaderStyle())
+    component.getRules(cardHeaderRules())
     component.loadStates([]);
 
     component.setRenderer(hbsRenderer);

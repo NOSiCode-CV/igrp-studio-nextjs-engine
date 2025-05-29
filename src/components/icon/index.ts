@@ -3,7 +3,7 @@ import {
   iconProperties,
   iconVariants,
   iconChildProperties,
-  iconChildPropertiesMapping,
+  iconChildPropertiesMapping, iconRules, iconStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
@@ -21,7 +21,8 @@ export default {
     component.getPropertiesMapping(iconPropertiesMapping());
     component.getChildProperties(iconChildProperties());
     component.getChildPropertiesMapping(iconChildPropertiesMapping());
-
+    component.getRules(iconRules())
+    component.getStyle(iconStyle())
     component.loadStates([
     ]);
 

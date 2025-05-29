@@ -3,7 +3,11 @@ import {
   inputAddOnProperties,
   inputAddOnVariants,
   inputAddOnChildProperties,
-  inputAddOnChildPropertiesMapping, inputAddOnInteractions, inputAddOnInteractionsMapping, inputAddOnData,
+  inputAddOnChildPropertiesMapping,
+  inputAddOnInteractions,
+  inputAddOnInteractionsMapping,
+  inputAddOnData,
+  inputAddOnStyle, inputAddOnRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +27,8 @@ export default {
     component.getInteractions(inputAddOnInteractions());
     component.getInteractionsMapping(inputAddOnInteractionsMapping());
     component.getData(inputAddOnData());
+    component.getStyle(inputAddOnStyle())
+    component.getRules(inputAddOnRules())
 
     component.loadStates([
       {

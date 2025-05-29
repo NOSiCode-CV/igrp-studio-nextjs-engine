@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function datePickerRangeProperties() {
@@ -61,4 +68,16 @@ export function datePickerRangeData() {
 
 export function datePickerRangeVariants() {
   return {};
+}
+
+export function datePickerRangeStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function datePickerRangeRules() {
+  return {
+    ...baseRules()
+  }
 }

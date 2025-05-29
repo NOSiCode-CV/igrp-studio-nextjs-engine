@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -59,4 +59,16 @@ export function inputTextareaData() {
 
 export function inputTextareaVariants() {
   return {};
+}
+
+export function inputTextareaStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputTextareaRules() {
+  return {
+    ...baseRules()
+  }
 }

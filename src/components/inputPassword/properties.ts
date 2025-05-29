@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -60,4 +60,16 @@ export function inputPasswordData() {
 
 export function inputPasswordVariants() {
   return {};
+}
+
+export function inputPasswordStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputPasswordRules() {
+  return {
+    ...baseRules()
+  }
 }

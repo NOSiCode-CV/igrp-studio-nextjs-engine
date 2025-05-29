@@ -3,7 +3,7 @@ import {
   aspectProperties,
   aspectVariants,
   aspectChildProperties,
-  aspectChildPropertiesMapping,
+  aspectChildPropertiesMapping, aspectStyle, aspectRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
 
@@ -18,6 +18,8 @@ export default {
     component.getChildProperties(aspectChildProperties());
     component.getChildPropertiesMapping(aspectChildPropertiesMapping());
     component.loadStates([]);
+    component.getStyle(aspectStyle())
+    component.getRules(aspectRules())
     component.setRenderer(defaultRenderer);
   },
 };

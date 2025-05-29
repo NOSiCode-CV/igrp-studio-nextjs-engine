@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -55,4 +55,16 @@ export function inputHiddenData() {
 
 export function inputHiddenVariants() {
   return {};
+}
+
+export function inputHiddenStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputHiddenRules() {
+  return {
+    ...baseRules()
+  }
 }

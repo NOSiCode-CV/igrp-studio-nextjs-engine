@@ -2,7 +2,7 @@ import {
   rangeSliderPropertiesMapping,
   rangeSliderProperties,
   rangeSliderVariants,
-  rangeSliderChildProperties, rangeSliderChildPropertiesMapping,
+  rangeSliderChildProperties, rangeSliderChildPropertiesMapping, rangeSliderRules, rangeSliderStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,7 +20,8 @@ export default {
     component.getPropertiesMapping(rangeSliderPropertiesMapping());
     component.getChildProperties(rangeSliderChildProperties()); // TODO: handle a way to fetch parent properties
     component.getChildPropertiesMapping(rangeSliderChildPropertiesMapping()); // TODO: handle a way to fetch parent properties
-
+    component.getRules(rangeSliderRules())
+    component.getStyle(rangeSliderStyle())
     component.loadStates([
       {
         state: {

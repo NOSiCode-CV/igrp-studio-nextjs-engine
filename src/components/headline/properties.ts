@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function headlineProperties() {
   return {
@@ -33,4 +33,16 @@ export function headlineVariants() {
   return {
     default: ''
   };
+}
+
+export function headlineStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function headlineRules() {
+  return {
+    ...baseRules()
+  }
 }

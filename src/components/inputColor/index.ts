@@ -3,7 +3,11 @@ import {
   inputColorProperties,
   inputColorVariants,
   inputColorChildProperties,
-  inputColorChildPropertiesMapping, inputColorInteractions, inputColorInteractionsMapping, inputColorData,
+  inputColorChildPropertiesMapping,
+  inputColorInteractions,
+  inputColorInteractionsMapping,
+  inputColorData,
+  inputColorRules, inputColorStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,7 +27,8 @@ export default {
     component.getInteractions(inputColorInteractions())
     component.getInteractionsMapping(inputColorInteractionsMapping());
     component.getData(inputColorData());
-
+    component.getRules(inputColorRules())
+    component.getStyle(inputColorStyle())
 
     component.loadStates([
       {

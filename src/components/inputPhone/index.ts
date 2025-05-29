@@ -3,7 +3,11 @@ import {
   inputPhoneProperties,
   inputPhoneVariants,
   inputPhoneChildProperties,
-  inputPhoneChildPropertiesMapping, inputPhoneInteractions, inputPhoneInteractionsMapping, inputPhoneData,
+  inputPhoneChildPropertiesMapping,
+  inputPhoneInteractions,
+  inputPhoneInteractionsMapping,
+  inputPhoneData,
+  inputPhoneRules, inputPhoneStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +27,8 @@ export default {
     component.getInteractions(inputPhoneInteractions())
     component.getInteractionsMapping(inputPhoneInteractionsMapping())
     component.getData(inputPhoneData());
+    component.getRules(inputPhoneRules());
+    component.getStyle(inputPhoneStyle());
 
     component.loadStates([
       {

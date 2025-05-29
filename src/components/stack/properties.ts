@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function stackProperties() {
   return {
@@ -27,5 +27,17 @@ export function stackVariants() {
     sm: 'space-y-2',
     md: 'space-y-4',
     lg: 'space-y-6',
+  }
+}
+
+export function stackStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function stackRules() {
+  return {
+    ...baseRules()
   }
 }

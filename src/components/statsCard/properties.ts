@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction,
+  baseInteraction, baseRules, baseStyle,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -80,5 +80,17 @@ export function statsCardData() {
         defaultValue: '0'
       }, true), required: true
     },
+  }
+}
+
+export function statsCardStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function statsCardRules() {
+  return {
+    ...baseRules()
   }
 }

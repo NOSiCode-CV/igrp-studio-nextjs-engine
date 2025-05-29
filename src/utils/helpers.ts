@@ -261,3 +261,20 @@ export function resolveFromMyAppPath(fullPath: string): string {
 export const getDirectoryPath = (filePath: string): string => {
   return path.dirname(filePath);
 };
+
+export const isString = (value: string | undefined)=> {
+
+  if(value === undefined || (value?.trim() === '')) return undefined
+
+  const trimmed = value.trim();
+
+  return (trimmed === 'null' ||
+    trimmed === 'undefined' ||
+    trimmed === 'true' ||
+    trimmed === 'false' ||
+    trimmed === '[]' ||
+    trimmed === '{}' ||
+    (!isNaN(Number(trimmed)) && trimmed !== '') ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))) ? undefined : 'string'
+}

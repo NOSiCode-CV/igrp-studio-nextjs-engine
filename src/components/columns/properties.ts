@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function columnsProperties() {
   return {
@@ -52,5 +52,17 @@ export function columnsVariants() {
     cols10: "grid-cols-10",
     cols11: "grid-cols-11",
     cols12: "grid-cols-12",
+  }
+}
+
+export function columnsStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function columnsRules() {
+  return {
+    ...baseRules()
   }
 }

@@ -2,7 +2,10 @@ import {
   horizontalBarChartPropertiesMapping,
   horizontalBarChartProperties,
   horizontalBarChartChildProperties,
-  horizontalBarChartChildPropertiesMapping, horizontalBarChartInteractions, horizontalBarChartData,
+  horizontalBarChartChildPropertiesMapping,
+  horizontalBarChartInteractions,
+  horizontalBarChartData,
+  horizontalBarChartRules, horizontalBarChartStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,7 +25,8 @@ export default {
     component.getData(horizontalBarChartData());
     component.getChildProperties(horizontalBarChartChildProperties());
     component.getChildPropertiesMapping(horizontalBarChartChildPropertiesMapping());
-
+    component.getRules(horizontalBarChartRules())
+    component.getStyle(horizontalBarChartStyle())
     component.loadStates([
     ]);
 

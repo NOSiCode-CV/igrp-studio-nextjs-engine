@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function aspectProperties() {
   return {
@@ -29,5 +29,17 @@ export function aspectVariants() {
     auto: "aspect-auto",
     portrait: "aspect-[2/3]",
     landscape: "aspect-[3/2]",
+  }
+}
+
+export function aspectStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function aspectRules() {
+  return {
+    ...baseRules()
   }
 }

@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function carouselProperties() {
   return {
@@ -30,4 +30,16 @@ export function carouselVariants() {
     fade: "fade",
     slide: "slide"
   };
+}
+
+export function carouselStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function carouselRules() {
+  return {
+    ...baseRules()
+  }
 }

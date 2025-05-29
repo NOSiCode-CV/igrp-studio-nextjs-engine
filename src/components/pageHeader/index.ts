@@ -3,7 +3,7 @@ import {
   pageHeaderProperties,
   pageHeaderVariants,
   pageHeaderChildProperties,
-  pageHeaderChildPropertiesMapping,
+  pageHeaderChildPropertiesMapping, pageHeaderRules, pageHeaderStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,7 +20,8 @@ export default {
     component.getPropertiesMapping(pageHeaderPropertiesMapping());
     component.getChildProperties(pageHeaderChildProperties());
     component.getChildPropertiesMapping(pageHeaderChildPropertiesMapping());
-
+    component.getRules(pageHeaderRules())
+    component.getStyle(pageHeaderStyle())
     component.loadStates([]);
 
     component.setRenderer(hbsRenderer);

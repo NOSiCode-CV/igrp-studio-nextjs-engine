@@ -3,7 +3,11 @@ import {
   dropdownItemProperties,
   dropdownItemVariants,
   dropdownItemChildProperties,
-  dropdownItemChildPropertiesMapping, dropdownItemInteractions, dropdownItemInteractionsMapping,
+  dropdownItemChildPropertiesMapping,
+  dropdownItemInteractions,
+  dropdownItemInteractionsMapping,
+  dropdownItemRules,
+  dropdownItemStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { TEMPLATES } from '../../../../utils/constants';
@@ -26,7 +30,8 @@ export default {
     component.getChildProperties(dropdownItemChildProperties());
     component.getChildPropertiesMapping(dropdownItemChildPropertiesMapping());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: DROPDOWN, name: DROPDOWN_ITEM }))
-
+    component.getRules(dropdownItemRules())
+    component.getStyle(dropdownItemStyle())
     component.loadStates([
     ]);
 

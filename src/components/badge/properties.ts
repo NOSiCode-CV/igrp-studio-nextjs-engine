@@ -1,4 +1,10 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseInteraction, baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function badgeProperties() {
@@ -53,4 +59,16 @@ export function badgeInteractions() {
 export function badgeInteractionsMapping() {
   return {
   };
+}
+
+export function badgeStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function badgeRules() {
+  return {
+    ...baseRules()
+  }
 }

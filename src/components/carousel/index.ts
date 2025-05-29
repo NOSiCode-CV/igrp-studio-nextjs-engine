@@ -3,7 +3,7 @@ import {
   carouselProperties,
   carouselVariants,
   carouselChildProperties,
-  carouselChildPropertiesMapping,
+  carouselChildPropertiesMapping, carouselStyle, carouselRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,7 +20,8 @@ export default {
     component.getPropertiesMapping(carouselPropertiesMapping());
     component.getChildProperties(carouselChildProperties());
     component.getChildPropertiesMapping(carouselChildPropertiesMapping());
-
+    component.getStyle(carouselStyle())
+    component.getRules(carouselRules())
     component.loadStates([
       {
         state: {

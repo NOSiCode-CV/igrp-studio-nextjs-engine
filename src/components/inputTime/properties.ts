@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -60,4 +60,16 @@ export function inputTimeData() {
 
 export function inputTimeVariants() {
   return {};
+}
+
+export function inputTimeStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputTimeRules() {
+  return {
+    ...baseRules()
+  }
 }

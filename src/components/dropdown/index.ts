@@ -3,7 +3,7 @@ import {
   dropdownProperties,
   dropdownVariants,
   dropdownChildProperties,
-  dropdownChildPropertiesMapping,
+  dropdownChildPropertiesMapping, dropdownRules, dropdownStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { DROPDOWN_ITEM } from './children/dropdownItem';
@@ -25,6 +25,10 @@ export default {
     component.loadChildrenTypes([{ name: DROPDOWN_ITEM, isDefault: true }]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
+
+    component.getRules(dropdownRules())
+
+    component.getStyle(dropdownStyle())
 
     component.setRenderer(hbsRenderer);
   },

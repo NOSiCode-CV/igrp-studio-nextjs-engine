@@ -3,7 +3,12 @@ import {
   statsCardProperties,
   statsCardVariants,
   statsCardChildProperties,
-  statsCardChildPropertiesMapping, statsCardInteractions, statsCardInteractionsMapping, statsCardData,
+  statsCardChildPropertiesMapping,
+  statsCardInteractions,
+  statsCardInteractionsMapping,
+  statsCardData,
+  statsCardRules,
+  statsCardStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +28,8 @@ export default {
     component.getChildProperties(statsCardChildProperties());
     component.getChildPropertiesMapping(statsCardChildPropertiesMapping());
     component.getData(statsCardData());
+    component.getRules(statsCardRules())
+    component.getStyle(statsCardStyle())
 
     component.loadStates([
     ]);

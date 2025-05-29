@@ -3,7 +3,7 @@ import {
   inputHiddenProperties,
   inputHiddenVariants,
   inputHiddenChildProperties,
-  inputHiddenChildPropertiesMapping,
+  inputHiddenChildPropertiesMapping, inputHiddenRules, inputHiddenStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -20,7 +20,8 @@ export default {
     component.getPropertiesMapping(inputHiddenPropertiesMapping());
     component.getChildProperties(inputHiddenChildProperties());
     component.getChildPropertiesMapping(inputHiddenChildPropertiesMapping());
-
+    component.getRules(inputHiddenRules())
+    component.getStyle(inputHiddenStyle())
     component.loadStates([
       {
         state: {

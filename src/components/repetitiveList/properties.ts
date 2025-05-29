@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function repetitiveListProperties() {
   return {
@@ -24,4 +24,16 @@ export function repetitiveListChildPropertiesMapping() {
 export function repetitiveListVariants() {
   return {
   };
+}
+
+export function repetitiveListStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function repetitiveListRules() {
+  return {
+    ...baseRules()
+  }
 }

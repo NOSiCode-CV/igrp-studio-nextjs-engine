@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function checkboxProperties() {
@@ -55,4 +62,16 @@ export function checkboxData() {
 
 export function checkboxVariants() {
   return {};
+}
+
+export function checkboxStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function checkboxRules() {
+  return {
+    ...baseRules()
+  }
 }

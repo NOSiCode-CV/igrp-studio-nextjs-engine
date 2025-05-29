@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
 export function separatorProperties() {
   return {
@@ -25,3 +25,16 @@ export function separatorChildPropertiesMapping() {
 export function separatorVariants() {
   return {};
 }
+
+export function separatorStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function separatorRules() {
+  return {
+    ...baseRules()
+  }
+}
+

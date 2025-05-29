@@ -3,7 +3,12 @@ import {
   inputFileProperties,
   inputFileVariants,
   inputFileChildProperties,
-  inputFileChildPropertiesMapping, inputFileInteractions, inputFileInteractionsMapping, inputFileData,
+  inputFileChildPropertiesMapping,
+  inputFileInteractions,
+  inputFileInteractionsMapping,
+  inputFileData,
+  inputFileStyle,
+  inputFileRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -23,6 +28,8 @@ export default {
     component.getInteractions(inputFileInteractions())
     component.getInteractionsMapping(inputFileInteractionsMapping())
     component.getData(inputFileData());
+    component.getStyle(inputFileStyle())
+    component.getRules(inputFileRules())
 
     component.loadStates([
       {

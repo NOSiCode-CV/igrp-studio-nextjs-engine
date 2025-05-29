@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties,
+  dataCommonProperties, baseStyle, baseRules,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -61,4 +61,16 @@ export function inputNumberData() {
 
 export function inputNumberVariants() {
   return {};
+}
+
+export function inputNumberStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function inputNumberRules() {
+  return {
+    ...baseRules()
+  }
 }

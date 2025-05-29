@@ -1,4 +1,11 @@
-import { baseData, baseInteraction, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
@@ -66,4 +73,16 @@ export function formInteractionsMapping() {
 
 export function formVariants() {
   return {};
+}
+
+export function formStyle() {
+  return {
+    ...baseStyle()
+  }
+}
+
+export function formRules() {
+  return {
+    ...baseRules()
+  }
 }

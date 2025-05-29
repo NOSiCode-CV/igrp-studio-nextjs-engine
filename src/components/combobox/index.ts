@@ -3,7 +3,12 @@ import {
   comboboxProperties,
   comboboxVariants,
   comboboxChildProperties,
-  comboboxChildPropertiesMapping, comboboxInteractions, comboboxInteractionsMapping, comboboxData,
+  comboboxChildPropertiesMapping,
+  comboboxInteractions,
+  comboboxInteractionsMapping,
+  comboboxData,
+  comboboxStyle,
+  comboboxRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -45,7 +50,8 @@ export default {
     component.getData(comboboxData());
     component.getChildProperties(comboboxChildProperties());
     component.getChildPropertiesMapping(comboboxChildPropertiesMapping());
-
+    component.getStyle(comboboxStyle())
+    component.getRules(comboboxRules())
     component.setRenderer(hbsRenderer);
   },
 };

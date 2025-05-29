@@ -3,7 +3,7 @@ import {
   formProperties,
   formVariants,
   formInteractions,
-  formInteractionsMapping, formData,
+  formInteractionsMapping, formData, formStyle, formRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { GRID } from '../grid';
@@ -31,7 +31,8 @@ export default {
     component.getPropertiesMapping(formPropertiesMapping());
     component.loadChildrenTypes([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
     component.loadAcceptedChildren([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
-
+    component.getStyle(formStyle())
+    component.getRules(formRules())
     component.loadStates([
       {
         state: {
