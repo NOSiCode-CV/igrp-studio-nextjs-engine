@@ -504,8 +504,28 @@ const argsSchema: JSONSchemaType<Arguments> = {
       type: 'string',
       errorMessage: 'The name attribute must be a string.'
     },
+    isList: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a boolean.'
+    },
+    isOptional: {
+      type: 'boolean',
+      errorMessage: 'The isOptional attribute must be a boolean.'
+    },
+    isInterface: {
+      type: 'boolean',
+      errorMessage: 'The isInterface attribute must be a boolean.'
+    },
+    isFunction: {
+      type: 'boolean',
+      errorMessage: 'The isFunction attribute must be a boolean.'
+    },
+    isState: {
+      type: 'boolean',
+      errorMessage: 'The isState attribute must be a boolean.'
+    },
   },
-  required: ['type', 'name'],
+  required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
   additionalProperties: false
 };
 

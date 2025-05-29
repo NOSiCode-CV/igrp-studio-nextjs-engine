@@ -33,7 +33,12 @@ export interface PageComponentConfig extends IdentifiableElement {
 
 export interface Arguments {
   type: string,
-  name: string
+  name: string,
+  isList: boolean,
+  isOptional: boolean,
+  isInterface: boolean,
+  isFunction: boolean,
+  isState: boolean,
 }
 
 export interface ComponentConfig extends IdentifiableElement {
