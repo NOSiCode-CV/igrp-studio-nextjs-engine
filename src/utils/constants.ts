@@ -105,7 +105,7 @@ export const ENVIRONMENT_FILES = {
   UI_IGRP_ENV: '.ui.igrp.env',
   IAM_IGRP_ENV: '.iam.igrp.env',
   FILE_IGRP_ENV: '.file.igrp.env',
-  APP_LOGIC_IGRP_ENV: '.applogic.igrp.env',
+  APP_LOGIC_IGRP_ENV: '.al.igrp.env',
   IGRP_ENV: '.igrp.env',
 }
 

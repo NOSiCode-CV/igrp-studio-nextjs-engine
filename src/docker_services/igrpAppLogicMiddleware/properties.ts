@@ -46,25 +46,7 @@ export function igrpAppLogicMiddlewareProperties() {
       ],
     },
     hostname: { type: 'string', required: false, default: 'igrp-app-logic-middleware' },
-    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.am.igrp.env' } } }, required: true, default: [ { file: '.am.igrp.env'} ] },
-    environments: {
-      type: 'array',
-      default: [
-        { key: 'DB_POSTGRESDB_HOST', value: '${IGRP_APP_LOGIC_DB_HOSTNAME}' },
-        { key: 'DB_POSTGRESDB_PORT', value: '5432' },
-        { key: 'DB_POSTGRESDB_DATABASE', value: '${IGRP_APP_LOGIC_MIDDLEWARE_DB_NAME}' },
-        { key: 'DB_POSTGRESDB_USER', value: '${IGRP_APP_LOGIC_MIDDLEWARE_DB_USER}' },
-        { key: 'APPLOGIC_HOST', value: 'http://${IGRP_APP_LOGIC_HOSTNAME}:5678' },
-        { key: 'APPLOGIC_TOKEN', value: '{{token}}' },
-      ],
-      items: {
-        type: 'object',
-        properties: {
-          key: { type: 'string', required: true },
-          value: { type: 'string', required: true },
-        },
-      },
-    },
+    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.al.igrp.env' } } }, required: true, default: [ { file: '.al.igrp.env'}, { file: '.igrp.env'}, ] },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],

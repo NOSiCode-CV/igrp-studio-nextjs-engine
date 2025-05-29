@@ -10,7 +10,7 @@ export function igrpAppLogicProperties() {
   encryptionKey = generateKey()
 
   return {
-    image: { type: 'string', required: true, default: 'registry.nosi.cv/formacao-igrp/igrp-app-logic:latest' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/igrp-app-logic:latest' },
     container_name: { type: 'string', required: false, default: 'igrp-app-logic' },
     restart: {
       type: 'string',
@@ -64,6 +64,27 @@ export function igrpAppLogicProperties() {
       },
       required: false,
       default: [{ file: '.igrp.env' }],
+    },
+    healthcheck: {
+      type: 'object',
+      properties: {
+        test: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { instruction: { type: 'string', required: true } },
+          },
+          default: [
+            { instruction: 'CMD' },
+            { instruction: 'curl' },
+            { instruction: '-f' },
+            { instruction: 'http://localhost:5678/healthz' },
+          ],
+        },
+        interval: { type: 'string', required: true, default: '15s' },
+        timeout: { type: 'string', required: true, default: '5s' },
+        retries: { type: 'number', required: true, default: 5 },
+      },
     },
     networks: {
       type: 'array',
