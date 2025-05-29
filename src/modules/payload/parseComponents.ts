@@ -99,7 +99,7 @@ function parseComponentProps(propsContent: string): { props: ComponentDef['props
         props.push(createPropDefinition(name, 'any', optional, defaultValue));
       }
     }
-    return { props };
+    return { props: props.filter((it) => it.name != '') };
   }
 
   return { props: [], argumentsInterface: undefined };

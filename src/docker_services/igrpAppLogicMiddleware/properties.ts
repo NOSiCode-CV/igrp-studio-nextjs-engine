@@ -1,4 +1,5 @@
 import { IGRP_APP_LOGIC_MIDDLEWARE } from './index';
+import { COMMON_FILES, DIRECTORIES, ENVIRONMENT_FILES } from '../../utils/constants';
 
 export function igrpAppLogicMiddlewareProperties() {
   return {
@@ -24,6 +25,24 @@ export function igrpAppLogicMiddlewareProperties() {
           internal: 7980,
           external: 7980,
         },
+      ],
+    },
+    volumes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', required: true, default: `./${DIRECTORIES.IGRPSTUDIO}/applogic/${COMMON_FILES.JSON_IGRP_APP_LOGIC}` },
+          path: { type: 'string', required: true, default: '/data/applogic/igrp-app-logic.json' },
+          driver: { type: 'string', required: true, default: 'none' },
+        },
+      },
+      default: [
+        {
+          name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/${COMMON_FILES.JSON_IGRP_APP_LOGIC}`,
+          path: '/data/applogic/igrp-app-logic.json',
+          driver: 'none',
+        }
       ],
     },
     hostname: { type: 'string', required: false, default: 'igrp-app-logic-middleware' },
