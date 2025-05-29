@@ -28,7 +28,7 @@ export function inputDatePickerProperties() {
     month: { type: 'date', required: false, default: '2025-01-01' },
     endMonth: { type: 'date', required: false, default: '2025-12-31' },
     numberOfMonths: { type: 'number', required: false, default: '1' },
-    weekStartsOn: { type: 'number', required: false, enum: [0, 1, 2, 3, 4, 5, 6], default: 'full' },
+    weekStartsOn: { type: 'number', required: false, enum: [0, 1, 2, 3, 4, 5, 6], default: 0 },
     pagedNavigation: { type: 'boolean', required: true, default: false },
     reverseMonths: { type: 'boolean', required: true, default: false },
     hideNavigation: { type: 'boolean', required: false, default: false },
