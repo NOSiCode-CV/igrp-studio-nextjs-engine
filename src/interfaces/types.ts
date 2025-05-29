@@ -324,6 +324,7 @@ export interface ComponentRegisterConfig {
   customClassName?: string,
   customComponentTag?: string,
   variants: Record<string, any>,
+  metadata: Record<string, any>,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,
   interactions: Record<string, any>,

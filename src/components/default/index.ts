@@ -16,6 +16,7 @@ export default {
 
     component.loadTemplatePath(config.templatePath);
     component.loadVariants(config.variants)
+    component.loadMetadata(config.metadata)
     component.getProperties(config.properties);
     component.getPropertiesMapping(config.propertiesMapping);
     component.getChildProperties(config.childProperties);

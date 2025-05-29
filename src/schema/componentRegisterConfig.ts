@@ -113,6 +113,9 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     variants: {
       type: 'object'
     },
+    metadata: {
+      type: 'object'
+    },
     properties: {
       type: 'object'
     },

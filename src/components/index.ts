@@ -29,6 +29,7 @@ export type Component = {
   childProperties: Record<string, any>;
   childPropertiesMapping: Record<string, any>;
   variants: Record<string, any>;
+  metadata: Record<string, any>;
   childrenTypes: Set<ChildComponent>;
   acceptedChildren: Set<ChildComponent>;
   states: Set<RegisterState>;
@@ -71,6 +72,7 @@ export type Component = {
   loadChildrenMax:(max: number) => void;
 
   loadVariants: (variants: Record<string, any>) => void;
+  loadMetadata: (metadata: Record<string, any>) => void;
   getInteractions: (interactions: Record<string, any>) => void;
   getInteractionsMapping: (mapping: Record<string, any>) => void;
   getData: (data: Record<string, any>) => void;
@@ -98,6 +100,7 @@ function initComponent(): Component {
   return {
     imports: new Set(),
     variants: {},
+    metadata: {},
     properties: {},
     interactions: {},
     interactionsMapping: {},
@@ -202,6 +205,10 @@ function initComponent(): Component {
 
     loadVariants(variants) {
       Object.assign(this.variants, variants);
+    },
+
+    loadMetadata(metadata) {
+      Object.assign(this.metadata, metadata);
     },
 
     getInteractions(interactions) {
@@ -309,6 +316,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     customClassName: value.customClassName,
     customComponentTag: value.customComponentTag,
     variants: value.variants,
+    metadata: value.metadata,
     childProperties: value.childProperties,
     properties: value.properties,
     propertiesMapping: {},
