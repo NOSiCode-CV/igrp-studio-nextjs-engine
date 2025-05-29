@@ -1,9 +1,9 @@
-import { ActionConfig, Layout, PageConfig, RenderContext } from '../interfaces/types';
+import { ActionConfig, ComponentConfig, Layout, PageConfig, RenderContext } from '../interfaces/types';
 import { extractComponentData } from '../utils/helpers';
 import { Component } from '../components';
 import { generateAction } from '../modules/actions/generateAction';
 
-export function resolveImports(config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, page?: PageConfig): string {
+export function resolveImports(config: Layout, registry: Record<string, Component>, pageName: string, basePath: string, page?: PageConfig, component?: ComponentConfig): string {
 
   if(!config) return ''
 
@@ -33,6 +33,14 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(component?.types) {
+    component.types.forEach((type) => {
+      if (type.path) {
+        imports.add(`import { ${type.name} } from "${type.path}";`);
+      }
+    });
+  }
+
   if(page?.functions) {
     page.functions.forEach((fun) => {
       fun.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
@@ -53,6 +61,12 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
   if(page?.states) {
     page.states.forEach((st) => {
+      st.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
+  if(component?.states) {
+    component.states.forEach((st) => {
       st.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
     });
   }

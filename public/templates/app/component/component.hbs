@@ -1,11 +1,11 @@
 'use client'
 
-{{{resolve-imports resourceConfig.components registry resourceConfig.name basePath}}}
+{{{resolve-imports resourceConfig.components registry resourceConfig.name basePath undefined resourceConfig}}}
 
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}: {{{this.type}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
   {{{resolve-states resourceConfig.components registry}}}
-  {{{resolve-code-blocks resourceConfig resourceConfig.components registry}}}
+  {{{resolve-code-blocks resourceConfig.components registry undefined resourceConfig}}}
 
   return (
 {{{render-layout resourceConfig.components}}}

@@ -43,6 +43,9 @@ export interface ComponentConfig extends IdentifiableElement {
   scope: 'app' | 'page';
   pageName?: string;
   icon?: string;
+  types?: TypeDef[];
+  imports?: Import[];
+  states?: State[];
   args?: Arguments[];
   components?: Layout | {};
 }

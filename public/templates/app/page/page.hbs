@@ -18,7 +18,7 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
   {{/if}}
   {{{resolve-states resourceConfig.components registry}}}
   {{{resolve-references resourceConfig.components registry}}}
-  {{{resolve-code-blocks resourceConfig resourceConfig.components registry}}}
+  {{{resolve-code-blocks resourceConfig.components registry resourceConfig}}}
 
   return (
 {{{render-layout resourceConfig.components}}}

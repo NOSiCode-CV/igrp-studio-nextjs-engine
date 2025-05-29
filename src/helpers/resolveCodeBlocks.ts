@@ -1,4 +1,5 @@
 import {
+  ComponentConfig,
   CustomFunctionConfig,
   FunctionDef,
   Layout,
@@ -15,25 +16,32 @@ import { TEMPLATES } from '../utils/constants';
 import { isLayout } from '../modules/page/generatePage';
 
 export function resolveCodeBlocks(
-  page: PageConfig,
   config: Layout,
   registry: Record<string, Component>,
+  page?: PageConfig,
+  component?: ComponentConfig
 ): string {
   let codeBlock: string = '';
 
-  if (page.states) {
+  if (page?.states) {
     page.states.forEach((state) => {
       codeBlock += '\n' + renderState(state) + '\n';
     });
   }
 
-  if (page.references) {
+  if (component?.states) {
+    component.states.forEach((state) => {
+      codeBlock += '\n' + renderState(state) + '\n';
+    });
+  }
+
+  if (page?.references) {
     page.references.forEach((ref) => {
       codeBlock += '\n' + renderReference(ref) + '\n';
     });
   }
 
-  if(isLayout(page.components)) {
+  if(isLayout(page?.components)) {
     const containsNavigations = hasNavigationInteraction(page.components);
 
     if (containsNavigations) {
@@ -41,7 +49,7 @@ export function resolveCodeBlocks(
     }
   }
 
-  if (page.functions) {
+  if (page?.functions) {
     page.functions
       .flatMap((fn) => fn.states ?? [])
       .forEach((state) => {
@@ -55,7 +63,7 @@ export function resolveCodeBlocks(
     });
   }
 
-  if (page.actions) {
+  if (page?.actions) {
     page.actions
       .flatMap((fn) => fn.states ?? [])
       .forEach((state) => {
@@ -68,18 +76,18 @@ export function resolveCodeBlocks(
   }
 
   if (config) {
-    codeBlock += resolveComponentCodeBlocks(page, config, registry);
+    codeBlock += resolveComponentCodeBlocks(config, registry, page);
   }
 
   return codeBlock;
 }
 
 function resolveComponentCodeBlocks(
-  page: PageConfig,
   config: Layout,
   registry: Record<string, Component>,
+  page?: PageConfig,
 ): string {
-  if (!config) return '';
+  if (!config || !page) return '';
 
   let codeBlock: string = '';
 
@@ -111,7 +119,7 @@ function resolveComponentCodeBlocks(
     }
 
     config.children?.forEach(
-      (child) => (codeBlock += resolveComponentCodeBlocks(page, child, registry)),
+      (child) => (codeBlock += resolveComponentCodeBlocks(child, registry, page)),
     );
   }
 

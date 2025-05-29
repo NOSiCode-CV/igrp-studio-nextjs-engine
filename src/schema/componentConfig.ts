@@ -6,10 +6,138 @@ import {
   ColumnConfig,
   IAction,
   IActionConfig,
-  Layout, CommonProperties, Arguments,
+  Layout, CommonProperties, Arguments, TypeDef, Import, State, ElementField,
 } from '../interfaces/types';
 import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+
+const elementFieldSchema: JSONSchemaType<ElementField> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    required: {
+      type: 'boolean',
+      errorMessage: 'The required must be a valid boolean.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is list attribute must be a valid boolean.'
+    },
+    validation: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The validation, if provided, must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+  },
+  required: ['name', 'componentId', 'type', 'required'],
+  additionalProperties: false,
+};
+
+
+const typeDefSchema: JSONSchemaType<TypeDef> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
+    },
+    path: {
+      type: 'string',
+      errorMessage: 'The path must be a valid string.'
+    },
+    tags: {
+      type: 'array',
+      nullable: true,
+      items: {
+        type: 'string'
+      },
+      errorMessage: 'The tag must be a valid string array.'
+    },
+    fields: {
+      type: 'array',
+      items: elementFieldSchema,
+      errorMessage: 'The fields must be an array of valid field configuration.'
+    },
+    isMainType: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The main type check, if provided, must be a valid boolean.'
+    },
+  },
+  required: ['name', 'path', 'fields'],
+  additionalProperties: false,
+};
+
+const importSchema: JSONSchemaType<Import> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    namespace: {
+      type: 'string',
+      errorMessage: 'The namespace must be a valid string.'
+    },
+  },
+  required: ['namespace'],
+  additionalProperties: false,
+}
+
+const stateSchema: JSONSchemaType<State> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+  },
+  required: ['id', 'type', 'name'],
+  additionalProperties: false,
+}
 
 // Schema para FieldConfig
 const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
@@ -584,6 +712,24 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       },
       nullable: true,
       errorMessage: 'Arguments must contain valid args configuration.',
+    },
+    types: {
+      type: 'array',
+      nullable: true,
+      items: typeDefSchema,
+      errorMessage: 'The types attribute must be an array of valid type definition configuration.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+    states: {
+      type: 'array',
+      nullable: true,
+      items: stateSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
     },
   },
   required: ['type', 'name'],
