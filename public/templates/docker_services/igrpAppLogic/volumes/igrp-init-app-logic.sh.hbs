@@ -136,6 +136,23 @@ if echo "$API_KEYS_RESPONSE" | grep -q '"data":\[\]'; then
 
   echo "🎉   API Key saved successfully!"
 
+  ENV_FILE="/data/applogic/.applogic.igrp.env"
+  KEY_VAR="IGRP_APP_LOGIC_API_KEY"
+  TEMP_ENV_FILE="${ENV_FILE}.tmp"
+
+  # Cria o arquivo se não existir
+  touch "$ENV_FILE"
+
+  if grep -q "^$KEY_VAR=" "$ENV_FILE"; then
+    # Atualiza a linha com a nova chave, preservando o restante
+    grep -v "^$KEY_VAR=" "$ENV_FILE" > "$TEMP_ENV_FILE"
+    echo "$KEY_VAR=$RAW_API_KEY" >> "$TEMP_ENV_FILE"
+    mv "$TEMP_ENV_FILE" "$ENV_FILE"
+  else
+    # Adiciona a nova chave ao final
+    echo "$KEY_VAR=$RAW_API_KEY" >> "$ENV_FILE"
+  fi
+
 else
   echo "ℹ️ API Key already exists. No action needed."
 fi

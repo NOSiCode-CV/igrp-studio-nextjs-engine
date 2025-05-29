@@ -93,6 +93,7 @@ export const TEMPLATES = {
   UI_IGRP_ENV: 'workspace/ui-igrp-env.hbs',
   IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
+  AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
@@ -104,6 +105,7 @@ export const ENVIRONMENT_FILES = {
   UI_IGRP_ENV: '.ui.igrp.env',
   IAM_IGRP_ENV: '.iam.igrp.env',
   FILE_IGRP_ENV: '.file.igrp.env',
+  APP_LOGIC_IGRP_ENV: '.applogic.igrp.env',
   IGRP_ENV: '.igrp.env',
 }
 

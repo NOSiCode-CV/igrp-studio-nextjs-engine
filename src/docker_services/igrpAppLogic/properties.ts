@@ -1,4 +1,4 @@
-import { COMMON_FILES, DIRECTORIES, TEMPLATES } from '../../utils/constants';
+import { COMMON_FILES, DIRECTORIES, ENVIRONMENT_FILES, TEMPLATES } from '../../utils/constants';
 import { VolumeFile } from '../../interfaces/types';
 import { replaceTemplate } from '../../utils/helpers';
 import { IGRP_APP_LOGIC } from './index';
@@ -104,6 +104,11 @@ export function igrpAppLogicProperties() {
         {
           name: `./${DIRECTORIES.IGRPSTUDIO}/applogic/workflows/${COMMON_FILES.JSON_IGRP_APP_LOGIC_CREDENTIALS}`,
           path: '/data/applogic/workflows/igrp-app-logic-credentials.json',
+          driver: 'none',
+        },
+        {
+          name: `./${ENVIRONMENT_FILES.APP_LOGIC_IGRP_ENV}`,
+          path: '/data/applogic/.applogic.igrp.env',
           driver: 'none',
         },
         {
