@@ -8,7 +8,7 @@ import {
   IActionConfig,
   Layout, CommonProperties, Arguments, TypeDef, Import, State, ElementField,
 } from '../interfaces/types';
-import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS } from '../utils/constants';
+import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
 
@@ -704,8 +704,8 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
     pagePath: {
       type: "string",
       nullable: true,
-      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
-      errorMessage: 'The path attribute must only contain letters and must not have spaces or special characters.',
+      pattern: VALID_SEGMENT_PATTERN,
+      errorMessage: 'The path attribute must follow Next.js path conventions: static, [param], [...param], [[...param]], or (group).'
     },
     icon: {
       type: "string",
