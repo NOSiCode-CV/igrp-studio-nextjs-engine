@@ -576,7 +576,13 @@ const loadFormFields = async () => {
                         onClick: {
                           navigate: {
                             name: 'handlebutton_cancelarNavigation',
-                            path: '/contribuintes'
+                            path: '/contribuintes',
+                            params: {
+                              param1: 'value1',
+                              param2: 'value2',
+                              param3: ['value3', 'value4'],
+                              param4: 5
+                            }
                           },
                           type: 'navigate',
                         },

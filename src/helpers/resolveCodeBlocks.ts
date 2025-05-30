@@ -129,6 +129,7 @@ function resolveComponentCodeBlocks(
               tag: config.tag,
               name: replaceTemplate(value.navigate.name, { id: config.tag }),
               path: value.navigate.path,
+              params: value.navigate.params
             }) +
             '\n';
         }

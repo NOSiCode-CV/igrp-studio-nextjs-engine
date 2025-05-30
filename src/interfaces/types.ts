@@ -273,6 +273,7 @@ export interface Navigate extends IdentifiableElement {
   name: string,
   tag: string,
   path: string,
+  params?: Record<string, string>
 }
 
 export interface RegisterNavigate {

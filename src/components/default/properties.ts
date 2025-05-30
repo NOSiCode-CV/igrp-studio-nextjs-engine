@@ -288,6 +288,7 @@ export function baseInteraction(
         properties: {
           name: { type: 'string', required: true, default: 'handle{{id}}Navigation' },
           path: { type: 'string', required: true, default: '/' },
+          params: { type: 'object', required: false, default: '{}' },
         },
       },
     },
