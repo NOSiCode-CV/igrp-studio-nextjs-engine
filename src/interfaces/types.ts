@@ -44,6 +44,7 @@ export interface Arguments {
 export interface ComponentConfig extends IdentifiableElement {
   type: 'component';
   name: string;
+  description?: string;
   pagePath?: string;
   scope: 'app' | 'page';
   pageName?: string;
@@ -51,6 +52,9 @@ export interface ComponentConfig extends IdentifiableElement {
   types?: TypeDef[];
   imports?: Import[];
   states?: State[];
+  references?: Reference[];
+  functions?: CustomFunctionConfig[];
+  actions?: CustomFunctionConfig[];
   args?: Arguments[];
   components?: Layout | {};
 }

@@ -41,6 +41,12 @@ export function resolveCodeBlocks(
     });
   }
 
+  if (component?.references) {
+    component.references.forEach((ref) => {
+      codeBlock += '\n' + renderReference(ref) + '\n';
+    });
+  }
+
   if(isLayout(page?.components)) {
     const containsNavigations = hasNavigationInteraction(page.components);
 
@@ -71,6 +77,18 @@ export function resolveCodeBlocks(
       });
 
     page.actions.forEach((act) => {
+      codeBlock += '\n' + act.code + '\n';
+    });
+  }
+
+  if (component?.actions) {
+    component.actions
+      .flatMap((fn) => fn.states ?? [])
+      .forEach((state) => {
+        codeBlock += '\n' + renderState(state) + '\n';
+      });
+
+    component.actions.forEach((act) => {
       codeBlock += '\n' + act.code + '\n';
     });
   }

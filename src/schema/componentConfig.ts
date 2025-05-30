@@ -6,89 +6,19 @@ import {
   ColumnConfig,
   IAction,
   IActionConfig,
-  Layout, CommonProperties, Arguments, TypeDef, Import, State, ElementField,
+  Layout,
+  CommonProperties,
+  Arguments,
+  TypeDef,
+  Import,
+  State,
+  ElementField,
+  CustomFunctionConfig,
+  Reference,
+  ReturnValue, Argument,
 } from '../interfaces/types';
 import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
-
-
-const elementFieldSchema: JSONSchemaType<ElementField> = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      errorMessage: 'The name must be a valid string.'
-    },
-    componentId: {
-      type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
-    },
-    type: {
-      type: 'string',
-      errorMessage: 'The type must be a valid string.'
-    },
-    required: {
-      type: 'boolean',
-      errorMessage: 'The required must be a valid boolean.'
-    },
-    isList: {
-      type: 'boolean',
-      nullable: true,
-      errorMessage: 'The is list attribute must be a valid boolean.'
-    },
-    validation: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The validation, if provided, must be a valid string.'
-    },
-    defaultValue: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The default value, if provided, must be a valid string.'
-    },
-  },
-  required: ['name', 'componentId', 'type', 'required'],
-  additionalProperties: false,
-};
-
-
-const typeDefSchema: JSONSchemaType<TypeDef> = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      errorMessage: 'The name must be a valid string.'
-    },
-    componentId: {
-      type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
-    },
-    path: {
-      type: 'string',
-      errorMessage: 'The path must be a valid string.'
-    },
-    tags: {
-      type: 'array',
-      nullable: true,
-      items: {
-        type: 'string'
-      },
-      errorMessage: 'The tag must be a valid string array.'
-    },
-    fields: {
-      type: 'array',
-      items: elementFieldSchema,
-      errorMessage: 'The fields must be an array of valid field configuration.'
-    },
-    isMainType: {
-      type: 'boolean',
-      nullable: true,
-      errorMessage: 'The main type check, if provided, must be a valid boolean.'
-    },
-  },
-  required: ['name', 'path', 'fields'],
-  additionalProperties: false,
-};
 
 const importSchema: JSONSchemaType<Import> = {
   type: 'object',
@@ -138,6 +68,215 @@ const stateSchema: JSONSchemaType<State> = {
   required: ['id', 'type', 'name'],
   additionalProperties: false,
 }
+
+const referenceSchema: JSONSchemaType<Reference> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+  },
+  required: ['id', 'type', 'name'],
+  additionalProperties: false,
+}
+
+const returnValueSchema: JSONSchemaType<ReturnValue> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+    isNullable: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+  },
+  required: ['type', 'isNullable'],
+  additionalProperties: false,
+}
+
+const argumentSchema: JSONSchemaType<Argument> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+    isNullable: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a valid boolean.'
+    },
+  },
+  required: ['name', 'type', 'id', 'isNullable'],
+  additionalProperties: false,
+}
+
+const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    code: {
+      type: 'string',
+      errorMessage: 'The code must be a valid string.'
+    },
+    path: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The path, if provided, must be a valid string.'
+    },
+    returnValue: returnValueSchema,
+    arguments: {
+      type: 'array',
+      items: argumentSchema,
+      errorMessage: 'The fields must be an array of valid field configuration.'
+    },
+    imports: {
+      type: 'array',
+      nullable: true,
+      items: importSchema,
+      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+    },
+    states: {
+      type: 'array',
+      nullable: true,
+      items: stateSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+    },
+    isAsync: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is async argument must be a valid boolean.'
+    },
+  },
+  required: ['name', 'code', 'id', 'returnValue', 'arguments'],
+  additionalProperties: false,
+};
+
+const elementFieldSchema: JSONSchemaType<ElementField> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type must be a valid string.'
+    },
+    required: {
+      type: 'boolean',
+      errorMessage: 'The required must be a valid boolean.'
+    },
+    isList: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is list attribute must be a valid boolean.'
+    },
+    validation: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The validation, if provided, must be a valid string.'
+    },
+    defaultValue: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The default value, if provided, must be a valid string.'
+    },
+  },
+  required: ['name', 'componentId', 'type', 'required'],
+  additionalProperties: false,
+};
+
+const typeDefSchema: JSONSchemaType<TypeDef> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    componentId: {
+      type: 'string',
+      errorMessage: 'The component ID must be a valid string.'
+    },
+    path: {
+      type: 'string',
+      errorMessage: 'The path must be a valid string.'
+    },
+    tags: {
+      type: 'array',
+      nullable: true,
+      items: {
+        type: 'string'
+      },
+      errorMessage: 'The tag must be a valid string array.'
+    },
+    fields: {
+      type: 'array',
+      items: elementFieldSchema,
+      errorMessage: 'The fields must be an array of valid field configuration.'
+    },
+    isMainType: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The main type check, if provided, must be a valid boolean.'
+    },
+  },
+  required: ['name', 'path', 'fields'],
+  additionalProperties: false,
+};
 
 // Schema para FieldConfig
 const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
@@ -701,6 +840,13 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage: 'The component name must only contain letters and must not have spaces or special characters.',
     },
+    description: {
+      type: 'string',
+      nullable: true,
+      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
+      errorMessage:
+        'The description, if provided, must only contain letters, numbers and spaces and must not have special characters.',
+    },
     pagePath: {
       type: "string",
       nullable: true,
@@ -732,6 +878,24 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       },
       nullable: true,
       errorMessage: 'Arguments must contain valid args configuration.',
+    },
+    functions: {
+      type: 'array',
+      nullable: true,
+      items: functionSchema,
+      errorMessage: 'The functions attribute must be an array of valid function definition configuration.'
+    },
+    actions: {
+      type: 'array',
+      nullable: true,
+      items: functionSchema,
+      errorMessage: 'The actions attribute must be an array of valid function definition configuration.'
+    },
+    references: {
+      type: 'array',
+      nullable: true,
+      items: referenceSchema,
+      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
     },
     types: {
       type: 'array',
