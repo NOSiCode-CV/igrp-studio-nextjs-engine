@@ -26,7 +26,7 @@ import {
   renderInteractions,
   renderProperties,
   resolveComponent,
-  resolveFirstType, resolveQueryParams, resolveStateDefault, resolveZodTypes,
+  resolveFirstType, resolveQueryParams, resolveSegmentPath, resolveStateDefault, resolveZodTypes,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -49,6 +49,7 @@ Handlebars.registerHelper("resolve-types", resolveTypes);
 Handlebars.registerHelper("resolve-code-blocks", resolveCodeBlocks);
 Handlebars.registerHelper("resolve-service-interface-methods", resolveServiceInterfaceMethods);
 Handlebars.registerHelper("resolve-query-params", resolveQueryParams);
+Handlebars.registerHelper("resolve-segment-path", resolveSegmentPath);
 Handlebars.registerHelper("component-name-helper", componentNameHelper);
 Handlebars.registerHelper("field-helper", fieldHelper);
 Handlebars.registerHelper("render-layout", renderLayout);

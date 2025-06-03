@@ -19,6 +19,7 @@ export default {
       'import { IGRPDataTableDropdownMenu } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableDropdownMenu')
     component.loadVariants(tableDropdownMenuCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

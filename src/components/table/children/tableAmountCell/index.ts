@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableCellAmount } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableCellAmount')
     component.loadVariants(tableAmountCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

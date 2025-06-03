@@ -1,4 +1,4 @@
-import { Component, customRenderer, defaultRenderer, hbsRenderer } from '../index';
+import { Component, customRenderer, defaultRenderer, hbsRenderer, noRenderer } from '../index';
 import { ComponentRegisterConfig } from '../../interfaces/types';
 
 export default {
@@ -28,6 +28,6 @@ export default {
     component.getStyleMapping(config.styleMapping)
     component.getRules(config.rules)
     component.getRulesMapping(config.rulesMapping)
-    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : customRenderer);
+    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : config.renderer === 'custom' ? customRenderer : noRenderer);
   }
 };

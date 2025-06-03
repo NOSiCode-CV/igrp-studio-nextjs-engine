@@ -93,8 +93,8 @@ export function resolveStates(config: Layout, registry: Record<string, Component
   if(dataConfigs) {
     dataConfigs.forEach((c) => {
       Object.entries(c.data!).forEach(([_, value]) => {
-        
-        if(value.state) {
+
+        if(value.state?.generate) {
           const defaultValue = isBool(c.componentName)
             ? (c.properties?.disabled ?? 'false')
             : (c.properties?.value ?? '');

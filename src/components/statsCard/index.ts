@@ -18,6 +18,7 @@ export default {
       'import { IGRPStatsCard } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPStatsCard')
     component.loadVariants(statsCardVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Stats Card')

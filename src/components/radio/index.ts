@@ -17,6 +17,7 @@ export default {
       'import { IGRPRadioGroup } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPRadioGroup')
     component.loadVariants(radioGroupVariants());
     component.loadGroup('formElements')
     component.loadLabel('Radio')

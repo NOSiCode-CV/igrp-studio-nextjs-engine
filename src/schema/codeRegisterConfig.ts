@@ -6,6 +6,12 @@ import { ajvInstance } from '../utils/ajv-instance';
 const codeSnippetsRegisterConfigSchema: JSONSchemaType<CodeSnippetsRegisterConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     name: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
@@ -60,6 +66,12 @@ const codeSnippetsRegisterConfigSchema: JSONSchemaType<CodeSnippetsRegisterConfi
 const codeSnippetsRegistrationConfigSchema: JSONSchemaType<CodeSnippetsRegistrationConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     codes: {
       type: 'array',
       items: codeSnippetsRegisterConfigSchema,

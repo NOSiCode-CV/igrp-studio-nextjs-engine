@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableCellDate } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableCellDate')
     component.loadVariants(tableDateCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

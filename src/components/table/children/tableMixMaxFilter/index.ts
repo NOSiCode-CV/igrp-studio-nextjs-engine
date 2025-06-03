@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableFilterMinMax } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableFilterMinMax')
     component.loadVariants(tableMinMaxFilterVariants());
     component.loadParent(TABLE)
     component.loadLabel('Interval Filter')

@@ -13,7 +13,7 @@ export function badgeProperties() {
     color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
-    label: { type: 'string', required: false, default: 'Badge' },
+    content: { type: 'string', required: false, default: 'Badge' },
     dot: { type: 'boolean', required: false, default: false },
     //customColor: { type: 'string', required: false },
     iconProperties: {

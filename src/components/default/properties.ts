@@ -347,8 +347,13 @@ export function baseData(
               },
             },
           },
+          generate: {
+            type: 'boolean',
+            required: isStateRequired,
+            default: true
+          }
         },
-        required: isStateRequired ?? false,
+        required: false,
       },
       value: {
         type: 'object',
@@ -590,7 +595,14 @@ export function baseStyle() {
             required: false
           },
         }
-      }
+      },
+      typography: {
+        type: 'object',
+      },
+      borders: {
+        type: 'object',
+      },
+
     },
   };
 }

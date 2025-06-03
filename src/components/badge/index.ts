@@ -13,6 +13,7 @@ export default {
       'import { IGRPBadge } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPBadge')
     component.loadVariants(badgeVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Badge')

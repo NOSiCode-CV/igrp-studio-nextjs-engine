@@ -14,6 +14,7 @@ export default {
       'import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('Tabs')
     component.loadVariants(tabsVariants());
     component.loadGroup('layout')
     component.loadLabel('Tabs')

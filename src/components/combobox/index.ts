@@ -40,6 +40,7 @@ export default {
       }
     ]);
 
+    component.loadComponentClass('IGRPCombobox')
     component.loadVariants(comboboxVariants());
     component.loadGroup('formElements')
     component.loadLabel('Combobox')

@@ -17,6 +17,7 @@ export default {
       'import { IGRPInputPassword } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputPassword')
     component.loadVariants(inputPasswordVariants());
     component.loadGroup('formElements')
     component.loadLabel('Password')

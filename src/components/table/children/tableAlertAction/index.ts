@@ -18,6 +18,7 @@ export default {
       `import { IGRPDataTableButtonAlert } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPDataTableButtonAlert')
     component.loadVariants(tableAlertActionVariants());
     component.loadParent(TABLE_ACTION_LIST_CELL)
     component.loadGroup('Columns')

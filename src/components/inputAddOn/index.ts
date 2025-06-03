@@ -17,6 +17,7 @@ export default {
       'import { IGRPInputAddOn } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputAddOn')
     component.loadVariants(inputAddOnVariants());
     component.loadGroup('formElements')
     component.loadLabel('Add On')

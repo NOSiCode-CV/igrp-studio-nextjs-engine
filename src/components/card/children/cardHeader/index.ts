@@ -17,6 +17,7 @@ export default {
       `import { IGRPCardHeader } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPCardHeader')
     component.loadVariants(cardHeaderVariants());
     component.loadParent(CARD)
     component.loadLabel('Card Header')

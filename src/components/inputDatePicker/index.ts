@@ -16,6 +16,7 @@ export default {
       'import { IGRPDatePicker } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPDatePicker')
     component.loadVariants(inputDatePickerVariants());
     component.loadGroup('formElements')
     component.loadLabel('Date Picker')

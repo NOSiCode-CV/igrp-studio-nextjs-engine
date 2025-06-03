@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableFilterInput } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableFilterInput')
     component.loadVariants(tableInputFilterVariants());
     component.loadParent(TABLE)
     component.loadLabel('Input Filter')

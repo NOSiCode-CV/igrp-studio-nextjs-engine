@@ -18,6 +18,7 @@ export default {
       `import { IGRPDataTableButtonModal } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPDataTableButtonModal')
     component.loadVariants(tableModalActionVariants());
     component.loadParent(TABLE_ACTION_LIST_CELL)
     component.loadGroup('Columns')

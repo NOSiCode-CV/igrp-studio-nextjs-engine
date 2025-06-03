@@ -14,6 +14,7 @@ export default {
       'import { IGRPInputText } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputText')
     component.loadVariants(inputTextVariants());
     component.loadGroup('formElements')
     component.loadLabel('Input Text')

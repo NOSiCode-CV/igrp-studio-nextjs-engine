@@ -133,6 +133,7 @@ const tableLayout: Layout = {
                   componentName: 'tableAlertAction',
                   properties: {
                     labelTrigger: 'Delete',
+                    variant: 'destructive',
                     iconProperties: {
                       iconName: 'Trash',
                     },
@@ -244,7 +245,8 @@ const tableLayout: Layout = {
                     id: 'state_filter_1',
                     name: 'dropdownFiltersubRoleFilterOptions',
                     type: 'IGRPOptionsProps[]',
-                    defaultValue: '[]'
+                    defaultValue: '[]',
+                    generate: true
                   },
                 }
               },
@@ -263,7 +265,8 @@ const tableLayout: Layout = {
                     id: 'state_filter_2',
                     name: 'dropdownFilterroleFilterOptions',
                     type: 'IGRPOptionsProps[]',
-                    defaultValue: '[]'
+                    defaultValue: '[]',
+                    generate: true
                   },
                 }
               },

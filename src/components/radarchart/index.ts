@@ -12,6 +12,7 @@ export default {
       'import { IGRPRadarChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPRadarChart')
     //component.loadVariants(radarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Radar Chart')

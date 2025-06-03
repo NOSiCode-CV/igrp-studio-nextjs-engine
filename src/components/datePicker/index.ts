@@ -16,6 +16,7 @@ export default {
       'import { IGRPInputDate } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPInputDate')
     component.loadVariants(datePickerVariants());
     component.loadGroup('formElements')
     component.loadLabel('Input Date')

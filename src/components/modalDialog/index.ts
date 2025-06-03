@@ -18,6 +18,7 @@ export default {
       'import { IGRPModalDialog } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPModalDialog')
     component.loadVariants(modalDialogVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Modal Dialog')

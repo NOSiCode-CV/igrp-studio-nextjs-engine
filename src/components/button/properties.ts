@@ -10,7 +10,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function buttonProperties() {
   return {
-    label: { type: 'string', required: true, default: 'Button' },
+    content: { type: 'string', required: true, default: 'Button' },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
     ...iconProperties(),

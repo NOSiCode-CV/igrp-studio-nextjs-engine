@@ -13,6 +13,7 @@ export default {
       'import { IGRPInputHidden } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputHidden')
     component.loadVariants(inputHiddenVariants());
     component.loadGroup('formElements')
     component.loadLabel('Input Hidden')

@@ -28,7 +28,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -39,7 +39,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -50,7 +50,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -64,7 +64,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -75,7 +75,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -86,7 +86,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -101,7 +101,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -112,7 +112,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -123,7 +123,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -137,7 +137,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -148,7 +148,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -159,7 +159,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -174,7 +174,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'solid',
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -185,7 +185,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'outline',
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -196,7 +196,7 @@ const badgeLayout: Layout = {
         size: "sm",
         variant: 'soft',
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 
@@ -212,7 +212,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -223,7 +223,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -234,7 +234,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -248,7 +248,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -259,7 +259,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -270,7 +270,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -285,7 +285,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -296,7 +296,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -307,7 +307,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -321,7 +321,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -332,7 +332,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -343,7 +343,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -358,7 +358,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'solid',
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -369,7 +369,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'outline',
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -380,7 +380,7 @@ const badgeLayout: Layout = {
         size: "md",
         variant: 'soft',
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 
@@ -396,7 +396,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -407,7 +407,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -418,7 +418,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -432,7 +432,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -443,7 +443,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -454,7 +454,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -469,7 +469,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -480,7 +480,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -491,7 +491,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -505,7 +505,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -516,7 +516,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -527,7 +527,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -542,7 +542,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'solid',
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -553,7 +553,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'outline',
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -564,7 +564,7 @@ const badgeLayout: Layout = {
         size: "lg",
         variant: 'soft',
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 
@@ -587,7 +587,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -603,7 +603,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -619,7 +619,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -638,7 +638,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -654,7 +654,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -670,7 +670,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -690,7 +690,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -706,7 +706,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -722,7 +722,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -741,7 +741,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -757,7 +757,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -773,7 +773,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -793,7 +793,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -809,7 +809,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -825,7 +825,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 
@@ -846,7 +846,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -862,7 +862,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -878,7 +878,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -897,7 +897,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -913,7 +913,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -929,7 +929,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -949,7 +949,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -965,7 +965,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -981,7 +981,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -1000,7 +1000,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -1016,7 +1016,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -1032,7 +1032,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -1052,7 +1052,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -1068,7 +1068,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -1084,7 +1084,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 
@@ -1105,7 +1105,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Solid'
+        content: 'Default Solid'
       },
     },
     {
@@ -1121,7 +1121,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Default Outline'
+        content: 'Default Outline'
       },
     },
     {
@@ -1137,7 +1137,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Default Soft'
+        content: 'Default Soft'
       },
     },
 
@@ -1156,7 +1156,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Solid'
+        content: 'Primary Solid'
       },
     },
     {
@@ -1172,7 +1172,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'primary',
-        label: 'Primary Outline'
+        content: 'Primary Outline'
       },
     },
     {
@@ -1188,7 +1188,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'primary',
-        label: 'Primary Soft'
+        content: 'Primary Soft'
       },
     },
 
@@ -1208,7 +1208,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Solid'
+        content: 'Secondary Solid'
       },
     },
     {
@@ -1224,7 +1224,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'secondary',
-        label: 'Secondary Outline'
+        content: 'Secondary Outline'
       },
     },
     {
@@ -1240,7 +1240,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'secondary',
-        label: 'Secondary Soft'
+        content: 'Secondary Soft'
       },
     },
 
@@ -1259,7 +1259,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Solid'
+        content: 'Success Solid'
       },
     },
     {
@@ -1275,7 +1275,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'success',
-        label: 'Success Outline'
+        content: 'Success Outline'
       },
     },
     {
@@ -1291,7 +1291,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'success',
-        label: 'Success Soft'
+        content: 'Success Soft'
       },
     },
 
@@ -1311,7 +1311,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Solid'
+        content: 'Error Solid'
       },
     },
     {
@@ -1327,7 +1327,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'end'
         },
         color: 'destructive',
-        label: 'Error Outline'
+        content: 'Error Outline'
       },
     },
     {
@@ -1343,7 +1343,7 @@ const badgeLayout: Layout = {
           iconPlacement: 'start'
         },
         color: 'destructive',
-        label: 'Error Soft'
+        content: 'Error Soft'
       },
     },
 

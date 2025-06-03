@@ -19,6 +19,7 @@ export default {
       //'import { zodResolver } from "@hookform/resolvers/zod";'
     ]);
 
+    component.loadComponentClass('IGRPForm')
     component.loadVariants(formVariants());
     component.loadGroup('containers')
     component.loadLabel('Form')

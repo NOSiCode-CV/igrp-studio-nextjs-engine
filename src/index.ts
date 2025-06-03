@@ -66,7 +66,7 @@ import { codeRegistryAsObject, register as registerCode } from './code_snippets/
 import { renderCode } from './utils/renderCode';
 
 export function getPaths(): PathConfig {
-  const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV;
+  const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
 
   if (environment === 'production') {
     return {

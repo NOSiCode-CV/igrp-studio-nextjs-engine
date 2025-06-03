@@ -13,6 +13,7 @@ export default {
     ]);
 
     //component.loadVariants(lineChartVariants());
+    component.loadComponentClass('IGRPLineChart')
     component.loadGroup('dataDisplay')
     component.loadLabel('Line Chart')
     component.getProperties(lineChartProperties());

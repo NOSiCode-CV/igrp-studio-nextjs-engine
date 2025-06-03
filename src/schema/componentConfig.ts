@@ -820,6 +820,12 @@ const componentSchema: JSONSchemaType<Layout> = {
 const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     id: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,

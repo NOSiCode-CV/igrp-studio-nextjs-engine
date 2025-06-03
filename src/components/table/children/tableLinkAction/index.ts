@@ -18,6 +18,7 @@ export default {
       `import { IGRPDataTableButtonLink } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPDataTableButtonLink')
     component.loadVariants(tableLinkActionVariants());
     component.loadParent(TABLE_ACTION_LIST_CELL)
     component.loadGroup('Columns')

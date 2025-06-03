@@ -13,6 +13,7 @@ export default {
       'import { IGRPInputSearch } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputSearch')
     component.loadVariants(inputSearchVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Input Search')

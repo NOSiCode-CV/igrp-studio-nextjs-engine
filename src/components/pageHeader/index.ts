@@ -13,6 +13,7 @@ export default {
       'import { IGRPPageHeader } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPPageHeader')
     component.loadVariants(pageHeaderVariants());
     component.loadGroup('layout')
     component.loadLabel('Page Header')

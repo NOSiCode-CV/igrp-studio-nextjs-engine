@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableCellCheckbox } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableCellCheckbox')
     component.loadVariants(tableCheckboxCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

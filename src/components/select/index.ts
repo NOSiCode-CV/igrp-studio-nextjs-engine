@@ -14,6 +14,7 @@ export default {
       'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPSelect')
     component.loadVariants(selectVariants());
     component.loadGroup('formElements')
     component.loadLabel('Select')

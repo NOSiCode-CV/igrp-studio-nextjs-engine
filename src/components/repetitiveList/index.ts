@@ -13,6 +13,7 @@ export default {
       'import { IGRPRepetitiveComponent } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPRepetitiveComponent')
     component.loadVariants(repetitiveListVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Repetitive Component')

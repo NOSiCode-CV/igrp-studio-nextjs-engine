@@ -1,3 +1,5 @@
+import { FilterType, TransformType } from '../interfaces/types';
+
 export const PARTIALS = [
   'workspace/igrp-docker-services.hbs',
   'workspace/mysql-docker-service.hbs',
@@ -205,11 +207,31 @@ export const DIRECTORIES = {
   APP: 'src/app',
   GENERATED: 'src/app/(generated)',
   MYAPP: 'src/app/(myapp)',
+  LOCALE: 'src/app/[locale]',
+  LOCALE_IGRP: 'src/app/[locale]/(igrp)',
+  IGRP_ACTIONS: 'src/app/actions/(igrp)',
   SERVICES: 'src/services',
   LAYOUTS: 'src/layouts',
   ASSETS: 'src/assets',
+  CONFIG: 'src/config',
+  FEATURES: 'src/features',
+  FEATURES_APPLICATIONS: 'src/features/applications',
+  FEATURES_APPLICATIONS_HOOKS: 'src/features/applications/hooks',
+  FEATURES_AUTH: 'src/features/auth',
+  FEATURES_AUTH_LIB: 'src/features/auth/lib',
+  FEATURES_MENUS: 'src/features/menus',
+  FEATURES_MENUS_HOOKS: 'src/features/menus/hooks',
+  FEATURES_USERS: 'src/features/users',
+  FEATURES_USERS_COMPONENTS: 'src/features/users/components',
+  FEATURES_USERS_HOOKS: 'src/features/users/hooks',
+  FEATURES_USERS_SCHEMAS: 'src/features/users/schemas',
+  HOOKS: 'src/hooks',
+  INTERNATIONALIZATION: 'src/i18n',
+  LIB: 'src/lib',
+  SRC_TYPES: 'src/types',
   DESIGN_SYSTEM: 'design-system',
   PUBLIC: 'public',
+  PUBLIC_IGRP: 'public/igrp',
   PROJECTS: 'projects',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
@@ -221,7 +243,9 @@ export const DIRECTORIES = {
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   KUBERNETES: 'k8s',
+  TYPES: 'types',
   BASE_COMPONENTS: 'src/components',
+  BASE_COMPONENTS_UI: 'src/components/ui',
   COMPONENTS: 'src/app/(generated)/components',
 };
 
@@ -297,3 +321,108 @@ export const RESTART_TYPES = [
   'unless-stopped'
 ] as const;
 
+export const filterTypes: FilterType[] = [
+  { name: 'blur', min: '0', max: '20', unit: 'px' },
+  { name: 'brightness', min: '0', max: '200', unit: '%' },
+  { name: 'contrast', min: '0', max: '200', unit: '%' },
+  { name: 'grayscale', min: '0', max: '100', unit: '%' },
+  { name: 'hue-rotate', min: '0', max: '360', unit: 'deg' },
+  { name: 'invert', min: '0', max: '100', unit: '%' },
+  { name: 'opacity', min: '0', max: '100', unit: '%' },
+  { name: 'saturate', min: '0', max: '200', unit: '%' },
+  { name: 'sepia', min: '0', max: '100', unit: '%' }
+];
+
+export const transformTypes: TransformType[] = [
+  { name: 'translate', units: ['px', '%', 'rem', 'em'] },
+  { name: 'translateX', units: ['px', '%', 'rem', 'em'] },
+  { name: 'translateY', units: ['px', '%', 'rem', 'em'] },
+  { name: 'scale', units: [''] },
+  { name: 'scaleX', units: [''] },
+  { name: 'scaleY', units: [''] },
+  { name: 'rotate', units: ['deg', 'turn', 'rad'] },
+  { name: 'rotateX', units: ['deg', 'turn', 'rad'] },
+  { name: 'rotateY', units: ['deg', 'turn', 'rad'] },
+  { name: 'rotateZ', units: ['deg', 'turn', 'rad'] },
+  { name: 'skew', units: ['deg', 'turn', 'rad'] },
+  { name: 'skewX', units: ['deg', 'turn', 'rad'] },
+  { name: 'skewY', units: ['deg', 'turn', 'rad'] },
+  { name: 'perspective', units: ['px'] }
+];
+
+export const transitionProperties = [
+  'all',
+  'background',
+  'border',
+  'color',
+  'font-size',
+  'height',
+  'margin',
+  'opacity',
+  'padding',
+  'transform',
+  'width'
+];
+
+export const timingFunctions = [
+  'linear',
+  'ease',
+  'ease-in',
+  'ease-out',
+  'ease-in-out',
+  'step-start',
+  'step-end'
+];
+
+export const backgroundSizes = [
+  'cover',
+  'contain',
+  '100% 100%',
+  'auto'
+];
+
+export const backgroundPositions = [
+  'center',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'top left',
+  'top right',
+  'bottom left',
+  'bottom right'
+];
+
+export const backgroundRepeats = [
+  'no-repeat',
+  'repeat',
+  'repeat-x',
+  'repeat-y',
+  'space',
+  'round'
+];
+
+export const backgroundAttachments = [
+  'scroll',
+  'fixed',
+  'local'
+];
+
+export const blendModes = [
+  'normal',
+  'multiply',
+  'screen',
+  'overlay',
+  'darken',
+  'lighten',
+  'color-dodge',
+  'color-burn',
+  'hard-light',
+  'soft-light',
+  'difference',
+  'exclusion',
+  'hue',
+  'saturation',
+  'color',
+  'luminosity'
+];

@@ -17,6 +17,7 @@ export default {
       'import { IGRPTextarea } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPTextarea')
     component.loadVariants(inputTextareaVariants());
     component.loadGroup('formElements')
     component.loadLabel('Textarea')

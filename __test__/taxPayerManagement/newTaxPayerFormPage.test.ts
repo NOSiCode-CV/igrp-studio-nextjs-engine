@@ -10,7 +10,7 @@ const formLayout: Layout = {
   componentName: 'form',
   dataType: 'NewTaxPayerRequest',
   properties: {
-    formClassName: 'space-y-6',
+    className: 'space-y-6',
   },
   children: [
     {
@@ -77,11 +77,11 @@ const formLayout: Layout = {
               tag: 'basic_information_form_grid',
               componentName: 'grid',
               childProperties: {
-                className: 'col-span-1'
+                className: 'col-span-1',
               },
               properties: {
                 variant: 'cols1',
-                className: 'md:grid-cols-2 gap-4'
+                className: 'md:grid-cols-2 gap-4',
               },
               children: [
                 // inputs
@@ -92,7 +92,7 @@ const formLayout: Layout = {
                   properties: {
                     label: 'Tipo de documento de inscrição',
                     required: true,
-                    placeholder: 'Selecione o tipo de documento'
+                    placeholder: 'Selecione o tipo de documento',
                   },
                   /*interactions: {
                     onValueChange: {
@@ -108,8 +108,9 @@ const formLayout: Layout = {
                         id: 'basic_information_tp_documento_opt_st',
                         name: 'selectTipo_documentoOptions',
                         type: 'IGRPOptionsProps[]',
-                        defaultValue: '[]'
-                      }
+                        defaultValue: '[]',
+                        generate: true
+                      },
                     },
                     /*value: {
                       state: {
@@ -119,14 +120,14 @@ const formLayout: Layout = {
                         defaultValue: ''
                       }
                     },*/
-                  }
+                  },
                 },
                 {
                   id: 'numero_documento',
                   tag: 'numero_documento',
                   componentName: 'inputText',
                   properties: {
-                    label: "Número de documento de inscrição",
+                    label: 'Número de documento de inscrição',
                     required: true,
                   },
                 },
@@ -135,7 +136,7 @@ const formLayout: Layout = {
                   tag: 'denominacao_social',
                   componentName: 'inputText',
                   properties: {
-                    label: "Denominação Social",
+                    label: 'Denominação Social',
                     required: true,
                   },
                 },
@@ -144,7 +145,7 @@ const formLayout: Layout = {
                   tag: 'nome_comercial',
                   componentName: 'inputText',
                   properties: {
-                    label: "Nome Comercial",
+                    label: 'Nome Comercial',
                     required: true,
                   },
                 },
@@ -155,7 +156,7 @@ const formLayout: Layout = {
                   properties: {
                     label: 'Estatuto Jurídico',
                     required: true,
-                    placeholder: 'Selecione o estatuto jurídico'
+                    placeholder: 'Selecione o estatuto jurídico',
                   },
                   data: {
                     options: {
@@ -163,8 +164,9 @@ const formLayout: Layout = {
                         id: 'basic_information_estatuto_opt_st',
                         name: 'selectEstatutoOptions',
                         type: 'IGRPOptionsProps[]',
-                        defaultValue: '[]'
-                      }
+                        defaultValue: '[]',
+                        generate: true
+                      },
                     },
                   },
                   /*interactions: {
@@ -183,7 +185,7 @@ const formLayout: Layout = {
                   properties: {
                     label: 'Tipo de representação',
                     required: true,
-                    placeholder: 'Selecione o tipo de representação'
+                    placeholder: 'Selecione o tipo de representação',
                   },
                   data: {
                     options: {
@@ -191,8 +193,9 @@ const formLayout: Layout = {
                         id: 'basic_information_tipo_representacao_opt_st',
                         name: 'selectTipo_representacaoOptions',
                         type: 'IGRPOptionsProps[]',
-                        defaultValue: '[]'
-                      }
+                        defaultValue: '[]',
+                        generate: true
+                      },
                     },
                   },
                   /*interactions: {
@@ -209,13 +212,13 @@ const formLayout: Layout = {
                   tag: 'dt_inicio_actividade',
                   componentName: 'inputDatePicker',
                   properties: {
-                    label: "Data de Início de Atividade",
+                    label: 'Data de Início de Atividade',
                     placeholder: 'Escolha uma data',
                     required: true,
                   },
                 },
-              ]
-            }
+              ],
+            },
           ],
         },
       ],
@@ -236,6 +239,7 @@ const formLayout: Layout = {
         name: 'contentForm{{id}}',
         type: 'z.infer<{{type}}ZodType>',
         defaultValue: 'init{{type}}',
+        generate: true,
       },
     },
   },
@@ -276,8 +280,7 @@ const pageContent: Layout = {
       tag: 'footer_with_actions',
       componentName: 'stack', // TODO: replace with 'sticky'?
       properties: {
-        className:
-          'bottom-0 left-0 right-0 mt-6 bg-background border-t shadow-md py-2 px-4 z-10',
+        className: 'bottom-0 left-0 right-0 mt-6 bg-background border-t shadow-md py-2 px-4 z-10',
       },
       children: [
         {
@@ -351,8 +354,18 @@ const pageContent: Layout = {
                   componentName: 'button',
                   properties: {
                     type: 'submit',
-                    disabled: 'isSubmitting',
                     className: 'min-w-[150px]',
+                  },
+                  data: {
+                    disabled: {
+                      state: {
+                        id: 'is_submitting_st',
+                        name: 'isSubmitting',
+                        type: 'boolean',
+                        defaultValue: 'false',
+                        generate: true
+                      },
+                    },
                   },
                   children: [
                     {
@@ -490,7 +503,7 @@ const loadFormFields = async () => {
       componentName: 'flex',
       properties: {
         variant: 'col',
-        className: 'min-h-full'
+        className: 'min-h-full',
       },
       children: [
         {
@@ -498,7 +511,7 @@ const loadFormFields = async () => {
           tag: 'main_sticky',
           componentName: 'stack',
           properties: {
-            className: 'top-0 z-10 bg-background'
+            className: 'top-0 z-10 bg-background',
           },
           children: [
             {
@@ -507,7 +520,7 @@ const loadFormFields = async () => {
               componentName: 'flex',
               properties: {
                 variant: 'items-center',
-                className: 'justify-between mb-4'
+                className: 'justify-between mb-4',
               },
               children: [
                 {
@@ -516,30 +529,30 @@ const loadFormFields = async () => {
                   componentName: 'flex',
                   properties: {
                     variant: 'items-center',
-                    className: 'gap-2'
+                    className: 'gap-2',
                   },
                   children: [
                     {
-                      id: "button_nav_back",
-                      tag: "button_nav_back",
-                      componentName: "button",
+                      id: 'button_nav_back',
+                      tag: 'button_nav_back',
+                      componentName: 'button',
                       properties: {
                         variant: 'outline',
                         size: 'icon',
                         iconProperties: {
                           showIcon: true,
-                          iconName: 'ArrowLeft'
-                        }
+                          iconName: 'ArrowLeft',
+                        },
                       },
                       interactions: {
                         onClick: {
                           type: 'navigate',
                           navigate: {
                             name: 'handlebutton_nav_backNavigation',
-                            path: '/contribuintes'
-                          }
-                        }
-                      }
+                            path: '/contribuintes',
+                          },
+                        },
+                      },
                     },
                     {
                       id: 'page_headline',
@@ -558,7 +571,7 @@ const loadFormFields = async () => {
                   componentName: 'flex',
                   properties: {
                     variant: 'items-center',
-                    className: 'gap-2'
+                    className: 'gap-2',
                   },
                   children: [
                     {
@@ -566,23 +579,52 @@ const loadFormFields = async () => {
                       tag: 'button_cancelar',
                       componentName: 'button',
                       properties: {
-                        label: 'Cancelar',
+                        content: 'Cancelar',
                         size: 'sm',
                         variant: 'outline',
-                        iconProperties: {
-                        },
+                        iconProperties: {},
                       },
                       interactions: {
                         onClick: {
                           navigate: {
                             name: 'handlebutton_cancelarNavigation',
-                            path: '/contribuintes',
+                            path: '/contribuintes/[basePath]/[id]/[...some]/[[...another]]',
+                            segments: [
+                              {
+                                name: '[basePath]',
+                                value: 'ui',
+                              },
+                              {
+                                name: '[id]',
+                                tag: 'id',
+                              },
+                              {
+                                name: '[...some]',
+                                tag: 'some1',
+                              },
+                              {
+                                name: '[...some]',
+                                tag: 'some2',
+                              },
+                              {
+                                name: '[...some]',
+                                value: 'someVal',
+                              },
+                              {
+                                name: '[[...another]]',
+                                value: 'anotherVal1',
+                              },
+                              {
+                                name: '[[...another]]',
+                                value: 'anotherVal2',
+                              },
+                            ],
                             params: {
                               param1: 'value1',
                               param2: 'value2',
                               param3: ['value3', 'value4'],
-                              param4: 5
-                            }
+                              param4: 5,
+                            },
                           },
                           type: 'navigate',
                         },
@@ -593,11 +635,9 @@ const loadFormFields = async () => {
                       tag: 'button_save',
                       componentName: 'button',
                       properties: {
-                        label: 'Salvar Contribuinte',
+                        content: 'Salvar Contribuinte',
                         size: 'sm',
-                        iconProperties: {
-
-                        },
+                        iconProperties: {},
                       },
                       interactions: {
                         onClick: {
@@ -609,7 +649,7 @@ const loadFormFields = async () => {
                       },
                     },
                   ],
-                }
+                },
               ],
             },
             {
@@ -618,16 +658,14 @@ const loadFormFields = async () => {
               componentName: 'flex',
               properties: {
                 variant: 'flex1',
-                className: 'px-4 pb-6'
+                className: 'px-4 pb-6',
               },
-              children: [
-                pageContent
-              ]
-            }
+              children: [pageContent],
+            },
           ],
-        }
+        },
       ],
-    }
+    },
   ],
 };
 
@@ -655,12 +693,6 @@ const pageConfig: PageConfig = {
     {
       id: 'is_submitted_st',
       name: 'isSubmitted',
-      type: 'boolean',
-      defaultValue: 'false',
-    },
-    {
-      id: 'is_submitting_st',
-      name: 'isSubmitting',
       type: 'boolean',
       defaultValue: 'false',
     },

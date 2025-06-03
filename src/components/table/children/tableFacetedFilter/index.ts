@@ -17,6 +17,7 @@ export default {
       'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableFilterFaceted')
     component.loadVariants(tableFacetedFilterVariants());
     component.loadParent(TABLE)
     component.loadLabel('Faceted Filter')

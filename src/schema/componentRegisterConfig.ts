@@ -74,6 +74,12 @@ const registryStateSchema: JSONSchemaType<RegisterState> = {
 const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     name: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
@@ -171,7 +177,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     },
     renderer: {
       type: 'string',
-      enum: ['hbs', 'default', 'custom'],
+      enum: ['hbs', 'default', 'custom', 'none'],
       errorMessage: "The renderer attribute must only be 'hbs', 'custom' or 'default'."
     },
     templatePath: {
@@ -187,6 +193,12 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
 const componentRegistrationConfigSchema: JSONSchemaType<ComponentRegistrationConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     components: {
       type: 'array',
       items: componentRegisterConfigSchema,

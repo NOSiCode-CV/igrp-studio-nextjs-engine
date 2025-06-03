@@ -423,7 +423,7 @@ const loadRegimeFltCombobox = async () => {
                   tag: 'button_new',
                   componentName: 'button',
                   properties: {
-                    label: 'Novo',
+                    content: 'Novo',
                     size: 'sm',
                     variant: 'outline',
                     iconProperties: {
@@ -445,7 +445,7 @@ const loadRegimeFltCombobox = async () => {
                   tag: 'button_quick_action',
                   componentName: 'button',
                   properties: {
-                    label: 'Ação Rápida',
+                    content: 'Ação Rápida',
                     size: 'sm',
                     iconProperties: {
                       showIcon: true,
@@ -763,7 +763,7 @@ const loadRegimeFltCombobox = async () => {
                               tag: 'button_download',
                               componentName: 'button',
                               properties: {
-                                label: 'Exportar contribuintes',
+                                content: 'Exportar contribuintes',
                                 size: 'icon',
                                 variant: 'outline',
                                 className: 'h-10 w-10',
@@ -785,7 +785,7 @@ const loadRegimeFltCombobox = async () => {
                               tag: 'button_import',
                               componentName: 'button',
                               properties: {
-                                label: 'Importar contribuintes',
+                                content: 'Importar contribuintes',
                                 size: 'icon',
                                 variant: 'outline',
                                 className: 'h-10 w-10',
@@ -807,7 +807,7 @@ const loadRegimeFltCombobox = async () => {
                               tag: 'button_refresh',
                               componentName: 'button',
                               properties: {
-                                label: 'Atualizar lista',
+                                content: 'Atualizar lista',
                                 size: 'icon',
                                 variant: 'outline',
                                 className: 'h-10 w-10',
@@ -1032,7 +1032,7 @@ const loadRegimeFltCombobox = async () => {
                                   tag: 'button_clear_filter',
                                   componentName: 'button',
                                   properties: {
-                                    label: 'Limpar Filtros',
+                                    content: 'Limpar Filtros',
                                     size: 'sm',
                                     variant: 'outline',
                                     className: 'h-9',

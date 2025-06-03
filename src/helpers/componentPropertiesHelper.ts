@@ -1,15 +1,20 @@
 import { Component } from '../components';
-import { ElementField, Layout, StyleDefinition } from '../interfaces/types';
+import { ElementField, Layout, Segment, StyleDefinition } from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
-import { renderReference } from './resolveCodeBlocks';
-import { capitalize, toCamelCase } from './stringHelpers';
+import { toCamelCase } from './stringHelpers';
 import { renderCode } from '../utils/renderCode';
 import { layoutStyleToClasses } from './layoutStyleToClasses';
 import { spacingToClasses } from './spacingToClasses';
 import { sizeToClasses } from './sizeToClasses';
+import { isString } from '../utils/helpers';
+import { typographyStyleToClasses } from './typographyStyleToClasses';
+import { bordersStyleToClasses } from './bordersStyleToClasses';
+import { positionStyleToClasses } from './positionStyleToClasses';
+import { backgroundsStyleToClasses } from './backgroundsStyleToClasses';
+import { parseRoutePath } from './routerParser';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -45,7 +50,7 @@ export function addClassNameFromStyle(style: StyleDefinition) {
 
   const classes: string[] = []
 
-  let { layout, spacing, size } = style ?? {}
+  let { layout, spacing, size, typography, borders, position, backgrounds } = style ?? {}
 
   if(layout) {
     classes.push(`'${layoutStyleToClasses(layout)}',`);
@@ -57,6 +62,22 @@ export function addClassNameFromStyle(style: StyleDefinition) {
 
   if(size) {
     classes.push(`'${sizeToClasses(size)}',`);
+  }
+
+  if(typography) {
+    classes.push(`'${typographyStyleToClasses(typography)}',`);
+  }
+
+  if(borders) {
+    classes.push(`'${bordersStyleToClasses(borders)}',`);
+  }
+
+  if(position) {
+    classes.push(`'${positionStyleToClasses(position)}',`);
+  }
+
+  if(backgrounds) {
+    classes.push(`'${backgroundsStyleToClasses(backgrounds)}',`);
   }
 
   return classes.join('')
@@ -90,6 +111,41 @@ export function resolveQueryParams(params: Record<string, any>): string {
   return `?${query}`;
 }
 
+export function resolveSegmentPath(path: string, segments?: Segment[]) {
+  if (!segments) return path
+
+  const segmentsScan = parseRoutePath(path)
+  let finalPath = path
+
+  // Group segments by name (e.g., [...some], [[...another]], etc.)
+  const grouped = segments.reduce<Record<string, Segment[]>>((acc, seg) => {
+    if (!acc[seg.name]) acc[seg.name] = []
+    acc[seg.name].push(seg)
+    return acc
+  }, {})
+
+  // Resolve all placeholders in path
+  Object.entries(grouped).forEach(([name, group]) => {
+    const type = segmentsScan.find(s => s.originalSegment === name)?.type ?? 'dynamic'
+
+    let replacement = ''
+
+    if (type === 'catch-all' || type === 'optional-catch-all') {
+      const parts = group.map(g =>
+        g.tag ? `\${row?.original.${g.tag}}` : g.value ?? ''
+      )
+      replacement = parts.join('/')
+    } else {
+      const g = group[0]
+      replacement = g.tag ? `\${row.original.${g.tag}}` : g.value ?? ''
+    }
+
+    finalPath = finalPath.replace(name, replacement)
+  })
+
+  return finalPath
+}
+
 /**
  * Resolves a default state value from a string representation.
  *
@@ -102,7 +158,7 @@ export function resolveQueryParams(params: Record<string, any>): string {
  */
 export function resolveStateDefault(defaultValue?: string, type?: string): string {
 
-  if(defaultValue === undefined || (defaultValue?.trim() === '' && type !== 'string')) return 'undefined'
+  if(defaultValue === undefined || ((defaultValue && defaultValue?.trim() === '') && type !== 'string')) return 'undefined'
 
   const trimmed = defaultValue.trim();
 
@@ -125,7 +181,6 @@ export function resolveStateDefault(defaultValue?: string, type?: string): strin
   // Otherwise, treat it as a plain string literal in case type is not present and is a string
   return type && type === 'string' ? `\"${trimmed.replace(/"/g, '\\"')}\"` : trimmed;
 }
-
 
 export function resolveZodTypes(field?: ElementField): string {
   if (!field) {
@@ -208,10 +263,18 @@ export function resolveComponent(componentName: string, registry: Record<string,
 
 }
 
-export function renderProperties(customProperties: Record<string, any>) {
+export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return `${key}={ ${resolveStateDefault(value)} }`;
+      if(key === 'className' || key === 'content') return ''
+      if(dataProperties && dataProperties[key]) return ''
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return Object.entries(value).map(([k, v]) => {
+          return `${k}={ ${resolveStateDefault(`${v}`, isString(v? `${v}` : undefined ))} }`;
+        }).join("\n")
+      } else {
+        return `${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+      }
     }).join("\n")
     : ``
 }
@@ -250,8 +313,7 @@ export function renderInteractions(interactions: Record<string, any>) {
 export function renderData(data: Record<string, any>) {
   return data
     ? Object.entries(data).map(([key, value]) => {
-      return `${key}={ ${value.state?.name ?? 'undefined'} }`;
+      return `${key}={ ${value.state?.name ?? value.value?.code ?? 'undefined'} }`;
     }).join("\n")
     : ``
 }
-

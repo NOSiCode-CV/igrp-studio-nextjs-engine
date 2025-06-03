@@ -14,6 +14,7 @@ export default {
       'import { IGRPLabel } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPLabel')
     component.loadVariants(labelVariants());
     component.loadGroup('formElements')
     component.loadLabel('Label')

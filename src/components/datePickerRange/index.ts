@@ -17,6 +17,7 @@ export default {
       'import { DateRange } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDatePickerRange')
     component.loadVariants(datePickerRangeVariants());
     component.loadGroup('formElements')
     component.loadLabel('Date Range')

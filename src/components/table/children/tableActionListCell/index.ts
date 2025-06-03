@@ -20,6 +20,7 @@ export default {
       'import { IGRPDataTableRowAction } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableRowAction')
     component.loadVariants(tableActionListCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

@@ -705,6 +705,12 @@ const componentSchema: JSONSchemaType<Layout> = {
 const pageConfigSchema: JSONSchemaType<PageConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     id: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,

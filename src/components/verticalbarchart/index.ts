@@ -16,6 +16,7 @@ export default {
       'import { IGRPVerticalBarChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPVerticalBarChart')
     //component.loadVariants(verticalBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Vertical Bar Chart')

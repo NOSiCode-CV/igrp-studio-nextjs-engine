@@ -16,6 +16,7 @@ export default {
       'import { IGRPCard } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPCard')
     component.loadVariants(cardVariants());
     component.loadChildrenMax(3)
     component.loadGroup('layout')

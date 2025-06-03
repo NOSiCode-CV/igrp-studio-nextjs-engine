@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableFilterDate } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableFilterDate')
     component.loadVariants(tableDateFilterVariants());
     component.loadParent(TABLE)
     component.loadLabel('Date Filter')

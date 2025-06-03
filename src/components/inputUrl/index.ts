@@ -18,6 +18,7 @@ export default {
       'import { IGRPInputUrl } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputUrl')
     component.loadVariants(inputUrlVariants());
     component.loadGroup('formElements')
     component.loadLabel('URL')

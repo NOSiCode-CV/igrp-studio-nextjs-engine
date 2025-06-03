@@ -13,6 +13,7 @@ export default {
       'import { Carousel, CarouselItem } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('Carousel')
     component.loadVariants(carouselVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Carousel')

@@ -13,6 +13,7 @@ export default {
     ]);
 
     //component.loadVariants(areaChartVariants());
+    component.loadComponentClass('IGRPAreaChart')
     component.loadGroup('dataDisplay')
     component.loadLabel('Area Chart')
     component.setAllowTypes(true)

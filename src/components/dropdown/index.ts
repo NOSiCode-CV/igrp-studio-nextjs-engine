@@ -14,6 +14,7 @@ export default {
       'import { IGRPDropdown } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPDropdown')
     component.loadVariants(dropdownVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Dropdown')

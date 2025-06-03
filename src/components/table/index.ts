@@ -8,6 +8,8 @@ import {
 import { Component, hbsRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
 import { TABLE_FILTERS } from './children/tableFilters';
+import { TEMPLATES } from '../../utils/constants';
+import { replaceTemplate } from '../../utils/helpers';
 
 export default {
   register(component: Component) {
@@ -16,6 +18,7 @@ export default {
       'import { IGRPDataTableFacetedFilterFn , IGRPDataTableDateRangeFilterFn } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTable')
     component.loadVariants(tableVariants());
     component.loadChildrenMax(2)
     component.loadGroup('dataDisplay')
@@ -26,6 +29,7 @@ export default {
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
     component.getData(tableData());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: TABLE }))
 
     component.loadChildrenTypes([
       { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }

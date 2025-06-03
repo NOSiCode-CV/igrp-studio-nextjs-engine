@@ -17,6 +17,7 @@ export default {
       'import { IGRPInputPhone } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputPhone')
     component.loadVariants(inputPhoneVariants());
     component.loadGroup('formElements')
     component.loadLabel('Phone')

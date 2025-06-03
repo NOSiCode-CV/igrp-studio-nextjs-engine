@@ -18,6 +18,7 @@ export default {
       'import { IGRPInputFile } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputFile')
     component.loadVariants(inputFileVariants());
     component.loadGroup('formElements')
     component.loadLabel('Upload File')

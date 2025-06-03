@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableCellBadge } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableCellBadge')
     component.loadVariants(tableBadgeCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

@@ -13,6 +13,7 @@ export default {
       'import { IGRPHeadline } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPHeadline')
     component.loadVariants(headlineVariants());
     component.loadGroup('typography')
     component.loadLabel('Headline')

@@ -1,0 +1,42 @@
+<{{resolveComponent resourceConfig.componentName registry}}
+  {{#if resourceConfig.tag}}
+  name={ "{{resourceConfig.tag}}" }
+  {{/if}}
+  {{#if resourceConfig.properties}}
+  {{{render-properties resourceConfig.properties}}}
+  {{/if}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
+  {{/if}}
+  {{#if resourceConfig.properties.commonProperties.customProperties}}
+  {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
+  {{/if}}
+>
+  {{#if resourceConfig.content}}
+  {{resourceConfig.content}}
+  {{else}}
+  {{#if resourceConfig.properties.content}}
+  {{resourceConfig.properties.content}}
+  {{else}}
+  {{#if resourceConfig.children}}
+  {{#each resourceConfig.children}}
+  {{{render-layout this}}}
+  {{/each}}
+  {{/if~}}
+  {{/if~}}
+  {{/if~}}
+</{{resolveComponent resourceConfig.componentName registry}}>

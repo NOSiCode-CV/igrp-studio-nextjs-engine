@@ -17,6 +17,7 @@ export default {
       'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableFilterSelect')
     component.loadVariants(tableSelectFilterVariants());
     component.loadParent(TABLE)
     component.loadLabel('Select Filter')

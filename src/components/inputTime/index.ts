@@ -18,6 +18,7 @@ export default {
       'import { IGRPInputTime } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputTime')
     component.loadVariants(inputTimeVariants());
     component.loadGroup('formElements')
     component.loadLabel('Time')

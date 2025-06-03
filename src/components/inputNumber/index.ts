@@ -17,6 +17,7 @@ export default {
       'import { IGRPInputNumber } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputNumber')
     component.loadVariants(inputNumberVariants());
     component.loadGroup('formElements')
     component.loadLabel('Number')

@@ -1,17 +1,21 @@
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
 
+interface VersionableElement {
+  engineVersion?: string
+}
+
 interface IdentifiableElement {
   id: string
 }
 
-export interface AppConfig extends IdentifiableElement {
+export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
   workspaceId: string;
   name: string;
   description?: string
 }
 
-export interface PageConfig extends IdentifiableElement {
+export interface PageConfig extends IdentifiableElement, VersionableElement {
   type: 'page';
   path: string;
   description?: string;
@@ -26,7 +30,7 @@ export interface PageConfig extends IdentifiableElement {
   components?: Layout | {};
 }
 
-export interface PageComponentConfig extends IdentifiableElement {
+export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'page' | 'component'
   components?: Layout | {};
 }
@@ -41,7 +45,7 @@ export interface Arguments {
   isState: boolean,
 }
 
-export interface ComponentConfig extends IdentifiableElement {
+export interface ComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'component';
   name: string;
   description?: string;
@@ -273,7 +277,8 @@ export interface Navigate extends IdentifiableElement {
   name: string,
   tag: string,
   path: string,
-  params?: Record<string, string>
+  params?: Record<string, string>,
+  segments?: Segment[]
 }
 
 export interface RegisterNavigate {
@@ -309,15 +314,15 @@ export interface DeleteConfig extends IdentifiableElement {
   type: ConfigTypes
 }
 
-export interface ComponentRegistrationConfig {
+export interface ComponentRegistrationConfig extends VersionableElement {
   components: ComponentRegisterConfig[]
 }
 
-export interface DockerServiceRegistrationConfig {
+export interface DockerServiceRegistrationConfig extends VersionableElement {
   services: DockerServiceRegisterConfig[]
 }
 
-export interface DockerServiceRegisterConfig {
+export interface DockerServiceRegisterConfig extends VersionableElement {
   name: string,
   label: string,
   custom?: string,
@@ -327,7 +332,7 @@ export interface DockerServiceRegisterConfig {
   templatePath?: string
 }
 
-export interface ComponentRegisterConfig {
+export interface ComponentRegisterConfig extends VersionableElement {
   name: string,
   imports: string[],
   defaultValue: boolean,
@@ -353,7 +358,7 @@ export interface ComponentRegisterConfig {
   states: RegisterState[],
   childrenTypes: ComponentRegisterConfig[],
   acceptedChildren: ComponentRegisterConfig[],
-  renderer: 'default' | 'hbs' | 'custom',
+  renderer: 'default' | 'hbs' | 'custom' | 'none',
   templatePath?: string
 }
 
@@ -437,10 +442,142 @@ export interface SizeStyle {
   aspectRatioLocked: boolean;
 }
 
+//Typography
+export interface TypographyValue {
+  value: string;
+  unit: string;
+}
+
+export interface TypographyStyle {
+  fontSize: TypographyValue;
+  lineHeight: TypographyValue;
+  letterSpacing: TypographyValue;
+  wordSpacing: TypographyValue;
+  textAlign: string;
+  fontWeight: string;
+  fontStyle: string;
+  textDecoration: string;
+  textTransform: string;
+  fontFamily: string;
+}
+
+//Borders
+export interface BorderValue {
+  width: string;
+  style: string;
+  color: string;
+}
+
+export interface BorderRadius {
+  topLeft: string;
+  topRight: string;
+  bottomRight: string;
+  bottomLeft: string;
+}
+
+export interface BordersStyle {
+  borders: Record<string, BorderValue>;
+  borderRadius: BorderRadius;
+}
+
+//Position
+
+export interface PositionValue {
+  value: string;
+  unit: string;
+}
+
+export type PositionType = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
+
+export interface PositionStyle {
+  type: PositionType;
+  positions: Record<Side, PositionValue>;
+  zIndex: string;
+  linked: boolean;
+}
+
+// Shadow Types
+export interface ShadowValue {
+  x: string;
+  y: string;
+  blur: string;
+  spread: string;
+  color: string;
+  inset: boolean;
+}
+export interface InteractionValue {
+  fnCustomSet?: string;
+  fnName?: string;
+  fnCustomCode?: {
+    fnCode?: string;
+    imports?: Import[];
+  }
+}
+
+// Filter Types
+export interface FilterValue {
+  type: string;
+  value: string;
+  unit: string;
+}
+
+export interface FilterType {
+  name: string;
+  min: string;
+  max: string;
+  unit: string;
+}
+
+// Transform Types
+export interface TransformValue {
+  type: string;
+  value: string;
+  unit: string;
+}
+
+export interface TransformType {
+  name: string;
+  units: string[];
+}
+
+// Transition Types
+export interface TransitionValue {
+  property: string;
+  duration: string;
+  timing: string;
+  delay: string;
+}
+
+// Background Types
+export interface GradientStop {
+  color: string;
+  position: string;
+}
+
+export interface GradientValue {
+  type: 'linear' | 'radial' | 'conic';
+  angle: string;
+  stops: GradientStop[];
+}
+
+export interface BackgroundStyle {
+  type: 'color' | 'image' | 'gradient';
+  value: string | GradientValue;
+  size: string;
+  position: string;
+  repeat: string;
+  attachment: string;
+  blendMode: string;
+}
+
 export interface StyleDefinition {
   layout?: LayoutStyle;
   spacing?: SpacingState;
-  size?: SizeStyle
+  size?: SizeStyle;
+  typography?: TypographyStyle;
+  borders?: BordersStyle;
+  position?: PositionStyle;
+  backgrounds?: BackgroundStyle[]
 }
 
 export type Side = 'top' | 'right' | 'bottom' | 'left';
@@ -450,6 +587,19 @@ export type Unit = 'px' | 'rem' | '%' | 'em' | 'auto';
 export interface SpacingValue {
   value?: string;
   unit?: Unit;
+}
+
+export interface Segment {
+  name: string,
+  tag?: string,
+  value?: string
+}
+
+export interface RouteSegment {
+  name: string
+  type: "static" | "dynamic" | "catch-all" | "optional-catch-all" | "route-group"
+  required: boolean
+  originalSegment: string
 }
 
 type SpacingValues = Record<Side, SpacingValue>;
@@ -468,7 +618,7 @@ export interface ServiceWorkspace extends IdentifiableElement {
 
 // Workspace
 
-export interface WorkspaceConfig extends IdentifiableElement {
+export interface WorkspaceConfig extends IdentifiableElement, VersionableElement {
   name: string;
   slug: string;
   description?: string;
@@ -490,7 +640,7 @@ export interface WorkspaceProject {
   dependsOn: Dependency[],
 }
 
-export interface WorkspaceService extends IdentifiableElement{
+export interface WorkspaceService extends IdentifiableElement {
   name: string,
   properties: DockerContainer
 }
@@ -754,7 +904,7 @@ export interface CodeSnippetConfig extends IdentifiableElement {
   properties?: Record<string, any>;
 }
 
-export interface CodeSnippetsRegisterConfig {
+export interface CodeSnippetsRegisterConfig extends VersionableElement {
   name: string,
   title: string,
   description: string,
@@ -768,7 +918,7 @@ export interface CodeSnippetsRegisterConfig {
   states: string[],
 }
 
-export interface CodeSnippetsRegistrationConfig {
+export interface CodeSnippetsRegistrationConfig extends VersionableElement {
   codes: CodeSnippetsRegisterConfig[]
 }
 

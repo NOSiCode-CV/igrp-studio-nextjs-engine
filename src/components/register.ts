@@ -72,6 +72,7 @@ import tableSelectFilterModule, { TABLE_SELECT_FILTER } from './table/children/t
 import tableFacetedFilterModule, { TABLE_FACETED_FILTER } from './table/children/tableFacetedFilter';
 import tableButtonListCellModule, { TABLE_BUTTON_LIST_CELL } from './table/children/tableButtonListCell';
 import tableActionListCellModule, { TABLE_ACTION_LIST_CELL } from './table/children/tableActionListCell';
+import tableHiddenCellModule, { TABLE_HIDDEN_CELL } from './table/children/tableHiddenCell/index';
 import tableAlertButtonModule, { TABLE_ALERT_BUTTON } from './table/children/tableAlertButton';
 import tableLinkButtonModule, { TABLE_LINK_BUTTON } from './table/children/tableLinkButton';
 import tableModalButtonModule, { TABLE_MODAL_BUTTON } from './table/children/tableModalButton';
@@ -158,6 +159,7 @@ export function registerAllComponents() {
   register(TABLE_BUTTON_LIST_CELL, tableButtonListCellModule.register);
   register(TABLE_DROPDOWN_MENU_CELL, tableDropdownMenuCellModule.register);
   register(TABLE_ACTION_LIST_CELL, tableActionListCellModule.register);
+  register(TABLE_HIDDEN_CELL, tableHiddenCellModule.register);
 
   // Action Buttons
   register(TABLE_ALERT_BUTTON, tableAlertButtonModule.register);

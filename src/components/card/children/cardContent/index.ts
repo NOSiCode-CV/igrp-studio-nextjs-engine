@@ -17,6 +17,7 @@ export default {
       `import { IGRPCardContent } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPCardContent')
     component.loadVariants(cardContentVariants());
     component.loadParent(CARD)
     component.loadLabel('Card Content')

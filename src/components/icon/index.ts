@@ -14,6 +14,7 @@ export default {
       'import { IGRPIcon } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPIcon')
     component.loadVariants(iconVariants());
     component.loadGroup('formElements')
     component.loadLabel('Icon')

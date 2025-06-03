@@ -16,6 +16,7 @@ export default {
       'import { IGRPRadialBarChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPRadialBarChart')
     //component.loadVariants(radialBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Radial Bar Chart')

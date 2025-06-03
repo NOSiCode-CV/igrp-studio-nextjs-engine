@@ -16,6 +16,7 @@ export default {
       'import { IGRPDataTableCellExpander } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableCellExpander')
     component.loadVariants(tableExpanderCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

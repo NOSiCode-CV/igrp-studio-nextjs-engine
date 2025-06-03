@@ -19,6 +19,7 @@ export default {
       'import { IGRPDataTableButtonList } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPDataTableButtonList')
     component.loadVariants(tableButtonListCellVariants());
     component.loadParent(TABLE)
     component.loadGroup('Columns')

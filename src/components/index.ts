@@ -13,6 +13,10 @@ import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
 import { resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
+import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
+import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
+import { backgroundsStyleToClasses } from '../helpers/backgroundsStyleToClasses';
 
 export type Component = {
   imports: Set<string>;
@@ -354,7 +358,7 @@ export function registryAsObject(): ComponentRegistrationConfig {
 export function defaultRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
-  let { layout, spacing, size } = component.style ?? {}
+  let { layout, spacing, size, typography, borders, position, backgrounds } = component.style ?? {}
   let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
 
   let props = common
@@ -398,6 +402,22 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   if(size) {
     sizeClasses += sizeToClasses(size);
+  }
+
+  if(typography) {
+    sizeClasses += typographyStyleToClasses(typography);
+  }
+
+  if(borders) {
+    sizeClasses += bordersStyleToClasses(borders);
+  }
+
+  if(position) {
+    sizeClasses += positionStyleToClasses(position);
+  }
+
+  if(backgrounds) {
+    sizeClasses += backgroundsStyleToClasses(backgrounds);
   }
 
   if (parentComponent?.childProperties) {
@@ -472,6 +492,14 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
     }).join("")
     : ``
 
+  props += component.data
+    ? Object.entries(component.data).map(([key, value]) => {
+      return ` ${key}={ ${value.state.name} }`;
+    }).join("")
+    : ``
+
+
+
   let childProps = ``
 
   if (parentComponent?.childProperties) {
@@ -519,8 +547,12 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
 export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   const name = component.componentName
-  return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name }), {
+  return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name: 'default' /*name*/ }), {
     resourceConfig: component,
     parentResourceConfig: parentComponent
   })
+}
+
+export function noRenderer(): () => string {
+  return () => ""
 }

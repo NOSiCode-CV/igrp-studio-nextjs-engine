@@ -15,6 +15,7 @@ export default {
       'import { IGRPHorizontalBarChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPHorizontalBarChart')
     //component.loadVariants(horizontalBarChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Horizontal Bar Chart')

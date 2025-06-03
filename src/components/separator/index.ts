@@ -14,6 +14,7 @@ export default {
       'import { IGRPSeparator } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPSeparator')
     component.loadVariants(separatorVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Separator')

@@ -6,6 +6,12 @@ import { ajvInstance } from '../utils/ajv-instance';
 const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     name: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
@@ -44,6 +50,12 @@ const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterCon
 const dockerServiceRegistrationConfigSchema: JSONSchemaType<DockerServiceRegistrationConfig> = {
   type: 'object',
   properties: {
+    engineVersion: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The engine version attribute must be a valid string.',
+    },
     services: {
       type: 'array',
       items: dockerServiceRegisterConfigSchema,

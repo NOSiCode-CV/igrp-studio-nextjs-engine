@@ -14,6 +14,7 @@ export default {
       'import { IGRPInputBasic } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputBasic')
     component.loadVariants(inputVariants());
     component.loadGroup('formElements')
     component.loadLabel('Input')

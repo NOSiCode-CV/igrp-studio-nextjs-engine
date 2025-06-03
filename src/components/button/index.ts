@@ -13,6 +13,7 @@ export default {
       'import { IGRPButton } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPButton')
     component.loadVariants(buttonVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Button')

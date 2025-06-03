@@ -13,6 +13,7 @@ export default {
       'import { IGRPSwitch } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPSwitch')
     component.loadVariants(switchVariants());
     component.loadGroup('formElements')
     component.loadLabel('Switch')

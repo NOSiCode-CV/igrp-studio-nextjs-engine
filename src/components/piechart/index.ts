@@ -12,6 +12,7 @@ export default {
       'import { IGRPPieChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPPieChart')
     //component.loadVariants(pieChartVariants());
     component.loadGroup('dataDisplay')
     component.loadLabel('Pie Chart')

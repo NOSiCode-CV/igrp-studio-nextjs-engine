@@ -17,6 +17,7 @@ export default {
       `import { IGRPCardFooter } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
+    component.loadComponentClass('IGRPCardFooter')
     component.loadVariants(cardFooterVariants());
     component.loadParent(CARD)
     component.loadLabel('Card Footer')

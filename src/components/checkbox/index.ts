@@ -18,6 +18,7 @@ export default {
       'import { IGRPCheckbox } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPCheckbox')
     component.loadVariants(checkboxVariants());
     component.loadGroup('formElements')
     component.loadLabel('Checkbox')

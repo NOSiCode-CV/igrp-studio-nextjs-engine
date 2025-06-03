@@ -17,6 +17,7 @@ export default {
       'import { IGRPInputColor } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
+    component.loadComponentClass('IGRPInputColor')
     component.loadVariants(inputColorVariants());
     component.loadGroup('formElements')
     component.loadLabel('Color')
