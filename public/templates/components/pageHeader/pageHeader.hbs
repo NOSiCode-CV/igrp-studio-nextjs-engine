@@ -3,6 +3,9 @@
   {{#if resourceConfig.properties.description}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
+  {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
+  value="{{resourceConfig.properties.value}}"
+  {{/if~}}
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}

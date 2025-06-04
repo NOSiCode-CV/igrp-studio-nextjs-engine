@@ -10,6 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputProperties() {
   return {
+    value: { type: 'string', required: false, default: '' },
     type: { type: 'string', required: false, default: 'text', enum: [
         'text',
         'email',
@@ -62,7 +63,7 @@ export function inputInteractionsMapping() {
 
 export function inputData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

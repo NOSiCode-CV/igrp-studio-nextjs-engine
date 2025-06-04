@@ -10,7 +10,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function statsCardProperties() {
   return {
-    cardBorderPosition: { type: 'string', required: false, default: 'left', enum: ['left', 'right', 'top', 'bottom', 'none'] },
+    cardBorderPosition: { type: 'string', required: false, default: 'top', enum: ['left', 'right', 'top', 'bottom', 'none'] },
     cardBorder: { type: 'string', required: false, default: 'rounded-xl', enum: ['none', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl', 'rounded-2xl', 'rounded-3xl', 'rounded-full', 'square'] },
     cardVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     iconBackground: { type: 'string', required: false, default: 'none', enum: ['none', 'square', 'rounded'] },

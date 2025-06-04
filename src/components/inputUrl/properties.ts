@@ -20,6 +20,7 @@ export function inputUrlProperties() {
   ]
 
   return {
+    value: { type: 'string', required: false, default: '' },
     name: { type: 'string', required: true, default: 'url' },
     label: { type: 'string', required: false, default: 'Input URL' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
@@ -65,7 +66,7 @@ export function inputUrlInteractionsMapping() {
 
 export function inputUrlData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

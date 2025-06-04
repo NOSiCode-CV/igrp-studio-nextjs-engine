@@ -30,6 +30,7 @@ export function inputPhoneProperties() {
   ]
 
   return {
+    value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Input Phone' },
     description: { type: 'string', required: false },
     //floatingLabel: { type: 'boolean', required: false, default: false },
@@ -76,7 +77,7 @@ export function inputPhoneInteractionsMapping() {
 
 export function inputPhoneData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

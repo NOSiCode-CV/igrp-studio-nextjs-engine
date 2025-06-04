@@ -6,6 +6,7 @@ import {
   iconProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function modalDialogProperties() {
   return {
@@ -15,7 +16,7 @@ export function modalDialogProperties() {
     type: { type: 'string', required: false, enum: ['default', 'alert', 'confirm', 'delete', 'info', 'success', 'warning', 'modal'], default: 'default' },
     size: { type: 'string', required: false, enum: ['sm', 'md', 'lg', 'xl', 'full'], default: 'md' },
     headerClassName: { type: 'string', required: false },
-    showTrigger: { type: 'boolean', required: false },
+    showTrigger: { type: 'boolean', required: false, default: true },
     showFooter: { type: 'boolean', required: false, default: true },
     triggerText: { type: 'string', required: false, default: 'Open Dialog' },
     triggerButton: { type: 'string', required: false },
@@ -46,9 +47,23 @@ export function modalDialogVariants() {
   return {};
 }
 
+function onOpenChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function modalDialogInteractions() {
   return {
-    onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_OPEN), required: false },
+    onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_OPEN, undefined, onOpenChangeInteractionFieldVisibility() ), required: false },
   };
 }
 

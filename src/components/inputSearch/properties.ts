@@ -11,18 +11,19 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function inputSearchProperties() {
   return {
     label: { type: 'string', required: false, default: 'Input Search', 'x-ui-widget': 'text', 'x-meta': { label: 'Label'} },
+    value: { type: 'string', required: false, default: '' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Placeholder'} },
     helperText: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Helper Text'} },
+    showSubmitButton: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Submit Button'} },
     iconProperties: {
       type: 'object',
       properties: {
-        showStartIcon: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Start Icon?'} },
+        showStartIcon: { type: 'boolean', required: false, default: true, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Start Icon?'} },
         startIcon: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'icon', 'x-meta': { label: 'Start Icon'} },
         submitIcon: { type: 'string', required: false, default: 'ArrowRight', 'x-ui-widget': 'icon', 'x-meta': { label: 'Submit Icon'} },
       }
     },
-    showSubmitButton: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Submit Button'} },
     disabled: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Disabled'} },
     required: { type: 'boolean', required: true, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Required'} },
     submitButtonLabel: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
@@ -84,12 +85,12 @@ export function inputSearchInteractions() {
 
 export function inputSearchData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
+    /*value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE, {
         id: '',
         name: 'inputSearch{{id}}Value',
         type: 'string',
         defaultValue: ''
-      }, true), required: true },
+      }, true), required: true },*/
     //defaultValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DEFAULT_VALUE), required: false },
   };
 }

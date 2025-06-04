@@ -10,9 +10,9 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputFileProperties() {
   return {
+    value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Input File' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: true, default: 'file' },
     error: { type: 'string', required: false },
     accept: { type: 'string', required: false, default: 'application/pdf' },
     //customId: { type: 'string', required: false, default: '{{id}}' },
@@ -52,7 +52,7 @@ export function inputFileInteractionsMapping() {
 
 export function inputFileData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

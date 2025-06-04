@@ -9,9 +9,9 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputPasswordProperties() {
   return {
+    value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Input Password' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: true, default: 'password' },
     placeholder: { type: 'string', required: false, default: '' },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
@@ -54,7 +54,7 @@ export function inputPasswordInteractionsMapping() {
 
 export function inputPasswordData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

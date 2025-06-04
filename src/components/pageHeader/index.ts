@@ -6,6 +6,8 @@ import {
   pageHeaderChildPropertiesMapping, pageHeaderRules, pageHeaderStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -24,6 +26,7 @@ export default {
     component.getRules(pageHeaderRules())
     component.getStyle(pageHeaderStyle())
     component.loadStates([]);
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: PAGEHEADER }))
 
     component.setRenderer(hbsRenderer);
   },

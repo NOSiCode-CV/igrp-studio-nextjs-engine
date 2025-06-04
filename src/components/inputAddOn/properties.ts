@@ -10,6 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputAddOnProperties() {
   return {
+    value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Input Add On' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     optionLabel: { type: 'string', required: false, default: 'Add On Option' },
@@ -55,7 +56,7 @@ export function inputAddOnInteractionsMapping() {
 
 export function inputAddOnData() {
   return {
-    selectValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //selectValue: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
     options: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.OPTIONS, {
         id: '',
         name: 'inputAddOn{{id}}Options',

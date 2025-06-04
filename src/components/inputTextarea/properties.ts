@@ -10,6 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputTextareaProperties() {
   return {
+    value: { type: 'string', required: false, default: '' },
     name: { type: 'string', required: true, default: 'textarea' },
     label: { type: 'string', required: false, default: 'Input Textarea' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
@@ -53,7 +54,7 @@ export function inputTextareaInteractionsMapping() {
 
 export function inputTextareaData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 

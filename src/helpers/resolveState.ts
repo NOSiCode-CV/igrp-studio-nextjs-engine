@@ -102,7 +102,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
           const type = c.dataType ? capitalize(c.dataType) : 'any';
 
           value.state.name = replaceTemplate(value.state.name, { id: c.tag });
-          value.state.defaultValue = value.state.defaultValue
+          value.state.defaultValue = value.state.defaultValue !== undefined
             ? replaceTemplate(value.state.defaultValue, { defaultValue, type })
             : undefined;
           value.state.type = replaceTemplate(value.state.type, { type });

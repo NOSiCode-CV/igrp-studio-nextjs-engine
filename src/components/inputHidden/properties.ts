@@ -10,7 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function inputHiddenProperties() {
   return {
-    name: { type: 'string', required: true, default: 'hidden' },
+    value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Hidden' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
@@ -49,7 +49,7 @@ export function inputHiddenInteractions() {
 
 export function inputHiddenData() {
   return {
-    value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
+    //value: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.VALUE), required: true },
   };
 }
 
