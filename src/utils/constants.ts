@@ -165,6 +165,7 @@ export const INTERACTIONS_TYPES = {
   ON_LOAD: 'On load',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
+  ON_ACTION: 'On action',
   ON_SUBMIT: 'On submit',
   ON_PICK: 'On pick',
   ON_SELECT_CHANGE: 'On select',
@@ -184,6 +185,7 @@ export const INTERACTIONS_TYPES = {
   VALUE: "Value",
   DEFAULT_VALUE: "Default Value",
   OPTIONS: "Options",
+  ITEMS: "Items",
   CUSTOMIZE: "Customize"
 }
 
@@ -252,9 +254,8 @@ export const DIRECTORIES = {
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   KUBERNETES: 'k8s',
   TYPES: 'types',
-  BASE_COMPONENTS: 'src/components',
-  BASE_COMPONENTS_UI: 'src/components/ui',
   COMPONENTS: 'src/app/[locale]/(igrp)/(generated)/components',
+  BASE_COMPONENTS: 'src/components',
 };
 
 export const ERROR_MESSAGE = {

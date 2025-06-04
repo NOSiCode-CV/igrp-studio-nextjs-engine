@@ -274,7 +274,7 @@ export function renderProperties(customProperties: Record<string, any>, dataProp
     ? Object.entries(customProperties).map(([key, value]) => {
       if(key === 'className' || key === 'content' || key === 'dataProperties') return ''
       if(dataProperties && dataProperties[key]) return ''
-      if (value && typeof value === 'object' && !Array.isArray(value)) {
+      if (value && typeof value === 'object' && !Array.isArray(value) && ['iconProperties', 'commonProperties'].includes(key)) {
         return Object.entries(value).map(([k, v]) => {
           if(k === 'customProperties') return ''
           return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined ))} }`;

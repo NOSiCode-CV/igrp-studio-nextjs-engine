@@ -1,4 +1,5 @@
 import { register } from './index';
+import alertDialogModule, { ALERT_DIALOG } from './alertDialog';
 import aspectModule, { ASPECT } from './aspect';
 import badgeModule, { BADGE } from './badge';
 import buttonModule, { BUTTON } from './button';
@@ -88,6 +89,7 @@ import tabsModule, { TABS } from './tabs';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 
 export function registerAllComponents() {
+  register(ALERT_DIALOG, alertDialogModule.register);
   register(AREACHART, chartModule.register);
   register(ASPECT, aspectModule.register);
   register(BADGE, badgeModule.register);
@@ -184,5 +186,5 @@ export function registerAllComponents() {
   register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
 
-  //register(TABS, tabsModule.register);
+  register(TABS, tabsModule.register);
 }

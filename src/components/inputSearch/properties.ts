@@ -65,11 +65,11 @@ function onSearchInteractionFieldVisibility(): InteractionFieldVisibility {
   return {
     fnName: { visible: true },
     actionName: { visible: false },
-    fnCustomSet: { visible: false },
+    fnCustomSet: { visible: true },
     fnCustomCode: {
       imports: { visible: true },
       states: { visible: true },
-      fnCode: { visible: true },
+      fnCode: { visible: false },
       actionCode: { visible: false }
     },
   }

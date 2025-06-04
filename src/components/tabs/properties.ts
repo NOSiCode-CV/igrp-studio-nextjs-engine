@@ -1,13 +1,21 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function tabsProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
-    tabs: { type: 'array', required: true },
-    tab1Content: { type: 'string', required: false },
-    tab2Content: { type: 'string', required: false },
-    description: { type: 'string', required: false },
+    variant: { type: 'string', required: false, default: 'default', enum: ['default', 'outline', 'pills', 'underline', 'cards'] },
+    tabListClassName: { type: 'string', required: false },
+    tabTriggerClassName: { type: 'string', required: false },
+    tabContentClassName: { type: 'string', required: false },
+    iconProperties: {
+      type: 'object',
+      properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
+      },
+    },
+    contentBorder: { type: 'boolean', default: false, required: false},
+    fullWidth: { type: 'boolean', default: false, required: false},
     message: { type: 'string', required: false },
     ...commonProperties()
   };
@@ -15,38 +23,17 @@ export function tabsProperties() {
 
 export function tabsPropertiesMapping() {
   return {
-    name: 'name',
-    label: 'label',
-    tabs: 'tabs',
-    tab1Content: 'tab1Content',
-    tab2Content: 'tab2Content',
-    description: 'description',
-    message: 'message',
     ...commonPropertiesMapping()
   };
 }
 
 export function tabsChildProperties() {
   return {
-    name: { type: 'string', required: true },
-    label: { type: 'string', required: false },
-    tabs: { type: 'array', required: true },
-    tab1Content: { type: 'string', required: false },
-    tab2Content: { type: 'string', required: false },
-    description: { type: 'string', required: false },
-    message: { type: 'string', required: false }
   };
 }
 
 export function tabsChildPropertiesMapping() {
   return {
-    name: 'name',
-    label: 'label',
-    tabs: 'tabs',
-    tab1Content: 'tab1Content',
-    tab2Content: 'tab2Content',
-    description: 'description',
-    message: 'message'
   };
 }
 
@@ -64,4 +51,15 @@ export function tabsRules() {
   return {
     ...baseRules()
   }
+}
+
+export function tabsData() {
+  return {
+    items: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
+        id: '',
+        name: 'tabs{{id}}Items',
+        type: 'IGRPTabItem[]',
+        defaultValue: '[]'
+      }, true), required: true },
+  };
 }
