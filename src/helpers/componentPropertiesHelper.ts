@@ -272,10 +272,11 @@ export function resolveComponent(componentName: string, registry: Record<string,
 export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      if(key === 'className' || key === 'content' || key === 'dataProperties' || key === 'customProperties') return ''
+      if(key === 'className' || key === 'content' || key === 'dataProperties') return ''
       if(dataProperties && dataProperties[key]) return ''
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         return Object.entries(value).map(([k, v]) => {
+          if(k === 'customProperties') return ''
           return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined ))} }`;
         }).join("\n")
       } else {

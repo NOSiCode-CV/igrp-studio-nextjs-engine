@@ -85,8 +85,8 @@ export function dataCommonProperties() {
     dataProperties: {
       type: 'object',
       properties: {
-        isVirtual: { type: 'boolean', required: false, default: false },
-        isType: { type: 'boolean', required: false, default: true },
+        isVirtual: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Is Virtual'} },
+        isType: { type: 'boolean', required: false, default: true, 'x-ui-widget': 'icon', 'x-meta': { label: 'Is Type'} },
       },
     },
   };
