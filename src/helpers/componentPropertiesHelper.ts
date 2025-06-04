@@ -164,7 +164,7 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
  */
 export function resolveStateDefault(defaultValue?: string, type?: string): string {
 
-  if(defaultValue === undefined || ((defaultValue && defaultValue?.trim() === '') && type !== 'string')) return 'undefined'
+  if(defaultValue === undefined || ((defaultValue?.trim() === '') && type !== 'string')) return 'undefined'
 
   const trimmed = defaultValue.trim();
 
@@ -276,10 +276,10 @@ export function renderProperties(customProperties: Record<string, any>, dataProp
       if(dataProperties && dataProperties[key]) return ''
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         return Object.entries(value).map(([k, v]) => {
-          return `${k}={ ${resolveStateDefault(`${v}`, isString(v? `${v}` : undefined ))} }`;
+          return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined ))} }`;
         }).join("\n")
       } else {
-        return `${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+        return `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined ))} }`;
       }
     }).join("\n")
     : ``
