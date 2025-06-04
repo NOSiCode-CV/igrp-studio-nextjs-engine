@@ -19,6 +19,7 @@ export interface PageConfig extends IdentifiableElement, VersionableElement {
   type: 'page';
   path: string;
   description?: string;
+  parentName?: string;
   pageName: string;
   forceDynamic?: boolean;
   types: TypeDef[];
@@ -254,6 +255,7 @@ export interface State extends IdentifiableElement {
   type: string,
   imports?: Import[],
   defaultValue?: string,
+  generate?: boolean
 }
 
 export interface RegisterState {

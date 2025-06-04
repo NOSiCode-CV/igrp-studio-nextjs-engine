@@ -75,7 +75,6 @@ export function dropdownItemProperties(labelTrigger?: string) {
       required: false
     },
     className: { type: 'string', required: false },
-    variant: { type: 'string', required: false, default: 'default', enum: ['default'] },
   };
 }
 

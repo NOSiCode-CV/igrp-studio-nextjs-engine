@@ -227,7 +227,7 @@ export function removeQuotes(jsonString: any) {
  * @returns {string} The path relative to `src` using `@/` aliasing.
  *
  * @example
- * // returns "@/app/(myapp)/types/User.ts"
+ * // returns "@/app/[locale]/(myapp)/types/User.ts"
  * resolveExportedPath("C:\\project\\src\\app\\(myapp)\\types\\User.ts");
  */
 export function resolveExportedPath(fullPath: string): string {
@@ -240,20 +240,20 @@ export function resolveExportedPath(fullPath: string): string {
 }
 
 /**
- * Converts an absolute file path to a package-style path using @ alias from the `src/app/(myapp)` root.
+ * Converts an absolute file path to a package-style path using @ alias from the `src/app/[locale]/(myapp)` root.
  *
  * @param {string} fullPath - The full file path.
- * @returns {string} The path relative to `src/app/(myapp)` using `@/app/(myapp)/...` aliasing.
+ * @returns {string} The path relative to `src/app/[locale]/(myapp)` using `@/app/[locale]/(myapp)/...` aliasing.
  *
  * @example
- * // returns "@/app/(myapp)/types/User.ts"
+ * // returns "@/app/[locale]/(myapp)/types/User.ts"
  * resolveFromMyAppPath("C:\\project\\src\\app\\(myapp)\\types\\User.ts");
  */
 export function resolveFromMyAppPath(fullPath: string): string {
   const normalized = fullPath.replace(/\\/g, '/');
   const match = normalized.match(/\/src\/app\/\([^)]+\)/);
   if (!match) {
-    throw new Error("Path must include 'src/app/(myapp)' group.");
+    throw new Error("Path must include 'src/app/[locale]/(myapp)' group.");
   }
   return '@' + normalized.substring(normalized.indexOf(match[0]) + 4).replace(/\.[^.]+$/, ''); // skip '/src'
 }

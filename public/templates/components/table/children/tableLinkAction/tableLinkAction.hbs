@@ -1,7 +1,7 @@
 <IGRPDataTableButtonLink
   labelTrigger="{{resourceConfig.properties.labelTrigger}}"
   {{#if resourceConfig.properties.href}}
-  href=`{{{resolve-segment-path resourceConfig.properties.href resourceConfig.properties.segments}}}{{#if resourceConfig.params}}{{{resolve-query-params resourceConfig.params}}}{{/if}}`
+  href={ `{{{resolve-segment-path resourceConfig.properties.href resourceConfig.properties.segments}}}{{#if resourceConfig.params}}{{{resolve-query-params resourceConfig.params}}}{{/if}}` }
   {{/if~}}
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"

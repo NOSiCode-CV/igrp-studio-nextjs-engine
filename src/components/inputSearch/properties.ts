@@ -78,7 +78,7 @@ function onSearchInteractionFieldVisibility(): InteractionFieldVisibility {
 export function inputSearchInteractions() {
   return {
     onSearch: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.ON_SEARCH, undefined, onSearchInteractionFieldVisibility()), required: false },
-    setValueChange: { ...baseInteraction("(e) => setInputSearch{{id}}Value(e.target.value)", INTERACTIONS_TYPES.VALUE_CHANGE, undefined, setValueChangeInteractionFieldVisibility()), required: true },
+    setValueChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_STRING_VALUE, INTERACTIONS_TYPES.VALUE_CHANGE, undefined, setValueChangeInteractionFieldVisibility()), required: true },
   };
 }
 

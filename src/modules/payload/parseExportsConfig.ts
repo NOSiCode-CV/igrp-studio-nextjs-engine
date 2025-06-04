@@ -6,7 +6,7 @@ import { parseActions } from './parseActions';
 import { parseComponents } from './parseComponents';
 
 export async function parseExportsConfig(config: any, basePath: string): Promise<AppExportsConfig> {
-  const srcRoot = path.join(basePath, 'src/app/(myapp)');
+  const srcRoot = path.join(basePath, 'src/app/[locale]/(myapp)');
 
   const parseMultiple = async (entries: string[], parser: Function) => {
     return await Promise.all(

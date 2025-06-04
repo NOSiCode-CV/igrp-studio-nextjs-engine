@@ -117,18 +117,24 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
   const segmentsScan = parseRoutePath(path)
   let finalPath = path
 
-  // Group segments by name (e.g., [...some], [[...another]], etc.)
+  // Remove route groups like (group) from the path
+  finalPath = finalPath
+    .split('/')
+    .filter(p => !(p.startsWith('(') && p.endsWith(')')))
+    .join('/')
+
+  // Group segments by name
   const grouped = segments.reduce<Record<string, Segment[]>>((acc, seg) => {
     if (!acc[seg.name]) acc[seg.name] = []
     acc[seg.name].push(seg)
     return acc
   }, {})
 
-  // Resolve all placeholders in path
+  // Resolve all placeholders in the cleaned path
   Object.entries(grouped).forEach(([name, group]) => {
     const type = segmentsScan.find(s => s.originalSegment === name)?.type ?? 'dynamic'
 
-    let replacement = ''
+    let replacement: string
 
     if (type === 'catch-all' || type === 'optional-catch-all') {
       const parts = group.map(g =>
@@ -266,7 +272,7 @@ export function resolveComponent(componentName: string, registry: Record<string,
 export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      if(key === 'className' || key === 'content') return ''
+      if(key === 'className' || key === 'content' || key === 'dataProperties' || key === 'customProperties') return ''
       if(dataProperties && dataProperties[key]) return ''
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         return Object.entries(value).map(([k, v]) => {

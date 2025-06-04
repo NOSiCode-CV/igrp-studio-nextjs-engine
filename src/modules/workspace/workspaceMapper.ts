@@ -191,8 +191,6 @@ export const removeServiceInWorkspace = async (serviceId: string, basePath: stri
 
   const serviceIndex = workspace.services.findIndex((s) => s.id === serviceId);
 
-  console.log("Service id:", serviceId)
-
   if (serviceIndex === -1) {
     throw new Error(`Service with id "${serviceId}" not found in workspace`);
   }

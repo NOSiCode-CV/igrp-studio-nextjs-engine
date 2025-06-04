@@ -54,6 +54,11 @@ const stateSchema: JSONSchemaType<State> = {
       nullable: true,
       errorMessage: 'The default value, if provided, must be a valid string.'
     },
+    generate: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The generate value, if provided, must be a valid boolean.'
+    },
     imports: {
       type: 'array',
       nullable: true,
@@ -731,6 +736,13 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
       errorMessage:
         'The page name must only contain letters and must not have spaces or special characters.',
+    },
+    parentName: {
+      type: 'string',
+      nullable: true,
+      pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
+      errorMessage:
+        'The parent page name must only contain letters and must not have spaces or special characters.',
     },
     description: {
       type: 'string',

@@ -52,7 +52,7 @@ export function pageInteractions() {
 
 export function pageVariants() {
   return {
-    default: 'mx-auto px-4 space-y-6',
+    default: 'space-y-6',
     narrow: 'mx-auto px-4 max-w-4xl space-y-6',
     wide: 'mx-auto px-4 max-w-7xl space-y-6',
   }

@@ -1257,7 +1257,7 @@ const pageConfig: PageConfig = {
           "required": true
         }
       ],
-      "path": "@/app/(myapp)/data/types"
+      "path": "@/app/[locale]/(myapp)/data/types"
     },
   ],
   functions: [
@@ -1359,7 +1359,7 @@ const pageConfig: PageConfig = {
           isNullable: false
         }
       ],
-      path: "@/app/(myapp)/utils/utils",
+      path: "@/app/[locale]/(myapp)/utils/utils",
       returnValue: {
         type: 'string',
         isList: false,
@@ -1409,7 +1409,7 @@ const pageConfig: PageConfig = {
       name: 'getTaxPayers',
       code: '',
       arguments: [],
-      path: "@/app/(myapp)/actions/mock-actions",
+      path: "@/app/[locale]/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'TaxPayer',
         isList: true,
@@ -1421,7 +1421,7 @@ const pageConfig: PageConfig = {
       name: 'getStatusOptions',
       code: '',
       arguments: [],
-      path: "@/app/(myapp)/actions/mock-actions",
+      path: "@/app/[locale]/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,
@@ -1433,7 +1433,7 @@ const pageConfig: PageConfig = {
       name: 'getLegalStatusOptions',
       code: '',
       arguments: [],
-      path: "@/app/(myapp)/actions/mock-actions",
+      path: "@/app/[locale]/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,
@@ -1445,7 +1445,7 @@ const pageConfig: PageConfig = {
       name: 'getRegimeOptions',
       code: '',
       arguments: [],
-      path: "@/app/(myapp)/actions/mock-actions",
+      path: "@/app/[locale]/(myapp)/actions/mock-actions",
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,

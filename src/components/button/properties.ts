@@ -16,7 +16,6 @@ export function buttonProperties() {
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
-    action: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

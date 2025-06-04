@@ -58,6 +58,11 @@ const stateSchema: JSONSchemaType<State> = {
       nullable: true,
       errorMessage: 'The default value, if provided, must be a valid string.'
     },
+    generate: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The generate value, if provided, must be a valid boolean.'
+    },
     imports: {
       type: 'array',
       nullable: true,

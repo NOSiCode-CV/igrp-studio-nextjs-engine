@@ -11,17 +11,30 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function statsCardProperties() {
   return {
     variant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
-    borderPosition: { type: 'string', required: false, default: 'left', enum: ['left', 'right', 'top', 'bottom'] },
-    border: { type: 'boolean', required: false, default: false },
+    cardBorderPosition: { type: 'string', required: false, default: 'left', enum: ['left', 'right', 'top', 'bottom', 'none'] },
+    cardBorder: { type: 'string', required: false, default: 'rounded-xl', enum: ['none', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl', 'rounded-2xl', 'rounded-3xl', 'rounded-full', 'square'] },
+    cardVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    iconBackground: { type: 'string', required: false, default: 'none', enum: ['none', 'square', 'rounded'] },
+    showIconBackground: { type: 'boolean', required: false, default: false },
+    showIconBorder: { type: 'boolean', required: false, default: false },
     title: { type: 'string', required: false, default: 'Stat Card' },
+    titleSize: { type: 'string', required: false, default: 'sm', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
+    valueSize: { type: 'string', required: false, default: 'sm', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
     iconProperties: {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: true },
         iconName: { type: 'string', required: false, default: "Box" },
+        iconSize: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'] },
+        iconVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
       },
     },
+    image: { type: 'string', required: false },
+    imageAlt: { type: 'string', required: false },
     className: { type: 'string', required: false },
+    cardClassName: { type: 'string', required: false },
+    titleClassName: { type: 'string', required: false },
+    valueClassName: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

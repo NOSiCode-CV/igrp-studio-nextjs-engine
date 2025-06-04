@@ -3,7 +3,7 @@
   name={ "{{resourceConfig.tag}}" }
   {{/if}}
   {{#if resourceConfig.properties}}
-  {{{render-properties resourceConfig.properties}}}
+  {{{render-properties resourceConfig.properties resourceConfig.data}}}
   {{/if}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

@@ -20,8 +20,16 @@ const formLayout: Layout = {
       properties: {
         className: 'shadow-sm',
         customProperties: {
-          ref: 'basicRef',
+
         },
+      },
+      data: {
+        ref: {
+          value: {
+            id: 'card_ref',
+            code: 'basicRef'
+          },
+        }
       },
       children: [
         {
@@ -59,7 +67,6 @@ const formLayout: Layout = {
                 variant: 'outline',
                 color: 'secondary',
                 className: 'font-normal text-xs',
-                label: 'Obrigatório',
               },
             },
           ],
@@ -599,6 +606,10 @@ const loadFormFields = async () => {
                                 tag: 'id',
                               },
                               {
+                                name: '(private)',
+                                value: 'value',
+                              },
+                              {
                                 name: '[...some]',
                                 tag: 'some1',
                               },
@@ -801,7 +812,7 @@ const pageConfig: PageConfig = {
           required: true,
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -842,7 +853,7 @@ const pageConfig: PageConfig = {
           defaultValue: '0.00',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -890,7 +901,7 @@ const pageConfig: PageConfig = {
           defaultValue: 'true',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -924,7 +935,7 @@ const pageConfig: PageConfig = {
           defaultValue: 'true',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -972,7 +983,7 @@ const pageConfig: PageConfig = {
           defaultValue: 'true',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -1013,7 +1024,7 @@ const pageConfig: PageConfig = {
           defaultValue: '',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
     {
       componentId: 'form_taxpayers',
@@ -1131,7 +1142,7 @@ const pageConfig: PageConfig = {
           defaultValue: '[]',
         },
       ],
-      path: '@/app/(myapp)/data/types',
+      path: '@/app/[locale]/(myapp)/data/types',
     },
   ],
   functions: [
@@ -1381,7 +1392,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTaxPayers',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1392,7 +1403,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getStatusOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1403,7 +1414,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getRegimeOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1414,7 +1425,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getLegalStatusOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1425,7 +1436,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTipoDocumentoInscricaoOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1436,7 +1447,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getEstatutoJuridicosOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1447,7 +1458,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getSetoresOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1458,7 +1469,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTiposRepresentacaoOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1469,7 +1480,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTiposEnderecoOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1480,7 +1491,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTiposContactoOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1491,7 +1502,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getBancosOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1502,7 +1513,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getTiposDocumentoOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1513,7 +1524,7 @@ const pageConfig: PageConfig = {
       code: '',
       name: 'getFormSectionsOptions',
       arguments: [],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,
@@ -1532,7 +1543,7 @@ const pageConfig: PageConfig = {
           id: 'arg_value6',
         },
       ],
-      path: '@/app/(myapp)/actions/mock-actions',
+      path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
         isNullable: false,

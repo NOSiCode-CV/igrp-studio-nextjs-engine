@@ -205,8 +205,8 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 
 export const DIRECTORIES = {
   APP: 'src/app',
-  GENERATED: 'src/app/(generated)',
-  MYAPP: 'src/app/(myapp)',
+  GENERATED: 'src/app/[locale]/(igrp)/(generated)',
+  MYAPP: 'src/app/[locale]/(myapp)',
   LOCALE: 'src/app/[locale]',
   LOCALE_IGRP: 'src/app/[locale]/(igrp)',
   IGRP_ACTIONS: 'src/app/actions/(igrp)',
@@ -246,7 +246,7 @@ export const DIRECTORIES = {
   TYPES: 'types',
   BASE_COMPONENTS: 'src/components',
   BASE_COMPONENTS_UI: 'src/components/ui',
-  COMPONENTS: 'src/app/(generated)/components',
+  COMPONENTS: 'src/app/[locale]/(igrp)/(generated)/components',
 };
 
 export const ERROR_MESSAGE = {
