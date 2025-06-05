@@ -8,13 +8,15 @@ import {
 import { Component, hbsRenderer } from '../index';
 import { GRID } from '../grid';
 import { HEADLINE } from '../headline';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPForm } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPFormHandle } from "@igrp/igrp-framework-react-design-system";',
-      'import { z } from "zod";',
+      'import { z } from "@igrp/igrp-framework-react-design-system"',
       //'import { useForm } from "react-hook-form";',
       //'import { zodResolver } from "@hookform/resolvers/zod";'
     ]);
@@ -34,6 +36,7 @@ export default {
     component.loadAcceptedChildren([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
     component.getStyle(formStyle())
     component.getRules(formRules())
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: FORM }))
     component.loadStates([
       {
         state: {

@@ -106,7 +106,10 @@ const formLayout: Layout = {
                 required: true,
               },
             },*/
-          ]
+          ],
+          childProperties: {
+            className: 'col-span-1'
+          }
         },
       ],
     },

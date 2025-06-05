@@ -26,7 +26,7 @@
         {{#if resourceConfig.children}}
         children:
         {{#each resourceConfig.children}}
-        {{{render-layout resourceConfig}}}
+        {{{render-layout this ../resourceConfig}}}
         {{/each}}
         {{/if~}}
       }

@@ -30,7 +30,7 @@
   <div className="flex items-center gap-2">
     {{#if resourceConfig.children}}
     {{#each resourceConfig.children}}
-    {{{render-layout this}}}
+    {{{render-layout this ../resourceConfig}}}
     {{/each}}
     {{/if~}}
   </div>
