@@ -45,7 +45,7 @@ const formLayout: Layout = {
               tag: 'basic_information_building_icon',
               componentName: 'icon',
               properties: {
-                name: 'Building',
+                iconName: 'Building',
                 className: 'h-4 w-4 text-muted-foreground',
               },
             },

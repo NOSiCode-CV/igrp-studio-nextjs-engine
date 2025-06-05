@@ -35,11 +35,11 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: TABS }))
 
     component.loadChildrenTypes([
-      { name: TABS_ITEM, isDefault: false }
+      { name: TABS_ITEM, isDefault: true }
     ]);
 
     component.loadAcceptedChildren([
-      { name: TABS_ITEM, isDefault: false }
+      { name: TABS_ITEM, isDefault: true }
     ]);
 
     component.setRenderer(hbsRenderer);

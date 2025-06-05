@@ -22,11 +22,17 @@ export function cardContentPropertiesMapping() {
 }
 
 export function cardContentChildProperties() {
-  return {};
+  return {
+    className: { type: 'string', required: true, default: '' },
+    ...commonProperties()
+  }
 }
 
 export function cardContentChildPropertiesMapping() {
-  return {};
+  return {
+    className: { className: '' },
+    ...commonPropertiesMapping()
+  }
 }
 
 export function cardContentVariants() {
