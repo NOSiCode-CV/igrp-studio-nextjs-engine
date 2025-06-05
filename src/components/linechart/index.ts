@@ -5,6 +5,8 @@ import {
   lineChartChildPropertiesMapping, lineChartInteractions, lineChartData, lineChartRules, lineChartStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -24,6 +26,7 @@ export default {
     component.getData(lineChartData());
     component.getRules(lineChartRules());
     component.getStyle(lineChartStyle());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: LINECHART }))
 
     component.loadStates([
     ]);

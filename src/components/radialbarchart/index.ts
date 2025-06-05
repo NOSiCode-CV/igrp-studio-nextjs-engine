@@ -9,6 +9,8 @@ import {
   radialBarChartStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -29,6 +31,7 @@ export default {
     component.getData(radialBarChartData());
     component.getRules(radialBarChartRules())
     component.getStyle(radialBarChartStyle())
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: RADIAL_BAR_CHART }))
 
     component.loadStates([
     ]);

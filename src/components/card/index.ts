@@ -9,6 +9,8 @@ import { Component, hbsRenderer } from '../index';
 import { CARD_CONTENT } from './children/cardContent';
 import { CARD_FOOTER } from './children/cardFooter';
 import { CARD_HEADER } from './children/cardHeader';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -27,6 +29,7 @@ export default {
     component.getChildPropertiesMapping(cardChildPropertiesMapping());
     component.getStyle(cardStyle())
     component.getRules(cardRules())
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: CARD }))
     component.loadChildrenTypes([
       { name: CARD_HEADER, isDefault: true }, { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true },
     ]);

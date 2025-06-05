@@ -5,6 +5,8 @@ import {
   radarChartChildPropertiesMapping, radarChartInteractions, radarChartData, radarChartStyle, radarChartRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -25,6 +27,7 @@ export default {
     component.getData(radarChartData());
     component.getStyle(radarChartStyle())
     component.getRules(radarChartRules())
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: RADARCHART }))
 
     component.loadStates([
     ]);

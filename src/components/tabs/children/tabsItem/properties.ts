@@ -2,8 +2,8 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 
 export function tabsItemProperties() {
   return {
-    value: { type: 'string', required: true, default: '' },
-    label: { type: 'string', required: true, default: '' },
+    value: { type: 'string', required: true, default: '{{id}}' },
+    label: { type: 'string', required: true, default: 'Tab' },
     iconProperties: {
       type: 'object',
       properties: {

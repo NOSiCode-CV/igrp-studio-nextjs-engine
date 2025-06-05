@@ -9,6 +9,8 @@ import {
   verticalBarChartRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -29,6 +31,7 @@ export default {
     component.getData(verticalBarChartData());
     component.getStyle(verticalBarChartStyle())
     component.getRules(verticalBarChartRules())
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: VERTICAL_BAR_CHART }))
 
     component.loadStates([
     ]);
