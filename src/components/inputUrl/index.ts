@@ -11,6 +11,8 @@ import {
   inputUrlStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -31,6 +33,7 @@ export default {
     component.getData(inputUrlData());
     component.getRules(inputUrlRules());
     component.getStyle(inputUrlStyle());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: INPUT_URL }))
 
     component.loadStates([
       {

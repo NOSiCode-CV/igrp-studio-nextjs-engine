@@ -6,6 +6,8 @@ import {
   repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -17,6 +19,7 @@ export default {
     component.loadVariants(repetitiveListVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Repetitive Component')
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: REPETITIVE_LIST }))
     component.getProperties(repetitiveListProperties());
     component.getPropertiesMapping(repetitiveListPropertiesMapping());
     component.getChildProperties(repetitiveListChildProperties());

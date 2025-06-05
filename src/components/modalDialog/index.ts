@@ -11,6 +11,8 @@ import {
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -32,6 +34,7 @@ export default {
     component.getRules(modalDialogRules())
     component.loadStates([
     ]);
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: MODAL_DIALOG }))
 
     component.setRenderer(hbsRenderer);
   },
