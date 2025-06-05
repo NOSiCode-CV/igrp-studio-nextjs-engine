@@ -1,38 +1,63 @@
-<FormField
-  control={() => { {{#if resourceConfig.properties.control}}{{resourceConfig.properties.control}}(){{/if}} }}
-  name="{{resourceConfig.properties.name}}"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>{{resourceConfig.properties.label}}</FormLabel>
-      <FormControl>
-        <Tabs defaultValue="tab1">
-          <TabsList>
-            {{#each resourceConfig.properties.tabs as |tab|}}
-              <TabsTrigger value="{{tab.value}}">
-                {{tab.label}}
-              </TabsTrigger>
+<IGRPTabs
+  {{#if resourceConfig.properties.variant}}
+  variant={ "{{resourceConfig.properties.variant}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.tabListClassName}}
+  tabListClassName={ "{{resourceConfig.properties.tabListClassName}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.tabTriggerClassName}}
+  tabTriggerClassName={ "{{resourceConfig.properties.tabTriggerClassName}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.tabContentClassName}}
+  tabContentClassName={ "{{resourceConfig.properties.tabContentClassName}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconPlacement}}
+  iconPlacement={ "{{resourceConfig.properties.iconProperties.iconPlacement}}" }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  items={
+    [
+    {{#if resourceConfig.children}}
+      {{#each (extractTabsItem resourceConfig.children)}}
+        {
+          {{#if this.properties.value}}
+          value: "{{this.properties.value}}",
+          {{/if~}}
+          {{#if this.properties.label}}
+          label: "{{this.properties.label}}",
+          {{/if~}}
+          {{#if this.properties.iconProperties.icon}}
+          icon: "{{this.properties.iconProperties.icon}}",
+          {{/if~}}
+          {{#if (and this.properties.disabled (not this.data.disabled))}}
+          disabled: {{this.properties.disabled}}
+          {{/if~}}
+          {{#if (and (not this.properties.disabled) this.data.disabled)}}
+          disabled: {{this.data.disabled.state.name}}
+          {{/if~}}
+          {{#if (gt (length this.children) 0)}}
+          content: (<>
+            {{#each this.children}}
+            {{{render-layout this}}}
             {{/each}}
-          </TabsList>
-          <TabsContent value="tab1">
-            <TabsPanel>
-              {{#if resourceConfig.properties.tab1Content}}
-                <p>{{resourceConfig.properties.tab1Content}}</p>
-              {{/if}}
-            </TabsPanel>
-          </TabsContent>
-          <TabsContent value="tab2">
-            <TabsPanel>
-              {{#if resourceConfig.properties.tab2Content}}
-                <p>{{resourceConfig.properties.tab2Content}}</p>
-              {{/if}}
-            </TabsPanel>
-          </TabsContent>
-        </Tabs>
-      </FormControl>
-      <FormDescription>{{resourceConfig.properties.description}}</FormDescription>
-      {{#if resourceConfig.properties.message}}
-      <FormMessage>{{resourceConfig.properties.message}}</FormMessage>
-      {{/if}}
-    </FormItem>
-  )}
+          </>),
+          {{/if~}}
+        },
+      {{/each}}
+    {{/if~}}
+    ]
+  }
 />

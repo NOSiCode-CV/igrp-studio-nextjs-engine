@@ -86,6 +86,7 @@ import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/table
 import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tableModalAction';
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
 import tabsModule, { TABS } from './tabs';
+import tabsItemModule, { TABS_ITEM } from './tabs/children/tabsItem/index';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 
 export function registerAllComponents() {
@@ -187,4 +188,5 @@ export function registerAllComponents() {
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
 
   register(TABS, tabsModule.register);
+  register(TABS_ITEM, tabsItemModule.register);
 }

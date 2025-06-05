@@ -18,7 +18,7 @@ export function statsCardProperties() {
     showIconBorder: { type: 'boolean', required: false, default: false },
     title: { type: 'string', required: false, default: 'Stat Card' },
     titleSize: { type: 'string', required: false, default: 'sm', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
-    valueSize: { type: 'string', required: false, default: 'sm', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
+    valueSize: { type: 'string', required: false, default: '2xl', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
     iconProperties: {
       type: 'object',
       properties: {
@@ -26,8 +26,10 @@ export function statsCardProperties() {
         iconName: { type: 'string', required: false, default: "Box" },
         iconSize: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'] },
         iconVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+        iconPlacement: { type: 'string', required: true, default: 'end', enum: ['start', 'end' ] },
       },
     },
+    itemPlacement: { type: 'string', required: true, default: 'start', enum: ['start', 'end' ] },
     image: { type: 'string', required: false },
     imageAlt: { type: 'string', required: false },
     className: { type: 'string', required: false },

@@ -16,7 +16,6 @@ export function tabsProperties() {
     },
     contentBorder: { type: 'boolean', default: false, required: false},
     fullWidth: { type: 'boolean', default: false, required: false},
-    message: { type: 'string', required: false },
     ...commonProperties()
   };
 }

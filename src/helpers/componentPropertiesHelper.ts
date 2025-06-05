@@ -15,6 +15,7 @@ import { bordersStyleToClasses } from './bordersStyleToClasses';
 import { positionStyleToClasses } from './positionStyleToClasses';
 import { backgroundsStyleToClasses } from './backgroundsStyleToClasses';
 import { parseRoutePath } from './routerParser';
+import { TABS_ITEM } from '../components/tabs/children/tabsItem/index';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -255,6 +256,10 @@ export function extractCardContent(children: Layout[]) {
 
 export function extractCardFooter(children: Layout[]) {
   return children.filter((it) => it.componentName === CARD_FOOTER);
+}
+
+export function extractTabsItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === TABS_ITEM);
 }
 
 export function resolveComponent(componentName: string, registry: Record<string, Component>, type?: string): string {

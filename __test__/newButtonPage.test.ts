@@ -4,7 +4,7 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const buttonLayout: Layout = {
+export const buttonLayout: Layout = {
   id: "grid_buttons",
   tag: "grid_buttons",
   componentName: "grid",

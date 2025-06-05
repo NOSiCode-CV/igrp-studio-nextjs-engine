@@ -4,7 +4,7 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const badgeLayout: Layout = {
+export const badgeLayout: Layout = {
   id: "grid_badges",
   tag: "grid_badges",
   componentName: "grid",
