@@ -2,6 +2,7 @@ import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from 
 
 export function paragraphProperties() {
   return {
+    content: { type: 'string', required: true, default: 'Lorem ipsum dolor sit amet' },
     ...commonProperties(),
   }
 }

@@ -23,7 +23,7 @@ export function tableBadgeCellProperties() {
       },
     },
     variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'soft', 'outline'] },
-    className: { type: 'string', required: false },
+    badgeClassName: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

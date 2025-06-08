@@ -1,6 +1,12 @@
+import { commonProperties, dataCommonProperties, iconProperties } from '../../../default/properties';
+import { cellProperties } from '../tableColumns/properties';
+
 export function tableHiddenCellProperties() {
   return {
-
+    ...cellProperties('Hidden Column'),
+    value: { type: 'string', required: false, default: '' },
+    ...dataCommonProperties(),
+    ...commonProperties(),
   };
 }
 

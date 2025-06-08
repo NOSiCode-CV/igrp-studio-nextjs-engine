@@ -23,7 +23,7 @@
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
@@ -48,13 +48,13 @@
           {{#if (and (not this.properties.disabled) this.data.disabled)}}
           disabled: {{this.data.disabled.state.name}}
           {{/if~}}
-          {{#if (gt (length this.children) 0)}}
           content: (<>
+            {{#if (gt (length this.children) 0)}}
             {{#each this.children}}
             {{{render-layout this ../resourceConfig}}}
             {{/each}}
+            {{/if~}}
           </>),
-          {{/if~}}
         },
       {{/each}}
     {{/if~}}

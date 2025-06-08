@@ -3,9 +3,22 @@
   {{#if resourceConfig.properties.description}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconBackButton}}
+  iconBackButton="{{resourceConfig.properties.iconProperties.iconBackButton}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.isSticky}}
+  isSticky={ {{resourceConfig.properties.isSticky}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.showBackButton}}
+  showBackButton={ {{resourceConfig.properties.showBackButton}} }
+  {{/if~}}
   {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
   value="{{resourceConfig.properties.value}}"
   {{/if~}}
+  {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
+  urlBackButton="{{resourceConfig.properties.urlBackButton}}"
+  {{/if~}}
+
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
@@ -15,7 +28,7 @@
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
@@ -25,6 +38,9 @@
   {{/if~}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
   {{/if}}
 >
   <div className="flex items-center gap-2">

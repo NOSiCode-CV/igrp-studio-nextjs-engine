@@ -5,7 +5,7 @@ export function tableFacetedFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
     placeholder: { type: 'string', required: false, default: 'Selecionar...' },
-    className: { type: 'string', required: false },
+    badgeClassName: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

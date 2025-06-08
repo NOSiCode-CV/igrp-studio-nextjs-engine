@@ -359,7 +359,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
   if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { layout, spacing, size, typography, borders, position, backgrounds } = component.style ?? {}
-  let { variant, customProperties, className: cn, ...common } = component.properties ?? {};
+  let { variant, customProperties, content, className: cn, ...common } = component.properties ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -470,6 +470,11 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     str += component.content
   }
 
+  if(content) {
+    str += "\n\t"
+    str += content
+  }
+
   str += `</${element.customComponentTag ?? 'div'}>`
 
   return () => str
@@ -478,7 +483,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 export function customRenderer (component: Layout, parentComponent?: Layout, element?: Component, parentElement?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
-  let { customProperties, className: cn, ...common } = component.properties ?? {};
+  let { customProperties, content, className: cn, ...common } = component.properties ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -538,6 +543,11 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   if(component.content) {
     str += "\n\t"
     str += component.content
+  }
+
+  if(content) {
+    str += "\n\t"
+    str += content
   }
 
   str += `</${element.customComponentTag ?? 'div'}>`

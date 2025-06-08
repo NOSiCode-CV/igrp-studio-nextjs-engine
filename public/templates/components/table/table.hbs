@@ -26,7 +26,7 @@
   {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig)}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
@@ -36,6 +36,7 @@
     {{#if resourceConfig.children}}
       {{#each (extractTableColumns resourceConfig.children)}}
         {{#each this.children}}
+        {{#if ( not (eq this.componentName 'tableHiddenCell'))}}
         {
           {{#if (or this.properties.headerTitle this.properties.headerType)}}header: {{> tableHeader this ~}},{{/if~}}
           {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.tag}}',
@@ -43,8 +44,9 @@
           cell: ({ row }) => {
           {{{render-table-row this ../../registry}}}
           },
-        filterFn: {{#if (eq this.componentName 'tableDateCell')}}IGRPDataTableDateRangeFilterFn{{else}}IGRPDataTableFacetedFilterFn{{/if}}
+          filterFn: {{#if (eq this.componentName 'tableDateCell')}}IGRPDataTableDateRangeFilterFn{{else}}IGRPDataTableFacetedFilterFn{{/if}}
         },
+        {{/if}}
         {{/each}}
       {{/each}}
     {{/if~}}

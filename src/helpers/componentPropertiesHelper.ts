@@ -290,20 +290,28 @@ export function renderProperties(customProperties: Record<string, any>, dataProp
     : ``
 }
 
-export function renderInteractions(interactions: Record<string, any>) {
+export function renderInteractions(interactions: Record<string, any>, isJson?: boolean) {
   return interactions
     ? Object.entries(interactions).map(([key, value]) => {
       if(value.function && value.type === 'function') {
         if (!(value.function.fnName || value.function.fnCustomSet || value.function.state)) return;
-        return `${key}={ ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name} }`;
+        return isJson === true ? `${key}: ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name},` : `${key}={ ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name} }`;
       }
       if(value.action && value.type === 'action') {
         if (!(value.action.actionName || value.action.actionCustomSet || value.action.state)) return;
-        return `${key}={ ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name} }`;
+        return isJson === true ? `${key}: ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name},` : `${key}={ ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name} }`;
       }
       if(value.formSubmit && value.type === 'formSubmit') {
         if (!(value.formSubmit.targetForm)) return;
-        return `${key}={ () => ${
+        return isJson === true? `${key}: () => ${
+          renderCode({
+            id: '',
+            name: `formReferenceUsage`,
+            properties: {
+              formTag: value.formSubmit.targetForm
+            }
+          })
+        },` : `${key}={ () => ${
           renderCode({
             id: '',
             name: `formReferenceUsage`,
@@ -315,7 +323,7 @@ export function renderInteractions(interactions: Record<string, any>) {
       }
       if(value.navigate && value.type === 'navigate') {
         if(!value.navigate.path) return
-        return `${key}={ () => ${value.navigate.name}() }`;
+        return isJson === true ? `${key}: () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}),` : `${key}={ () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}) }`;
       }
     }).join("\n")
     : ``

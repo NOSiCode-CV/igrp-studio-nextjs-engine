@@ -186,7 +186,8 @@ export const INTERACTIONS_TYPES = {
   DEFAULT_VALUE: "Default Value",
   OPTIONS: "Options",
   ITEMS: "Items",
-  CUSTOMIZE: "Customize"
+  CUSTOMIZE: "Customize",
+  COMPUTE_LABEL: 'Compute Label',
 }
 
 export const INTERACTIONS_DEFAULTS = {
@@ -200,6 +201,7 @@ export const INTERACTIONS_DEFAULTS = {
   NULLABLE: 'null',
   ZERO: '0',
   EMPTY_ARRAY: '[]',
+  EMPTY_OBJECT: '{}',
 
 }
 

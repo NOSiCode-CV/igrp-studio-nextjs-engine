@@ -1,26 +1,32 @@
-<IGRPForm
-  {{#if resourceConfig.dataType}}
-  schema={ {{toCamelCase resourceConfig.dataType}} }
-  {{/if}}
-  {{#if resourceConfig.properties.validationMode}}
-  validationMode="{{resourceConfig.properties.validationMode}}"
+<IGRPDynamicRepeater
+  {{#if resourceConfig.id}}
+  id={ "{{{resourceConfig.id}}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.gridClassName}}
-  gridClassName="{{resourceConfig.properties.gridClassName}}"
+  {{#if resourceConfig.tag}}
+  name={ "{{{resourceConfig.tag}}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.resetAfterSubmit}}
-  resetAfterSubmit={ {{resourceConfig.properties.resetAfterSubmit}} }
+  {{#if resourceConfig.properties.label}}
+  label={ "{{{resourceConfig.properties.label}}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.showAction}}
-  showAction={ {{resourceConfig.properties.showAction}} }
+  {{#if resourceConfig.properties.description}}
+  description={ "{{{resourceConfig.properties.description}}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.submitText}}
-  submitText="{{resourceConfig.properties.submitText}}"
+  {{#if resourceConfig.properties.badgeValue}}
+  badgeValue={ `{{{resourceConfig.properties.badgeValue}}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.submitVariant}}
-  submitVariant="{{resourceConfig.properties.submitVariant}}"
+  renderItem={ (_: typeof init{{capitalize resourceConfig.dataType}}['{{{resourceConfig.tag}}}'][0], index: number) => (
+      {{#if resourceConfig.children}}
+      {{#each resourceConfig.children}}
+      {{{render-layout this ../resourceConfig}}}
+      {{/each}}
+      {{/if~}}
+    )
+  }
+  {{#if resourceConfig.properties.computeLabel}}
+  computeLabel={
+    (item: (typeof init{{capitalize resourceConfig.dataType}})['{{{resourceConfig.tag}}}'][0], index: number) => `{{{resourceConfig.properties.computeLabel.code}}}`
+  }
   {{/if~}}
-  formRef={ form{{resourceConfig.tag}}Ref }
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
@@ -42,11 +48,5 @@
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
 >
-  <>
-  {{#if resourceConfig.children}}
-  {{#each resourceConfig.children}}
-  {{{render-layout this ../resourceConfig}}}
-  {{/each}}
-  {{/if~}}
-  </>
-</IGRPForm>
+}
+</IGRPDynamicRepeater>

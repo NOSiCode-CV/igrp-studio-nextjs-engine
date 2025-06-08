@@ -11,10 +11,32 @@ import {
   CustomFunctionConfig,
   ReturnValue,
   Argument,
-  Import, State, Reference, StyleDefinition, LayoutStyle, BlockProperties, GridProperties, FlexProperties,
+  Import, State, Reference, StyleDefinition, LayoutStyle, BlockProperties, GridProperties, FlexProperties, Segment,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
+
+const segmentSchema: JSONSchemaType<Segment> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: 'The name must be a valid string.'
+    },
+    tag: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The tag must be a valid string.'
+    },
+    value: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The value must be a valid string.'
+    },
+  },
+  required: ['name'],
+  additionalProperties: false,
+}
 
 const importSchema: JSONSchemaType<Import> = {
   type: 'object',
@@ -763,6 +785,12 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       nullable: true,
       anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
+    },
+    segments: {
+      type: 'array',
+      nullable: true,
+      items: segmentSchema,
+      errorMessage: 'The segments attribute must be an array of valid segment definition configuration.'
     },
     types: {
       type: 'array',

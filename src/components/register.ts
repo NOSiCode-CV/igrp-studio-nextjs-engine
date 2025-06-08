@@ -18,6 +18,7 @@ import containerModule, { CONTAINER } from './container';
 import datePickerRangeModule, { DATE_PICKER_RANGE } from './datePickerRange/index';
 import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
+import dynamicRepeaterModule, { DYNAMIC_REPEATER } from './dynamicRepeater';
 import flexModule, { FLEX } from './flex';
 import formModule, { FORM } from './form';
 import fragmentModule, { FRAGMENT } from './fragment';
@@ -81,6 +82,7 @@ import tableDropdownMenuCellModule, { TABLE_DROPDOWN_MENU_CELL } from './table/c
 import tableAlertDropdownItemModule, { TABLE_ALERT_DROPDOWN_ITEM } from './table/children/tableAlertDropdownItem';
 import tableLinkDropdownItemModule, { TABLE_LINK_DROPDOWN_ITEM } from './table/children/tableLinkDropdownItem';
 import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table/children/tableModalDropdownItem';
+import tableCustomDropdownItemModule, { TABLE_CUSTOM_DROPDOWN_ITEM } from './table/children/tableCustomDropdownItem/index';
 import tableAlertActionModule, { TABLE_ALERT_ACTION } from './table/children/tableAlertAction';
 import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/tableLinkAction';
 import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tableModalAction';
@@ -109,6 +111,7 @@ export function registerAllComponents() {
   register(DATE_PICKER_RANGE, datePickerRangeModule.register);
   register(DROPDOWN, dropdownModule.register);
   register(DROPDOWN_ITEM, dropdownItemModule.register);
+  register(DYNAMIC_REPEATER, dynamicRepeaterModule.register);
   register(FLEX, flexModule.register);
   register(FORM, formModule.register);
   register(FRAGMENT, fragmentModule.register);
@@ -171,7 +174,8 @@ export function registerAllComponents() {
 
   // Dropdown Items
   register(TABLE_ALERT_DROPDOWN_ITEM, tableAlertDropdownItemModule.register);
-  register(TABLE_MODAL_DROPDOWN_ITEM, tableModalDropdownItemModule.register);
+  //register(TABLE_MODAL_DROPDOWN_ITEM, tableModalDropdownItemModule.register);
+  register(TABLE_CUSTOM_DROPDOWN_ITEM, tableCustomDropdownItemModule.register);
   register(TABLE_LINK_DROPDOWN_ITEM, tableLinkDropdownItemModule.register);
 
   // Action Items

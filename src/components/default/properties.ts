@@ -86,7 +86,7 @@ export function dataCommonProperties() {
       type: 'object',
       properties: {
         isVirtual: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Is Virtual'} },
-        isType: { type: 'boolean', required: false, default: true, 'x-ui-widget': 'icon', 'x-meta': { label: 'Is Type'} },
+        isType: { type: 'boolean', required: false, default: true, 'x-ui-widget': 'switch', 'x-meta': { label: 'Is Type'} },
       },
     },
   };
@@ -289,6 +289,7 @@ export function baseInteraction(
           name: { type: 'string', required: true, default: 'handle{{id}}Navigation' },
           path: { type: 'string', required: true, default: '/' },
           params: { type: 'object', required: false, default: '{}' },
+          inRow: { type: 'boolean', required: false, default: false },
         },
       },
     },
@@ -300,6 +301,7 @@ export function baseData(
   label?: string,
   state?: State,
   isStateRequired?: boolean,
+  defaultCode?: string,
 ) {
   return {
     type: 'object',
@@ -366,7 +368,7 @@ export function baseData(
           code: {
             type: 'string',
             required: true,
-            default: '',
+            default: defaultCode ?? '',
           },
         },
         required: false,

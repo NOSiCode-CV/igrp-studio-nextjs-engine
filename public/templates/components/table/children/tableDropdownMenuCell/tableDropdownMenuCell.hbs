@@ -14,7 +14,7 @@
           {{#if this.properties.variant}}variant: "{{this.properties.variant}}",{{/if~}}
           {{#if this.properties.href}}href: `{{{resolve-segment-path this.properties.href this.properties.segments}}}{{#if this.properties.params}}{{{resolve-query-params this.properties.params}}}{{/if}}`,{{/if~}}
           {{#if this.properties.className}}className: "{{this.properties.className}}",{{/if~}}
-          {{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{/if~}}
+          {{!--{{#if this.properties.action}}action: () => {{this.properties.action}}(rowData),{{/if~}}--}}
           {{#if this.properties.showIcon}}showIcon: {{this.properties.showIcon}},{{/if~}}
           {{#if this.properties.showCancel}}showCancel: {{this.properties.showCancel}},{{/if~}}
           {{#if this.properties.labelCancel}}labelCancel: "{{this.properties.labelCancel}}",{{/if~}}
@@ -25,6 +25,9 @@
           {{#if this.properties.classNameConfirm}}classNameConfirm: "{{this.properties.classNameConfirm}}",{{/if~}}
           {{#if this.properties.variantConfirm}}variantConfirm: "{{this.properties.variantConfirm}}",{{/if~}}
           {{#if this.properties.actionConfirm}}onClickConfirm: () => {{this.properties.actionConfirm}}(rowData),{{/if~}}
+          {{#if this.interactions}}
+          {{{render-interactions this.interactions true}}}
+          {{/if~}}
           {{#if this.children}}
           children:
           {{#each this.children}}

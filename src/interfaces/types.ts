@@ -24,6 +24,7 @@ export interface PageConfig extends IdentifiableElement, VersionableElement {
   forceDynamic?: boolean;
   types: TypeDef[];
   imports?: Import[];
+  segments?: Segment[];
   states?: State[];
   references?: Reference[];
   functions?: CustomFunctionConfig[];
@@ -280,6 +281,7 @@ export interface Navigate extends IdentifiableElement {
   tag: string,
   path: string,
   params?: Record<string, string>,
+  inRow?: boolean,
   segments?: Segment[]
 }
 

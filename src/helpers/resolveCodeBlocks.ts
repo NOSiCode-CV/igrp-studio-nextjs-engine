@@ -130,7 +130,8 @@ function resolveComponentCodeBlocks(
               name: replaceTemplate(value.navigate.name, { id: config.tag }),
               path: value.navigate.path,
               params: value.navigate.params,
-              segments: value.navigate.segments
+              segments: value.navigate.segments,
+              inRow: value.navigate.inRow
             }) +
             '\n';
         }

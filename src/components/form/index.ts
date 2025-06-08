@@ -10,6 +10,7 @@ import { GRID } from '../grid';
 import { HEADLINE } from '../headline';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
+import { DYNAMIC_REPEATER } from '../dynamicRepeater/index';
 
 export default {
   register(component: Component) {
@@ -59,6 +60,10 @@ export default {
         },
         required: true,
       },
+    ]);
+
+    component.loadChildrenTypes([
+      { name: DYNAMIC_REPEATER, isDefault: false}
     ]);
 
     component.setRenderer(hbsRenderer);
