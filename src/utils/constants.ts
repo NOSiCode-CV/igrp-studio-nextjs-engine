@@ -188,6 +188,7 @@ export const INTERACTIONS_TYPES = {
   ITEMS: "Items",
   CUSTOMIZE: "Customize",
   COMPUTE_LABEL: 'Compute Label',
+  ACTIVE_SECTION: 'Active Section',
 }
 
 export const INTERACTIONS_DEFAULTS = {

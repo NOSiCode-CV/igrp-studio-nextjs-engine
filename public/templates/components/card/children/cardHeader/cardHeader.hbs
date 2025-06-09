@@ -1,4 +1,8 @@
 <IGRPCardHeader
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}

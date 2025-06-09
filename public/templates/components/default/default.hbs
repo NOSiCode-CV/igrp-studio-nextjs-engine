@@ -2,6 +2,10 @@
   {{#if resourceConfig.tag}}
   name={ `{{resourceConfig.tag}}` }
   {{/if}}
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if resourceConfig.properties}}
   {{{render-properties resourceConfig.properties resourceConfig.data}}}
   {{/if}}

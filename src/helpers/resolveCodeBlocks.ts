@@ -14,6 +14,7 @@ import { Component } from '../components';
 import { renderSyncTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from '../utils/constants';
 import { isLayout } from '../modules/page/generatePage';
+import { MENU_NAVIGATION } from '../components/menuNavigation/index';
 
 export function resolveCodeBlocks(
   config: Layout,
@@ -49,10 +50,16 @@ export function resolveCodeBlocks(
 
   if(isLayout(page?.components)) {
     const containsNavigations = hasNavigationInteraction(page.components);
+    const containsMenuNavigations = hasMenuNavigationInteraction(page.components);
 
     if (containsNavigations) {
       codeBlock += '\n' + `const router = useRouter()` + '\n';
     }
+
+    if (containsMenuNavigations) {
+      codeBlock += '\n' + `const { getSectionRef } = useIGRPMenuNavigation();` + '\n';
+    }
+
   }
 
   if (page?.functions) {
@@ -176,4 +183,14 @@ function hasNavigationInteraction(layout: Layout): boolean {
   if (containsNavigate) return true;
 
   return (layout.children || []).some(hasNavigationInteraction);
+}
+
+function hasMenuNavigationInteraction(layout: Layout): boolean {
+
+  if (layout.componentName === MENU_NAVIGATION) {
+    return true;
+  }
+
+  // Recursive case: check children
+  return (layout.children || []).some((child) => hasMenuNavigationInteraction(child));
 }

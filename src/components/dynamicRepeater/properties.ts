@@ -1,6 +1,5 @@
 import {
   baseData,
-  baseInteraction,
   baseRules,
   baseStyle,
   commonProperties,
@@ -18,7 +17,6 @@ export function dynamicRepeaterProperties() {
       required: false,
       properties: {
         code: { type: 'string', required: true, default: `Item \${index}`},
-        fieldTag: { type: 'string', required: true, default: ''},
       }
     },
     addButtonLabel: { type: 'string', required: false, default: 'Add' },
@@ -70,7 +68,6 @@ export function dynamicRepeaterData() {
           defaultValue: '{}',
         }, true
       ), required: true },
-    computeLabel: { ...baseData(`Item \${index}`, INTERACTIONS_TYPES.COMPUTE_LABEL, undefined, undefined, `Item \${index}`), required: true },
   };
 }
 

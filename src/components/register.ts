@@ -42,6 +42,8 @@ import inputTimeModule, { INPUT_TIME } from './inputTime';
 import inputUrlModule, { INPUT_URL } from './inputUrl';
 import labelModule, { LABEL } from './label';
 import lineChartModule, { LINECHART } from './linechart';
+import menuNavigationModule, { MENU_NAVIGATION } from './menuNavigation/index';
+import menuNavigationItemModule, { MENU_NAVIGATION_ITEM } from './menuNavigation/children/menuNavigationItem/index';
 import modalDialogModule, { MODAL_DIALOG } from './modalDialog/index';
 import pageModule, { PAGE } from './page';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
@@ -134,6 +136,8 @@ export function registerAllComponents() {
   register(INPUT_URL, inputUrlModule.register);
   register(LABEL, labelModule.register);
   register(LINECHART, lineChartModule.register);
+  register(MENU_NAVIGATION, menuNavigationModule.register);
+  register(MENU_NAVIGATION_ITEM, menuNavigationItemModule.register);
   register(MODAL_DIALOG, modalDialogModule.register);
   register(PAGE, pageModule.register);
   register(PAGEHEADER, pageHeaderModule.register);

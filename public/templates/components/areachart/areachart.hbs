@@ -1,4 +1,8 @@
 <IGRPAreaChart
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   areas={
     [
     {{#if resourceConfig.properties.areas}}

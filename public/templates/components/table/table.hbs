@@ -1,4 +1,8 @@
 <IGRPDataTable{{{typeFormatter resourceConfig.dataType}}}
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if resourceConfig.properties.showFilter}}
   showFilter={ {{resourceConfig.properties.showFilter}} }
   {{/if~}}

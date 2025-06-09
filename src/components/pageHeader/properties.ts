@@ -9,7 +9,7 @@ export function pageHeaderProperties() {
     headlineClassName: { type: 'string', required: false },
     isSticky: { type: 'boolean', required: false },
     showBackButton: { type: 'boolean', required: false, default: false },
-    urlBackButton: { type: 'string', required: false, default: '/' },
+    urlBackButton: { type: 'string', required: false, default: '', 'x-ui-widget': 'uri' },
     iconProperties: {
       type: 'object',
       properties: {

@@ -1,4 +1,8 @@
 <IGRPPieChart
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   pies={
     [
     {{#if resourceConfig.properties.pies}}

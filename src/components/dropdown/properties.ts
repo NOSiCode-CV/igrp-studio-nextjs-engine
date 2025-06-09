@@ -8,7 +8,7 @@ export function dropdownProperties() {
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
-    actionItem: { type: 'array', items: { type: 'object', items: { href: { type: 'string' } } }, required: false },
+    actionItem: { type: 'array', items: { type: 'object', items: { href: { type: 'string', 'x-ui-widget': 'uri' } } }, required: false },
     ...commonProperties(),
   };
 }

@@ -1,4 +1,8 @@
 <IGRPDynamicRepeater
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if resourceConfig.id}}
   id={ "{{{resourceConfig.id}}}" }
   {{/if~}}
@@ -14,17 +18,19 @@
   {{#if resourceConfig.properties.badgeValue}}
   badgeValue={ `{{{resourceConfig.properties.badgeValue}}}` }
   {{/if~}}
-  renderItem={ (_: typeof init{{capitalize resourceConfig.dataType}}['{{{resourceConfig.tag}}}'][0], index: number) => (
-      {{#if resourceConfig.children}}
-      {{#each resourceConfig.children}}
-      {{{render-layout this ../resourceConfig}}}
-      {{/each}}
-      {{/if~}}
+  renderItem={ (_: {{#if resourceConfig.dataType}}typeof init{{capitalize resourceConfig.dataType}}['{{{resourceConfig.tag}}}'][0]{{else}}any{{/if}}, index: number) => (
+      <>
+        {{#if resourceConfig.children}}
+        {{#each resourceConfig.children}}
+        {{{render-layout this ../resourceConfig}}}
+        {{/each}}
+        {{/if~}}
+      </>
     )
   }
   {{#if resourceConfig.properties.computeLabel}}
   computeLabel={
-    (item: (typeof init{{capitalize resourceConfig.dataType}})['{{{resourceConfig.tag}}}'][0], index: number) => `{{{resourceConfig.properties.computeLabel.code}}}`
+    (item: {{#if resourceConfig.dataType}}(typeof init{{capitalize resourceConfig.dataType}})['{{{resourceConfig.tag}}}'][0]{{else}}any{{/if}}, index: number) => `{{{resourceConfig.properties.computeLabel.code}}}`
   }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
@@ -48,5 +54,4 @@
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
 >
-}
 </IGRPDynamicRepeater>

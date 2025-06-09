@@ -1,4 +1,8 @@
 <IGRPRadarChart
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   radars={
     [
     {{#if resourceConfig.properties.radars}}

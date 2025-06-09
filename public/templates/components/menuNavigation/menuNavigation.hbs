@@ -1,0 +1,57 @@
+<IGRPMenuNavigation
+  {{#if resourceConfig.properties.title}}
+  title={ "{{resourceConfig.properties.title}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.badgeContent}}
+  badgeContent={ "{{resourceConfig.properties.badgeContent}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.badgeVariant}}
+  badgeVariant={ "{{resourceConfig.properties.badgeVariant}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.badgeColor}}
+  badgeColor={ "{{resourceConfig.properties.badgeColor}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.badgeClassName}}
+  badgeClassName={ "{{resourceConfig.properties.badgeClassName}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.showChevron}}
+  showChevron={ {{resourceConfig.properties.showChevron}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.isStickyTop}}
+  isStickyTop={ {{resourceConfig.properties.isStickyTop}} }
+  {{/if~}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
+  {{/if}}
+  {{#if resourceConfig.properties.commonProperties.customProperties}}
+  {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
+  {{/if}}
+  sections={
+    [
+    {{#if resourceConfig.children}}
+      {{#each (extractMenuNavigationItems resourceConfig.children)}}
+        {
+          {{#if this.tag}}
+          id: "{{this.tag}}",
+          {{/if~}}
+          {{#if this.properties.label}}
+          label: "{{this.properties.label}}",
+          {{/if~}}
+          {{#if this.properties.iconProperties.icon}}
+          icon: "{{this.properties.iconProperties.icon}}",
+          {{/if~}}
+          {{#if (and this.properties.disabled (not this.data.disabled))}}
+          disabled: {{this.properties.disabled}}
+          {{/if~}}
+          {{#if (and (not this.properties.disabled) this.data.disabled)}}
+          disabled: {{this.data.disabled.state.name}}
+          {{/if~}}
+        },
+      {{/each}}
+    {{/if~}}
+    ]
+  }
+/>

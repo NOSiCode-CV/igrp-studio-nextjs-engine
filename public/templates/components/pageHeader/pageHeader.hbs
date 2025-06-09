@@ -1,4 +1,8 @@
 <IGRPPageHeader
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   title="{{resourceConfig.properties.title}}"
   {{#if resourceConfig.properties.description}}
   description="{{resourceConfig.properties.description}}"

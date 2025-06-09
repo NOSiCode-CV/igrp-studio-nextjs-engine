@@ -62,10 +62,6 @@ export default {
       },
     ]);
 
-    component.loadChildrenTypes([
-      { name: DYNAMIC_REPEATER, isDefault: false}
-    ]);
-
     component.setRenderer(hbsRenderer);
   },
 };

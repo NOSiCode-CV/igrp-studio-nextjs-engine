@@ -1,4 +1,8 @@
 <IGRPForm
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if resourceConfig.dataType}}
   schema={ {{toCamelCase resourceConfig.dataType}} }
   {{/if}}

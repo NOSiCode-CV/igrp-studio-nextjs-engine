@@ -16,6 +16,7 @@ import { positionStyleToClasses } from './positionStyleToClasses';
 import { backgroundsStyleToClasses } from './backgroundsStyleToClasses';
 import { parseRoutePath } from './routerParser';
 import { TABS_ITEM } from '../components/tabs/children/tabsItem/index';
+import { MENU_NAVIGATION_ITEM } from '../components/menuNavigation/children/menuNavigationItem/index';
 
 export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
 
@@ -261,6 +262,10 @@ export function extractTabsItem(children: Layout[]) {
   return children.filter((it) => it.componentName === TABS_ITEM);
 }
 
+export function extractMenuNavigationItems(children: Layout[]) {
+  return children.filter((it) => it.componentName === MENU_NAVIGATION_ITEM);
+}
+
 export function resolveComponent(componentName: string, registry: Record<string, Component>, type?: string): string {
 
   if(!type) return registry[componentName]?.componentClass ?? 'any'
@@ -276,7 +281,7 @@ export function resolveComponent(componentName: string, registry: Record<string,
 export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      if(key === 'className' || key === 'content' || key === 'dataProperties' || key === 'name' || key === 'customProperties') return ''
+      if(['className', 'content', 'dataProperties', 'name', 'customProperties', 'ref'].includes(key)) return ''
       if(dataProperties && dataProperties[key]) return ''
       if (value && typeof value === 'object' && !Array.isArray(value) && ['iconProperties', 'commonProperties'].includes(key)) {
         return Object.entries(value).map(([k, v]) => {

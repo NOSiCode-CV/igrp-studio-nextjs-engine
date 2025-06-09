@@ -4,7 +4,7 @@ import { buttonProperties, buttonPropertiesMapping } from '../tableColumns/prope
 export function tableLinkButtonProperties() {
   return {
     ...buttonProperties('Link'),
-    href: { type: 'string', required: false, default: 'https://www.igrp.cv/' },
+    href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     ...commonProperties(),
   };
 }

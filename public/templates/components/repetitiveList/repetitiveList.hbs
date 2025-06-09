@@ -1,4 +1,8 @@
 <IGRPRepetitiveComponent
+  {{#if resourceConfig.properties.commonProperties.ref}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
   {{#if resourceConfig.properties.data}}
   items={ {{{resourceConfig.properties.data}}} }
   {{/if~}}

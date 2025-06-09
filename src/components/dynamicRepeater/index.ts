@@ -18,7 +18,6 @@ export default {
 
     component.loadComponentClass('IGRPDynamicRepeater')
     component.loadVariants(dynamicRepeaterVariants());
-    component.loadParent(FORM)
     component.loadGroup('basicElements')
     component.loadLabel('Dynamic Repeater')
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: DYNAMIC_REPEATER }))

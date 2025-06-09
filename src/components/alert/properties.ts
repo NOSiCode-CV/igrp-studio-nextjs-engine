@@ -13,7 +13,7 @@ export function alertProperties() {
     variant: { type: 'string', required: false, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     color: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     linkLabel: { type: 'string', required: false },
-    linkUrl: { type: 'string', required: false },
+    linkUrl: { type: 'string', required: false, 'x-ui-widget': 'uri' },
     descriptionClassName: { type: 'string', required: false },
     showLink: { type: 'boolean', required: false, default: false },
     textColored: { type: 'boolean', required: false, default: false },
