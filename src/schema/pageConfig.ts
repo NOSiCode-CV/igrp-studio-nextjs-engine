@@ -10,7 +10,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   ReturnValue,
-  Argument,
+  Arguments,
   Import, State, Reference, StyleDefinition, LayoutStyle, BlockProperties, GridProperties, FlexProperties, Segment,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
@@ -145,7 +145,7 @@ const returnValueSchema: JSONSchemaType<ReturnValue> = {
   additionalProperties: false,
 }
 
-const argumentSchema: JSONSchemaType<Argument> = {
+const argumentSchema: JSONSchemaType<Arguments> = {
   type: 'object',
   properties: {
     id: {
@@ -153,27 +153,38 @@ const argumentSchema: JSONSchemaType<Argument> = {
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
       errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
-    name: {
-      type: 'string',
-      errorMessage: 'The name must be a valid string.'
-    },
     type: {
       type: 'string',
-      errorMessage: 'The type must be a valid string.'
+      errorMessage: 'The type attribute must be a string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name attribute must be a string.'
     },
     isList: {
       type: 'boolean',
-      nullable: true,
-      errorMessage: 'The isList attribute must be a valid boolean.'
+      errorMessage: 'The isList attribute must be a boolean.'
     },
-    isNullable: {
+    isOptional: {
       type: 'boolean',
-      errorMessage: 'The isList attribute must be a valid boolean.'
+      errorMessage: 'The isOptional attribute must be a boolean.'
+    },
+    isInterface: {
+      type: 'boolean',
+      errorMessage: 'The isInterface attribute must be a boolean.'
+    },
+    isFunction: {
+      type: 'boolean',
+      errorMessage: 'The isFunction attribute must be a boolean.'
+    },
+    isState: {
+      type: 'boolean',
+      errorMessage: 'The isState attribute must be a boolean.'
     },
   },
-  required: ['name', 'type', 'id', 'isNullable'],
-  additionalProperties: false,
-}
+  required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
+  additionalProperties: false
+};
 
 const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   type: 'object',

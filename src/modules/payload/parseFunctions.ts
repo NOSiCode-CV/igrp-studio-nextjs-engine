@@ -68,8 +68,11 @@ function parseFunctionSignature(
       return {
         name,
         type,
-        isNullable: optional,
+        isOptional: optional,
         isList,
+        isFunction: false,
+        isInterface: false,
+        isState: false,
         id: ''
       };
     });

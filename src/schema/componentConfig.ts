@@ -15,9 +15,9 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, Argument,
+  ReturnValue,
 } from '../interfaces/types';
-import { COMPONENTS, COMPONENTS_NAMES, FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
+import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
 
 const importSchema: JSONSchemaType<Import> = {
@@ -36,6 +36,47 @@ const importSchema: JSONSchemaType<Import> = {
   required: ['namespace'],
   additionalProperties: false,
 }
+
+const argsSchema: JSONSchemaType<Arguments> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type attribute must be a string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name attribute must be a string.'
+    },
+    isList: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a boolean.'
+    },
+    isOptional: {
+      type: 'boolean',
+      errorMessage: 'The isOptional attribute must be a boolean.'
+    },
+    isInterface: {
+      type: 'boolean',
+      errorMessage: 'The isInterface attribute must be a boolean.'
+    },
+    isFunction: {
+      type: 'boolean',
+      errorMessage: 'The isFunction attribute must be a boolean.'
+    },
+    isState: {
+      type: 'boolean',
+      errorMessage: 'The isState attribute must be a boolean.'
+    },
+  },
+  required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
+  additionalProperties: false
+};
 
 const stateSchema: JSONSchemaType<State> = {
   type: 'object',
@@ -127,36 +168,6 @@ const returnValueSchema: JSONSchemaType<ReturnValue> = {
   additionalProperties: false,
 }
 
-const argumentSchema: JSONSchemaType<Argument> = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'string',
-      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
-    },
-    name: {
-      type: 'string',
-      errorMessage: 'The name must be a valid string.'
-    },
-    type: {
-      type: 'string',
-      errorMessage: 'The type must be a valid string.'
-    },
-    isList: {
-      type: 'boolean',
-      nullable: true,
-      errorMessage: 'The isList attribute must be a valid boolean.'
-    },
-    isNullable: {
-      type: 'boolean',
-      errorMessage: 'The isList attribute must be a valid boolean.'
-    },
-  },
-  required: ['name', 'type', 'id', 'isNullable'],
-  additionalProperties: false,
-}
-
 const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   type: 'object',
   properties: {
@@ -181,8 +192,8 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
     returnValue: returnValueSchema,
     arguments: {
       type: 'array',
-      items: argumentSchema,
-      errorMessage: 'The fields must be an array of valid field configuration.'
+      items: argsSchema,
+      errorMessage: 'The fields must be an array of valid argument configuration.'
     },
     imports: {
       type: 'array',
@@ -635,42 +646,6 @@ const actionSchema: JSONSchemaType<IAction> = {
   },
   required: ['type'],
   additionalProperties: true
-};
-
-const argsSchema: JSONSchemaType<Arguments> = {
-  type: 'object',
-  properties: {
-    type: {
-      type: 'string',
-      errorMessage: 'The type attribute must be a string.'
-    },
-    name: {
-      type: 'string',
-      errorMessage: 'The name attribute must be a string.'
-    },
-    isList: {
-      type: 'boolean',
-      errorMessage: 'The isList attribute must be a boolean.'
-    },
-    isOptional: {
-      type: 'boolean',
-      errorMessage: 'The isOptional attribute must be a boolean.'
-    },
-    isInterface: {
-      type: 'boolean',
-      errorMessage: 'The isInterface attribute must be a boolean.'
-    },
-    isFunction: {
-      type: 'boolean',
-      errorMessage: 'The isFunction attribute must be a boolean.'
-    },
-    isState: {
-      type: 'boolean',
-      errorMessage: 'The isState attribute must be a boolean.'
-    },
-  },
-  required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
-  additionalProperties: false
 };
 
 // Schema para ColumnComponent (los componentes anidados dentro de las columnas)

@@ -10,7 +10,7 @@ import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
 import { TABLE } from '../../index';
 import { TABLE_ALERT_DROPDOWN_ITEM } from '../tableAlertDropdownItem';
-import { TABLE_MODAL_DROPDOWN_ITEM } from '../tableModalDropdownItem';
+import { TABLE_CUSTOM_DROPDOWN_ITEM } from '../tableCustomDropdownItem';
 import { TABLE_LINK_DROPDOWN_ITEM } from '../tableLinkDropdownItem';
 
 export default {
@@ -34,7 +34,7 @@ export default {
 
     component.loadChildrenTypes([
       { name: TABLE_ALERT_DROPDOWN_ITEM, isDefault: false },
-      { name: TABLE_MODAL_DROPDOWN_ITEM, isDefault: false },
+      { name: TABLE_CUSTOM_DROPDOWN_ITEM, isDefault: false },
       { name: TABLE_LINK_DROPDOWN_ITEM, isDefault: false },
     ]);
 

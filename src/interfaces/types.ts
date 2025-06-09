@@ -32,12 +32,7 @@ export interface PageConfig extends IdentifiableElement, VersionableElement {
   components?: Layout | {};
 }
 
-export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
-  type: 'page' | 'component'
-  components?: Layout | {};
-}
-
-export interface Arguments {
+export interface Arguments extends IdentifiableElement{
   type: string,
   name: string,
   isList: boolean,
@@ -45,6 +40,11 @@ export interface Arguments {
   isInterface: boolean,
   isFunction: boolean,
   isState: boolean,
+}
+
+export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
+  type: 'page' | 'component'
+  components?: Layout | {};
 }
 
 export interface ComponentConfig extends IdentifiableElement, VersionableElement {
@@ -833,13 +833,6 @@ export interface TypeDef {
   fields: ElementField[];
 }
 
-export interface Argument extends IdentifiableElement {
-  name: string;
-  type: string;
-  isList?: boolean,
-  isNullable: boolean;
-}
-
 export interface ReturnValue {
   type: string;
   isList?: boolean;
@@ -849,14 +842,14 @@ export interface ReturnValue {
 export interface ActionDef {
   name: string;
   path: string;
-  args: Argument[];
+  args: Arguments[];
   returnType: string;
 }
 
 export interface FunctionDef {
   name: string;
   path: string;
-  args: Argument[];
+  args: Arguments[];
   returnType: string;
 }
 
@@ -893,7 +886,7 @@ export interface CustomCodeConfig {
 
 export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
   name: string,
-  arguments: Argument[],
+  arguments: Arguments[],
   imports?: Import[];
   states?: State[];
   isAsync?: boolean;
