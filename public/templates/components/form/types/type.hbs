@@ -12,11 +12,4 @@ const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {
     {{this.name}}: {{{resolveStateDefault this.defaultValue this.type}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
 }
-
-{{!--{{#if this.isMainType}}
-const form{{capitalize this.name}} = useForm<z.infer<{{capitalize this.name}}ZodType>>({
-    resolver: zodResolver({{toCamelCase this.name}}),
-    defaultValues: init{{capitalize this.name}}
-})
-{{/if}}--}}
 {{/each}}

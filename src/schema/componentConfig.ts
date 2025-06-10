@@ -251,6 +251,14 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
       nullable: true,
       errorMessage: 'The default value, if provided, must be a valid string.'
     },
+    fields: {
+      type: 'array',
+      nullable: true,
+      items: {
+        required: [],
+        type: 'object'
+      },
+    }
   },
   required: ['name', 'componentId', 'type', 'required'],
   additionalProperties: false,

@@ -821,6 +821,7 @@ export interface ElementField {
   validation?: string,
   defaultValue?: string,
   isList?: boolean,
+  fields?: ElementField[]
   required: boolean;
 }
 

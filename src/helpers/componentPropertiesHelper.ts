@@ -194,47 +194,58 @@ export function resolveZodTypes(field?: ElementField): string {
     return 'z.unknown()';
   }
 
-  const { type, isList, required, validation } = field;
+  const { type, isList, required, validation, fields } = field;
   let zodType: string;
 
-  // Handle primitive types
-  switch (type.toLowerCase()) {
-    case 'string':
-      zodType = 'z.string()';
-      break;
-    case 'number':
-      zodType = 'z.number()';
-      break;
-    case 'boolean':
-      zodType = 'z.boolean()';
-      break;
-    case 'date':
-      zodType = 'z.date()';
-      break;
-    case 'any':
-      zodType = 'z.any()';
-      break;
-    case 'unknown':
-      zodType = 'z.unknown()';
-      break;
-    default:
-      // Assume it's a custom type that will be defined elsewhere
-      zodType = `${toCamelCase(type)}`;
+  const lowerType = type.toLowerCase();
+
+  const isPrimitive =
+    ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
+
+  if (lowerType === 'object' && fields && fields.length > 0) {
+    const innerFields = fields
+      .map(
+        (f) => `${f.name}: ${resolveZodTypes(f)}`
+      )
+      .join(', ');
+    zodType = `z.object({ ${innerFields} })`;
+  } else if (isPrimitive) {
+    switch (lowerType) {
+      case 'string':
+        zodType = 'z.string()';
+        break;
+      case 'number':
+        zodType = 'z.number()';
+        break;
+      case 'boolean':
+        zodType = 'z.boolean()';
+        break;
+      case 'date':
+        zodType = 'z.date()';
+        break;
+      case 'any':
+        zodType = 'z.any()';
+        break;
+      case 'unknown':
+      default:
+        zodType = 'z.unknown()';
+    }
+  } else {
+    // Assume it's a named external object/interface
+    zodType = `${toCamelCase(type)}`;
   }
 
-  // Handle validation if present
+  // Add validation
   if (validation) {
-    // This is a simple implementation - you might want to parse the validation string
-    // and apply appropriate Zod validations
     zodType += `.refine(${validation})`;
   }
 
-  // Handle arrays
+  // List handling
   if (isList) {
     zodType = `z.array(${zodType})`;
   }
 
-  // Handle required/optional
+  // Optional handling
   if (!required) {
     zodType += '.optional()';
   }
