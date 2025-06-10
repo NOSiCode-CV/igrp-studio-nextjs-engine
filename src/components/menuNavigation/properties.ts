@@ -11,6 +11,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function menuNavigationProperties() {
   return {
+    targetRef: { type: 'string', required: true, default: '', 'x-widget-ui': 'select', 'x-meta': { label: 'Target Component Reference' } },
     title: { type: 'string', required: false, default: 'Menu' },
     badgeColor: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
