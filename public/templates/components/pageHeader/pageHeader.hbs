@@ -20,9 +20,8 @@
   value="{{resourceConfig.properties.value}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
-  urlBackButton="{{resourceConfig.properties.urlBackButton}}"
+  urlBackButton=`{{{resolve-segment-path this.properties.urlBackButton this.properties.segments}}}{{#if this.properties.params}}{{{resolve-query-params this.properties.params}}}{{/if}}`
   {{/if~}}
-
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
