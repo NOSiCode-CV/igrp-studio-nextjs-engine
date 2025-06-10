@@ -45,9 +45,7 @@
     {{#if resourceConfig.children}}
       {{#each (extractMenuNavigationItems resourceConfig.children)}}
         {
-          {{#if this.properties.targetRef}}
           id: "{{this.properties.targetRef}}",
-          {{/if~}}
           {{#if this.properties.label}}
           label: "{{this.properties.label}}",
           {{/if~}}
