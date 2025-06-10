@@ -1,7 +1,8 @@
 import { baseRules, baseStyle, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
 
-export function headlineProperties() {
+export function textListProperties() {
   return {
+    type: { type: 'string', required: false, enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], default: 'h3' },
     title: { type: 'string', required: true, default: 'Page Title' },
     description: { type: 'string', required: false, default: 'Page Description' },
     variant: { type: 'string', required: false, enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], default: 'h3' },
@@ -13,38 +14,38 @@ export function headlineProperties() {
   };
 }
 
-export function headlinePropertiesMapping() {
+export function textListPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function headlineChildProperties() {
+export function textListChildProperties() {
   return {
 
   };
 }
 
-export function headlineChildPropertiesMapping() {
+export function textListChildPropertiesMapping() {
   return {
 
   };
 }
 
 
-export function headlineVariants() {
+export function textListVariants() {
   return {
     default: ''
   };
 }
 
-export function headlineStyle() {
+export function textListStyle() {
   return {
     ...baseStyle()
   }
 }
 
-export function headlineRules() {
+export function textListRules() {
   return {
     ...baseRules()
   }

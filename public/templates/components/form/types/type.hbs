@@ -9,7 +9,7 @@ type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
 
 const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {
   {{#each this.fields}}
-    {{this.name}}: {{{resolveStateDefault this.defaultValue this.type}}}{{#if @last}}{{else}},{{/if}}
+    {{this.name}}: {{{resolveStateDefault this.defaultValue this.type this.isList}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
 }
 {{/each}}

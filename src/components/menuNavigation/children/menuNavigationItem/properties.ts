@@ -2,7 +2,7 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 
 export function menuNavigationsItemProperties() {
   return {
-    targetRef: { type: 'string', required: true, default: '', 'x-widget-ui': 'ref', 'x-meta': { label: 'Target Component Reference' } },
+    targetRef: { type: 'string', required: true, default: '', 'x-ui-widget': 'ref', 'x-meta': { label: 'Target Component Reference' } },
     label: { type: 'string', required: true, default: 'Menu Item' },
     iconProperties: {
       type: 'object',

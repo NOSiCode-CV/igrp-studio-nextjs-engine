@@ -6,7 +6,7 @@ export function commonProperties() {
     commonProperties: {
       type: 'object',
       properties: {
-        ref: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Generate Reference'} },
+        generateReference: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Generate Reference'} },
         customProperties: {
           type: 'object',
         },

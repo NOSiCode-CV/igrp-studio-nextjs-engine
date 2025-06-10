@@ -113,9 +113,7 @@ export function resolveQueryParams(params: Record<string, any>): string {
 }
 
 export function resolveSegmentPath(path: string, segments?: Segment[]) {
-  if (!segments) return path
 
-  const segmentsScan = parseRoutePath(path)
   let finalPath = path
 
   // Remove route groups like (group) from the path
@@ -123,6 +121,10 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
     .split('/')
     .filter(p => !(p.startsWith('(') && p.endsWith(')')))
     .join('/')
+
+  if (!segments) return finalPath
+
+  const segmentsScan = parseRoutePath(finalPath)
 
   // Group segments by name
   const grouped = segments.reduce<Record<string, Segment[]>>((acc, seg) => {
@@ -150,7 +152,7 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
     finalPath = finalPath.replace(name, replacement)
   })
 
-  return finalPath
+  return (!(finalPath.includes("http://") || finalPath.includes("https://"))? "/" : "" )+ finalPath
 }
 
 /**
@@ -163,8 +165,9 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
  * @param {string} type - The string representing the type.
  * @returns {string} A string suitable for inclusion as a default state value in code.
  */
-export function resolveStateDefault(defaultValue?: string, type?: string): string {
+export function resolveStateDefault(defaultValue?: string, type?: string, isList?: boolean): string {
 
+  if((defaultValue === undefined || (defaultValue?.trim() === '')) && isList) return '[]'
   if(defaultValue === undefined || ((defaultValue?.trim() === '') && type !== 'string')) return 'undefined'
 
   const trimmed = defaultValue.trim();
@@ -194,7 +197,7 @@ export function resolveZodTypes(field?: ElementField): string {
     return 'z.unknown()';
   }
 
-  const { type, isList, required, validation, fields } = field;
+  const { type, isList, required, validation, fields, defaultValue } = field;
   let zodType: string;
 
   const lowerType = type.toLowerCase();
@@ -204,9 +207,7 @@ export function resolveZodTypes(field?: ElementField): string {
 
   if (lowerType === 'object' && fields && fields.length > 0) {
     const innerFields = fields
-      .map(
-        (f) => `${f.name}: ${resolveZodTypes(f)}`
-      )
+      .map((f) => `${f.name}: ${resolveZodTypes(f)}`)
       .join(', ');
     zodType = `z.object({ ${innerFields} })`;
   } else if (isPrimitive) {
@@ -240,12 +241,23 @@ export function resolveZodTypes(field?: ElementField): string {
     zodType += `.refine(${validation})`;
   }
 
-  // List handling
+  // Handle arrays
   if (isList) {
-    zodType = `z.array(${zodType})`;
+    zodType = `z.array(${zodType}).default([])`;
   }
 
-  // Optional handling
+  // Handle default value for non-array fields
+  if (!isList && defaultValue !== undefined && defaultValue !== '') {
+    try {
+      const parsed = JSON.parse(defaultValue);
+      zodType += `.default(${JSON.stringify(parsed)})`;
+    } catch {
+      // fallback to string default if not JSON
+      zodType += `.default(${JSON.stringify(defaultValue)})`;
+    }
+  }
+
+  // Optional if not required
   if (!required) {
     zodType += '.optional()';
   }
@@ -292,11 +304,11 @@ export function resolveComponent(componentName: string, registry: Record<string,
 export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
   return customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      if(['className', 'content', 'dataProperties', 'name', 'customProperties', 'ref'].includes(key)) return ''
+      if(['className', 'content', 'dataProperties', 'name', 'customProperties', 'generateReference'].includes(key)) return ''
       if(dataProperties && dataProperties[key]) return ''
       if (value && typeof value === 'object' && !Array.isArray(value) && ['iconProperties', 'commonProperties'].includes(key)) {
         return Object.entries(value).map(([k, v]) => {
-          if(k === 'customProperties') return ''
+          if(k === 'customProperties' || k === 'generateReference') return ''
           return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined ))} }`;
         }).join("\n")
       } else {
