@@ -7,7 +7,7 @@ import {
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
-export function dynamicRepeaterProperties() {
+export function formListProperties() {
   return {
     label: { type: 'string', required: true, default: 'Separator List' },
     description: { type: 'string', required: true, },
@@ -27,43 +27,43 @@ export function dynamicRepeaterProperties() {
   };
 }
 
-export function dynamicRepeaterPropertiesMapping() {
+export function formListPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function dynamicRepeaterChildProperties() {
+export function formListChildProperties() {
   return {};
 }
 
-export function dynamicRepeaterChildPropertiesMapping() {
+export function formListChildPropertiesMapping() {
   return {};
 }
 
-export function dynamicRepeaterVariants() {
+export function formListVariants() {
   return {
   };
 }
 
-export function dynamicRepeaterStyle() {
+export function formListStyle() {
   return {
     ...baseStyle()
   }
 }
 
-export function dynamicRepeaterRules() {
+export function formListRules() {
   return {
     ...baseRules()
   }
 }
 
-export function dynamicRepeaterData() {
+export function formListData() {
   return {
     defaultItem: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_OBJECT, INTERACTIONS_TYPES.DEFAULT_VALUE,
         {
           id: '',
-          name: 'dynamicRepeater{{id}}Default',
+          name: 'formList{{id}}Default',
           type: '{{type}}',
           defaultValue: '{}',
         }, true
@@ -71,7 +71,7 @@ export function dynamicRepeaterData() {
   };
 }
 
-export function dynamicRepeaterInteractions() {
+export function formListInteractions() {
   return {
 
   };

@@ -17,7 +17,10 @@ export function tableProperties() {
     isServerSide: { type: 'boolean', required: false, default: false },
     toggleLabel: { type: 'string', required: false },
     toggleOptionsLabel: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    tableClassName: { type: 'string', required: false },
+    tableHeaderClassName: { type: 'string', required: false },
+    tableBodyClassName: { type: 'string', required: false },
+    paginationClassName: { type: 'string', required: false },
     ...commonProperties()
   };
 }

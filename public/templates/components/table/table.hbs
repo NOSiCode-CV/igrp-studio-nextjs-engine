@@ -24,6 +24,18 @@
   {{#if resourceConfig.properties.toggleOptionsLabel}}
   toggleOptionsLabel="{{resourceConfig.properties.toggleOptionsLabel}}"
   {{/if~}}
+  {{#if resourceConfig.properties.tableClassName}}
+  tableClassName="{{resourceConfig.properties.tableClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.tableHeaderClassName}}
+  tableHeaderClassName="{{resourceConfig.properties.tableHeaderClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.tableBodyClassName}}
+  tableBodyClassName="{{resourceConfig.properties.tableBodyClassName}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.paginationClassName}}
+  paginationClassName="{{resourceConfig.properties.paginationClassName}}"
+  {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
