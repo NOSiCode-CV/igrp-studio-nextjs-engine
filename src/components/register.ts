@@ -1,4 +1,5 @@
 import { register } from './index';
+import alertModule, { ALERT } from './alert/index';
 import alertDialogModule, { ALERT_DIALOG } from './alertDialog';
 import aspectModule, { ASPECT } from './aspect';
 import badgeModule, { BADGE } from './badge';
@@ -94,6 +95,7 @@ import tabsItemModule, { TABS_ITEM } from './tabs/children/tabsItem/index';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 
 export function registerAllComponents() {
+  register(ALERT, alertModule.register);
   register(ALERT_DIALOG, alertDialogModule.register);
   register(AREACHART, chartModule.register);
   register(ASPECT, aspectModule.register);

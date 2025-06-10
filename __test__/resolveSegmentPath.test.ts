@@ -8,7 +8,7 @@ describe('Resolve Segment Path', () => {
 
   test('Resolve Segment Path', async () => {
 
-    const path = '(utente)/utentes/(contr)/[id]/(pa)/(ew)/[id2]';
+    const path = '(utente)/utentes';
     const segments: Segment[] = [
       {
         name: '[id]',
@@ -20,7 +20,7 @@ describe('Resolve Segment Path', () => {
       },
     ]
 
-     console.log(resolveSegmentPath(path, segments));
+     console.log(resolveSegmentPath(path));
      //console.log("Generic : ", loadRegistry().components.find((it) => it.name === 'table')?.childrenTypes);
      //console.log("Specific : ", loadRegistry().components.find((it) => it.name === 'table')?.acceptedChildren.find((it) => it.name === 'tableColumns')?.childrenTypes);
   });

@@ -1,5 +1,9 @@
 'use client'
 
+{{! Ignore temporarily just for better errors spot in development --}}
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 {{{resolve-imports resourceConfig.components registry resourceConfig.name basePath undefined resourceConfig}}}
 
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{{this.type}}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {

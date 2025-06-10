@@ -11,7 +11,9 @@ export function formListProperties() {
   return {
     label: { type: 'string', required: true, default: 'Separator List' },
     description: { type: 'string', required: true, },
-    badgeValue: { type: 'string', required: false, },
+    color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    badgeValue: { type: 'string', required: false, default: 'Form List' },
     computeLabel: {
       type: 'object',
       required: false,
@@ -19,10 +21,21 @@ export function formListProperties() {
         code: { type: 'string', required: true, default: `Item \${index}`},
       }
     },
+    iconProperties: {
+      type: 'object',
+      properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
+        iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
+        addButtonIconName: { type: 'string', required: false, default: 'Plus', 'x-ui-widget': 'icon' },
+        iconClassName: { type: 'string', required: false },
+        iconSize: { type: 'number', required: false },
+      },
+    },
     addButtonLabel: { type: 'string', required: false, default: 'Add' },
-    addButtonIconName: { type: 'string', required: false, default: 'Plus', 'x-ui-widget': 'icon' },
+    dot: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false, },
     badgeClassName: { type: 'string', required: false, },
+    labelClassName: { type: 'string', required: false, },
     ...commonProperties(),
   };
 }

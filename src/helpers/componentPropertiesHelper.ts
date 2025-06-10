@@ -114,7 +114,7 @@ export function resolveQueryParams(params: Record<string, any>): string {
 
 export function resolveSegmentPath(path: string, segments?: Segment[]) {
 
-  let finalPath = path
+  let finalPath = path.startsWith('/') ? path.slice(1) : path;
 
   // Remove route groups like (group) from the path
   finalPath = finalPath
@@ -122,7 +122,7 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
     .filter(p => !(p.startsWith('(') && p.endsWith(')')))
     .join('/')
 
-  if (!segments) return finalPath
+  if (!segments) return (!(finalPath.includes("http://") || finalPath.includes("https://"))? "/" : "" )+ finalPath
 
   const segmentsScan = parseRoutePath(finalPath)
 
@@ -160,36 +160,59 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
  *
  * - Wraps plain strings with double quotes.
  * - Returns arrays, objects, booleans, numbers, and `null` as-is.
+ * - Recursively builds defaults for nested object fields.
  *
  * @param {string} defaultValue - The string representing the default value.
  * @param {string} type - The string representing the type.
+ * @param {boolean} isList - The boolean representing the list type.
+ * @param {ElementField[]} fields - The nested fields if the type is object.
  * @returns {string} A string suitable for inclusion as a default state value in code.
  */
-export function resolveStateDefault(defaultValue?: string, type?: string, isList?: boolean): string {
+export function resolveStateDefault(
+  defaultValue?: string,
+  type?: string,
+  isList?: boolean,
+  fields?: ElementField[]
+): string {
 
-  if((defaultValue === undefined || (defaultValue?.trim() === '')) && isList) return '[]'
-  if(defaultValue === undefined || ((defaultValue?.trim() === '') && type !== 'string')) return 'undefined'
+  const trimmed = defaultValue?.trim() ?? '';
 
-  const trimmed = defaultValue.trim();
+  if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
 
-  // If it's clearly an array, object, number, boolean or null, return as-is
   if (
     type !== 'string' &&
     (trimmed === 'null' ||
-    trimmed === 'undefined' ||
-    trimmed === 'true' ||
-    trimmed === 'false' ||
-    trimmed === '[]' ||
-    trimmed === '{}' ||
-    (!isNaN(Number(trimmed)) && trimmed !== '') ||
-    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-    (trimmed.startsWith('{') && trimmed.endsWith('}')))
+      trimmed === 'undefined' ||
+      trimmed === 'true' ||
+      trimmed === 'false' ||
+      trimmed === '[]' ||
+      trimmed === '{}' ||
+      (!isNaN(Number(trimmed)) && trimmed !== '') ||
+      (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+      (trimmed.startsWith('{') && trimmed.endsWith('}')))
   ) {
     return trimmed;
   }
 
-  // Otherwise, treat it as a plain string literal in case type is not present and is a string
-  return type && type === 'string' ? `\"${trimmed.replace(/"/g, '\\"')}\"` : trimmed;
+  // Handle object with nested fields
+  if (type === 'object' && fields && fields.length > 0) {
+    const objectBody = fields
+      .map((f) => {
+        const value = resolveStateDefault(f.defaultValue, f.type, f.isList, f.fields);
+        return `${f.name}: ${value}`;
+      })
+      .join(', ');
+    const result = `{ ${objectBody} }`;
+    return isList === true? `[${result}]` : result
+  }
+
+  // Handle lists
+  if (isList === true) {
+    return (trimmed !== '') ? trimmed : '[]';
+  }
+
+  // Handle strings and fallback
+  return type === 'string' ? `"${trimmed.replace(/"/g, '\\"')}"` : trimmed;
 }
 
 export function resolveZodTypes(field?: ElementField): string {
@@ -197,7 +220,7 @@ export function resolveZodTypes(field?: ElementField): string {
     return 'z.unknown()';
   }
 
-  const { type, isList, required, validation, fields, defaultValue } = field;
+  const { type, isList, required, validation, fields } = field;
   let zodType: string;
 
   const lowerType = type.toLowerCase();
@@ -241,23 +264,12 @@ export function resolveZodTypes(field?: ElementField): string {
     zodType += `.refine(${validation})`;
   }
 
-  // Handle arrays
-  if (isList) {
-    zodType = `z.array(${zodType}).default([])`;
+  // List handling
+  if (isList === true) {
+    zodType = `z.array(${zodType})`;
   }
 
-  // Handle default value for non-array fields
-  if (!isList && defaultValue !== undefined && defaultValue !== '') {
-    try {
-      const parsed = JSON.parse(defaultValue);
-      zodType += `.default(${JSON.stringify(parsed)})`;
-    } catch {
-      // fallback to string default if not JSON
-      zodType += `.default(${JSON.stringify(defaultValue)})`;
-    }
-  }
-
-  // Optional if not required
+  // Optional handling
   if (!required) {
     zodType += '.optional()';
   }

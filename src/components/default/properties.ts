@@ -71,7 +71,7 @@ export function iconProperties() {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: false },
-        iconName: { type: 'string', required: false },
+        iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
         iconClassName: { type: 'string', required: false },
         iconSize: { type: 'number', required: false },
