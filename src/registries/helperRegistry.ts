@@ -22,7 +22,7 @@ import {
   addClassNameFromChildProperties,
   addClassNameFromProperties, addClassNameFromStyle, extractCardContent, extractCardFooter, extractMenuNavigationItems,
   extractTableColumns,
-  extractTableFilters, extractTabsItem, renderData,
+  extractTableFilters, extractTabsItem, indexedTag, renderData,
   renderInteractions,
   renderProperties,
   resolveComponent,
@@ -67,6 +67,7 @@ Handlebars.registerHelper("extractCardFooter", extractCardFooter);
 Handlebars.registerHelper("extractTabsItem", extractTabsItem);
 Handlebars.registerHelper("extractMenuNavigationItems", extractMenuNavigationItems);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
+Handlebars.registerHelper("indexedTag", indexedTag);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
 Handlebars.registerHelper("render-data", renderData);

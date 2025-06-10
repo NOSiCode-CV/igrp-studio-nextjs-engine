@@ -18,11 +18,13 @@ import { parseRoutePath } from './routerParser';
 import { TABS_ITEM } from '../components/tabs/children/tabsItem/index';
 import { MENU_NAVIGATION_ITEM } from '../components/menuNavigation/children/menuNavigationItem/index';
 
-export function addClassNameFromChildProperties(parent: Layout, registry: Record<string, Component>): string {
+export function addClassNameFromChildProperties(
+  parent: Layout,
+  registry: Record<string, Component>,
+): string {
+  if (!parent.childProperties) return '';
 
-  if(!parent.childProperties) return ''
-
-  const parentElement = registry[parent.componentName]
+  const parentElement = registry[parent.componentName];
 
   return Object.entries(parent.childProperties)
     .map(([key, value]) => {
@@ -30,13 +32,16 @@ export function addClassNameFromChildProperties(parent: Layout, registry: Record
         ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${value}',`
         : ``;
     })
-    .join('')
+    .join('');
 }
 
-export function addClassNameFromProperties(component: Layout, registry: Record<string, Component>): string {
-  if(!component.properties) return ''
+export function addClassNameFromProperties(
+  component: Layout,
+  registry: Record<string, Component>,
+): string {
+  if (!component.properties) return '';
 
-  const componentElement = registry[component.componentName]
+  const componentElement = registry[component.componentName];
 
   return Object.entries(component.properties)
     .map(([key, value]) => {
@@ -44,49 +49,47 @@ export function addClassNameFromProperties(component: Layout, registry: Record<s
         ? `'${componentElement.propertiesMapping[key]?.className ?? key}${value}',`
         : ``;
     })
-    .join('')
+    .join('');
 }
 
 export function addClassNameFromStyle(style: StyleDefinition) {
+  const classes: string[] = [];
 
-  const classes: string[] = []
+  let { layout, spacing, size, typography, borders, position, backgrounds } = style ?? {};
 
-  let { layout, spacing, size, typography, borders, position, backgrounds } = style ?? {}
-
-  if(layout) {
+  if (layout) {
     classes.push(`'${layoutStyleToClasses(layout)}',`);
   }
 
-  if(spacing) {
+  if (spacing) {
     classes.push(`'${spacingToClasses(spacing)}',`);
   }
 
-  if(size) {
+  if (size) {
     classes.push(`'${sizeToClasses(size)}',`);
   }
 
-  if(typography) {
+  if (typography) {
     classes.push(`'${typographyStyleToClasses(typography)}',`);
   }
 
-  if(borders) {
+  if (borders) {
     classes.push(`'${bordersStyleToClasses(borders)}',`);
   }
 
-  if(position) {
+  if (position) {
     classes.push(`'${positionStyleToClasses(position)}',`);
   }
 
-  if(backgrounds) {
+  if (backgrounds) {
     classes.push(`'${backgroundsStyleToClasses(backgrounds)}',`);
   }
 
-  return classes.join('')
-
+  return classes.join('');
 }
 
 export function resolveFirstType(data: any[]): string {
-  return (!data || Object.entries(data).length == 0)? 'any' : `${data[0].type}`;
+  return !data || Object.entries(data).length == 0 ? 'any' : `${data[0].type}`;
 }
 
 /**
@@ -95,14 +98,18 @@ export function resolveFirstType(data: any[]): string {
  * @returns A string beginning with '?' followed by encoded query parameters.
  */
 export function resolveQueryParams(params: Record<string, any>): string {
-  const keys = Object.keys(params).filter(key => params[key] !== undefined && params[key] !== null);
+  const keys = Object.keys(params).filter(
+    (key) => params[key] !== undefined && params[key] !== null,
+  );
   if (keys.length === 0) return '';
 
   const query = keys
-    .map(key => {
+    .map((key) => {
       const value = params[key];
       if (Array.isArray(value)) {
-        return value.map(val => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`).join('&');
+        return value
+          .map((val) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`)
+          .join('&');
       } else {
         return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
       }
@@ -113,46 +120,48 @@ export function resolveQueryParams(params: Record<string, any>): string {
 }
 
 export function resolveSegmentPath(path: string, segments?: Segment[]) {
-
   let finalPath = path.startsWith('/') ? path.slice(1) : path;
 
   // Remove route groups like (group) from the path
   finalPath = finalPath
     .split('/')
-    .filter(p => !(p.startsWith('(') && p.endsWith(')')))
-    .join('/')
+    .filter((p) => !(p.startsWith('(') && p.endsWith(')')))
+    .join('/');
 
-  if (!segments) return (!(finalPath.includes("http://") || finalPath.includes("https://"))? "/" : "" )+ finalPath
+  if (!segments)
+    return (
+      (!(finalPath.includes('http://') || finalPath.includes('https://')) ? '/' : '') + finalPath
+    );
 
-  const segmentsScan = parseRoutePath(finalPath)
+  const segmentsScan = parseRoutePath(finalPath);
 
   // Group segments by name
   const grouped = segments.reduce<Record<string, Segment[]>>((acc, seg) => {
-    if (!acc[seg.name]) acc[seg.name] = []
-    acc[seg.name].push(seg)
-    return acc
-  }, {})
+    if (!acc[seg.name]) acc[seg.name] = [];
+    acc[seg.name].push(seg);
+    return acc;
+  }, {});
 
   // Resolve all placeholders in the cleaned path
   Object.entries(grouped).forEach(([name, group]) => {
-    const type = segmentsScan.find(s => s.originalSegment === name)?.type ?? 'dynamic'
+    const type = segmentsScan.find((s) => s.originalSegment === name)?.type ?? 'dynamic';
 
-    let replacement: string
+    let replacement: string;
 
     if (type === 'catch-all' || type === 'optional-catch-all') {
-      const parts = group.map(g =>
-        g.tag ? `\${row?.original.${g.tag}}` : g.value ?? ''
-      )
-      replacement = parts.join('/')
+      const parts = group.map((g) => (g.tag ? `\${row?.original.${g.tag}}` : (g.value ?? '')));
+      replacement = parts.join('/');
     } else {
-      const g = group[0]
-      replacement = g.tag ? `\${row.original.${g.tag}}` : g.value ?? ''
+      const g = group[0];
+      replacement = g.tag ? `\${row.original.${g.tag}}` : (g.value ?? '');
     }
 
-    finalPath = finalPath.replace(name, replacement)
-  })
+    finalPath = finalPath.replace(name, replacement);
+  });
 
-  return (!(finalPath.includes("http://") || finalPath.includes("https://"))? "/" : "" )+ finalPath
+  return (
+    (!(finalPath.includes('http://') || finalPath.includes('https://')) ? '/' : '') + finalPath
+  );
 }
 
 /**
@@ -172,9 +181,8 @@ export function resolveStateDefault(
   defaultValue?: string,
   type?: string,
   isList?: boolean,
-  fields?: ElementField[]
+  fields?: ElementField[],
 ): string {
-
   const trimmed = defaultValue?.trim() ?? '';
 
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
@@ -203,12 +211,12 @@ export function resolveStateDefault(
       })
       .join(', ');
     const result = `{ ${objectBody} }`;
-    return isList === true? `[${result}]` : result
+    return isList === true ? `[${result}]` : result;
   }
 
   // Handle lists
   if (isList === true) {
-    return (trimmed !== '') ? trimmed : '[]';
+    return trimmed !== '' ? trimmed : '[]';
   }
 
   // Handle strings and fallback
@@ -225,13 +233,10 @@ export function resolveZodTypes(field?: ElementField): string {
 
   const lowerType = type.toLowerCase();
 
-  const isPrimitive =
-    ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
+  const isPrimitive = ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
 
   if (lowerType === 'object' && fields && fields.length > 0) {
-    const innerFields = fields
-      .map((f) => `${f.name}: ${resolveZodTypes(f)}`)
-      .join(', ');
+    const innerFields = fields.map((f) => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
     zodType = `z.object({ ${innerFields} })`;
   } else if (isPrimitive) {
     switch (lowerType) {
@@ -301,78 +306,133 @@ export function extractMenuNavigationItems(children: Layout[]) {
   return children.filter((it) => it.componentName === MENU_NAVIGATION_ITEM);
 }
 
-export function resolveComponent(componentName: string, registry: Record<string, Component>, type?: string): string {
+export function resolveComponent(
+  componentName: string,
+  registry: Record<string, Component>,
+  type?: string,
+): string {
+  if (!type) return registry[componentName]?.componentClass ?? 'any';
 
-  if(!type) return registry[componentName]?.componentClass ?? 'any'
-
-  if(type === 'button') {
-    return registry[componentName.replace('Action', 'Button')]?.componentClass ?? 'any'
+  if (type === 'button') {
+    return registry[componentName.replace('Action', 'Button')]?.componentClass ?? 'any';
   } else {
-    return registry[componentName]?.componentClass ?? 'any'
+    return registry[componentName]?.componentClass ?? 'any';
   }
-
 }
 
-export function renderProperties(customProperties: Record<string, any>, dataProperties?: Record<string, any>) {
+/**
+ * Recursively modifies the `tag` property of a layout and its children
+ * using the format: `${tag}.${index}.${layout.tag}`.
+ *
+ * @param layout The layout object to transform.
+ * @param tag The base tag prefix to use.
+ * @returns A new layout with updated tags.
+ */
+export function indexedTag(layout: Layout, tag: string): Layout {
+  const applyTag = (node: Layout): Layout => {
+    if (node.tag.includes(`\${index}`)) return node;
+    return {
+      ...node,
+      tag: `${tag}.\${index}.${node.tag}`,
+      children: node.children?.map((child) => applyTag(child)),
+    };
+  };
+
+  return applyTag(layout);
+}
+
+export function renderProperties(
+  customProperties: Record<string, any>,
+  dataProperties?: Record<string, any>,
+) {
   return customProperties
-    ? Object.entries(customProperties).map(([key, value]) => {
-      if(['className', 'content', 'dataProperties', 'name', 'customProperties', 'generateReference'].includes(key)) return ''
-      if(dataProperties && dataProperties[key]) return ''
-      if (value && typeof value === 'object' && !Array.isArray(value) && ['iconProperties', 'commonProperties'].includes(key)) {
-        return Object.entries(value).map(([k, v]) => {
-          if(k === 'customProperties' || k === 'generateReference') return ''
-          return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined ))} }`;
-        }).join("\n")
-      } else {
-        return `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined ))} }`;
-      }
-    }).join("\n")
-    : ``
+    ? Object.entries(customProperties)
+        .map(([key, value]) => {
+          if (
+            [
+              'className',
+              'content',
+              'dataProperties',
+              'name',
+              'customProperties',
+              'generateReference',
+            ].includes(key)
+          )
+            return '';
+          if (dataProperties && dataProperties[key]) return '';
+          if (
+            value &&
+            typeof value === 'object' &&
+            !Array.isArray(value) &&
+            ['iconProperties', 'commonProperties'].includes(key)
+          ) {
+            return Object.entries(value)
+              .map(([k, v]) => {
+                if (k === 'customProperties' || k === 'generateReference') return '';
+                return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
+              })
+              .join('\n');
+          } else {
+            return `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
+          }
+        })
+        .join('\n')
+    : ``;
 }
 
 export function renderInteractions(interactions: Record<string, any>, isJson?: boolean) {
   return interactions
-    ? Object.entries(interactions).map(([key, value]) => {
-      if(value.function && value.type === 'function') {
-        if (!(value.function.fnName || value.function.fnCustomSet || value.function.state)) return;
-        return isJson === true ? `${key}: ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name},` : `${key}={ ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name} }`;
-      }
-      if(value.action && value.type === 'action') {
-        if (!(value.action.actionName || value.action.actionCustomSet || value.action.state)) return;
-        return isJson === true ? `${key}: ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name},` : `${key}={ ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name} }`;
-      }
-      if(value.formSubmit && value.type === 'formSubmit') {
-        if (!(value.formSubmit.targetForm)) return;
-        return isJson === true? `${key}: () => ${
-          renderCode({
-            id: '',
-            name: `formReferenceUsage`,
-            properties: {
-              formTag: value.formSubmit.targetForm
-            }
-          })
-        },` : `${key}={ () => ${
-          renderCode({
-            id: '',
-            name: `formReferenceUsage`,
-            properties: {
-              formTag: value.formSubmit.targetForm
-            }
-          })
-        } }`;
-      }
-      if(value.navigate && value.type === 'navigate') {
-        if(!value.navigate.path) return
-        return isJson === true ? `${key}: () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}),` : `${key}={ () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}) }`;
-      }
-    }).join("\n")
-    : ``
+    ? Object.entries(interactions)
+        .map(([key, value]) => {
+          if (value.function && value.type === 'function') {
+            if (!(value.function.fnName || value.function.fnCustomSet || value.function.state))
+              return;
+            return isJson === true
+              ? `${key}: ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name},`
+              : `${key}={ ${value.function.fnName ?? value.function.fnCustomSet ?? value.function.state?.name} }`;
+          }
+          if (value.action && value.type === 'action') {
+            if (!(value.action.actionName || value.action.actionCustomSet || value.action.state))
+              return;
+            return isJson === true
+              ? `${key}: ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name},`
+              : `${key}={ ${value.action.actionName ?? value.action.actionCustomSet ?? value.action.state?.name} }`;
+          }
+          if (value.formSubmit && value.type === 'formSubmit') {
+            if (!value.formSubmit.targetForm) return;
+            return isJson === true
+              ? `${key}: () => ${renderCode({
+                  id: '',
+                  name: `formReferenceUsage`,
+                  properties: {
+                    formTag: value.formSubmit.targetForm,
+                  },
+                })},`
+              : `${key}={ () => ${renderCode({
+                  id: '',
+                  name: `formReferenceUsage`,
+                  properties: {
+                    formTag: value.formSubmit.targetForm,
+                  },
+                })} }`;
+          }
+          if (value.navigate && value.type === 'navigate') {
+            if (!value.navigate.path) return;
+            return isJson === true
+              ? `${key}: () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}),`
+              : `${key}={ () => ${value.navigate.name}(${value.navigate.inRow ? 'row' : ''}) }`;
+          }
+        })
+        .join('\n')
+    : ``;
 }
 
 export function renderData(data: Record<string, any>) {
   return data
-    ? Object.entries(data).map(([key, value]) => {
-      return `${key}={ ${value.state?.name ?? value.value?.code ?? 'undefined'} }`;
-    }).join("\n")
-    : ``
+    ? Object.entries(data)
+        .map(([key, value]) => {
+          return `${key}={ ${value.state?.name ?? value.value?.code ?? 'undefined'} }`;
+        })
+        .join('\n')
+    : ``;
 }

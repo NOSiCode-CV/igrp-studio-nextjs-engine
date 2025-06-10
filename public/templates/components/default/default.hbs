@@ -1,6 +1,6 @@
 <{{resolveComponent resourceConfig.componentName registry}}
   {{#if resourceConfig.tag}}
-  name={ `{{resourceConfig.tag}}` }
+  name={ `{{{resourceConfig.tag}}}` }
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }

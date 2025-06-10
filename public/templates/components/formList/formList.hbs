@@ -55,7 +55,7 @@
       <>
         {{#if resourceConfig.children}}
         {{#each resourceConfig.children}}
-        {{{render-layout this ../resourceConfig}}}
+        {{{render-layout (indexedTag this ../resourceConfig.tag) ../resourceConfig}}}
         {{/each}}
         {{/if~}}
       </>
