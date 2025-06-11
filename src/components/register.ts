@@ -51,6 +51,7 @@ import modalDialogModule, { MODAL_DIALOG } from './modalDialog/index';
 import pageModule, { PAGE } from './page';
 import pageHeaderModule, { PAGEHEADER } from './pageHeader';
 import paragraphModule, { PARAGRAPH } from './paragraph';
+import pdfViewerModule, { PDF_VIEWER } from './pdfViewer/index';
 import pieChartModule, { PIECHART } from './piechart';
 import radarChartModule, { RADARCHART } from './radarchart';
 import radialBarChartModule, { RADIAL_BAR_CHART } from './radialbarchart';
@@ -154,6 +155,7 @@ export function registerAllComponents() {
   register(PAGE, pageModule.register);
   register(PAGEHEADER, pageHeaderModule.register);
   register(PARAGRAPH, paragraphModule.register);
+  register(PDF_VIEWER, pdfViewerModule.register);
   register(PIECHART, pieChartModule.register);
   register(RADARCHART, radarChartModule.register);
   register(RADIAL_BAR_CHART, radialBarChartModule.register);
