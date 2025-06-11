@@ -18,8 +18,10 @@ import { parseRoutePath } from './routerParser';
 import { TABS_ITEM } from '../components/tabs/children/tabsItem/index';
 import { MENU_NAVIGATION_ITEM } from '../components/menuNavigation/children/menuNavigationItem/index';
 import { TEXT_LIST_ITEM } from '../components/textList/children/textListItem/index';
-import { TEXT_LIST_SUBITEM } from '../components/textList/children/textListSubItem/index';
+import { TEXT_LIST_SUBITEMS } from '../components/textList/children/textListSubItems/index';
 import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
+import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
+import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -314,11 +316,19 @@ export function extractTextListItems(children: Layout[]) {
 }
 
 export function extractTextListItemSubItems(children: Layout[]) {
-  return children.filter((it) => it.componentName === TEXT_LIST_SUBITEM);
+  return children.filter((it) => it.componentName === TEXT_LIST_SUBITEMS);
 }
 
 export function extractTextListItemContent(children: Layout[]) {
   return children.filter((it) => it.componentName === TEXT_LIST_ITEM_CONTENT);
+}
+
+export function extractInfoSection(children: Layout[]) {
+  return children.filter((it) => it.componentName === INFO_SECTION);
+}
+
+export function extractInfoItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === INFO_ITEM);
 }
 
 export function resolveComponent(

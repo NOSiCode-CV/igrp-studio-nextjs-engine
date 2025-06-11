@@ -27,7 +27,9 @@ import gridModule, { GRID } from './grid';
 import headlineModule, { HEADLINE } from './headline';
 import horizontalBarChartModule, { HORIZONTAL_BAR_CHART } from './horizontalbarchart';
 import iconModule, { ICON } from './icon';
-import inputModule, { INPUT } from './input';
+import infoCardModule, { INFO_CARD } from './infoCard';
+import infoItemModule, { INFO_ITEM } from './infoCard/children/infoItem';
+import infoSectionModule, { INFO_SECTION } from './infoCard/children/infoSection';
 import inputAddOnModule, { INPUT_ADD_ON } from './inputAddOn';
 import inputColorModule, { INPUT_COLOR } from './inputColor';
 import inputDatePickerModule, { INPUT_DATE_PICKER } from './inputDatePicker';
@@ -93,10 +95,11 @@ import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters
 import tabsModule, { TABS } from './tabs';
 import tabsItemModule, { TABS_ITEM } from './tabs/children/tabsItem/index';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
+import textModule, { TEXT } from './text/index';
 import textListModule, { TEXT_LIST } from './textList/index';
 import textListItemModule, { TEXT_LIST_ITEM } from './textList/children/textListItem/index';
 import textListItemContentModule, { TEXT_LIST_ITEM_CONTENT } from './textList/children/textListItemContent/index';
-import textListSubItemModule, { TEXT_LIST_SUBITEM } from './textList/children/textListSubItem/index';
+import textListSubItemModule, { TEXT_LIST_SUBITEMS } from './textList/children/textListSubItems/index';
 
 export function registerAllComponents() {
   register(ALERT, alertModule.register);
@@ -127,6 +130,9 @@ export function registerAllComponents() {
   register(HEADLINE, headlineModule.register);
   register(HORIZONTAL_BAR_CHART, horizontalBarChartModule.register);
   register(ICON, iconModule.register);
+  register(INFO_CARD, infoCardModule.register);
+  register(INFO_ITEM, infoItemModule.register);
+  register(INFO_SECTION, infoSectionModule.register);
   register(INPUT_ADD_ON, inputAddOnModule.register);
   register(INPUT_COLOR, inputColorModule.register);
   register(INPUT_DATE_PICKER, inputDatePickerModule.register);
@@ -200,13 +206,12 @@ export function registerAllComponents() {
   register(TABLE_MINMAX_FILTER, tableMinMaxFilterModule.register);
   register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
-
   register(TABS, tabsModule.register);
   register(TABS_ITEM, tabsItemModule.register);
-
+  register(TEXT, textModule.register);
   register(TEXT_LIST, textListModule.register);
   register(TEXT_LIST_ITEM, textListItemModule.register);
   register(TEXT_LIST_ITEM_CONTENT, textListItemContentModule.register);
-  register(TEXT_LIST_SUBITEM, textListSubItemModule.register);
+  register(TEXT_LIST_SUBITEMS, textListSubItemModule.register);
 
 }

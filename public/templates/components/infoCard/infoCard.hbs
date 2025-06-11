@@ -1,0 +1,63 @@
+<IGRPInfoCard
+  {{#if resourceConfig.properties.commonProperties.generateReference}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
+  {{#if resourceConfig.properties.variantSection}}
+  variantSection={ "{{resourceConfig.properties.variantSection}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.colorSection}}
+  colorSection={ "{{resourceConfig.properties.colorSection}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.titleClassName}}
+  titleClassName={ "{{resourceConfig.properties.titleClassName}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.title}}
+  title={ "{{resourceConfig.properties.title}}" }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  sections={
+    [
+    {{#if resourceConfig.children}}
+      {{#each (extractInfoSection resourceConfig.children)}}
+        {
+          items: [
+            {{#each (extractInfoItem this.children)}}
+            {
+            {{#if this.properties.text}}
+              text: "{{this.properties.text}}",
+            {{/if~}}
+            {{#if this.properties.label}}
+              label: "{{this.properties.label}}",
+            {{/if~}}
+            {{#if this.properties.iconProperties.icon}}
+              icon: "{{this.properties.iconProperties.icon}}",
+            {{/if~}}
+            {{#if this.properties.iconProperties.iconClassName}}
+              iconClassName: "{{this.properties.iconProperties.iconClassName}}",
+            {{/if~}}
+            {{#if this.properties.variantItem}}
+              variantItem: "{{this.properties.variantItem}}",
+            {{/if~}}
+            {{#if this.properties.colorItem}}
+              colorItem: "{{this.properties.colorItem}}",
+            {{/if~}}
+            },
+            {{/each}}
+          ]
+        },
+      {{/each}}
+    {{/if~}}
+    ]
+  }
+/>

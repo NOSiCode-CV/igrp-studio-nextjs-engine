@@ -5,7 +5,7 @@ import {
   textListItemContentChildProperties,
   textListItemContentChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, defaultRenderer, hbsRenderer } from '../../../index';
 import { TEXT_LIST } from '../../index';
 import { TEXT_LIST_ITEM } from '../textListItem/index';
 
@@ -15,6 +15,9 @@ export default {
     ]);
 
     component.loadVariants(textListItemContentVariants());
+    component.loadCustomComponentTag("");
+    component.loadCustomClassName("");
+    component.setNoClassName(true);
     component.loadParent(TEXT_LIST_ITEM)
     component.loadLabel('Text List Item Content')
     component.getProperties(textListItemContentProperties());
@@ -24,7 +27,7 @@ export default {
 
     component.loadStates([]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(defaultRenderer);
   },
 };
 

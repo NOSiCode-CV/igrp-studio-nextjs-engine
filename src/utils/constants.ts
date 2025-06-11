@@ -189,6 +189,7 @@ export const INTERACTIONS_TYPES = {
   CUSTOMIZE: "Customize",
   COMPUTE_LABEL: 'Compute Label',
   ACTIVE_SECTION: 'Active Section',
+  HIGHLIGHT: 'Highlight',
 }
 
 export const INTERACTIONS_DEFAULTS = {

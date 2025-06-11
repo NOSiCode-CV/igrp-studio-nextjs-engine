@@ -23,7 +23,7 @@ import {
   addClassNameFromProperties,
   addClassNameFromStyle,
   extractCardContent,
-  extractCardFooter,
+  extractCardFooter, extractInfoItem, extractInfoSection,
   extractMenuNavigationItems,
   extractTableColumns,
   extractTableFilters,
@@ -85,6 +85,8 @@ Handlebars.registerHelper("extractMenuNavigationItems", extractMenuNavigationIte
 Handlebars.registerHelper("extractTextListItems", extractTextListItems);
 Handlebars.registerHelper("extractTextListItemSubItems", extractTextListItemSubItems);
 Handlebars.registerHelper("extractTextListItemContent", extractTextListItemContent);
+Handlebars.registerHelper("extractInfoSection", extractInfoSection);
+Handlebars.registerHelper("extractInfoItem", extractInfoItem);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("indexedTag", indexedTag);
 Handlebars.registerHelper("render-properties", renderProperties);

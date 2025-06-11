@@ -2,6 +2,7 @@ import { commonPropertiesMapping } from '../../../default/properties';
 
 export function textListItemContentProperties() {
   return {
+    content: { type: 'string', required: false },
   };
 }
 

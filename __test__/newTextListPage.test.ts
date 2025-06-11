@@ -2,7 +2,6 @@ import { initComponents, newPage } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 import { inputLayout } from './newInputPage.test';
-import { buttonLayout } from './newButtonPage.test';
 import { badgeLayout } from './newBadgePage.test';
 //import { inputLayout } from "./newInputPage.test";
 
@@ -38,11 +37,10 @@ const textListLayout: Layout = {
       },
       children: [
         {
-          id: 'textList_default_buttons',
-          tag: 'textList_default_buttons',
+          id: 'textList_default_item_1',
+          tag: 'textList_default_item_1',
           componentName: 'textListItem',
           properties: {
-            value: 'button',
             badgeText: 'Buttons',
             badgeVariant: 'outline',
             badgeColor: 'primary',
@@ -51,31 +49,84 @@ const textListLayout: Layout = {
             }
           },
           children: [
-            buttonLayout
+            {
+              id: 'textList_default_content',
+              tag: 'textList_default_content',
+              componentName: 'textListItemContent',
+              properties: {
+              },
+              children: [
+                {
+                  id: 'text_default',
+                  tag: 'text_default',
+                  componentName: 'text',
+                  properties: {
+                    content: 'iGRP',
+                    variant: 'primary',
+                    weight: 'bold',
+                    size: 'lg',
+                    align: 'center'
+                  }
+                }
+              ],
+            },
+            {
+              id: 'textList_default_subitem',
+              tag: 'textList_default_subitems',
+              componentName: 'textListSubItems',
+              properties: {
+              },
+              children: [
+                {
+                  id: 'textList_default_subitem_1',
+                  tag: 'textList_default_subitem_1',
+                  componentName: 'textListItem',
+                  properties: {
+                    badgeText: 'SubItem1',
+                    badgeVariant: 'soft',
+                    badgeColor: 'secondary',
+                    iconProperties: {
+                      icon: 'ArrowLeft'
+                    }
+                  },
+                  children: [
+                    {
+                      id: 'textList_default_content_subitem',
+                      tag: 'textList_default_content_subitem',
+                      componentName: 'textListItemContent',
+                      properties: {
+                        content: 'Text Subitem 1'
+                      },
+                      children: [
+
+                      ],
+                    },
+                    {
+                      id: 'textList_default_subitem_2',
+                      tag: 'textList_default_subitems_2',
+                      componentName: 'textListSubItems',
+                      properties: {
+                      },
+                      children: [
+
+                      ],
+                    },
+
+                  ],
+                },
+              ],
+            },
+
           ],
         },
-        {
-          id: 'textList_default_badge',
-          tag: 'textList_default_badge',
-          componentName: 'textListItem',
-          properties: {
-            value: 'badge',
-            label: 'Badges',
-            iconProperties: {
-              icon: 'ArrowRight'
-            }
-          },
-          children: [
-            badgeLayout
-          ],
-        },
+
       ],
     },
   ],
 };
 
 const pageConfig: PageConfig = {
-  id: 'tabTgb1La4p0',
+  id: 'qbcTgr4Ny2z1',
   types: [],
   type: 'page',
   pageName: 'textList',
@@ -87,8 +138,8 @@ beforeAll(async () => {
   await initComponents();
 });
 
-describe('TextList module',() =>{
-  it('should save the textList page configuration file', async()=> {
+describe('Text List module',() =>{
+  it('should save the text list page configuration file', async()=> {
     await newPage(pageConfig, OUTPUT_DIR);
   })
 

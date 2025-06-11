@@ -8,7 +8,7 @@ import {
 import { Component, hbsRenderer } from '../../../index';
 import { TEXT_LIST } from '../../index';
 import { TEXT_LIST_ITEM_CONTENT } from '../textListItemContent/index';
-import { TEXT_LIST_SUBITEM } from '../textListSubItem/index';
+import { TEXT_LIST_SUBITEMS } from '../textListSubItems/index';
 
 export default {
   register(component: Component) {
@@ -27,12 +27,12 @@ export default {
 
     component.loadChildrenTypes([
       { name: TEXT_LIST_ITEM_CONTENT, isDefault: true },
-      { name: TEXT_LIST_SUBITEM, isDefault: true }
+      { name: TEXT_LIST_SUBITEMS, isDefault: true }
     ]);
 
     component.loadAcceptedChildren([
       { name: TEXT_LIST_ITEM_CONTENT, isDefault: true },
-      { name: TEXT_LIST_SUBITEM, isDefault: true }
+      { name: TEXT_LIST_SUBITEMS, isDefault: true }
     ]);
 
     component.loadStates([]);
@@ -42,5 +42,19 @@ export default {
 };
 
 const TEXT_LIST_ITEM = 'textListItem'
+
+export interface IGRPTextListItem {
+  id: string;
+  badgeText?: string;
+  badgeVariant?: string;
+  badgeColor?: string;
+  icon?: string;
+  iconColor?: string;
+  variant?: string;
+  completed?: boolean;
+  disabled?: boolean;
+  content?: string; // or JSX.Element in runtime
+  subItems?: IGRPTextListItem[];
+}
 
 export { TEXT_LIST_ITEM };

@@ -1,37 +1,33 @@
 import { Layout } from '../interfaces/types';
-import { Component } from '../components';
+import { extractTextListItemContent, extractTextListItemSubItems } from './componentPropertiesHelper';
 import { renderLayout } from '../utils/renderLayout';
-import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
-import { TABLE_FILTERS } from '../components/table/children/tableFilters';
-import { extractTextListItemSubItems } from './componentPropertiesHelper';
+import { IGRPTextListItem } from '../components/textList/children/textListItem/index';
 
-/**
- * Extracts `IGRPTextListItem` subItems recursively from children.
- */
-function extractTextListItemSubItem(children?: Layout[]): any {
+function renderTextListItemSubItem(children?: Layout[]): IGRPTextListItem[] | undefined {
   if (!children) return undefined;
 
   const subItemLayouts = extractTextListItemSubItems(children);
 
-  if (!subItemLayouts.length) return undefined;
+  if (!(subItemLayouts && subItemLayouts.length > 0)) return undefined;
 
-  return subItemLayouts.map((layout) => JSON.parse(renderTextListItem(layout)));
+  return subItemLayouts[0].children?.map((layout) => renderTextListItemJson(layout));
 }
 
-/**
- * Extracts the content of a text list item from children layouts.
- */
-function extractTextListItemContent(children?: Layout[]): string | undefined {
+function renderTextListItemContent(children?: Layout[]): string | undefined {
   if (!children?.length) return undefined;
-  return children.map((child) => renderLayout(child)).join('\n');
+
+  const contents = children.map((child) => {
+    if (child.properties?.content !== undefined && child.properties?.content !== '') {
+      return child.properties.content;
+    }
+    return renderLayout(child);
+  });
+
+  return `${contents.join('\n')}`;
 }
 
-/**
- * Renders a Layout into an IGRPTextListItem JSON string.
- */
-export const renderTextListItem = function (config: Layout): string {
+const renderTextListItemJson = (config: Layout): IGRPTextListItem => {
   const {
-    id,
     variant,
     completed,
     disabled,
@@ -42,11 +38,11 @@ export const renderTextListItem = function (config: Layout): string {
     badgeColor,
   } = config.properties || {};
 
-  const content = '<>' + extractTextListItemContent(config.children) + '</>';
-  const subItems = extractTextListItemSubItem(config.children);
+  const content = renderTextListItemContent(extractTextListItemContent(config.children ?? []));
+  const subItems = renderTextListItemSubItem(config.children);
 
-  const result = {
-    id,
+  return {
+    id: config.tag,
     variant,
     completed,
     disabled,
@@ -58,6 +54,24 @@ export const renderTextListItem = function (config: Layout): string {
     content,
     subItems,
   };
-
-  return JSON.stringify(result, null, 2);
 };
+
+export function renderTextListItem(config: Layout): string {
+  const item = renderTextListItemJson(config);
+
+  // Manually construct the object string to avoid JSON escaping
+  const result = [
+    '{',
+    `  id: '${item.id}',`,
+    item.badgeText && `  badgeText: '${item.badgeText}',`,
+    item.badgeVariant && `  badgeVariant: '${item.badgeVariant}',`,
+    item.badgeColor && `  badgeColor: '${item.badgeColor}',`,
+    item.content && `  content: ${item.content},`,
+    item.subItems && `  subItems: [\n${item.subItems.map(subItem =>
+      `    {\n      id: '${subItem.id}',\n${subItem.content ? `      content: '${subItem.content}',\n` : ''}    }`
+    ).join(',\n')}\n  ],`,
+    '}'
+  ].filter(Boolean).join('\n');
+
+  return result;
+}
