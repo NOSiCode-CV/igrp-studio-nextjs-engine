@@ -210,21 +210,21 @@ export function baseInteraction(
           actionName: {
             type: 'string',
             required: false,
-            visible: visibility?.actionName.visible ?? false,
+            visible: false//visibility?.actionName.visible ?? false,
           },
           actionCustomSet: {
             type: 'string',
             required: false,
             default: defaultCustomSet,
-            visible: visibility?.fnCustomSet.visible ?? false,
+            visible: false//visibility?.fnCustomSet.visible ?? false,
           },
           actionCustomCode: {
             type: 'object',
             visible:
-              (visibility?.fnCustomCode.imports.visible ||
+              /*(visibility?.fnCustomCode.imports.visible ||
                 visibility?.fnCustomCode.states.visible ||
                 visibility?.fnCustomCode.fnCode.visible ||
-                visibility?.fnCustomCode.actionCode.visible) ??
+                visibility?.fnCustomCode.actionCode.visible) ??*/
               false,
             required: false,
             properties: {
@@ -245,7 +245,7 @@ export function baseInteraction(
               states: {
                 type: 'array',
                 required: false,
-                visible: visibility?.fnCustomCode.states.visible ?? false,
+                visible: false,//visibility?.fnCustomCode.states.visible ?? false,
                 items: {
                   type: 'object',
                   properties: {
@@ -276,7 +276,7 @@ export function baseInteraction(
               actionCode: {
                 type: 'string',
                 required: false,
-                visible: visibility?.fnCustomCode.actionCode.visible ?? false,
+                visible: false//visibility?.fnCustomCode.actionCode.visible ?? false,
               },
             },
           },

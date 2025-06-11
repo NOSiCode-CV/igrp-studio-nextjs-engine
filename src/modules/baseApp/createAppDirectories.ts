@@ -59,6 +59,7 @@ const getDirectoriesToCreate = (basePath: string): string[] => {
     path.join(basePath, DIRECTORIES.IGRP_ACTIONS),
     path.join(basePath, DIRECTORIES.LOCALE),
     path.join(basePath, DIRECTORIES.LOCALE_IGRP),
+    path.join(basePath, DIRECTORIES.LOCALE_IGRP_SYS_SETTINGS),
     //path.join(basePath, DIRECTORIES.PAGES),
     path.join(basePath, DIRECTORIES.COMPONENTS),
     path.join(basePath, DIRECTORIES.PUBLIC),

@@ -1,5 +1,4 @@
 import {
-  baseData,
   baseInteraction,
   baseRules,
   baseStyle,
@@ -11,8 +10,21 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function textListProperties() {
   return {
-
-    isStickyTop: { type: 'boolean', default: false, required: false},
+    type: { type: 'string', required: false, enum: ['unordered', 'ordered', 'checklist', 'steps', 'features', 'custom'], default: 'unordered' },
+    animate: { type: 'boolean', default: false, required: false},
+    interactive: { type: 'boolean', default: false, required: false},
+    collapsible: { type: 'boolean', default: false, required: false},
+    iconProperties: {
+      type: 'object',
+      properties: {
+        customIcon: { type: 'string', required: false, 'x-ui-widget': 'icon' },
+        iconGlobalColor: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+      },
+    },
+    maxDepth: { type: 'number', required: false, default: 3, 'x-ui-widget': 'number' },
+    size: { type: 'number', required: false, default: 3, 'x-ui-widget': 'number' },
+    spacing: { type: 'number', required: false, default: 3, 'x-ui-widget': 'number' },
+    variant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     className: { type: 'string', required: false },
     ...commonProperties()
   };
@@ -52,22 +64,16 @@ export function textListRules() {
 
 export function textListData() {
   return {
-    activeSection: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ACTIVE_SECTION, {
-        id: '',
-        name: 'textList{{id}}ActiveSection',
-        type: 'string',
-        defaultValue: ''
-      }, true), required: true },
   };
 }
 
-function onSectionChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+function onItemClickInteractionFieldVisibility(): InteractionFieldVisibility {
   return {
     fnName: { visible: true },
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }
@@ -77,6 +83,6 @@ function onSectionChangeInteractionFieldVisibility(): InteractionFieldVisibility
 
 export function textListInteractions() {
   return {
-    onSectionChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHANGE, undefined, onSectionChangeInteractionFieldVisibility()), required: false,  },
+    onItemClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_ITEM_INDEX, INTERACTIONS_TYPES.ON_CLICK, undefined, onItemClickInteractionFieldVisibility()), required: false,  },
   };
 }

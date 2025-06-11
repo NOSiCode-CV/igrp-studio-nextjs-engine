@@ -17,6 +17,9 @@ import { backgroundsStyleToClasses } from './backgroundsStyleToClasses';
 import { parseRoutePath } from './routerParser';
 import { TABS_ITEM } from '../components/tabs/children/tabsItem/index';
 import { MENU_NAVIGATION_ITEM } from '../components/menuNavigation/children/menuNavigationItem/index';
+import { TEXT_LIST_ITEM } from '../components/textList/children/textListItem/index';
+import { TEXT_LIST_SUBITEM } from '../components/textList/children/textListSubItem/index';
+import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -304,6 +307,18 @@ export function extractTabsItem(children: Layout[]) {
 
 export function extractMenuNavigationItems(children: Layout[]) {
   return children.filter((it) => it.componentName === MENU_NAVIGATION_ITEM);
+}
+
+export function extractTextListItems(children: Layout[]) {
+  return children.filter((it) => it.componentName === TEXT_LIST_ITEM);
+}
+
+export function extractTextListItemSubItems(children: Layout[]) {
+  return children.filter((it) => it.componentName === TEXT_LIST_SUBITEM);
+}
+
+export function extractTextListItemContent(children: Layout[]) {
+  return children.filter((it) => it.componentName === TEXT_LIST_ITEM_CONTENT);
 }
 
 export function resolveComponent(

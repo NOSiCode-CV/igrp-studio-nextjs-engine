@@ -93,6 +93,10 @@ import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters
 import tabsModule, { TABS } from './tabs';
 import tabsItemModule, { TABS_ITEM } from './tabs/children/tabsItem/index';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
+import textListModule, { TEXT_LIST } from './textList/index';
+import textListItemModule, { TEXT_LIST_ITEM } from './textList/children/textListItem/index';
+import textListItemContentModule, { TEXT_LIST_ITEM_CONTENT } from './textList/children/textListItemContent/index';
+import textListSubItemModule, { TEXT_LIST_SUBITEM } from './textList/children/textListSubItem/index';
 
 export function registerAllComponents() {
   register(ALERT, alertModule.register);
@@ -199,4 +203,10 @@ export function registerAllComponents() {
 
   register(TABS, tabsModule.register);
   register(TABS_ITEM, tabsItemModule.register);
+
+  register(TEXT_LIST, textListModule.register);
+  register(TEXT_LIST_ITEM, textListItemModule.register);
+  register(TEXT_LIST_ITEM_CONTENT, textListItemContentModule.register);
+  register(TEXT_LIST_SUBITEM, textListSubItemModule.register);
+
 }

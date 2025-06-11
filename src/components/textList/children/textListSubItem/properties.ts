@@ -1,6 +1,6 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
-export function textListsItemProperties() {
+export function textListsSubItemProperties() {
   return {
     id: { type: 'string', required: false },
     variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
@@ -20,20 +20,20 @@ export function textListsItemProperties() {
   };
 }
 
-export function textListsItemPropertiesMapping() {
+export function textListsSubItemPropertiesMapping() {
   return {
     ...commonPropertiesMapping(),
   };
 }
 
-export function textListsItemChildProperties() {
+export function textListsSubItemChildProperties() {
   return {};
 }
 
-export function textListsItemChildPropertiesMapping() {
+export function textListsSubItemChildPropertiesMapping() {
   return {};
 }
 
-export function textListsItemVariants() {
+export function textListsSubItemVariants() {
   return {};
 }

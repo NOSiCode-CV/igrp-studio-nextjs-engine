@@ -20,13 +20,27 @@ import { renderLayout } from '../utils/renderLayout';
 import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
-  addClassNameFromProperties, addClassNameFromStyle, extractCardContent, extractCardFooter, extractMenuNavigationItems,
+  addClassNameFromProperties,
+  addClassNameFromStyle,
+  extractCardContent,
+  extractCardFooter,
+  extractMenuNavigationItems,
   extractTableColumns,
-  extractTableFilters, extractTabsItem, indexedTag, renderData,
+  extractTableFilters,
+  extractTabsItem,
+  extractTextListItemContent,
+  extractTextListItems,
+  extractTextListItemSubItems,
+  indexedTag,
+  renderData,
   renderInteractions,
   renderProperties,
   resolveComponent,
-  resolveFirstType, resolveQueryParams, resolveSegmentPath, resolveStateDefault, resolveZodTypes,
+  resolveFirstType,
+  resolveQueryParams,
+  resolveSegmentPath,
+  resolveStateDefault,
+  resolveZodTypes,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -40,6 +54,7 @@ import { PARTIALS } from '../utils/constants';
 import { renderService } from '../utils/renderService';
 import { resolveTypes } from '../helpers/resolveTypes';
 import { resolveReferences } from '../helpers/resolveReference';
+import { renderTextListItem } from '../helpers/renderTextListItem';
 
 // Components
 Handlebars.registerHelper("resolve-imports", resolveImports);
@@ -54,6 +69,7 @@ Handlebars.registerHelper("component-name-helper", componentNameHelper);
 Handlebars.registerHelper("field-helper", fieldHelper);
 Handlebars.registerHelper("render-layout", renderLayout);
 Handlebars.registerHelper("render-table-row", renderTableRow);
+Handlebars.registerHelper("render-text-list-item", renderTextListItem);
 Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperties);
 Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
 Handlebars.registerHelper("addClassNameFromStyle", addClassNameFromStyle);
@@ -66,6 +82,9 @@ Handlebars.registerHelper("extractCardContent", extractCardContent);
 Handlebars.registerHelper("extractCardFooter", extractCardFooter);
 Handlebars.registerHelper("extractTabsItem", extractTabsItem);
 Handlebars.registerHelper("extractMenuNavigationItems", extractMenuNavigationItems);
+Handlebars.registerHelper("extractTextListItems", extractTextListItems);
+Handlebars.registerHelper("extractTextListItemSubItems", extractTextListItemSubItems);
+Handlebars.registerHelper("extractTextListItemContent", extractTextListItemContent);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("indexedTag", indexedTag);
 Handlebars.registerHelper("render-properties", renderProperties);
