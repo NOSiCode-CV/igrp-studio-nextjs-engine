@@ -1,6 +1,6 @@
 {
   "name": "@igrp/igrp-studio-nextjs-engine",
-  "version": "0.0.1-alpha.379",
+  "version": "0.0.1-alpha.382",
   "description": "The NextJS engine application allows to create a new NextJS application",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -12,6 +12,7 @@
     "test": "jest --coverage",
     "build": "env-cmd -f .env.production tsc && vite build",
     "deploy": "npm publish --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",
+    "release": "npm run build && npm run deploy",
     "start": "tsc && vite"
   },
   "repository": {

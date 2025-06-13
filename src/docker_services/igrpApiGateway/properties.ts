@@ -1,13 +1,9 @@
-import { IGRP_UI } from './index';
+import { IGRP_API_GATEWAY } from './index';
 
-export function igrpUiProperties() {
+export function igrpApiGatewayProperties() {
   return {
-    image: {
-      type: 'string',
-      required: true,
-      default: 'registry.nosi.cv/igrp/igrp-ui:latest',
-    },
-    container_name: { type: 'string', required: false, default: 'igrp-ui' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/igrp-gateway:latest' },
+    container_name: { type: 'string', required: false, default: 'igrp-api-gateway' },
     restart: {
       type: 'string',
       required: false,
@@ -19,26 +15,32 @@ export function igrpUiProperties() {
       items: {
         type: 'object',
         properties: {
-          internal: { type: 'number', required: true, default: 3000 },
-          external: { type: 'number', required: true, default: 3000 },
+          internal: { type: 'number', required: true, default: 7070 },
+          external: { type: 'number', required: true, default: 7070 },
         },
       },
       default: [
         {
-          internal: 3000,
-          external: 3000,
+          internal: 7070,
+          external: 7070,
         },
       ],
     },
-    hostname: { type: 'string', required: false, default: 'igrp-ui' },
-    env_file: {
+    hostname: { type: 'string', required: false, default: 'igrp-api-gateway' },
+    environments: {
       type: 'array',
+      default: [
+        { key: 'SPRING_PROFILES_ACTIVE', value: 'production' },
+        { key: 'SERVER_PORT', value: '7070' },
+        { key: 'EUREKA_CLIENT_SERVICEURL_DEFAULTZONE', value: 'http://eureka:8761/eureka'}
+      ],
       items: {
         type: 'object',
-        properties: { file: { type: 'string', required: true, default: '.ui.igrp.env' } },
+        properties: {
+          key: { type: 'string', required: true },
+          value: { type: 'string', required: true },
+        },
       },
-      required: true,
-      default: [{ file: '.igrp.env' }, { file: '.ui.igrp.env' }],
     },
     networks: {
       type: 'array',
@@ -57,7 +59,7 @@ export function igrpUiProperties() {
       default: [
         {
           key: 'name',
-          value: IGRP_UI,
+          value: IGRP_API_GATEWAY,
         },
         {
           key: 'type',

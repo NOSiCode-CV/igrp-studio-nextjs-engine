@@ -1,13 +1,9 @@
-import { IGRP_UI } from './index';
+import { IGRP_ACCESS_MANAGEMENT } from './index';
 
-export function igrpUiProperties() {
+export function igrpAccessManagementProperties() {
   return {
-    image: {
-      type: 'string',
-      required: true,
-      default: 'registry.nosi.cv/igrp/igrp-ui:latest',
-    },
-    container_name: { type: 'string', required: false, default: 'igrp-ui' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/access-management-api:latest' },
+    container_name: { type: 'string', required: false, default: 'igrp-access-management' },
     restart: {
       type: 'string',
       required: false,
@@ -19,27 +15,19 @@ export function igrpUiProperties() {
       items: {
         type: 'object',
         properties: {
-          internal: { type: 'number', required: true, default: 3000 },
-          external: { type: 'number', required: true, default: 3000 },
+          internal: { type: 'number', required: true, default: 7981 },
+          external: { type: 'number', required: true, default: 7981 },
         },
       },
       default: [
         {
-          internal: 3000,
-          external: 3000,
+          internal: 7981,
+          external: 7981,
         },
       ],
     },
-    hostname: { type: 'string', required: false, default: 'igrp-ui' },
-    env_file: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: { file: { type: 'string', required: true, default: '.ui.igrp.env' } },
-      },
-      required: true,
-      default: [{ file: '.igrp.env' }, { file: '.ui.igrp.env' }],
-    },
+    hostname: { type: 'string', required: false, default: 'igrp-access-management' },
+    env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.am.igrp.env' } } }, required: true, default: [ { file: '.am.igrp.env'}, { file: '.igrp.env'},  ] },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],
@@ -57,7 +45,7 @@ export function igrpUiProperties() {
       default: [
         {
           key: 'name',
-          value: IGRP_UI,
+          value: IGRP_ACCESS_MANAGEMENT,
         },
         {
           key: 'type',

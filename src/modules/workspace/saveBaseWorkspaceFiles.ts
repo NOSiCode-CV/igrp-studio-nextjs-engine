@@ -16,6 +16,13 @@ import {
 import { workspaceConfigValidate } from '../../schema/baseWorkspace';
 import { getPaths } from '../../index';
 import { saveBaseWorkspaceFileConfig } from './saveBaseWorkspaceConfig';
+import { IGRP_ACCESS_MANAGEMENT } from '../../docker_services/igrpAccessManagement/index';
+import { MINIO } from '../../docker_services/minio/index';
+import { KEYCLOAK } from '../../docker_services/keycloak/index';
+import { POSTGRES } from '../../docker_services/postgres/index';
+import { IGRP_UI } from '../../docker_services/igrpUi/index';
+import { IGRP_API_GATEWAY } from '../../docker_services/igrpApiGateway/index';
+import { EUREKA } from '../../docker_services/eureka/index';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -40,7 +47,6 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
   return [
     { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
     { output: context.basePath, template: TEMPLATES.AM_IGRP_ENV, name: ENVIRONMENT_FILES.AM_IGRP_ENV },
-    { output: context.basePath, template: TEMPLATES.UM_IGRP_ENV, name: ENVIRONMENT_FILES.UM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.UI_IGRP_ENV, name: ENVIRONMENT_FILES.UI_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IAM_IGRP_ENV, name: ENVIRONMENT_FILES.IAM_IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.FILE_IGRP_ENV, name: ENVIRONMENT_FILES.FILE_IGRP_ENV },
@@ -86,7 +92,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
     services: [
       {
         id: "igrp_db",
-        name: "postgres",
+        name: POSTGRES,
         properties: {
           image: "postgres:16-alpine",
           container_name: `${baseContext.resourceConfig.slug}-igrp-db`,
@@ -135,8 +141,60 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         },
       },
       {
+        id: "igrp_api_gateway",
+        name: IGRP_API_GATEWAY,
+        properties: {
+          image: "registry.nosi.cv/igrp/igrp-gateway:latest",
+          container_name: `igrp-gateway`,
+          dependsOn: [
+            { service: `igrp-eureka` }
+          ],
+          environments: [
+            { key: 'SPRING_PROFILES_ACTIVE', value: 'local' },
+            { key: 'SERVER_PORT', value: '7070' },
+            { key: 'EUREKA_CLIENT_SERVICEURL_DEFAULTZONE', value: 'http://igrp-eureka:8761/eureka'}
+          ],
+          ports: [
+            {
+              internal: 7070,
+              external: 7070
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'web'},
+            { key: 'name', value: IGRP_API_GATEWAY},
+          ]
+        },
+      },
+      {
+        id: "igrp_eureka",
+        name: EUREKA,
+        properties: {
+          image: "springcloud/eureka:latest",
+          container_name: `igrp-eureka`,
+          dependsOn: [
+          ],
+          ports: [
+            {
+              internal: 8761,
+              external: 8761
+            }
+          ],
+          networks: [
+            { network: `${baseContext.resourceConfig.slug}-network` }
+          ],
+          labels: [
+            { key: 'type', value: 'web'},
+            { key: 'name', value: EUREKA},
+          ]
+        },
+      },
+      {
         id: "igrp_keycloak",
-        name: "keycloak",
+        name: KEYCLOAK,
         properties: {
           image: "keycloak/keycloak:25.0.4",
           container_name: `${baseContext.resourceConfig.slug}-keycloak`,
@@ -202,7 +260,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
       },
       {
         id: "igrp_minio",
-        name: "minio",
+        name: MINIO,
         properties: {
           image: "minio/minio:latest",
           container_name: "igrp-minio",
@@ -264,50 +322,23 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         }
       },
       {
-        id: "igrp_um",
-        name: "igrpUserManagement",
-        properties: {
-          image: "registry.nosi.cv/formacao-igrp/igrp-user-management-api:demo-local",
-          container_name: `${baseContext.resourceConfig.slug}-user-management`,
-          dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-keycloak` },
-            { service: `${baseContext.resourceConfig.slug}-igrp-db` }
-          ],
-          env_file: [
-            { file: '.um.igrp.env' }
-          ],
-          ports: [
-            {
-              internal: 8081,
-              external: 8081
-            }
-          ],
-          networks: [
-            { network: `${baseContext.resourceConfig.slug}-network` }
-          ],
-          labels: [
-            { key: 'type', value: 'web'},
-            { key: 'name', value: 'igrpUserManagement'},
-          ]
-        },
-      },
-      {
         id: "igrp_am",
-        name: "igrpAppManagement",
+        name: IGRP_ACCESS_MANAGEMENT,
         properties: {
-          image: "registry.nosi.cv/formacao-igrp/app-manager-api:demo-local",
-          container_name: `${baseContext.resourceConfig.slug}-app-manager`,
+          image: "registry.nosi.cv/igrp/access-management-api:latest",
+          container_name: `${baseContext.resourceConfig.slug}-access-manager`,
           dependsOn: [
             { service: `${baseContext.resourceConfig.slug}-keycloak` },
             { service: `${baseContext.resourceConfig.slug}-igrp-db` }
           ],
           env_file: [
-            { file: '.am.igrp.env' }
+            { file: '.am.igrp.env' },
+            { file: '.igrp.env' }
           ],
           ports: [
             {
-              internal: 8082,
-              external: 8082
+              internal: 7981,
+              external: 7981
             }
           ],
           networks: [
@@ -315,23 +346,22 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           labels: [
             { key: 'type', value: 'web'},
-            { key: 'name', value: 'igrpAppManagement'},
+            { key: 'name', value: 'igrpAccessManagement'},
           ]
         },
       },
       {
         id: "igrp_ui",
-        name: "igrpUi",
+        name: IGRP_UI,
         properties: {
-          image: "registry.nosi.cv/formacao-igrp/igrp-ui-dev:demo-local",
+          image: "registry.nosi.cv/igrp/igrp-ui:latest",
           container_name: `${baseContext.resourceConfig.slug}-ui`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-user-management` },
-            { service: `${baseContext.resourceConfig.slug}-app-manager` }
+            { service: `${baseContext.resourceConfig.slug}-access-manager` }
           ],
           env_file: [
             { file: '.igrp.env' },
-            { file: '.ui.igrp.env' },
+            { file: '.ui.igrp.env' }
           ],
           ports: [
             {

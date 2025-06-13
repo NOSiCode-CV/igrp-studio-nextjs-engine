@@ -46,6 +46,9 @@
           {{#if this.properties.iconProperties.icon}}
           icon: "{{this.properties.iconProperties.icon}}",
           {{/if~}}
+          {{#if this.properties.className}}
+          className: "{{this.properties.className}}",
+          {{/if~}}
           {{#if (and this.properties.disabled (not this.data.disabled))}}
           disabled: {{this.properties.disabled}}
           {{/if~}}

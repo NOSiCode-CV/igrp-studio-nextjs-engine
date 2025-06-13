@@ -12,6 +12,7 @@ export function tabsItemProperties() {
       required: false
     },
     disabled: { type: 'boolean', required: false, default: false },
+    className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

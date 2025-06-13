@@ -1,12 +1,15 @@
 'use client'
 
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
 {{! Ignore temporarily just for better errors spot in development --}}
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 {{{resolve-imports resourceConfig.components registry resourceConfig.name basePath undefined resourceConfig}}}
 
-export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{{this.type}}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}}) {
+export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({ {{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}} } : { {{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{#if (or this.isFunction this.isState)}}() => {{/if}}{{{this.type}}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}} }) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
   {{{resolve-states resourceConfig.components registry}}}
   {{{resolve-code-blocks resourceConfig.components registry undefined resourceConfig}}}

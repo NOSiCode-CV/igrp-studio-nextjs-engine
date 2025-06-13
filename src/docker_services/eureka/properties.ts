@@ -1,45 +1,32 @@
-import { IGRP_UI } from './index';
+import { EUREKA } from './index';
 
-export function igrpUiProperties() {
+export function eurekaProperties() {
   return {
-    image: {
-      type: 'string',
-      required: true,
-      default: 'registry.nosi.cv/igrp/igrp-ui:latest',
-    },
-    container_name: { type: 'string', required: false, default: 'igrp-ui' },
+    image: { type: 'string', required: true, default: 'springcloud/eureka:latest' },
+    container_name: { type: 'string', required: false, default: 'eureka' },
     restart: {
       type: 'string',
       required: false,
       enum: ['always', 'no', 'on-failure', 'unless-stopped'],
-      default: 'on-failure',
+      default: 'always',
     },
     ports: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
-          internal: { type: 'number', required: true, default: 3000 },
-          external: { type: 'number', required: true, default: 3000 },
+          internal: { type: 'number', required: true, default: 8761 },
+          external: { type: 'number', required: true, default: 8761 },
         },
       },
       default: [
         {
-          internal: 3000,
-          external: 3000,
+          internal: 8761,
+          external: 8761,
         },
       ],
     },
-    hostname: { type: 'string', required: false, default: 'igrp-ui' },
-    env_file: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: { file: { type: 'string', required: true, default: '.ui.igrp.env' } },
-      },
-      required: true,
-      default: [{ file: '.igrp.env' }, { file: '.ui.igrp.env' }],
-    },
+    hostname: { type: 'string', required: false, default: 'eureka' },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],
@@ -57,7 +44,7 @@ export function igrpUiProperties() {
       default: [
         {
           key: 'name',
-          value: IGRP_UI,
+          value: EUREKA,
         },
         {
           key: 'type',
