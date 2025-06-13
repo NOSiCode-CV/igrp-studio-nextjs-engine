@@ -4,7 +4,7 @@ import {
   baseRules,
   baseStyle,
   commonProperties,
-  commonPropertiesMapping,
+  commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -14,6 +14,7 @@ export function checkboxProperties() {
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     message: { type: 'string', required: false },
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }
