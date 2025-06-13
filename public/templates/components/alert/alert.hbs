@@ -3,28 +3,28 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.properties.color}}
+  {{#if (and resourceConfig.properties.color (not resourceConfig.data.color))}}
   color="{{resourceConfig.properties.color}}"
   {{/if~}}
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.linkLabel}}
+  {{#if (and resourceConfig.properties.linkLabel (not resourceConfig.data.linkLabel))}}
   linkLabel="{{resourceConfig.properties.linkLabel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.linkUrl}}
+  {{#if (and resourceConfig.properties.linkUrl (not resourceConfig.data.linkUrl))}}
   linkUrl="{{resourceConfig.properties.linkUrl}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showLink}}
+  {{#if (and resourceConfig.properties.showLink (not resourceConfig.data.showLink))}}
   showLink={ {{resourceConfig.properties.showLink}} }
   {{/if~}}
-  {{#if resourceConfig.properties.textColored}}
+  {{#if (and resourceConfig.properties.textColored (not resourceConfig.data.textColored))}}
   textColored={ {{resourceConfig.properties.textColored}} }
   {{/if~}}
-  {{#if resourceConfig.properties.borderColored}}
+  {{#if (and resourceConfig.properties.borderColored (not resourceConfig.data.borderColored))}}
   borderColored={ {{resourceConfig.properties.borderColored}} }
   {{/if~}}
-  {{#if resourceConfig.properties.bgColored}}
+  {{#if (and resourceConfig.properties.bgColored (not resourceConfig.data.bgColored))}}
   bgColored={ {{resourceConfig.properties.bgColored}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.icon}}

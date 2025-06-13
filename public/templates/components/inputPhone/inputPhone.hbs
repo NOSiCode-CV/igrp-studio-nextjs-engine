@@ -4,16 +4,16 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   name={ `{{resourceConfig.tag}}` }
-  {{#if resourceConfig.properties.dir}}
+  {{#if (and resourceConfig.properties.dir (not resourceConfig.data.dir))}}
   dir="{{resourceConfig.properties.dir}}"
   {{/if~}}
-  {{#if resourceConfig.properties.defaultValue}}
+  {{#if (and resourceConfig.properties.defaultValue (not resourceConfig.data.defaultValue))}}
   defaultValue="{{resourceConfig.properties.defaultValue}}"
   {{/if~}}
-  {{#if resourceConfig.properties.defaultCountry}}
+  {{#if (and resourceConfig.properties.defaultCountry (not resourceConfig.data.defaultCountry))}}
   defaultCountry="{{resourceConfig.properties.defaultCountry}}"
   {{/if~}}
-  {{#if resourceConfig.properties.countries}}
+  {{#if (and resourceConfig.properties.countries (not resourceConfig.data.countries))}}
   countries={
     [
     {{#each resourceConfig.properties.countries}}
@@ -22,34 +22,34 @@
     ]
   }
   {{/if~}}
-  {{#if resourceConfig.properties.error}}
+  {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
   error="{{resourceConfig.properties.error}}"
   {{/if~}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
-  {{#if resourceConfig.properties.label}}
+  {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
   label="{{resourceConfig.properties.label}}"
   {{/if~}}
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
-  {{#if resourceConfig.properties.international}}
+  {{#if (and resourceConfig.properties.international (not resourceConfig.data.international))}}
   international={ {{resourceConfig.properties.international}} }
   {{/if~}}
-  {{#if resourceConfig.properties.floatingLabel}}
+  {{#if (and resourceConfig.properties.floatingLabel (not resourceConfig.data.floatingLabel))}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.helperText}}
+  {{#if (and resourceConfig.properties.helperText (not resourceConfig.data.helperText))}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.errorMessage}}
+  {{#if (and resourceConfig.properties.errorMessage (not resourceConfig.data.errorMessage))}}
   errorMessage="{{resourceConfig.properties.errorMessage}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showIcon}}
+  {{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}
-  {{#if resourceConfig.properties.required}}
+  {{#if (and resourceConfig.properties.required (not resourceConfig.data.required))}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
@@ -64,10 +64,10 @@
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.readOnly}}
+  {{#if (and resourceConfig.properties.readOnly (not resourceConfig.data.readOnly))}}
   readOnly
   {{/if~}}
-  {{#if resourceConfig.properties.autofocus}}
+  {{#if (and resourceConfig.properties.autofocus (not resourceConfig.data.autofocus))}}
   autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

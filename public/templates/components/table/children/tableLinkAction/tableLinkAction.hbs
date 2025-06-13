@@ -1,18 +1,18 @@
 <IGRPDataTableButtonLink
   labelTrigger="{{resourceConfig.properties.labelTrigger}}"
-  {{#if resourceConfig.properties.href}}
+  {{#if (and resourceConfig.properties.href (not resourceConfig.data.href))}}
   href={ `{{{resolve-segment-path resourceConfig.properties.href resourceConfig.properties.segments}}}{{#if resourceConfig.params}}{{{resolve-query-params resourceConfig.params}}}{{/if}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
   icon="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.classNameTrigger}}
+  {{#if (and resourceConfig.properties.classNameTrigger (not resourceConfig.data.classNameTrigger))}}
   classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}

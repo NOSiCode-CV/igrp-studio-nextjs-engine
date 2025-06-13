@@ -2,7 +2,7 @@
   column={column}
   placeholder="{{resourceConfig.properties.placeholder}}"
   {{!--onChange={setInput{{resourceConfig.tag}}Value}--}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
   {{#if resourceConfig.interactions}}

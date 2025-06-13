@@ -3,16 +3,16 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.properties.variantSection}}
+  {{#if (and resourceConfig.properties.variantSection (not resourceConfig.data.variantSection))}}
   variantSection={ "{{resourceConfig.properties.variantSection}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.colorSection}}
+  {{#if (and resourceConfig.properties.colorSection (not resourceConfig.data.colorSection))}}
   colorSection={ "{{resourceConfig.properties.colorSection}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.titleClassName}}
+  {{#if (and resourceConfig.properties.titleClassName (not resourceConfig.data.titleClassName))}}
   titleClassName={ "{{resourceConfig.properties.titleClassName}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title={ "{{resourceConfig.properties.title}}" }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

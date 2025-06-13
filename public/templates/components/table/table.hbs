@@ -3,37 +3,37 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.properties.showFilter}}
+  {{#if (and resourceConfig.properties.showFilter (not resourceConfig.data.showFilter))}}
   showFilter={ {{resourceConfig.properties.showFilter}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showPagination}}
+  {{#if (and resourceConfig.properties.showPagination (not resourceConfig.data.showPagination))}}
   showPagination={ {{resourceConfig.properties.showFilter}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showToggleColumn}}
+  {{#if (and resourceConfig.properties.showToggleColumn (not resourceConfig.data.showToggleColumn))}}
   showToggleColumn={ {{resourceConfig.properties.showToggleColumn}} }
   {{/if~}}
-  {{#if resourceConfig.properties.isNumericPagination}}
+  {{#if (and resourceConfig.properties.isNumericPagination (not resourceConfig.data.isNumericPagination))}}
   isNumericPagination={ {{resourceConfig.properties.isNumericPagination}} }
   {{/if~}}
-  {{#if resourceConfig.properties.isServerSide}}
+  {{#if (and resourceConfig.properties.isServerSide (not resourceConfig.data.isServerSide))}}
   isServerSide={ {{resourceConfig.properties.isServerSide}} }
   {{/if~}}
-  {{#if resourceConfig.properties.toggleLabel}}
+  {{#if (and resourceConfig.properties.toggleLabel (not resourceConfig.data.toggleLabel))}}
   toggleLabel="{{resourceConfig.properties.toggleLabel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.toggleOptionsLabel}}
+  {{#if (and resourceConfig.properties.toggleOptionsLabel (not resourceConfig.data.toggleOptionsLabel))}}
   toggleOptionsLabel="{{resourceConfig.properties.toggleOptionsLabel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.tableClassName}}
+  {{#if (and resourceConfig.properties.tableClassName (not resourceConfig.data.tableClassName))}}
   tableClassName="{{resourceConfig.properties.tableClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.tableHeaderClassName}}
+  {{#if (and resourceConfig.properties.tableHeaderClassName (not resourceConfig.data.tableHeaderClassName))}}
   tableHeaderClassName="{{resourceConfig.properties.tableHeaderClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.tableBodyClassName}}
+  {{#if (and resourceConfig.properties.tableBodyClassName (not resourceConfig.data.tableBodyClassName))}}
   tableBodyClassName="{{resourceConfig.properties.tableBodyClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.paginationClassName}}
+  {{#if (and resourceConfig.properties.paginationClassName (not resourceConfig.data.paginationClassName))}}
   paginationClassName="{{resourceConfig.properties.paginationClassName}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

@@ -1,23 +1,23 @@
 <IGRPMenuNavigation
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title={ "{{resourceConfig.properties.title}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.badgeContent}}
+  {{#if (and resourceConfig.properties.badgeContent (not resourceConfig.data.badgeContent))}}
   badgeContent={ "{{resourceConfig.properties.badgeContent}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.badgeVariant}}
+  {{#if (and resourceConfig.properties.badgeVariant (not resourceConfig.data.badgeVariant))}}
   badgeVariant={ "{{resourceConfig.properties.badgeVariant}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.badgeColor}}
+  {{#if (and resourceConfig.properties.badgeColor (not resourceConfig.data.badgeColor))}}
   badgeColor={ "{{resourceConfig.properties.badgeColor}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.badgeClassName}}
+  {{#if (and resourceConfig.properties.badgeClassName (not resourceConfig.data.badgeClassName))}}
   badgeClassName={ "{{resourceConfig.properties.badgeClassName}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.showChevron}}
+  {{#if (and resourceConfig.properties.showChevron (not resourceConfig.data.showChevron))}}
   showChevron={ {{resourceConfig.properties.showChevron}} }
   {{/if~}}
-  {{#if resourceConfig.properties.isStickyTop}}
+  {{#if (and resourceConfig.properties.isStickyTop (not resourceConfig.data.isStickyTop))}}
   isStickyTop={ {{resourceConfig.properties.isStickyTop}} }
   {{/if~}}
   {{#if resourceConfig.interactions}}

@@ -6,22 +6,22 @@
   {{#if resourceConfig.dataType}}
   schema={ {{toCamelCase resourceConfig.dataType}} }
   {{/if}}
-  {{#if resourceConfig.properties.validationMode}}
+  {{#if (and resourceConfig.properties.validationMode (not resourceConfig.data.validationMode))}}
   validationMode="{{resourceConfig.properties.validationMode}}"
   {{/if~}}
-  {{#if resourceConfig.properties.gridClassName}}
+  {{#if (and resourceConfig.properties.gridClassName (not resourceConfig.data.gridClassName))}}
   gridClassName="{{resourceConfig.properties.gridClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.resetAfterSubmit}}
+  {{#if (and resourceConfig.properties.resetAfterSubmit (not resourceConfig.data.resetAfterSubmit))}}
   resetAfterSubmit={ {{resourceConfig.properties.resetAfterSubmit}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showAction}}
+  {{#if (and resourceConfig.properties.showAction (not resourceConfig.data.showAction))}}
   showAction={ {{resourceConfig.properties.showAction}} }
   {{/if~}}
-  {{#if resourceConfig.properties.submitText}}
+  {{#if (and resourceConfig.properties.submitText (not resourceConfig.data.submitText))}}
   submitText="{{resourceConfig.properties.submitText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.submitVariant}}
+  {{#if (and resourceConfig.properties.submitVariant (not resourceConfig.data.submitVariant))}}
   submitVariant="{{resourceConfig.properties.submitVariant}}"
   {{/if~}}
   formRef={ form{{resourceConfig.tag}}Ref }

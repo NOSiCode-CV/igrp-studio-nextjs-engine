@@ -5,7 +5,7 @@
   {{/if}}
   lines={
     [
-    {{#if resourceConfig.properties.lines}}
+    {{#if (and resourceConfig.properties.lines (not resourceConfig.data.lines))}}
       {{#each resourceConfig.properties.lines}}
         {
           dataKey: '{{this.dataKey}}',
@@ -22,7 +22,7 @@
     {{/if~}}
     ]
   }
-  {{#if resourceConfig.properties.customLegend}}
+  {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>
     {{{resourceConfig.properties.customLegend}}}
@@ -30,68 +30,68 @@
   }
   {{/if}}
   categoryKey="{{resourceConfig.properties.categoryKey}}"
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title="{{resourceConfig.properties.title}}"
   {{/if~}}
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showGrid}}
+  {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showTooltip}}
+  {{#if (and resourceConfig.properties.showTooltip (not resourceConfig.data.showTooltip))}}
   showTooltip={ {{resourceConfig.properties.showTooltip}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideAxis}}
+  {{#if (and resourceConfig.properties.hideAxis (not resourceConfig.data.hideAxis))}}
   hideAxis={ {{resourceConfig.properties.hideAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideXAxis}}
+  {{#if (and resourceConfig.properties.hideXAxis (not resourceConfig.data.hideXAxis))}}
   hideXAxis={ {{resourceConfig.properties.hideXAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideYAxis}}
+  {{#if (and resourceConfig.properties.hideYAxis (not resourceConfig.data.hideYAxis))}}
   hideYAxis={ {{resourceConfig.properties.hideYAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.stacked}}
+  {{#if (and resourceConfig.properties.stacked (not resourceConfig.data.stacked))}}
   stacked={ {{resourceConfig.properties.stacked}} }
   {{/if~}}
-  {{#if resourceConfig.properties.expanded}}
+  {{#if (and resourceConfig.properties.expanded (not resourceConfig.data.expanded))}}
   expanded={ {{resourceConfig.properties.expanded}} }
   {{/if~}}
-  {{#if resourceConfig.properties.height}}
+  {{#if (and resourceConfig.properties.height (not resourceConfig.data.height))}}
   height={ {{resourceConfig.properties.height}} }
   {{/if~}}
-  {{#if resourceConfig.properties.width}}
+  {{#if (and resourceConfig.properties.width (not resourceConfig.data.width))}}
   width={ {{resourceConfig.properties.width}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showReferenceZero}}
+  {{#if (and resourceConfig.properties.showReferenceZero (not resourceConfig.data.showReferenceZero))}}
   showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
   {{/if~}}
-  {{#if resourceConfig.properties.gridColor}}
+  {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
   gridColor="{{resourceConfig.properties.gridColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.backgroundColor}}
+  {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
   backgroundColor="{{resourceConfig.properties.backgroundColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.referenceLineColor}}
+  {{#if (and resourceConfig.properties.referenceLineColor (not resourceConfig.data.referenceLineColor))}}
   referenceLineColor="{{resourceConfig.properties.referenceLineColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.axisColor}}
+  {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
   axisColor="{{resourceConfig.properties.axisColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.footer}}
+  {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
       description: "{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
-  {{#if resourceConfig.properties.legendPosition}}
+  {{#if (and resourceConfig.properties.legendPosition (not resourceConfig.data.legendPosition))}}
   legendPosition="{{resourceConfig.properties.legendPosition}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
+  {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
   size="{{resourceConfig.properties.size}}"
   {{/if~}}
-  {{#if resourceConfig.properties.valueDomain}}
+  {{#if (and resourceConfig.properties.valueDomain (not resourceConfig.data.valueDomain))}}
   valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

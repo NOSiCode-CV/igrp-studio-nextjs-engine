@@ -1,8 +1,8 @@
 <IGRPDropdownItem
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
+  {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
   size="{{resourceConfig.properties.size}}"
   {{/if~}}
   disabled={ {{resourceConfig.id}}Disabled }
@@ -33,7 +33,7 @@
   {{/if}}
   {{/if}}
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
-  onClick={(e) => { {{#if resourceConfig.properties.action}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
+  onClick={(e) => { {{#if (and resourceConfig.properties.action (not resourceConfig.data.action))}}{{resourceConfig.properties.action}}(e){{else}}handle{{resourceConfig.id}}Click(e){{/if}} }}
 >
 {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}

@@ -4,25 +4,25 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   title="{{resourceConfig.properties.title}}"
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconBackButton}}
   iconBackButton="{{resourceConfig.properties.iconProperties.iconBackButton}}"
   {{/if~}}
-  {{#if resourceConfig.properties.isSticky}}
+  {{#if (and resourceConfig.properties.isSticky (not resourceConfig.data.isSticky))}}
   isSticky={ {{resourceConfig.properties.isSticky}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showBackButton}}
+  {{#if (and resourceConfig.properties.showBackButton (not resourceConfig.data.showBackButton))}}
   showBackButton={ {{resourceConfig.properties.showBackButton}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
   value="{{resourceConfig.properties.value}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
-  urlBackButton={ `{{{resolve-segment-path resourceConfig.properties.urlBackButton resourceConfig.properties.segments}}}{{#if resourceConfig.properties.params}}{{{resolve-query-params resourceConfig.properties.params}}}{{/if}}` }
+  urlBackButton={ `{{{resolve-segment-path resourceConfig.properties.urlBackButton resourceConfig.properties.segments}}}{{#if (and resourceConfig.properties.params (not resourceConfig.data.params))}}{{{resolve-query-params resourceConfig.properties.params}}}{{/if}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
@@ -36,7 +36,7 @@
   {{/if~}}
   {{/if}}
   {{/if}}
-  {{#if resourceConfig.properties.headlineClassName}}
+  {{#if (and resourceConfig.properties.headlineClassName (not resourceConfig.data.headlineClassName))}}
   headlineClassName="{{resourceConfig.properties.headlineClassName}}"
   {{/if~}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}

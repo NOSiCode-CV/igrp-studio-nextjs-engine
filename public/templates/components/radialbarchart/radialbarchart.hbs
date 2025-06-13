@@ -5,7 +5,7 @@
   {{/if}}
   bars={
     [
-    {{#if resourceConfig.properties.bars}}
+    {{#if (and resourceConfig.properties.bars (not resourceConfig.data.bars))}}
       {{#each resourceConfig.properties.bars}}
         {
           dataKey: '{{this.dataKey}}',
@@ -49,68 +49,68 @@
   }
   categoryKey="{{resourceConfig.properties.categoryKey}}"
   nameKey="{{resourceConfig.properties.nameKey}}"
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title="{{resourceConfig.properties.title}}"
   {{/if~}}
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showGrid}}
+  {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showTooltip}}
+  {{#if (and resourceConfig.properties.showTooltip (not resourceConfig.data.showTooltip))}}
   showTooltip={ {{resourceConfig.properties.showTooltip}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showBackground}}
+  {{#if (and resourceConfig.properties.showBackground (not resourceConfig.data.showBackground))}}
   showBackground={ {{resourceConfig.properties.showBackground}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showRadiusAxis}}
+  {{#if (and resourceConfig.properties.showRadiusAxis (not resourceConfig.data.showRadiusAxis))}}
   showRadiusAxis={ {{resourceConfig.properties.showRadiusAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.height}}
+  {{#if (and resourceConfig.properties.height (not resourceConfig.data.height))}}
   height={ {{resourceConfig.properties.height}} }
   {{/if~}}
-  {{#if resourceConfig.properties.width}}
+  {{#if (and resourceConfig.properties.width (not resourceConfig.data.width))}}
   width={ {{resourceConfig.properties.width}} }
   {{/if~}}
-  {{#if resourceConfig.properties.startAngle}}
+  {{#if (and resourceConfig.properties.startAngle (not resourceConfig.data.startAngle))}}
   startAngle={ {{resourceConfig.properties.startAngle}} }
   {{/if~}}
-  {{#if resourceConfig.properties.endAngle}}
+  {{#if (and resourceConfig.properties.endAngle (not resourceConfig.data.endAngle))}}
   endAngle={ {{resourceConfig.properties.endAngle}} }
   {{/if~}}
-  {{#if resourceConfig.properties.innerRadius}}
+  {{#if (and resourceConfig.properties.innerRadius (not resourceConfig.data.innerRadius))}}
   innerRadius="{{resourceConfig.properties.innerRadius}}"
   {{/if~}}
-  {{#if resourceConfig.properties.outerRadius}}
+  {{#if (and resourceConfig.properties.outerRadius (not resourceConfig.data.outerRadius))}}
   outerRadius="{{resourceConfig.properties.outerRadius}}"
   {{/if~}}
-  {{#if resourceConfig.properties.barSize}}
+  {{#if (and resourceConfig.properties.barSize (not resourceConfig.data.barSize))}}
   barSize={ {{resourceConfig.properties.barSize}} }
   {{/if~}}
-  {{#if resourceConfig.properties.gridType}}
+  {{#if (and resourceConfig.properties.gridType (not resourceConfig.data.gridType))}}
   gridType="{{resourceConfig.properties.gridType}}"
   {{/if~}}
-  {{#if resourceConfig.properties.gridColor}}
+  {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
   gridColor="{{resourceConfig.properties.gridColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.backgroundColor}}
+  {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
   backgroundColor="{{resourceConfig.properties.backgroundColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.referenceLineColor}}
+  {{#if (and resourceConfig.properties.referenceLineColor (not resourceConfig.data.referenceLineColor))}}
   referenceLineColor="{{resourceConfig.properties.referenceLineColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.axisColor}}
+  {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
   axisColor="{{resourceConfig.properties.axisColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.footer}}
+  {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
       description: "{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
-  {{#if resourceConfig.properties.centerText}}
+  {{#if (and resourceConfig.properties.centerText (not resourceConfig.data.centerText))}}
   centerText={
     {
       show: {{resourceConfig.properties.centerText.show}}
@@ -120,10 +120,10 @@
     }
   }
   {{/if~}}
-  {{#if resourceConfig.properties.legendPosition}}
+  {{#if (and resourceConfig.properties.legendPosition (not resourceConfig.data.legendPosition))}}
   legendPosition="{{resourceConfig.properties.legendPosition}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
+  {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
   size="{{resourceConfig.properties.size}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

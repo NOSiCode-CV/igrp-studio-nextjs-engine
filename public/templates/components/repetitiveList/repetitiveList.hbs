@@ -3,10 +3,10 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.properties.data}}
+  {{#if (and resourceConfig.properties.data (not resourceConfig.data.data))}}
   items={ {{{resourceConfig.properties.data}}} }
   {{/if~}}
-  {{#if resourceConfig.properties.keyExtractor}}
+  {{#if (and resourceConfig.properties.keyExtractor (not resourceConfig.data.keyExtractor))}}
   keyExtractor={ {{{resourceConfig.properties.keyExtractor}}} }
   {{/if~}}
   {{!--{{#if (and resourceConfig.properties.className parentResourceConfig)}}

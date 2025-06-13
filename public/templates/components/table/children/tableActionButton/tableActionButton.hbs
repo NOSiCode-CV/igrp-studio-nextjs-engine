@@ -5,7 +5,7 @@
       component: {{resolveComponent resourceConfig.componentName registry 'button'}},
       props: {
         {{#if resourceConfig.properties.title}}title: "{{resourceConfig.properties.title}}",{{/if~}}
-        {{#if resourceConfig.properties.labelTrigger}}labelTrigger: "{{resourceConfig.properties.labelTrigger}}",{{/if~}}
+        {{#if (and resourceConfig.properties.labelTrigger (not resourceConfig.data.labelTrigger))}}labelTrigger: "{{resourceConfig.properties.labelTrigger}}",{{/if~}}
         {{#if resourceConfig.iconProperties.iconName}}icon: "{{resourceConfig.properties.iconName}}",{{/if~}}
         {{#if resourceConfig.iconProperties.iconPlacement}}iconPlacement: "{{resourceConfig.properties.iconPlacement}}",{{/if~}}
         {{#if resourceConfig.iconProperties.iconClassName}}iconClassName: "{{resourceConfig.properties.iconClassName}}",{{/if~}}
@@ -22,7 +22,7 @@
         {{#if resourceConfig.properties.labelConfirm}}labelConfirm: "{{resourceConfig.properties.labelConfirm}}",{{/if~}}
         {{#if resourceConfig.properties.classNameConfirm}}classNameConfirm: "{{resourceConfig.properties.classNameConfirm}}",{{/if~}}
         {{#if resourceConfig.properties.variantConfirm}}variantConfirm: "{{resourceConfig.properties.variantConfirm}}",{{/if~}}
-        {{#if resourceConfig.properties.actionConfirm}}onClickConfirm: () => {{resourceConfig.properties.actionConfirm}}(rowData),{{/if~}}
+        {{#if (and resourceConfig.properties.actionConfirm (not resourceConfig.data.actionConfirm))}}onClickConfirm: () => {{resourceConfig.properties.actionConfirm}}(rowData),{{/if~}}
         {{#if resourceConfig.children}}
         children:
         {{#each resourceConfig.children}}

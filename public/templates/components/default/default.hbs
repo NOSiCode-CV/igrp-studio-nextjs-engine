@@ -33,7 +33,7 @@
   {{#if resourceConfig.content}}
   {{resourceConfig.content}}
   {{else}}
-  {{#if resourceConfig.properties.content}}
+  {{#if (and resourceConfig.properties.content (not resourceConfig.data.content))}}
   {{resourceConfig.properties.content}}
   {{else}}
   {{#if resourceConfig.children}}

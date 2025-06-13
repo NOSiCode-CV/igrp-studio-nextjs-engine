@@ -4,28 +4,28 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   name={ `{{resourceConfig.tag}}` }
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
-  {{#if resourceConfig.properties.label}}
+  {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
   label="{{resourceConfig.properties.label}}"
   {{/if~}}
-  {{#if resourceConfig.properties.floatingLabel}}
+  {{#if (and resourceConfig.properties.floatingLabel (not resourceConfig.data.floatingLabel))}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.helperText}}
+  {{#if (and resourceConfig.properties.helperText (not resourceConfig.data.helperText))}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.defaultValue}}
+  {{#if (and resourceConfig.properties.defaultValue (not resourceConfig.data.defaultValue))}}
   defaultValue="{{resourceConfig.properties.defaultValue}}"
   {{/if~}}
-  {{#if resourceConfig.properties.defaultProtocol}}
+  {{#if (and resourceConfig.properties.defaultProtocol (not resourceConfig.data.defaultProtocol))}}
   defaultProtocol="{{resourceConfig.properties.defaultProtocol}}"
   {{/if~}}
-  {{#if resourceConfig.properties.error}}
+  {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
   error="{{resourceConfig.properties.error}}"
   {{/if~}}
-  {{#if resourceConfig.properties.protocols}}
+  {{#if (and resourceConfig.properties.protocols (not resourceConfig.data.protocols))}}
   protocols={
     [
     {{#each resourceConfig.properties.protocols}}
@@ -37,10 +37,10 @@
     ]
   }
   {{/if~}}
-  {{#if resourceConfig.properties.showIcon}}
+  {{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}
-  {{#if resourceConfig.properties.required}}
+  {{#if (and resourceConfig.properties.required (not resourceConfig.data.required))}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
@@ -55,10 +55,10 @@
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.readOnly}}
+  {{#if (and resourceConfig.properties.readOnly (not resourceConfig.data.readOnly))}}
   readOnly
   {{/if~}}
-  {{#if resourceConfig.properties.autofocus}}
+  {{#if (and resourceConfig.properties.autofocus (not resourceConfig.data.autofocus))}}
   autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

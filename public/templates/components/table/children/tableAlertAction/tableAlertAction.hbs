@@ -1,42 +1,42 @@
 <IGRPDataTableButtonAlert
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   modalTitle="{{resourceConfig.properties.title}}"
   {{/if~}}
   labelTrigger="{{resourceConfig.properties.labelTrigger}}"
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant="{{resourceConfig.properties.variant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
   icon="{{resourceConfig.properties.iconProperties.iconName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.variantCancel}}
+  {{#if (and resourceConfig.properties.variantCancel (not resourceConfig.data.variantCancel))}}
   variantCancel="{{resourceConfig.properties.variantCancel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.variantConfirm}}
+  {{#if (and resourceConfig.properties.variantConfirm (not resourceConfig.data.variantConfirm))}}
   variantConfirm="{{resourceConfig.properties.variantConfirm}}"
   {{/if~}}
-  {{#if resourceConfig.properties.labelCancel}}
+  {{#if (and resourceConfig.properties.labelCancel (not resourceConfig.data.labelCancel))}}
   labelCancel="{{resourceConfig.properties.labelCancel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.labelConfirm}}
+  {{#if (and resourceConfig.properties.labelConfirm (not resourceConfig.data.labelConfirm))}}
   labelConfirm="{{resourceConfig.properties.labelConfirm}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showCancel}}
+  {{#if (and resourceConfig.properties.showCancel (not resourceConfig.data.showCancel))}}
   showCancel={ {{resourceConfig.properties.showCancel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showConfirm}}
+  {{#if (and resourceConfig.properties.showConfirm (not resourceConfig.data.showConfirm))}}
   showConfirm={ {{resourceConfig.properties.showCancel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.classNameCancel}}
+  {{#if (and resourceConfig.properties.classNameCancel (not resourceConfig.data.classNameCancel))}}
   classNameCancel="{{resourceConfig.properties.classNameCancel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.classNameConfirm}}
+  {{#if (and resourceConfig.properties.classNameConfirm (not resourceConfig.data.classNameConfirm))}}
   classNameConfirm="{{resourceConfig.properties.classNameConfirm}}"
   {{/if~}}
-  {{#if resourceConfig.properties.classNameTrigger}}
+  {{#if (and resourceConfig.properties.classNameTrigger (not resourceConfig.data.classNameTrigger))}}
   classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}

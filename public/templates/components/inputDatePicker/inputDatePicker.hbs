@@ -1,45 +1,45 @@
 <IGRPDatePicker
-  {{#if resourceConfig.properties.placeholder}}
+  {{#if (and resourceConfig.properties.placeholder (not resourceConfig.data.placeholder))}}
   placeholder="{{resourceConfig.properties.placeholder}}"
   {{/if~}}
   {{#if resourceConfig.tag}}
   name={ `{{resourceConfig.tag}}` }
   id={ `{{resourceConfig.tag}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.defaultValue}}
+  {{#if (and resourceConfig.properties.defaultValue (not resourceConfig.data.defaultValue))}}
   defaultValue="{{resourceConfig.properties.defaultValue}}"
   {{/if~}}
-  {{#if resourceConfig.properties.error}}
+  {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
   error="{{resourceConfig.properties.error}}"
   {{/if~}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
-  {{#if resourceConfig.properties.label}}
+  {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
   label="{{resourceConfig.properties.label}}"
   {{/if~}}
-  {{#if resourceConfig.properties.floatingLabel}}
+  {{#if (and resourceConfig.properties.floatingLabel (not resourceConfig.data.floatingLabel))}}
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
-  {{#if resourceConfig.properties.helperText}}
+  {{#if (and resourceConfig.properties.helperText (not resourceConfig.data.helperText))}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.startDate}}
+  {{#if (and resourceConfig.properties.startDate (not resourceConfig.data.startDate))}}
   startDate={ new Date("{{resourceConfig.properties.startDate}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.endDate}}
+  {{#if (and resourceConfig.properties.endDate (not resourceConfig.data.endDate))}}
   endDate={ new Date("{{resourceConfig.properties.endDate}}") }
   {{/if~}}
-  {{!--{{#if resourceConfig.properties.showIcon}}
+  {{!--{{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}--}}
-  {{#if resourceConfig.properties.required}}
+  {{#if (and resourceConfig.properties.required (not resourceConfig.data.required))}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
-  {{#if resourceConfig.properties.labelClassName}}
+  {{#if (and resourceConfig.properties.labelClassName (not resourceConfig.data.labelClassName))}}
   labelClassName="{{resourceConfig.properties.labelClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.gridSize}}
+  {{#if (and resourceConfig.properties.gridSize (not resourceConfig.data.gridSize))}}
   gridSize="{{resourceConfig.properties.gridSize}}"
   {{/if~}}
   {{!--{{#if resourceConfig.properties.iconProperties.iconName}}
@@ -54,73 +54,73 @@
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
   {{/if~}}--}}
-  {{#if resourceConfig.properties.dateFormat}}
+  {{#if (and resourceConfig.properties.dateFormat (not resourceConfig.data.dateFormat))}}
   dateFormat="{{resourceConfig.properties.dateFormat}}"
   {{/if~}}
-  {{#if resourceConfig.properties.today}}
+  {{#if (and resourceConfig.properties.today (not resourceConfig.data.today))}}
   today={ new Date("{{resourceConfig.properties.today}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.defaultMonth}}
+  {{#if (and resourceConfig.properties.defaultMonth (not resourceConfig.data.defaultMonth))}}
   defaultMonth={ new Date("{{resourceConfig.properties.defaultMonth}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.startMonth}}
+  {{#if (and resourceConfig.properties.startMonth (not resourceConfig.data.startMonth))}}
   startMonth={ new Date("{{resourceConfig.properties.startMonth}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.month}}
+  {{#if (and resourceConfig.properties.month (not resourceConfig.data.month))}}
   month={ new Date("{{resourceConfig.properties.month}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.endMonth}}
+  {{#if (and resourceConfig.properties.endMonth (not resourceConfig.data.endMonth))}}
   endMonth={ new Date("{{resourceConfig.properties.endMonth}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.numberOfMonths}}
+  {{#if (and resourceConfig.properties.numberOfMonths (not resourceConfig.data.numberOfMonths))}}
   numberOfMonths={ {{resourceConfig.properties.numberOfMonths}} }
   {{/if~}}
-  {{#if resourceConfig.properties.weekStartsOn}}
+  {{#if (and resourceConfig.properties.weekStartsOn (not resourceConfig.data.weekStartsOn))}}
   weekStartsOn={ {{resourceConfig.properties.weekStartsOn}} }
   {{/if~}}
-  {{#if resourceConfig.properties.pagedNavigation}}
+  {{#if (and resourceConfig.properties.pagedNavigation (not resourceConfig.data.pagedNavigation))}}
   pagedNavigation={ {{resourceConfig.properties.pagedNavigation}} }
   {{/if~}}
-  {{#if resourceConfig.properties.reverseMonths}}
+  {{#if (and resourceConfig.properties.reverseMonths (not resourceConfig.data.reverseMonths))}}
   reverseMonths={ {{resourceConfig.properties.reverseMonths}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideNavigation}}
+  {{#if (and resourceConfig.properties.hideNavigation (not resourceConfig.data.hideNavigation))}}
   hideNavigation={ {{resourceConfig.properties.hideNavigation}} }
   {{/if~}}
-  {{#if resourceConfig.properties.disableNavigation}}
+  {{#if (and resourceConfig.properties.disableNavigation (not resourceConfig.data.disableNavigation))}}
   disableNavigation={ {{resourceConfig.properties.disableNavigation}} }
   {{/if~}}
-  {{#if resourceConfig.properties.fixedWeeks}}
+  {{#if (and resourceConfig.properties.fixedWeeks (not resourceConfig.data.fixedWeeks))}}
   fixedWeeks={ {{resourceConfig.properties.fixedWeeks}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideWeekdays}}
+  {{#if (and resourceConfig.properties.hideWeekdays (not resourceConfig.data.hideWeekdays))}}
   hideWeekdays={ {{resourceConfig.properties.hideWeekdays}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showOutsideDays}}
+  {{#if (and resourceConfig.properties.showOutsideDays (not resourceConfig.data.showOutsideDays))}}
   showOutsideDays={ {{resourceConfig.properties.showOutsideDays}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showWeekNumber}}
+  {{#if (and resourceConfig.properties.showWeekNumber (not resourceConfig.data.showWeekNumber))}}
   showWeekNumber={ {{resourceConfig.properties.showWeekNumber}} }
   {{/if~}}
-  {{#if resourceConfig.properties.animate}}
+  {{#if (and resourceConfig.properties.animate (not resourceConfig.data.animate))}}
   animate={ {{resourceConfig.properties.animate}} }
   {{/if~}}
-  {{#if resourceConfig.properties.broadcastCalendar}}
+  {{#if (and resourceConfig.properties.broadcastCalendar (not resourceConfig.data.broadcastCalendar))}}
   broadcastCalendar={ {{resourceConfig.properties.broadcastCalendar}} }
   {{/if~}}
-  {{#if resourceConfig.properties.ISOWeek}}
+  {{#if (and resourceConfig.properties.ISOWeek (not resourceConfig.data.ISOWeek))}}
   ISOWeek={ {{resourceConfig.properties.ISOWeek}} }
   {{/if~}}
-  {{#if resourceConfig.properties.captionLayout}}
+  {{#if (and resourceConfig.properties.captionLayout (not resourceConfig.data.captionLayout))}}
   captionLayout="{{resourceConfig.properties.captionLayout}}"
   {{/if~}}
-  {{#if resourceConfig.properties.navLayout}}
+  {{#if (and resourceConfig.properties.navLayout (not resourceConfig.data.navLayout))}}
   navLayout="{{resourceConfig.properties.navLayout}}"
   {{/if~}}
-  {{#if resourceConfig.properties.readOnly}}
+  {{#if (and resourceConfig.properties.readOnly (not resourceConfig.data.readOnly))}}
   readOnly
   {{/if~}}
-  {{#if resourceConfig.properties.autofocus}}
+  {{#if (and resourceConfig.properties.autofocus (not resourceConfig.data.autofocus))}}
   autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

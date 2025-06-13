@@ -5,7 +5,7 @@
   {{/if}}
   radars={
     [
-    {{#if resourceConfig.properties.radars}}
+    {{#if (and resourceConfig.properties.radars (not resourceConfig.data.radars))}}
       {{#each resourceConfig.properties.radars}}
         {
           dataKey: '{{this.dataKey}}',
@@ -22,86 +22,86 @@
   }
   categoryKey="{{resourceConfig.properties.categoryKey}}"
   angleAxisKey="{{resourceConfig.properties.angleAxisKey}}"
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title="{{resourceConfig.properties.title}}"
   {{/if~}}
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showGrid}}
+  {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showTooltip}}
+  {{#if (and resourceConfig.properties.showTooltip (not resourceConfig.data.showTooltip))}}
   showTooltip={ {{resourceConfig.properties.showTooltip}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideAxis}}
+  {{#if (and resourceConfig.properties.hideAxis (not resourceConfig.data.hideAxis))}}
   hideAxis={ {{resourceConfig.properties.hideAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideXAxis}}
+  {{#if (and resourceConfig.properties.hideXAxis (not resourceConfig.data.hideXAxis))}}
   hideXAxis={ {{resourceConfig.properties.hideXAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.hideYAxis}}
+  {{#if (and resourceConfig.properties.hideYAxis (not resourceConfig.data.hideYAxis))}}
   hideYAxis={ {{resourceConfig.properties.hideYAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.stacked}}
+  {{#if (and resourceConfig.properties.stacked (not resourceConfig.data.stacked))}}
   stacked={ {{resourceConfig.properties.stacked}} }
   {{/if~}}
-  {{#if resourceConfig.properties.expanded}}
+  {{#if (and resourceConfig.properties.expanded (not resourceConfig.data.expanded))}}
   expanded={ {{resourceConfig.properties.expanded}} }
   {{/if~}}
-  {{#if resourceConfig.properties.height}}
+  {{#if (and resourceConfig.properties.height (not resourceConfig.data.height))}}
   height={ {{resourceConfig.properties.height}} }
   {{/if~}}
-  {{#if resourceConfig.properties.width}}
+  {{#if (and resourceConfig.properties.width (not resourceConfig.data.width))}}
   width={ {{resourceConfig.properties.width}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showReferenceZero}}
+  {{#if (and resourceConfig.properties.showReferenceZero (not resourceConfig.data.showReferenceZero))}}
   showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
   {{/if~}}
-  {{#if resourceConfig.properties.gridColor}}
+  {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
   gridColor="{{resourceConfig.properties.gridColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.backgroundColor}}
+  {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
   backgroundColor="{{resourceConfig.properties.backgroundColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.axisColor}}
+  {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
   axisColor="{{resourceConfig.properties.axisColor}}"
   {{/if~}}
-  {{#if resourceConfig.properties.footer}}
+  {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
       description: "{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
-  {{#if resourceConfig.properties.polarGridType}}
+  {{#if (and resourceConfig.properties.polarGridType (not resourceConfig.data.polarGridType))}}
   polarGridType="{{resourceConfig.properties.polarGridType}}"
   {{/if~}}
-  {{#if resourceConfig.properties.polarGridLineType}}
+  {{#if (and resourceConfig.properties.polarGridLineType (not resourceConfig.data.polarGridLineType))}}
   polarGridLineType="{{resourceConfig.properties.polarGridLineType}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showPolarGrid}}
+  {{#if (and resourceConfig.properties.showPolarGrid (not resourceConfig.data.showPolarGrid))}}
   showPolarGrid={ {{resourceConfig.properties.showPolarGrid}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showRadiusAxis}}
+  {{#if (and resourceConfig.properties.showRadiusAxis (not resourceConfig.data.showRadiusAxis))}}
   showRadiusAxis={ {{resourceConfig.properties.showRadiusAxis}} }
   {{/if~}}
-  {{#if resourceConfig.properties.radiusAxisDomain}}
+  {{#if (and resourceConfig.properties.radiusAxisDomain (not resourceConfig.data.radiusAxisDomain))}}
   radiusAxisDomain=[{{resourceConfig.properties.radiusAxisDomain.min}}, {{resourceConfig.properties.radiusAxisDomain.max}}]
   {{/if~}}
-  {{#if resourceConfig.properties.radiusAxisAngle}}
+  {{#if (and resourceConfig.properties.radiusAxisAngle (not resourceConfig.data.radiusAxisAngle))}}
   radiusAxisAngle={ {{resourceConfig.properties.radiusAxisAngle}} }
   {{/if~}}
-  {{#if resourceConfig.properties.customAngleAsisTick}}
+  {{#if (and resourceConfig.properties.customAngleAsisTick (not resourceConfig.data.customAngleAsisTick))}}
   customAngleAsisTick={ {{{json resourceConfig.properties.customAngleAsisTick}}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showGridLines}}
+  {{#if (and resourceConfig.properties.showGridLines (not resourceConfig.data.showGridLines))}}
   showGridLines={ {{resourceConfig.properties.showGridLines}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showRadiusLines}}
+  {{#if (and resourceConfig.properties.showRadiusLines (not resourceConfig.data.showRadiusLines))}}
   showRadiusLines={ {{resourceConfig.properties.showRadiusLines}} }
   {{/if~}}
-  {{#if resourceConfig.properties.gridFilled}}
+  {{#if (and resourceConfig.properties.gridFilled (not resourceConfig.data.gridFilled))}}
   gridFilled={ {{resourceConfig.properties.gridFilled}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

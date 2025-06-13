@@ -3,16 +3,16 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.properties.variant}}
+  {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant={ "{{resourceConfig.properties.variant}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.tabListClassName}}
+  {{#if (and resourceConfig.properties.tabListClassName (not resourceConfig.data.tabListClassName))}}
   tabListClassName={ "{{resourceConfig.properties.tabListClassName}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.tabTriggerClassName}}
+  {{#if (and resourceConfig.properties.tabTriggerClassName (not resourceConfig.data.tabTriggerClassName))}}
   tabTriggerClassName={ "{{resourceConfig.properties.tabTriggerClassName}}" }
   {{/if~}}
-  {{#if resourceConfig.properties.tabContentClassName}}
+  {{#if (and resourceConfig.properties.tabContentClassName (not resourceConfig.data.tabContentClassName))}}
   tabContentClassName={ "{{resourceConfig.properties.tabContentClassName}}" }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.showIcon}}

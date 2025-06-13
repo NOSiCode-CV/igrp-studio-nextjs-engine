@@ -1,48 +1,48 @@
 <IGRPDatePickerRange
-  {{#if resourceConfig.properties.placeholder}}
+  {{#if (and resourceConfig.properties.placeholder (not resourceConfig.data.placeholder))}}
   placeholder="{{resourceConfig.properties.placeholder}}"
   {{/if~}}
   {{#if resourceConfig.tag}}
   name={ `{{resourceConfig.tag}}` }
   id={ `{{resourceConfig.tag}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.error}}
+  {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
   error="{{resourceConfig.properties.error}}"
   {{/if~}}
-  {{#if resourceConfig.properties.disabled}}
+  {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
-  {{#if resourceConfig.properties.required}}
+  {{#if (and resourceConfig.properties.required (not resourceConfig.data.required))}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
-  {{#if resourceConfig.properties.label}}
+  {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
   label="{{resourceConfig.properties.label}}"
   {{/if~}}
-  {{#if resourceConfig.properties.dayButtonClassName}}
+  {{#if (and resourceConfig.properties.dayButtonClassName (not resourceConfig.data.dayButtonClassName))}}
   dayButtonClassName="{{resourceConfig.properties.dayButtonClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.labelClassName}}
+  {{#if (and resourceConfig.properties.labelClassName (not resourceConfig.data.labelClassName))}}
   labelClassName="{{resourceConfig.properties.labelClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.helperText}}
+  {{#if (and resourceConfig.properties.helperText (not resourceConfig.data.helperText))}}
   helperText="{{resourceConfig.properties.helperText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.startDate}}
+  {{#if (and resourceConfig.properties.startDate (not resourceConfig.data.startDate))}}
   startDate={ new Date("{{resourceConfig.properties.startDate}}") }
   {{/if~}}
-  {{#if resourceConfig.properties.endDate}}
+  {{#if (and resourceConfig.properties.endDate (not resourceConfig.data.endDate))}}
   endDate={ new Date("{{resourceConfig.properties.endDate}}") }
   {{/if~}}
-  {{!--{{#if resourceConfig.properties.showIcon}}
+  {{!--{{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
   {{/if~}}--}}
-  {{#if resourceConfig.properties.required}}
+  {{#if (and resourceConfig.properties.required (not resourceConfig.data.required))}}
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
-  {{#if resourceConfig.properties.labelClassName}}
+  {{#if (and resourceConfig.properties.labelClassName (not resourceConfig.data.labelClassName))}}
   labelClassName="{{resourceConfig.properties.labelClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.gridSize}}
+  {{#if (and resourceConfig.properties.gridSize (not resourceConfig.data.gridSize))}}
   gridSize="{{resourceConfig.properties.gridSize}}"
   {{/if~}}
   {{!--{{#if resourceConfig.properties.iconProperties.iconName}}
@@ -57,10 +57,10 @@
   {{#if resourceConfig.properties.iconProperties.iconPlacement}}
   iconPlacement="{{resourceConfig.properties.iconProperties.iconPlacement}}"
   {{/if~}}
-  {{#if resourceConfig.properties.dateFormat}}
+  {{#if (and resourceConfig.properties.dateFormat (not resourceConfig.data.dateFormat))}}
   dateFormat="{{resourceConfig.properties.dateFormat}}"
   {{/if~}}
-  {{#if resourceConfig.properties.autofocus}}
+  {{#if (and resourceConfig.properties.autofocus (not resourceConfig.data.autofocus))}}
   autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

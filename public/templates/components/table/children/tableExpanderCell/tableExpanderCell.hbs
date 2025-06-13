@@ -1,7 +1,7 @@
 return <IGRPDataTableCellExpander
   row={ row }
   field={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}row.getValue('{{resourceConfig.tag}}'){{/if}} }
-  {{#if resourceConfig.properties.icons}}icons={ [ {{resourceConfig.properties.icons}} ] }{{/if~}}
+  {{#if (and resourceConfig.properties.icons (not resourceConfig.data.icons))}}icons={ [ {{resourceConfig.properties.icons}} ] }{{/if~}}
 >
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}

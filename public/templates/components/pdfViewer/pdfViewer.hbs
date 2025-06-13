@@ -13,19 +13,19 @@
       fileUrl: '{{resourceConfig.properties.fileUrl}}',
     }
   }
-  {{#if resourceConfig.properties.displayMode}}
+  {{#if (and resourceConfig.properties.displayMode (not resourceConfig.data.displayMode))}}
   displayMode="{{resourceConfig.properties.displayMode}}"
   {{/if~}}
-  {{#if resourceConfig.properties.labelButtonCancel}}
+  {{#if (and resourceConfig.properties.labelButtonCancel (not resourceConfig.data.labelButtonCancel))}}
   labelButtonCancel="{{resourceConfig.properties.labelButtonCancel}}"
   {{/if~}}
-  {{#if resourceConfig.properties.labelButtonNewTab}}
+  {{#if (and resourceConfig.properties.labelButtonNewTab (not resourceConfig.data.labelButtonNewTab))}}
   labelButtonNewTab="{{resourceConfig.properties.labelButtonNewTab}}"
   {{/if~}}
-  {{#if resourceConfig.properties.inlineHeight}}
+  {{#if (and resourceConfig.properties.inlineHeight (not resourceConfig.data.inlineHeight))}}
   inlineHeight="{{resourceConfig.properties.inlineHeight}}"
   {{/if~}}
-  {{#if resourceConfig.properties.notFoundLabel}}
+  {{#if (and resourceConfig.properties.notFoundLabel (not resourceConfig.data.notFoundLabel))}}
   notFoundLabel="{{resourceConfig.properties.notFoundLabel}}"
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}

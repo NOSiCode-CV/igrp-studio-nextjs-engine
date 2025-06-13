@@ -1,35 +1,35 @@
 <IGRPModalDialog
-  {{#if resourceConfig.properties.title}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title="{{resourceConfig.properties.title}}"
   {{/if~}}
-  {{#if resourceConfig.properties.description}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description="{{resourceConfig.properties.description}}"
   {{/if~}}
-  {{#if resourceConfig.properties.type}}
+  {{#if (and resourceConfig.properties.type (not resourceConfig.data.type))}}
   type="{{resourceConfig.properties.type}}"
   {{/if~}}
-  {{#if resourceConfig.properties.size}}
+  {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
   size="{{resourceConfig.properties.size}}"
   {{/if~}}
-  {{#if resourceConfig.properties.headerClassName}}
+  {{#if (and resourceConfig.properties.headerClassName (not resourceConfig.data.headerClassName))}}
   headerClassName="{{resourceConfig.properties.headerClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.showCloseButton}}
+  {{#if (and resourceConfig.properties.showCloseButton (not resourceConfig.data.showCloseButton))}}
   showCloseButton={ {{resourceConfig.properties.showCloseButton}} }
   {{/if~}}
-  {{#if resourceConfig.properties.closeOnClickOutside}}
+  {{#if (and resourceConfig.properties.closeOnClickOutside (not resourceConfig.data.closeOnClickOutside))}}
   closeOnClickOutside={ {{resourceConfig.properties.closeOnClickOutside}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showTrigger}}
+  {{#if (and resourceConfig.properties.showTrigger (not resourceConfig.data.showTrigger))}}
   showTrigger={ {{resourceConfig.properties.showTrigger}} }
   {{/if~}}
-  {{#if resourceConfig.properties.triggerText}}
+  {{#if (and resourceConfig.properties.triggerText (not resourceConfig.data.triggerText))}}
   triggerText="{{resourceConfig.properties.triggerText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.triggerVariant}}
+  {{#if (and resourceConfig.properties.triggerVariant (not resourceConfig.data.triggerVariant))}}
   triggerVariant="{{resourceConfig.properties.triggerVariant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.triggerButton}}
+  {{#if (and resourceConfig.properties.triggerButton (not resourceConfig.data.triggerButton))}}
   triggerButton={
     <>
     {{{resourceConfig.properties.triggerButton}}}
@@ -54,46 +54,46 @@
   {{#if resourceConfig.properties.iconProperties.iconColor}}
   iconColor={ {{resourceConfig.properties.iconProperties.iconColor}} }
   {{/if~}}
-  {{#if resourceConfig.properties.showFooter}}
+  {{#if (and resourceConfig.properties.showFooter (not resourceConfig.data.showFooter))}}
   showFooter={ {{resourceConfig.properties.showFooter}} }
   {{/if~}}
-  {{#if resourceConfig.properties.footerClassName}}
+  {{#if (and resourceConfig.properties.footerClassName (not resourceConfig.data.footerClassName))}}
   footerClassName="{{resourceConfig.properties.footerClassName}}"
   {{/if~}}
-  {{#if resourceConfig.properties.footerDirection}}
+  {{#if (and resourceConfig.properties.footerDirection (not resourceConfig.data.footerDirection))}}
   footerDirection="{{resourceConfig.properties.footerDirection}}"
   {{/if~}}
-  {{#if resourceConfig.properties.reverseFooterButtons}}
+  {{#if (and resourceConfig.properties.reverseFooterButtons (not resourceConfig.data.reverseFooterButtons))}}
   reverseFooterButtons={ {{resourceConfig.properties.reverseFooterButtons}} }
   {{/if~}}
-  {{#if resourceConfig.properties.cancelText}}
+  {{#if (and resourceConfig.properties.cancelText (not resourceConfig.data.cancelText))}}
   cancelText="{{resourceConfig.properties.cancelText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.cancelVariant}}
+  {{#if (and resourceConfig.properties.cancelVariant (not resourceConfig.data.cancelVariant))}}
   cancelVariant="{{resourceConfig.properties.cancelVariant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.confirmText}}
+  {{#if (and resourceConfig.properties.confirmText (not resourceConfig.data.confirmText))}}
   confirmText="{{resourceConfig.properties.confirmText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.confirmVariant}}
+  {{#if (and resourceConfig.properties.confirmVariant (not resourceConfig.data.confirmVariant))}}
   confirmVariant="{{resourceConfig.properties.confirmVariant}}"
   {{/if~}}
-  {{#if resourceConfig.properties.requireConfirmation}}
+  {{#if (and resourceConfig.properties.requireConfirmation (not resourceConfig.data.requireConfirmation))}}
   requireConfirmation={ {{resourceConfig.properties.requireConfirmation}} }
   {{/if~}}
-  {{#if resourceConfig.properties.confirmationText}}
+  {{#if (and resourceConfig.properties.confirmationText (not resourceConfig.data.confirmationText))}}
   confirmationText="{{resourceConfig.properties.confirmationText}}"
   {{/if~}}
-  {{#if resourceConfig.properties.confirmationPlaceholder}}
+  {{#if (and resourceConfig.properties.confirmationPlaceholder (not resourceConfig.data.confirmationPlaceholder))}}
   confirmationPlaceholder="{{resourceConfig.properties.confirmationPlaceholder}}"
   {{/if~}}
-  {{#if resourceConfig.properties.open}}
+  {{#if (and resourceConfig.properties.open (not resourceConfig.data.open))}}
   open={ {{resourceConfig.properties.open}} }
   {{/if~}}
-  {{#if resourceConfig.properties.name}}
+  {{#if (and resourceConfig.properties.name (not resourceConfig.data.name))}}
   name={ `{{resourceConfig.properties.name}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.children}}
+  {{#if (and resourceConfig.properties.children (not resourceConfig.data.children))}}
   children={
     <>
     {{#if resourceConfig.children}}
