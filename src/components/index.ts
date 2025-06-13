@@ -1,7 +1,7 @@
 import {
   ChildComponent,
   ComponentRegisterConfig,
-  ComponentRegistrationConfig,
+  ComponentRegistrationConfig, DefaultChildComponent,
   Layout, RegisterReference,
   RegisterState,
 } from '../interfaces/types';
@@ -36,6 +36,7 @@ export type Component = {
   metadata: Record<string, any>;
   childrenTypes: Set<ChildComponent>;
   acceptedChildren: Set<ChildComponent>;
+  defaultChildren: Set<DefaultChildComponent>;
   states: Set<RegisterState>;
   references: Set<RegisterReference>;
   serviceMethods: Set<string>;
@@ -91,6 +92,7 @@ export type Component = {
   getChildPropertiesMapping: (mapping?: Record<string, any>) => void;
   loadChildrenTypes: (types: ChildComponent[]) => void;
   loadAcceptedChildren: (types: ChildComponent[]) => void;
+  loadDefaultChildren: (types: DefaultChildComponent[]) => void;
   loadStates: (states: RegisterState[]) => void;
   loadReferences: (refs: RegisterReference[]) => void;
   loadServiceMethods: (states: string[]) => void;
@@ -117,6 +119,7 @@ function initComponent(): Component {
     childProperties: {},
     propertiesMapping: {},
     childPropertiesMapping: {},
+    defaultChildren: new Set(),
     acceptedChildren: new Set(),
     childrenTypes: new Set(),
     states: new Set(),
@@ -277,6 +280,10 @@ function initComponent(): Component {
 
     loadAcceptedChildren(types) {
       types.forEach((type) => this.acceptedChildren.add(type));
+    },
+
+    loadDefaultChildren(types) {
+      types.forEach((type) => this.defaultChildren.add(type));
     },
 
     loadServiceMethods(methods) {

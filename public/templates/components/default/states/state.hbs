@@ -1,2 +1,2 @@
-const [{{resourceConfig.name}}, set{{capitalize resourceConfig.name}}] = useState{{#if resourceConfig.type}}<{{{resourceConfig.type}}}{{#if resourceConfig.isList}}[]{{/if}}>{{/if}}({{{resolveStateDefault
-  resourceConfig.defaultValue resourceConfig.type}}});
+const [{{replaceId resourceConfig.name resourceConfig.component}}, set{{replaceId (capitalize resourceConfig.name) resourceConfig.component}}] = useState{{#if resourceConfig.type}}<{{{replaceType resourceConfig.type resourceConfig.component}}}{{#if resourceConfig.isList}}[]{{/if}}>{{/if}}({{{replaceValue (resolveStateDefault
+  resourceConfig.defaultValue (replaceType resourceConfig.type resourceConfig.component)) resourceConfig.component}}});

@@ -24,6 +24,7 @@ export function gridProperties() {
         'row-auto', 'rows-auto', 'rows-min', 'rows-max'
       ], default: 'cols4'
     },
+    className: { type: 'string', required: false },
     ...commonProperties(),
   }
 }

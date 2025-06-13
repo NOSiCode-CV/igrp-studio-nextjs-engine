@@ -10,15 +10,14 @@ import { buttonProperties } from '../button/properties';
 
 export function alertProperties() {
   return {
-    variant: { type: 'string', required: false, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
-    color: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    color: { type: 'string', required: false, default: 'info', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'outline', 'soft'] },
     linkLabel: { type: 'string', required: false },
     linkUrl: { type: 'string', required: false, 'x-ui-widget': 'uri' },
-    descriptionClassName: { type: 'string', required: false },
     showLink: { type: 'boolean', required: false, default: false },
-    textColored: { type: 'boolean', required: false, default: false },
-    borderColored: { type: 'boolean', required: false, default: false },
-    bgColored: { type: 'boolean', required: false, default: false },
+    textColored: { type: 'boolean', required: false, default: true },
+    borderColored: { type: 'boolean', required: false, default: true },
+    bgColored: { type: 'boolean', required: false, default: true },
     iconProperties: {
       type: 'object',
       properties: {

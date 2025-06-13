@@ -355,7 +355,7 @@ export function baseData(
             default: true
           }
         },
-        required: false,
+        required: isStateRequired ?? false,
       },
       value: {
         type: 'object',
@@ -374,6 +374,7 @@ export function baseData(
         required: false,
       },
     },
+    required: isStateRequired ?? false
   };
 }
 

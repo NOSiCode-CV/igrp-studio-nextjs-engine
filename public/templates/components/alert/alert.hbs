@@ -1,29 +1,40 @@
-<IGRPPageHeader
+<IGRPAlert
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  title="{{resourceConfig.properties.title}}"
-  {{#if resourceConfig.properties.description}}
-  description="{{resourceConfig.properties.description}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconBackButton}}
-  iconBackButton="{{resourceConfig.properties.iconProperties.iconBackButton}}"
-  {{/if~}}
-  {{#if resourceConfig.properties.isSticky}}
-  isSticky={ {{resourceConfig.properties.isSticky}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.showBackButton}}
-  showBackButton={ {{resourceConfig.properties.showBackButton}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
-  value="{{resourceConfig.properties.value}}"
-  {{/if~}}
-  {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
-  urlBackButton={ `{{{resolve-segment-path resourceConfig.properties.urlBackButton resourceConfig.properties.segments}}}{{#if resourceConfig.properties.params}}{{{resolve-query-params resourceConfig.properties.params}}}{{/if}}` }
+  {{#if resourceConfig.properties.color}}
+  color="{{resourceConfig.properties.color}}"
   {{/if~}}
   {{#if resourceConfig.properties.variant}}
   variant="{{resourceConfig.properties.variant}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.linkLabel}}
+  linkLabel="{{resourceConfig.properties.linkLabel}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.linkUrl}}
+  linkUrl="{{resourceConfig.properties.linkUrl}}"
+  {{/if~}}
+  {{#if resourceConfig.properties.showLink}}
+  showLink={ {{resourceConfig.properties.showLink}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.textColored}}
+  textColored={ {{resourceConfig.properties.textColored}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.borderColored}}
+  borderColored={ {{resourceConfig.properties.borderColored}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.bgColored}}
+  bgColored={ {{resourceConfig.properties.bgColored}} }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.icon}}
+  icon={ "{{{resourceConfig.properties.iconProperties.icon}}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.linkIcon}}
+  linkIcon={ "{{{resourceConfig.properties.iconProperties.linkIcon}}}" }
+  {{/if~}}
+  {{#if resourceConfig.properties.iconProperties.iconClassName}}
+  iconClassName={ "{{{resourceConfig.properties.iconProperties.iconClassName}}}" }
   {{/if~}}
   {{#if (and resourceConfig.properties.className parentResourceConfig)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
@@ -36,9 +47,6 @@
   {{/if~}}
   {{/if}}
   {{/if}}
-  {{#if resourceConfig.properties.headlineClassName}}
-  headlineClassName="{{resourceConfig.properties.headlineClassName}}"
-  {{/if~}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
@@ -46,11 +54,11 @@
   {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
 >
-  <div className="flex items-center gap-2">
+  <>
     {{#if resourceConfig.children}}
     {{#each resourceConfig.children}}
     {{{render-layout this ../resourceConfig}}}
     {{/each}}
     {{/if~}}
-  </div>
-</IGRPPageHeader>
+  </>
+</IGRPAlert>

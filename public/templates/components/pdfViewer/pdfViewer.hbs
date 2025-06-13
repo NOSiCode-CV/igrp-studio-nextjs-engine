@@ -5,12 +5,12 @@
   {{/if}}
   document={
     {
-      id: '{{resourceConfig.tag}}',
-      title: '{{resourceConfig.properties.title}},
-      description: '{{resourceConfig.properties.description}},
-      author: '{{resourceConfig.properties.author}},
-      date: '{{resourceConfig.properties.date}},
-      fileUrl: '{{resourceConfig.properties.fileUrl}},
+      id: 1,
+      title: '{{resourceConfig.properties.title}}',
+      description: '{{resourceConfig.properties.description}}',
+      author: '{{resourceConfig.properties.author}}',
+      date: '{{resourceConfig.properties.date}}',
+      fileUrl: '{{resourceConfig.properties.fileUrl}}',
     }
   }
   {{#if resourceConfig.properties.displayMode}}
@@ -43,7 +43,7 @@
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
   {{#if resourceConfig.data}}
-  {{{render-data resourceConfig.data}}}
+  {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
 >
 </IGRPPdfViewer>

@@ -10,7 +10,9 @@ import {
   alertRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
-import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
+import { TEXT } from '../text/index';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -28,6 +30,8 @@ export default {
     component.getChildPropertiesMapping(alertChildPropertiesMapping());
     component.getInteractions(alertInteractions());
     component.getInteractionsMapping(alertInteractionsMapping());
+    component.loadDefaultChildren([{name: TEXT}])
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: ALERT }))
     component.getStyle(alertStyle())
     component.getRules(alertRules())
     component.loadStates([

@@ -12,15 +12,10 @@ export function inputHiddenProperties() {
   return {
     value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Hidden' },
-    //floatingLabel: { type: 'boolean', required: false, default: false },
-    helperText: { type: 'string', required: false, default: '' },
-    ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     inputClassName: { type: 'string', required: false },
-    labelClassName: { type: 'string', required: false },
     className: { type: 'string', required: false },
-    ref: { type: 'string', required: false },
     ...dataCommonProperties(),
     ...commonProperties(),
   };

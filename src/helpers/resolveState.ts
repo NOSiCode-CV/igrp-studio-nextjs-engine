@@ -34,9 +34,9 @@ export function resolveStates(config: Layout, registry: Record<string, Component
           : (component.properties?.value ?? '');
         const type = component.dataType ? capitalize(component.dataType) : 'any';
         metadata.states.forEach((imp: RegisterState) => {
-            imp.state.name = replaceTemplate(imp.state.name, { id: component.tag, });
-            imp.state.defaultValue = imp.state.defaultValue? replaceTemplate(imp.state.defaultValue, { value, type }) : undefined;
-            imp.state.type = replaceTemplate(imp.state.type, { type });
+            //imp.state.name = replaceTemplate(imp.state.name, { id: component.tag, });
+            //imp.state.defaultValue = imp.state.defaultValue? replaceTemplate(imp.state.defaultValue, { value, type }) : undefined;
+            //imp.state.type = replaceTemplate(imp.state.type, { type });
 
             // TODO: find a better way to handle any type
             if(imp.state.type === 'z.infer<anyZodType>') {
@@ -44,7 +44,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             }
 
             if(imp.required) {
-              stateDefinitions.add(renderState(imp.state));
+              stateDefinitions.add(renderState(imp.state, component));
             }
           }
         );
@@ -71,18 +71,18 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
             const type = c.dataType ? capitalize(c.dataType) : 'any';
 
-            s.name = replaceTemplate(s.name, { id: c.tag });
+            /*s.name = replaceTemplate(s.name, { id: c.tag });
             s.defaultValue = s.defaultValue
               ? replaceTemplate(s.defaultValue, { value, type })
               : undefined;
-            s.type = replaceTemplate(s.type, { type });
+            s.type = replaceTemplate(s.type, { type });*/
 
             // TODO: find a better way to handle any type
             if(s.type === 'z.infer<anyZodType>') {
               s.type = 'z.infer<any>'
             }
 
-            stateDefinitions.add(renderState(s));
+            stateDefinitions.add(renderState(s, c));
           });
         }
       })
@@ -101,18 +101,18 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
           const type = c.dataType ? capitalize(c.dataType) : 'any';
 
-          value.state.name = replaceTemplate(value.state.name, { id: c.tag });
+          /*value.state.name = replaceTemplate(value.state.name, { id: c.tag });
           value.state.defaultValue = value.state.defaultValue !== undefined
             ? replaceTemplate(value.state.defaultValue, { defaultValue, type })
             : undefined;
-          value.state.type = replaceTemplate(value.state.type, { type });
+          value.state.type = replaceTemplate(value.state.type, { type });*/
 
           // TODO: find a better way to handle any type
           if(value.state.type === 'z.infer<anyZodType>') {
             value.state.type = 'z.infer<any>'
           }
 
-          stateDefinitions.add(renderState(value.state));
+          stateDefinitions.add(renderState(value.state, c));
         }
 
       })

@@ -44,6 +44,25 @@ export function postgresProperties() {
       },
     },
     env_file: { type: 'array', items: { type: 'object', properties: { file: { type: 'string', required: true, default: '.env' } } }, required: false, default: [ { file: '.env'} ] },
+    healthcheck: {
+      type: 'object',
+      properties: {
+        test: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: { instruction: { type: 'string', required: true } },
+          },
+          default: [
+            { instruction: 'CMD-SHELL' },
+            { instruction: 'pg_isready -U postgres -h 127.0.0.1' },
+          ],
+        },
+        interval: { type: 'string', required: true, default: '30s' },
+        timeout: { type: 'string', required: true, default: '30s' },
+        retries: { type: 'number', required: true, default: 3 },
+      },
+    },
     networks: {
       type: 'array',
       default: [{ network: '{{slug}}-network' }],

@@ -34,7 +34,7 @@ import {
   indexedTag,
   renderData,
   renderInteractions,
-  renderProperties,
+  renderProperties, replaceId, replaceType, replaceValue,
   resolveComponent,
   resolveFirstType,
   resolveQueryParams,
@@ -89,6 +89,9 @@ Handlebars.registerHelper("extractInfoSection", extractInfoSection);
 Handlebars.registerHelper("extractInfoItem", extractInfoItem);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("indexedTag", indexedTag);
+Handlebars.registerHelper("replaceId", replaceId);
+Handlebars.registerHelper("replaceType", replaceType);
+Handlebars.registerHelper("replaceValue", replaceValue);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
 Handlebars.registerHelper("render-data", renderData);

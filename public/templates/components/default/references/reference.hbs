@@ -1,2 +1,2 @@
-const {{resourceConfig.name}} = useRef{{#if resourceConfig.type}}<{{{resourceConfig.type}}}>{{/if}}({{{resolveStateDefault
-  resourceConfig.defaultValue resourceConfig.type}}});
+const {{replaceId resourceConfig.name resourceConfig.component}} = useRef{{#if resourceConfig.type}}<{{{replaceType resourceConfig.type resourceConfig.component}}}>{{/if}}({{{replaceValue (resolveStateDefault
+  resourceConfig.defaultValue (replaceType resourceConfig.type resourceConfig.component)) resourceConfig.component}}});

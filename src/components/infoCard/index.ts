@@ -12,6 +12,7 @@ import { Component, hbsRenderer } from '../index';
 import { INFO_ITEM } from './children/infoItem/index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
+import { INFO_SECTION } from './children/infoSection/index';
 
 export default {
   register(component: Component) {
@@ -35,11 +36,11 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: INFO_CARD }))
 
     component.loadChildrenTypes([
-      { name: INFO_ITEM, isDefault: true }
+      { name: INFO_SECTION, isDefault: true }
     ]);
 
     component.loadAcceptedChildren([
-      { name: INFO_ITEM, isDefault: true }
+      { name: INFO_SECTION, isDefault: true }
     ]);
 
     component.setRenderer(hbsRenderer);

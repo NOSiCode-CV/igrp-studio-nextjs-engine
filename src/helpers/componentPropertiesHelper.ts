@@ -4,12 +4,12 @@ import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
 import { CARD_FOOTER } from '../components/card/children/cardFooter';
-import { toCamelCase } from './stringHelpers';
+import { capitalize, toCamelCase } from './stringHelpers';
 import { renderCode } from '../utils/renderCode';
 import { layoutStyleToClasses } from './layoutStyleToClasses';
 import { spacingToClasses } from './spacingToClasses';
 import { sizeToClasses } from './sizeToClasses';
-import { isString } from '../utils/helpers';
+import { isString, replaceTemplate } from '../utils/helpers';
 import { typographyStyleToClasses } from './typographyStyleToClasses';
 import { bordersStyleToClasses } from './bordersStyleToClasses';
 import { positionStyleToClasses } from './positionStyleToClasses';
@@ -366,6 +366,27 @@ export function indexedTag(layout: Layout, tag: string): Layout {
   return applyTag(layout);
 }
 
+export function replaceId(name: string, component?: any) {
+  if (!component || !name) return name;
+
+  const tag = component.tag;
+  const finalTag = tag.includes('${index}')
+    ? tag.substring(tag.lastIndexOf('.') + 1)
+    : tag;
+
+  return replaceTemplate(name, { id: finalTag });
+}
+
+export function replaceType(type: string, component?: any) {
+  if(!component || !type) return type;
+  return replaceTemplate(type, { type: component.dataType ? capitalize(component.dataType) : 'any' })
+}
+
+export function replaceValue(value: string, component?: any) {
+  if(!component || !value) return value;
+  return replaceTemplate(value, { value: component.properties?.value ?? '', type: component.dataType ? capitalize(component.dataType) : 'any' })
+}
+
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
@@ -452,11 +473,11 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
     : ``;
 }
 
-export function renderData(data: Record<string, any>) {
+export function renderData(data: Record<string, any>, component?: Layout) {
   return data
     ? Object.entries(data)
         .map(([key, value]) => {
-          return `${key}={ ${value.state?.name ?? value.value?.code ?? 'undefined'} }`;
+          return `${key}={ ${replaceId(value.state?.name, component) ?? value.value?.code ?? 'undefined'} }`;
         })
         .join('\n')
     : ``;

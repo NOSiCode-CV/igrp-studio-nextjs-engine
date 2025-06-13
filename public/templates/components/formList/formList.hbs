@@ -7,7 +7,7 @@
   id={ "{{{resourceConfig.id}}}" }
   {{/if~}}
   {{#if resourceConfig.tag}}
-  name={ "{{{resourceConfig.tag}}}" }
+  name={ `{{{resourceConfig.tag}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.label}}
   label={ "{{{resourceConfig.properties.label}}}" }
@@ -81,7 +81,7 @@
   {{{render-interactions resourceConfig.interactions}}}
   {{/if}}
   {{#if resourceConfig.data}}
-  {{{render-data resourceConfig.data}}}
+  {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

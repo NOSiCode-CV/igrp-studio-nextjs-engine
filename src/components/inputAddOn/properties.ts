@@ -21,8 +21,8 @@ export function inputAddOnProperties() {
         color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    classNameGlobal: { type: 'string', required: false },
     classNameLabel: { type: 'string', required: false },
+    className: { type: 'string', required: false },
     ...dataCommonProperties(),
     ...commonProperties(),
   };

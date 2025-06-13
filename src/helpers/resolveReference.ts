@@ -30,16 +30,16 @@ export function resolveReferences(config: Layout, registry: Record<string, Compo
           : (component.properties?.value ?? '');
         const type = component.dataType ? capitalize(component.dataType) : 'any';
         metadata.references.forEach((imp: RegisterReference) => {
-          imp.ref.name = replaceTemplate(imp.ref.name, { id: component.tag });
+          /*imp.ref.name = replaceTemplate(imp.ref.name, { id: component.tag });
           imp.ref.defaultValue = imp.ref.defaultValue
             ? replaceTemplate(imp.ref.defaultValue, {
                 value,
                 type,
               })
             : undefined;
-          imp.ref.type = replaceTemplate(imp.ref.type, { type });
+          imp.ref.type = replaceTemplate(imp.ref.type, { type });*/
           if (imp.required) {
-            referenceDefinitions.add(renderReference(imp.ref));
+            referenceDefinitions.add(renderReference(imp.ref, component));
           }
         });
       }

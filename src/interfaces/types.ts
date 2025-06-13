@@ -394,6 +394,11 @@ export interface ChildComponent {
   isDefault: boolean
 }
 
+export interface DefaultChildComponent {
+  name: string,
+  children?: DefaultChildComponent[]
+}
+
 // Style
 
 // First, update your types.ts (or wherever you define LayoutStyle)

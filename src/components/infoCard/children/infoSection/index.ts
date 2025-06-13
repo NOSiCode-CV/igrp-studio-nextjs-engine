@@ -7,6 +7,7 @@ import {
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { INFO_CARD } from '../../index';
+import { INFO_ITEM } from '../infoItem/index';
 
 export default {
   register(component: Component) {
@@ -30,6 +31,15 @@ export default {
     ]);
     component.getStyle(infoSectionStyle())
     component.getRules(infoSectionRules())
+
+    component.loadChildrenTypes([
+      { name: INFO_ITEM, isDefault: true }
+    ]);
+
+    component.loadAcceptedChildren([
+      { name: INFO_ITEM, isDefault: true }
+    ]);
+
     component.setRenderer(hbsRenderer);
   },
 };

@@ -32,8 +32,7 @@ export default {
     component.getData(formData());
     component.getProperties(formProperties());
     component.getPropertiesMapping(formPropertiesMapping());
-    component.loadChildrenTypes([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
-    component.loadAcceptedChildren([{name: HEADLINE, isDefault: true}, {name: GRID, isDefault: true}])
+    component.loadDefaultChildren([{name: HEADLINE}, {name: GRID}])
     component.getStyle(formStyle())
     component.getRules(formRules())
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: FORM }))

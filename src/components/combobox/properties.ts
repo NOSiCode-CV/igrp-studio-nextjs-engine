@@ -17,7 +17,6 @@ export function comboboxProperties() {
     helperText: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     required: { type: 'boolean', required: true },
-    message: { type: 'string', required: false },
     selectLabel: { type: 'string', required: false, default: "No option found" },
     errorText: { type: 'string', required: false },
     searchText: { type: 'string', required: false },
