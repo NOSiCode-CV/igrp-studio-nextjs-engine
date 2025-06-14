@@ -5,7 +5,7 @@ export function tableTextCellProperties() {
   return {
     ...cellProperties('Text Column'),
     ...dataCommonProperties(),
-    variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
+    variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     ...commonProperties(),
   };
 }

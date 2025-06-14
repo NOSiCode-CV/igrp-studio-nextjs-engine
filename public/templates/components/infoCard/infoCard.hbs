@@ -42,6 +42,8 @@
             {{else}}
             {{#if this.properties.text}}
               text: "{{this.properties.text}}",
+            {{else}}
+              text: "",
             {{/if~}}
             {{/if~}}
             {{#if this.data.label}}
@@ -49,6 +51,8 @@
             {{else}}
             {{#if this.properties.label}}
               label: "{{this.properties.label}}",
+            {{else}}
+              label: "",
             {{/if~}}
             {{/if~}}
             {{#if this.data.icon}}
@@ -77,6 +81,8 @@
             {{else}}
             {{#if this.properties.colorItem}}
               colorItem: "{{this.properties.colorItem}}",
+            {{else}}
+              colorItem: "",
             {{/if~}}
             {{/if~}}
             },
