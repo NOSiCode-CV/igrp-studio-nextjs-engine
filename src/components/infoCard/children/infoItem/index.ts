@@ -18,7 +18,7 @@ export default {
     component.loadComponentClass('IGRPInfoItem')
     component.loadVariants(infoItemVariants());
     component.loadGroup('basicElements')
-    component.loadLabel('InfoItem')
+    component.loadLabel('Info Item')
     component.getInteractions(infoItemInteractions());
     component.getInteractionsMapping(infoItemInteractionsMapping());
     component.getProperties(infoItemProperties());

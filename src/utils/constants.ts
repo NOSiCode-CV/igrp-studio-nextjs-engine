@@ -205,7 +205,6 @@ export const INTERACTIONS_DEFAULTS = {
   ZERO: '0',
   EMPTY_ARRAY: '[]',
   EMPTY_OBJECT: '{}',
-
 }
 
 export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}

@@ -26,6 +26,9 @@
   {{/if~}}
   {{/if}}
   {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
+  {{/if}}
   sections={
     [
     {{#if resourceConfig.children}}
@@ -34,23 +37,47 @@
           items: [
             {{#each (extractInfoItem this.children)}}
             {
+            {{#if this.data.text}}
+              text: {{this.data.text.state.name}},
+            {{else}}
             {{#if this.properties.text}}
               text: "{{this.properties.text}}",
             {{/if~}}
+            {{/if~}}
+            {{#if this.data.label}}
+              label: {{this.data.label.state.name}},
+            {{else}}
             {{#if this.properties.label}}
               label: "{{this.properties.label}}",
             {{/if~}}
+            {{/if~}}
+            {{#if this.data.icon}}
+              icon: {{this.data.icon.state.name}},
+            {{else}}
             {{#if this.properties.iconProperties.icon}}
               icon: "{{this.properties.iconProperties.icon}}",
             {{/if~}}
+            {{/if~}}
+            {{#if this.data.iconClassName}}
+              icon: {{this.data.iconClassName.state.name}},
+            {{else}}
             {{#if this.properties.iconProperties.iconClassName}}
               iconClassName: "{{this.properties.iconProperties.iconClassName}}",
             {{/if~}}
+            {{/if~}}
+            {{#if this.data.variantItem}}
+              variantItem: {{this.data.variantItem.state.name}},
+            {{else}}
             {{#if this.properties.variantItem}}
               variantItem: "{{this.properties.variantItem}}",
             {{/if~}}
+            {{/if~}}
+            {{#if this.data.colorItem}}
+              colorItem: {{this.data.colorItem.state.name}},
+            {{else}}
             {{#if this.properties.colorItem}}
               colorItem: "{{this.properties.colorItem}}",
+            {{/if~}}
             {{/if~}}
             },
             {{/each}}

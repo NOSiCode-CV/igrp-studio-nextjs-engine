@@ -36,7 +36,7 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: INFO_CARD }))
 
     component.loadChildrenTypes([
-      { name: INFO_SECTION, isDefault: true }
+      { name: INFO_SECTION, isDefault: true },
     ]);
 
     component.loadAcceptedChildren([
