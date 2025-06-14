@@ -7,17 +7,21 @@ export function tableAlertDropdownItemProperties() {
   return {
     ...dropdownItemProperties('Alert'),
     type: { type: 'string', required: true, const: 'alert' },
-    title: { type: 'string', required: false, default: 'New Alert' },
+    modalTitle: { type: 'string', required: false, default: 'New Alert' },
+    content: { type: 'string', required: true, default: 'A new alert triggered' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
-    classNameCancel: { type: 'string', required: false },
+    labelTrigger: { type: 'string', required: false },
     variantCancel: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     showConfirm: { type: 'boolean', required: false, default: true },
     labelConfirm: { type: 'string', required: false, default: 'Confirm' },
-    classNameConfirm: { type: 'string', required: false },
     variantConfirm: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    classNameItem: { type: 'string', required: false },
+    classNameConfirm: { type: 'string', required: false },
+    classNameCancel: { type: 'string', required: false },
     ...commonProperties(),
   };
+
 }
 
 export function tableAlertDropdownItemPropertiesMapping() {

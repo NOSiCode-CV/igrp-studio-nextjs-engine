@@ -62,6 +62,13 @@
               icon: "{{this.properties.iconProperties.icon}}",
             {{/if~}}
             {{/if~}}
+            {{#if this.data.showIcon}}
+              showIcon: {{this.data.showIcon.state.name}},
+            {{else}}
+            {{#if this.properties.iconProperties.showIcon}}
+              showIcon: {{this.properties.iconProperties.showIcon}},
+            {{/if~}}
+            {{/if~}}
             {{#if this.data.iconClassName}}
               icon: {{this.data.iconClassName.state.name}},
             {{else}}

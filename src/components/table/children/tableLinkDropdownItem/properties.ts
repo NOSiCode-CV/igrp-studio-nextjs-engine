@@ -8,6 +8,7 @@ export function tableLinkDropdownItemProperties() {
     ...dropdownItemProperties('Link'),
     type: { type: 'string', required: true, const: 'link' },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
+    classNameItem: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

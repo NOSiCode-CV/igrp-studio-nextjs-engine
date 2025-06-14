@@ -6,6 +6,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableCustomDropdownItemProperties() {
   return {
     ...dropdownItemProperties('Custom'),
+    classNameItem: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
