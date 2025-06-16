@@ -2,7 +2,7 @@ import { commonPropertiesMapping } from '../../../default/properties';
 
 export function textListItemContentProperties() {
   return {
-    content: { type: 'string', required: false },
+    content: { type: 'string', required: false, defaultValue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
   };
 }
 

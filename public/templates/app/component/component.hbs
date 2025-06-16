@@ -11,6 +11,11 @@
 
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({ {{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}} } : { {{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{#if (or this.isFunction this.isState)}}() => {{/if}}{{{this.type}}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}},{{/if}}{{/each}}{{/if}} }) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
+
+  {{#if resourceConfig.types}}
+  {{{resolve-types this}}}
+  {{/if}}
+  {{{resolve-references resourceConfig.components registry}}}
   {{{resolve-states resourceConfig.components registry}}}
   {{{resolve-code-blocks resourceConfig.components registry undefined resourceConfig}}}
 

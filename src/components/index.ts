@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
-import { resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
 import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
 import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
 import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
@@ -374,6 +374,8 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     }).join("")
     : ``
 
+  let interactions = component.interactions? renderInteractions(component.interactions) : ``
+
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
       return (key === "className")? `` : ` ${key}="${value}"`;
@@ -465,7 +467,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
@@ -498,9 +500,13 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
     }).join("")
     : ``
 
+  let interactions = component.interactions? renderInteractions(component.interactions) : ``
+
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+      if(!component.data || (component.data && !component.data[key]))
+        return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+      else return
     }).join("")
     : ``
 
@@ -509,8 +515,6 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
       return ` ${key}={ ${value.state.name} }`;
     }).join("")
     : ``
-
-
 
   let childProps = ``
 
@@ -540,7 +544,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${props} ${childProps} >`
+  str += `<${element.customComponentTag ?? 'div'} ${props} ${childProps} ${interactions} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"

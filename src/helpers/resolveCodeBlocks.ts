@@ -62,6 +62,20 @@ export function resolveCodeBlocks(
 
   }
 
+  if(isLayout(component?.components)) {
+    const containsNavigations = hasNavigationInteraction(component.components);
+    const containsMenuNavigations = hasMenuNavigationInteraction(component.components);
+
+    if (containsNavigations) {
+      codeBlock += '\n' + `const router = useRouter()` + '\n';
+    }
+
+    if (containsMenuNavigations) {
+      codeBlock += '\n' + `const { getSectionRef } = useIGRPMenuNavigation();` + '\n';
+    }
+
+  }
+
   if (page?.functions) {
     page.functions
       .flatMap((fn) => fn.states ?? [])
@@ -85,6 +99,20 @@ export function resolveCodeBlocks(
 
     page.actions.forEach((act) => {
       codeBlock += '\n' + act.code + '\n';
+    });
+  }
+
+  if (component?.functions) {
+    component.functions
+      .flatMap((fn) => fn.states ?? [])
+      .forEach((state) => {
+        codeBlock += '\n' + renderState(state) + '\n';
+      });
+
+    component.functions.forEach((fun) => {
+      if (!fun.path) {
+        codeBlock += '\n' + renderFunction(fun) + '\n';
+      }
     });
   }
 
@@ -112,7 +140,7 @@ function resolveComponentCodeBlocks(
   registry: Record<string, Component>,
   page?: PageConfig,
 ): string {
-  if (!config || !page) return '';
+  if (!config) return '';
 
   let codeBlock: string = '';
 
@@ -126,6 +154,7 @@ function resolveComponentCodeBlocks(
     if (config.interactions) {
 
       Object.entries(config.interactions).forEach(([_, value]) => {
+
         if (value.type === 'function' && value.function?.fnCustomCode?.fnCode)
           codeBlock += '\n' + value.function.fnCustomCode.fnCode + '\n';
         if (value.type === 'navigate' && value.navigate?.path) {

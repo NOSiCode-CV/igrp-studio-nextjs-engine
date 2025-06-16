@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import {
-  getComponentConfigPath, getComponentPath,
+  getComponentConfigPath, getComponentDir, getComponentPath,
   getPageConfigPath,
   getPagePath,
   getPageServicePath,
@@ -58,7 +58,7 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
       basePath: context.basePath,
     };
 
-    const componentPath = getComponentPath(contextComponent);
+    const componentPath = getComponentDir(contextComponent);
 
     const componentConfigPath = getComponentConfigPath(contextComponent);
 
