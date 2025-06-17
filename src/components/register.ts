@@ -64,6 +64,7 @@ import separatorModule, { SEPARATOR } from './separator/index';
 import sliderModule, { SLIDER } from './slider';
 import stackModule, { STACK } from './stack';
 import statsCardModule, { STATS_CARD } from './statsCard';
+import statusBannerModule, { STATUS_BANNER } from './statusBanner/index';
 import switchModule, { SWITCH } from './switch';
 import tableModule, { TABLE } from './table';
 import tableBadgeModule, { TABLE_TEXT_CELL } from './table/children/tableTextCell';
@@ -169,6 +170,7 @@ export function registerAllComponents() {
   //register(SLIDER, sliderModule.register);
   register(STACK, stackModule.register);
   register(STATS_CARD, statsCardModule.register);
+  register(STATUS_BANNER, statusBannerModule.register);
   register(SWITCH, switchModule.register);
   register(TABLE, tableModule.register);
   register(VERTICAL_BAR_CHART, verticalBarChartModule.register);
