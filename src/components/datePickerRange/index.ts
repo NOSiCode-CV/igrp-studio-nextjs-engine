@@ -15,7 +15,6 @@ import { TEMPLATES } from '../../utils/constants';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDatePickerRange } from "@igrp/igrp-framework-react-design-system";',
       'import { DateRange } from "@igrp/igrp-framework-react-design-system";',
     ]);
 

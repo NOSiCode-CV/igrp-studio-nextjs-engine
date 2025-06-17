@@ -17,7 +17,6 @@ export default {
     component.loadComponentClass('IGRPDataTableDropdownMenuAlert')
 
     component.loadImports([
-      `import { ${component.componentClass} } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
     component.loadVariants(tableAlertDropdownItemVariants());

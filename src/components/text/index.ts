@@ -11,7 +11,6 @@ import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPText } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadComponentClass('IGRPText')

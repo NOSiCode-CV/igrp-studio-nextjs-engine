@@ -11,7 +11,6 @@ import { INFO_SECTION } from '../infoSection/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPInfoItem } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadParent(INFO_SECTION)

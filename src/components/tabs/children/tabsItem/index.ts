@@ -11,9 +11,9 @@ import { TABS } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPTabItem } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPTabItem')
     component.loadVariants(tabsItemVariants());
     component.loadParent(TABS)
     component.loadLabel('Tabs Item')

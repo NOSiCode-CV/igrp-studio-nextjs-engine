@@ -14,7 +14,6 @@ import { TEMPLATES } from '../../utils/constants';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPForm } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPFormHandle } from "@igrp/igrp-framework-react-design-system";',
       'import { z } from "@igrp/igrp-framework-react-design-system"',
       //'import { useForm } from "react-hook-form";',

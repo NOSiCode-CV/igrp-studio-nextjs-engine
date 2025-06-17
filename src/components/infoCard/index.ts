@@ -9,7 +9,6 @@ import {
   infoCardData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
-import { INFO_ITEM } from './children/infoItem/index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 import { INFO_SECTION } from './children/infoSection/index';
@@ -17,7 +16,6 @@ import { INFO_SECTION } from './children/infoSection/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPInfoCard } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadComponentClass('IGRPInfoCard');

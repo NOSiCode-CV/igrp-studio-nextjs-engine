@@ -13,7 +13,6 @@ import { CARD_HEADER } from './children/cardHeader';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPCard } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadComponentClass('IGRPCard')

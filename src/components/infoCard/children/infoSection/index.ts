@@ -12,7 +12,6 @@ import { INFO_ITEM } from '../infoItem/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPInfoSection } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadParent(INFO_CARD)

@@ -11,9 +11,9 @@ import { MENU_NAVIGATION } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPMenuNavigationItem } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPMenuNavigationItem');
     component.loadVariants(menuNavigationsItemVariants());
     component.loadParent(MENU_NAVIGATION)
     component.loadLabel('Menu Navigation Item')

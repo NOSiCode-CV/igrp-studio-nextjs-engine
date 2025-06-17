@@ -18,12 +18,26 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any>, forceStateLoad: boolean, dataType?: string }>();
   extractComponentData(config, components, registry);
 
+  const classes = new Set<string>();
+
   components.forEach((component) => {
     const metadata = registry[component.componentName];
+
+    if (metadata?.componentClass) {
+      classes.add(metadata.componentClass);
+    }
     if (metadata?.imports) {
       metadata.imports.forEach((imp) => imports.add(imp));
     }
   });
+
+  if (classes.size > 0) {
+    imports.add(
+      `import { 
+  ${Array.from(classes).join(',\n\t')} 
+} from "@igrp/igrp-framework-react-design-system";`,
+    );
+  }
 
   if(page?.types) {
     page.types.forEach((type) => {
