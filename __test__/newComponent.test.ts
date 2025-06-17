@@ -3024,12 +3024,47 @@ const componentConfig: ComponentConfig = {
   imports: [],
 };
 
+const componentConfig2: ComponentConfig = {
+  type: 'component',
+  scope: 'app',
+  description: 'NewCompoennt',
+  name: 'newCompoennt',
+  id: '89aw44nlml',
+  args: [],
+  components: {
+    id: 'component_1e2gen',
+    componentName: 'component',
+    properties: {
+      commonProperties: {
+        generateReference: false,
+      },
+    },
+    children: [],
+    tag: 'component2',
+    data: {},
+    interactions: {
+      onLoad: {
+        type: 'function',
+        function: {
+          type: 'function',
+        },
+        action: {},
+      },
+    },
+    childProperties: {},
+  },
+  functions: [],
+  types: [],
+  states: [],
+  imports: [],
+};
+
 beforeAll(async () => {
   await initComponents();
 });
 
 describe('Component module', () => {
   it('should save the component configuration file', async () => {
-    await newComponent(componentConfig, OUTPUT_DIR);
+    await newComponent(componentConfig2, OUTPUT_DIR);
   });
 });

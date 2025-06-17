@@ -1,0 +1,11 @@
+igrpToast({
+  type: "success",
+  title: "{{resourceConfig.title}}",
+  description: "{{resourceConfig.description}}",
+  {{#if resourceConfig.action}}
+  action: {
+    label: "{{resourceConfig.action.label}}",
+    onClick: () => console.log("{{resourceConfig.action.label}}"),
+  },
+  {{/if}}
+})

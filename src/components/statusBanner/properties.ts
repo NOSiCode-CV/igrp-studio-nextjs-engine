@@ -7,10 +7,10 @@ import {
 
 export function statusBannerProperties() {
   return {
-    color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
-    variant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    color: { type: 'string', required: true, default: 'success', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'outline', 'soft'] },
     text: { type: 'string', required: false, default: 'Status Banner' },
-    badgeColor: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    badgeColor: { type: 'string', required: true, default: 'secondary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     badgeText: { type: 'string', required: false, default: 'Status Banner' },
     className: { type: 'string', required: false },

@@ -10,7 +10,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   const imports = new Set<string>();
 
   imports.add(`import { useState, useEffect, useRef } from 'react';`)
-  imports.add(`import { cn, useIGRPMenuNavigation } from '@igrp/igrp-framework-react-design-system';`)
+  imports.add(`import { cn, useIGRPMenuNavigation, useIGRPToast } from '@igrp/igrp-framework-react-design-system';`)
 
   /*if(isPage)
     imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)*/

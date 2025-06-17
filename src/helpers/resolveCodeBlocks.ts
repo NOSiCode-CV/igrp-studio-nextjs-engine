@@ -66,6 +66,8 @@ export function resolveCodeBlocks(
     const containsNavigations = hasNavigationInteraction(component.components);
     const containsMenuNavigations = hasMenuNavigationInteraction(component.components);
 
+    codeBlock += '\n' + `const { igrpToast } = useIGRPToast()` + '\n';
+
     if (containsNavigations) {
       codeBlock += '\n' + `const router = useRouter()` + '\n';
     }

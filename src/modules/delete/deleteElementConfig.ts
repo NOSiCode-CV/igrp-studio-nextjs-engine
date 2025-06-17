@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import {
-  getComponentConfigPath, getComponentDir, getComponentPath,
+  getComponentConfigPath, getComponentDir,
   getPageConfigPath,
   getPagePath,
   getPageServicePath,
@@ -21,7 +21,7 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
 
     const pages: PageConfig[] = await loadConfig(path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, 'pages'));
 
-    const page = pages.find((it) => it.id = context.resourceConfig.id)
+    const page = pages.find((it) => it.id === context.resourceConfig.id)
 
     if(!page) throw Error(`Page '${context.resourceConfig.name}' does not exist!`)
 
@@ -49,7 +49,7 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
 
     const components: ComponentConfig[] = await loadConfig(path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, 'components'));
 
-    const component = components.find((it) => it.id = context.resourceConfig.id)
+    const component = components.find((it) => it.id === context.resourceConfig.id)
 
     if(!component) throw Error(`Component '${context.resourceConfig.name}' does not exist!`)
 
