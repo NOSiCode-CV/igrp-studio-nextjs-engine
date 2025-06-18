@@ -13,7 +13,6 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPMenuNavigationItem');
     component.loadVariants(menuNavigationsItemVariants());
     component.loadParent(MENU_NAVIGATION)
     component.loadLabel('Menu Navigation Item')

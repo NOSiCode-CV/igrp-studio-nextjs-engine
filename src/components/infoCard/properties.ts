@@ -46,11 +46,5 @@ export function infoCardRules() {
 
 export function infoCardData() {
   return {
-    items: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
-        id: '',
-        name: 'infoCard{{id}}Items',
-        type: 'IGRPTabItem[]',
-        defaultValue: '[]'
-      }, true), required: true },
   };
 }

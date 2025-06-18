@@ -3,7 +3,12 @@ import {
   infoSectionProperties,
   infoSectionVariants,
   infoSectionChildProperties,
-  infoSectionChildPropertiesMapping, infoSectionInteractions, infoSectionInteractionsMapping, infoSectionStyle, infoSectionRules,
+  infoSectionChildPropertiesMapping,
+  infoSectionInteractions,
+  infoSectionInteractionsMapping,
+  infoSectionStyle,
+  infoSectionRules,
+  infoSectionData,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { INFO_CARD } from '../../index';
@@ -30,6 +35,7 @@ export default {
     ]);
     component.getStyle(infoSectionStyle())
     component.getRules(infoSectionRules())
+    component.getData(infoSectionData())
 
     component.loadChildrenTypes([
       { name: INFO_ITEM, isDefault: true }
