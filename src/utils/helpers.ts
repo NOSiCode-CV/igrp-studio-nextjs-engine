@@ -59,7 +59,6 @@ export const getComponentDir = (context: RenderContext<ComponentConfig, Componen
   ) : path.join(
     context.basePath,
     DIRECTORIES.BASE_COMPONENTS,
-    `${context.resourceConfig.name}`.toLowerCase(),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };

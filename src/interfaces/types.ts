@@ -40,6 +40,7 @@ export interface Arguments extends IdentifiableElement{
   isInterface: boolean,
   isFunction: boolean,
   isState: boolean,
+  functionParameters?: Arguments[]
 }
 
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {

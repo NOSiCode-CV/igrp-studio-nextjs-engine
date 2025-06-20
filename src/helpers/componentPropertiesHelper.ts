@@ -1,5 +1,5 @@
 import { Component } from '../components';
-import { ElementField, Layout, Segment, StyleDefinition } from '../interfaces/types';
+import { Arguments, ElementField, Layout, Segment, StyleDefinition } from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
@@ -285,6 +285,29 @@ export function resolveZodTypes(field?: ElementField): string {
   }
 
   return zodType;
+}
+
+export function resolveFunctionArgs(args: Arguments[]): string {
+  return args
+    .map((arg) => {
+      const name = arg.isState ? `set${capitalize(arg.name)}` : arg.name;
+      const optional = arg.isOptional ? '?' : '';
+      const type = resolveType(arg);
+      return `${name}${optional}: ${type}`;
+    })
+    .join(', ');
+}
+
+function resolveType(arg: Arguments): string {
+  if (arg.isFunction) {
+    const params = arg.functionParameters ? resolveFunctionArgs(arg.functionParameters) : '';
+    return `(${params}) => ${arg.type}${arg.isList ? '[]' : ''}`;
+  }
+  if (arg.isState) {
+    return `(${arg.name}: ${arg.type}${arg.isList ? '[]' : ''}) => void`;
+  }
+
+  return `${arg.type}${arg.isList ? '[]' : ''}`;
 }
 
 export function extractTableColumns(children: Layout[]) {

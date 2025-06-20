@@ -181,6 +181,15 @@ const argumentSchema: JSONSchemaType<Arguments> = {
       type: 'boolean',
       errorMessage: 'The isState attribute must be a boolean.'
     },
+    functionParameters: {
+      type: 'array',
+      nullable: true,
+      items: {
+        required: [],
+        type: 'object'
+      },
+      errorMessage: 'The function parameters, if provided, must be an array of valid argument configuration'
+    }
   },
   required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
   additionalProperties: false

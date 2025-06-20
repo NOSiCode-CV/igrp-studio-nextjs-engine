@@ -35,9 +35,8 @@ const renderTypeDefinition = (component: Layout, types: TypeDef[], context: any)
   const element = context.registry[component.componentName]
   if(!element) return ''
   if(!element.allowTypes) return ''
-  context.resourceConfig.types = types.filter((type) => type.componentId === component.id);
   return renderSyncTemplate(
     replaceTemplate(TEMPLATES.TYPE_ELEMENT, { element: component.componentName }),
-    context,
+    { resourceConfig: { types: types.filter((type) => type.componentId === component.id), ...context.resourceConfig }, ...context },
   );
 };

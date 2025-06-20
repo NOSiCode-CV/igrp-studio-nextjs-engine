@@ -170,7 +170,9 @@ export function keycloakVolumes(): Record<string, VolumeFile> {
         name: KEYCLOAK,
         volume: 'igrp-realm.json',
       }),
-      context: {},
+      context: {
+
+      },
     },
   }
 }

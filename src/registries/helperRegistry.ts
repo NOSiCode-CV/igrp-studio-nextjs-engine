@@ -36,7 +36,7 @@ import {
   renderInteractions,
   renderProperties, replaceId, replaceType, replaceValue,
   resolveComponent,
-  resolveFirstType,
+  resolveFirstType, resolveFunctionArgs,
   resolveQueryParams,
   resolveSegmentPath,
   resolveStateDefault,
@@ -76,6 +76,7 @@ Handlebars.registerHelper("addClassNameFromStyle", addClassNameFromStyle);
 Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
 Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
+Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);
