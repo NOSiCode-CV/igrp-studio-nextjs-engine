@@ -16,6 +16,7 @@ import { TEMPLATES } from '../../utils/constants';
 import { MODAL_DIALOG_CONTENT } from './children/modalDialogContent/index';
 import { MODAL_DIALOG_FOOTER } from './children/modalDialogFooter/index';
 import { MODAL_DIALOG_HEADER } from './children/modalDialogHeader/index';
+import { MODAL_DIALOG_TRIGGER } from './children/modalDialogTrigger/index';
 
 export default {
   register(component: Component) {
@@ -40,15 +41,13 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: MODAL_DIALOG }))
 
     component.loadChildrenTypes([
-      { name: MODAL_DIALOG_HEADER, isDefault: true },
       { name: MODAL_DIALOG_CONTENT, isDefault: true },
-      { name: MODAL_DIALOG_FOOTER, isDefault: true },
+      { name: MODAL_DIALOG_TRIGGER, isDefault: true },
     ])
 
     component.loadAcceptedChildren([
-      { name: MODAL_DIALOG_HEADER, isDefault: true },
       { name: MODAL_DIALOG_CONTENT, isDefault: true },
-      { name: MODAL_DIALOG_FOOTER, isDefault: true },
+      { name: MODAL_DIALOG_TRIGGER, isDefault: true },
     ])
 
     component.setRenderer(hbsRenderer);

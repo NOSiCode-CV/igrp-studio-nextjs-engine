@@ -363,6 +363,7 @@ export interface ComponentRegisterConfig extends VersionableElement {
   states: RegisterState[],
   childrenTypes: ComponentRegisterConfig[],
   acceptedChildren: ComponentRegisterConfig[],
+  defaultChildren: DefaultChildComponent[],
   renderer: 'default' | 'hbs' | 'custom' | 'none',
   templatePath?: string
 }

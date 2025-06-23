@@ -47,7 +47,8 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
     { output: mainPath, template: TEMPLATES.EXPORTS_FILE, name: COMMON_FILES.EXPORTS_FILE },
     { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
-    { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S}
+    { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S},
+    { output: kubernetesPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML}
   ];
 };
 

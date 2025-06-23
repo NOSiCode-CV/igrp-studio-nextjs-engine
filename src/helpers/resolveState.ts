@@ -43,6 +43,10 @@ export function resolveStates(config: Layout, registry: Record<string, Component
               imp.state.type = 'z.infer<any>'
             }
 
+            if(imp.state.type === 'anyZodType') {
+              imp.state.type = 'any'
+            }
+
             if(imp.required) {
               stateDefinitions.add(renderState(imp.state, component));
             }
@@ -80,6 +84,10 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             // TODO: find a better way to handle any type
             if(s.type === 'z.infer<anyZodType>') {
               s.type = 'z.infer<any>'
+            }
+
+            if(s.type === 'anyZodType') {
+              s.type = 'any'
             }
 
             stateDefinitions.add(renderState(s, c));

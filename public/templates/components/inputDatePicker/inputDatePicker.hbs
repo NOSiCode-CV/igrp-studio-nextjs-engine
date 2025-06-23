@@ -25,10 +25,10 @@
   helperText={ `{{resourceConfig.properties.helperText}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.startDate (not resourceConfig.data.startDate))}}
-  startDate={ new Date("{{resourceConfig.properties.startDate}}") }
+  startDate={ new Date(`{{resourceConfig.properties.startDate}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.endDate (not resourceConfig.data.endDate))}}
-  endDate={ new Date("{{resourceConfig.properties.endDate}}") }
+  endDate={ new Date(`{{resourceConfig.properties.endDate}}`) }
   {{/if~}}
   {{!--{{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
@@ -58,19 +58,19 @@
   dateFormat={ `{{resourceConfig.properties.dateFormat}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.today (not resourceConfig.data.today))}}
-  today={ new Date("{{resourceConfig.properties.today}}") }
+  today={ new Date(`{{resourceConfig.properties.today}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.defaultMonth (not resourceConfig.data.defaultMonth))}}
-  defaultMonth={ new Date("{{resourceConfig.properties.defaultMonth}}") }
+  defaultMonth={ new Date(`{{resourceConfig.properties.defaultMonth}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.startMonth (not resourceConfig.data.startMonth))}}
-  startMonth={ new Date("{{resourceConfig.properties.startMonth}}") }
+  startMonth={ new Date(`{{resourceConfig.properties.startMonth}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.month (not resourceConfig.data.month))}}
-  month={ new Date("{{resourceConfig.properties.month}}") }
+  month={ new Date(`{{resourceConfig.properties.month}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.endMonth (not resourceConfig.data.endMonth))}}
-  endMonth={ new Date("{{resourceConfig.properties.endMonth}}") }
+  endMonth={ new Date(`{{resourceConfig.properties.endMonth}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.numberOfMonths (not resourceConfig.data.numberOfMonths))}}
   numberOfMonths={ {{resourceConfig.properties.numberOfMonths}} }

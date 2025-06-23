@@ -344,6 +344,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
       registry[it.name], it.isDefault)),
     acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),
+    defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
     templatePath: value.templatePath

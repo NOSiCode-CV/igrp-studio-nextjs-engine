@@ -9,6 +9,9 @@ import { Component, hbsRenderer } from '../../../index';
 import { MODAL_DIALOG } from '../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
+import { MODAL_DIALOG_HEADER } from '../modalDialogHeader/index';
+import { MODAL_DIALOG_FOOTER } from '../modalDialogFooter/index';
+import { FRAGMENT } from '../../../fragment/index';
 
 export default {
   register(component: Component) {
@@ -28,6 +31,22 @@ export default {
     component.getStyle(modalDialogContentStyle())
     component.getRules(modalDialogContentRules())
     component.loadStates([]);
+
+    component.loadDefaultChildren([
+      { name: MODAL_DIALOG_HEADER },
+      { name: FRAGMENT },
+      { name: MODAL_DIALOG_FOOTER },
+    ])
+
+    component.loadChildrenTypes([
+      { name: MODAL_DIALOG_HEADER, isDefault: false },
+      { name: MODAL_DIALOG_FOOTER, isDefault: false },
+    ])
+
+    component.loadAcceptedChildren([
+      { name: MODAL_DIALOG_HEADER, isDefault: false },
+      { name: MODAL_DIALOG_FOOTER, isDefault: false },
+    ])
 
     component.setRenderer(hbsRenderer);
   },

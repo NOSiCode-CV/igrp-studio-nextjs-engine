@@ -28,10 +28,10 @@
   helperText={ `{{resourceConfig.properties.helperText}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.startDate (not resourceConfig.data.startDate))}}
-  startDate={ new Date("{{resourceConfig.properties.startDate}}` }) }
+  startDate={ new Date(`{{resourceConfig.properties.startDate}}`) }
   {{/if~}}
   {{#if (and resourceConfig.properties.endDate (not resourceConfig.data.endDate))}}
-  endDate={ new Date("{{resourceConfig.properties.endDate}}` }) }
+  endDate={ new Date(`{{resourceConfig.properties.endDate}}`) }
   {{/if~}}
   {{!--{{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }

@@ -61,7 +61,7 @@ export function infoSectionData() {
     items: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
         id: '',
         name: 'infoCard{{id}}Items',
-        type: 'IGRPTabItem[]',
+        type: 'IGRPInfoItem[]',
         defaultValue: '[]'
       }), required: false },
   }

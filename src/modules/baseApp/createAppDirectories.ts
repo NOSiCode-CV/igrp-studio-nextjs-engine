@@ -31,6 +31,10 @@ export const createAppDirectories = async (context: RenderContext) => {
 const getDirectoriesToCreate = (basePath: string): string[] => {
   return [
     path.join(basePath, DIRECTORIES.CONFIG),
+    path.join(basePath, DIRECTORIES.TEMP),
+    path.join(basePath, DIRECTORIES.TEMP_APPLICATIONS),
+    path.join(basePath, DIRECTORIES.TEMP_MENUS),
+    path.join(basePath, DIRECTORIES.TEMP_USERS),
     path.join(basePath, DIRECTORIES.FEATURES),
     path.join(basePath, DIRECTORIES.FEATURES_APPLICATIONS),
     path.join(basePath, DIRECTORIES.FEATURES_APPLICATIONS_HOOKS),
