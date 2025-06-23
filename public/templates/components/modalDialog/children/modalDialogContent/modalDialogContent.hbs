@@ -4,7 +4,7 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
-  size="{{resourceConfig.properties.size}}"
+  size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

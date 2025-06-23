@@ -1,18 +1,18 @@
 <IGRPMenuNavigation
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title={ "{{resourceConfig.properties.title}}" }
+  title={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeContent (not resourceConfig.data.badgeContent))}}
-  badgeContent={ "{{resourceConfig.properties.badgeContent}}" }
+  badgeContent={ `{{resourceConfig.properties.badgeContent}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeVariant (not resourceConfig.data.badgeVariant))}}
-  badgeVariant={ "{{resourceConfig.properties.badgeVariant}}" }
+  badgeVariant={ `{{resourceConfig.properties.badgeVariant}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeColor (not resourceConfig.data.badgeColor))}}
-  badgeColor={ "{{resourceConfig.properties.badgeColor}}" }
+  badgeColor={ `{{resourceConfig.properties.badgeColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeClassName (not resourceConfig.data.badgeClassName))}}
-  badgeClassName={ "{{resourceConfig.properties.badgeClassName}}" }
+  badgeClassName={ `{{resourceConfig.properties.badgeClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showChevron (not resourceConfig.data.showChevron))}}
   showChevron={ {{resourceConfig.properties.showChevron}} }
@@ -47,10 +47,10 @@
         {
           id: "{{this.properties.targetRef}}",
           {{#if this.properties.label}}
-          label: "{{this.properties.label}}",
+          label: `{{this.properties.label}}`,
           {{/if~}}
           {{#if this.properties.iconProperties.icon}}
-          icon: "{{this.properties.iconProperties.icon}}",
+          icon: `{{this.properties.iconProperties.icon}}`,
           {{/if~}}
           {{#if (and this.properties.disabled (not this.data.disabled))}}
           disabled: {{this.properties.disabled}}

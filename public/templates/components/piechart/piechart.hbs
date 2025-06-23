@@ -37,13 +37,13 @@
     </>
   }
   {{/if}}
-  nameKey="{{resourceConfig.properties.nameKey}}"
-  categoryKey="{{resourceConfig.properties.categoryKey}}"
+  nameKey={ `{{resourceConfig.properties.nameKey}}` }
+  categoryKey={ `{{resourceConfig.properties.categoryKey}}` }
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title="{{resourceConfig.properties.title}}"
+  title={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description="{{resourceConfig.properties.description}}"
+  description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
@@ -76,26 +76,26 @@
   showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
-  gridColor="{{resourceConfig.properties.gridColor}}"
+  gridColor={ `{{resourceConfig.properties.gridColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
-  backgroundColor="{{resourceConfig.properties.backgroundColor}}"
+  backgroundColor={ `{{resourceConfig.properties.backgroundColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
-  axisColor="{{resourceConfig.properties.axisColor}}"
+  axisColor={ `{{resourceConfig.properties.axisColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: "{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
   {{#if (and resourceConfig.properties.legendPosition (not resourceConfig.data.legendPosition))}}
-  legendPosition="{{resourceConfig.properties.legendPosition}}"
+  legendPosition={ `{{resourceConfig.properties.legendPosition}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
-  size="{{resourceConfig.properties.size}}"
+  size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.valueDomain (not resourceConfig.data.valueDomain))}}
   valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]

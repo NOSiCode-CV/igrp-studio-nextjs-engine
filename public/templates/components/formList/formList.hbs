@@ -4,52 +4,52 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if resourceConfig.id}}
-  id={ "{{{resourceConfig.id}}}" }
+  id={ `{{{resourceConfig.id}}}` }
   {{/if~}}
   {{#if resourceConfig.tag}}
   name={ `{{{resourceConfig.tag}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
-  label={ "{{{resourceConfig.properties.label}}}" }
+  label={ `{{{resourceConfig.properties.label}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description={ "{{{resourceConfig.properties.description}}}" }
+  description={ `{{{resourceConfig.properties.description}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.color (not resourceConfig.data.color))}}
-  color={ "{{{resourceConfig.properties.color}}}" }
+  color={ `{{{resourceConfig.properties.color}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant={ "{{{resourceConfig.properties.variant}}}" }
+  variant={ `{{{resourceConfig.properties.variant}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.addButtonLabel (not resourceConfig.data.addButtonLabel))}}
-  addButtonLabel={ "{{{resourceConfig.properties.addButtonLabel}}}" }
+  addButtonLabel={ `{{{resourceConfig.properties.addButtonLabel}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  iconName={ "{{{resourceConfig.properties.iconProperties.iconName}}}" }
+  iconName={ `{{{resourceConfig.properties.iconProperties.iconName}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.addButtonIconName}}
-  addButtonIconName={ "{{{resourceConfig.properties.iconProperties.addButtonIconName}}}" }
+  addButtonIconName={ `{{{resourceConfig.properties.iconProperties.addButtonIconName}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.addButtonLabel}}
-  addButtonLabel={ "{{{resourceConfig.properties.iconProperties.addButtonLabel}}}" }
+  addButtonLabel={ `{{{resourceConfig.properties.iconProperties.addButtonLabel}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.dot (not resourceConfig.data.dot))}}
   dot={ {{{resourceConfig.properties.dot}}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName={ "{{{resourceConfig.properties.iconProperties.iconClassName}}}" }
+  iconClassName={ `{{{resourceConfig.properties.iconProperties.iconClassName}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconSize}}
-  iconSize={ "{{{resourceConfig.properties.iconProperties.iconSize}}}" }
+  iconSize={ `{{{resourceConfig.properties.iconProperties.iconSize}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeValue (not resourceConfig.data.badgeValue))}}
   badgeValue={ `{{{resourceConfig.properties.badgeValue}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.badgeClassName (not resourceConfig.data.badgeClassName))}}
-  badgeClassName={ "{{{resourceConfig.properties.badgeClassName}}}" }
+  badgeClassName={ `{{{resourceConfig.properties.badgeClassName}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelClassName (not resourceConfig.data.labelClassName))}}
-  labelClassName={ "{{{resourceConfig.properties.labelClassName}}}" }
+  labelClassName={ `{{{resourceConfig.properties.labelClassName}}}` }
   {{/if~}}
   renderItem={ (_: {{#if resourceConfig.dataType}}typeof init{{capitalize resourceConfig.dataType}}['{{{resourceConfig.tag}}}'][0]{{else}}any{{/if}}, index: number) => (
       <>

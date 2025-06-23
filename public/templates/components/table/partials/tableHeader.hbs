@@ -1,11 +1,11 @@
 {{#if (eq properties.headerType 'sortToggle')}}
-({ column }) => (<IGRPDataTableHeaderSortToggle column={column} title="{{properties.headerTitle}}" />)
+({ column }) => (<IGRPDataTableHeaderSortToggle column={column} title={ `{{properties.headerTitle}}` } />)
 {{else}}
 {{#if (eq properties.headerType 'sortDropdown')}}
-({ column }) => <IGRPDataTableHeaderSortDropdown column={column} title="{{properties.headerTitle}}" />
+({ column }) => <IGRPDataTableHeaderSortDropdown column={column} title={ `{{properties.headerTitle}}` } />
 {{else}}
 {{#if (eq properties.headerType 'rowsSelect')}}
-({ table }) => <IGRPDataTableHeaderRowsSelect table={table} title="{{properties.headerTitle}}" />
+({ table }) => <IGRPDataTableHeaderRowsSelect table={table} title={ `{{properties.headerTitle}}` } />
 {{else}}
 '{{properties.headerTitle}}'
 {{/if~}}

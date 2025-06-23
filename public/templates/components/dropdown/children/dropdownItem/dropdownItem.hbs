@@ -1,22 +1,22 @@
 <IGRPDropdownItem
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
-  size="{{resourceConfig.properties.size}}"
+  size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   disabled={ {{resourceConfig.id}}Disabled }
   {{#if resourceConfig.properties.iconProperties.showIcon}}
   showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  iconName={ `{{resourceConfig.properties.iconProperties.iconName}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconPlacement}}
-  iconPlacement="{{resourceConfig.properties.iconProperties.iconPlacement}}"
+  iconPlacement={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClass="{{resourceConfig.properties.iconProperties.iconClassName}}"
+  iconClass={ `{{resourceConfig.properties.iconProperties.iconClassName}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconSize}}
   iconSize={{resourceConfig.properties.iconProperties.iconSize}}

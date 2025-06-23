@@ -1,22 +1,22 @@
 <IGRPDataTableButtonLink
-  labelTrigger="{{resourceConfig.properties.labelTrigger}}"
+  labelTrigger={ `{{resourceConfig.properties.labelTrigger}}` }
   {{#if (and resourceConfig.properties.href (not resourceConfig.data.href))}}
   href={ `{{{resolve-segment-path resourceConfig.properties.href resourceConfig.properties.segments}}}{{#if resourceConfig.params}}{{{resolve-query-params resourceConfig.params}}}{{/if}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  icon="{{resourceConfig.properties.iconProperties.iconName}}"
+  icon={ `{{resourceConfig.properties.iconProperties.iconName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.classNameTrigger (not resourceConfig.data.classNameTrigger))}}
-  classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
+  classNameTrigger={ `{{resourceConfig.properties.classNameTrigger}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName="{{resourceConfig.properties.iconClassName}}"
+  iconClassName={ `{{resourceConfig.properties.iconClassName}}` }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

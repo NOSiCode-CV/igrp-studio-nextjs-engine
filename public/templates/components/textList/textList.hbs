@@ -16,13 +16,13 @@
   collapsible={ {{resourceConfig.properties.collapsible}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.type (not resourceConfig.data.type))}}
-  type="{{resourceConfig.properties.type}}"
+  type={ `{{resourceConfig.properties.type}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconGlobalColor}}
-  iconGlobalColor="{{resourceConfig.properties.iconProperties.iconGlobalColor}}"
+  iconGlobalColor={ `{{resourceConfig.properties.iconProperties.iconGlobalColor}}` }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

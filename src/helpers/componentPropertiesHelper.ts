@@ -225,7 +225,7 @@ export function resolveStateDefault(
   }
 
   // Handle strings and fallback
-  return type === 'string' ? `"${trimmed.replace(/"/g, '\\"')}"` : trimmed;
+  return type === 'string' ? `\`${trimmed.replace(/"/g, '\\"')}\`` : trimmed;
 }
 
 export function resolveZodTypes(field?: ElementField): string {

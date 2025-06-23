@@ -4,16 +4,16 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if (and resourceConfig.properties.color (not resourceConfig.data.color))}}
-  color="{{resourceConfig.properties.color}}"
+  color={ `{{resourceConfig.properties.color}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.linkLabel (not resourceConfig.data.linkLabel))}}
-  linkLabel="{{resourceConfig.properties.linkLabel}}"
+  linkLabel={ `{{resourceConfig.properties.linkLabel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.linkUrl (not resourceConfig.data.linkUrl))}}
-  linkUrl="{{resourceConfig.properties.linkUrl}}"
+  linkUrl={ `{{resourceConfig.properties.linkUrl}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showLink (not resourceConfig.data.showLink))}}
   showLink={ {{resourceConfig.properties.showLink}} }
@@ -28,13 +28,13 @@
   bgColored={ {{resourceConfig.properties.bgColored}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.icon}}
-  icon={ "{{{resourceConfig.properties.iconProperties.icon}}}" }
+  icon={ `{{{resourceConfig.properties.iconProperties.icon}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.linkIcon}}
-  linkIcon={ "{{{resourceConfig.properties.iconProperties.linkIcon}}}" }
+  linkIcon={ `{{{resourceConfig.properties.iconProperties.linkIcon}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName={ "{{{resourceConfig.properties.iconProperties.iconClassName}}}" }
+  iconClassName={ `{{{resourceConfig.properties.iconProperties.iconClassName}}}` }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

@@ -9,6 +9,8 @@ import { Component, hbsRenderer } from '../../../index';
 import { MODAL_DIALOG } from '../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
+import { MODAL_DIALOG_TITLE } from '../modalDialogTitle/index';
+import { MODAL_DIALOG_DESCRIPTION } from '../modalDialogDescription/index';
 
 export default {
   register(component: Component) {
@@ -28,6 +30,16 @@ export default {
     component.getStyle(modalDialogHeaderStyle())
     component.getRules(modalDialogHeaderRules())
     component.loadStates([]);
+
+    component.loadChildrenTypes([
+      { name: MODAL_DIALOG_TITLE, isDefault: true },
+      { name: MODAL_DIALOG_DESCRIPTION, isDefault: true },
+    ])
+
+    component.loadAcceptedChildren([
+      { name: MODAL_DIALOG_TITLE, isDefault: true },
+      { name: MODAL_DIALOG_DESCRIPTION, isDefault: true },
+    ])
 
     component.setRenderer(hbsRenderer);
   },
