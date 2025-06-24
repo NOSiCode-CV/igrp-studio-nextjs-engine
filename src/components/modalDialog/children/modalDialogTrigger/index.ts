@@ -7,6 +7,7 @@ import {
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { MODAL_DIALOG } from '../../index';
+import { BUTTON } from '../../../button/index';
 
 export default {
   register(component: Component) {
@@ -25,6 +26,7 @@ export default {
     component.getChildPropertiesMapping(modalDialogTriggerChildPropertiesMapping());
     component.getStyle(modalDialogTriggerStyle())
     component.getRules(modalDialogTriggerRules())
+    component.loadDefaultChildren([{ name: BUTTON }])
     component.loadStates([
       {
         state: {

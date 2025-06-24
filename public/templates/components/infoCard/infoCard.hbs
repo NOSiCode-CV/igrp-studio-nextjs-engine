@@ -35,7 +35,7 @@
       {{#each (extractInfoSection resourceConfig.children)}}
       {{#if this.data.items}}
       {
-        items: {{replaceId this.data.items.state.name this}}
+        items: {{#if this.data.items.value}}{{replaceId this.data.items.value.code this}}{{else}}{{replaceId this.data.items.state.name this}}{{/if}}
       },
       {{else}}
       {

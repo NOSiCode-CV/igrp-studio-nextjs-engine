@@ -39,13 +39,13 @@ export default {
     ])
 
     component.loadChildrenTypes([
-      { name: MODAL_DIALOG_HEADER, isDefault: false },
-      { name: MODAL_DIALOG_FOOTER, isDefault: false },
+      { name: MODAL_DIALOG_HEADER, isDefault: true },
+      { name: MODAL_DIALOG_FOOTER, isDefault: true },
     ])
 
     component.loadAcceptedChildren([
-      { name: MODAL_DIALOG_HEADER, isDefault: false },
-      { name: MODAL_DIALOG_FOOTER, isDefault: false },
+      { name: MODAL_DIALOG_HEADER, isDefault: true },
+      { name: MODAL_DIALOG_FOOTER, isDefault: true },
     ])
 
     component.setRenderer(hbsRenderer);

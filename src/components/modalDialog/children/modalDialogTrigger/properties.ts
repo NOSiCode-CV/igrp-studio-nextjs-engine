@@ -10,7 +10,7 @@ import { InteractionFieldVisibility } from '../../../../interfaces/types';
 
 export function modalDialogTriggerProperties() {
   return {
-    content: { type: 'string', required: true, default: 'Open' },
+    content: { type: 'string', required: false },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
     ...iconProperties(),
