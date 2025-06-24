@@ -9,7 +9,7 @@ export function textListsItemProperties() {
     iconProperties: {
       type: 'object',
       properties: {
-        icon: { type: 'string', required: false },
+        icon: { type: 'string', required: false, 'x-ui-widget': 'icon' },
         iconColor: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
       },
     },

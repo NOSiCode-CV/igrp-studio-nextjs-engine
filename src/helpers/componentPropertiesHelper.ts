@@ -229,57 +229,67 @@ export function resolveStateDefault(
 }
 
 export function resolveZodTypes(field?: ElementField): string {
-  if (!field) {
-    return 'z.unknown()';
-  }
+  if (!field) return 'z.unknown()';
 
   const { type, isList, required, validation, fields } = field;
   let zodType: string;
-
   const lowerType = type.toLowerCase();
 
   const isPrimitive = ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
 
   if (lowerType === 'object' && fields && fields.length > 0) {
-    const innerFields = fields.map((f) => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
-    zodType = `z.object({ ${innerFields} })`;
+    const inner = fields.map(f => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
+    zodType = `z.object({ ${inner} })`;
   } else if (isPrimitive) {
     switch (lowerType) {
-      case 'string':
-        zodType = 'z.string()';
-        break;
-      case 'number':
-        zodType = 'z.number()';
-        break;
-      case 'boolean':
-        zodType = 'z.boolean()';
-        break;
-      case 'date':
-        zodType = 'z.date()';
-        break;
-      case 'any':
-        zodType = 'z.any()';
-        break;
-      case 'unknown':
-      default:
-        zodType = 'z.unknown()';
+      case 'string': zodType = 'z.string()'; break;
+      case 'number': zodType = 'z.number()'; break;
+      case 'boolean': zodType = 'z.boolean()'; break;
+      case 'date': zodType = 'z.date()'; break;
+      case 'any': zodType = 'z.any()'; break;
+      default: zodType = 'z.unknown()';
     }
   } else {
-    // Assume it's a named external object/interface
     zodType = `${toCamelCase(type)}`;
   }
 
-  // Add validation
+  // Apply validations
   if (validation) {
-    zodType += `.refine(${validation})`;
+    const validators: string[] = [];
+
+    if (lowerType === 'string') {
+      if (validation.minLength) validators.push(`.min(${validation.minLength})`);
+      if (validation.maxLength) validators.push(`.max(${validation.maxLength})`);
+      if (validation.regex) validators.push(`.regex(new RegExp(${JSON.stringify(validation.regex)}))`);
+      if (validation.email) validators.push(`.email()`);
+      if (validation.url) validators.push(`.url()`);
+      if (validation.uuid) validators.push(`.uuid()`);
+      if (validation.startsWith) validators.push(`.startsWith(${JSON.stringify(validation.startsWith)})`);
+      if (validation.endsWith) validators.push(`.endsWith(${JSON.stringify(validation.endsWith)})`);
+      if (validation.includes) validators.push(`.includes(${JSON.stringify(validation.includes)})`);
+    }
+
+    if (lowerType === 'number') {
+      if (validation.min !== undefined) validators.push(`.min(${validation.min})`);
+      if (validation.max !== undefined) validators.push(`.max(${validation.max})`);
+      if (validation.positive) validators.push(`.positive()`);
+      if (validation.negative) validators.push(`.negative()`);
+      if (validation.int) validators.push(`.int()`);
+      if (validation.finite) validators.push(`.finite()`);
+    }
+
+    if (lowerType === 'date') {
+      if (validation.minDate) validators.push(`.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { message: 'Date must be after ${validation.minDate}' })`);
+      if (validation.maxDate) validators.push(`.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { message: 'Date must be before ${validation.maxDate}' })`);
+    }
+
+    zodType += validators.join('');
   }
 
-  // List handling
   if (isList === true) {
     zodType = `z.array(${zodType})`;
   }
 
-  // Optional handling
   if (!required) {
     zodType += '.optional()';
   }

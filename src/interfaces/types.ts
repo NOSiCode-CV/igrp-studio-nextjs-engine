@@ -821,11 +821,33 @@ export interface PathConfig {
 
 // Payload configuration
 
+export interface FieldValidation {
+  minLength?: number;
+  maxLength?: number;
+  regex?: string;
+  email?: boolean;
+  url?: boolean;
+  uuid?: boolean;
+  startsWith?: string;
+  endsWith?: string;
+  includes?: string;
+
+  min?: number;
+  max?: number;
+  positive?: boolean;
+  negative?: boolean;
+  int?: boolean;
+  finite?: boolean;
+
+  minDate?: string; // ISO string or Date string
+  maxDate?: string;
+}
+
 export interface ElementField {
   componentId: string;
   name: string;
   type: string;
-  validation?: string,
+  validation?: FieldValidation,
   defaultValue?: string,
   isList?: boolean,
   fields?: ElementField[]
