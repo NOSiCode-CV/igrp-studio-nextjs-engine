@@ -64,8 +64,26 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(component?.functions) {
+    component.functions.forEach((fun) => {
+      fun.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+      if (fun.path) {
+        imports.add(`import { ${fun.name} } from "${fun.path}";`);
+      }
+    });
+  }
+
   if(page?.actions) {
     page.actions.forEach((act) => {
+      act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+      if (act.path) {
+        imports.add(`import { ${act.name} } from "${act.path}";`);
+      }
+    });
+  }
+
+  if(component?.actions) {
+    component.actions.forEach((act) => {
       act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
       if (act.path) {
         imports.add(`import { ${act.name} } from "${act.path}";`);
@@ -91,8 +109,18 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(component?.references) {
+    component.references.forEach((ref) => {
+      ref.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
   if(page?.imports) {
     page.imports.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+  }
+
+  if(component?.imports) {
+    component.imports.map((it) => it.namespace).forEach((imp) => imports.add(imp));
   }
 
   // Define actions imports
