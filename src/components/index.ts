@@ -513,7 +513,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
   props += component.data
     ? Object.entries(component.data).map(([key, value]) => {
-      return ` ${key}={ ${value.state.name} }`;
+      return ` ${key}={ ${value.state?.name ?? value.value?.code ?? ''} }`;
     }).join("")
     : ``
 
