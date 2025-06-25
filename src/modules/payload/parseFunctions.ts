@@ -10,7 +10,7 @@ export function parseFunctions(functionFilePath: string): FunctionDef[] {
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
   // 1. Parse traditional function declarations
-  const functionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/gs;
+  const functionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;<]+(?:<[^>]+>)?[^{;]*))?/gs;
   let functionMatch;
 
   while ((functionMatch = functionRegex.exec(content)) !== null) {
@@ -23,7 +23,7 @@ export function parseFunctions(functionFilePath: string): FunctionDef[] {
   }
 
   // 2. Parse arrow function declarations
-  const constFunctionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=>]+))?\s*=>/gs;
+  const constFunctionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=><]+(?:<[^>]+>)?[^=>]*))?\s*=>/gs;
   let constFunctionMatch;
 
   while ((constFunctionMatch = constFunctionRegex.exec(content)) !== null) {

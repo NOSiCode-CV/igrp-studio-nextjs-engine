@@ -107,7 +107,7 @@ export function baseInteraction(
       type: {
         type: 'string',
         required: true,
-        enum: ['function', 'action', 'both'],
+        enum: ['function', 'action', 'navigate', 'formSubmit', 'appLogic'],
         default: 'function',
       },
       function: {
@@ -292,6 +292,24 @@ export function baseInteraction(
           inRow: { type: 'boolean', required: false, default: false },
         },
       },
+      appLogic: {
+        type: 'object',
+        properties: {
+          endpoint: { type: 'string', required: true },
+          method: { type: 'string', default: 'GET', enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'], required: true },
+          dataType: { type: 'string', required: true },
+          auth: {
+            type: 'object',
+            properties: {
+              authType: { type: 'string', default: 'bearer', enum: ['bearer', 'header', 'basic', 'none'], required: true },
+              authKey: { type: 'string', required: true },
+              authValue: { type: 'string', required: true }
+            },
+            required: false
+          }
+        },
+        required: false
+      }
     },
   };
 }

@@ -22,7 +22,7 @@ export function badgeProperties() {
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
-    className: { type: 'string', required: false },
+    badgeClassName: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

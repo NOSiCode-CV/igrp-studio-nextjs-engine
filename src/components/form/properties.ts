@@ -12,7 +12,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function formProperties() {
   return {
     validationMode: { type: 'string', required: false, default: 'onBlur', enum: ['onBlur'] },
-    gridClassName: { type: 'string', required: true, default: 'flex flex-col' },
+    gridClassName: { type: 'string', required: true, default: 'grid grid-cols-4' },
     //formRef: { type: 'string', required: true, default: 'form{{id}}Ref' },
     resetAfterSubmit: { type: 'boolean', required: false, default: false },
     //showAction: { type: 'boolean', required: false, default: false },

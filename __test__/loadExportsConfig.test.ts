@@ -1,8 +1,9 @@
 import { initComponents, loadAppExports } from '../src';
-import { OUTPUT_TAXPAYER_TEST, OUTPUT_TEST, OUTPUT_TEST2 } from '../src/utils/testPath';
+import { OUTPUT_TAXPAYER_TEST, OUTPUT_TEST2 } from '../src/utils/testPath';
 
-export const WORKSPACE_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss";
-export const OUTPUT_DIR = WORKSPACE_DIR + "\\projects\\inss-sisgb-core-contribuicoes-frontend";
+//export const WORKSPACE_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss";
+//export const OUTPUT_DIR = WORKSPACE_DIR + "\\projects\\inss-sisgb-core-contribuicoes-frontend";
+export const OUTPUT_DIR = OUTPUT_TEST2
 
 describe('Load Exports', () => {
 
