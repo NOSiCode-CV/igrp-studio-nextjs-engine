@@ -468,7 +468,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
@@ -577,4 +577,30 @@ export function hbsRenderer (component: Layout, parentComponent?: Layout, elemen
 
 export function noRenderer(): () => string {
   return () => ""
+}
+
+function resolveVariants(variant: any, element: Component) {
+
+  if(!variant) return ''
+
+  if(typeof variant === 'string') {
+    return (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``)
+  } else {
+    if (variant.default) {
+      return (element.variants[variant.default] !== '' && element.variants[variant.default] !== undefined ? `'${element.variants[variant.default]}',` : ``);
+    }
+    if (variant.xs) {
+      return (element.variants[variant.xs] !== '' && element.variants[variant.xs] !== undefined ? `'xs:${element.variants[variant.xs]}',` : ``);
+    }
+    if (variant.md) {
+      return (element.variants[variant.md] !== '' && element.variants[variant.md] !== undefined ? `'md:${element.variants[variant.md]}',` : ``);
+    }
+    if (variant.lg) {
+      return (element.variants[variant.lg] !== '' && element.variants[variant.lg] !== undefined ? `'lg:${element.variants[variant.lg]}',` : ``);
+    }
+    if (variant.xl) {
+      return (element.variants[variant.xl] !== '' && element.variants[variant.lg] !== undefined ? `'xl:${element.variants[variant.xl]}',` : ``);
+    }
+  }
+
 }

@@ -1,21 +1,32 @@
 import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
+const variantProperties = { type: 'string', required: true, enum: [
+    'cols1',
+    'cols2',
+    'cols3',
+    'cols4',
+    'cols5',
+    'cols6',
+    'cols7',
+    'cols8',
+    'cols9',
+    'cols10',
+    'cols11',
+    'cols12'
+  ], default: 'cols12' }
+
 export function columnsProperties() {
   return {
-    variant: { type: 'string', required: true, enum: [
-        'cols1',
-        'cols2',
-        'cols3',
-        'cols4',
-        'cols5',
-        'cols6',
-        'cols7',
-        'cols8',
-        'cols9',
-        'cols10',
-        'cols11',
-        'cols12'
-      ], default: 'cols12'
+    variant: {
+      type: 'object',
+      required: true,
+      properties: {
+        default: variantProperties,
+        xs: variantProperties,
+        md: variantProperties,
+        lg: variantProperties,
+        xl: variantProperties,
+      }
     },
     gap: {type: 'number', required: false, default: 4, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64']},
 
