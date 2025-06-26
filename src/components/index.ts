@@ -386,7 +386,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return (key === "className")? `` : ` ${key}="${value}"`;
+      return (key === (element.classNamePropertyTag ?? "className"))? `` : ` ${key}="${value}"`;
     }).join("")
     : ``
 
@@ -475,7 +475,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `${element.classNamePropertyTag ?? 'className'}={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
