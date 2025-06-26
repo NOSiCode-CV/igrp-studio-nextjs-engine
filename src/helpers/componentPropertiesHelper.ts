@@ -420,21 +420,28 @@ export function replaceValue(value: string, component?: any) {
   return replaceTemplate(value, { value: component.properties?.value ?? '', type: component.dataType ? capitalize(component.dataType) : 'any' })
 }
 
+export function resolveClassNameProperty(component: Layout, registry: Record<string, Component>) {
+  const element = registry[component.componentName];
+  if(!element) return 'className'
+  return element.classNamePropertyTag ?? 'className'
+}
+
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
+  classKey?: string
 ) {
   return customProperties
     ? Object.entries(customProperties)
         .map(([key, value]) => {
           if (
             [
-              'className',
               'content',
               'dataProperties',
               'name',
               'customProperties',
               'generateReference',
+              classKey
             ].includes(key)
           )
             return '';

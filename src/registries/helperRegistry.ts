@@ -17,7 +17,7 @@ import { fieldHelper } from '../helpers/fieldHelper';
 import { Default, isValidation, yupValidation } from '../helpers/validationHelpers';
 import { actionType, applyToAll, importActionsType, targetHelper } from '../helpers/actionHelpers';
 import { renderLayout } from '../utils/renderLayout';
-import { notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
+import { getPropertyByKey, notNullOrEmpty, nullOrEmpty } from '../helpers/objectHelpers';
 import {
   addClassNameFromChildProperties,
   addClassNameFromProperties,
@@ -34,7 +34,7 @@ import {
   indexedTag,
   renderData,
   renderInteractions,
-  renderProperties, replaceId, replaceType, replaceValue,
+  renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
   resolveComponent,
   resolveFirstType, resolveFunctionArgs,
   resolveQueryParams,
@@ -93,6 +93,7 @@ Handlebars.registerHelper("indexedTag", indexedTag);
 Handlebars.registerHelper("replaceId", replaceId);
 Handlebars.registerHelper("replaceType", replaceType);
 Handlebars.registerHelper("replaceValue", replaceValue);
+Handlebars.registerHelper("resolveClassNameProperty", resolveClassNameProperty);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
 Handlebars.registerHelper("render-data", renderData);
@@ -142,6 +143,7 @@ Handlebars.registerHelper("default", Default)
 // Objects
 Handlebars.registerHelper("notNullOrEmpty", notNullOrEmpty)
 Handlebars.registerHelper("nullOrEmpty", nullOrEmpty)
+Handlebars.registerHelper("getPropertyByKey", getPropertyByKey)
 
 /**
  * Dynamically loads and registers Handlebars partials in a React.js application.

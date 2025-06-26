@@ -53,6 +53,7 @@ export type Component = {
   group: string;
   parent: string;
   componentClass: string;
+  classNamePropertyTag?: string;
   maxChildren?: number;
   templatePath?: string;
   renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
@@ -73,6 +74,7 @@ export type Component = {
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
   loadComponentClass:(componentClass: string) => void;
+  loadClassNamePropertyTag:(classNamePropertyTag: string) => void;
   loadTemplatePath:(templatePath?: string) => void;
   loadChildrenMax:(max: number) => void;
 
@@ -138,6 +140,7 @@ function initComponent(): Component {
     group: '',
     parent: '',
     componentClass: '',
+    classNamePropertyTag: undefined,
     maxChildren: undefined,
     templatePath: undefined,
     renderer: () => () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: "Not registered" }),
@@ -196,6 +199,10 @@ function initComponent(): Component {
 
     loadComponentClass(componentClass: string) {
       this.componentClass = componentClass
+    },
+
+    loadClassNamePropertyTag(classNamePropertyTag: string) {
+      this.classNamePropertyTag = classNamePropertyTag
     },
 
     loadTemplatePath(path?: string) {

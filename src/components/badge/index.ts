@@ -13,6 +13,7 @@ export default {
     ]);
 
     component.loadComponentClass('IGRPBadge')
+    component.loadClassNamePropertyTag('badgeClassName')
     component.loadVariants(badgeVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Badge')
