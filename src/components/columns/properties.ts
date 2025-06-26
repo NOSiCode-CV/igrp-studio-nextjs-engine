@@ -21,10 +21,10 @@ export function columnsProperties() {
       type: 'object',
       required: true,
       properties: {
-        default: { ...variantProperties, default: 'cols12'  },
+        default: { ...variantProperties, default: 'cols1'  },
         xs: { ...variantProperties, 'x-meta': { label: 'Extra Small' } },
-        md: { ...variantProperties, 'x-meta': { label: 'Medium' } },
-        lg: { ...variantProperties, 'x-meta': { label: 'Large' } },
+        md: { ...variantProperties, default: 'cols2', 'x-meta': { label: 'Medium' } },
+        lg: { ...variantProperties, default: 'cols4', 'x-meta': { label: 'Large' } },
         xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
       },
     },
