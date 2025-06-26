@@ -19,26 +19,26 @@ const variantProperties = {
     'row-end-1', 'row-end-2', 'row-end-3', 'row-end-4', 'row-end-5', 'row-end-6', 'row-end-auto',
     '-row-end-1', '-row-end-2', '-row-end-3', '-row-end-4', '-row-end-5', '-row-end-6',
     'row-auto', 'rows-auto', 'rows-min', 'rows-max'
-  ], default: 'cols4'
+  ]
 }
 
 export function gridProperties() {
   return {
-    gap: {type: 'number', required: false, default: 4},
+    gap: { type: 'number', required: false, default: 4 },
     variant: {
       type: 'object',
       required: true,
       properties: {
-        default: variantProperties,
-        xs: variantProperties,
-        md: variantProperties,
-        lg: variantProperties,
-        xl: variantProperties,
-      }
+        default: { ...variantProperties, default: 'cols1' },
+        xs: { ...variantProperties, 'x-meta': { label: 'Extra Small' } },
+        md: { ...variantProperties, default: 'cols2', 'x-meta': { label: 'Medium' } },
+        lg: { ...variantProperties, default: 'cols4', 'x-meta': { label: 'Large' } },
+        xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
+      },
     },
     className: { type: 'string', required: false },
     ...commonProperties(),
-  }
+  };
 }
 
 export function gridPropertiesMapping() {

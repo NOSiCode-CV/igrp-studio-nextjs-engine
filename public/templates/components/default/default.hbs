@@ -37,7 +37,7 @@
   {{resourceConfig.properties.content}}
   {{else}}
   {{#if (and (not resourceConfig.properties.content) resourceConfig.data.content)}}
-  {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}{{resourceConfig.data.content.state.name}}{{/if}}
+  { {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}{{resourceConfig.data.content.state.name}}{{/if}} }
   {{else}}
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}

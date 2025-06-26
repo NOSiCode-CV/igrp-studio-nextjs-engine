@@ -510,6 +510,7 @@ export function renderData(data: Record<string, any>, component?: Layout) {
   return data
     ? Object.entries(data)
         .map(([key, value]) => {
+          if(key === 'content') return ''
           return `${key}={ ${replaceId(value.state?.name, component) ?? value.value?.code ?? 'undefined'} }`;
         })
         .join('\n')

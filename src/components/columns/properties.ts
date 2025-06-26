@@ -13,7 +13,7 @@ const variantProperties = { type: 'string', required: true, enum: [
     'cols10',
     'cols11',
     'cols12'
-  ], default: 'cols12' }
+  ]}
 
 export function columnsProperties() {
   return {
@@ -21,17 +21,40 @@ export function columnsProperties() {
       type: 'object',
       required: true,
       properties: {
-        default: variantProperties,
-        xs: variantProperties,
-        md: variantProperties,
-        lg: variantProperties,
-        xl: variantProperties,
-      }
+        default: { ...variantProperties, default: 'cols12'  },
+        xs: { ...variantProperties, 'x-meta': { label: 'Extra Small' } },
+        md: { ...variantProperties, 'x-meta': { label: 'Medium' } },
+        lg: { ...variantProperties, 'x-meta': { label: 'Large' } },
+        xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
+      },
     },
-    gap: {type: 'number', required: false, default: 4, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64']},
+    gap: {
+      type: 'number',
+      required: false,
+      default: 4,
+      enum: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '8',
+        '10',
+        '12',
+        '16',
+        '20',
+        '24',
+        '32',
+        '40',
+        '48',
+        '56',
+        '64',
+      ],
+    },
 
     ...commonProperties(),
-  }
+  };
 }
 
 export function columnsChildProperties() {

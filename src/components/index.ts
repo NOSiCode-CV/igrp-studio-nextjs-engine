@@ -583,24 +583,28 @@ function resolveVariants(variant: any, element: Component) {
 
   if(!variant) return ''
 
+  let variants = ''
+
   if(typeof variant === 'string') {
-    return (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``)
+    variants += (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``)
   } else {
     if (variant.default) {
-      return (element.variants[variant.default] !== '' && element.variants[variant.default] !== undefined ? `'${element.variants[variant.default]}',` : ``);
+      variants += (element.variants[variant.default] !== '' && element.variants[variant.default] !== undefined ? `'${element.variants[variant.default]} ',` : ``);
     }
     if (variant.xs) {
-      return (element.variants[variant.xs] !== '' && element.variants[variant.xs] !== undefined ? `'xs:${element.variants[variant.xs]}',` : ``);
+      variants += (element.variants[variant.xs] !== '' && element.variants[variant.xs] !== undefined ? `'xs:${element.variants[variant.xs]} ',` : ``);
     }
     if (variant.md) {
-      return (element.variants[variant.md] !== '' && element.variants[variant.md] !== undefined ? `'md:${element.variants[variant.md]}',` : ``);
+      variants += (element.variants[variant.md] !== '' && element.variants[variant.md] !== undefined ? `'md:${element.variants[variant.md]} ',` : ``);
     }
     if (variant.lg) {
-      return (element.variants[variant.lg] !== '' && element.variants[variant.lg] !== undefined ? `'lg:${element.variants[variant.lg]}',` : ``);
+      variants += (element.variants[variant.lg] !== '' && element.variants[variant.lg] !== undefined ? `'lg:${element.variants[variant.lg]} ',` : ``);
     }
     if (variant.xl) {
-      return (element.variants[variant.xl] !== '' && element.variants[variant.lg] !== undefined ? `'xl:${element.variants[variant.xl]}',` : ``);
+      variants += (element.variants[variant.xl] !== '' && element.variants[variant.lg] !== undefined ? `'xl:${element.variants[variant.xl]} ',` : ``);
     }
   }
+
+  return variants
 
 }
