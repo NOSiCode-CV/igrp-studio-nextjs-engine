@@ -11,7 +11,6 @@ import { TEMPLATES } from '../../utils/constants';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPLineChart } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     //component.loadVariants(lineChartVariants());

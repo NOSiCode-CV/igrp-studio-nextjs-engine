@@ -11,7 +11,6 @@ import { DROPDOWN_ITEM } from './children/dropdownItem';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDropdown } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadComponentClass('IGRPDropdown')

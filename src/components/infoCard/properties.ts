@@ -3,7 +3,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function infoCardProperties() {
   return {
-    title: { type: 'string', required: false },
+    title: { type: 'string', required: false, default: 'Lorem Ipsum' },
     colorSection: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     variantSection: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     titleClassName: { type: 'string', required: false },
@@ -46,11 +46,5 @@ export function infoCardRules() {
 
 export function infoCardData() {
   return {
-    items: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
-        id: '',
-        name: 'infoCard{{id}}Items',
-        type: 'IGRPTabItem[]',
-        defaultValue: '[]'
-      }, true), required: true },
   };
 }

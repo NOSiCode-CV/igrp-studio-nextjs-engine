@@ -7,16 +7,16 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if resourceConfig.properties}}
-  {{{render-properties resourceConfig.properties resourceConfig.data}}}
+  {{{render-properties resourceConfig.properties resourceConfig.data (resolveClassNameProperty resourceConfig registry)}}}
   {{/if}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and (getPropertyByKey resourceConfig.properties (resolveClassNameProperty resourceConfig registry)) parentResourceConfig) resourceConfig.style)}}
+  {{{resolveClassNameProperty resourceConfig registry}}}={ cn({{{concat "'" (getPropertyByKey resourceConfig.properties (resolveClassNameProperty resourceConfig registry)) "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and (getPropertyByKey resourceConfig.properties (resolveClassNameProperty resourceConfig registry)) (not parentResourceConfig)) resourceConfig.style)}}
+  {{{resolveClassNameProperty resourceConfig registry}}}={ cn({{{concat "'" (getPropertyByKey resourceConfig.properties (resolveClassNameProperty resourceConfig registry)) "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
-  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and (nullOrEmpty (getPropertyByKey resourceConfig.properties (resolveClassNameProperty resourceConfig registry))) parentResourceConfig.childProperties) resourceConfig.style)}}
+  {{{resolveClassNameProperty resourceConfig registry}}}={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
   {{/if}}
@@ -36,10 +36,14 @@
   {{#if (and resourceConfig.properties.content (not resourceConfig.data.content))}}
   {{resourceConfig.properties.content}}
   {{else}}
+  {{#if (and (not resourceConfig.properties.content) resourceConfig.data.content)}}
+  { {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}{{resourceConfig.data.content.state.name}}{{/if}} }
+  {{else}}
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
   {{{render-layout this ../resourceConfig}}}
   {{/each}}
+  {{/if~}}
   {{/if~}}
   {{/if~}}
   {{/if~}}

@@ -22,38 +22,38 @@
           clockWise: {{this.clockWise}},
           {{/if~}}
           {{#if this.stackId}}
-          stackId: "{{this.stackId}}",
+          stackId: `{{this.stackId}}`,
           {{/if~}}
           {{#if this.showLabels}}
           showLabels: {{this.showLabels}},
           {{/if~}}
           {{#if this.labelPosition}}
-          labelPosition: "{{this.labelPosition}}",
+          labelPosition: `{{this.labelPosition}}`,
           {{/if~}}
           {{#if this.labelType}}
-          labelType: "{{this.labelType}}",
+          labelType: `{{this.labelType}}`,
           {{/if~}}
           {{#if this.labelStyle}}
-          labelStyle: "{{this.labelStyle}}",
+          labelStyle: `{{this.labelStyle}}`,
           {{/if~}}
           {{#if this.name}}
-          name: "{{this.name}}",
+          name: `{{this.name}}`,
           {{/if~}}
           {{#if this.color}}
-          color: "{{this.color}}",
+          color: `{{this.color}}`,
           {{/if~}}
         },
       {{/each}}
     {{/if~}}
     ]
   }
-  categoryKey="{{resourceConfig.properties.categoryKey}}"
-  nameKey="{{resourceConfig.properties.nameKey}}"
+  categoryKey={ `{{resourceConfig.properties.categoryKey}}` }
+  nameKey={ `{{resourceConfig.properties.nameKey}}` }
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title="{{resourceConfig.properties.title}}"
+  title={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description="{{resourceConfig.properties.description}}"
+  description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
@@ -80,33 +80,33 @@
   endAngle={ {{resourceConfig.properties.endAngle}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.innerRadius (not resourceConfig.data.innerRadius))}}
-  innerRadius="{{resourceConfig.properties.innerRadius}}"
+  innerRadius={ `{{resourceConfig.properties.innerRadius}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.outerRadius (not resourceConfig.data.outerRadius))}}
-  outerRadius="{{resourceConfig.properties.outerRadius}}"
+  outerRadius={ `{{resourceConfig.properties.outerRadius}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.barSize (not resourceConfig.data.barSize))}}
   barSize={ {{resourceConfig.properties.barSize}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.gridType (not resourceConfig.data.gridType))}}
-  gridType="{{resourceConfig.properties.gridType}}"
+  gridType={ `{{resourceConfig.properties.gridType}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
-  gridColor="{{resourceConfig.properties.gridColor}}"
+  gridColor={ `{{resourceConfig.properties.gridColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
-  backgroundColor="{{resourceConfig.properties.backgroundColor}}"
+  backgroundColor={ `{{resourceConfig.properties.backgroundColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.referenceLineColor (not resourceConfig.data.referenceLineColor))}}
-  referenceLineColor="{{resourceConfig.properties.referenceLineColor}}"
+  referenceLineColor={ `{{resourceConfig.properties.referenceLineColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
-  axisColor="{{resourceConfig.properties.axisColor}}"
+  axisColor={ `{{resourceConfig.properties.axisColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: "{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
@@ -114,25 +114,25 @@
   centerText={
     {
       show: {{resourceConfig.properties.centerText.show}}
-      value: "{{resourceConfig.properties.centerText.value}}"
-      label: "{{resourceConfig.properties.centerText.label}}"
+      value: `{{resourceConfig.properties.centerText.value}}"
+      label: `{{resourceConfig.properties.centerText.label}}"
       formatter: (value: number) => "{{resourceConfig.properties.centerText.formatter}}"
     }
   }
   {{/if~}}
   {{#if (and resourceConfig.properties.legendPosition (not resourceConfig.data.legendPosition))}}
-  legendPosition="{{resourceConfig.properties.legendPosition}}"
+  legendPosition={ `{{resourceConfig.properties.legendPosition}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
-  size="{{resourceConfig.properties.size}}"
+  size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}

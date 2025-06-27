@@ -24,6 +24,7 @@ export function cellProperties(defaultTitle?: string) {
   return {
     headerType: { type: 'string', required: false, enum: [ 'sortToggle', 'sortDropdown', 'rowsSelect' ] },
     headerTitle: { type: 'string', required: false, default: defaultTitle ?? 'New Column' },
+    className: { type: 'string', required: false }
   };
 }
 
@@ -39,6 +40,19 @@ export function actionProperties(labelTrigger?: string) {
       properties: {
         iconName: { type: 'string', required: false, default: "ArrowRight" },
       },
+    },
+    segments: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', required: true },
+          tag: { type: 'string', required: false },
+          value: { type: 'string', required: false }
+        },
+        required: false
+      },
+      'x-ui-widget': 'hidden'
     },
     className: { type: 'string', required: false },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },

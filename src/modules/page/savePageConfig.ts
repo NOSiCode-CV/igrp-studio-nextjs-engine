@@ -18,7 +18,7 @@ import { DIRECTORIES, EXTENSIONS } from '../../utils/constants';
  ```
  */
 export const savePageConfig = async (pageConfig: PageConfig, basePath: string) => {
-  
+
   const pageConfigOutputPath = path.join(
     basePath,
     DIRECTORIES.IGRPSTUDIO_PAGES,

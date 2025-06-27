@@ -7,10 +7,10 @@
   schema={ {{toCamelCase resourceConfig.dataType}} }
   {{/if}}
   {{#if (and resourceConfig.properties.validationMode (not resourceConfig.data.validationMode))}}
-  validationMode="{{resourceConfig.properties.validationMode}}"
+  validationMode={ `{{resourceConfig.properties.validationMode}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.gridClassName (not resourceConfig.data.gridClassName))}}
-  gridClassName="{{resourceConfig.properties.gridClassName}}"
+  gridClassName={ `{{resourceConfig.properties.gridClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.resetAfterSubmit (not resourceConfig.data.resetAfterSubmit))}}
   resetAfterSubmit={ {{resourceConfig.properties.resetAfterSubmit}} }
@@ -19,19 +19,19 @@
   showAction={ {{resourceConfig.properties.showAction}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.submitText (not resourceConfig.data.submitText))}}
-  submitText="{{resourceConfig.properties.submitText}}"
+  submitText={ `{{resourceConfig.properties.submitText}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.submitVariant (not resourceConfig.data.submitVariant))}}
-  submitVariant="{{resourceConfig.properties.submitVariant}}"
+  submitVariant={ `{{resourceConfig.properties.submitVariant}}` }
   {{/if~}}
   formRef={ form{{resourceConfig.tag}}Ref }
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}

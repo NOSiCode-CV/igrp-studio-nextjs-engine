@@ -13,7 +13,6 @@ import { TABLE } from '../../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDataTableFilterInput } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
     component.loadComponentClass('IGRPDataTableFilterInput')

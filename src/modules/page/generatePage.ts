@@ -10,7 +10,9 @@ import { checkDuplicatedLayouts } from './checkDuplicatedLayouts';
  * @param context
  */
 export const generatePage = async (context: RenderContext<PageConfig, PageConfig>) => {
+
   const page = await renderPage(context);
+
   const pageOutputPath = getPageDir(context);
 
   const pages = await loadPagesConfig(context.basePath)

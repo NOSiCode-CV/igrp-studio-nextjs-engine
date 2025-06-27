@@ -32,12 +32,22 @@ export function resolveTypes(context: any): string {
 }
 
 const renderTypeDefinition = (component: Layout, types: TypeDef[], context: any) => {
-  const element = context.registry[component.componentName]
-  if(!element) return ''
-  if(!element.allowTypes) return ''
-  context.resourceConfig.types = types.filter((type) => type.componentId === component.id);
+  const element = context.registry[component.componentName];
+  if (!element || !element.allowTypes) return '';
+
+  // Filter types specific to the current component
+  const filteredTypes = types.filter(type => type.componentId === component.id);
+
+  const specContext = {
+    ...context,
+    resourceConfig: {
+      ...context.resourceConfig,
+      types: filteredTypes // Inject only the relevant types
+    }
+  }
+
   return renderSyncTemplate(
     replaceTemplate(TEMPLATES.TYPE_ELEMENT, { element: component.componentName }),
-    context,
+    specContext
   );
 };

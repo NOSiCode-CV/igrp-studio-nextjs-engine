@@ -11,14 +11,13 @@ import { INFO_SECTION } from '../infoSection/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPInfoItem } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadParent(INFO_SECTION)
     component.loadComponentClass('IGRPInfoItem')
     component.loadVariants(infoItemVariants());
     component.loadGroup('basicElements')
-    component.loadLabel('InfoItem')
+    component.loadLabel('Info Item')
     component.getInteractions(infoItemInteractions());
     component.getInteractionsMapping(infoItemInteractionsMapping());
     component.getProperties(infoItemProperties());

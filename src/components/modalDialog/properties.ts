@@ -10,20 +10,9 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function modalDialogProperties() {
   return {
-    name: { type: 'string', required: true, default: 'modalDialog' },
-    title: { type: 'string', required: false, default: 'Modal Dialog' },
-    description: { type: 'string', required: false, default: 'A modal dialog' },
-    type: { type: 'string', required: false, enum: ['default', 'alert', 'confirm', 'delete', 'info', 'success', 'warning', 'modal'], default: 'default' },
-    size: { type: 'string', required: false, enum: ['sm', 'md', 'lg', 'xl', 'full'], default: 'md' },
-    headerClassName: { type: 'string', required: false },
-    showTrigger: { type: 'boolean', required: false, default: true },
-    showFooter: { type: 'boolean', required: false, default: true },
-    triggerText: { type: 'string', required: false, default: 'Open Dialog' },
-    triggerButton: { type: 'string', required: false },
-    triggerVariant: { type: 'string', required: false, enum: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'], default: 'outline' },
-    ...iconProperties(),
-    footerClassName: { type: 'string', required: false },
     open: { type: 'boolean', required: false },
+    defaultOpen: { type: 'boolean', required: false },
+    modal: { type: 'boolean', required: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

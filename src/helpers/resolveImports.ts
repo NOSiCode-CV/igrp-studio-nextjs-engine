@@ -10,7 +10,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   const imports = new Set<string>();
 
   imports.add(`import { useState, useEffect, useRef } from 'react';`)
-  imports.add(`import { cn, useIGRPMenuNavigation } from '@igrp/igrp-framework-react-design-system';`)
+  imports.add(`import { cn, useIGRPMenuNavigation, useIGRPToast } from '@igrp/igrp-framework-react-design-system';`)
 
   /*if(isPage)
     imports.add(`import { ${capitalize(pageName)}Service} from '@/services/${toLowerCase(pageName)}/${capitalize(pageName)}Service'`)*/
@@ -18,12 +18,26 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
   const components = new Set<{ componentName: string, id: string, tag: string, interactions: Record<string, any>, forceStateLoad: boolean, dataType?: string }>();
   extractComponentData(config, components, registry);
 
+  const classes = new Set<string>();
+
   components.forEach((component) => {
     const metadata = registry[component.componentName];
+
+    if (metadata?.componentClass) {
+      classes.add(metadata.componentClass);
+    }
     if (metadata?.imports) {
       metadata.imports.forEach((imp) => imports.add(imp));
     }
   });
+
+  if (classes.size > 0) {
+    imports.add(
+      `import { 
+  ${Array.from(classes).join(',\n\t')} 
+} from "@igrp/igrp-framework-react-design-system";`,
+    );
+  }
 
   if(page?.types) {
     page.types.forEach((type) => {
@@ -50,8 +64,26 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(component?.functions) {
+    component.functions.forEach((fun) => {
+      fun.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+      if (fun.path) {
+        imports.add(`import { ${fun.name} } from "${fun.path}";`);
+      }
+    });
+  }
+
   if(page?.actions) {
     page.actions.forEach((act) => {
+      act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+      if (act.path) {
+        imports.add(`import { ${act.name} } from "${act.path}";`);
+      }
+    });
+  }
+
+  if(component?.actions) {
+    component.actions.forEach((act) => {
       act.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
       if (act.path) {
         imports.add(`import { ${act.name} } from "${act.path}";`);
@@ -77,8 +109,18 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  if(component?.references) {
+    component.references.forEach((ref) => {
+      ref.imports?.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+    });
+  }
+
   if(page?.imports) {
     page.imports.map((it) => it.namespace).forEach((imp) => imports.add(imp));
+  }
+
+  if(component?.imports) {
+    component.imports.map((it) => it.namespace).forEach((imp) => imports.add(imp));
   }
 
   // Define actions imports

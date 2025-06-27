@@ -1,11 +1,9 @@
 import {
-  baseInteraction, baseRules,
+  baseRules,
   baseStyle,
   commonProperties,
   commonPropertiesMapping,
-  iconProperties,
-} from '../default/properties';
-import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+  } from '../default/properties';
 
 export function badgeProperties() {
   return {
@@ -20,11 +18,11 @@ export function badgeProperties() {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: false },
-        iconName: { type: 'string', required: false, default: 'Info' },
+        iconName: { type: 'string', required: false, default: 'Info', 'x-ui-widget': 'icon' },
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
-    className: { type: 'string', required: false },
+    badgeClassName: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

@@ -13,9 +13,9 @@ import { TEXT_LIST_SUBITEMS } from '../textListSubItems/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPTextListItem } from "@igrp/igrp-framework-react-design-system";',
     ]);
 
+    component.loadComponentClass('IGRPTextListItem')
     component.loadVariants(textListsItemVariants());
     component.loadChildrenMax(2)
     component.loadParent(TEXT_LIST)
@@ -27,12 +27,12 @@ export default {
 
     component.loadChildrenTypes([
       { name: TEXT_LIST_ITEM_CONTENT, isDefault: true },
-      { name: TEXT_LIST_SUBITEMS, isDefault: true }
+      { name: TEXT_LIST_SUBITEMS, isDefault: false }
     ]);
 
     component.loadAcceptedChildren([
       { name: TEXT_LIST_ITEM_CONTENT, isDefault: true },
-      { name: TEXT_LIST_SUBITEMS, isDefault: true }
+      { name: TEXT_LIST_SUBITEMS, isDefault: false }
     ]);
 
     component.loadStates([]);

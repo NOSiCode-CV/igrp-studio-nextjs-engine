@@ -5,13 +5,13 @@
   {{/if}}
   name={ `{{resourceConfig.tag}}` }
   {{#if (and resourceConfig.properties.dir (not resourceConfig.data.dir))}}
-  dir="{{resourceConfig.properties.dir}}"
+  dir={ `{{resourceConfig.properties.dir}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.defaultValue (not resourceConfig.data.defaultValue))}}
-  defaultValue="{{resourceConfig.properties.defaultValue}}"
+  defaultValue={ `{{resourceConfig.properties.defaultValue}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.defaultCountry (not resourceConfig.data.defaultCountry))}}
-  defaultCountry="{{resourceConfig.properties.defaultCountry}}"
+  defaultCountry={ `{{resourceConfig.properties.defaultCountry}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.countries (not resourceConfig.data.countries))}}
   countries={
@@ -23,16 +23,16 @@
   }
   {{/if~}}
   {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
-  error="{{resourceConfig.properties.error}}"
+  error={ `{{resourceConfig.properties.error}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
   {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
-  label="{{resourceConfig.properties.label}}"
+  label={ `{{resourceConfig.properties.label}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description="{{resourceConfig.properties.description}}"
+  description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.international (not resourceConfig.data.international))}}
   international={ {{resourceConfig.properties.international}} }
@@ -41,10 +41,10 @@
   floatingLabel={ {{resourceConfig.properties.floatingLabel}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.helperText (not resourceConfig.data.helperText))}}
-  helperText="{{resourceConfig.properties.helperText}}"
+  helperText={ `{{resourceConfig.properties.helperText}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.errorMessage (not resourceConfig.data.errorMessage))}}
-  errorMessage="{{resourceConfig.properties.errorMessage}}"
+  errorMessage={ `{{resourceConfig.properties.errorMessage}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.showIcon}} }
@@ -53,16 +53,16 @@
   required={ {{resourceConfig.properties.required}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  iconName="{{resourceConfig.properties.iconProperties.iconName}}"
+  iconName={ `{{resourceConfig.properties.iconProperties.iconName}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconSize}}
-  iconSize="{{resourceConfig.properties.iconProperties.iconSize}}"
+  iconSize={ `{{resourceConfig.properties.iconProperties.iconSize}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconPlacement}}
-  iconPlacement="{{resourceConfig.properties.iconProperties.iconPlacement}}"
+  iconPlacement={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
+  iconClassName={ `{{resourceConfig.properties.iconProperties.iconClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.readOnly (not resourceConfig.data.readOnly))}}
   readOnly
@@ -70,13 +70,13 @@
   {{#if (and resourceConfig.properties.autofocus (not resourceConfig.data.autofocus))}}
   autoFocus={ {{resourceConfig.properties.autofocus}} }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}

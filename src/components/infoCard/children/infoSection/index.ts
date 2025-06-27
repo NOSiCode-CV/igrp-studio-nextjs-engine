@@ -3,7 +3,12 @@ import {
   infoSectionProperties,
   infoSectionVariants,
   infoSectionChildProperties,
-  infoSectionChildPropertiesMapping, infoSectionInteractions, infoSectionInteractionsMapping, infoSectionStyle, infoSectionRules,
+  infoSectionChildPropertiesMapping,
+  infoSectionInteractions,
+  infoSectionInteractionsMapping,
+  infoSectionStyle,
+  infoSectionRules,
+  infoSectionData,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { INFO_CARD } from '../../index';
@@ -12,7 +17,6 @@ import { INFO_ITEM } from '../infoItem/index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPInfoSection } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadParent(INFO_CARD)
@@ -31,6 +35,7 @@ export default {
     ]);
     component.getStyle(infoSectionStyle())
     component.getRules(infoSectionRules())
+    component.getData(infoSectionData())
 
     component.loadChildrenTypes([
       { name: INFO_ITEM, isDefault: true }

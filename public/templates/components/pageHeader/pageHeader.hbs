@@ -3,12 +3,12 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  title="{{resourceConfig.properties.title}}"
+  title={ `{{resourceConfig.properties.title}}` }
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description="{{resourceConfig.properties.description}}"
+  description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconBackButton}}
-  iconBackButton="{{resourceConfig.properties.iconProperties.iconBackButton}}"
+  iconBackButton={ `{{resourceConfig.properties.iconProperties.iconBackButton}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.isSticky (not resourceConfig.data.isSticky))}}
   isSticky={ {{resourceConfig.properties.isSticky}} }
@@ -17,27 +17,27 @@
   showBackButton={ {{resourceConfig.properties.showBackButton}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
-  value="{{resourceConfig.properties.value}}"
+  value={ `{{resourceConfig.properties.value}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
   urlBackButton={ `{{{resolve-segment-path resourceConfig.properties.urlBackButton resourceConfig.properties.segments}}}{{#if (and resourceConfig.properties.params (not resourceConfig.data.params))}}{{{resolve-query-params resourceConfig.properties.params}}}{{/if}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
   {{/if}}
   {{#if (and resourceConfig.properties.headlineClassName (not resourceConfig.data.headlineClassName))}}
-  headlineClassName="{{resourceConfig.properties.headlineClassName}}"
+  headlineClassName={ `{{resourceConfig.properties.headlineClassName}}` }
   {{/if~}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

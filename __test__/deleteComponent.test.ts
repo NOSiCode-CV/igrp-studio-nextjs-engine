@@ -1,17 +1,17 @@
-import { ComponentConfig } from '../src/interfaces/types';
+import { DeleteConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
+import { deleteElement } from '../src/index';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const componentConfig: ComponentConfig = {
+const componentConfig: DeleteConfig = {
   type: 'component',
-  name: 'card',
-  pagePath: 'card',
-  components: [],
+  name: 'newCompoennt',
+  id: '89aw44nlml'
 };
 
-describe('Component module', () => {
-  it('should save the component configuration file', async () => {
-    // await deleteComponent(componentConfig, OUTPUT_DIR);
+describe('Delete Component module', () => {
+  it('should delete the component configuration file', async () => {
+    await deleteElement(componentConfig, OUTPUT_DIR);
   });
 });

@@ -20,13 +20,13 @@
     {{/if~}}
     ]
   }
-  categoryKey="{{resourceConfig.properties.categoryKey}}"
-  angleAxisKey="{{resourceConfig.properties.angleAxisKey}}"
+  categoryKey={ `{{resourceConfig.properties.categoryKey}}` }
+  angleAxisKey={ `{{resourceConfig.properties.angleAxisKey}}` }
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title="{{resourceConfig.properties.title}}"
+  title={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description="{{resourceConfig.properties.description}}"
+  description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showGrid (not resourceConfig.data.showGrid))}}
   showGrid={ {{resourceConfig.properties.showGrid}} }
@@ -59,26 +59,26 @@
   showReferenceZero={ {{resourceConfig.properties.showReferenceZero}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.gridColor (not resourceConfig.data.gridColor))}}
-  gridColor="{{resourceConfig.properties.gridColor}}"
+  gridColor={ `{{resourceConfig.properties.gridColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.backgroundColor (not resourceConfig.data.backgroundColor))}}
-  backgroundColor="{{resourceConfig.properties.backgroundColor}}"
+  backgroundColor={ `{{resourceConfig.properties.backgroundColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.axisColor (not resourceConfig.data.axisColor))}}
-  axisColor="{{resourceConfig.properties.axisColor}}"
+  axisColor={ `{{resourceConfig.properties.axisColor}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: "{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}"
     }
   }
   {{/if~}}
   {{#if (and resourceConfig.properties.polarGridType (not resourceConfig.data.polarGridType))}}
-  polarGridType="{{resourceConfig.properties.polarGridType}}"
+  polarGridType={ `{{resourceConfig.properties.polarGridType}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.polarGridLineType (not resourceConfig.data.polarGridLineType))}}
-  polarGridLineType="{{resourceConfig.properties.polarGridLineType}}"
+  polarGridLineType={ `{{resourceConfig.properties.polarGridLineType}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showPolarGrid (not resourceConfig.data.showPolarGrid))}}
   showPolarGrid={ {{resourceConfig.properties.showPolarGrid}} }
@@ -104,13 +104,13 @@
   {{#if (and resourceConfig.properties.gridFilled (not resourceConfig.data.gridFilled))}}
   gridFilled={ {{resourceConfig.properties.gridFilled}} }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}

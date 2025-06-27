@@ -12,7 +12,6 @@ import { TEMPLATES } from '../../utils/constants';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPRepetitiveComponent } from "@igrp/igrp-framework-react-design-system";'
     ]);
 
     component.loadComponentClass('IGRPRepetitiveComponent')

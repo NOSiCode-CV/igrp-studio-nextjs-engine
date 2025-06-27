@@ -9,8 +9,8 @@ export function parseTypes(typeFilePath: string): TypeDef[] {
   // Remove all comment blocks first
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  // 1. Parse interface declarations
-  const interfaceRegex = /interface\s+(\w+)\s*{([^}]*)}/gs;
+  // 1. Parse interface declarations (updated to handle generics)
+  const interfaceRegex = /interface\s+(\w+)\s*(?:<[^>]+>)?\s*{([^}]*)}/gs;
   let interfaceMatch;
 
   while ((interfaceMatch = interfaceRegex.exec(content)) !== null) {
@@ -21,8 +21,8 @@ export function parseTypes(typeFilePath: string): TypeDef[] {
     ));
   }
 
-  // 2. Parse type declarations with object literals
-  const typeLiteralRegex = /type\s+(\w+)\s*=\s*{([^}]*)}/gs;
+  // 2. Parse type declarations with object literals (updated to handle generics)
+  const typeLiteralRegex = /type\s+(\w+)\s*(?:<[^>]+>)?\s*=\s*{([^}]*)}/gs;
   let typeLiteralMatch;
 
   while ((typeLiteralMatch = typeLiteralRegex.exec(content)) !== null) {
@@ -41,7 +41,8 @@ function parseTypeDefinition(
   bodyContent: string,
   filePath: string
 ): TypeDef {
-  const fieldRegex = /(\w+)\s*\??\s*:\s*([^;\n,]+)(?:\s*,\s*|;|\n|$)/g;
+  // Updated field regex to handle complex types with angle brackets
+  const fieldRegex = /(\w+)\s*\??\s*:\s*([^;\n,<]+(?:<[^>]+>)?[^;\n,]*)(?:\s*,\s*|;|\n|$)/g;
   const fields: TypeDef['fields'] = [];
   let fieldMatch;
 
@@ -50,7 +51,7 @@ function parseTypeDefinition(
     let fieldType = fieldMatch[2].trim();
     fieldType = fieldType.replace(/,\s*$/, '').trim();
     const isList = fieldType.endsWith('[]');
-    fieldType = fieldType.replace(/\[]$/, '')
+    fieldType = fieldType.replace(/\[]$/, '');
     fields.push({
       componentId: '',
       name: fieldName,

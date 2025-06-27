@@ -14,6 +14,7 @@ export function infoItemProperties() {
     iconProperties: {
       type: 'object',
       properties: {
+        showIcon: { type: 'boolean', required: false, default: false },
         icon: { type: 'string', required: false, default: 'Info', 'x-ui-widget': 'icon' },
         iconClassName: { type: 'string', required: false },
       },

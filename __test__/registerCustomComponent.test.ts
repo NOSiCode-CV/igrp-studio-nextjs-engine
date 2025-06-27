@@ -7,46 +7,68 @@ describe('Register Custom Components', () => {
   const config: ComponentRegistrationConfig = {
     components: [
       {
-        name: "MyComponent",
+        name: 'MyComponent',
         imports: [`import { MyComponent } from '@components/mycomponent/myComponent'`],
-        group: "Custom",
-        label: "My Component",
+        group: 'Custom',
+        label: 'My Component',
         variants: {},
         childProperties: {},
         properties: {
-          title: {type: 'string', required: true, default: 'New Component'},
+          title: { type: 'string', required: true, default: 'New Component' },
         },
         propertiesMapping: {
-          title: { property: 'title' }
+          title: { property: 'title' },
         },
         states: [],
         childrenTypes: [],
         acceptedChildren: [],
+        allowTypes: false,
+        metadata: {},
+        interactions: {},
+        interactionsMapping: {},
+        data: {},
+        dataMapping: {},
+        style: {},
+        styleMapping: {},
+        rules: {},
+        rulesMapping: {},
+        defaultChildren: [],
         defaultValue: false,
-        renderer: 'hbs'
+        renderer: 'hbs',
       },
 
       {
-        name: "MyForm",
+        name: 'MyForm',
         imports: [`import { MyForm } from '@components/myform/myForm'`],
-        group: "Form",
-        label: "My Form",
+        group: 'Form',
+        label: 'My Form',
         variants: {},
         childProperties: {},
         properties: {
-          title: {type: 'string', required: true, default: 'New Component'},
+          title: { type: 'string', required: true, default: 'New Component' },
         },
         propertiesMapping: {
-          title: { className: 'title' }
+          title: { className: 'title' },
         },
         states: [],
         childrenTypes: [],
         acceptedChildren: [],
         defaultValue: false,
-        renderer: 'default'
-      }
-    ]
-  }
+        renderer: 'custom',
+        allowTypes: false,
+        metadata: {},
+        interactions: {},
+        interactionsMapping: {},
+        data: {},
+        dataMapping: {},
+        style: {},
+        styleMapping: {},
+        rules: {},
+        rulesMapping: {},
+        defaultChildren: [],
+      },
+    ],
+  };
 
   test('Get component', async () => {
      registerComponents(config)

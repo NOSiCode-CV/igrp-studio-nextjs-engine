@@ -1,26 +1,60 @@
 import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
+const variantProperties = { type: 'string', required: true, enum: [
+    'cols1',
+    'cols2',
+    'cols3',
+    'cols4',
+    'cols5',
+    'cols6',
+    'cols7',
+    'cols8',
+    'cols9',
+    'cols10',
+    'cols11',
+    'cols12'
+  ]}
+
 export function columnsProperties() {
   return {
-    variant: { type: 'string', required: true, enum: [
-        'cols1',
-        'cols2',
-        'cols3',
-        'cols4',
-        'cols5',
-        'cols6',
-        'cols7',
-        'cols8',
-        'cols9',
-        'cols10',
-        'cols11',
-        'cols12'
-      ], default: 'cols12'
+    variant: {
+      type: 'object',
+      required: true,
+      properties: {
+        default: { ...variantProperties, default: 'cols1'  },
+        xs: { ...variantProperties, 'x-meta': { label: 'Extra Small' } },
+        md: { ...variantProperties, default: 'cols2', 'x-meta': { label: 'Medium' } },
+        lg: { ...variantProperties, default: 'cols4', 'x-meta': { label: 'Large' } },
+        xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
+      },
     },
-    gap: {type: 'number', required: false, default: 4, enum: ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64']},
+    gap: {
+      type: 'number',
+      required: false,
+      default: 4,
+      enum: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '8',
+        '10',
+        '12',
+        '16',
+        '20',
+        '24',
+        '32',
+        '40',
+        '48',
+        '56',
+        '64',
+      ],
+    },
 
     ...commonProperties(),
-  }
+  };
 }
 
 export function columnsChildProperties() {

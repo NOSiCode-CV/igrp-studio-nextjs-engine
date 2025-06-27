@@ -10,7 +10,7 @@ export function parseActions(actionFilePath: string): ActionDef[] {
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
   // 1. Parse traditional action declarations
-  const actionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;]+))?/gs;
+  const actionRegex = /function\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?::\s*([^{;<]+(?:<[^>]+>)?[^{;]*))?/gs;
   let actionMatch;
 
   while ((actionMatch = actionRegex.exec(content)) !== null) {
@@ -23,7 +23,7 @@ export function parseActions(actionFilePath: string): ActionDef[] {
   }
 
   // 2. Parse arrow action declarations
-  const constActionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=>]+))?\s*=>/gs;
+  const constActionRegex = /const\s+(\w+)\s*=\s*(?:async\s*)?\(\s*([^)]*)\s*\)\s*(?::\s*([^=><]+(?:<[^>]+>)?[^=>]*))?\s*=>/gs;
   let constActionMatch;
 
   while ((constActionMatch = constActionRegex.exec(content)) !== null) {

@@ -14,7 +14,7 @@ export function tableAmountCellProperties() {
     language: {type: 'string', required: false, default: 'pt-PT', enum: ['pt-PT', 'en-US', 'fr-FR']},
     formatStyle: {type: 'string', required: false, default: 'currency', enum: ['currency', 'decimal', 'percent']},
     icons: {type: 'array', required: false, items: { type: 'string', required: true, enum: ['ChevronDown', 'ChevronUp'] }},
-    variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
+    variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     ...commonProperties(),
   };
 }

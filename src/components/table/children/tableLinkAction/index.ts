@@ -15,7 +15,6 @@ export default {
   register(component: Component) {
 
     component.loadImports([
-      `import { IGRPDataTableButtonLink } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
     component.loadComponentClass('IGRPDataTableButtonLink')

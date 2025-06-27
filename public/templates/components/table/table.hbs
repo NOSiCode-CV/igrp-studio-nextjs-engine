@@ -19,30 +19,30 @@
   isServerSide={ {{resourceConfig.properties.isServerSide}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.toggleLabel (not resourceConfig.data.toggleLabel))}}
-  toggleLabel="{{resourceConfig.properties.toggleLabel}}"
+  toggleLabel={ `{{resourceConfig.properties.toggleLabel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.toggleOptionsLabel (not resourceConfig.data.toggleOptionsLabel))}}
-  toggleOptionsLabel="{{resourceConfig.properties.toggleOptionsLabel}}"
+  toggleOptionsLabel={ `{{resourceConfig.properties.toggleOptionsLabel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.tableClassName (not resourceConfig.data.tableClassName))}}
-  tableClassName="{{resourceConfig.properties.tableClassName}}"
+  tableClassName={ `{{resourceConfig.properties.tableClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.tableHeaderClassName (not resourceConfig.data.tableHeaderClassName))}}
-  tableHeaderClassName="{{resourceConfig.properties.tableHeaderClassName}}"
+  tableHeaderClassName={ `{{resourceConfig.properties.tableHeaderClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.tableBodyClassName (not resourceConfig.data.tableBodyClassName))}}
-  tableBodyClassName="{{resourceConfig.properties.tableBodyClassName}}"
+  tableBodyClassName={ `{{resourceConfig.properties.tableBodyClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.paginationClassName (not resourceConfig.data.paginationClassName))}}
-  paginationClassName="{{resourceConfig.properties.paginationClassName}}"
+  paginationClassName={ `{{resourceConfig.properties.paginationClassName}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
@@ -74,7 +74,7 @@
       {{#each (extractTableFilters resourceConfig.children)}}
         {{#each this.children}}
         {
-          {{#if this.properties.columnId}}columnId: "{{this.properties.columnId}}",{{/if}}
+          {{#if this.properties.columnId}}columnId: `{{this.properties.columnId}}`,{{/if}}
           component: (column) => (
           {{{render-table-row this ../../registry}}}
           )

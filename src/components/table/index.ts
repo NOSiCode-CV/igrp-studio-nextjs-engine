@@ -14,7 +14,6 @@ import { replaceTemplate } from '../../utils/helpers';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPDataTable } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPDataTableFacetedFilterFn , IGRPDataTableDateRangeFilterFn } from "@igrp/igrp-framework-react-design-system";',
     ]);
 

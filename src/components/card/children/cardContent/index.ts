@@ -14,7 +14,6 @@ export default {
   register(component: Component) {
 
     component.loadImports([
-      `import { IGRPCardContent } from "@igrp/igrp-framework-react-design-system";`,
     ]);
 
     component.loadComponentClass('IGRPCardContent')

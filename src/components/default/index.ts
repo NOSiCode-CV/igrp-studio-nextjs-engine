@@ -28,6 +28,7 @@ export default {
     component.getStyleMapping(config.styleMapping)
     component.getRules(config.rules)
     component.getRulesMapping(config.rulesMapping)
+    component.loadDefaultChildren(config.defaultChildren)
     component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : config.renderer === 'custom' ? customRenderer : noRenderer);
   }
 };

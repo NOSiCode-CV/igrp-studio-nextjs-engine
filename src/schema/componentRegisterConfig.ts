@@ -1,7 +1,7 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
 import {
   ComponentRegisterConfig,
-  ComponentRegistrationConfig,
+  ComponentRegistrationConfig, DefaultChildComponent,
   Import,
   RegisterState,
   State,
@@ -75,6 +75,24 @@ const registryStateSchema: JSONSchemaType<RegisterState> = {
   required: ['state', 'required'],
   additionalProperties: false,
 };
+
+const defaultChildSchema: JSONSchemaType<DefaultChildComponent> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      errorMessage: `Component name only must be a valid string`,
+    },
+    children: {
+      type: 'array',
+      items: { type: 'object', required: ['name'] },
+      nullable: true,
+      errorMessage: 'Children property must be a valid array of default child object definition'
+    }
+  },
+  required: ['name'],
+  additionalProperties: false,
+}
 
 const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
   type: 'object',
@@ -179,6 +197,11 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       type: 'array',
       items: { type: 'object', required: ['name', 'imports', 'defaultValue', 'group', 'label', 'variants', 'properties', 'propertiesMapping', 'states', 'childrenTypes', 'renderer'] },
       errorMessage: "The accepted children must be an array of objects"
+    },
+    defaultChildren: {
+      type: 'array',
+      items: defaultChildSchema,
+      errorMessage: "The default children must be an array of default child object definition"
     },
     renderer: {
       type: 'string',

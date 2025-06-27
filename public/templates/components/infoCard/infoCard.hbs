@@ -4,58 +4,104 @@
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if (and resourceConfig.properties.variantSection (not resourceConfig.data.variantSection))}}
-  variantSection={ "{{resourceConfig.properties.variantSection}}" }
+  variantSection={ `{{resourceConfig.properties.variantSection}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.colorSection (not resourceConfig.data.colorSection))}}
-  colorSection={ "{{resourceConfig.properties.colorSection}}" }
+  colorSection={ `{{resourceConfig.properties.colorSection}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.titleClassName (not resourceConfig.data.titleClassName))}}
-  titleClassName={ "{{resourceConfig.properties.titleClassName}}" }
+  titleClassName={ `{{resourceConfig.properties.titleClassName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title={ "{{resourceConfig.properties.title}}" }
+  title={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
   sections={
     [
     {{#if resourceConfig.children}}
       {{#each (extractInfoSection resourceConfig.children)}}
-        {
-          items: [
-            {{#each (extractInfoItem this.children)}}
-            {
+      {{#if this.data.items}}
+      {
+        items: {{#if this.data.items.value}}{{replaceId this.data.items.value.code this}}{{else}}{{replaceId this.data.items.state.name this}}{{/if}}
+      },
+      {{else}}
+      {
+        items: [
+        {{#each (extractInfoItem this.children)}}
+          {
+          {{#if this.data.text}}
+            text: {{this.data.text.state.name}},
+          {{else}}
             {{#if this.properties.text}}
-              text: "{{this.properties.text}}",
+              text: `{{this.properties.text}}`,
+            {{else}}
+              text: "",
             {{/if~}}
+          {{/if~}}
+          {{#if this.data.label}}
+            label: {{this.data.label.state.name}},
+          {{else}}
             {{#if this.properties.label}}
-              label: "{{this.properties.label}}",
+              label: `{{this.properties.label}}`,
+            {{else}}
+              label: "",
             {{/if~}}
+          {{/if~}}
+          {{#if this.data.icon}}
+            icon: {{this.data.icon.state.name}},
+          {{else}}
             {{#if this.properties.iconProperties.icon}}
-              icon: "{{this.properties.iconProperties.icon}}",
+              icon: `{{this.properties.iconProperties.icon}}`,
             {{/if~}}
+          {{/if~}}
+          {{#if this.data.showIcon}}
+            showIcon: {{this.data.showIcon.state.name}},
+          {{else}}
+            {{#if this.properties.iconProperties.showIcon}}
+              showIcon: {{this.properties.iconProperties.showIcon}},
+            {{/if~}}
+          {{/if~}}
+          {{#if this.data.iconClassName}}
+            icon: {{this.data.iconClassName.state.name}},
+          {{else}}
             {{#if this.properties.iconProperties.iconClassName}}
-              iconClassName: "{{this.properties.iconProperties.iconClassName}}",
+              iconClassName: `{{this.properties.iconProperties.iconClassName}}`,
             {{/if~}}
+          {{/if~}}
+          {{#if this.data.variantItem}}
+            variantItem: {{this.data.variantItem.state.name}},
+          {{else}}
             {{#if this.properties.variantItem}}
-              variantItem: "{{this.properties.variantItem}}",
+              variantItem: `{{this.properties.variantItem}}`,
             {{/if~}}
+          {{/if~}}
+          {{#if this.data.colorItem}}
+            colorItem: {{this.data.colorItem.state.name}},
+          {{else}}
             {{#if this.properties.colorItem}}
-              colorItem: "{{this.properties.colorItem}}",
+              colorItem: `{{this.properties.colorItem}}`,
+            {{else}}
+              colorItem: "",
             {{/if~}}
-            },
-            {{/each}}
-          ]
-        },
+          {{/if~}}
+          },
+        {{/each}}
+        ]
+      },
+      {{/if~}}
       {{/each}}
     {{/if~}}
     ]

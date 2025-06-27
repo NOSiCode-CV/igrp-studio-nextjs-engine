@@ -10,7 +10,6 @@ import { Component, hbsRenderer } from '../index';
 export default {
   register(component: Component) {
     component.loadImports([
-      'import { IGRPSelect } from "@igrp/igrp-framework-react-design-system";',
       'import { IGRPOptionsProps } from "@igrp/igrp-framework-react-design-system";',
     ]);
 

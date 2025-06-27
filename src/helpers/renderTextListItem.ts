@@ -18,7 +18,7 @@ function renderTextListItemContent(children?: Layout[]): string | undefined {
 
   const contents = children.map((child) => {
     if (child.properties?.content !== undefined && child.properties?.content !== '') {
-      return child.properties.content;
+      return `"${child.properties.content}"`;
     }
     return renderLayout(child);
   });

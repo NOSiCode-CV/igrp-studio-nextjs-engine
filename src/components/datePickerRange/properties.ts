@@ -14,13 +14,6 @@ export function datePickerRangeProperties() {
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     helperText: { type: 'string', required: false, default: '' },
-    iconProperties: {
-      type: 'object',
-      properties: {
-        iconPlacement: { type: 'string', required: false, default: 'start' },
-      },
-      required: false
-    },
     startDate: { type: 'date', required: false, default: '1900-01-01' },
     endDate: { type: 'date', required: false, default: '2099-12-31' },
     //floatingLabel: { type: 'boolean', required: false },

@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
-import { resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
 import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
 import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
 import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
@@ -53,6 +53,7 @@ export type Component = {
   group: string;
   parent: string;
   componentClass: string;
+  classNamePropertyTag?: string;
   maxChildren?: number;
   templatePath?: string;
   renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
@@ -73,6 +74,7 @@ export type Component = {
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
   loadComponentClass:(componentClass: string) => void;
+  loadClassNamePropertyTag:(classNamePropertyTag: string) => void;
   loadTemplatePath:(templatePath?: string) => void;
   loadChildrenMax:(max: number) => void;
 
@@ -138,6 +140,7 @@ function initComponent(): Component {
     group: '',
     parent: '',
     componentClass: '',
+    classNamePropertyTag: undefined,
     maxChildren: undefined,
     templatePath: undefined,
     renderer: () => () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: "Not registered" }),
@@ -196,6 +199,10 @@ function initComponent(): Component {
 
     loadComponentClass(componentClass: string) {
       this.componentClass = componentClass
+    },
+
+    loadClassNamePropertyTag(classNamePropertyTag: string) {
+      this.classNamePropertyTag = classNamePropertyTag
     },
 
     loadTemplatePath(path?: string) {
@@ -344,6 +351,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
       registry[it.name], it.isDefault)),
     acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
       registry[it.name], it.isDefault)),
+    defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
     templatePath: value.templatePath
@@ -374,9 +382,11 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     }).join("")
     : ``
 
+  let interactions = component.interactions? renderInteractions(component.interactions) : ``
+
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return (key === "className")? `` : ` ${key}="${value}"`;
+      return (key === (element.classNamePropertyTag ?? "className"))? `` : ` ${key}="${value}"`;
     }).join("")
     : ``
 
@@ -465,7 +475,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `className={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `${element.classNamePropertyTag ?? 'className'}={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
@@ -498,19 +508,21 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
     }).join("")
     : ``
 
+  let interactions = component.interactions? renderInteractions(component.interactions) : ``
+
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+      if(!component.data || (component.data && !component.data[key]))
+        return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+      else return
     }).join("")
     : ``
 
   props += component.data
     ? Object.entries(component.data).map(([key, value]) => {
-      return ` ${key}={ ${value.state.name} }`;
+      return ` ${key}={ ${value.state?.name ?? value.value?.code ?? ''} }`;
     }).join("")
     : ``
-
-
 
   let childProps = ``
 
@@ -540,7 +552,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${props} ${childProps} >`
+  str += `<${element.customComponentTag ?? 'div'} ${props} ${childProps} ${interactions} >`
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
@@ -572,4 +584,34 @@ export function hbsRenderer (component: Layout, parentComponent?: Layout, elemen
 
 export function noRenderer(): () => string {
   return () => ""
+}
+
+function resolveVariants(variant: any, element: Component) {
+
+  if(!variant) return ''
+
+  let variants = ''
+
+  if(typeof variant === 'string') {
+    variants += (element.variants[variant] !== '' && element.variants[variant] !== undefined? `'${element.variants[variant]}',` : ``)
+  } else {
+    if (variant.default) {
+      variants += (element.variants[variant.default] !== '' && element.variants[variant.default] !== undefined ? `'${element.variants[variant.default]} ',` : ``);
+    }
+    if (variant.xs) {
+      variants += (element.variants[variant.xs] !== '' && element.variants[variant.xs] !== undefined ? `'xs:${element.variants[variant.xs]} ',` : ``);
+    }
+    if (variant.md) {
+      variants += (element.variants[variant.md] !== '' && element.variants[variant.md] !== undefined ? `'md:${element.variants[variant.md]} ',` : ``);
+    }
+    if (variant.lg) {
+      variants += (element.variants[variant.lg] !== '' && element.variants[variant.lg] !== undefined ? `'lg:${element.variants[variant.lg]} ',` : ``);
+    }
+    if (variant.xl) {
+      variants += (element.variants[variant.xl] !== '' && element.variants[variant.lg] !== undefined ? `'xl:${element.variants[variant.xl]} ',` : ``);
+    }
+  }
+
+  return variants
+
 }

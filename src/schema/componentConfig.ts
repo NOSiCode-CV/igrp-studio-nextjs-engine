@@ -15,7 +15,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue,
+  ReturnValue, FieldValidation,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -73,6 +73,15 @@ const argsSchema: JSONSchemaType<Arguments> = {
       type: 'boolean',
       errorMessage: 'The isState attribute must be a boolean.'
     },
+    functionParameters: {
+      type: 'array',
+      nullable: true,
+      items: {
+        required: [],
+        type: 'object'
+      },
+      errorMessage: 'The function parameters, if provided, must be an array of valid argument configuration'
+    }
   },
   required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
   additionalProperties: false
@@ -217,6 +226,102 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   additionalProperties: false,
 };
 
+const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
+  type: 'object',
+  properties: {
+    minLength: {
+      type: 'number',
+      minimum: 0,
+      nullable: true,
+      errorMessage: 'The attribute minLength, if provided, must be a positive number',
+    },
+    maxLength: {
+      type: 'number',
+      minimum: 0,
+      nullable: true,
+      errorMessage: 'The attribute maxLength, if provided, must be a positive number',
+    },
+    regex: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute regex, if provided, must be a valid string'
+    },
+    email: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute email, if provided, must be a valid boolean'
+    },
+    url: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute url, if provided, must be a valid boolean'
+    },
+    uuid: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute uuid, if provided, must be a valid boolean'
+    },
+    startsWith: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute startsWith, if provided, must be a valid string'
+    },
+    endsWith: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute endsWith, if provided, must be a valid string'
+    },
+    includes: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute includes, if provided, must be a valid string'
+    },
+    min: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute min, if provided, must be a valid number',
+    },
+    max: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute max, if provided, must be a valid number',
+    },
+    positive: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute positive, if provided, must be a valid boolean'
+    },
+    negative: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute negative, if provided, must be a valid boolean'
+    },
+    int: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute int, if provided, must be a valid boolean'
+    },
+    finite: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The attribute finite, if provided, must be a valid boolean'
+    },
+    minDate: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute minDate, if provided, must be a valid string',
+    },
+    maxDate: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The attribute maxDate, if provided, must be a valid string',
+    },
+  },
+  required: [],
+  errorMessage: 'The validation, if provided, must be a valid validation object definition.',
+  additionalProperties: false
+}
+
 const elementFieldSchema: JSONSchemaType<ElementField> = {
   type: 'object',
   properties: {
@@ -242,9 +347,10 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
       errorMessage: 'The is list attribute must be a valid boolean.'
     },
     validation: {
-      type: 'string',
+      type: "object",
       nullable: true,
-      errorMessage: 'The validation, if provided, must be a valid string.'
+      anyOf: [fieldValidationSchema],
+      errorMessage: "Validation must match the FieldValidation schema, if provided."
     },
     defaultValue: {
       type: 'string',

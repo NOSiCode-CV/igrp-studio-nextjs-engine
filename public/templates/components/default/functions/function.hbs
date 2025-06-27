@@ -1,4 +1,4 @@
-{{#if resourceConfig.isAsync}}async {{/if}}function {{resourceConfig.name}} ({{#each resourceConfig.arguments}}{{this.name}}{{#if this.isNullable}}?{{/if}}: {{this.type}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}}, {{/if}}{{/each}}): {{#if resourceConfig.isAsync}}Promise<{{/if}}{{resourceConfig.returnValue.type}}{{#if resourceConfig.returnValue.isList}}[]{{/if}}{{#if resourceConfig.returnValue.isNullable}}  | undefined{{/if}}{{#if resourceConfig.isAsync}}>{{/if}} {
+{{#if resourceConfig.isAsync}}async {{/if}}function {{resourceConfig.name}} ({{#each resourceConfig.arguments}}{{this.name}}{{#if this.isNullable}}?{{/if}}: {{{this.type}}}{{#if this.isList}}[]{{/if}}{{#if @last}}{{else}}, {{/if}}{{/each}}): {{#if resourceConfig.isAsync}}Promise<{{/if}}{{{resourceConfig.returnValue.type}}}{{#if resourceConfig.returnValue.isList}}[]{{/if}}{{#if resourceConfig.returnValue.isNullable}}  | undefined{{/if}}{{#if resourceConfig.isAsync}}>{{/if}} {
 
   {{{resourceConfig.code}}}
 

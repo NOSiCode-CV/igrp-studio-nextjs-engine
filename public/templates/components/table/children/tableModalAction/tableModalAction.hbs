@@ -1,30 +1,30 @@
 <IGRPDataTableButtonModal
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  modalTitle="{{resourceConfig.properties.title}}"
+  modalTitle={ `{{resourceConfig.properties.title}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelTrigger (not resourceConfig.data.labelTrigger))}}
-  labelTrigger="{{resourceConfig.properties.labelTrigger}}"
+  labelTrigger={ `{{resourceConfig.properties.labelTrigger}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
-  variant="{{resourceConfig.properties.variant}}"
+  variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled={ {{resourceConfig.properties.disabled}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconName}}
-  icon="{{resourceConfig.properties.iconProperties.iconName}}"
+  icon={ `{{resourceConfig.properties.iconProperties.iconName}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variantCancel (not resourceConfig.data.variantCancel))}}
-  variantCancel="{{resourceConfig.properties.variantCancel}}"
+  variantCancel={ `{{resourceConfig.properties.variantCancel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.variantConfirm (not resourceConfig.data.variantConfirm))}}
-  variantConfirm="{{resourceConfig.properties.variantConfirm}}"
+  variantConfirm={ `{{resourceConfig.properties.variantConfirm}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelCancel (not resourceConfig.data.labelCancel))}}
-  labelCancel="{{resourceConfig.properties.labelCancel}}"
+  labelCancel={ `{{resourceConfig.properties.labelCancel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelConfirm (not resourceConfig.data.labelConfirm))}}
-  labelConfirm="{{resourceConfig.properties.labelConfirm}}"
+  labelConfirm={ `{{resourceConfig.properties.labelConfirm}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showCancel (not resourceConfig.data.showCancel))}}
   showCancel={ {{resourceConfig.properties.showCancel}} }
@@ -33,33 +33,33 @@
   showConfirm={ {{resourceConfig.properties.showCancel}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.classNameCancel (not resourceConfig.data.classNameCancel))}}
-  classNameCancel="{{resourceConfig.properties.classNameCancel}}"
+  classNameCancel={ `{{resourceConfig.properties.classNameCancel}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.classNameConfirm (not resourceConfig.data.classNameConfirm))}}
-  classNameConfirm="{{resourceConfig.properties.classNameConfirm}}"
+  classNameConfirm={ `{{resourceConfig.properties.classNameConfirm}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.classNameTrigger (not resourceConfig.data.classNameTrigger))}}
-  classNameTrigger="{{resourceConfig.properties.classNameTrigger}}"
+  classNameTrigger={ `{{resourceConfig.properties.classNameTrigger}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.modalSize (not resourceConfig.data.modalSize))}}
-  modalSize="{{resourceConfig.properties.modalSize}}"
+  modalSize={ `{{resourceConfig.properties.modalSize}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.modalTitle (not resourceConfig.data.modalTitle))}}
-  modalTitle="{{resourceConfig.properties.modalTitle}}"
+  modalTitle={ `{{resourceConfig.properties.modalTitle}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.showStickyFooter (not resourceConfig.data.showStickyFooter))}}
   showStickyFooter={ {{resourceConfig.properties.showStickyFooter}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClassName="{{resourceConfig.properties.iconProperties.iconClassName}}"
+  iconClassName={ `{{resourceConfig.properties.iconProperties.iconClassName}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.className parentResourceConfig)}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and resourceConfig.properties.className (not parentResourceConfig))}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties)}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
