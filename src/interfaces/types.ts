@@ -860,6 +860,7 @@ export interface TypeDef {
   path: string;
   tags?: string[];
   isMainType?: boolean,
+  isEnum?: boolean,
   fields: ElementField[];
 }
 

@@ -403,6 +403,11 @@ const typeDefSchema: JSONSchemaType<TypeDef> = {
       nullable: true,
       errorMessage: 'The main type check, if provided, must be a valid boolean.'
     },
+    isEnum: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The enum type check, if provided, must be a valid boolean.'
+    },
   },
   required: ['name', 'path', 'fields'],
   additionalProperties: false,
