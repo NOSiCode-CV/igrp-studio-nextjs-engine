@@ -14,38 +14,10 @@ import {
   Import,
   State,
   Reference,
-  StyleDefinition,
-  LayoutStyle,
-  BlockProperties,
-  GridProperties,
-  FlexProperties,
-  Segment,
   FieldValidation,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
-
-const segmentSchema: JSONSchemaType<Segment> = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      errorMessage: 'The name must be a valid string.'
-    },
-    tag: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The tag must be a valid string.'
-    },
-    value: {
-      type: 'string',
-      nullable: true,
-      errorMessage: 'The value must be a valid string.'
-    },
-  },
-  required: ['name'],
-  additionalProperties: false,
-}
 
 const importSchema: JSONSchemaType<Import> = {
   type: 'object',
@@ -756,6 +728,56 @@ const styleSchema: JSONSchemaType<StyleDefinition> = {
   additionalProperties: false
 };*/
 
+const argsSchema: JSONSchemaType<Arguments> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+    },
+    type: {
+      type: 'string',
+      errorMessage: 'The type attribute must be a string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The name attribute must be a string.'
+    },
+    isList: {
+      type: 'boolean',
+      errorMessage: 'The isList attribute must be a boolean.'
+    },
+    isOptional: {
+      type: 'boolean',
+      errorMessage: 'The isOptional attribute must be a boolean.'
+    },
+    isInterface: {
+      type: 'boolean',
+      errorMessage: 'The isInterface attribute must be a boolean.'
+    },
+    isFunction: {
+      type: 'boolean',
+      errorMessage: 'The isFunction attribute must be a boolean.'
+    },
+    isState: {
+      type: 'boolean',
+      errorMessage: 'The isState attribute must be a boolean.'
+    },
+    functionParameters: {
+      type: 'array',
+      nullable: true,
+      items: {
+        required: [],
+        type: 'object'
+      },
+      errorMessage: 'The function parameters, if provided, must be an array of valid argument configuration'
+    }
+  },
+  required: ['type', 'name', 'isList', 'isOptional', 'isInterface', 'isFunction', 'isState'],
+  additionalProperties: false
+};
+
 // Schema para Component (los componentes que contienen filas)
 const componentSchema: JSONSchemaType<Layout> = {
   type: 'object',
@@ -925,11 +947,13 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
     },
-    segments: {
+    args: {
       type: 'array',
+      items: {
+        anyOf: [argsSchema]
+      },
       nullable: true,
-      items: segmentSchema,
-      errorMessage: 'The segments attribute must be an array of valid segment definition configuration.'
+      errorMessage: 'Arguments must contain valid args configuration.',
     },
     types: {
       type: 'array',

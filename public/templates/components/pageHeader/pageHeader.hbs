@@ -3,7 +3,9 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
   title={ `{{resourceConfig.properties.title}}` }
+  {{/if}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
   description={ `{{resourceConfig.properties.description}}` }
   {{/if~}}

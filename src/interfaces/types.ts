@@ -24,11 +24,11 @@ export interface PageConfig extends IdentifiableElement, VersionableElement {
   forceDynamic?: boolean;
   types: TypeDef[];
   imports?: Import[];
-  segments?: Segment[];
   states?: State[];
   references?: Reference[];
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
+  args?: Arguments[];
   components?: Layout | {};
 }
 

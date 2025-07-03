@@ -9,7 +9,7 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
   const imports = new Set<string>();
 
-  imports.add(`import { useState, useEffect, useRef } from 'react';`)
+  imports.add(`import { use, useState, useEffect, useRef } from 'react';`)
   imports.add(`import { cn, useIGRPMenuNavigation, useIGRPToast } from '@igrp/igrp-framework-react-design-system';`)
 
   /*if(isPage)

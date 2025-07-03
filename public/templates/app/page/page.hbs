@@ -13,7 +13,12 @@
 export const dynamic = 'force-dynamic'
 {{/if}}
 
-export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.pageName)}}Component() {
+export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.pageName)}}Component({{#if (notNullOrEmpty resourceConfig.args)}}{ params } : { params: Promise<{ {{{resolveFunctionArgs resourceConfig.args}}} }> } {{/if}}) {
+
+  {{#if (notNullOrEmpty resourceConfig.args)}}
+  const { {{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}}, {{/if}}{{/each}} } = use(params);
+  {{/if~}}
+
 {{#if (notNullOrEmpty resourceConfig.components)}}
 
   {{!--const service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {{capitalize resourceConfig.pageName}}Service;--}}
