@@ -603,7 +603,8 @@ export interface SpacingValue {
 export interface Segment {
   name: string,
   tag?: string,
-  value?: string
+  value?: string,
+  context: 'column' | 'variable'
 }
 
 export interface RouteSegment {

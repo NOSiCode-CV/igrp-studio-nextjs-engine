@@ -158,7 +158,7 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
       replacement = parts.join('/');
     } else {
       const g = group[0];
-      replacement = g.tag ? `\${row.original.${g.tag}}` : (g.value ?? '');
+      replacement = g.tag ? `\${${ g.context === 'column' ?  'row.original.' : '' }${g.tag}}` : (g.value ?? '');
     }
 
     finalPath = finalPath.replace(name, replacement);

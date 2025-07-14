@@ -17,8 +17,8 @@ export function statsCardProperties() {
     showIconBackground: { type: 'boolean', required: false, default: false },
     showIconBorder: { type: 'boolean', required: false, default: false },
     title: { type: 'string', required: false, default: 'Stat Card' },
-    titleSize: { type: 'string', required: false, default: 'sm', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
-    valueSize: { type: 'string', required: false, default: '2xl', enum: ['sm', 'md', 'lg', 'xl', '2xl'] },
+    titleSize: { type: 'string', required: false, default: 'sm', enum: ['base', 'xs', 'sm', 'lg', 'xl'] },
+    valueSize: { type: 'string', required: false, default: '2xl', enum: ['base', 'sm', 'lg', 'xl', '2xl', '3xl', '4xl'] },
     iconProperties: {
       type: 'object',
       properties: {

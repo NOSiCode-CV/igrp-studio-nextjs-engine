@@ -11,8 +11,10 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function comboboxProperties() {
   return {
     label: { type: 'string', required: false, default: "Combobox Input" },
+    value: { type: 'string', required: false, default: '' },
     variant: { type: 'string', required: false, default: 'single', enum: ['single', 'multiple'] },
     //floatingLabel: { type: 'boolean', required: false },
+    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true }, color: { type: 'string', required: false } }, 'x-ui-widget': 'list' },
     placeholder: { type: 'string', required: false, default: "Select an option..." },
     helperText: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },

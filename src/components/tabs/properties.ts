@@ -14,8 +14,6 @@ export function tabsProperties() {
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
-    contentBorder: { type: 'boolean', default: false, required: false},
-    fullWidth: { type: 'boolean', default: false, required: false},
     ...commonProperties()
   };
 }

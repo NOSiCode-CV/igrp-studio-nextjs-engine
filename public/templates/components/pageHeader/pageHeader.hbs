@@ -1,13 +1,16 @@
 <IGRPPageHeader
+  {{#if resourceConfig.tag}}
+  name={ `{{{resourceConfig.tag}}}` }
+  {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title={ `{{resourceConfig.properties.title}}` }
+  title={ `{{{resourceConfig.properties.title}}}` }
   {{/if}}
   {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description={ `{{resourceConfig.properties.description}}` }
+  description={ `{{{resourceConfig.properties.description}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconBackButton}}
   iconBackButton={ `{{resourceConfig.properties.iconProperties.iconBackButton}}` }
@@ -19,7 +22,7 @@
   showBackButton={ {{resourceConfig.properties.showBackButton}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.value (not resourceConfig.data.value))}}
-  value={ `{{resourceConfig.properties.value}}` }
+  value={ `{{{resourceConfig.properties.value}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.urlBackButton (not resourceConfig.data.urlBackButton))}}
   urlBackButton={ `{{{resolve-segment-path resourceConfig.properties.urlBackButton resourceConfig.properties.segments}}}{{#if (and resourceConfig.properties.params (not resourceConfig.data.params))}}{{{resolve-query-params resourceConfig.properties.params}}}{{/if}}` }

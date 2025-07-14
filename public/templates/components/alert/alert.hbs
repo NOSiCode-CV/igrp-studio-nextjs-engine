@@ -27,6 +27,9 @@
   {{#if (and resourceConfig.properties.bgColored (not resourceConfig.data.bgColored))}}
   bgColored={ {{resourceConfig.properties.bgColored}} }
   {{/if~}}
+  {{#if (and resourceConfig.properties.iconProperties.showIcon (not resourceConfig.data.showIcon))}}
+  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
+  {{/if~}}
   {{#if resourceConfig.properties.iconProperties.icon}}
   icon={ `{{{resourceConfig.properties.iconProperties.icon}}}` }
   {{/if~}}
