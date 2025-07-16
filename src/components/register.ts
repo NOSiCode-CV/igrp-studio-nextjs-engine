@@ -8,7 +8,6 @@ import cardModule, { CARD } from './card';
 import cardContentModule, { CARD_CONTENT } from './card/children/cardContent';
 import cardFooterModule, { CARD_FOOTER } from './card/children/cardFooter';
 import cardHeaderModule, { CARD_HEADER } from './card/children/cardHeader';
-import carouselModule, { CAROUSEL } from './carousel';
 import chartModule, { AREACHART } from './areachart';
 import chatModule, { CHAT } from './chat';
 import checkboxModule, { CHECKBOX } from './checkbox';
@@ -123,7 +122,7 @@ export function registerAllComponents() {
   register(CARD_CONTENT, cardContentModule.register);
   register(CARD_FOOTER, cardFooterModule.register);
   register(CARD_HEADER, cardHeaderModule.register);
-  register(CAROUSEL, carouselModule.register);
+  //register(CAROUSEL, carouselModule.register);
   register(CHAT, chatModule.register);
   register(CHECKBOX, checkboxModule.register);
   register(COLUMN, columnModule.register);

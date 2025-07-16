@@ -58,7 +58,14 @@ export function datePickerInteractionsMapping() {
 
 export function datePickerData() {
   return {
-    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
+    data: { ...baseData(undefined, INTERACTIONS_TYPES.DATA,
+        {
+          id: '',
+          name: 'contentChart{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

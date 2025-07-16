@@ -59,7 +59,7 @@ export function horizontalBarChartProperties() {
         }
       }
     },
-    valueDomain: { type: 'array', required: true, items: { type: 'object' } },
+    valueDomain: { type: 'object', required: false, properties: { min: { type: 'number', required: true, default: 0 }, max: { type: 'number', required: true, default: 0 } }, },
     gridColor: { type: 'string', required: false },
     backgroundColor: { type: 'string', required: false },
     referenceLineColor: { type: 'string', required: false },
@@ -99,7 +99,14 @@ export function horizontalBarChartInteractions() {
 
 export function horizontalBarChartData() {
   return {
-    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
+    data: { ...baseData(undefined, INTERACTIONS_TYPES.DATA,
+        {
+          id: '',
+          name: 'contentChart{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

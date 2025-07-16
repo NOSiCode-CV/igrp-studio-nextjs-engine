@@ -1,11 +1,11 @@
 {{#each resourceConfig.types}}
 {{#if this.isEnum}}
-const {{toCamelCase this.name}} = z.enum([{{#each this.fields}}'{{#if this.defaultValue}}{{this.defaultValue}}{{else}}{{this.name}}{{/if}}'{{#if @last}}{{else}}, {{/if}}{{/each}}])
+const {{toCamelCase this.name}} = z.enum([{{#each this.fields}}'{{#if this.defaultValue}}{{{this.defaultValue}}}{{else}}{{{this.name}}}{{/if}}'{{#if @last}}{{else}}, {{/if}}{{/each}}])
 
 {{else}}
 const {{toCamelCase this.name}} = z.object({
   {{#each this.fields}}
-    {{this.name}}: {{resolveZodTypes this}}{{#if @last}}{{else}},{{/if}}
+    {{this.name}}: {{{resolveZodTypes this}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
 })
 

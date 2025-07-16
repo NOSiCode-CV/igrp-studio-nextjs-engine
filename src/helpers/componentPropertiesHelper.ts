@@ -260,7 +260,7 @@ export function resolveZodTypes(field?: ElementField): string {
     if (lowerType === 'string') {
       if (validation.minLength) validators.push(`.min(${validation.minLength})`);
       if (validation.maxLength) validators.push(`.max(${validation.maxLength})`);
-      if (validation.regex) validators.push(`.regex(new RegExp(${JSON.stringify(validation.regex)}))`);
+      if (validation.regex) validators.push(`.regex(${validation.regex})`);
       if (validation.email) validators.push(`.email()`);
       if (validation.url) validators.push(`.url()`);
       if (validation.uuid) validators.push(`.uuid()`);

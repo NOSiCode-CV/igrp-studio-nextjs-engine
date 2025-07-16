@@ -76,7 +76,7 @@
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: `{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}`
     }
   }
   {{/if~}}
@@ -87,7 +87,7 @@
   size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.valueDomain (not resourceConfig.data.valueDomain))}}
-  valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
+  valueDomain={ [{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}] }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

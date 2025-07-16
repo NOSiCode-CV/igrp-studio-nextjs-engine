@@ -212,11 +212,10 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 
 export const DIRECTORIES = {
   APP: 'src/app',
-  GENERATED: 'src/app/[locale]/(igrp)/(generated)',
-  MYAPP: 'src/app/[locale]/(myapp)',
-  LOCALE: 'src/app/[locale]',
-  LOCALE_IGRP: 'src/app/[locale]/(igrp)',
-  LOCALE_IGRP_SYS_SETTINGS: 'src/app/[locale]/(igrp)/system-settings',
+  GENERATED: 'src/app/(igrp)/(generated)',
+  MYAPP: 'src/app/(myapp)',
+  PACKAGE_IGRP: 'src/app/(igrp)',
+  IGRP_SYS_SETTINGS: 'src/app/(igrp)/system-settings',
   IGRP_ACTIONS: 'src/app/actions/(igrp)',
   SRC_ACTIONS: 'src/actions',
   ACTIONS_IGRP: 'src/actions/(igrp)',
@@ -264,7 +263,7 @@ export const DIRECTORIES = {
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   KUBERNETES: 'k8s',
   TYPES: 'types',
-  COMPONENTS: 'src/app/[locale]/(igrp)/(generated)/components',
+  COMPONENTS: 'src/app/(igrp)/(generated)/components',
   BASE_COMPONENTS: 'src/components',
 };
 
