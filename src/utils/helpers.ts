@@ -252,7 +252,7 @@ export function resolveFromMyAppPath(fullPath: string): string {
   const normalized = fullPath.replace(/\\/g, '/');
   const match = normalized.match(/\/src\/app\/\([^)]+\)/);
   if (!match) {
-    throw new Error("Path must include 'src/app/[locale]/(myapp)' group.");
+    throw new Error("Path must include 'src/app/(myapp)' group.");
   }
   return '@' + normalized.substring(normalized.indexOf(match[0]) + 4).replace(/\.[^.]+$/, ''); // skip '/src'
 }
