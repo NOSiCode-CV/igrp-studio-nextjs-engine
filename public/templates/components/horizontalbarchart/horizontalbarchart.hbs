@@ -3,18 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  bars={
-    [
-    {{#if (and resourceConfig.properties.bars (not resourceConfig.data.bars))}}
-      {{#each resourceConfig.properties.bars}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.radius}}radius: {{this.radius}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>

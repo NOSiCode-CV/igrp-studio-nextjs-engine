@@ -3,25 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  lines={
-    [
-    {{#if (and resourceConfig.properties.lines (not resourceConfig.data.lines))}}
-      {{#each resourceConfig.properties.lines}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.strokeWidth}}strokeWidth: {{this.strokeWidth}},{{/if~}}
-          {{#if this.strokeDasharray}}strokeDasharray: '{{this.strokeDasharray}}',{{/if~}}
-          {{#if this.dot}}dot: {{this.dot}},{{/if~}}
-          {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
-          {{#if this.showLabels}}showLabels: {{this.showLabels}},{{/if~}}
-          {{#if this.labelPosition}}labelPosition: '{{this.labelPosition}}',{{/if~}}
-          {{#if this.labelOffset}}labelOffset: {{this.labelOffset}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>

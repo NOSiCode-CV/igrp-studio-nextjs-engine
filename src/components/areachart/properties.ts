@@ -107,6 +107,14 @@ export function areaChartData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+    areas: { ...baseData(undefined, INTERACTIONS_TYPES.AREAS,
+        {
+          id: '',
+          name: 'areasChart{{id}}',
+          type: 'IGRPAreaConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

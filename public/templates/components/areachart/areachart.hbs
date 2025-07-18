@@ -3,20 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  areas={
-    [
-    {{#if (and resourceConfig.properties.areas (not resourceConfig.data.areas))}}
-      {{#each resourceConfig.properties.areas}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.fillOpacity}}fillOpacity: {{this.fillOpacity}},{{/if~}}
-          {{#if this.gradient}}gradient: {{this.gradient}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>

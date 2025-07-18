@@ -3,50 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  bars={
-    [
-    {{#if (and resourceConfig.properties.bars (not resourceConfig.data.bars))}}
-      {{#each resourceConfig.properties.bars}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.cornerRadius}}
-          cornerRadius: {{this.cornerRadius}},
-          {{/if~}}
-          {{#if this.minAngle}}
-          minAngle: {{this.minAngle}},
-          {{/if~}}
-          {{#if this.background}}
-          background: {{this.background}},
-          {{/if~}}
-          {{#if this.clockWise}}
-          clockWise: {{this.clockWise}},
-          {{/if~}}
-          {{#if this.stackId}}
-          stackId: `{{this.stackId}}`,
-          {{/if~}}
-          {{#if this.showLabels}}
-          showLabels: {{this.showLabels}},
-          {{/if~}}
-          {{#if this.labelPosition}}
-          labelPosition: `{{this.labelPosition}}`,
-          {{/if~}}
-          {{#if this.labelType}}
-          labelType: `{{this.labelType}}`,
-          {{/if~}}
-          {{#if this.labelStyle}}
-          labelStyle: `{{this.labelStyle}}`,
-          {{/if~}}
-          {{#if this.name}}
-          name: `{{this.name}}`,
-          {{/if~}}
-          {{#if this.color}}
-          color: `{{this.color}}`,
-          {{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   categoryKey={ `{{resourceConfig.properties.categoryKey}}` }
   nameKey={ `{{resourceConfig.properties.nameKey}}` }
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}

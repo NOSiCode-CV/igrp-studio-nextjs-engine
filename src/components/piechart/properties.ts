@@ -119,6 +119,14 @@ export function pieChartData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+    pies: { ...baseData(undefined, INTERACTIONS_TYPES.PIES,
+        {
+          id: '',
+          name: 'piesChart{{id}}',
+          type: 'IGRPPieConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

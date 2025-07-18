@@ -191,6 +191,11 @@ export const INTERACTIONS_TYPES = {
   COMPUTE_LABEL: 'Compute Label',
   ACTIVE_SECTION: 'Active Section',
   HIGHLIGHT: 'Highlight',
+  BARS: 'Bars',
+  AREAS: 'Areas',
+  LINES: 'Lines',
+  PIES: 'Pies',
+  RADARS: 'Radars',
 }
 
 export const INTERACTIONS_DEFAULTS = {

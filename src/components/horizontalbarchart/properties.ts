@@ -107,6 +107,14 @@ export function horizontalBarChartData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+    bars: { ...baseData(undefined, INTERACTIONS_TYPES.BARS,
+        {
+          id: '',
+          name: 'barsChart{{id}}',
+          type: 'IGRPBarConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

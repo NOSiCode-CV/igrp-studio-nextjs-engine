@@ -112,6 +112,14 @@ export function lineChartData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+    lines: { ...baseData(undefined, INTERACTIONS_TYPES.LINES,
+        {
+          id: '',
+          name: 'linesChart{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

@@ -119,6 +119,14 @@ export function radarChartData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+    radars: { ...baseData(undefined, INTERACTIONS_TYPES.RADARS,
+        {
+          id: '',
+          name: 'radarsChart{{id}}',
+          type: 'IGRPRadarConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 
