@@ -14,6 +14,7 @@ import {
 } from '../../utils/constants';
 import { appConfigValidate } from '../../schema/baseApp';
 import { getPaths } from '../../index';
+import { loadConfig, loadProjectConfig } from '../../utils/helpers';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -36,14 +37,9 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
   if (!isBaseConfigValid && appConfigValidate.errors) throw ERROR_MESSAGE.INVALID_APP_CONFIG;
 
   const mainPath = path.join(context.basePath, DIRECTORIES.APP);
-  const mainLayoutPath = path.join(context.basePath, DIRECTORIES.LAYOUTS)
   const kubernetesPath = path.join(context.basePath, 'k8s');
 
   return [
-    //{ output: mainPath, template: TEMPLATES.WELCOME_PAGE, name: COMMON_FILES.PAGE_TSX },
-    //{ output: mainPath, template: TEMPLATES.CONFIG_LAYOUT, name: COMMON_FILES.LAYOUT_TSX },
-    //{ output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT, name: COMMON_FILES.MAIN_LAYOUT_TSX },
-    //{ output: mainLayoutPath, template: TEMPLATES.MAIN_LAYOUT_CSS, name: COMMON_FILES.MAIN_LAYOUT_CSS },
     { output: mainPath, template: TEMPLATES.EXPORTS_FILE, name: COMMON_FILES.EXPORTS_FILE },
     { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
@@ -62,17 +58,7 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
   const CONFIGS = getPaths().configs
 
   return [
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.EN), dest: path.join(context.basePath, DST_CONFIG_FILES.EN)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.ES), dest: path.join(context.basePath, DST_CONFIG_FILES.ES)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.PT), dest: path.join(context.basePath, DST_CONFIG_FILES.PT)},
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.NPMRC), dest: path.join(context.basePath, DST_CONFIG_FILES.NPMRC)},
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.LOCAL_ENV), dest: path.join(context.basePath, DST_CONFIG_FILES.ENV)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.VSCODE_SETTINGS), dest: path.join(context.basePath, DST_CONFIG_FILES.VSCODE_SETTINGS)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.README), dest: path.join(context.basePath, DST_CONFIG_FILES.README)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTENV), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTENV)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.TSCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.TSCONFIG)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.GITIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.GITIGNORE)},
-    //{src: path.join(CONFIGS, SRC_CONFIG_FILES.NEXTCONFIG), dest: path.join(context.basePath, DST_CONFIG_FILES.NEXTCONFIG)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, DST_CONFIG_FILES.GITLABCIYAML)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERFILE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERFILE)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERIGNORE)},
@@ -94,7 +80,13 @@ const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE
     })
   )
 
-  const template = await renderTemplate(PACKAGE_JSON.template, context)
   const outputPath = path.join(context.basePath, PACKAGE_JSON.output)
-  await saveToFile(template, outputPath);
+  const configs = await loadProjectConfig<any>(context.basePath)
+
+  if(configs.length > 0) {
+    const template = configs[0];
+    template.name = context.baseConfig?.name ?? 'igrp-app'
+    await saveToFile(JSON.stringify(template, null, 2), outputPath);
+  }
+
 };

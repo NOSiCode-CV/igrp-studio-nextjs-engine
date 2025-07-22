@@ -67,12 +67,13 @@ import { renderCode } from './utils/renderCode';
 
 export function getPaths(): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
+  const PROJECT_TEMPLATE_VERSION = '0.0.1-alpha.0';
 
   if (environment === 'production') {
     return {
       configs: path.join(__dirname, './configs'),
       template: path.join(__dirname, './templates'),
-      baseApp: path.join(__dirname, './templates/base_app.zip'),
+      baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
       baseWorkspace: path.join(__dirname, './templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, './templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, './templates/partials'),
@@ -81,7 +82,7 @@ export function getPaths(): PathConfig {
     return {
       configs: path.join(__dirname, '../public/configs'),
       template: path.join(__dirname, '../public/templates'),
-      baseApp: path.join(__dirname, '../public/templates/base_app.zip'),
+      baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
       baseWorkspace: path.join(__dirname, '../public/templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, '../public/templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, '../public/templates/partials'),

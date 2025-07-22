@@ -127,6 +127,17 @@ export const loadConfig = async function <T>(basePath: string): Promise<T[]> {
   return await Promise.all<T>(files);
 };
 
+export const loadProjectConfig = async function <T>(basePath: string): Promise<T[]> {
+  if (!(await fs.pathExists(basePath))) {
+    return [];
+  }
+
+  const files = (await fs.readdir(basePath))
+    .filter((f) => f === 'package.json')
+    .map((f) => fs.readJSON(path.join(basePath, f)));
+  return await Promise.all<T>(files);
+};
+
 export const loadWorkspaceConfig = async (basePath: string) => {
   const workspaces = await loadConfig<WorkspaceProjectsConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO))
 

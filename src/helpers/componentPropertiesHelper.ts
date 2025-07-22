@@ -188,6 +188,11 @@ export function resolveStateDefault(
   isList?: boolean,
   fields?: ElementField[],
 ): string {
+
+  if(type === 'string' && defaultValue === '') {
+    return 'undefined';
+  }
+
   const trimmed = defaultValue?.trim() ?? '';
 
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
