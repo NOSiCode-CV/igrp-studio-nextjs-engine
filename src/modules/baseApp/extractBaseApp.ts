@@ -4,5 +4,5 @@ import { getPaths } from '../../index';
 
 export const extractBaseApp
   = async (context: RenderContext): Promise<void> => extractZipFromUrl(
-  getPaths().baseApp, context
+  getPaths(context.baseConfig?.version).baseApp, context
 )

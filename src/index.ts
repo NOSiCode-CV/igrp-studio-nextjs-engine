@@ -65,9 +65,9 @@ import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
 import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { renderCode } from './utils/renderCode';
 
-export function getPaths(): PathConfig {
+export function getPaths(version?: string): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
-  const PROJECT_TEMPLATE_VERSION = '0.0.1-alpha.0';
+  const PROJECT_TEMPLATE_VERSION = version ?? '0.0.1-alpha.0';
 
   if (environment === 'production') {
     return {
