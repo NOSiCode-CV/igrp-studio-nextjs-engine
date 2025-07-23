@@ -1,7 +1,7 @@
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
 
 interface VersionableElement {
-  engineVersion?: string
+  version?: string
 }
 
 interface IdentifiableElement {

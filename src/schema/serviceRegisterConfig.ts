@@ -6,7 +6,7 @@ import { ajvInstance } from '../utils/ajv-instance';
 const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:
@@ -50,7 +50,7 @@ const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterCon
 const dockerServiceRegistrationConfigSchema: JSONSchemaType<DockerServiceRegistrationConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

@@ -6,7 +6,7 @@ import { ajvInstance } from '../utils/ajv-instance';
 const workspaceConfigSchema: JSONSchemaType<WorkspaceConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

@@ -893,7 +893,7 @@ const componentSchema: JSONSchemaType<Layout> = {
 const pageConfigSchema: JSONSchemaType<PageConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

@@ -6,7 +6,7 @@ import { ajvInstance } from '../utils/ajv-instance';
 const appConfigSchema: JSONSchemaType<AppConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

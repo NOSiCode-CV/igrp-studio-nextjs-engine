@@ -919,7 +919,7 @@ const componentSchema: JSONSchemaType<Layout> = {
 const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

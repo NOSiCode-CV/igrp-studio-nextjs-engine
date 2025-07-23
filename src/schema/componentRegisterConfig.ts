@@ -97,7 +97,7 @@ const defaultChildSchema: JSONSchemaType<DefaultChildComponent> = {
 const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:
@@ -221,7 +221,7 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
 const componentRegistrationConfigSchema: JSONSchemaType<ComponentRegistrationConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:
