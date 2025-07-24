@@ -3,6 +3,4 @@ import { extractZipFile, extractZipFromUrl } from '../../utils/zipUtils';
 import { getPaths } from '../../index';
 
 export const extractBaseApp
-  = async (context: RenderContext): Promise<void> => extractZipFromUrl(
-  getPaths(context.baseConfig?.version).baseApp, context
-)
+  = async (context: RenderContext): Promise<void> => extractZipFromUrl(context)
