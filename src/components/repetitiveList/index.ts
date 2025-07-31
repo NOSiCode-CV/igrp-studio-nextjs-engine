@@ -16,6 +16,7 @@ export default {
 
     component.loadComponentClass('IGRPRepetitiveComponent')
     component.loadVariants(repetitiveListVariants());
+    component.setAllowTypes(true);
     component.loadGroup('basicElements')
     component.loadLabel('Repetitive Component')
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: REPETITIVE_LIST }))

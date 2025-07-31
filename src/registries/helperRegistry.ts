@@ -8,7 +8,7 @@ import {
   toProps,
   concat,
   toCamelCaseFromNatural,
-  typeResolution, trim, toCamelCase, typeFormatter,
+  typeResolution, trim, toCamelCase, typeFormatter, singleTypeFormatter,
 } from '../helpers/stringHelpers';
 import { getAttribute, getIndex, length } from '../helpers/arrayHelpers';
 import { greaterThan, equals, and, not, or } from '../helpers/comparisonHelpers';
@@ -115,6 +115,7 @@ Handlebars.registerHelper("concat", concat);
 Handlebars.registerHelper("toCamelCaseFromNatural", toCamelCaseFromNatural);
 Handlebars.registerHelper("typeResolution", typeResolution);
 Handlebars.registerHelper("typeFormatter", typeFormatter);
+Handlebars.registerHelper("singleTypeFormatter", singleTypeFormatter);
 
 // Array
 Handlebars.registerHelper("length", length);
