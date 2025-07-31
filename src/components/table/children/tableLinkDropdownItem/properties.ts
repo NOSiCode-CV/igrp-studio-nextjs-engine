@@ -3,24 +3,27 @@ import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableC
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
+const segmentInterface = {
+  type: 'array',
+  items: {
+    type: 'object',
+    properties: {
+      name: { type: 'string', required: true },
+      tag: { type: 'string', required: false },
+      value: { type: 'string', required: false }
+    },
+    required: false
+  },
+  'x-ui-widget': 'hidden'
+}
+
 export function tableLinkDropdownItemProperties() {
   return {
     ...dropdownItemProperties('Link'),
     type: { type: 'string', required: true, const: 'link' },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
-    segments: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          name: { type: 'string', required: true },
-          tag: { type: 'string', required: false },
-          value: { type: 'string', required: false }
-        },
-        required: false
-      },
-      'x-ui-widget': 'hidden'
-    },
+    segments: segmentInterface,
+    params: segmentInterface,
     classNameItem: { type: 'string', required: false },
     ...commonProperties(),
   };

@@ -1,5 +1,19 @@
 import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
+const segmentInterface = {
+  type: 'array',
+  items: {
+    type: 'object',
+    properties: {
+      name: { type: 'string', required: true },
+      tag: { type: 'string', required: false },
+      value: { type: 'string', required: false }
+    },
+    required: false
+  },
+  'x-ui-widget': 'hidden'
+}
+
 export function tableColumnsProperties() {
   return {
     ...commonProperties(),
@@ -41,19 +55,8 @@ export function actionProperties(labelTrigger?: string) {
         iconName: { type: 'string', required: false, default: "ArrowRight" },
       },
     },
-    segments: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          name: { type: 'string', required: true },
-          tag: { type: 'string', required: false },
-          value: { type: 'string', required: false }
-        },
-        required: false
-      },
-      'x-ui-widget': 'hidden'
-    },
+    segments: segmentInterface,
+    params: segmentInterface,
     className: { type: 'string', required: false },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
   };

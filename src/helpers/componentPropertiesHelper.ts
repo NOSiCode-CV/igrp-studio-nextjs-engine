@@ -116,7 +116,7 @@ export function resolveQueryParams(params: Segment[]): string {
         ? `\${${seg.context === 'column' ? 'row.original.' : ''}${seg.tag}}`
         : seg.value ?? '';
 
-      return `${encodeURIComponent(seg.name)}=${encodeURIComponent(replacement)}`;
+      return `${seg.name}=${replacement}`;
     })
     .join('&');
 
