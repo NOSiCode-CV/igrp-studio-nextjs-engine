@@ -281,7 +281,7 @@ export interface Navigate extends IdentifiableElement {
   name: string,
   tag: string,
   path: string,
-  params?: Record<string, string>,
+  params?: Segment[],
   inRow?: boolean,
   segments?: Segment[]
 }

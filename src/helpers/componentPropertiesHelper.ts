@@ -98,30 +98,29 @@ export function resolveFirstType(data: any[]): string {
 }
 
 /**
- * Converts an object of key-value pairs into a URL query string.
- * @param params Object with query parameter keys and values.
- * @returns A string beginning with '?' followed by encoded query parameters.
+ * Converts an array of Segment objects into a URL query string.
+ * If the segment has a tag, uses it as a dynamic replacement (with `row.original.` prefix for column context).
+ * Otherwise, uses the value if available.
+ *
+ * Example output:
+ * ?userId=${row.original.user_id}&status=active
  */
-export function resolveQueryParams(params: Record<string, any>): string {
-  const keys = Object.keys(params).filter(
-    (key) => params[key] !== undefined && params[key] !== null,
-  );
-  if (keys.length === 0) return '';
+export function resolveQueryParams(params: Segment[]): string {
+  if (!params || params.length === 0) return '';
 
-  const query = keys
-    .map((key) => {
-      const value = params[key];
-      if (Array.isArray(value)) {
-        return value
-          .map((val) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`)
-          .join('&');
-      } else {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-      }
+  const query = params
+    .filter((seg) => seg.value !== undefined || seg.tag !== undefined)
+    .map((seg) => {
+      // Build the replacement value
+      const replacement = seg.tag
+        ? `\${${seg.context === 'column' ? 'row.original.' : ''}${seg.tag}}`
+        : seg.value ?? '';
+
+      return `${encodeURIComponent(seg.name)}=${encodeURIComponent(replacement)}`;
     })
     .join('&');
 
-  return `?${query}`;
+  return query ? `?${query}` : '';
 }
 
 export function resolveSegmentPath(path: string, segments?: Segment[]) {
