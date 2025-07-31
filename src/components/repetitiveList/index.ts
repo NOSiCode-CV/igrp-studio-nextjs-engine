@@ -3,7 +3,7 @@ import {
   repetitiveListProperties,
   repetitiveListVariants,
   repetitiveListChildProperties,
-  repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle,
+  repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle, repetitiveListData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
@@ -25,6 +25,7 @@ export default {
     component.getChildPropertiesMapping(repetitiveListChildPropertiesMapping());
     component.getRules(repetitiveListRules())
     component.getStyle(repetitiveListStyle())
+    component.getData(repetitiveListData())
     component.setRenderer(hbsRenderer);
   },
 };
