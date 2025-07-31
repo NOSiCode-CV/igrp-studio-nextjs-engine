@@ -15,7 +15,7 @@ export default {
   register(component: Component) {
     component.loadImports([
       'import { IGRPFormHandle } from "@igrp/igrp-framework-react-design-system";',
-      'import { z } from "@igrp/igrp-framework-react-design-system"',
+      'import { z } from "zod"',
       //'import { useForm } from "react-hook-form";',
       //'import { zodResolver } from "@hookform/resolvers/zod";'
     ]);

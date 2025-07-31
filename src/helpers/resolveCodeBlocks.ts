@@ -1,13 +1,11 @@
 import {
   ComponentConfig,
   CustomFunctionConfig,
-  FunctionDef,
   Layout,
   Navigate,
   PageConfig,
   Reference,
-  State,
-  TypeDef,
+  State
 } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';

@@ -14,7 +14,7 @@ import {
 } from '../../utils/constants';
 import { appConfigValidate } from '../../schema/baseApp';
 import { getPaths } from '../../index';
-import { loadConfig, loadProjectConfig } from '../../utils/helpers';
+import { loadProjectConfig } from '../../utils/helpers';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
