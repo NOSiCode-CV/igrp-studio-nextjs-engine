@@ -14,10 +14,12 @@
   {{/if}}
 >
 { ({{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}) =>
+  <>
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
   {{{render-layout this ../resourceConfig}}}
   {{/each}}
   {{/if~}}
+  </>
 }
 </IGRPRepetitiveComponent>
