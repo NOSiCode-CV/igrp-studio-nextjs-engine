@@ -345,6 +345,11 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
       nullable: true,
       errorMessage: 'The is list attribute must be a valid boolean.'
     },
+    isKey: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is key attribute must be a valid boolean.'
+    },
     validation: {
       type: "object",
       nullable: true,

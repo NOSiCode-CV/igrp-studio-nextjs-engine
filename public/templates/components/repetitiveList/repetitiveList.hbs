@@ -3,7 +3,7 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  keyExtractor={ (item) => '' }
+  keyExtractor={ ({{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}) => {{#if resourceConfig.properties.dataKey}}{{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}.{{resourceConfig.properties.dataKey}}{{else}}''{{/if}} }
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
