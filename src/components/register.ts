@@ -61,6 +61,7 @@ import paragraphModule, { PARAGRAPH } from './paragraph';
 import pdfViewerModule, { PDF_VIEWER } from './pdfViewer/index';
 import pieChartModule, { PIECHART } from './piechart';
 import processModule, { PROCESS } from './process';
+import processStepModule, { PROCESS_STEP } from './process/children/processStep/index';
 import radarChartModule, { RADARCHART } from './radarchart';
 import radialBarChartModule, { RADIAL_BAR_CHART } from './radialbarchart';
 import radioModule, { RADIO } from './radio';
@@ -176,6 +177,7 @@ export function registerAllComponents() {
   register(PDF_VIEWER, pdfViewerModule.register);
   register(PIECHART, pieChartModule.register);
   register(PROCESS, processModule.register);
+  register(PROCESS_STEP, processStepModule.register);
   register(RADARCHART, radarChartModule.register);
   register(RADIAL_BAR_CHART, radialBarChartModule.register);
   register(RADIO, radioModule.register);
