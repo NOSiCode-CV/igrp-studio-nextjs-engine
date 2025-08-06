@@ -90,1598 +90,1495 @@ const dashboardLayout: Layout = {
 };
 
 const pageConfig: PageConfig = {
-  type: 'page',
-  pageName: 'view',
-  path: '(contribuinte)/contribuintes/[uuid]/view',
-  description: 'Visualizar contribuinte',
-  forceDynamic: false,
-  id: 'xcblrtpadq',
-  types: [
+  "type": "page",
+  "pageName": "Agregados",
+  "path": "(utente)/utentes/[uuid]/agregados",
+  "description": "Agregados",
+  "forceDynamic": false,
+  "id": "1lgj6xeomz",
+  "types": [
     {
-      componentId: 'table_0ui9bz',
-      name: 'tableAnexos',
-      path: '',
-      fields: [
+      "componentId": "table_8ikc83",
+      "name": "table1",
+      "path": "",
+      "fields": [
         {
-          componentId: 'tabletextcell_c18rla',
-          name: 'descricaoTipoDocumento',
-          type: 'number',
-          required: false,
-          defaultValue: '',
+          "componentId": "tablehiddencell_2dudz0",
+          "name": "utenteId",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
         },
         {
-          componentId: 'tabletextcell_5ax9xk',
-          name: 'url',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-        },
-      ],
-    },
-    {
-      componentId: 'table_w0340b',
-      name: 'tableatividades',
-      path: '',
-      fields: [
-        {
-          componentId: 'tabletextcell_j45wd3',
-          name: 'idActividadeEconomica',
-          type: 'string',
-          required: false,
-          defaultValue: '',
+          "componentId": "tabletextcell_0v0d2r",
+          "name": "numeroUtente",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
         },
         {
-          componentId: 'tabletextcell_3nbnyu',
-          name: 'designacao',
-          type: 'string',
-          required: false,
-          defaultValue: '',
+          "componentId": "tabletextcell_vkzdkd",
+          "name": "nome",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
         },
         {
-          componentId: 'tablebadgecell_8stkmr',
-          name: 'tableBadgeCell1',
-          type: 'string',
-          required: false,
-          defaultValue: '',
+          "componentId": "tabletextcell_yrdh7a",
+          "name": "dtNascimento",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
         },
-      ],
-    },
+        {
+          "componentId": "tablebadgecell_zie5kn",
+          "name": "sexoDesc",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
+        },
+        {
+          "componentId": "tabletextcell_b1o1nl",
+          "name": "dtInscricao",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
+        },
+        {
+          "componentId": "tablebadgecell_0pqc9l",
+          "name": "estado",
+          "type": "string",
+          "required": false,
+          "defaultValue": ""
+        }
+      ]
+    }
   ],
-  states: [
+  "states": [
     {
-      id: 'state_yZGfQt',
-      name: 'dataRegistoText',
-      type: 'string',
-      imports: [],
-      defaultValue: '',
+      "id": "state_Bhg83S",
+      "name": "select1Placeholder",
+      "type": "string",
+      "imports": [],
+      "defaultValue": ""
     },
     {
-      id: 'state_U5non5',
-      name: 'nomeComercialText',
-      type: 'string',
-      imports: [],
-      defaultValue: '',
+      "id": "state_tlz9Y",
+      "name": "showFilter",
+      "type": "boolean",
+      "defaultValue": "false",
+      "imports": []
     },
+    {
+      "id": "state_lDU4Xi",
+      "name": "searchValue",
+      "type": "string",
+      "imports": [],
+      "defaultValue": " "
+    },
+    {
+      "id": "state_ZFWkE",
+      "name": "openAdicaoRapida",
+      "type": "boolean",
+      "defaultValue": "false",
+      "imports": []
+    },
+    {
+      "id": "state_JvdgxA",
+      "name": "openModalCessar",
+      "type": "boolean",
+      "defaultValue": "false",
+      "imports": []
+    },
+    {
+      "id": "state_wPzakH",
+      "name": "currentUtente",
+      "type": "any",
+      "defaultValue": "",
+      "imports": []
+    }
   ],
-  functions: [
+  "functions": [],
+  "args": [
     {
-      id: 'fnc_YogiYU',
-      name: 'goToEdit',
-      code: '\nconst contribuinteId = params.uuid as string;\nrouter.push(`/contribuintes/${contribuinteId}/edit`)',
-      returnValue: {
-        type: 'void',
-        isNullable: true,
-        isList: false,
-      },
-      imports: [
-        {
-          id: 'import_swoaPO',
-          namespace: 'import { useRouter } from "next/navigation";',
-        },
-        {
-          id: 'import__SRua',
-          namespace: "import { useParams } from 'next/navigation';",
-        },
-      ],
-      arguments: [],
-    },
+      "id": "jict2wqikf",
+      "type": "string",
+      "name": "uuid",
+      "isList": false,
+      "isOptional": false,
+      "isInterface": false,
+      "isFunction": false,
+      "isState": false
+    }
   ],
-  parentName: 'contribuintes',
-  components: {
-    id: 'page_watl8d',
-    componentName: 'page',
-    label: 'page',
-    properties: {
-      variant: 'default',
-      commonProperties: {
-        generateReference: false,
-      },
+  "components": {
+    "id": "page_etie93",
+    "componentName": "page",
+    "label": "page",
+    "properties": {
+      "variant": "default",
+      "commonProperties": {
+        "generateReference": false
+      }
     },
-    children: [
+    "children": [
       {
-        id: 'section_1qw9o9',
-        componentName: 'section',
-        label: 'section',
-        properties: {
-          spaceX: '6',
-          spaceY: '6',
-          commonProperties: {
-            generateReference: false,
-          },
+        "id": "section_6sx8k0",
+        "componentName": "section",
+        "label": "section",
+        "properties": {
+          "spaceX": "3",
+          "spaceY": "6",
+          "commonProperties": {}
         },
-        children: [
+        "children": [
           {
-            id: 'pageheader_w5f2n4',
-            tag: 'pageHeader1',
-            componentName: 'pageHeader',
-            label: 'Page Header',
-            type: 'group',
-            children: [
+            "id": "pageheader_okzejp",
+            "tag": "pageHeader1",
+            "componentName": "pageHeader",
+            "label": "Page Header",
+            "type": "group",
+            "children": [
               {
-                id: 'button_ozx9fr',
-                tag: 'button2',
-                componentName: 'button',
-                label: 'Button',
-                type: 'group',
-                children: [],
-                interactions: {
-                  onClick: {
-                    type: 'function',
-                    function: {
-                      fnCustomSet: '() => {}',
-                      type: 'function',
+                "id": "button_32zgrt",
+                "tag": "button1",
+                "componentName": "button",
+                "label": "Button",
+                "type": "group",
+                "children": [],
+                "interactions": {
+                  "onClick": {
+                    "type": "navigate",
+                    "function": {
+                      "fnCustomSet": "() => {}",
+                      "type": "function",
+                      "fnCustomCode": {
+                        "imports": []
+                      }
                     },
-                    action: {},
-                  },
-                },
-                allowTypes: false,
-                data: {},
-                properties: {
-                  content: 'Imprimir',
-                  variant: 'outline',
-                  size: 'default',
-                  iconProperties: {
-                    showIcon: true,
-                    iconName: 'Printer',
-                  },
-                  disabled: false,
-                  commonProperties: {
-                    generateReference: false,
-                  },
-                },
-                childProperties: {},
-              },
-              {
-                id: 'button_2a2pgw',
-                tag: 'button1',
-                componentName: 'button',
-                label: 'Button',
-                type: 'group',
-                children: [],
-                interactions: {
-                  onClick: {
-                    type: 'function',
-                    function: {
-                      fnCustomSet: '() => {}',
-                      type: 'function',
-                      fnCustomCode: {
-                        imports: [
-                          {
-                            id: 'import_uXuvCY',
-                            namespace: "import { useParams } from 'next/navigation';",
-                          },
-                        ],
-                      },
-                      fnName: 'goToEdit',
+                    "action": {
+                      "actionCustomSet": "() => {}"
                     },
-                    action: {},
-                  },
+                    "navigate": {
+                      "path": "(utente)/utentes/[uuid]/agregados/novo",
+                      "name": "goTonovoAgregado",
+                      "params": {},
+                      "segments": [
+                        {
+                          "name": "[uuid]",
+                          "tag": "uuid",
+                          "context": "variable"
+                        }
+                      ]
+                    }
+                  }
                 },
-                allowTypes: false,
-                data: {},
-                properties: {
-                  content: 'Editar',
-                  variant: 'default',
-                  size: 'default',
-                  iconProperties: {
-                    showIcon: true,
-                    iconName: 'Pen',
+                "allowTypes": false,
+                "data": {},
+                "properties": {
+                  "content": "Novo",
+                  "variant": "secondary",
+                  "size": "default",
+                  "iconProperties": {
+                    "showIcon": true,
+                    "iconName": "Plus"
                   },
-                  disabled: false,
-                  commonProperties: {
-                    generateReference: false,
-                  },
+                  "commonProperties": {
+                    "generateReference": false
+                  }
                 },
-                childProperties: {},
-              },
+                "childProperties": {},
+                "style": {}
+              }
             ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              title: 'Visualizar Contribuinte',
-              description: '',
-              variant: 'h3',
-              showBackButton: true,
-              urlBackButton: '(contribuinte)/contribuintes',
-              iconProperties: {
-                iconBackButton: 'ArrowLeft',
+            "interactions": {},
+            "allowTypes": false,
+            "data": {},
+            "properties": {
+              "title": "Agregados",
+              "description": "",
+              "variant": "h3",
+              "iconProperties": {
+                "iconBackButton": "ArrowLeft"
               },
-              commonProperties: {
-                generateReference: false,
+              "commonProperties": {
+                "generateReference": false
               },
+              "showBackButton": true,
+              "urlBackButton": "(utente)/utentes"
             },
-            childProperties: {},
+            "childProperties": {}
           },
           {
-            id: 'statusbanner_v9o5zf',
-            tag: 'statusBanner1',
-            componentName: 'statusBanner',
-            label: 'Status Banner',
-            type: 'group',
-            children: [],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              color: 'success',
-              variant: 'soft',
-              text: 'Status: Ativo',
-              badgeColor: 'secondary',
-              badgeVariant: 'solid',
-              badgeText: 'Privado',
-              commonProperties: {
-                generateReference: false,
-              },
-            },
-            childProperties: {},
-          },
-          {
-            id: 'columns_bdi9wt',
-            tag: 'columns1',
-            componentName: 'columns',
-            label: 'Columns',
-            type: 'group',
-            children: [
+            "id": "grid_mx6nlw",
+            "tag": "grid1",
+            "componentName": "grid",
+            "label": "Grid",
+            "type": "group",
+            "children": [
               {
-                id: 'column_ju1g22',
-                tag: 'column1',
-                componentName: 'column',
-                label: 'Column',
-                children: [
-                  {
-                    id: 'infocard_yhw4m2',
-                    tag: 'inforBasicas',
-                    componentName: 'infoCard',
-                    label: 'Info Card',
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'infosection_sy91xi',
-                        tag: 'infoSection1',
-                        componentName: 'infoSection',
-                        label: 'Info Section',
-                        children: [
-                          {
-                            id: 'infoitem_z5gtim',
-                            tag: 'infoItem1',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              label: 'NIF',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Info',
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'infoitem_isr63s',
-                            tag: 'nomeComercial',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {
-                              text: {
-                                state: {
-                                  id: '',
-                                  name: 'nomeComercialText',
-                                  type: '',
-                                  imports: [],
-                                  generate: false,
-                                },
-                              },
-                            },
-                            properties: {
-                              label: 'Nome/Razão Social',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'AlignVerticalJustifyCenter',
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'infoitem_6agqhr',
-                            tag: 'infoItem3',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              label: 'Setor',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Info',
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {},
-                        childProperties: {},
-                      },
-                      {
-                        id: 'infosection_437qj1',
-                        tag: 'infoSection2',
-                        componentName: 'infoSection',
-                        label: 'Info Section',
-                        type: '',
-                        children: [
-                          {
-                            id: 'infoitem_axxrxe',
-                            tag: 'infoItem12',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              label: 'Email',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Info',
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'infoitem_ll0vyf',
-                            tag: 'infoItem123',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              label: 'Telefone',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Info',
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'infoitem_ysopbc',
-                            tag: 'infoItem2',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              label: 'Endereço',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Calendar',
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {},
-                        childProperties: {},
-                      },
-                      {
-                        id: 'infosection_3endrt',
-                        tag: 'infoSection2f',
-                        componentName: 'infoSection',
-                        label: 'Info Section',
-                        type: '',
-                        children: [
-                          {
-                            id: 'infoitem_t4ztkk',
-                            tag: 'dataRegisto',
-                            componentName: 'infoItem',
-                            label: 'InfoItem',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {
-                              text: {
-                                state: {
-                                  id: '',
-                                  name: 'dataRegistoText',
-                                  type: '',
-                                  imports: [],
-                                  generate: false,
-                                },
-                              },
-                            },
-                            properties: {
-                              label: 'Data de Registro',
-                              text: '',
-                              colorItem: 'primary',
-                              variantItem: 'solid',
-                              iconProperties: {
-                                icon: 'Calendar',
-                                showIcon: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {},
-                        childProperties: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: {
-                      colorSection: 'primary',
-                      variantSection: 'solid',
-                      commonProperties: {
-                        generateReference: false,
-                      },
-                      title: 'Informações Básicas',
+                "id": "statscard_9fseux",
+                "tag": "statsCard3",
+                "componentName": "statsCard",
+                "label": "Stats Card",
+                "type": "group",
+                "children": [],
+                "interactions": {
+                  "onClick": {
+                    "type": "function",
+                    "function": {
+                      "fnCustomSet": "() => {}",
+                      "type": "function"
                     },
-                    childProperties: {},
-                  },
-                ],
-                interactions: {},
-                allowTypes: false,
-                data: {},
-                properties: {
-                  variant: 'span3',
+                    "action": {
+                      "actionCustomSet": "() => {}"
+                    }
+                  }
                 },
-              },
-              {
-                id: 'column_hyz4tv',
-                tag: 'column2',
-                componentName: 'column',
-                label: 'Column',
-                type: '',
-                children: [
-                  {
-                    id: 'tabs_klrfst',
-                    tag: 'tabs1',
-                    componentName: 'tabs',
-                    label: 'Tabs',
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'tabsitem_k0tfb3',
-                        tag: 'tabsItem2',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        children: [
-                          {
-                            id: 'headline_ss1ib4',
-                            tag: 'headline1',
-                            componentName: 'headline',
-                            label: 'Headline',
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              title: 'Actividades Económicas',
-                              description: '',
-                              variant: 'h3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'table_w0340b',
-                            tag: 'table1',
-                            componentName: 'table',
-                            label: 'Table',
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'tablecolumns_c09txg',
-                                tag: 'tableColumns1',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_j45wd3',
-                                    tag: 'idActividadeEconomica',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Codigo',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tabletextcell_3nbnyu',
-                                    tag: 'designacao',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Descriçāo',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tablebadgecell_8stkmr',
-                                    tag: 'tableBadgeCell1',
-                                    componentName: 'tableBadgeCell',
-                                    label: 'Badge Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {
-                                      customize: {
-                                        type: 'function',
-                                        function: {
-                                          type: 'function',
-                                        },
-                                        action: {},
-                                      },
-                                    },
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Principal',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      iconProperties: {
-                                        showIcon: false,
-                                        iconName: 'Info',
-                                        iconPlacement: 'start',
-                                      },
-                                      variant: 'soft',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                ],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'tablefilters_kuwmg4',
-                                tag: 'tableFilters1',
-                                componentName: 'tableFilters',
-                                label: 'Table Filter',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: true,
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  type: '{{type}}[]',
-                                  name: 'contentTable{{id}}',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-                              showFilter: false,
-                              showPagination: false,
-                              showToggleColumn: false,
-                              isNumericPagination: false,
-                              isServerSide: false,
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            dataType: 'tableatividades',
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          value: 'actividades',
-                          label: 'Actividades',
-                          iconProperties: {
-                            icon: 'Briefcase',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                          className: '',
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'tabsitem_am033v',
-                        tag: 'tabsItem133',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        type: '',
-                        children: [
-                          {
-                            id: 'headline_os5qql',
-                            tag: 'headline2',
-                            componentName: 'headline',
-                            label: 'Headline',
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              title: 'Contactos',
-                              description: '',
-                              variant: 'h3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'table_xmvdvw',
-                            tag: 'tableContactos',
-                            componentName: 'table',
-                            label: 'Table',
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'tablecolumns_eihmjy',
-                                tag: 'tableColumns2',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_5g3g58',
-                                    tag: 'tipoContactoDesc',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Tipo',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tabletextcell_6qvi60',
-                                    tag: 'contacto',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Contacto',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                ],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'tablefilters_xr5lbj',
-                                tag: 'tableFilters2',
-                                componentName: 'tableFilters',
-                                label: 'Table Filter',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: true,
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  type: '{{type}}[]',
-                                  name: 'contentTable{{id}}',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-                              showFilter: false,
-                              showPagination: false,
-                              showToggleColumn: false,
-                              isNumericPagination: false,
-                              isServerSide: false,
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            dataType: 'tableContactos',
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          value: 'contactos',
-                          label: 'Contactos',
-                          iconProperties: {
-                            icon: 'Phone',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'tabsitem_qnzl0z',
-                        tag: 'tabsItem1',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        type: '',
-                        children: [
-                          {
-                            id: 'headline_6p0cms',
-                            tag: 'headline3',
-                            componentName: 'headline',
-                            label: 'Headline',
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              title: 'Endereços',
-                              description: '',
-                              variant: 'h3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'table_ulbzb3',
-                            tag: 'tableTableEndereco',
-                            componentName: 'table',
-                            label: 'Table',
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'tablecolumns_nrc3jj',
-                                tag: 'tableColumns3',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_ahz8y2',
-                                    tag: 'tipoEnderecoDesc',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Tipo',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tabletextcell_ks985e',
-                                    tag: 'rua',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Endereço',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                ],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                              {
-                                id: 'tablefilters_uq4pzw',
-                                tag: 'tableFilters3',
-                                componentName: 'tableFilters',
-                                label: 'Table Filter',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: true,
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  type: '{{type}}[]',
-                                  name: 'contentTable{{id}}',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-                              showFilter: false,
-                              showPagination: false,
-                              showToggleColumn: false,
-                              isNumericPagination: false,
-                              isServerSide: false,
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            dataType: 'tableEndereco',
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          value: 'tabsItemEndereco',
-                          label: 'Endereços',
-                          iconProperties: {
-                            icon: 'MapPin',
-                          },
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'tabsitem_rncxpp',
-                        tag: 'tabsItem5',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        type: '',
-                        children: [
-                          {
-                            id: 'headline_a097tt',
-                            tag: 'headline4',
-                            componentName: 'headline',
-                            label: 'Headline',
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              title: 'Dados Bancários',
-                              description: '',
-                              variant: 'h3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'table_1bw4yu',
-                            tag: 'tableBancaria',
-                            componentName: 'table',
-                            label: 'Table',
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'tablecolumns_7e2h8n',
-                                tag: 'tableColumns4',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_o7mtx1',
-                                    tag: 'operadoraDesc',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Banco',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tabletextcell_m0tfat',
-                                    tag: 'numConta',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Conta',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                ],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                              {
-                                id: 'tablefilters_i8fs2x',
-                                tag: 'tableFilters4',
-                                componentName: 'tableFilters',
-                                label: 'Table Filter',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: true,
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  type: '{{type}}[]',
-                                  name: 'contentTable{{id}}',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-                              showFilter: false,
-                              showPagination: false,
-                              showToggleColumn: false,
-                              isNumericPagination: false,
-                              isServerSide: false,
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                            dataType: 'tableBancaria',
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          value: 'bancaria',
-                          label: 'Bancários',
-                          iconProperties: {
-                            icon: 'CreditCard',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'tabsitem_o6lgi4',
-                        tag: 'tabsItem6',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        type: '',
-                        children: [
-                          {
-                            id: 'headline_wfbtxb',
-                            tag: 'headline5',
-                            componentName: 'headline',
-                            label: 'Headline',
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              title: 'Anexos',
-                              description: '',
-                              variant: 'h3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'table_0ui9bz',
-                            tag: 'tableAnexos',
-                            componentName: 'table',
-                            label: 'Table',
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'tablecolumns_vl5dhf',
-                                tag: 'tableColumns5',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_c18rla',
-                                    tag: 'descricaoTipoDocumento',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Tipo',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                  {
-                                    id: 'tabletextcell_5ax9xk',
-                                    tag: 'url',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    type: '',
-                                    children: [],
-                                    interactions: {},
-                                    allowTypes: false,
-                                    data: {},
-                                    properties: {
-                                      headerTitle: 'Nome',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                    childProperties: {},
-                                  },
-                                ],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'tablefilters_bgp5so',
-                                tag: 'tableFilters5',
-                                componentName: 'tableFilters',
-                                label: 'Table Filter',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
-                                },
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: true,
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  type: '{{type}}[]',
-                                  name: 'contentTable{{id}}',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-                              showFilter: false,
-                              showPagination: false,
-                              showToggleColumn: false,
-                              isNumericPagination: false,
-                              isServerSide: false,
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                            },
-                            childProperties: {},
-                            dataType: 'tableAnexos',
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          value: 'anexos',
-                          label: 'Anexos',
-                          iconProperties: {
-                            icon: 'FileText',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
-                        childProperties: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      items: {
-                        state: {
-                          id: '',
-                          type: 'IGRPTabItem[]',
-                          name: 'tabs{{id}}Items',
-                          defaultValue: '[]',
-                          imports: [],
-                          generate: true,
-                        },
-                      },
+                "allowTypes": false,
+                "data": {
+                  "value": {
+                    "state": {
+                      "id": "",
+                      "type": "string | number",
+                      "name": "statstatsCard3Value",
+                      "defaultValue": "0",
+                      "imports": [],
+                      "generate": true
                     },
-                    properties: {
-                      variant: 'default',
-                      iconProperties: {
-                        showIcon: true,
-                        iconPlacement: 'start',
-                      },
-                      contentBorder: true,
-                      fullWidth: true,
-                      commonProperties: {
-                        generateReference: false,
-                      },
-                      tabContentClassName: 'border rounded-lg border-transparent-none',
-                    },
-                    childProperties: {},
-                  },
-                ],
-                interactions: {},
-                allowTypes: false,
-                data: {},
-                properties: {
-                  variant: 'span9',
+                    "value": {
+                      "id": "",
+                      "code": ""
+                    }
+                  }
                 },
-                childProperties: {},
-              },
+                "properties": {
+                  "cardBorderPosition": "top",
+                  "cardBorder": "rounded-md",
+                  "cardVariant": "warning",
+                  "iconBackground": "rounded",
+                  "title": "Total de Agregado",
+                  "titleSize": "sm",
+                  "valueSize": "sm",
+                  "iconProperties": {
+                    "showIcon": true,
+                    "iconName": "UsersRound",
+                    "iconSize": "md",
+                    "iconVariant": "warning",
+                    "iconPlacement": "end"
+                  },
+                  "itemPlacement": "start",
+                  "commonProperties": {
+                    "generateReference": false
+                  },
+                  "showIconBackground": true
+                },
+                "childProperties": {}
+              }
             ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              variant: 'cols12',
-              gap: 4,
-              commonProperties: {
-                generateReference: false,
+            "interactions": {},
+            "allowTypes": false,
+            "data": {},
+            "properties": {
+              "gap": 4,
+              "variant": {
+                "default": "cols1",
+                "md": "cols2",
+                "lg": "cols4"
               },
+              "commonProperties": {
+                "generateReference": false
+              }
             },
+            "childProperties": {
+              "className": "col-span-1"
+            }
           },
           {
-            id: 'columns_do455u',
-            tag: 'columns2',
-            componentName: 'columns',
-            label: 'Columns',
-            type: 'group',
-            children: [
+            "id": "container_us5b4f",
+            "tag": "container4",
+            "componentName": "container",
+            "label": "Container",
+            "type": "group",
+            "children": [
               {
-                id: 'column_7uh7g3',
-                tag: 'column3',
-                componentName: 'column',
-                label: 'Column',
-                children: [
+                "id": "container_cua2ew",
+                "tag": "container1",
+                "componentName": "container",
+                "label": "Container",
+                "type": "group",
+                "children": [
                   {
-                    id: 'container_6bjo66',
-                    tag: 'container1',
-                    componentName: 'container',
-                    label: 'Container',
-                    type: 'group',
-                    children: [
+                    "id": "container_rb9e8l",
+                    "tag": "container2",
+                    "componentName": "container",
+                    "label": "Container",
+                    "type": "group",
+                    "children": [
                       {
-                        id: 'headline_a2b34q',
-                        tag: 'headline6',
-                        componentName: 'headline',
-                        label: 'Headline',
-                        type: 'group',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          title: 'Funcionários',
-                          description: '',
-                          variant: 'h3',
-                          roleColor: 'solid',
-                          color: 'primary',
-                          iconProperties: {
-                            showIcon: false,
-                          },
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                        "id": "container_f7tvd0",
+                        "tag": "container3",
+                        "componentName": "container",
+                        "label": "Container",
+                        "type": "group",
+                        "children": [
+                          {
+                            "id": "inputsearch_m9mipl",
+                            "tag": "inputSearch2",
+                            "componentName": "inputSearch",
+                            "label": "Input Search",
+                            "type": "group",
+                            "children": [],
+                            "interactions": {
+                              "setValueChange": {
+                                "type": "function",
+                                "function": {
+                                  "fnCustomSet": "(value) => setSearchValue(value )\n",
+                                  "type": "function",
+                                  "fnCustomCode": {
+                                    "imports": []
+                                  }
+                                },
+                                "action": {
+                                  "actionCustomSet": "(value) => ''"
+                                }
+                              },
+                              "onSearch": {
+                                "type": "function",
+                                "function": {
+                                  "fnCustomCode": {
+                                    "imports": []
+                                  },
+                                  "fnCustomSet": "()=>setShowFilter(!showFilter)\n"
+                                }
+                              }
+                            },
+                            "allowTypes": false,
+                            "data": {
+                              "value": {
+                                "state": {
+                                  "id": "",
+                                  "name": "searchValue",
+                                  "type": "",
+                                  "imports": [],
+                                  "generate": false
+                                }
+                              }
+                            },
+                            "properties": {
+                              "label": "",
+                              "value": "",
+                              "placeholder": "Pesquisar por nome, número ou NIF...",
+                              "helperText": "",
+                              "iconProperties": {
+                                "showStartIcon": true,
+                                "startIcon": "Search",
+                                "submitIcon": "SlidersVertical"
+                              },
+                              "showSubmitButton": true,
+                              "disabled": false,
+                              "required": false,
+                              "dataProperties": {
+                                "isVirtual": false,
+                                "isType": true
+                              },
+                              "commonProperties": {},
+                              "submitButtonLabel": "Filters",
+                              "className": "py-1",
+                              "submitButtonClassName": ""
+                            },
+                            "childProperties": {}
+                          }
+                        ],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "className": "flex-1 min-w-[240px]",
+                          "commonProperties": {}
                         },
-                        childProperties: {},
+                        "childProperties": {}
                       },
+                      {
+                        "id": "flex_kujoxb",
+                        "tag": "flex1",
+                        "componentName": "flex",
+                        "label": "Flex",
+                        "type": "group",
+                        "children": [
+                          {
+                            "id": "button_se0lgo",
+                            "tag": "button3",
+                            "componentName": "button",
+                            "label": "Button",
+                            "type": "group",
+                            "children": [],
+                            "interactions": {
+                              "onClick": {
+                                "type": "function",
+                                "function": {
+                                  "fnCustomSet": "() => {}",
+                                  "type": "function"
+                                },
+                                "action": {
+                                  "actionCustomSet": "() => {}"
+                                }
+                              }
+                            },
+                            "allowTypes": false,
+                            "data": {},
+                            "properties": {
+                              "content": "Exportar Utente",
+                              "variant": "outline",
+                              "size": "icon",
+                              "iconProperties": {
+                                "showIcon": true,
+                                "iconName": "Download"
+                              },
+                              "disabled": false,
+                              "commonProperties": {}
+                            },
+                            "childProperties": {}
+                          },
+                          {
+                            "id": "button_or7nbs",
+                            "tag": "button4",
+                            "componentName": "button",
+                            "label": "Button",
+                            "type": "group",
+                            "children": [],
+                            "interactions": {
+                              "onClick": {
+                                "type": "function",
+                                "function": {
+                                  "fnCustomSet": "() => {}",
+                                  "type": "function"
+                                },
+                                "action": {
+                                  "actionCustomSet": "() => {}"
+                                }
+                              }
+                            },
+                            "allowTypes": false,
+                            "data": {},
+                            "properties": {
+                              "content": "Import Utente",
+                              "variant": "outline",
+                              "size": "icon",
+                              "iconProperties": {
+                                "showIcon": true,
+                                "iconName": "Upload"
+                              },
+                              "disabled": false,
+                              "commonProperties": {}
+                            },
+                            "childProperties": {}
+                          },
+                          {
+                            "id": "button_h32wdc",
+                            "tag": "button2",
+                            "componentName": "button",
+                            "label": "Button",
+                            "type": "group",
+                            "children": [],
+                            "interactions": {
+                              "onClick": {
+                                "type": "function",
+                                "function": {
+                                  "fnCustomSet": "() => {}",
+                                  "type": "function"
+                                },
+                                "action": {
+                                  "actionCustomSet": "() => {}"
+                                }
+                              }
+                            },
+                            "allowTypes": false,
+                            "data": {},
+                            "properties": {
+                              "content": "Atualizar lista",
+                              "variant": "outline",
+                              "size": "icon",
+                              "iconProperties": {
+                                "showIcon": true,
+                                "iconName": "RefreshCw"
+                              },
+                              "disabled": false,
+                              "commonProperties": {}
+                            },
+                            "childProperties": {}
+                          }
+                        ],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "commonProperties": {}
+                        },
+                        "childProperties": {},
+                        "style": {
+                          "layout": {
+                            "type": "flex",
+                            "flex": {
+                              "direction": "row",
+                              "wrap": "wrap",
+                              "alignItems": "stretch",
+                              "justifyContent": "flex-end",
+                              "gap": "2"
+                            },
+                            "grid": {
+                              "templateColumns": "1",
+                              "templateRows": "1",
+                              "gap": "2",
+                              "justifyItems": "start",
+                              "alignItems": "start",
+                              "direction": "row",
+                              "dense": false
+                            },
+                            "block": {}
+                          }
+                        }
+                      }
                     ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: {
-                      className: 'border p-4 rounded-lg',
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "commonProperties": {},
+                      "className": ""
                     },
-                    childProperties: {},
+                    "childProperties": {},
+                    "style": {
+                      "layout": {
+                        "type": "flex",
+                        "flex": {
+                          "direction": "row",
+                          "wrap": "wrap",
+                          "alignItems": "center",
+                          "justifyContent": "space-between",
+                          "gap": "2"
+                        },
+                        "grid": {
+                          "templateColumns": "1",
+                          "templateRows": "1",
+                          "gap": "2",
+                          "justifyItems": "start",
+                          "alignItems": "start",
+                          "direction": "row",
+                          "dense": false
+                        },
+                        "block": {}
+                      }
+                    }
                   },
+                  {
+                    "id": "separator_ivc9k0",
+                    "tag": "separator1",
+                    "componentName": "separator",
+                    "label": "Separator",
+                    "type": "group",
+                    "children": [],
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "orientation": "horizontal",
+                      "className": "my-3",
+                      "commonProperties": {}
+                    },
+                    "childProperties": {},
+                    "rules": [
+                      {
+                        "type": "visibility",
+                        "condition": "showFilter"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "grid_l18109",
+                    "tag": "grid2",
+                    "componentName": "grid",
+                    "label": "Grid",
+                    "type": "group",
+                    "children": [
+                      {
+                        "id": "inputtext_c2fyrt",
+                        "tag": "nomeFlt",
+                        "componentName": "inputText",
+                        "label": "Input Text",
+                        "type": "group",
+                        "children": [],
+                        "interactions": {
+                          "onChange": {
+                            "type": "function",
+                            "function": {
+                              "type": "function"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "value": "",
+                          "label": "Nome",
+                          "placeholder": "",
+                          "helperText": "",
+                          "iconProperties": {
+                            "showIcon": false
+                          },
+                          "disabled": false,
+                          "required": false,
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "inputtext_9y90u6",
+                        "tag": "numeroFlt",
+                        "componentName": "inputText",
+                        "label": "Input Text",
+                        "type": "group",
+                        "children": [],
+                        "interactions": {
+                          "onChange": {
+                            "type": "function",
+                            "function": {
+                              "type": "function"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "value": "",
+                          "label": "Numero",
+                          "placeholder": "",
+                          "helperText": "",
+                          "iconProperties": {
+                            "showIcon": false
+                          },
+                          "disabled": false,
+                          "required": false,
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "combobox_08pf10",
+                        "tag": "tipoUtenteFlt",
+                        "componentName": "combobox",
+                        "label": "Combobox",
+                        "type": "group",
+                        "children": [],
+                        "interactions": {
+                          "onChange": {
+                            "type": "function",
+                            "function": {
+                              "fnCustomSet": "() => {}",
+                              "type": "function"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {
+                          "value": {
+                            "state": {
+                              "id": "",
+                              "type": "string",
+                              "name": "select{{id}}Value",
+                              "defaultValue": "{{value}}",
+                              "imports": [],
+                              "generate": true
+                            }
+                          },
+                          "options": {
+                            "state": {
+                              "id": "",
+                              "type": "IGRPOptionsProps[]",
+                              "name": "select{{id}}Options",
+                              "defaultValue": "[]",
+                              "imports": [],
+                              "generate": true
+                            }
+                          }
+                        },
+                        "properties": {
+                          "label": "Tipo de Utente",
+                          "variant": "single",
+                          "placeholder": "Select an option...",
+                          "selectLabel": "No option found",
+                          "showSearch": true,
+                          "gridSize": "full",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "commonProperties": {
+                            "generateReference": false
+                          }
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "combobox_l1zife",
+                        "tag": "estadoflt",
+                        "componentName": "combobox",
+                        "label": "Combobox",
+                        "type": "group",
+                        "children": [],
+                        "interactions": {
+                          "onChange": {
+                            "type": "function",
+                            "function": {
+                              "fnCustomSet": "() => {}",
+                              "type": "function"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {
+                          "value": {
+                            "state": {
+                              "id": "",
+                              "type": "string",
+                              "name": "select{{id}}Value",
+                              "defaultValue": "{{value}}",
+                              "imports": [],
+                              "generate": true
+                            }
+                          },
+                          "options": {
+                            "state": {
+                              "id": "",
+                              "type": "IGRPOptionsProps[]",
+                              "name": "select{{id}}Options",
+                              "defaultValue": "[]",
+                              "imports": [],
+                              "generate": true
+                            }
+                          }
+                        },
+                        "properties": {
+                          "label": "Estado",
+                          "variant": "single",
+                          "placeholder": "Select an option...",
+                          "selectLabel": "No option found",
+                          "showSearch": true,
+                          "iconProperties": {
+                            "showIcon": false,
+                            "iconName": "CornerDownRight"
+                          },
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "commonProperties": {
+                            "generateReference": false
+                          },
+                          "gridSize": "full"
+                        },
+                        "childProperties": {}
+                      }
+                    ],
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "gap": 4,
+                      "variant": {
+                        "default": "cols1",
+                        "md": "cols2",
+                        "lg": "cols4"
+                      },
+                      "commonProperties": {
+                        "generateReference": false
+                      }
+                    },
+                    "childProperties": {
+                      "className": "col-span-1 "
+                    },
+                    "style": {},
+                    "rules": [
+                      {
+                        "type": "visibility",
+                        "condition": "showFilter"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "flex_gzk6wy",
+                    "tag": "flex2",
+                    "componentName": "flex",
+                    "label": "Flex",
+                    "type": "group",
+                    "children": [
+                      {
+                        "id": "button_2c64es",
+                        "tag": "button5",
+                        "componentName": "button",
+                        "label": "Button",
+                        "type": "group",
+                        "children": [],
+                        "interactions": {
+                          "onClick": {
+                            "type": "function",
+                            "function": {
+                              "fnCustomSet": "() => {}",
+                              "type": "function"
+                            },
+                            "action": {
+                              "actionCustomSet": "() => {}"
+                            }
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "content": "Limpar Filtros",
+                          "variant": "outline",
+                          "size": "default",
+                          "iconProperties": {
+                            "showIcon": true,
+                            "iconName": "X"
+                          },
+                          "disabled": false,
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      }
+                    ],
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "commonProperties": {},
+                      "className": ""
+                    },
+                    "childProperties": {},
+                    "style": {
+                      "layout": {
+                        "type": "flex",
+                        "flex": {
+                          "direction": "row",
+                          "wrap": "wrap",
+                          "alignItems": "stretch",
+                          "justifyContent": "flex-end",
+                          "gap": "2"
+                        },
+                        "grid": {
+                          "templateColumns": "1",
+                          "templateRows": "1",
+                          "gap": "2",
+                          "justifyItems": "start",
+                          "alignItems": "start",
+                          "direction": "row",
+                          "dense": false
+                        },
+                        "block": {}
+                      }
+                    },
+                    "rules": [
+                      {
+                        "type": "visibility",
+                        "condition": "showFilter"
+                      }
+                    ]
+                  }
                 ],
-                interactions: {},
-                allowTypes: false,
-                data: {},
-                properties: {
-                  variant: 'span6',
+                "interactions": {},
+                "allowTypes": false,
+                "data": {},
+                "properties": {
+                  "className": "px-4 pt-2 space-y-3",
+                  "commonProperties": {}
                 },
-                childProperties: {},
+                "childProperties": {}
               },
               {
-                id: 'column_2_h45w3m',
-                componentName: 'column',
-                label: 'Column 2',
-                properties: {
-                  variant: 'span6',
-                },
-                children: [
+                "id": "table_8ikc83",
+                "tag": "table1",
+                "componentName": "table",
+                "label": "Table",
+                "type": "group",
+                "children": [
                   {
-                    id: 'container_rx5c1o',
-                    tag: 'container2',
-                    componentName: 'container',
-                    label: 'Container',
-                    type: 'group',
-                    children: [
+                    "id": "tablecolumns_bk6z31",
+                    "tag": "tableColumns1",
+                    "componentName": "tableColumns",
+                    "label": "Table Column",
+                    "children": [
                       {
-                        id: 'headline_xdskzb',
-                        tag: 'headline7',
-                        componentName: 'headline',
-                        label: 'Headline',
-                        type: 'group',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          title: 'Pagamentos',
-                          description: '',
-                          variant: 'h3',
-                          roleColor: 'solid',
-                          color: 'primary',
-                          iconProperties: {
-                            showIcon: false,
+                        "id": "tablehiddencell_2dudz0",
+                        "tag": "utenteId",
+                        "componentName": "tableHiddenCell",
+                        "label": "Hidden Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "UUID",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
                           },
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          "commonProperties": {
+                            "generateReference": false
+                          }
                         },
-                        childProperties: {},
+                        "childProperties": {}
                       },
+                      {
+                        "id": "tabletextcell_0v0d2r",
+                        "tag": "numeroUtente",
+                        "componentName": "tableTextCell",
+                        "label": "Text Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Numero",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "variant": "default",
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tabletextcell_vkzdkd",
+                        "tag": "nome",
+                        "componentName": "tableTextCell",
+                        "label": "Text Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerType": "sortToggle",
+                          "headerTitle": "Nome",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "variant": "default",
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tabletextcell_yrdh7a",
+                        "tag": "dtNascimento",
+                        "componentName": "tableTextCell",
+                        "label": "Text Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Data de Nascimento",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "variant": "default",
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tablebadgecell_zie5kn",
+                        "tag": "sexoDesc",
+                        "componentName": "tableBadgeCell",
+                        "label": "Badge Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {
+                          "customize": {
+                            "type": "function",
+                            "function": {
+                              "type": "function"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Sexo",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "iconProperties": {
+                            "showIcon": false,
+                            "iconName": "Info",
+                            "iconPlacement": "start"
+                          },
+                          "variant": "soft",
+                          "commonProperties": {}
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tabletextcell_b1o1nl",
+                        "tag": "dtInscricao",
+                        "componentName": "tableTextCell",
+                        "label": "Text Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Data Inscriçāo",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "variant": "default",
+                          "commonProperties": {
+                            "generateReference": false
+                          }
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tablebadgecell_0pqc9l",
+                        "tag": "estado",
+                        "componentName": "tableBadgeCell",
+                        "label": "Badge Column",
+                        "type": "",
+                        "children": [],
+                        "interactions": {
+                          "customize": {
+                            "type": "function",
+                            "function": {
+                              "type": "function",
+                              "fnCustomCode": {
+                                "imports": [
+                                  {
+                                    "namespace": "import {getStatusColorUtente} from '@/app/(myapp)/functions/global'",
+                                    "id": "rm9gh86ptu"
+                                  }
+                                ]
+                              },
+                              "fnName": "getStatusColorUtente"
+                            },
+                            "action": {}
+                          }
+                        },
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Estado",
+                          "dataProperties": {
+                            "isVirtual": false,
+                            "isType": true
+                          },
+                          "iconProperties": {
+                            "showIcon": false,
+                            "iconName": "Info",
+                            "iconPlacement": "start"
+                          },
+                          "variant": "soft",
+                          "commonProperties": {
+                            "generateReference": false
+                          }
+                        },
+                        "childProperties": {}
+                      },
+                      {
+                        "id": "tableactionlistcell_rz79fw",
+                        "tag": "tableActionListCell1",
+                        "componentName": "tableActionListCell",
+                        "label": "Actions Column",
+                        "type": "",
+                        "children": [
+                          {
+                            "id": "tabledropdownmenucell_1t20lu",
+                            "tag": "tableDropdownMenuCell1",
+                            "componentName": "tableDropdownMenuCell",
+                            "label": "Dropdown Column",
+                            "type": "",
+                            "children": [
+                              {
+                                "id": "tablelinkdropdownitem_t6ax9g",
+                                "tag": "tableLinkDropdownItem1",
+                                "componentName": "tableLinkDropdownItem",
+                                "label": "Link Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {},
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Visualizar",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "Eye"
+                                  },
+                                  "href": "(utente)/utentes/[uuid]/view",
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  },
+                                  "segments": [
+                                    {
+                                      "name": "[uuid]",
+                                      "tag": "uuid",
+                                      "context": "variable"
+                                    }
+                                  ]
+                                },
+                                "childProperties": {}
+                              },
+                              {
+                                "id": "tablelinkdropdownitem_s3d4oy",
+                                "tag": "tableLinkDropdownItem2",
+                                "componentName": "tableLinkDropdownItem",
+                                "label": "Link Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {},
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Editar",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "SquarePen"
+                                  },
+                                  "href": "(utente)/utentes/[uuid]/agregados/[uuidAgregado]/edit",
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  },
+                                  "segments": [
+                                    {
+                                      "name": "[uuid]",
+                                      "tag": "uuid",
+                                      "context": "pageParam"
+                                    },
+                                    {
+                                      "name": "[uuidAgregado]",
+                                      "tag": "utenteId",
+                                      "context": "column"
+                                    }
+                                  ],
+                                  "params": []
+                                },
+                                "childProperties": {}
+                              },
+                              {
+                                "id": "tablecustomdropdownitem_xmxogk",
+                                "tag": "tableCustomDropdownItem4",
+                                "componentName": "tableCustomDropdownItem",
+                                "label": "Custom Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {},
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Falecimento",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "Skull"
+                                  },
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  }
+                                },
+                                "childProperties": {}
+                              },
+                              {
+                                "id": "tablecustomdropdownitem_bzyw41",
+                                "tag": "tableCustomDropdownItem3",
+                                "componentName": "tableCustomDropdownItem",
+                                "label": "Custom Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {},
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Reativar",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "UserRoundCheck"
+                                  },
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  }
+                                },
+                                "childProperties": {}
+                              },
+                              {
+                                "id": "tablecustomdropdownitem_pw7mau",
+                                "tag": "tableCustomDropdownItem2",
+                                "componentName": "tableCustomDropdownItem",
+                                "label": "Custom Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {},
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Suspender",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "UserX"
+                                  },
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  }
+                                },
+                                "childProperties": {}
+                              },
+                              {
+                                "id": "tablecustomdropdownitem_6qq5ee",
+                                "tag": "tableCustomDropdownItem1",
+                                "componentName": "tableCustomDropdownItem",
+                                "label": "Custom Item",
+                                "type": "",
+                                "children": [],
+                                "interactions": {
+                                  "action": {
+                                    "type": "function",
+                                    "function": {
+                                      "fnCustomCode": {
+                                        "imports": []
+                                      },
+                                      "fnCustomSet": "()=>{setOpenModalCessar(!openModalCessar); setCurrentUtente(rowData)\n}\n"
+                                    }
+                                  }
+                                },
+                                "allowTypes": false,
+                                "data": {},
+                                "properties": {
+                                  "labelTrigger": "Cessar",
+                                  "showIcon": true,
+                                  "iconProperties": {
+                                    "iconName": "ArchiveX"
+                                  },
+                                  "commonProperties": {
+                                    "generateReference": false
+                                  }
+                                },
+                                "childProperties": {}
+                              }
+                            ],
+                            "interactions": {},
+                            "allowTypes": false,
+                            "data": {},
+                            "properties": {
+                              "labelTrigger": "Dropdown Actions",
+                              "iconProperties": {
+                                "iconName": "ArrowRight"
+                              },
+                              "variant": "default",
+                              "commonProperties": {}
+                            },
+                            "childProperties": {}
+                          }
+                        ],
+                        "interactions": {},
+                        "allowTypes": false,
+                        "data": {},
+                        "properties": {
+                          "headerTitle": "Açōes",
+                          "type": "inline",
+                          "commonProperties": {
+                            "generateReference": false
+                          }
+                        },
+                        "childProperties": {}
+                      }
                     ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: {
-                      className: 'border p-4 rounded-lg',
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "commonProperties": {}
                     },
-                    childProperties: {},
+                    "childProperties": {}
                   },
+                  {
+                    "id": "tablefilters_pi9a7r",
+                    "tag": "tableFilters1",
+                    "componentName": "tableFilters",
+                    "label": "Table Filter",
+                    "children": [],
+                    "interactions": {},
+                    "allowTypes": false,
+                    "data": {},
+                    "properties": {
+                      "commonProperties": {}
+                    }
+                  }
                 ],
-                interactions: [],
-                tag: '',
-              },
+                "interactions": {},
+                "allowTypes": true,
+                "data": {
+                  "data": {
+                    "state": {
+                      "id": "",
+                      "type": "Table1[]",
+                      "name": "contentTabletable1",
+                      "defaultValue": "[]",
+                      "imports": [],
+                      "generate": true
+                    },
+                    "value": {
+                      "id": "",
+                      "code": ""
+                    }
+                  }
+                },
+                "properties": {
+                  "commonProperties": {
+                    "generateReference": false
+                  },
+                  "showFilter": true,
+                  "showPagination": true,
+                  "showToggleColumn": false,
+                  "isNumericPagination": false,
+                  "isServerSide": false,
+                  "tableClassName": "rounded-none",
+                  "paginationClassName": "px-3 pb-3"
+                },
+                "dataType": "table1",
+                "childProperties": {}
+              }
             ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              variant: 'cols12',
-              gap: 4,
-              commonProperties: {
-                generateReference: false,
-              },
+            "interactions": {},
+            "allowTypes": false,
+            "data": {},
+            "properties": {
+              "className": "border rounded-sm",
+              "commonProperties": {}
             },
-          },
+            "childProperties": {}
+          }
         ],
-        tag: 'section1',
-        data: {},
-        interactions: {},
+        "tag": "section2",
+        "data": {},
+        "interactions": {},
+        "childProperties": {}
       },
-    ],
-    tag: 'page1',
-    data: {},
-    interactions: {
-      onLoad: {
-        type: 'function',
-        function: {
-          type: 'function',
-          fnCustomCode: {
-            imports: [
-              {
-                namespace:
-                  "import {useDetalheContribuinte} from '@/app/[locale]/(myapp)/hooks/use-contribuinte'",
-                id: 'y542kpea3o',
-              },
-            ],
-            fnCode:
-              "const router = useRouter();\nconst params = useParams();\nconst { data, isLoading } = useDetalheContribuinte()\n\nuseEffect(() => {\n  if (isLoading && !data) return\n  setDataRegistoText(data?.dataEntrada || '')\n  setNomeComercialText(data?.nomeComercial || '')\n\n  setContentTabletable1((data?.actividadesEconomicas || []).map(item => ({\n    idActividadeEconomica: item.idActividadeEconomica?.toString() || '',\n    designacao: item.designacao || '',\n    tableBadgeCell1: item.nivelActividade ? 'Principal' : 'Secundária'\n  })))\n  setContentTabletableContactos(data?.contactos || [])\n  setContentTabletableTableEndereco(data?.enderecos || [])\n  setContentTabletableBancaria((data?.dadosBancarios || []).map(item => ({\n    operadoraDesc: item.operadoraDesc || '',\n    numConta: item.numConta?.toString() || ''\n  })))\n  setContentTabletableAnexos((data?.anexos || []).map(item => ({\n    descricaoTipoDocumento: parseInt(item.descricaoTipoDocumento) || 0,\n    url: item.url || ''\n  })))\n\n}, [data])",
-          },
+      {
+        "id": "section_av7rta",
+        "componentName": "section",
+        "label": "section",
+        "properties": {
+          "spaceX": "6",
+          "spaceY": "6",
+          "commonProperties": {
+            "generateReference": false
+          }
         },
-        action: {},
-      },
+        "children": [
+          {
+            "id": "cessarutente_m6xei2",
+            "tag": "CessarUtente1",
+            "componentName": "CessarUtente",
+            "label": "Cessar Utente",
+            "type": "group",
+            "children": [],
+            "interactions": {
+              "setOpen": {
+                "type": "function",
+                "function": {
+                  "fnCustomCode": {
+                    "imports": []
+                  },
+                  "fnCustomSet": "()=>setOpenModalCessar(!openModalCessar)\n"
+                }
+              }
+            },
+            "allowTypes": false,
+            "data": {
+              "utente": {
+                "state": {
+                  "id": "",
+                  "name": "currentUtente",
+                  "type": "",
+                  "imports": [],
+                  "generate": false
+                }
+              },
+              "open": {
+                "state": {
+                  "id": "",
+                  "name": "openModalCessar",
+                  "type": "",
+                  "imports": [],
+                  "generate": false
+                }
+              }
+            },
+            "properties": {
+              "customProperties": {}
+            },
+            "childProperties": {}
+          }
+        ],
+        "tag": "",
+        "data": {},
+        "interactions": {},
+        "childProperties": {}
+      }
+    ],
+    "tag": "page2",
+    "data": {},
+    "interactions": {
+      "onLoad": {
+        "type": "function",
+        "function": {
+          "type": "function",
+          "fnCustomCode": {
+            "imports": [
+              {
+                "id": "import_Cp42TZ",
+                "namespace": "import { IGRPLoadingSpinner } from '@igrp/igrp-framework-react-design-system';"
+              },
+              {
+                "namespace": "import {useUtente} from '@/app/(myapp)/hooks/use-utente'",
+                "id": "menu6ir50b"
+              },
+              {
+                "namespace": "import {useUtenteParameterizations} from '@/app/(myapp)/hooks/use-parameterization'",
+                "id": "3gjgcqvmq7"
+              }
+            ],
+            "fnCode": "const {\n  tiposUtente,\n  estadoUtente,\n  isLoading: isLoadingParams,\n} = useUtenteParameterizations();\n\nuseEffect(() => {\n  if (isLoadingParams) return;\n  setSelecttipoUtenteFltOptions(tiposUtente || []);\n  setSelectestadofltOptions(estadoUtente || [])\n}, [isLoadingParams]);\n\nconst { data, stats, isLoading, error } = useUtente({ search: searchValue, beneficiarioId: uuid });\n\nuseEffect(() => {\n  if(isLoading && !data) return\n  setContentTabletable1(\n    (data?.content || []).map((item: any) => ({\n      ...item,\n    })),\n  );\n  setStatstatsCard3Value(stats?.total || 0)\n\n  }, [isLoading]);\n\n  if (isLoading && !error) {\n    return (\n      <div className=\"flex items-center gap2 flex-col\">\n        <IGRPLoadingSpinner />\n        <span>loading utentes...</span>\n      </div>\n    );\n  }\n"
+          }
+        },
+        "action": {}
+      }
     },
-    childProperties: {},
+    "childProperties": {}
   },
-  imports: [],
-};
+  "imports": []
+}
 
 beforeAll(async () => {
   await initComponents();

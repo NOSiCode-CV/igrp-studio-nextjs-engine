@@ -22,6 +22,7 @@ import { TEXT_LIST_SUBITEMS } from '../components/textList/children/textListSubI
 import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
 import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
+import { PROCESS_STEP } from '../components/process/children/processStep/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -366,6 +367,10 @@ export function extractInfoSection(children: Layout[]) {
 
 export function extractInfoItem(children: Layout[]) {
   return children.filter((it) => it.componentName === INFO_ITEM);
+}
+
+export function extractProcessSteps(children: Layout[]) {
+  return children.filter((it) => it.componentName === PROCESS_STEP);
 }
 
 export function resolveComponent(

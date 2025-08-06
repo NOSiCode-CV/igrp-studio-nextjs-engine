@@ -257,6 +257,7 @@ export const DIRECTORIES = {
   PUBLIC: 'public',
   PUBLIC_IGRP: 'public/igrp',
   PROJECTS: 'projects',
+  PROCESS: 'process',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
   ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
@@ -266,10 +267,12 @@ export const DIRECTORIES = {
   MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
+  IGRPSTUDIO_PROCESS: '.igrpstudio/process',
   KUBERNETES: 'k8s',
   TYPES: 'types',
   COMPONENTS: 'src/app/(igrp)/(generated)/components',
   BASE_COMPONENTS: 'src/components',
+  PROCESS_PARAMS: '[...process]'
 };
 
 export const ERROR_MESSAGE = {
@@ -284,6 +287,7 @@ export const ERROR_MESSAGE = {
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
   INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again',
+  INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
   INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
 };
 

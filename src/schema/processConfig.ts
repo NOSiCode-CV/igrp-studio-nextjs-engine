@@ -1,6 +1,6 @@
 import { JSONSchemaType, ValidateFunction } from 'ajv';
 import {
-  ComponentConfig,
+  ProcessConfig,
   FieldConfig,
   Field,
   ColumnConfig,
@@ -772,7 +772,7 @@ const actionSchema: JSONSchemaType<IAction> = {
   additionalProperties: true
 };
 
-// Schema para ColumnComponent (los componentes anidados dentro de las columnas)
+// Schema para ColumnProcess (los processes anidados dentro de las columnas)
 const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
   type: "object",
   properties: {
@@ -811,7 +811,7 @@ const commonPropertiesSchema: JSONSchemaType<CommonProperties> = {
   },
 };
 
-// Schema para Component (los componentes que contienen filas)
+// Schema para Process (los processes que contienen filas)
 const componentSchema: JSONSchemaType<Layout> = {
   type: 'object',
   properties: {
@@ -920,8 +920,8 @@ const componentSchema: JSONSchemaType<Layout> = {
 };
 
 
-// Schema para ComponentConfig (la configuración de la página)
-const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
+// Schema para ProcessConfig (la configuración de la página)
+const processConfigSchema: JSONSchemaType<ProcessConfig> = {
   type: 'object',
   properties: {
     version: {
@@ -937,18 +937,13 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
     },
     type: {
       type: "string",
-      const: "component",
-      errorMessage: "The Component type must be 'component'.",
-    },
-    scope: {
-      type: "string",
-      enum: ['app', 'page'],
-      errorMessage: "The Component scope must be 'app' or 'page'.",
+      const: "process",
+      errorMessage: "The Process type must be 'process'.",
     },
     name: {
       type: "string",
       pattern: PATTERNS.VALID_NAME_CONVENTIONAL,
-      errorMessage: 'The component name must only contain letters and must not have spaces or special characters.',
+      errorMessage: 'The process name must only contain letters and must not have spaces or special characters.',
     },
     description: {
       type: 'string',
@@ -956,6 +951,15 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage:
         'The description, if provided, must only contain letters, numbers and spaces and must not have special characters.',
+    },
+    processKey: {
+      type: 'string',
+      errorMessage: 'The process key attribute must be a valid string.'
+    },
+    processVersion: {
+      type: 'string',
+      pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
+      errorMessage: 'The process version attribute must only contain alphanumeric characters and must not have spaces or special characters.'
     },
     pagePath: {
       type: "string",
@@ -980,6 +984,11 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       nullable: true,
       anyOf: [componentSchema, {}], // Ensure this matches the correct definition of `componentSchema`
       errorMessage: 'Components must contain valid configuration.',
+    },
+    forceDynamic: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: "The force dynamic attribute, if provided, must be valid boolean.",
     },
     args: {
       type: 'array',
@@ -1009,7 +1018,6 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
     },
     types: {
       type: 'array',
-      nullable: true,
       items: typeDefSchema,
       errorMessage: 'The types attribute must be an array of valid type definition configuration.'
     },
@@ -1025,15 +1033,10 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       items: stateSchema,
       errorMessage: 'The states attribute must be an array of valid state definition configuration.'
     },
-    forceDynamic: {
-      type: 'boolean',
-      nullable: true,
-      errorMessage: "The force dynamic attribute, if provided, must be valid boolean.",
-    },
   },
   required: ['type', 'name'],
   additionalProperties: false,
 };
 
-export const componentConfigValidate: ValidateFunction<ComponentConfig> =
-  ajvInstance.compile<ComponentConfig>(componentConfigSchema);
+export const processConfigValidate: ValidateFunction<ProcessConfig> =
+  ajvInstance.compile<ProcessConfig>(processConfigSchema);

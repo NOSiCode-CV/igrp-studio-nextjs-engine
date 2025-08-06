@@ -64,6 +64,24 @@ export interface ComponentConfig extends IdentifiableElement, VersionableElement
   actions?: CustomFunctionConfig[];
   args?: Arguments[];
   components?: Layout | {};
+  forceDynamic?: boolean;
+}
+
+export interface ProcessConfig extends IdentifiableElement, VersionableElement {
+  type: 'process';
+  name: string;
+  description?: string;
+  processKey: string;
+  processVersion: string;
+  forceDynamic?: boolean;
+  types: TypeDef[];
+  imports?: Import[];
+  states?: State[];
+  references?: Reference[];
+  functions?: CustomFunctionConfig[];
+  actions?: CustomFunctionConfig[];
+  args?: Arguments[];
+  components?: Layout | {};
 }
 
 export interface Component {

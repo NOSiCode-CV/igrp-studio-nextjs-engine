@@ -23,7 +23,7 @@ import {
   RenderContext,
   ServiceWorkspace,
   WorkspaceConfig,
-  WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig,
+  WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig, ProcessConfig,
 } from './interfaces/types';
 import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
@@ -64,6 +64,9 @@ import { registerAllCodeSnippets } from './code_snippets/register';
 import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
 import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { renderCode } from './utils/renderCode';
+import { processConfigValidate } from './schema/processConfig';
+import { generateProcess } from './modules/process/generateProcess';
+import { saveProcessConfig } from './modules/process/saveProcessConfig';
 
 export function getPaths(version?: string): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
@@ -246,6 +249,31 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
   await generateComponent(context);
 
   await saveComponentConfig(componentConfig, basePath);
+};
+
+/**
+ *
+ * @param processConfig
+ * @param basePath
+ */
+
+export const newProcess = async (processConfig: ProcessConfig, basePath: string) => {
+  const isProcessConfigValid = processConfigValidate(processConfig);
+
+  if (!isProcessConfigValid && processConfigValidate.errors)
+    throw processConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  const context: RenderContext<ProcessConfig, ProcessConfig> = {
+    resourceConfig: processConfig,
+    basePath: basePath,
+  };
+
+  await generateProcess(context);
+
+  await saveProcessConfig(processConfig, basePath);
+
 };
 
 /**

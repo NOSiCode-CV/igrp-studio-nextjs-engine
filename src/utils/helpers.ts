@@ -4,12 +4,16 @@ import {
   ComponentConfig,
   Layout,
   PageConfig,
-  RenderContext, WorkspaceProjectsConfig,
+  ProcessConfig,
+  RenderContext,
+  WorkspaceProjectsConfig,
 } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
 import { Component } from '../components';
 import { TABLE } from '../components/table';
+import { extractProcessSteps } from '../helpers/componentPropertiesHelper';
+import { isLayout } from '../modules/page/generatePage';
 
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
@@ -23,13 +27,11 @@ export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
  * @returns {boolean} True if the segment matches one of the valid patterns.
  */
 export function isValidNextSegment(segment: string): boolean {
-  return true //return VALID_SEGMENT_PATTERNS.some((pattern) => new RegExp(pattern).test(segment));
+  return true; //return VALID_SEGMENT_PATTERNS.some((pattern) => new RegExp(pattern).test(segment));
 }
 
 export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
-  const segments = context.resourceConfig.path
-    .split('/')
-    .filter(Boolean);
+  const segments = context.resourceConfig.path.split('/').filter(Boolean);
 
   /*for (const segment of segments) {
     if (!isValidNextSegment(segment)) {
@@ -39,36 +41,55 @@ export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
     }
   }*/
 
-  return path.join(
-    context.basePath,
-    DIRECTORIES.GENERATED,
-    ...segments,
-    COMMON_FILES.PAGE_TSX
-  );
+  return path.join(context.basePath, DIRECTORIES.GENERATED, ...segments, COMMON_FILES.PAGE_TSX);
 };
 
 export const getComponentDir = (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const name = context.resourceConfig.name.toLowerCase();
   const pagePath = context.resourceConfig.pagePath;
-  return pagePath? path.join(
+  return pagePath
+    ? path.join(
+        context.basePath,
+        DIRECTORIES.GENERATED,
+        pagePath,
+        'components',
+        replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+      )
+    : path.join(
+        context.basePath,
+        DIRECTORIES.BASE_COMPONENTS,
+        replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+      );
+};
+
+export const getProcessStepDir = (
+  context: RenderContext<ProcessConfig, ProcessConfig>,
+  stepName: string,
+) => {
+  const version = context.resourceConfig.processVersion;
+  const pagePath = path.join(DIRECTORIES.PROCESS, DIRECTORIES.PROCESS_PARAMS);
+
+  return path.join(
     context.basePath,
     DIRECTORIES.GENERATED,
     pagePath,
-    'components',
-    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
-  ) : path.join(
-    context.basePath,
-    DIRECTORIES.BASE_COMPONENTS,
-    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+    'steps',
+    version,
+    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name: stepName }),
   );
 };
 
-export const getActionDir = (context: RenderContext<ActionConfig, ActionConfig>, isComponent: boolean = false) => {
+export const getActionDir = (
+  context: RenderContext<ActionConfig, ActionConfig>,
+  isComponent: boolean = false,
+) => {
   const name = context.resourceConfig.actionName.toLowerCase();
   const pageName = context.resourceConfig.pageName.toLowerCase();
   return path.join(
     context.basePath,
-    replaceTemplate(isComponent? DIRECTORIES.ACTIONS_COMPONENT : DIRECTORIES.ACTIONS, { pageName }),
+    replaceTemplate(isComponent ? DIRECTORIES.ACTIONS_COMPONENT : DIRECTORIES.ACTIONS, {
+      pageName,
+    }),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };
@@ -97,6 +118,13 @@ export const getComponentConfigPath = (context: RenderContext<ComponentConfig, C
     `${context.resourceConfig.name}${EXTENSIONS.JSON}`,
   );
 
+export const getProcessConfigPath = (context: RenderContext<ProcessConfig, ProcessConfig>) =>
+  path.join(
+    context.basePath,
+    DIRECTORIES.IGRPSTUDIO_PROCESS,
+    `${context.resourceConfig.name}${EXTENSIONS.JSON}`,
+  );
+
 export const getPageServicePath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
@@ -113,6 +141,17 @@ export const getPagePath = (context: RenderContext<PageConfig, PageConfig>) =>
 
 export const getComponentPath = (context: RenderContext<ComponentConfig, ComponentConfig>) =>
   path.join(context.basePath, DIRECTORIES.COMPONENTS);
+
+export const getProcessPath = (context: RenderContext<ProcessConfig, ProcessConfig>): string[] => {
+
+  const processSteps = extractProcessSteps(
+    isLayout(context.resourceConfig.components)
+      ? (context.resourceConfig.components.children ?? [])
+      : [],
+  );
+
+  return processSteps.map((it) => getProcessStepDir(context, it.tag));
+};
 
 export const onlyUnique = (value: any, index: any, array: any) => array.indexOf(value) === index;
 
@@ -139,45 +178,39 @@ export const loadProjectConfig = async function <T>(basePath: string): Promise<T
 };
 
 export const loadWorkspaceConfig = async (basePath: string) => {
-  const workspaces = await loadConfig<WorkspaceProjectsConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO))
+  const workspaces = await loadConfig<WorkspaceProjectsConfig>(
+    path.join(basePath, DIRECTORIES.IGRPSTUDIO),
+  );
 
-  if(workspaces.length > 0)
-    return workspaces[0]
-  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`)
-
-}
+  if (workspaces.length > 0) return workspaces[0];
+  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`);
+};
 
 export const loadPageConfig = async (basePath: string, id: string) => {
-  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES))
+  const pages = await loadConfig<PageConfig>(
+    path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES),
+  );
 
-  if(pages.length > 0)
-    return pages.find(it => it.id === id)
+  if (pages.length > 0) return pages.find((it) => it.id === id);
 
-  return undefined
-
-}
+  return undefined;
+};
 
 export const loadPagesConfig = async (basePath: string) => {
-  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES));
 
-  if(pages.length > 0)
-    return pages
+  if (pages.length > 0) return pages;
 
-  return []
-
-}
+  return [];
+};
 
 export const loadPagesConfigSync = (basePath: string) => {
-  const pages = loadConfigSync<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+  const pages = loadConfigSync<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES));
 
-  if(pages.length > 0)
-    return pages
+  if (pages.length > 0) return pages;
 
-  return []
-
-}
-
-
+  return [];
+};
 
 export const loadConfigSync = function <T>(basePath: string): T[] {
   if (!fs.pathExistsSync(basePath)) {
@@ -196,7 +229,17 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
 
 export function extractComponentData(
   layout: Layout,
-  components: Set<{ componentName: string; id: string; tag: string; properties?: Record<string, any>; interactions?: Record<string, any>; data?: Record<string, any>; forceStateLoad?: boolean, forceReferenceLoad?: boolean, dataType?: string }>,
+  components: Set<{
+    componentName: string;
+    id: string;
+    tag: string;
+    properties?: Record<string, any>;
+    interactions?: Record<string, any>;
+    data?: Record<string, any>;
+    forceStateLoad?: boolean;
+    forceReferenceLoad?: boolean;
+    dataType?: string;
+  }>,
   registry: Record<string, Component>,
   parent?: Layout,
 ) {
@@ -212,7 +255,7 @@ export function extractComponentData(
     data: layout.data,
     forceStateLoad: registry[layout.componentName]?.forceStateLoad,
     forceReferenceLoad: registry[layout.componentName]?.forceReferenceLoad,
-    dataType: layout.dataType
+    dataType: layout.dataType,
   });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components, registry, layout));
@@ -268,7 +311,6 @@ export function resolveFromMyAppPath(fullPath: string): string {
   return '@' + normalized.substring(normalized.indexOf(match[0]) + 4).replace(/\.[^.]+$/, ''); // skip '/src'
 }
 
-
 /**
  * Extracts the directory path from a given full file path.
  * @param filePath - The full path of the file.
@@ -278,13 +320,12 @@ export const getDirectoryPath = (filePath: string): string => {
   return path.dirname(filePath);
 };
 
-export const isString = (value: string | undefined)=> {
-
-  if(value === undefined || (value?.trim() === '')) return undefined
+export const isString = (value: string | undefined) => {
+  if (value === undefined || value?.trim() === '') return undefined;
 
   const trimmed = value.trim();
 
-  return (trimmed === 'null' ||
+  return trimmed === 'null' ||
     trimmed === 'undefined' ||
     trimmed === 'true' ||
     trimmed === 'false' ||
@@ -292,5 +333,7 @@ export const isString = (value: string | undefined)=> {
     trimmed === '{}' ||
     (!isNaN(Number(trimmed)) && trimmed !== '') ||
     (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-    (trimmed.startsWith('{') && trimmed.endsWith('}'))) ? undefined : 'string'
-}
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+    ? undefined
+    : 'string';
+};
