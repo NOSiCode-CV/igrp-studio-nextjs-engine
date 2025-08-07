@@ -6,10 +6,11 @@ import {
   getPageServicePath,
   loadConfig,
 } from '../../utils/helpers';
-import { ComponentConfig, DeleteConfig, PageConfig, RenderContext } from '../../interfaces/types';
+import { ComponentConfig, DeleteConfig, PageConfig, ProcessConfig, RenderContext } from '../../interfaces/types';
 import { DIRECTORIES } from '../../utils/constants';
 import path from 'path';
 import { updateMeta } from '../pageMeta/updatePageMeta';
+import { deleteProcessConfig } from '../process/deleteProcess';
 
 /**
 * @param {RenderContext<DeleteConfig>} context - Context for the deletion of configuration.
@@ -67,6 +68,23 @@ export const deleteElementConfig = async (context: RenderContext<DeleteConfig>, 
     }
 
     if (await fs.pathExists(componentConfigPath)) await fs.rm(componentConfigPath, { recursive: true });
+
+  }
+
+  if(context.resourceConfig.type === 'process') {
+
+    const processes: ProcessConfig[] = await loadConfig(path.join(context.basePath, DIRECTORIES.IGRPSTUDIO_PROCESS));
+
+    const process = processes.find((it) => it.id === context.resourceConfig.id)
+
+    if(!process) throw Error(`Process '${context.resourceConfig.name}' does not exist!`)
+
+    const contextProcess: RenderContext<ProcessConfig, ProcessConfig> = {
+      resourceConfig: process,
+      basePath: context.basePath,
+    };
+
+    await deleteProcessConfig(contextProcess);
 
   }
 

@@ -338,7 +338,8 @@ export const COMPONENTS = [
 
 export const CONFIG_TYPES = [
   'page',
-  'component'
+  'component',
+  'process'
 ] as const;
 
 export const RESTART_TYPES = [
