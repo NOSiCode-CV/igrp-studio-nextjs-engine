@@ -15,7 +15,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, FieldValidation,
+  ReturnValue, FieldValidation, Artifact,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -153,6 +153,18 @@ const referenceSchema: JSONSchemaType<Reference> = {
     },
   },
   required: ['id', 'type', 'name'],
+  additionalProperties: false,
+}
+
+const artifactSchema: JSONSchemaType<Artifact> = {
+  type: 'object',
+  properties: {
+    artifact: {
+      type: 'string',
+      errorMessage: 'The artifact must be a valid string.'
+    },
+  },
+  required: ['artifact'],
   additionalProperties: false,
 }
 
@@ -1032,6 +1044,12 @@ const processConfigSchema: JSONSchemaType<ProcessConfig> = {
       nullable: true,
       items: stateSchema,
       errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+    },
+    artifacts: {
+      type: 'array',
+      nullable: true,
+      items: artifactSchema,
+      errorMessage: 'The artifacts attribute must be an array of valid artifact definition configuration.'
     },
   },
   required: ['type', 'name'],

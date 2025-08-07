@@ -43,6 +43,10 @@ export interface Arguments extends IdentifiableElement{
   functionParameters?: Arguments[]
 }
 
+export interface Artifact {
+  artifact: string
+}
+
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'page' | 'component'
   components?: Layout | {};
@@ -81,6 +85,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
   args?: Arguments[];
+  artifacts?: Artifact[];
   components?: Layout | {};
 }
 
