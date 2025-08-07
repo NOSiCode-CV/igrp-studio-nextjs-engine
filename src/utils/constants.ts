@@ -286,7 +286,7 @@ export const ERROR_MESSAGE = {
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
-  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again',
+  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the component details and try again',
   INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
   INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
 };

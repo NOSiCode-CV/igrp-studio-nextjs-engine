@@ -189,8 +189,10 @@ export function resolveStateDefault(
   fields?: ElementField[],
 ): string {
 
-  if(type === 'string' && defaultValue === '') {
-    return 'undefined';
+  if(type === 'string') {
+    if(defaultValue === undefined)
+      return 'undefined';
+    else return `\`${defaultValue.replace(/"/g, '\\"')}\``;
   }
 
   const trimmed = defaultValue?.trim() ?? '';
@@ -297,6 +299,10 @@ export function resolveZodTypes(field?: ElementField): string {
 
   if (!required) {
     zodType += '.optional()';
+  } else {
+    if(lowerType === "string") {
+      zodType += '.nonempty()';
+    }
   }
 
   return zodType;

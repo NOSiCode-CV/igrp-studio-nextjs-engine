@@ -3,7 +3,6 @@ import { appConfigValidate } from './schema/baseApp';
 import { checkIfDirectoryIsEmpty } from './utils/helpers';
 import { generatePage } from './modules/page/generatePage';
 import { savePageConfig } from './modules/page/savePageConfig';
-import { generateService } from './modules/page/generateService';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
@@ -16,7 +15,6 @@ import {
   DockerServiceRegistrationConfig,
   PageComponentConfig,
   PageConfig,
-  PageMetaConfig,
   PathConfig,
   AppExportsConfig,
   ProjectWorkspace,
@@ -25,7 +23,6 @@ import {
   WorkspaceConfig,
   WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig, ProcessConfig,
 } from './interfaces/types';
-import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
