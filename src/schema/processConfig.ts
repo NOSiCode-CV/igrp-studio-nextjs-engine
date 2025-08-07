@@ -15,7 +15,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, FieldValidation, Artifact,
+  ReturnValue, FieldValidation, ProcessArtifact, Variable,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -156,15 +156,40 @@ const referenceSchema: JSONSchemaType<Reference> = {
   additionalProperties: false,
 }
 
-const artifactSchema: JSONSchemaType<Artifact> = {
+const variableSchema: JSONSchemaType<Variable> = {
   type: 'object',
   properties: {
-    artifact: {
+    variable: {
       type: 'string',
-      errorMessage: 'The artifact must be a valid string.'
+      errorMessage: 'The variable must be a valid string.'
     },
   },
-  required: ['artifact'],
+  required: ['variable'],
+  additionalProperties: false,
+}
+
+const artifactSchema: JSONSchemaType<ProcessArtifact> = {
+  type: 'object',
+  properties: {
+    projectArtifactId: {
+      type: 'string',
+      errorMessage: 'The project artifact ID must be a valid string.'
+    },
+    taskKey: {
+      type: 'string',
+      errorMessage: 'The task key must be a valid string.'
+    },
+    name: {
+      type: 'string',
+      errorMessage: 'The artifact name must be a valid string.'
+    },
+    artifactVariables: {
+      type: 'array',
+      items: variableSchema,
+      errorMessage: 'The artifact variables attribute must be an array of valid variable definition configuration.'
+    },
+  },
+  required: ['projectArtifactId', 'taskKey', 'name', 'artifactVariables'],
   additionalProperties: false,
 }
 

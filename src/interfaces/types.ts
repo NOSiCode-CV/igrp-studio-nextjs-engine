@@ -43,8 +43,15 @@ export interface Arguments extends IdentifiableElement{
   functionParameters?: Arguments[]
 }
 
-export interface Artifact {
-  artifact: string
+export interface Variable {
+  variable: string
+}
+
+export interface ProcessArtifact {
+  projectArtifactId: string,
+  taskKey: string,
+  name: string,
+  artifactVariables: Variable[],
 }
 
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
@@ -85,7 +92,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
   args?: Arguments[];
-  artifacts?: Artifact[];
+  artifacts?: ProcessArtifact[];
   components?: Layout | {};
 }
 
