@@ -258,6 +258,7 @@ export const DIRECTORIES = {
   PUBLIC_IGRP: 'public/igrp',
   PROJECTS: 'projects',
   PROCESS: 'process',
+  PROCESS_STEP: 'process/{{name}}/steps',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
   ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
@@ -288,6 +289,7 @@ export const ERROR_MESSAGE = {
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
   INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the component details and try again',
   INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
+  INVALID_PROCESS_STEP_CONFIG: 'The provided process step configuration is invalid. Please verify the process step details and try again',
   INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
 };
 

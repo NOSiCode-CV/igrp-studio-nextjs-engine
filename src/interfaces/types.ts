@@ -54,6 +54,10 @@ export interface ProcessArtifact {
   artifactVariables: Variable[],
 }
 
+export interface ProcessStep extends IdentifiableElement {
+  name: string;
+}
+
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'page' | 'component'
   components?: Layout | {};
@@ -84,6 +88,15 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
   description?: string;
   processKey: string;
   processVersion: string;
+  steps?: ProcessStep[];
+}
+
+export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
+  type: 'processStep';
+  name: string;
+  description?: string;
+  processKey: string;
+  processVersion: string;
   forceDynamic?: boolean;
   types: TypeDef[];
   imports?: Import[];
@@ -92,7 +105,6 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
   args?: Arguments[];
-  artifacts?: ProcessArtifact[];
   components?: Layout | {};
 }
 

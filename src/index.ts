@@ -21,7 +21,12 @@ import {
   RenderContext,
   ServiceWorkspace,
   WorkspaceConfig,
-  WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig, ProcessConfig,
+  WorkspaceProjectsConfig,
+  CodeSnippetsRegistrationConfig,
+  CodeSnippetConfig,
+  ProcessConfig,
+  ProcessStepConfig,
+  CustomFunctionConfig,
 } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
@@ -62,8 +67,10 @@ import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
 import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { renderCode } from './utils/renderCode';
 import { processConfigValidate } from './schema/processConfig';
-import { generateProcess } from './modules/process/generateProcess';
+import { generateProcessStep } from './modules/process/generateProcessStep';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
+import { processStepConfigValidate } from './schema/processStepConfig';
+import { saveProcessStepConfig } from './modules/process/saveProcessStepConfig';
 
 export function getPaths(version?: string): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
@@ -262,14 +269,77 @@ export const newProcess = async (processConfig: ProcessConfig, basePath: string)
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  const context: RenderContext<ProcessConfig, ProcessConfig> = {
-    resourceConfig: processConfig,
+  await saveProcessConfig(processConfig, basePath);
+
+};
+
+/**
+ *
+ * @param processStepConfig
+ * @param basePath
+ */
+export const newProcessStep = async (processStepConfig: ProcessStepConfig, basePath: string) => {
+  const isProcessStepConfigValid = processStepConfigValidate(processStepConfig);
+
+  if (!isProcessStepConfigValid && processStepConfigValidate.errors)
+    throw processStepConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  if((processStepConfig.functions?.length ?? 0) === 0) {
+
+    const functions: CustomFunctionConfig[] = [
+      {
+        name: 'handleSave',
+        arguments: [
+        ],
+        isAsync: true,
+        returnValue: {
+          type: 'void',
+          isNullable: false
+        },
+        code: `
+    //TODO: Implement save logic
+    return {
+      success: true,
+      data: undefined,
+    };
+        `,
+        id: ''
+      },
+      {
+        name: 'handleComplete',
+        arguments: [],
+        isAsync: true,
+        returnValue: {
+          type: 'void',
+          isNullable: false
+        },
+        code: `
+    //TODO: Implement save logic
+    return {
+      success: true,
+      data: undefined,
+    };
+        `,
+        id: ''
+      },
+    ]
+
+    if(!processStepConfig.functions)
+      processStepConfig.functions = [];
+
+    processStepConfig.functions.push(...functions)
+  }
+
+  const context: RenderContext<ProcessStepConfig, ProcessStepConfig> = {
+    resourceConfig: processStepConfig,
     basePath: basePath,
   };
 
-  await generateProcess(context);
+  await saveProcessStepConfig(processStepConfig, basePath);
 
-  await saveProcessConfig(processConfig, basePath);
+  await generateProcessStep(context);
 
 };
 

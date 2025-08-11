@@ -4,7 +4,7 @@ import {
   ComponentConfig,
   Layout,
   PageConfig,
-  ProcessConfig,
+  ProcessConfig, ProcessStepConfig,
   RenderContext,
   WorkspaceProjectsConfig,
 } from '../interfaces/types';
@@ -63,19 +63,20 @@ export const getComponentDir = (context: RenderContext<ComponentConfig, Componen
 };
 
 export const getProcessStepDir = (
-  context: RenderContext<ProcessConfig, ProcessConfig>,
-  stepName: string,
+  context: RenderContext<ProcessStepConfig, ProcessStepConfig>
 ) => {
+  const name = context.resourceConfig.name;
   const version = context.resourceConfig.processVersion;
   const pagePath = path.join(DIRECTORIES.PROCESS, DIRECTORIES.PROCESS_PARAMS);
+  const processKey = context.resourceConfig.processKey;
 
   return path.join(
     context.basePath,
     DIRECTORIES.GENERATED,
     pagePath,
-    'steps',
+    `(${processKey})`,
     version,
-    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name: stepName }),
+    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };
 
@@ -144,13 +145,21 @@ export const getComponentPath = (context: RenderContext<ComponentConfig, Compone
 
 export const getProcessPath = (context: RenderContext<ProcessConfig, ProcessConfig>): string[] => {
 
-  const processSteps = extractProcessSteps(
-    isLayout(context.resourceConfig.components)
-      ? (context.resourceConfig.components.children ?? [])
-      : [],
-  );
+  const processSteps = context.resourceConfig.steps
 
-  return processSteps.map((it) => getProcessStepDir(context, it.tag));
+  if(!processSteps) return [];
+
+  return processSteps.map((it) => getProcessStepDir({ ...context, parentResourceConfig: undefined, resourceConfig: {
+      type: 'processStep',
+      name: it.name,
+      processKey: context.resourceConfig.name,
+      processVersion: context.resourceConfig.processVersion,
+      types: [],
+      id: it.id,
+      projectArtifactId: '',
+      taskKey: '',
+      artifactVariables: [],
+    }}));
 };
 
 export const onlyUnique = (value: any, index: any, array: any) => array.indexOf(value) === index;
@@ -194,6 +203,68 @@ export const loadPageConfig = async (basePath: string, id: string) => {
   if (pages.length > 0) return pages.find((it) => it.id === id);
 
   return undefined;
+};
+
+export const loadProcessConfig = async (basePath: string, name: string): Promise<ProcessConfig | undefined> => {
+  const processBasePath = path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PROCESS, name);
+
+  try {
+    const versionDirs = await fs.readdir(processBasePath, { withFileTypes: true });
+
+    // Filter folders with names like "v1", "v2", ..., "vn"
+    const versions = versionDirs
+      .filter(dirent => dirent.isDirectory() && /^v\d+$/.test(dirent.name))
+      .map(dirent => ({
+        name: dirent.name,
+        version: parseInt(dirent.name.slice(1), 10), // remove 'v' and parse number
+      }))
+      .sort((a, b) => b.version - a.version); // Sort descending to get latest
+
+    if (versions.length === 0) return undefined;
+
+    const latestVersionFolder = versions[0].name;
+    const jsonPath = path.join(processBasePath, latestVersionFolder, `${name}.json`);
+
+    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+    return JSON.parse(jsonContent) as ProcessConfig;
+
+  } catch (err) {
+    console.error(`Failed to load process config for ${name}:`, err);
+    return undefined;
+  }
+};
+
+export const loadProcessStepConfig = async (
+  basePath: string,
+  name: string,
+  processConfig: ProcessConfig
+): Promise<ProcessStepConfig> => {
+  const stepsPath = path.join(
+    basePath,
+    DIRECTORIES.IGRPSTUDIO,
+    DIRECTORIES.PROCESS,
+    name,
+    `v${processConfig.version}`,
+  );
+
+  const stepConfigs: Record<string, ProcessStepConfig> = {};
+
+  try {
+    const stepFiles = await fs.readdir(stepsPath);
+
+    for (const stepFile of stepFiles) {
+      if (stepFile.endsWith('.json')) {
+        const stepName = stepFile.replace(/\.json$/, '');
+
+        const content = await fs.readFile(path.join(stepsPath, stepFile), 'utf-8');
+        stepConfigs[stepName] = JSON.parse(content) as ProcessStepConfig;
+      }
+    }
+  } catch (err) {
+    console.error(`Failed to load step configs for process ${name}:`, err);
+  }
+
+  return stepConfigs[name];
 };
 
 export const loadPagesConfig = async (basePath: string) => {
