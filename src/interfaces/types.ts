@@ -959,6 +959,11 @@ export interface CustomCodeConfig {
   code: string
 }
 
+export interface PermittedActions {
+  deletable?: boolean;
+  editable?: boolean;
+}
+
 export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
   name: string,
   arguments: Arguments[],
@@ -967,6 +972,7 @@ export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElem
   isAsync?: boolean;
   path?: string;
   returnValue: ReturnValue;
+  actions?: PermittedActions
 }
 
 // Code Snippets

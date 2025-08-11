@@ -15,7 +15,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, FieldValidation,
+  ReturnValue, FieldValidation, PermittedActions,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -177,6 +177,24 @@ const returnValueSchema: JSONSchemaType<ReturnValue> = {
   additionalProperties: false,
 }
 
+const permittedActionsSchema: JSONSchemaType<PermittedActions> = {
+  type: 'object',
+  properties: {
+    deletable: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The deletable, if provided, attribute must be a valid boolean.'
+    },
+    editable: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The editable, if provided, attribute must be a valid boolean.'
+    },
+  },
+  required: [],
+  additionalProperties: false,
+}
+
 const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   type: 'object',
   properties: {
@@ -199,6 +217,12 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
       errorMessage: 'The path, if provided, must be a valid string.'
     },
     returnValue: returnValueSchema,
+    actions: {
+      type: "object",
+      nullable: true,
+      anyOf: [permittedActionsSchema],
+      errorMessage: "Permitted actions must match the PermittedActions schema, if provided."
+    },
     arguments: {
       type: 'array',
       items: argsSchema,

@@ -9,6 +9,13 @@
 
 {{{resolve-imports resourceConfig.components registry resourceConfig.name basePath undefined resourceConfig}}}
 
+{{#if (eq resourceConfig.type 'processStep')}}
+interface StepMethods {
+  saveStep: () => Promise<{ success: boolean; data?: any; error?: string }>;
+  completeStep: () => Promise<{ success: boolean; data?: any; error?: string }>;
+}
+{{/if~}}
+
 export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({ {{#if resourceConfig.args}}{{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}}, {{/if}}{{/each}}{{/if}} } : { {{#if resourceConfig.args}}{{{resolveFunctionArgs resourceConfig.args}}}{{/if}} }) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
 

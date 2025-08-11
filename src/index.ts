@@ -26,7 +26,7 @@ import {
   CodeSnippetConfig,
   ProcessConfig,
   ProcessStepConfig,
-  CustomFunctionConfig,
+  CustomFunctionConfig, Arguments,
 } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
@@ -286,6 +286,61 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
+  processStepConfig.args = [
+    {
+      id: 'processKey_arg',
+      type: "string",
+      name: "processKey",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'processInstanceId_arg',
+      type: "string",
+      name: "processInstanceId",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'userTaskInstanceId_arg',
+      type: "string",
+      name: "userTaskInstanceId",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'onRegisterMethods_fnc',
+      type: "void",
+      name: "onRegisterMethods",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: true,
+      isState: false,
+      functionParameters: [
+        {
+          id: 'methods_arg',
+          type: "StepMethods",
+          name: "methods",
+          isList: false,
+          isOptional: false,
+          isInterface: true,
+          isFunction: false,
+          isState: false
+        },
+      ]
+    },
+  ]
+
   if((processStepConfig.functions?.length ?? 0) === 0) {
 
     const functions: CustomFunctionConfig[] = [
@@ -295,34 +350,42 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         ],
         isAsync: true,
         returnValue: {
-          type: 'void',
+          type: 'any',
           isNullable: false
         },
         code: `
-    //TODO: Implement save logic
+    // TODO: Implement save logic
     return {
       success: true,
       data: undefined,
     };
         `,
-        id: ''
+        id: 'handleSave_fnc',
+        actions: {
+          deletable: false,
+          editable: true
+        }
       },
       {
         name: 'handleComplete',
         arguments: [],
         isAsync: true,
         returnValue: {
-          type: 'void',
+          type: 'any',
           isNullable: false
         },
         code: `
-    //TODO: Implement save logic
+    // TODO: Implement complete logic
     return {
       success: true,
       data: undefined,
     };
         `,
-        id: ''
+        id: 'handleComplete_fnc',
+        actions: {
+          deletable: false,
+          editable: true
+        }
       },
     ]
 
