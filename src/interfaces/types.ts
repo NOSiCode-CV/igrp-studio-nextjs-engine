@@ -297,6 +297,7 @@ export interface Import extends IdentifiableElement {
 export interface State extends IdentifiableElement {
   name: string,
   type: string,
+  isArray?: boolean,
   imports?: Import[],
   defaultValue?: string,
   generate?: boolean

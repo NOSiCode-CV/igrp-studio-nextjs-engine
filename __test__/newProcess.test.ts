@@ -9,8 +9,14 @@ const processConfig: ProcessConfig = {
   version: '0.1.0-beta',
   type: 'process',
   name: 'inscricao',
-  processKey: 'inscricao_contribuinte',
-  processVersion: 'v1'
+  processKey: 'inscricao',
+  processVersion: 'v1',
+  steps: [
+    {
+      id: 'process_step_1',
+      name: 'pedido'
+    }
+  ]
 };
 
 beforeAll(async () => {

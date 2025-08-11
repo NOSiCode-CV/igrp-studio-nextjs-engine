@@ -425,9 +425,10 @@ export function replaceId(name: string, component?: any) {
   return replaceTemplate(name, { id: finalTag });
 }
 
-export function replaceType(type: string, component?: any) {
-  if(!component || !type) return type;
-  return replaceTemplate(type, { type: component.dataType ? capitalize(component.dataType) : 'any' })
+export function replaceType(type: string, component?: any, isArray?: boolean) {
+  if(!component || !type) return isArray? type : `Array<${type}>`;
+  const finalType = component.dataType ? capitalize(component.dataType) : 'any'
+  return replaceTemplate(type, { type: isArray? `Array<${finalType}>` : finalType });
 }
 
 export function replaceValue(value: string, component?: any) {
