@@ -544,13 +544,8 @@ function normalizeAnyType(t: string) {
 
   if(t === undefined) return undefined;
 
-  if(t === 'anyZodType') {
-    return 'any'
-  }
-
-  if(t === 'z.infer<anyZodType>') {
-    return 'z.infer<any>'
-  }
+  if(t.includes('anyZodType'))
+    return t.replace('anyZodType', 'any')
 
   return t;
 
