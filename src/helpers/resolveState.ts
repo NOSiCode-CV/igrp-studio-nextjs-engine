@@ -120,6 +120,10 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             value.state.type = 'z.infer<any>'
           }
 
+          if(value.state.type === 'anyZodType') {
+            value.state.type = 'any'
+          }
+
           stateDefinitions.add(renderState(value.state, c));
         }
 

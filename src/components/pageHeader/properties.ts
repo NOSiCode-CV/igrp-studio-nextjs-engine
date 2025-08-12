@@ -13,7 +13,7 @@ export function pageHeaderProperties() {
     iconProperties: {
       type: 'object',
       properties: {
-        iconBackButton: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'icon', 'x-meta': { label: 'Back Button Icon'} },
+        iconBackButton: { type: 'string', required: false, default: 'ArrowBack', 'x-ui-widget': 'icon', 'x-meta': { label: 'Back Button Icon'} },
       }
     },
     ...commonProperties(),
