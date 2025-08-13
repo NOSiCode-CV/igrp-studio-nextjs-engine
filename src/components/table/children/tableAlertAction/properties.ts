@@ -6,7 +6,6 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableAlertActionProperties() {
   return {
     ...actionProperties('Alert'),
-    type: { type: 'string', required: true, default: 'alert' },
     title: { type: 'string', required: false, default: 'New Alert' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },

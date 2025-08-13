@@ -6,7 +6,6 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableModalActionProperties() {
   return {
     ...actionProperties('Modal'),
-    type: { type: 'string', required: true, default: 'modal' },
     modalTitle: { type: 'string', required: false, default: 'New Modal' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
