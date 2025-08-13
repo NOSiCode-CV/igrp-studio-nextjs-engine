@@ -64,7 +64,7 @@ function actionInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function tableLinkDropdownItemInteractions() {
   return {
-    action: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ACTION, undefined, actionInteractionFieldVisibility()), required: true },
+    action: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ACTION, undefined, actionInteractionFieldVisibility()), required: true },
   };
 }
 
