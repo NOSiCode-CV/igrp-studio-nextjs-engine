@@ -9,7 +9,7 @@ export const checkDuplicated = (context: RenderContext<WorkspaceProjectsConfig, 
 
   // Services
 
-  const servicePorts = context.resourceConfig.services.map((service) => service.properties.ports).flat();
+  const servicePorts: Port[] = context.resourceConfig.services.map((service) => service.properties.ports ?? []).flat();
 
   ports.push(
     ...servicePorts

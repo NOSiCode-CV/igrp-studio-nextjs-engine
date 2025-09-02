@@ -1,13 +1,13 @@
-import { IGRP_UI } from './index';
+import { IGRP_APPLICATION_CENTER } from './index';
 
-export function igrpUiProperties() {
+export function igrpApplicationCenterProperties() {
   return {
     image: {
       type: 'string',
       required: true,
-      default: 'registry.nosi.cv/igrp/igrp-ui:latest',
+      default: 'registry.nosi.cv/igrp/igrp-application-center:latest',
     },
-    container_name: { type: 'string', required: false, default: 'igrp-ui' },
+    container_name: { type: 'string', required: false, default: 'igrp-application-center' },
     restart: {
       type: 'string',
       required: false,
@@ -30,7 +30,7 @@ export function igrpUiProperties() {
         },
       ],
     },
-    hostname: { type: 'string', required: false, default: 'igrp-ui' },
+    hostname: { type: 'string', required: false, default: 'igrp-application-center' },
     env_file: {
       type: 'array',
       items: {
@@ -57,7 +57,7 @@ export function igrpUiProperties() {
       default: [
         {
           key: 'name',
-          value: IGRP_UI,
+          value: IGRP_APPLICATION_CENTER,
         },
         {
           key: 'type',

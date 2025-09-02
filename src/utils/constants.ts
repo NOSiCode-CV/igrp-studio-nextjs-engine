@@ -98,6 +98,7 @@ export const TEMPLATES = {
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
+  IGRP_NGINX: 'workspace/nginx.conf.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
@@ -109,7 +110,7 @@ export const ENVIRONMENT_FILES = {
   IAM_IGRP_ENV: '.iam.igrp.env',
   FILE_IGRP_ENV: '.file.igrp.env',
   APP_LOGIC_IGRP_ENV: '.al.igrp.env',
-  IGRP_ENV: '.igrp.env',
+  IGRP_ENV: '.env',
 }
 
 export const SRC_CONFIG_FILES = {
@@ -132,6 +133,7 @@ export const SRC_CONFIG_FILES = {
   PT: 'pt',
   EN: 'en',
   VSCODE_SETTINGS: 'vscode_settings.json',
+  IGRP_NGINX: 'nginx.conf',
 };
 
 export const DST_CONFIG_FILES ={
