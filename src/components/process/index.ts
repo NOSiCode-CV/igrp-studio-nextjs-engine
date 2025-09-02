@@ -5,7 +5,6 @@ import {
   processChildProperties, processChildPropertiesMapping, processInteractions, processStyle, processRules,
 } from './properties';
 import { Component, defaultRenderer } from '../index';
-import { PROCESS_STEP } from './children/processStep/index';
 
 export default {
   register(component: Component) {
@@ -22,15 +21,6 @@ export default {
     component.setRenderer(defaultRenderer);
     component.getStyle(processStyle());
     component.getRules(processRules());
-
-    component.loadChildrenTypes([
-      { name: PROCESS_STEP, isDefault: false },
-    ]);
-
-    component.loadAcceptedChildren([
-      { name: PROCESS_STEP, isDefault: false },
-    ]);
-
   },
 };
 

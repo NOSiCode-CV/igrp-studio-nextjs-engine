@@ -4,9 +4,9 @@ import {
   baseStyle,
   commonProperties,
   commonPropertiesMapping,
-} from '../../../default/properties';
-import { InteractionFieldVisibility } from '../../../../interfaces/types';
-import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
+} from '../default/properties';
+import { InteractionFieldVisibility } from '../../interfaces/types';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function processStepProperties() {
   return {

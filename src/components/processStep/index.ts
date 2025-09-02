@@ -4,16 +4,14 @@ import {
   processStepVariants,
   processStepChildProperties, processStepChildPropertiesMapping, processStepInteractions, processStepStyle, processStepRules,
 } from './properties';
-import { Component, defaultRenderer } from '../../../index';
-import { PROCESS } from '../../index';
+import { Component, defaultRenderer } from '../index';
 
 export default {
   register(component: Component) {
     component.loadImports([]);
     component.loadVariants(processStepVariants())
     component.loadGroup('structure')
-    component.loadLabel('Process Step Content')
-    component.loadParent(PROCESS);
+    component.loadLabel('Process Step Content');
     component.getProperties(processStepProperties());
     component.getPropertiesMapping(processStepPropertiesMapping());
     component.getChildProperties(processStepChildProperties());

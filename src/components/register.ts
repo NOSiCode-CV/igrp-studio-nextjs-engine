@@ -61,7 +61,7 @@ import paragraphModule, { PARAGRAPH } from './paragraph';
 import pdfViewerModule, { PDF_VIEWER } from './pdfViewer/index';
 import pieChartModule, { PIECHART } from './piechart';
 import processModule, { PROCESS } from './process';
-import processStepModule, { PROCESS_STEP } from './process/children/processStep/index';
+import processStepModule, { PROCESS_STEP } from './processStep/index';
 import radarChartModule, { RADARCHART } from './radarchart';
 import radialBarChartModule, { RADIAL_BAR_CHART } from './radialbarchart';
 import radioModule, { RADIO } from './radio';
