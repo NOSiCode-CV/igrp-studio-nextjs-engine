@@ -3,7 +3,7 @@ import {
   tableLinkDropdownItemProperties,
   tableLinkDropdownItemVariants,
   tableLinkDropdownItemChildProperties,
-  tableLinkDropdownItemChildPropertiesMapping, tableLinkDropdownItemInteractions,
+  tableLinkDropdownItemChildPropertiesMapping, tableLinkDropdownItemInteractions, tableLinkDropdownItemRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -28,6 +28,7 @@ export default {
     component.getInteractions(tableLinkDropdownItemInteractions());
     component.getChildProperties(tableLinkDropdownItemChildProperties());
     component.getChildPropertiesMapping(tableLinkDropdownItemChildPropertiesMapping());
+    component.getRules(tableLinkDropdownItemRules());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_LINK_DROPDOWN_ITEM }))
 
     component.loadStates([]);

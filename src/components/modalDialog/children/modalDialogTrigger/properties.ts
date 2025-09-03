@@ -2,19 +2,13 @@ import {
   baseInteraction, baseRules,
   baseStyle,
   commonProperties,
-  commonPropertiesMapping,
-  iconProperties,
+  commonPropertiesMapping
 } from '../../../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 
 export function modalDialogTriggerProperties() {
   return {
-    content: { type: 'string', required: false },
-    variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
-    size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
-    ...iconProperties(),
-    disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

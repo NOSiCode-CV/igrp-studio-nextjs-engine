@@ -3,7 +3,10 @@ import {
   tableAlertActionProperties,
   tableAlertActionVariants,
   tableAlertActionChildProperties,
-  tableAlertActionChildPropertiesMapping, tableAlertActionInteractions, tableAlertActionInteractionsMapping,
+  tableAlertActionChildPropertiesMapping,
+  tableAlertActionInteractions,
+  tableAlertActionInteractionsMapping,
+  tableAlertActionRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -17,17 +20,18 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPDataTableButtonAlert')
+    component.loadComponentClass('IGRPDataTableButtonAlert');
     component.loadVariants(tableAlertActionVariants());
-    component.loadParent(TABLE_ACTION_LIST_CELL)
-    component.loadGroup('Columns')
-    component.loadLabel('Alert Action')
+    component.loadParent(TABLE_ACTION_LIST_CELL);
+    component.loadGroup('Columns');
+    component.loadLabel('Alert Action');
     component.getProperties(tableAlertActionProperties());
     component.getPropertiesMapping(tableAlertActionPropertiesMapping());
-    component.getInteractions(tableAlertActionInteractions())
-    component.getInteractionsMapping(tableAlertActionInteractionsMapping())
+    component.getInteractions(tableAlertActionInteractions());
+    component.getInteractionsMapping(tableAlertActionInteractionsMapping());
     component.getChildProperties(tableAlertActionChildProperties());
     component.getChildPropertiesMapping(tableAlertActionChildPropertiesMapping());
+    component.getRules(tableAlertActionRules());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_ALERT_ACTION }))
 
     component.loadStates([]);

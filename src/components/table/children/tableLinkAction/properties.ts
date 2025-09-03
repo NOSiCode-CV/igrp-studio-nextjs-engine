@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -60,4 +60,10 @@ export function tableLinkActionVariants() {
   return {
     default: ''
   };
+}
+
+export function tableLinkActionRules() {
+  return {
+    ...baseRules()
+  }
 }
