@@ -137,7 +137,7 @@ http {
         }
 
         location /auth/ {
-            set $upstream igrp-iam-keycloak:8080;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-iam-keycloak:8080;
             proxy_pass         http://$upstream;
         }
 
@@ -150,7 +150,7 @@ http {
 
 
         location ^~ /minio {
-            set $upstream igrp-minio:9001;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-minio:9001;
             proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection "upgrade";
@@ -169,7 +169,7 @@ http {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_pass http://igrp-eureka:8761/;
+            proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761/;
             proxy_intercept_errors off;
         }
 
@@ -177,7 +177,7 @@ http {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_pass http://igrp-eureka:8761;
+            proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761;
             proxy_intercept_errors off;
         }
 
@@ -186,7 +186,7 @@ http {
 
         # API Gateway
         location ^~ /gateway-api/ {
-            set $upstream igrp-gateway:8080;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-gateway:8080;
             rewrite ^/gateway-api/?(.*)$ /$1 break;
             limit_req zone=api burst=20 nodelay;
             proxy_pass http://$upstream;
@@ -204,7 +204,7 @@ http {
 
 
         location ^~ /home/ {
-            set $upstream igrp-application-center:3000;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-application-center:3000;
             proxy_pass http://$upstream/;
             proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
@@ -213,7 +213,7 @@ http {
 
         # UI Application (catch-all)
         location / {
-            set $upstream igrp-application-center:3000;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-application-center:3000;
             proxy_pass http://$upstream;
             proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
