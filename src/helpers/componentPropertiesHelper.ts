@@ -487,15 +487,15 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson? `${k}: ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))}` : `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))}` : `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
               })
               .join('\n');
           } else {
-            return isJson? `${key}: ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))}` : `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
+            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))}` : `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')
-        .join(isJson? ',\n' : '\n')
+        .join(isJson === true? ',\n' : '\n')
     : ``;
 }
 
