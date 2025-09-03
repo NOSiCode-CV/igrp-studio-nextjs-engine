@@ -37,10 +37,10 @@ import {
   renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
   resolveComponent,
   resolveFirstType, resolveFunctionArgs,
-  resolveQueryParams, resolveRules,
+  resolveQueryParams, resolveArrayElementRules,
   resolveSegmentPath,
   resolveStateDefault,
-  resolveZodTypes,
+  resolveZodTypes, checkRules,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -77,7 +77,8 @@ Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
 Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
 Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
-Handlebars.registerHelper("resolveRules", resolveRules);
+Handlebars.registerHelper("resolveArrayElementRules", resolveArrayElementRules);
+Handlebars.registerHelper("checkRules", checkRules);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);
