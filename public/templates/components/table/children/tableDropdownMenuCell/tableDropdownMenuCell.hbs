@@ -3,7 +3,7 @@
     [
       {{#if resourceConfig.children}}
       {{#each resourceConfig.children}}
-      {
+      {{{resolveRules this}}}{
         component: {{resolveComponent this.componentName ../registry}},
         props: {
           {{#if this.properties.title}}title: `{{this.properties.title}}`,{{/if~}}

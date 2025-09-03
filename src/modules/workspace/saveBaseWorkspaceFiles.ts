@@ -463,7 +463,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             },
             {
               key: "APP_MANAGER_API",
-              value: "http://igrp-gateway:8080/access-management",
+              value: `http://${baseContext.resourceConfig.slug}-igrp-gateway:8080/access-management`,
             },
             {
               key: "APP_URL",

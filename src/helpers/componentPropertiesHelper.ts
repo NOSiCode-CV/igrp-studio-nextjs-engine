@@ -331,6 +331,14 @@ function resolveType(arg: Arguments): string {
   return `${arg.type}${arg.isList ? '[]' : ''}`;
 }
 
+export function resolveRules(config: Layout): string {
+
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
+
+  return config.rules && visibilityRules.length > 0 ? `${visibilityRules.map((it) => it.condition)[0]} && ` : ''
+
+}
+
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);
 }

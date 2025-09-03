@@ -37,7 +37,7 @@ import {
   renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
   resolveComponent,
   resolveFirstType, resolveFunctionArgs,
-  resolveQueryParams,
+  resolveQueryParams, resolveRules,
   resolveSegmentPath,
   resolveStateDefault,
   resolveZodTypes,
@@ -77,6 +77,7 @@ Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
 Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
 Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
+Handlebars.registerHelper("resolveRules", resolveRules);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);
