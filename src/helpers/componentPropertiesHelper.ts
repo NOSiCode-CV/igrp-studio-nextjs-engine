@@ -461,7 +461,7 @@ export function resolveClassNameProperty(component: Layout, registry: Record<str
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
-  classKey?: string
+  classKey?: string, isJson?: boolean
 ) {
   return customProperties
     ? Object.entries(customProperties)
@@ -476,7 +476,7 @@ export function renderProperties(
               classKey
             ].includes(key)
           )
-            return '';
+            return;
           if (dataProperties && dataProperties[key]) return '';
           if (
             value &&
@@ -487,14 +487,15 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
+                return isJson? `${k}: ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))}` : `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
               })
               .join('\n');
           } else {
-            return `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
+            return isJson? `${key}: ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))}` : `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
           }
         })
-        .join('\n')
+        .filter((it) => it !== undefined && it !== '')
+        .join(isJson? ',\n' : '\n')
     : ``;
 }
 
