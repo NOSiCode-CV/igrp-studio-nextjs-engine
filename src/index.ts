@@ -355,9 +355,28 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         },
         code: `
     // TODO: Implement save logic
+    
+    /* 
+    
+    Example:
+    
+    formform1Ref.current?.submit();
+ 
+    const data = formform1Ref.current?.getValues()
+ 
+    const variables = data
+      ? Object.entries(data).map(([key, value]) => ({
+          name: key,
+          value: value as string,
+        }))
+      : []; 
+      
+    */
+    
     return {
       success: true,
-      data: undefined,
+      variables: undefined,
+      forms: undefined
     };
         `,
         id: 'handleSave_fnc',
@@ -376,9 +395,28 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         },
         code: `
     // TODO: Implement complete logic
+    
+    /* 
+    
+    Example:
+    
+    formform1Ref.current?.submit();
+ 
+    const data = formform1Ref.current?.getValues()
+ 
+    const variables = data
+      ? Object.entries(data).map(([key, value]) => ({
+          name: key,
+          value: value as string,
+        }))
+      : []; 
+      
+    */
+    
     return {
       success: true,
-      data: undefined,
+      variables: undefined,
+      forms: undefined
     };
         `,
         id: 'handleComplete_fnc',
