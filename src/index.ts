@@ -26,7 +26,7 @@ import {
   CodeSnippetConfig,
   ProcessConfig,
   ProcessStepConfig,
-  CustomFunctionConfig, Arguments,
+  CustomFunctionConfig,
 } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
@@ -339,6 +339,17 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         },
       ]
     },
+    {
+      id: 'variables_arg',
+      type: "Array<{ name: string; value: string }> | undefined",
+      name: "variables",
+      isList: false,
+      isOptional: true,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    // variables?: Array<{ name: string; value: string }> | undefined
   ]
 
   if((processStepConfig.functions?.length ?? 0) === 0) {
@@ -446,8 +457,7 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
 
 /**
  *
- * @param pageConfig
- * @param component
+ * @param config
  * @param basePath
  */
 export const addComponentToPage = async (config: PageComponentConfig, basePath: string) => {
@@ -641,6 +651,6 @@ export const addCodeSnippet = (config: CodeSnippetConfig): string => {
  */
 export async function loadAppExports(basePath: string): Promise<AppExportsConfig> {
   const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.EXPORTS_FILE}`);
-  const resolvedConfig = await loadExportsConfig(configPath);
+  const resolvedConfig = loadExportsConfig(configPath);
   return await parseExportsConfig(resolvedConfig, basePath);
 }
