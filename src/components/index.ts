@@ -513,7 +513,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
       if(!component.data || (component.data && !component.data[key]))
-        return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+        return ` ${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
       else return
     }).join("")
     : ``

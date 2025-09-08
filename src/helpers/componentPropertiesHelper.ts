@@ -487,11 +487,11 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))}` : `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)} }`;
               })
               .join('\n');
           } else {
-            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))}` : `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
+            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)}` : `${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')
