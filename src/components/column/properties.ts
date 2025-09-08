@@ -1,21 +1,32 @@
 import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
 
+const variantProperties = { type: 'string', required: true, enum: [
+    'span1',
+    'span2',
+    'span3',
+    'span4',
+    'span5',
+    'span6',
+    'span7',
+    'span8',
+    'span9',
+    'span10',
+    'span11',
+    'span12',
+  ] }
+
 export function columnProperties() {
   return {
-    variant: { type: 'string', required: true, enum: [
-        'span1',
-        'span2',
-        'span3',
-        'span4',
-        'span5',
-        'span6',
-        'span7',
-        'span8',
-        'span9',
-        'span10',
-        'span11',
-        'span12',
-      ], default: 'span6'
+    variant: {
+      type: 'object',
+      required: true,
+      properties: {
+        default: { ...variantProperties, default: 'span1' },
+        xs: { ...variantProperties, 'x-meta': { label: 'Extra Small' } },
+        md: { ...variantProperties, 'x-meta': { label: 'Medium' } },
+        lg: { ...variantProperties, 'x-meta': { label: 'Large' } },
+        xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
+      },
     },
     ...commonProperties(),
   }

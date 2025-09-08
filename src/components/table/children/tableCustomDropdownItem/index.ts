@@ -3,7 +3,7 @@ import {
   tableCustomDropdownItemProperties,
   tableCustomDropdownItemVariants,
   tableCustomDropdownItemChildProperties,
-  tableCustomDropdownItemChildPropertiesMapping, tableCustomDropdownItemInteractions,
+  tableCustomDropdownItemChildPropertiesMapping, tableCustomDropdownItemInteractions, tableCustomDropdownItemRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -28,6 +28,7 @@ export default {
     component.getInteractions(tableCustomDropdownItemInteractions());
     component.getChildProperties(tableCustomDropdownItemChildProperties());
     component.getChildPropertiesMapping(tableCustomDropdownItemChildPropertiesMapping());
+    component.getRules(tableCustomDropdownItemRules());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_CUSTOM_DROPDOWN_ITEM }))
 
     component.loadStates([]);

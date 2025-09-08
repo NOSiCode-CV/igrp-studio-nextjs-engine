@@ -2,8 +2,10 @@ import { initComponents, loadAppExports } from '../src';
 import { OUTPUT_TAXPAYER_TEST, OUTPUT_TEST2 } from '../src/utils/testPath';
 
 //export const WORKSPACE_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss";
-//export const OUTPUT_DIR = WORKSPACE_DIR + "\\projects\\inss-sisgb-core-contribuicoes-frontend";
-export const OUTPUT_DIR = OUTPUT_TEST2
+//export const OUTPUT_DIR = WORKSPACE_DIR + "\\projects\\inss-sisgb-core-cadastro-frontend";
+
+export const OUTPUT_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss-sisgb-core-cadastro-frontend"
+//export const OUTPUT_DIR = OUTPUT_TEST2
 
 describe('Load Exports', () => {
 

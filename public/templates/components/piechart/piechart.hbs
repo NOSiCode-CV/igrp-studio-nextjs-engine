@@ -3,33 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  pies={
-    [
-    {{#if (and resourceConfig.properties.pies (not resourceConfig.data.pies))}}
-      {{#each resourceConfig.properties.pies}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.innerRadius}}innerRadius: {{this.innerRadius}},{{/if~}}
-          {{#if this.outerRadius}}outerRadius: {{this.outerRadius}},{{/if~}}
-          {{#if this.paddingAngle}}paddingAngle: {{this.paddingAngle}},{{/if~}}
-          {{#if this.cornerRadius}}cornerRadius: {{this.cornerRadius}},{{/if~}}
-          {{#if this.startAngle}}startAngle: {{this.startAngle}},{{/if~}}
-          {{#if this.cx}}cx: {{this.cx}},{{/if~}}
-          {{#if this.cy}}cy: {{this.cy}},{{/if~}}
-          {{#if this.showLabels}}showLabels: {{this.showLabels}},{{/if~}}
-          {{#if this.dot}}dot: {{this.dot}},{{/if~}}
-          {{#if this.labelType}}labelType: '{{this.labelType}}',{{/if~}}
-          {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
-          {{#if this.labelPosition}}labelPosition: '{{this.labelPosition}}',{{/if~}}
-          {{#if this.labelLine}}labelLine: {{this.labelLine}},{{/if~}}
-          {{#if this.activeIndex}}activeIndex: {{this.activeIndex}},{{/if~}}
-          {{#if this.activeShape}}activeShape: {{this.activeShape}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>
@@ -87,7 +60,7 @@
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: `{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}`
     }
   }
   {{/if~}}

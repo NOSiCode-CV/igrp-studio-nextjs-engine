@@ -6,14 +6,11 @@
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
-  {{#if (and resourceConfig.properties.tabListClassName (not resourceConfig.data.tabListClassName))}}
-  tabListClassName={ `{{resourceConfig.properties.tabListClassName}}` }
-  {{/if~}}
   {{#if (and resourceConfig.properties.tabTriggerClassName (not resourceConfig.data.tabTriggerClassName))}}
-  tabTriggerClassName={ `{{resourceConfig.properties.tabTriggerClassName}}` }
+  tabTriggerClassName={ `{{{resourceConfig.properties.tabTriggerClassName}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.tabContentClassName (not resourceConfig.data.tabContentClassName))}}
-  tabContentClassName={ `{{resourceConfig.properties.tabContentClassName}}` }
+  tabContentClassName={ `{{{resourceConfig.properties.tabContentClassName}}}` }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.showIcon}}
   showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
@@ -21,14 +18,14 @@
   {{#if resourceConfig.properties.iconProperties.iconPlacement}}
   iconPlacement={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }
   {{/if~}}
-  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and resourceConfig.properties.tabListClassName parentResourceConfig) resourceConfig.style)}}
+  tabListClassName={ cn({{{concat "'" resourceConfig.properties.tabListClassName "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and resourceConfig.properties.tabListClassName (not parentResourceConfig)) resourceConfig.style)}}
+  tabListClassName={ cn({{{concat "'" resourceConfig.properties.tabListClassName "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
-  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
-  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.tabListClassName) parentResourceConfig.childProperties) resourceConfig.style)}}
+  tabListClassName={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
   {{/if}}

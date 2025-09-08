@@ -3,7 +3,7 @@ import {
   repetitiveListProperties,
   repetitiveListVariants,
   repetitiveListChildProperties,
-  repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle,
+  repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle, repetitiveListData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
@@ -16,6 +16,7 @@ export default {
 
     component.loadComponentClass('IGRPRepetitiveComponent')
     component.loadVariants(repetitiveListVariants());
+    component.setAllowTypes(true);
     component.loadGroup('basicElements')
     component.loadLabel('Repetitive Component')
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: REPETITIVE_LIST }))
@@ -25,6 +26,7 @@ export default {
     component.getChildPropertiesMapping(repetitiveListChildPropertiesMapping());
     component.getRules(repetitiveListRules())
     component.getStyle(repetitiveListStyle())
+    component.getData(repetitiveListData())
     component.setRenderer(hbsRenderer);
   },
 };

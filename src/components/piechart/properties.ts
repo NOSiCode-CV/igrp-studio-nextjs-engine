@@ -111,7 +111,22 @@ export function pieChartInteractions() {
 
 export function pieChartData() {
   return {
-    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
+    data: { ...baseData(undefined, INTERACTIONS_TYPES.DATA,
+        {
+          id: '',
+          name: 'contentChart{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
+    pies: { ...baseData(undefined, INTERACTIONS_TYPES.PIES,
+        {
+          id: '',
+          name: 'piesChart{{id}}',
+          type: 'IGRPPieConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

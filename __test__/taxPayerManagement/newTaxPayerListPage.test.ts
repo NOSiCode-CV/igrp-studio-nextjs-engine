@@ -646,7 +646,7 @@ const loadRegimeFltCombobox = async () => {
                   tag: 'table_section',
                   componentName: 'section',
                   properties: {
-                    className: 'p4 border-b bg-white',
+                    className: 'p4 border-b',
                   },
                   children: [
                     {

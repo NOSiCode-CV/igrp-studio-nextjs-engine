@@ -3,7 +3,7 @@ import {
   tableModalDropdownItemProperties,
   tableModalDropdownItemVariants,
   tableModalDropdownItemChildProperties,
-  tableModalDropdownItemChildPropertiesMapping, tableModalDropdownItemInteractions,
+  tableModalDropdownItemChildPropertiesMapping, tableModalDropdownItemInteractions, tableModalDropdownItemRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -28,6 +28,7 @@ export default {
     component.getInteractions(tableModalDropdownItemInteractions());
     component.getChildProperties(tableModalDropdownItemChildProperties());
     component.getChildPropertiesMapping(tableModalDropdownItemChildPropertiesMapping());
+    component.getRules(tableModalDropdownItemRules());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_MODAL_DROPDOWN_ITEM }))
 
     component.loadStates([]);

@@ -3,7 +3,10 @@ import {
   tableLinkActionProperties,
   tableLinkActionVariants,
   tableLinkActionChildProperties,
-  tableLinkActionChildPropertiesMapping, tableLinkActionInteractions, tableLinkActionInteractionsMapping,
+  tableLinkActionChildPropertiesMapping,
+  tableLinkActionInteractions,
+  tableLinkActionInteractionsMapping,
+  tableLinkActionRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -17,18 +20,19 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPDataTableButtonLink')
+    component.loadComponentClass('IGRPDataTableButtonLink');
     component.loadVariants(tableLinkActionVariants());
-    component.loadParent(TABLE_ACTION_LIST_CELL)
-    component.loadGroup('Columns')
-    component.loadLabel('Link Action')
+    component.loadParent(TABLE_ACTION_LIST_CELL);
+    component.loadGroup('Columns');
+    component.loadLabel('Link Action');
     component.getProperties(tableLinkActionProperties());
     component.getPropertiesMapping(tableLinkActionPropertiesMapping());
     component.getInteractions(tableLinkActionInteractions());
-    component.getInteractionsMapping(tableLinkActionInteractionsMapping())
+    component.getInteractionsMapping(tableLinkActionInteractionsMapping());
     component.getChildProperties(tableLinkActionChildProperties());
     component.getChildPropertiesMapping(tableLinkActionChildPropertiesMapping());
-    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_LINK_ACTION}))
+    component.getRules(tableLinkActionRules());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_LINK_ACTION}));
 
     component.loadStates([]);
 

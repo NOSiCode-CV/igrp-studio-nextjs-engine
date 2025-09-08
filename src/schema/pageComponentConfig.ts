@@ -264,7 +264,7 @@ const componentSchema: JSONSchemaType<Layout> = {
 const pageComponentConfigSchema: JSONSchemaType<PageComponentConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

@@ -1,13 +1,11 @@
 import {
   ComponentConfig,
   CustomFunctionConfig,
-  FunctionDef,
   Layout,
   Navigate,
   PageConfig,
   Reference,
-  State,
-  TypeDef,
+  State
 } from '../interfaces/types';
 import { replaceTemplate } from '../utils/helpers';
 import { Component } from '../components';
@@ -51,6 +49,8 @@ export function resolveCodeBlocks(
   if(isLayout(page?.components)) {
     const containsNavigations = hasNavigationInteraction(page.components);
     const containsMenuNavigations = hasMenuNavigationInteraction(page.components);
+
+    codeBlock += '\n' + `const { igrpToast } = useIGRPToast()` + '\n';
 
     if (containsNavigations) {
       codeBlock += '\n' + `const router = useRouter()` + '\n';

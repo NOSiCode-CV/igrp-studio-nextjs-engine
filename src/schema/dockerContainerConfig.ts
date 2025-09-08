@@ -304,6 +304,11 @@ const healthCheckConfigSchema: JSONSchemaType<DockerServiceHealthcheck> = {
       nullable: true,
       errorMessage: 'The retries, if provided, must be a number that ranges from 1 to 100.'
     },
+    start_period: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The start_period, if provided, must be a valid string.'
+    },
   },
   errorMessage: "",
   additionalProperties: false
@@ -432,8 +437,9 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
     },
     ports: {
       type: 'array',
+      nullable: true,
       items: portSchema,
-      errorMessage: "The 'ports' attribute must be a valid port array configuration."
+      errorMessage: "The 'ports' attribute, if provided, must be a valid port array configuration."
     },
     expose: {
       type: 'array',
@@ -443,8 +449,9 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
     },
     networks: {
       type: 'array',
+      nullable: true,
       items: networkSchema,
-      errorMessage: "The 'networks' attribute must be a valid network array configuration."
+      errorMessage: "The 'networks' attribute, if provided, must be a valid network array configuration."
     },
     domainname: {
       type: 'string',
@@ -580,7 +587,7 @@ export const dockerContainerConfigSchema: JSONSchemaType<DockerContainer> = {
       errorMessage: 'The shared memory size attribute, if provided, must be a valid string.'
     },
   },
-  required: ['image', 'ports', 'networks'],
+  required: ['image'],
   additionalProperties: false,
 }
 

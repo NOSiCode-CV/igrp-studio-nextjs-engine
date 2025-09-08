@@ -11,7 +11,7 @@ export function loadExportsConfig(configPath: string) {
     const regex = new RegExp(`${prop}:\\s*\\[([^\\]]*)\\]`, 's');
     const match = configContent.match(regex);
     return match
-      ? [...match[1].matchAll(/'([^']+)'/g)].map(m => m[1])
+      ?[...match[1].matchAll(/["']([^"']+)["']/g)].map(m => m[1])
       : [];
   };
 

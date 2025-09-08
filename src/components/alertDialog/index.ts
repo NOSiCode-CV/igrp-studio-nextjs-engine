@@ -10,7 +10,8 @@ import {
   alertDialogRules,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
-import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
+import { replaceTemplate } from '../../utils/helpers';
+import { TEMPLATES } from '../../utils/constants';
 
 export default {
   register(component: Component) {
@@ -27,6 +28,7 @@ export default {
     component.getChildPropertiesMapping(alertDialogChildPropertiesMapping());
     component.getInteractions(alertDialogInteractions());
     component.getInteractionsMapping(alertDialogInteractionsMapping());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: ALERT_DIALOG }))
     component.getStyle(alertDialogStyle())
     component.getRules(alertDialogRules())
     component.loadStates([

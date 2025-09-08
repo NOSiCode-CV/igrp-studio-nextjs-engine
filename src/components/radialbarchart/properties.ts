@@ -161,7 +161,22 @@ export function radialBarChartInteractions() {
 
 export function radialBarChartData() {
   return {
-    data: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.DATA), required: true },
+    data: { ...baseData(undefined, INTERACTIONS_TYPES.DATA,
+        {
+          id: '',
+          name: 'contentChart{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
+    bars: { ...baseData(undefined, INTERACTIONS_TYPES.BARS,
+        {
+          id: '',
+          name: 'barsChart{{id}}',
+          type: 'IGRPBarConfig[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
   };
 }
 

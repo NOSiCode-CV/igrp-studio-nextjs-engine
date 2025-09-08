@@ -3,23 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  radars={
-    [
-    {{#if (and resourceConfig.properties.radars (not resourceConfig.data.radars))}}
-      {{#each resourceConfig.properties.radars}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.fill}}fill: '{{this.fill}}',{{/if~}}
-          {{#if this.fillOpacity}}fillOpacity: {{this.fillOpacity}},{{/if~}}
-          {{#if this.strokeWidth}}strokeWidth: {{this.strokeWidth}},{{/if~}}
-          {{#if this.dot}}dot: {{this.dot}},{{/if~}}
-          {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
-          {{#if this.isAnimationActive}}isAnimationActive: {{this.isAnimationActive}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   categoryKey={ `{{resourceConfig.properties.categoryKey}}` }
   angleAxisKey={ `{{resourceConfig.properties.angleAxisKey}}` }
   {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
@@ -70,7 +53,7 @@
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: `{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}`
     }
   }
   {{/if~}}
