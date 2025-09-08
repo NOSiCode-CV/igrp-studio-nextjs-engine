@@ -22,6 +22,7 @@ import { TEXT_LIST_SUBITEMS } from '../components/textList/children/textListSubI
 import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
 import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
+import { PROCESS_STEP } from '../components/processStep/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -98,30 +99,29 @@ export function resolveFirstType(data: any[]): string {
 }
 
 /**
- * Converts an object of key-value pairs into a URL query string.
- * @param params Object with query parameter keys and values.
- * @returns A string beginning with '?' followed by encoded query parameters.
+ * Converts an array of Segment objects into a URL query string.
+ * If the segment has a tag, uses it as a dynamic replacement (with `row.original.` prefix for column context).
+ * Otherwise, uses the value if available.
+ *
+ * Example output:
+ * ?userId=${row.original.user_id}&status=active
  */
-export function resolveQueryParams(params: Record<string, any>): string {
-  const keys = Object.keys(params).filter(
-    (key) => params[key] !== undefined && params[key] !== null,
-  );
-  if (keys.length === 0) return '';
+export function resolveQueryParams(params: Segment[]): string {
+  if (!params || params.length === 0) return '';
 
-  const query = keys
-    .map((key) => {
-      const value = params[key];
-      if (Array.isArray(value)) {
-        return value
-          .map((val) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`)
-          .join('&');
-      } else {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-      }
+  const query = params
+    .filter((seg) => seg.value !== undefined || seg.tag !== undefined)
+    .map((seg) => {
+      // Build the replacement value
+      const replacement = seg.tag
+        ? `\${${seg.context === 'column' ? 'row.original.' : ''}${seg.tag}}`
+        : seg.value ?? '';
+
+      return `${seg.name}=${replacement}`;
     })
     .join('&');
 
-  return `?${query}`;
+  return query ? `?${query}` : '';
 }
 
 export function resolveSegmentPath(path: string, segments?: Segment[]) {
@@ -158,7 +158,7 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
       replacement = parts.join('/');
     } else {
       const g = group[0];
-      replacement = g.tag ? `\${row.original.${g.tag}}` : (g.value ?? '');
+      replacement = g.tag ? `\${${ g.context === 'column' ?  'row.original.' : '' }${g.tag}}` : (g.value ?? '');
     }
 
     finalPath = finalPath.replace(name, replacement);
@@ -188,6 +188,13 @@ export function resolveStateDefault(
   isList?: boolean,
   fields?: ElementField[],
 ): string {
+
+  if(type === 'string') {
+    if(defaultValue === undefined)
+      return 'undefined';
+    else return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+  }
+
   const trimmed = defaultValue?.trim() ?? '';
 
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
@@ -260,7 +267,7 @@ export function resolveZodTypes(field?: ElementField): string {
     if (lowerType === 'string') {
       if (validation.minLength) validators.push(`.min(${validation.minLength})`);
       if (validation.maxLength) validators.push(`.max(${validation.maxLength})`);
-      if (validation.regex) validators.push(`.regex(new RegExp(${JSON.stringify(validation.regex)}))`);
+      if (validation.regex) validators.push(`.regex(${validation.regex})`);
       if (validation.email) validators.push(`.email()`);
       if (validation.url) validators.push(`.url()`);
       if (validation.uuid) validators.push(`.uuid()`);
@@ -292,6 +299,10 @@ export function resolveZodTypes(field?: ElementField): string {
 
   if (!required) {
     zodType += '.optional()';
+  } else {
+    if(lowerType === "string") {
+      zodType += '.nonempty()';
+    }
   }
 
   return zodType;
@@ -318,6 +329,22 @@ function resolveType(arg: Arguments): string {
   }
 
   return `${arg.type}${arg.isList ? '[]' : ''}`;
+}
+
+export function resolveArrayElementRules(config: Layout): string {
+
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
+
+  return `...(${visibilityRules.map((it) => it.condition)[0]} ? [`
+
+}
+
+export function checkRules(config: Layout): boolean {
+
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
+
+  return (config.rules && visibilityRules.length > 0) ?? false;
+
 }
 
 export function extractTableColumns(children: Layout[]) {
@@ -362,6 +389,10 @@ export function extractInfoSection(children: Layout[]) {
 
 export function extractInfoItem(children: Layout[]) {
   return children.filter((it) => it.componentName === INFO_ITEM);
+}
+
+export function extractProcessSteps(children: Layout[]) {
+  return children.filter((it) => it.componentName === PROCESS_STEP);
 }
 
 export function resolveComponent(
@@ -410,9 +441,10 @@ export function replaceId(name: string, component?: any) {
   return replaceTemplate(name, { id: finalTag });
 }
 
-export function replaceType(type: string, component?: any) {
-  if(!component || !type) return type;
-  return replaceTemplate(type, { type: component.dataType ? capitalize(component.dataType) : 'any' })
+export function replaceType(type: string, component?: any, isArray?: boolean) {
+  if(!component || !type) return normalizeAnyType(isArray? `Array<${type}>` : type);
+  const finalType = component.dataType ? capitalize(component.dataType) : 'any'
+  return normalizeAnyType(replaceTemplate(type, { type: isArray? `Array<${finalType}>` : finalType }));
 }
 
 export function replaceValue(value: string, component?: any) {
@@ -429,7 +461,7 @@ export function resolveClassNameProperty(component: Layout, registry: Record<str
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
-  classKey?: string
+  classKey?: string, isJson?: boolean
 ) {
   return customProperties
     ? Object.entries(customProperties)
@@ -444,7 +476,7 @@ export function renderProperties(
               classKey
             ].includes(key)
           )
-            return '';
+            return;
           if (dataProperties && dataProperties[key]) return '';
           if (
             value &&
@@ -455,14 +487,15 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return `${k}={ ${resolveStateDefault(`${v}`, isString(v !== undefined ? `${v}` : undefined))} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)} }`;
               })
               .join('\n');
           } else {
-            return `${key}={ ${resolveStateDefault(`${value}`, isString(value !== undefined ? `${value}` : undefined))} }`;
+            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)}` : `${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
           }
         })
-        .join('\n')
+        .filter((it) => it !== undefined && it !== '')
+        .join(isJson === true? ',\n' : '\n')
     : ``;
 }
 
@@ -522,4 +555,15 @@ export function renderData(data: Record<string, any>, component?: Layout) {
         })
         .join('\n')
     : ``;
+}
+
+function normalizeAnyType(t: string) {
+
+  if(t === undefined) return undefined;
+
+  if(t.includes('anyZodType'))
+    return t.replace('anyZodType', 'any')
+
+  return t;
+
 }

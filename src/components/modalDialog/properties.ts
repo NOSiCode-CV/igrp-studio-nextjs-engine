@@ -13,7 +13,6 @@ export function modalDialogProperties() {
     open: { type: 'boolean', required: false },
     defaultOpen: { type: 'boolean', required: false },
     modal: { type: 'boolean', required: false },
-    className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

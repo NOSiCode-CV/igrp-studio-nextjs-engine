@@ -48,3 +48,8 @@ export function typeResolution(...data: any[]): string {
 export function typeFormatter(type: string | undefined): string {
   return `<${type ? capitalize(type) : 'any'}, ${type ? capitalize(type) : 'any'}>`
 }
+
+export function singleTypeFormatter(type: string | undefined): string {
+  return `<${type ? capitalize(type) : 'any'}>`
+}
+

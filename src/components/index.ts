@@ -56,7 +56,7 @@ export type Component = {
   classNamePropertyTag?: string;
   maxChildren?: number;
   templatePath?: string;
-  renderer: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string);
+  renderer: ((component: Layout, parentComponent?: Layout, element?: Component, parent?: Component, templatePath?: string) => (component: Layout, parentComponent?: Layout) => string);
 
   loadImports: (imports: string[]) => void;
   getImports: () => string[];
@@ -99,9 +99,9 @@ export type Component = {
   loadReferences: (refs: RegisterReference[]) => void;
   loadServiceMethods: (states: string[]) => void;
 
-  setRenderer: (fn: ((component: Layout<any>, parentComponent?: Layout<any>, element?: Component, parent?: Component, templatePath?: string) => (component: Layout<any>, parentComponent?: Layout<any>) => string)) => void;
+  setRenderer: (fn: ((component: Layout, parentComponent?: Layout, element?: Component, parent?: Component, templatePath?: string) => (component: Layout, parentComponent?: Layout) => string)) => void;
 
-  render: (context: Layout, component: Component, parentContext?: Layout<any>, parent?: Component) => string;
+  render: (context: Layout, component: Component, parentContext?: Layout, parent?: Component) => string;
 };
 
 function initComponent(): Component {
@@ -301,7 +301,7 @@ function initComponent(): Component {
       this.renderer = renderer
     },
 
-    render(context: Layout<any>, component: Component, parentContext?: Layout<any>, parent?: Component) {
+    render(context: Layout, component: Component, parentContext?: Layout, parent?: Component) {
       if (this.renderer) {
         return this.renderer(context, parentContext, component, parent)(context, parentContext);
       }
@@ -513,7 +513,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
       if(!component.data || (component.data && !component.data[key]))
-        return ` ${key}={ ${resolveStateDefault(`${value}`, isString(value? `${value}` : undefined ))} }`;
+        return ` ${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
       else return
     }).join("")
     : ``
@@ -575,7 +575,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
 }
 
 export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
-  const name = component.componentName
+  //const name = component.componentName
   return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name: 'default' /*name*/ }), {
     resourceConfig: component,
     parentResourceConfig: parentComponent

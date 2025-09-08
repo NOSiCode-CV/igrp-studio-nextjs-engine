@@ -6,7 +6,7 @@ import { ajvInstance } from '../utils/ajv-instance';
 const codeSnippetsRegisterConfigSchema: JSONSchemaType<CodeSnippetsRegisterConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:
@@ -66,7 +66,7 @@ const codeSnippetsRegisterConfigSchema: JSONSchemaType<CodeSnippetsRegisterConfi
 const codeSnippetsRegistrationConfigSchema: JSONSchemaType<CodeSnippetsRegistrationConfig> = {
   type: 'object',
   properties: {
-    engineVersion: {
+    version: {
       type: 'string',
       nullable: true,
       errorMessage:

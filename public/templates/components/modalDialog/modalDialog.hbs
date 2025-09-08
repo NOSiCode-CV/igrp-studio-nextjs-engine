@@ -1,98 +1,4 @@
 <IGRPModalDialog
-  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
-  title={ `{{resourceConfig.properties.title}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
-  description={ `{{resourceConfig.properties.description}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.type (not resourceConfig.data.type))}}
-  type={ `{{resourceConfig.properties.type}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.size (not resourceConfig.data.size))}}
-  size={ `{{resourceConfig.properties.size}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.headerClassName (not resourceConfig.data.headerClassName))}}
-  headerClassName={ `{{resourceConfig.properties.headerClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.showCloseButton (not resourceConfig.data.showCloseButton))}}
-  showCloseButton={ {{resourceConfig.properties.showCloseButton}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.closeOnClickOutside (not resourceConfig.data.closeOnClickOutside))}}
-  closeOnClickOutside={ {{resourceConfig.properties.closeOnClickOutside}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.showTrigger (not resourceConfig.data.showTrigger))}}
-  showTrigger={ {{resourceConfig.properties.showTrigger}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.triggerText (not resourceConfig.data.triggerText))}}
-  triggerText={ `{{resourceConfig.properties.triggerText}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.triggerVariant (not resourceConfig.data.triggerVariant))}}
-  triggerVariant={ `{{resourceConfig.properties.triggerVariant}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.triggerButton (not resourceConfig.data.triggerButton))}}
-  triggerButton={
-    <>
-    {{{resourceConfig.properties.triggerButton}}}
-    </>
-  }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.showIcon}}
-  showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconName}}
-  iconName={ `{{resourceConfig.properties.iconProperties.iconName}}` }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconPlacement}}
-  iconPosition={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconClassName}}
-  iconClass={ `{{resourceConfig.properties.iconClassName}}` }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconSize}}
-  iconSize={ {{resourceConfig.properties.iconProperties.iconSize}} }
-  {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconColor}}
-  iconColor={ {{resourceConfig.properties.iconProperties.iconColor}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.showFooter (not resourceConfig.data.showFooter))}}
-  showFooter={ {{resourceConfig.properties.showFooter}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.footerClassName (not resourceConfig.data.footerClassName))}}
-  footerClassName={ `{{resourceConfig.properties.footerClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.footerDirection (not resourceConfig.data.footerDirection))}}
-  footerDirection={ `{{resourceConfig.properties.footerDirection}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.reverseFooterButtons (not resourceConfig.data.reverseFooterButtons))}}
-  reverseFooterButtons={ {{resourceConfig.properties.reverseFooterButtons}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.cancelText (not resourceConfig.data.cancelText))}}
-  cancelText={ `{{resourceConfig.properties.cancelText}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.cancelVariant (not resourceConfig.data.cancelVariant))}}
-  cancelVariant={ `{{resourceConfig.properties.cancelVariant}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.confirmText (not resourceConfig.data.confirmText))}}
-  confirmText={ `{{resourceConfig.properties.confirmText}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.confirmVariant (not resourceConfig.data.confirmVariant))}}
-  confirmVariant={ `{{resourceConfig.properties.confirmVariant}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.requireConfirmation (not resourceConfig.data.requireConfirmation))}}
-  requireConfirmation={ {{resourceConfig.properties.requireConfirmation}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.confirmationText (not resourceConfig.data.confirmationText))}}
-  confirmationText={ `{{resourceConfig.properties.confirmationText}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.confirmationPlaceholder (not resourceConfig.data.confirmationPlaceholder))}}
-  confirmationPlaceholder={ `{{resourceConfig.properties.confirmationPlaceholder}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.open (not resourceConfig.data.open))}}
-  open={ {{resourceConfig.properties.open}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.name (not resourceConfig.data.name))}}
-  name={ `{{resourceConfig.properties.name}}` }
-  {{/if~}}
   {{#if (and resourceConfig.properties.children (not resourceConfig.data.children))}}
   children={
     <>
@@ -104,17 +10,6 @@
     </>
   }
   {{/if~}}
-  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
-  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{/if~}}
-  {{/if}}
-  {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
   {{/if~}}

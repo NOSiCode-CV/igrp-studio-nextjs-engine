@@ -3,25 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  lines={
-    [
-    {{#if (and resourceConfig.properties.lines (not resourceConfig.data.lines))}}
-      {{#each resourceConfig.properties.lines}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.type}}type: '{{this.type}}',{{/if~}}
-          {{#if this.strokeWidth}}strokeWidth: {{this.strokeWidth}},{{/if~}}
-          {{#if this.strokeDasharray}}strokeDasharray: '{{this.strokeDasharray}}',{{/if~}}
-          {{#if this.dot}}dot: {{this.dot}},{{/if~}}
-          {{#if this.activeDot}}activeDot: {{{json this.activeDot}}},{{/if~}}
-          {{#if this.showLabels}}showLabels: {{this.showLabels}},{{/if~}}
-          {{#if this.labelPosition}}labelPosition: '{{this.labelPosition}}',{{/if~}}
-          {{#if this.labelOffset}}labelOffset: {{this.labelOffset}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>
@@ -81,7 +62,7 @@
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: `{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}`
     }
   }
   {{/if~}}
@@ -92,7 +73,7 @@
   size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.valueDomain (not resourceConfig.data.valueDomain))}}
-  valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
+  valueDomain={ [{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}] }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

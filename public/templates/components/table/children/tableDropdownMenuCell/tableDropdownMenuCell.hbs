@@ -3,7 +3,7 @@
     [
       {{#if resourceConfig.children}}
       {{#each resourceConfig.children}}
-      {
+      {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}{
         component: {{resolveComponent this.componentName ../registry}},
         props: {
           {{#if this.properties.title}}title: `{{this.properties.title}}`,{{/if~}}
@@ -43,7 +43,7 @@
           {{/if}}
           {{/if~}}
         }
-      },
+      }{{#if (checkRules this)}}] : []){{/if}},
       {{/each}}
       {{/if~}}
     ]

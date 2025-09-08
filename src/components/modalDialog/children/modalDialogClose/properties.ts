@@ -11,10 +11,6 @@ import { InteractionFieldVisibility } from '../../../../interfaces/types';
 export function modalDialogCloseProperties() {
   return {
     content: { type: 'string', required: true, default: 'Close' },
-    variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
-    size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
-    ...iconProperties(),
-    disabled: { type: 'boolean', required: false, default: false },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };
@@ -36,12 +32,6 @@ export function modalDialogCloseChildPropertiesMapping() {
 
 export function modalDialogCloseVariants() {
   return {
-    default: "default",
-    secondary: "secondary",
-    destructive: "destructive",
-    outline: "outline",
-    ghost: "ghost",
-    link: "link",
   };
 }
 

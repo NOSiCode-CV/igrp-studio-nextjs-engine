@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -6,7 +6,6 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableLinkActionProperties() {
   return {
     ...actionProperties('Link'),
-    type: { type: 'string', required: true, default: 'link' },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     ...commonProperties(),
   };
@@ -47,7 +46,7 @@ function actionInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function tableLinkActionInteractions() {
   return {
-    action: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ACTION, undefined, actionInteractionFieldVisibility()), required: true },
+    action: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ACTION, undefined, actionInteractionFieldVisibility()), required: true },
   };
 }
 
@@ -61,4 +60,10 @@ export function tableLinkActionVariants() {
   return {
     default: ''
   };
+}
+
+export function tableLinkActionRules() {
+  return {
+    ...baseRules()
+  }
 }

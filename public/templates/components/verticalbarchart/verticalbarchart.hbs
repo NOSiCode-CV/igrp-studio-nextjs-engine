@@ -3,18 +3,6 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  bars={
-    [
-    {{#if (and resourceConfig.properties.bars (not resourceConfig.data.bars))}}
-      {{#each resourceConfig.properties.bars}}
-        {
-          dataKey: '{{this.dataKey}}',
-          {{#if this.radius}}radius: {{this.radius}},{{/if~}}
-        },
-      {{/each}}
-    {{/if~}}
-    ]
-  }
   {{#if (and resourceConfig.properties.customLegend (not resourceConfig.data.customLegend))}}
   customLegend={
     <>
@@ -83,7 +71,7 @@
   {{#if (and resourceConfig.properties.footer (not resourceConfig.data.footer))}}
   footer={
     {
-      description: `{{resourceConfig.properties.footer.description}}"
+      description: `{{resourceConfig.properties.footer.description}}`
     }
   }
   {{/if~}}
@@ -94,7 +82,7 @@
   size={ `{{resourceConfig.properties.size}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.valueDomain (not resourceConfig.data.valueDomain))}}
-  valueDomain=[{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}]
+  valueDomain={ [{{resourceConfig.properties.valueDomain.min}}, {{resourceConfig.properties.valueDomain.max}}] }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

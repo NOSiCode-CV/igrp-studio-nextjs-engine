@@ -3,7 +3,6 @@ import { appConfigValidate } from './schema/baseApp';
 import { checkIfDirectoryIsEmpty } from './utils/helpers';
 import { generatePage } from './modules/page/generatePage';
 import { savePageConfig } from './modules/page/savePageConfig';
-import { generateService } from './modules/page/generateService';
 import { saveFileConfig } from './modules/baseApp/saveBaseAppFiles';
 import { saveWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceFiles';
 import { saveBaseAppFileConfig } from './modules/baseApp/saveBaseAppConfig';
@@ -16,16 +15,19 @@ import {
   DockerServiceRegistrationConfig,
   PageComponentConfig,
   PageConfig,
-  PageMetaConfig,
   PathConfig,
   AppExportsConfig,
   ProjectWorkspace,
   RenderContext,
   ServiceWorkspace,
   WorkspaceConfig,
-  WorkspaceProjectsConfig, CodeSnippetsRegistrationConfig, CodeSnippetConfig,
+  WorkspaceProjectsConfig,
+  CodeSnippetsRegistrationConfig,
+  CodeSnippetConfig,
+  ProcessConfig,
+  ProcessStepConfig,
+  CustomFunctionConfig,
 } from './interfaces/types';
-import { savePagesMeta } from './modules/pageMeta/savePagesMeta';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
@@ -64,15 +66,21 @@ import { registerAllCodeSnippets } from './code_snippets/register';
 import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
 import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { renderCode } from './utils/renderCode';
+import { processConfigValidate } from './schema/processConfig';
+import { generateProcessStep } from './modules/process/generateProcessStep';
+import { saveProcessConfig } from './modules/process/saveProcessConfig';
+import { processStepConfigValidate } from './schema/processStepConfig';
+import { saveProcessStepConfig } from './modules/process/saveProcessStepConfig';
 
-export function getPaths(): PathConfig {
+export function getPaths(version?: string): PathConfig {
   const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
+  const PROJECT_TEMPLATE_VERSION = version ?? '0.0.1-alpha.0';
 
   if (environment === 'production') {
     return {
       configs: path.join(__dirname, './configs'),
       template: path.join(__dirname, './templates'),
-      baseApp: path.join(__dirname, './templates/base_app.zip'),
+      baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
       baseWorkspace: path.join(__dirname, './templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, './templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, './templates/partials'),
@@ -81,7 +89,7 @@ export function getPaths(): PathConfig {
     return {
       configs: path.join(__dirname, '../public/configs'),
       template: path.join(__dirname, '../public/templates'),
-      baseApp: path.join(__dirname, '../public/templates/base_app.zip'),
+      baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
       baseWorkspace: path.join(__dirname, '../public/templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, '../public/templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, '../public/templates/partials'),
@@ -249,8 +257,207 @@ export const newComponent = async (componentConfig: ComponentConfig, basePath: s
 
 /**
  *
- * @param pageConfig
- * @param component
+ * @param processConfig
+ * @param basePath
+ */
+
+export const newProcess = async (processConfig: ProcessConfig, basePath: string) => {
+  const isProcessConfigValid = processConfigValidate(processConfig);
+
+  if (!isProcessConfigValid && processConfigValidate.errors)
+    throw processConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  await saveProcessConfig(processConfig, basePath);
+
+};
+
+/**
+ *
+ * @param processStepConfig
+ * @param basePath
+ */
+export const newProcessStep = async (processStepConfig: ProcessStepConfig, basePath: string) => {
+  const isProcessStepConfigValid = processStepConfigValidate(processStepConfig);
+
+  if (!isProcessStepConfigValid && processStepConfigValidate.errors)
+    throw processStepConfigValidate.errors;
+
+  if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
+
+  processStepConfig.args = [
+    {
+      id: 'processKey_arg',
+      type: "string",
+      name: "processKey",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'processInstanceId_arg',
+      type: "string",
+      name: "processInstanceId",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'userTaskInstanceId_arg',
+      type: "string",
+      name: "userTaskInstanceId",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'onRegisterMethods_fnc',
+      type: "void",
+      name: "onRegisterMethods",
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: true,
+      isState: false,
+      functionParameters: [
+        {
+          id: 'methods_arg',
+          type: "StepMethods",
+          name: "methods",
+          isList: false,
+          isOptional: false,
+          isInterface: true,
+          isFunction: false,
+          isState: false
+        },
+      ]
+    },
+    {
+      id: 'variables_arg',
+      type: "Array<{ name: string; value: string }> | undefined",
+      name: "variables",
+      isList: false,
+      isOptional: true,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    // variables?: Array<{ name: string; value: string }> | undefined
+  ]
+
+  if((processStepConfig.functions?.length ?? 0) === 0) {
+
+    const functions: CustomFunctionConfig[] = [
+      {
+        name: 'handleSave',
+        arguments: [
+        ],
+        isAsync: true,
+        returnValue: {
+          type: 'any',
+          isNullable: false
+        },
+        code: `
+    // TODO: Implement save logic
+    
+    /* 
+    
+    Example:
+    
+    formform1Ref.current?.submit();
+ 
+    const data = formform1Ref.current?.getValues()
+ 
+    const variables = data
+      ? Object.entries(data).map(([key, value]) => ({
+          name: key,
+          value: value as string,
+        }))
+      : []; 
+      
+    */
+    
+    return {
+      success: true,
+      variables: undefined,
+      forms: undefined
+    };
+        `,
+        id: 'handleSave_fnc',
+        actions: {
+          deletable: false,
+          editable: true
+        }
+      },
+      {
+        name: 'handleComplete',
+        arguments: [],
+        isAsync: true,
+        returnValue: {
+          type: 'any',
+          isNullable: false
+        },
+        code: `
+    // TODO: Implement complete logic
+    
+    /* 
+    
+    Example:
+    
+    formform1Ref.current?.submit();
+ 
+    const data = formform1Ref.current?.getValues()
+ 
+    const variables = data
+      ? Object.entries(data).map(([key, value]) => ({
+          name: key,
+          value: value as string,
+        }))
+      : []; 
+      
+    */
+    
+    return {
+      success: true,
+      variables: undefined,
+      forms: undefined
+    };
+        `,
+        id: 'handleComplete_fnc',
+        actions: {
+          deletable: false,
+          editable: true
+        }
+      },
+    ]
+
+    if(!processStepConfig.functions)
+      processStepConfig.functions = [];
+
+    processStepConfig.functions.push(...functions)
+  }
+
+  const context: RenderContext<ProcessStepConfig, ProcessStepConfig> = {
+    resourceConfig: processStepConfig,
+    basePath: basePath,
+  };
+
+  await saveProcessStepConfig(processStepConfig, basePath);
+
+  await generateProcessStep(context);
+
+};
+
+/**
+ *
+ * @param config
  * @param basePath
  */
 export const addComponentToPage = async (config: PageComponentConfig, basePath: string) => {
@@ -444,6 +651,6 @@ export const addCodeSnippet = (config: CodeSnippetConfig): string => {
  */
 export async function loadAppExports(basePath: string): Promise<AppExportsConfig> {
   const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.EXPORTS_FILE}`);
-  const resolvedConfig = await loadExportsConfig(configPath);
+  const resolvedConfig = loadExportsConfig(configPath);
   return await parseExportsConfig(resolvedConfig, basePath);
 }

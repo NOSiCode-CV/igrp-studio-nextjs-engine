@@ -21,6 +21,7 @@ export function alertProperties() {
     iconProperties: {
       type: 'object',
       properties: {
+        showIcon: { type: 'boolean', required: true, default: true },
         iconName: { type: 'string', required: false, default: 'ArrowRight', 'x-ui-widget': 'icon' },
         iconPlacement: { type: 'string', required: true, default: 'end', enum: ['start', 'end' ] },
         linkIcon: { type: 'string', required: false, default: 'ArrowRight', 'x-ui-widget': 'icon' },

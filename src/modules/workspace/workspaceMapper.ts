@@ -109,8 +109,8 @@ export const updateProjectInWorkspace = async (
     basePath: `${config.config.name}`,
     environments: config.service && config.service.properties.environments && config.service.properties.environments.length > 0? config.service.properties.environments : [],
     ports: {
-      internal: config.service && config.service.properties.ports?.length > 0? config.service.properties.ports[0].internal : basePort + index,
-      external: config.service && config.service.properties.ports?.length > 0? config.service.properties.ports[0].internal : basePort + index,
+      internal: config.service && (config.service.properties.ports?.length ?? 0) > 0? config.service.properties.ports![0].internal : basePort + index,
+      external: config.service && (config.service.properties.ports?.length ?? 0) > 0? config.service.properties.ports![0].internal : basePort + index,
     },
     dependsOn: config.service && config.service.properties.dependsOn && config.service.properties.dependsOn.length > 0? config.service.properties.dependsOn : [],
   };

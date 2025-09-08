@@ -4,7 +4,9 @@ import {
   ComponentConfig,
   Layout,
   PageConfig,
-  RenderContext, WorkspaceProjectsConfig,
+  ProcessConfig, ProcessStepConfig,
+  RenderContext,
+  WorkspaceProjectsConfig,
 } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
@@ -14,61 +16,58 @@ import { TABLE } from '../components/table';
 export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
   (await fs.readdir(directoryPath)).length === 0;
 
-/**
- * Checks if a string segment is a valid Next.js path segment
- * based on Next.js naming conventions like static, dynamic,
- * catch-all, optional catch-all, and group segments.
- *
- * @param {string} segment - The segment of the path to validate.
- * @returns {boolean} True if the segment matches one of the valid patterns.
- */
-export function isValidNextSegment(segment: string): boolean {
-  return true //return VALID_SEGMENT_PATTERNS.some((pattern) => new RegExp(pattern).test(segment));
-}
-
 export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
-  const segments = context.resourceConfig.path
-    .split('/')
-    .filter(Boolean);
-
-  /*for (const segment of segments) {
-    if (!isValidNextSegment(segment)) {
-      throw new Error(
-        `Invalid path segment "${segment}". Must follow Next.js conventions: static, [param], [...param], [[...param]], or (group).`
-      );
-    }
-  }*/
-
-  return path.join(
-    context.basePath,
-    DIRECTORIES.GENERATED,
-    ...segments,
-    COMMON_FILES.PAGE_TSX
-  );
+  const segments = context.resourceConfig.path.split('/').filter(Boolean);
+  return path.join(context.basePath, DIRECTORIES.GENERATED, ...segments, COMMON_FILES.PAGE_TSX);
 };
 
 export const getComponentDir = (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   const name = context.resourceConfig.name.toLowerCase();
   const pagePath = context.resourceConfig.pagePath;
-  return pagePath? path.join(
+  return pagePath
+    ? path.join(
+        context.basePath,
+        DIRECTORIES.GENERATED,
+        pagePath,
+        'components',
+        replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+      )
+    : path.join(
+        context.basePath,
+        DIRECTORIES.BASE_COMPONENTS,
+        replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+      );
+};
+
+export const getProcessStepDir = (
+  context: RenderContext<ProcessStepConfig, ProcessStepConfig>
+) => {
+  const name = context.resourceConfig.name;
+  const version = context.resourceConfig.processVersion;
+  const pagePath = path.join(DIRECTORIES.PROCESS, DIRECTORIES.PROCESS_PARAMS);
+  const processKey = context.resourceConfig.processKey;
+
+  return path.join(
     context.basePath,
     DIRECTORIES.GENERATED,
     pagePath,
-    'components',
-    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
-  ) : path.join(
-    context.basePath,
-    DIRECTORIES.BASE_COMPONENTS,
+    `(${processKey})`,
+    version,
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };
 
-export const getActionDir = (context: RenderContext<ActionConfig, ActionConfig>, isComponent: boolean = false) => {
+export const getActionDir = (
+  context: RenderContext<ActionConfig, ActionConfig>,
+  isComponent: boolean = false,
+) => {
   const name = context.resourceConfig.actionName.toLowerCase();
   const pageName = context.resourceConfig.pageName.toLowerCase();
   return path.join(
     context.basePath,
-    replaceTemplate(isComponent? DIRECTORIES.ACTIONS_COMPONENT : DIRECTORIES.ACTIONS, { pageName }),
+    replaceTemplate(isComponent ? DIRECTORIES.ACTIONS_COMPONENT : DIRECTORIES.ACTIONS, {
+      pageName,
+    }),
     replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
   );
 };
@@ -97,6 +96,13 @@ export const getComponentConfigPath = (context: RenderContext<ComponentConfig, C
     `${context.resourceConfig.name}${EXTENSIONS.JSON}`,
   );
 
+export const getProcessConfigPath = (context: RenderContext<ProcessConfig, ProcessConfig>) =>
+  path.join(
+    context.basePath,
+    DIRECTORIES.IGRPSTUDIO_PROCESS,
+    `${context.resourceConfig.name}${EXTENSIONS.JSON}`,
+  );
+
 export const getPageServicePath = (context: RenderContext<PageConfig, PageConfig>) =>
   path.join(
     context.basePath,
@@ -114,7 +120,24 @@ export const getPagePath = (context: RenderContext<PageConfig, PageConfig>) =>
 export const getComponentPath = (context: RenderContext<ComponentConfig, ComponentConfig>) =>
   path.join(context.basePath, DIRECTORIES.COMPONENTS);
 
-export const onlyUnique = (value: any, index: any, array: any) => array.indexOf(value) === index;
+export const getProcessPath = (context: RenderContext<ProcessConfig, ProcessConfig>): string[] => {
+
+  const processSteps = context.resourceConfig.steps
+
+  if(!processSteps) return [];
+
+  return processSteps.map((it) => getProcessStepDir({ ...context, parentResourceConfig: undefined, resourceConfig: {
+      type: 'processStep',
+      name: it.name,
+      processKey: context.resourceConfig.name,
+      processVersion: context.resourceConfig.processVersion,
+      types: [],
+      id: it.id,
+      projectArtifactId: '',
+      taskKey: '',
+      artifactVariables: [],
+    }}));
+};
 
 export const loadConfig = async function <T>(basePath: string): Promise<T[]> {
   if (!(await fs.pathExists(basePath))) {
@@ -127,46 +150,113 @@ export const loadConfig = async function <T>(basePath: string): Promise<T[]> {
   return await Promise.all<T>(files);
 };
 
+export const loadProjectConfig = async function <T>(basePath: string): Promise<T[]> {
+  if (!(await fs.pathExists(basePath))) {
+    return [];
+  }
+
+  const files = (await fs.readdir(basePath))
+    .filter((f) => f === 'package.json')
+    .map((f) => fs.readJSON(path.join(basePath, f)));
+  return await Promise.all<T>(files);
+};
+
 export const loadWorkspaceConfig = async (basePath: string) => {
-  const workspaces = await loadConfig<WorkspaceProjectsConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO))
+  const workspaces = await loadConfig<WorkspaceProjectsConfig>(
+    path.join(basePath, DIRECTORIES.IGRPSTUDIO),
+  );
 
-  if(workspaces.length > 0)
-    return workspaces[0]
-  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`)
-
-}
+  if (workspaces.length > 0) return workspaces[0];
+  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`);
+};
 
 export const loadPageConfig = async (basePath: string, id: string) => {
-  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES))
+  const pages = await loadConfig<PageConfig>(
+    path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES),
+  );
 
-  if(pages.length > 0)
-    return pages.find(it => it.id === id)
+  if (pages.length > 0) return pages.find((it) => it.id === id);
 
-  return undefined
+  return undefined;
+};
 
-}
+export const loadProcessConfig = async (basePath: string, name: string): Promise<ProcessConfig | undefined> => {
+  const processBasePath = path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PROCESS, name);
+
+  try {
+    const versionDirs = await fs.readdir(processBasePath, { withFileTypes: true });
+
+    // Filter folders with names like "v1", "v2", ..., "vn"
+    const versions = versionDirs
+      .filter(dirent => dirent.isDirectory() && /^v\d+$/.test(dirent.name))
+      .map(dirent => ({
+        name: dirent.name,
+        version: parseInt(dirent.name.slice(1), 10), // remove 'v' and parse number
+      }))
+      .sort((a, b) => b.version - a.version); // Sort descending to get latest
+
+    if (versions.length === 0) return undefined;
+
+    const latestVersionFolder = versions[0].name;
+    const jsonPath = path.join(processBasePath, latestVersionFolder, `${name}.json`);
+
+    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+    return JSON.parse(jsonContent) as ProcessConfig;
+
+  } catch (err) {
+    console.error(`Failed to load process config for ${name}:`, err);
+    return undefined;
+  }
+};
+
+export const loadProcessStepConfig = async (
+  basePath: string,
+  name: string,
+  processConfig: ProcessConfig
+): Promise<ProcessStepConfig> => {
+  const stepsPath = path.join(
+    basePath,
+    DIRECTORIES.IGRPSTUDIO,
+    DIRECTORIES.PROCESS,
+    name,
+    `v${processConfig.version}`,
+  );
+
+  const stepConfigs: Record<string, ProcessStepConfig> = {};
+
+  try {
+    const stepFiles = await fs.readdir(stepsPath);
+
+    for (const stepFile of stepFiles) {
+      if (stepFile.endsWith('.json')) {
+        const stepName = stepFile.replace(/\.json$/, '');
+
+        const content = await fs.readFile(path.join(stepsPath, stepFile), 'utf-8');
+        stepConfigs[stepName] = JSON.parse(content) as ProcessStepConfig;
+      }
+    }
+  } catch (err) {
+    console.error(`Failed to load step configs for process ${name}:`, err);
+  }
+
+  return stepConfigs[name];
+};
 
 export const loadPagesConfig = async (basePath: string) => {
-  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+  const pages = await loadConfig<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES));
 
-  if(pages.length > 0)
-    return pages
+  if (pages.length > 0) return pages;
 
-  return []
-
-}
+  return [];
+};
 
 export const loadPagesConfigSync = (basePath: string) => {
-  const pages = loadConfigSync<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES))
+  const pages = loadConfigSync<PageConfig>(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PAGES));
 
-  if(pages.length > 0)
-    return pages
+  if (pages.length > 0) return pages;
 
-  return []
-
-}
-
-
+  return [];
+};
 
 export const loadConfigSync = function <T>(basePath: string): T[] {
   if (!fs.pathExistsSync(basePath)) {
@@ -185,7 +275,17 @@ export const replaceTemplate = (template: string, replacements: Record<string, s
 
 export function extractComponentData(
   layout: Layout,
-  components: Set<{ componentName: string; id: string; tag: string; properties?: Record<string, any>; interactions?: Record<string, any>; data?: Record<string, any>; forceStateLoad?: boolean, forceReferenceLoad?: boolean, dataType?: string }>,
+  components: Set<{
+    componentName: string;
+    id: string;
+    tag: string;
+    properties?: Record<string, any>;
+    interactions?: Record<string, any>;
+    data?: Record<string, any>;
+    forceStateLoad?: boolean;
+    forceReferenceLoad?: boolean;
+    dataType?: string;
+  }>,
   registry: Record<string, Component>,
   parent?: Layout,
 ) {
@@ -201,7 +301,7 @@ export function extractComponentData(
     data: layout.data,
     forceStateLoad: registry[layout.componentName]?.forceStateLoad,
     forceReferenceLoad: registry[layout.componentName]?.forceReferenceLoad,
-    dataType: layout.dataType
+    dataType: layout.dataType,
   });
   if (layout.children) {
     layout.children.forEach((child) => extractComponentData(child, components, registry, layout));
@@ -252,11 +352,10 @@ export function resolveFromMyAppPath(fullPath: string): string {
   const normalized = fullPath.replace(/\\/g, '/');
   const match = normalized.match(/\/src\/app\/\([^)]+\)/);
   if (!match) {
-    throw new Error("Path must include 'src/app/[locale]/(myapp)' group.");
+    throw new Error("Path must include 'src/app/(myapp)' group.");
   }
   return '@' + normalized.substring(normalized.indexOf(match[0]) + 4).replace(/\.[^.]+$/, ''); // skip '/src'
 }
-
 
 /**
  * Extracts the directory path from a given full file path.
@@ -267,13 +366,12 @@ export const getDirectoryPath = (filePath: string): string => {
   return path.dirname(filePath);
 };
 
-export const isString = (value: string | undefined)=> {
-
-  if(value === undefined || (value?.trim() === '')) return undefined
+export const isString = (value: string | undefined) => {
+  if (value === undefined || value?.trim() === '') return undefined;
 
   const trimmed = value.trim();
 
-  return (trimmed === 'null' ||
+  return trimmed === 'null' ||
     trimmed === 'undefined' ||
     trimmed === 'true' ||
     trimmed === 'false' ||
@@ -281,5 +379,7 @@ export const isString = (value: string | undefined)=> {
     trimmed === '{}' ||
     (!isNaN(Number(trimmed)) && trimmed !== '') ||
     (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-    (trimmed.startsWith('{') && trimmed.endsWith('}'))) ? undefined : 'string'
-}
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+    ? undefined
+    : 'string';
+};

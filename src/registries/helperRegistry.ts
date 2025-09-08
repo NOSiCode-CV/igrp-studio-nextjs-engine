@@ -8,7 +8,7 @@ import {
   toProps,
   concat,
   toCamelCaseFromNatural,
-  typeResolution, trim, toCamelCase, typeFormatter,
+  typeResolution, trim, toCamelCase, typeFormatter, singleTypeFormatter,
 } from '../helpers/stringHelpers';
 import { getAttribute, getIndex, length } from '../helpers/arrayHelpers';
 import { greaterThan, equals, and, not, or } from '../helpers/comparisonHelpers';
@@ -37,10 +37,10 @@ import {
   renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
   resolveComponent,
   resolveFirstType, resolveFunctionArgs,
-  resolveQueryParams,
+  resolveQueryParams, resolveArrayElementRules,
   resolveSegmentPath,
   resolveStateDefault,
-  resolveZodTypes,
+  resolveZodTypes, checkRules,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -77,6 +77,8 @@ Handlebars.registerHelper("resolveFirstType", resolveFirstType);
 Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
 Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
 Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
+Handlebars.registerHelper("resolveArrayElementRules", resolveArrayElementRules);
+Handlebars.registerHelper("checkRules", checkRules);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);
@@ -115,6 +117,7 @@ Handlebars.registerHelper("concat", concat);
 Handlebars.registerHelper("toCamelCaseFromNatural", toCamelCaseFromNatural);
 Handlebars.registerHelper("typeResolution", typeResolution);
 Handlebars.registerHelper("typeFormatter", typeFormatter);
+Handlebars.registerHelper("singleTypeFormatter", singleTypeFormatter);
 
 // Array
 Handlebars.registerHelper("length", length);

@@ -1,7 +1,7 @@
 import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
 
 interface VersionableElement {
-  engineVersion?: string
+  version?: string
 }
 
 interface IdentifiableElement {
@@ -24,11 +24,11 @@ export interface PageConfig extends IdentifiableElement, VersionableElement {
   forceDynamic?: boolean;
   types: TypeDef[];
   imports?: Import[];
-  segments?: Segment[];
   states?: State[];
   references?: Reference[];
   functions?: CustomFunctionConfig[];
   actions?: CustomFunctionConfig[];
+  args?: Arguments[];
   components?: Layout | {};
 }
 
@@ -41,6 +41,21 @@ export interface Arguments extends IdentifiableElement{
   isFunction: boolean,
   isState: boolean,
   functionParameters?: Arguments[]
+}
+
+export interface Variable {
+  variable: string
+}
+
+export interface ProcessArtifact {
+  projectArtifactId: string,
+  taskKey: string,
+  name: string,
+  artifactVariables: Variable[],
+}
+
+export interface ProcessStep extends IdentifiableElement {
+  name: string;
 }
 
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
@@ -57,6 +72,33 @@ export interface ComponentConfig extends IdentifiableElement, VersionableElement
   pageName?: string;
   icon?: string;
   types?: TypeDef[];
+  imports?: Import[];
+  states?: State[];
+  references?: Reference[];
+  functions?: CustomFunctionConfig[];
+  actions?: CustomFunctionConfig[];
+  args?: Arguments[];
+  components?: Layout | {};
+  forceDynamic?: boolean;
+}
+
+export interface ProcessConfig extends IdentifiableElement, VersionableElement {
+  type: 'process';
+  name: string;
+  description?: string;
+  processKey: string;
+  processVersion: string;
+  steps?: ProcessStep[];
+}
+
+export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
+  type: 'processStep';
+  name: string;
+  description?: string;
+  processKey: string;
+  processVersion: string;
+  forceDynamic?: boolean;
+  types: TypeDef[];
   imports?: Import[];
   states?: State[];
   references?: Reference[];
@@ -255,6 +297,7 @@ export interface Import extends IdentifiableElement {
 export interface State extends IdentifiableElement {
   name: string,
   type: string,
+  isArray?: boolean,
   imports?: Import[],
   defaultValue?: string,
   generate?: boolean
@@ -281,7 +324,7 @@ export interface Navigate extends IdentifiableElement {
   name: string,
   tag: string,
   path: string,
-  params?: Record<string, string>,
+  params?: Segment[],
   inRow?: boolean,
   segments?: Segment[]
 }
@@ -603,7 +646,8 @@ export interface SpacingValue {
 export interface Segment {
   name: string,
   tag?: string,
-  value?: string
+  value?: string,
+  context: 'column' | 'variable'
 }
 
 export interface RouteSegment {
@@ -688,9 +732,9 @@ export interface Profile {
 }
 
 export interface Port {
-  internal: number,
-  external: number,
-  reference?: number
+  internal: number | string,
+  external: number | string,
+  reference?: number | string,
 }
 
 export interface Host {
@@ -738,9 +782,10 @@ export interface DockerServiceResourceLimit {
 
 export interface DockerServiceHealthcheck {
   test?: DockerServiceInstruction[],
-  interval?: string,
-  timeout?: string,
-  retries?: number
+  interval?: string | number,
+  timeout?: string | number,
+  retries?: number,
+  start_period?: string | number
 }
 
 export interface DockerServiceResources {
@@ -782,9 +827,9 @@ export interface DockerContainer {
   extends?: string,
   hostname?: string,
   profiles?: Profile[],
-  ports: Port[],
+  ports?: Port[],
   expose?: Expose[],
-  networks: Network[],
+  networks?: Network[],
   domainname?: string,
   environments?: Environment[],
   env_file?: EnvironmentFile[],
@@ -850,6 +895,7 @@ export interface ElementField {
   validation?: FieldValidation,
   defaultValue?: string,
   isList?: boolean,
+  isKey?: boolean,
   fields?: ElementField[]
   required: boolean;
 }
@@ -860,6 +906,7 @@ export interface TypeDef {
   path: string;
   tags?: string[];
   isMainType?: boolean,
+  isEnum?: boolean,
   fields: ElementField[];
 }
 
@@ -914,6 +961,11 @@ export interface CustomCodeConfig {
   code: string
 }
 
+export interface PermittedActions {
+  deletable?: boolean;
+  editable?: boolean;
+}
+
 export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElement {
   name: string,
   arguments: Arguments[],
@@ -922,6 +974,7 @@ export interface CustomFunctionConfig extends CustomCodeConfig, IdentifiableElem
   isAsync?: boolean;
   path?: string;
   returnValue: ReturnValue;
+  actions?: PermittedActions
 }
 
 // Code Snippets

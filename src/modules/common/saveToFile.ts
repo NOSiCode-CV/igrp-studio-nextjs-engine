@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path, { dirname, join } from 'path';
 import { DIRECTORIES, ERROR_MESSAGE, EXTENSIONS } from '../../utils/constants';
 import { getDirectoryPath, loadConfig, loadConfigSync } from '../../utils/helpers';
-import { ComponentConfig, PageConfig } from '../../interfaces/types';
+import { ComponentConfig, PageConfig, ProcessConfig } from '../../interfaces/types';
 
 /**
  * Saves the rendered template into the specified file. It will create the dir if it does not exist.
@@ -53,6 +53,23 @@ export const saveToFile = async (content: string, outputPath: string, override: 
             getDirectoryPath(outputPath),
             component.name.toLowerCase(),
           );
+        }
+
+        if(sourcePath != outputPath && sourcePath != getDirectoryPath(outputPath)) {
+          await fs.remove(sourcePath);
+        }
+
+      }
+
+    } else if(type === DIRECTORIES.PROCESS || type === DIRECTORIES.IGRPSTUDIO_PROCESS) {
+      const processes: ProcessConfig[] = await loadConfig(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PROCESS));
+      const process = processes.find((it) => it.id === id);
+      if (process) {
+        let sourcePath;
+        if (extension === EXTENSIONS.JSON) {
+          sourcePath = join(getDirectoryPath(outputPath), process.name.concat(extension));
+        } else {
+          sourcePath = join(getDirectoryPath(outputPath));
         }
 
         if(sourcePath != outputPath && sourcePath != getDirectoryPath(outputPath)) {
@@ -125,6 +142,23 @@ export const saveToFileSync = (content: string, outputPath: string, override: bo
             getDirectoryPath(outputPath),
             component.name.toLowerCase(),
           );
+        }
+
+        if(sourcePath != outputPath && sourcePath != getDirectoryPath(outputPath)) {
+          fs.removeSync(sourcePath);
+        }
+
+      }
+
+    } else if(type === DIRECTORIES.PROCESS || type === DIRECTORIES.IGRPSTUDIO_PROCESS) {
+      const processes: ProcessConfig[] = loadConfigSync(path.join(basePath, DIRECTORIES.IGRPSTUDIO_PROCESS));
+      const process = processes.find((it) => it.id === id);
+      if (process) {
+        let sourcePath;
+        if (extension === EXTENSIONS.JSON) {
+          sourcePath = join(getDirectoryPath(outputPath), process.name.concat(extension));
+        } else {
+          sourcePath = join(getDirectoryPath(outputPath));
         }
 
         if(sourcePath != outputPath && sourcePath != getDirectoryPath(outputPath)) {

@@ -98,6 +98,7 @@ export const TEMPLATES = {
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
+  IGRP_NGINX: 'workspace/nginx.conf.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
@@ -109,7 +110,7 @@ export const ENVIRONMENT_FILES = {
   IAM_IGRP_ENV: '.iam.igrp.env',
   FILE_IGRP_ENV: '.file.igrp.env',
   APP_LOGIC_IGRP_ENV: '.al.igrp.env',
-  IGRP_ENV: '.igrp.env',
+  IGRP_ENV: '.env',
 }
 
 export const SRC_CONFIG_FILES = {
@@ -132,6 +133,7 @@ export const SRC_CONFIG_FILES = {
   PT: 'pt',
   EN: 'en',
   VSCODE_SETTINGS: 'vscode_settings.json',
+  IGRP_NGINX: 'nginx.conf',
 };
 
 export const DST_CONFIG_FILES ={
@@ -191,6 +193,11 @@ export const INTERACTIONS_TYPES = {
   COMPUTE_LABEL: 'Compute Label',
   ACTIVE_SECTION: 'Active Section',
   HIGHLIGHT: 'Highlight',
+  BARS: 'Bars',
+  AREAS: 'Areas',
+  LINES: 'Lines',
+  PIES: 'Pies',
+  RADARS: 'Radars',
 }
 
 export const INTERACTIONS_DEFAULTS = {
@@ -212,11 +219,10 @@ export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'packa
 
 export const DIRECTORIES = {
   APP: 'src/app',
-  GENERATED: 'src/app/[locale]/(igrp)/(generated)',
-  MYAPP: 'src/app/[locale]/(myapp)',
-  LOCALE: 'src/app/[locale]',
-  LOCALE_IGRP: 'src/app/[locale]/(igrp)',
-  LOCALE_IGRP_SYS_SETTINGS: 'src/app/[locale]/(igrp)/system-settings',
+  GENERATED: 'src/app/(igrp)/(generated)',
+  MYAPP: 'src/app/(myapp)',
+  PACKAGE_IGRP: 'src/app/(igrp)',
+  IGRP_SYS_SETTINGS: 'src/app/(igrp)/system-settings',
   IGRP_ACTIONS: 'src/app/actions/(igrp)',
   SRC_ACTIONS: 'src/actions',
   ACTIONS_IGRP: 'src/actions/(igrp)',
@@ -253,6 +259,8 @@ export const DIRECTORIES = {
   PUBLIC: 'public',
   PUBLIC_IGRP: 'public/igrp',
   PROJECTS: 'projects',
+  PROCESS: 'process',
+  PROCESS_STEP: 'process/{{name}}/steps',
   PAGES: 'src/app/pages',
   ACTIONS: 'src/app/pages/{{pageName}}/actions',
   ACTIONS_COMPONENT: 'src/components/{{pageName}}/actions',
@@ -262,10 +270,12 @@ export const DIRECTORIES = {
   MESSAGES: 'messages',
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
+  IGRPSTUDIO_PROCESS: '.igrpstudio/process',
   KUBERNETES: 'k8s',
   TYPES: 'types',
-  COMPONENTS: 'src/app/[locale]/(igrp)/(generated)/components',
+  COMPONENTS: 'src/app/(igrp)/(generated)/components',
   BASE_COMPONENTS: 'src/components',
+  PROCESS_PARAMS: '[...process]'
 };
 
 export const ERROR_MESSAGE = {
@@ -279,7 +289,9 @@ export const ERROR_MESSAGE = {
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
-  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the page details and try again',
+  INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the component details and try again',
+  INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
+  INVALID_PROCESS_STEP_CONFIG: 'The provided process step configuration is invalid. Please verify the process step details and try again',
   INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
 };
 
@@ -330,7 +342,8 @@ export const COMPONENTS = [
 
 export const CONFIG_TYPES = [
   'page',
-  'component'
+  'component',
+  'process'
 ] as const;
 
 export const RESTART_TYPES = [

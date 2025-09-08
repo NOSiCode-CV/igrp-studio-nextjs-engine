@@ -11,10 +11,10 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function selectProperties() {
   return {
     label: { type: 'string', required: false, default: "Select Input" },
+    value: { type: 'string', required: false, default: '' },
     placeholder: { type: 'string', required: false, default: "Select an option..." },
+    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true }, color: { type: 'string', required: false } }, 'x-ui-widget': 'list' },
     helperText: { type: 'string', required: false },
-    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true },
-        color: { type: 'string', required: false } }, required: true }, // Array of objects with value and label
     disabled: { type: 'boolean', required: false },
     required: { type: 'boolean', required: true },
     selectClassName: { type: 'string', required: false },

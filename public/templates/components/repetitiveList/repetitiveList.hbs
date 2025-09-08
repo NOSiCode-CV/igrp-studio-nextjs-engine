@@ -1,37 +1,23 @@
-<IGRPRepetitiveComponent
+<IGRPRepetitiveComponent{{{singleTypeFormatter resourceConfig.dataType}}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if (and resourceConfig.properties.data (not resourceConfig.data.data))}}
-  items={ {{{resourceConfig.properties.data}}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.keyExtractor (not resourceConfig.data.keyExtractor))}}
-  keyExtractor={ {{{resourceConfig.properties.keyExtractor}}} }
-  {{/if~}}
-  {{!--{{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
-  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{/if~}}
-  {{/if}}
-  {{/if}}
-  {{#if resourceConfig.interactions}}
-  {{{render-interactions resourceConfig.interactions}}}
-  {{/if}}--}}
+  keyExtractor={ ({{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}) => {{#if resourceConfig.properties.dataKey}}{{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}.{{resourceConfig.properties.dataKey}}{{else}}''{{/if}} }
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
   {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
+  {{/if}}
 >
-  { ({{resourceConfig.properties.variable}}) =>
+{ ({{#if resourceConfig.properties.variable}}{{resourceConfig.properties.variable}}{{else}}item{{/if}}) =>
+  <>
   {{#if resourceConfig.children}}
   {{#each resourceConfig.children}}
   {{{render-layout this ../resourceConfig}}}
   {{/each}}
   {{/if~}}
+  </>
 }
 </IGRPRepetitiveComponent>

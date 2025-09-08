@@ -3,7 +3,10 @@ import {
   tableModalActionProperties,
   tableModalActionVariants,
   tableModalActionChildProperties,
-  tableModalActionChildPropertiesMapping, tableModalActionInteractions, tableModalActionInteractionsMapping,
+  tableModalActionChildPropertiesMapping,
+  tableModalActionInteractions,
+  tableModalActionInteractionsMapping,
+  tableModalActionRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -17,18 +20,19 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPDataTableButtonModal')
+    component.loadComponentClass('IGRPDataTableButtonModal');
     component.loadVariants(tableModalActionVariants());
-    component.loadParent(TABLE_ACTION_LIST_CELL)
-    component.loadGroup('Columns')
-    component.loadLabel('Modal Action')
+    component.loadParent(TABLE_ACTION_LIST_CELL);
+    component.loadGroup('Columns');
+    component.loadLabel('Modal Action');
     component.getInteractions(tableModalActionInteractions());
     component.getInteractionsMapping(tableModalActionInteractionsMapping());
     component.getProperties(tableModalActionProperties());
     component.getPropertiesMapping(tableModalActionPropertiesMapping());
     component.getChildProperties(tableModalActionChildProperties());
     component.getChildPropertiesMapping(tableModalActionChildPropertiesMapping());
-    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_MODAL_ACTION }))
+    component.getRules(tableModalActionRules());
+    component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_MODAL_ACTION }));
 
     component.loadStates([]);
 

@@ -1,4 +1,4 @@
-import { baseInteraction, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -6,7 +6,6 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableModalActionProperties() {
   return {
     ...actionProperties('Modal'),
-    type: { type: 'string', required: true, default: 'modal' },
     modalTitle: { type: 'string', required: false, default: 'New Modal' },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
@@ -70,4 +69,10 @@ export function tableModalActionVariants() {
   return {
     default: ''
   };
+}
+
+export function tableModalActionRules() {
+  return {
+    ...baseRules()
+  }
 }

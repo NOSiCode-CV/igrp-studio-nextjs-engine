@@ -7,6 +7,7 @@ import {
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { buttonProperties } from '../button/properties';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function alertDialogProperties() {
   return {
@@ -49,11 +50,25 @@ export function alertDialogVariants() {
   return {};
 }
 
+function onClickInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function alertDialogInteractions() {
   return {
-    onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_OPEN), required: false },
-    onCancel: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CANCEL), required: false },
-    onAction: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_ACTION), required: false },
+    onOpenChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_OPEN, undefined, onClickInteractionFieldVisibility()), required: false },
+    onCancel: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CANCEL, undefined, onClickInteractionFieldVisibility()), required: false },
+    onAction: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_ACTION, undefined, onClickInteractionFieldVisibility()), required: false },
   };
 }
 

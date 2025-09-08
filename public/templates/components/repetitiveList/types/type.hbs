@@ -1,0 +1,7 @@
+{{#each resourceConfig.types}}
+type {{capitalize this.name}} = {
+  {{#each this.fields}}
+    {{this.name}}: {{this.type}};
+  {{/each}}
+}
+{{/each}}

@@ -4,14 +4,14 @@ import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const componentConfig: ComponentConfig = {
+const componentConfig2: ComponentConfig =  {
   type: 'component',
   scope: 'page',
-  pagePath: '(contribuinte)/contribuintes',
+  pagePath: 'contribuintes',
   pageName: 'contribuintes',
   description: 'ContribuinteForm',
   name: 'contribuinteForm',
-  id: 'axcuwf9jty',
+  id: 'iznykl6s1s',
   args: [
     {
       id: '1',
@@ -21,16 +21,6 @@ const componentConfig: ComponentConfig = {
       isOptional: true,
       isInterface: false,
       isFunction: false,
-      isState: false,
-    },
-    {
-      id: '2',
-      name: 'onSubmitForm',
-      type: 'any',
-      isList: false,
-      isOptional: true,
-      isInterface: false,
-      isFunction: true,
       isState: false,
     },
     {
@@ -44,11 +34,21 @@ const componentConfig: ComponentConfig = {
       isState: false,
     },
     {
-      id: '4',
-      name: 'onCancel',
-      type: 'any',
+      id: '5',
+      name: 'shouldSubmit',
+      type: 'boolean',
       isList: false,
-      isOptional: true,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: '6',
+      name: 'onAfterSubmit',
+      type: 'void',
+      isList: false,
+      isOptional: false,
       isInterface: false,
       isFunction: true,
       isState: false,
@@ -57,112 +57,41 @@ const componentConfig: ComponentConfig = {
   components: {
     id: 'component_0hkjfi',
     componentName: 'component',
-    label: 'component',
-    properties: {
-      variant: 'default',
-      commonProperties: {},
-    },
+
+    properties: { commonProperties: { generateReference: false } },
     children: [
-      {
-        id: 'pageheader_ei6aw3',
-        tag: 'pageHeader1',
-        componentName: 'pageHeader',
-        label: 'Page Header',
-        type: 'group',
-        children: [
-          {
-            id: 'button_e2y2w6',
-            tag: 'button2',
-            componentName: 'button',
-            label: 'Button',
-            type: 'group',
-            children: [],
-            interactions: {
-              onClick: {
-                type: 'formSubmit',
-                function: {
-                  fnCustomSet: '() => {}',
-                  type: 'function',
-                  fnCustomCode: {
-                    imports: [],
-                  },
-                },
-                action: {
-                  actionCustomSet: '() => {}',
-                },
-                formSubmit: {
-                  formId: '',
-                  targetForm: 'form1',
-                },
-              },
-            },
-            allowTypes: false,
-            data: {},
-            properties: {
-              label: 'Gravar Utente',
-              variant: 'default',
-              size: 'default',
-              iconProperties: {
-                showIcon: true,
-                iconName: 'Save',
-              },
-              disabled: false,
-              commonProperties: {},
-              content: 'Salvar Contribuinte',
-            },
-            childProperties: {},
-          },
-        ],
-        interactions: {},
-        allowTypes: false,
-        data: {},
-        properties: {
-          title: 'Novo Contribuinte',
-          description: '',
-          variant: 'h3',
-          commonProperties: {},
-          showBackButton: true,
-          urlBackButton: '(contribuinte)/contribuintes',
-          iconProperties: {
-            iconBackButton: 'ArrowLeft',
-          },
-          isSticky: true,
-          className: 'top-10 z-8 -mt-4',
-        },
-        childProperties: {},
-      },
       {
         id: 'form_bkqda6',
         tag: 'form1',
         componentName: 'form',
-        label: 'Form',
+
         type: 'group',
         children: [
           {
             id: 'columns_sis1nx',
             tag: 'columns1',
             componentName: 'columns',
-            label: 'Columns',
+
             type: 'group',
             children: [
               {
                 id: 'column_c8l63e',
                 tag: 'column1',
                 componentName: 'column',
-                label: 'Column',
+
                 children: [
                   {
                     id: 'menunavigation_gyktj3',
                     tag: 'menuNavigation1',
                     componentName: 'menuNavigation',
-                    label: 'Menu Navigation',
+
                     type: 'group',
                     children: [
                       {
                         id: 'menunavigationitem_twxi07',
                         tag: 'menuNavigationItem1',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
@@ -170,14 +99,9 @@ const componentConfig: ComponentConfig = {
                         data: {},
                         properties: {
                           targetRef: 'identificacao',
-                          label: 'Informações Básicas',
-                          iconProperties: {
-                            icon: 'Building',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
+
+                          iconProperties: { icon: 'Building' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -185,22 +109,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_cru33e',
                         tag: 'menuNavigationItem6',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          targetRef: '',
-                          label: 'Sector de Actividade/SOAT',
-                          iconProperties: {
-                            icon: 'Briefcase',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          targetRef: 'actividadesEconomicas',
+
+                          iconProperties: { icon: 'Briefcase' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -208,20 +127,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_fmrfvv',
                         tag: 'menuNavigationItem3',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          label: 'Endereços',
-                          iconProperties: {
-                            icon: 'MapPin',
-                          },
-                          disabled: false,
-                          commonProperties: {},
-                          targetRef: 'residencia',
+                          targetRef: 'enderecos',
+
+                          iconProperties: { icon: 'MapPin' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                         style: {
@@ -247,40 +163,16 @@ const componentConfig: ComponentConfig = {
                           },
                           spacing: {
                             margin: {
-                              top: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              right: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              bottom: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              left: {
-                                value: '0',
-                                unit: 'px',
-                              },
+                              top: { value: '0', unit: 'px' },
+                              right: { value: '0', unit: 'px' },
+                              bottom: { value: '0', unit: 'px' },
+                              left: { value: '0', unit: 'px' },
                             },
                             padding: {
-                              top: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              right: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              bottom: {
-                                value: '0',
-                                unit: 'px',
-                              },
-                              left: {
-                                value: '0',
-                                unit: 'px',
-                              },
+                              top: { value: '0', unit: 'px' },
+                              right: { value: '0', unit: 'px' },
+                              bottom: { value: '0', unit: 'px' },
+                              left: { value: '0', unit: 'px' },
                             },
                           },
                           backgrounds: [
@@ -300,20 +192,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_z22k7t',
                         tag: 'menuNavigationItem27',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          label: 'Contacto',
-                          iconProperties: {
-                            icon: 'Phone',
-                          },
-                          disabled: false,
-                          commonProperties: {},
-                          targetRef: 'formList1',
+                          targetRef: 'contactos',
+
+                          iconProperties: { icon: 'Phone' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -321,20 +210,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_xw9e0p',
                         tag: 'menuNavigationItem5',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          label: 'Dados Bancários',
-                          iconProperties: {
-                            icon: 'CreditCard',
-                          },
-                          disabled: false,
-                          commonProperties: {},
-                          targetRef: 'contaBancaria',
+                          targetRef: 'dadosBancarios',
+
+                          iconProperties: { icon: 'CreditCard' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -342,22 +228,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_kef1ox',
                         tag: 'menuNavigationItem2',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          targetRef: 'documentos',
-                          label: 'Documentos',
-                          iconProperties: {
-                            icon: 'FileText',
-                          },
-                          disabled: false,
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          targetRef: 'anexos',
+
+                          iconProperties: { icon: 'FileText' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -365,20 +246,17 @@ const componentConfig: ComponentConfig = {
                         id: 'menunavigationitem_hts48h',
                         tag: 'menuNavigationItem8',
                         componentName: 'menuNavigationItem',
-                        label: 'Menu Navigation Item',
+
                         type: '',
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          label: 'Observaçōes',
-                          iconProperties: {
-                            icon: 'MessageSquare',
-                          },
-                          disabled: false,
-                          commonProperties: {},
                           targetRef: 'obs',
+
+                          iconProperties: { icon: 'MessageSquare' },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -395,9 +273,15 @@ const componentConfig: ComponentConfig = {
                           imports: [],
                           generate: true,
                         },
-                        value: {
+                        value: { id: '', code: '' },
+                      },
+                      badgeContent: {
+                        state: {
                           id: '',
-                          code: '',
+                          name: 'menuNavigation1BadgeContent',
+                          type: '',
+                          imports: [],
+                          generate: false,
                         },
                       },
                     },
@@ -407,28 +291,25 @@ const componentConfig: ComponentConfig = {
                       badgeVariant: 'solid',
                       badgeContent: 'Novo',
                       showChevron: true,
+                      commonProperties: { generateReference: false },
                       isStickyTop: true,
-                      commonProperties: {},
                       className: 'top-32',
-                      targetRef: '',
                     },
                     childProperties: {},
-                    style: {
-                      backgrounds: [],
-                    },
+                    style: { backgrounds: [] },
                   },
                   {
                     id: 'alert_slynmu',
                     tag: 'alert1',
                     componentName: 'alert',
-                    label: 'Alert',
+
                     type: 'group',
                     children: [
                       {
                         id: 'text_wncsxk',
                         tag: 'text3',
                         componentName: 'text',
-                        label: 'Text',
+
                         type: 'group',
                         children: [],
                         interactions: {},
@@ -455,9 +336,7 @@ const componentConfig: ComponentConfig = {
                           animate: false,
                           truncate: false,
                           maxLines: 3,
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          commonProperties: { generateReference: false },
                           className: 'mb-0',
                         },
                         childProperties: {},
@@ -466,7 +345,7 @@ const componentConfig: ComponentConfig = {
                         id: 'text_xfexaf',
                         tag: 'text2',
                         componentName: 'text',
-                        label: 'Text',
+
                         type: 'group',
                         children: [],
                         interactions: {},
@@ -494,9 +373,7 @@ const componentConfig: ComponentConfig = {
                           animate: false,
                           truncate: false,
                           maxLines: 3,
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          commonProperties: { generateReference: false },
                         },
                         childProperties: {},
                       },
@@ -507,17 +384,16 @@ const componentConfig: ComponentConfig = {
                     properties: {
                       color: 'info',
                       variant: 'soft',
-                      showLink: false,
                       textColored: true,
                       borderColored: true,
                       bgColored: true,
                       iconProperties: {
-                        icon: 'Dot',
+                        showIcon: true,
+                        iconName: 'Dot',
+                        iconPlacement: 'end',
                         linkIcon: 'ArrowRight',
                       },
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                      commonProperties: { generateReference: false },
                     },
                     childProperties: {},
                   },
@@ -526,52 +402,131 @@ const componentConfig: ComponentConfig = {
                 allowTypes: false,
                 data: {},
                 properties: {
-                  variant: 'span3',
+                  variant: { default: 'span1' },
+                  commonProperties: { generateReference: false },
                 },
+                childProperties: {},
+                style: {},
               },
               {
                 id: 'column_2_1bpcg2',
                 componentName: 'column',
-                label: 'Column 2',
+
                 properties: {
-                  variant: 'span9',
+                  variant: { default: 'span3' },
+                  commonProperties: { generateReference: false },
                 },
                 children: [
                   {
                     id: 'card_asn7ee',
                     tag: 'identificacao',
                     componentName: 'card',
-                    label: 'Card',
+
                     type: 'group',
                     children: [
                       {
                         id: 'cardheader_uyqkqs',
                         tag: 'cardHeader1',
                         componentName: 'cardHeader',
-                        label: 'Card Header',
+
                         children: [
                           {
-                            id: 'headline_uep1az',
-                            tag: 'headline1',
-                            componentName: 'headline',
-                            label: 'Headline',
+                            id: 'flex_cz2w6b',
+                            tag: 'flex1',
+                            componentName: 'flex',
+
                             type: 'group',
-                            children: [],
+                            children: [
+                              {
+                                id: 'headline_uep1az',
+                                tag: 'headline1',
+                                componentName: 'headline',
+
+                                type: 'group',
+                                children: [],
+                                interactions: {},
+                                allowTypes: false,
+                                data: {},
+                                properties: {
+                                  title: 'Informações Básicas',
+                                  description: 'Dados principais do contribuinte',
+                                  variant: 'h5',
+                                  roleColor: 'solid',
+                                  color: 'primary',
+                                  iconProperties: { showIcon: true, iconName: 'Building' },
+                                  commonProperties: { generateReference: false },
+                                  className: 'mt-3',
+                                },
+                                childProperties: {},
+                                style: {
+                                  layout: {
+                                    type: 'flex',
+                                    flex: {
+                                      direction: 'row',
+                                      wrap: 'nowrap',
+                                      alignItems: 'stretch',
+                                      justifyContent: 'flex-start',
+                                      gap: '2',
+                                    },
+                                    grid: {
+                                      templateColumns: '4',
+                                      templateRows: '1',
+                                      gap: '2',
+                                      justifyItems: 'start',
+                                      alignItems: 'start',
+                                      direction: 'row',
+                                      dense: false,
+                                    },
+                                    block: {},
+                                  },
+                                  spacing: {
+                                    margin: {
+                                      top: { value: '0', unit: 'px' },
+                                      right: { value: '0', unit: 'px' },
+                                      bottom: { value: '0', unit: 'px' },
+                                      left: { value: '0', unit: 'px' },
+                                    },
+                                    padding: {
+                                      top: { value: '0', unit: 'px' },
+                                      right: { value: '0', unit: 'px' },
+                                      bottom: { value: '0', unit: 'px' },
+                                      left: { value: '0', unit: 'px' },
+                                    },
+                                  },
+                                },
+                              },
+                              {
+                                id: 'badge_r2ihcm',
+                                tag: 'badge1',
+                                componentName: 'badge',
+
+                                type: 'group',
+                                children: [],
+                                interactions: {},
+                                allowTypes: false,
+                                data: {},
+                                properties: {
+                                  color: 'primary',
+                                  variant: 'solid',
+                                  size: 'md',
+                                  content: 'Obrigatório',
+                                  iconProperties: {
+                                    showIcon: false,
+                                    iconName: 'Info',
+                                    iconPlacement: 'start',
+                                  },
+                                  commonProperties: { generateReference: false },
+                                  dot: true,
+                                },
+                                childProperties: {},
+                              },
+                            ],
                             interactions: {},
                             allowTypes: false,
                             data: {},
                             properties: {
-                              title: 'Informações Básicas',
-                              description: 'Dados principais do contribuinte',
-                              variant: 'h5',
-                              commonProperties: {},
-                              className: 'mt-3',
-                              roleColor: 'solid',
-                              color: 'primary',
-                              iconProperties: {
-                                showIcon: true,
-                                iconName: 'Building',
-                              },
+                              variant: '',
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                             style: {
@@ -580,111 +535,55 @@ const componentConfig: ComponentConfig = {
                                 flex: {
                                   direction: 'row',
                                   wrap: 'nowrap',
-                                  alignItems: 'stretch',
-                                  justifyContent: 'flex-start',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
                                   gap: '2',
                                 },
                                 grid: {
                                   templateColumns: '4',
                                   templateRows: '1',
                                   gap: '2',
-                                  justifyItems: 'start',
+                                  justifyItems: 'stretch',
                                   alignItems: 'start',
                                   direction: 'row',
                                   dense: false,
                                 },
                                 block: {},
                               },
-                              spacing: {
-                                margin: {
-                                  top: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  right: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  bottom: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  left: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                },
-                                padding: {
-                                  top: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  right: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  bottom: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                  left: {
-                                    value: '0',
-                                    unit: 'px',
-                                  },
-                                },
-                              },
-                              backgrounds: [
-                                {
-                                  type: 'color',
-                                  value: '#FFFFFF',
-                                  size: 'cover',
-                                  position: 'center',
-                                  repeat: 'no-repeat',
-                                  attachment: 'scroll',
-                                  blendMode: 'normal',
-                                },
-                              ],
                             },
                           },
                         ],
                         interactions: {},
                         allowTypes: false,
                         data: {},
-                        properties: {
-                          commonProperties: {},
-                        },
+                        properties: { commonProperties: {} },
                         childProperties: {},
                       },
                       {
                         id: 'cardcontent_04zpeq',
                         tag: 'cardContent1',
                         componentName: 'cardContent',
-                        label: 'Card Content',
+
                         children: [
                           {
                             id: 'grid_5i65am',
                             tag: 'grid6',
                             componentName: 'grid',
-                            label: 'Grid',
+
                             type: 'group',
                             children: [
                               {
                                 id: 'combobox_su2ger',
                                 tag: 'tipoDocumento',
                                 componentName: 'combobox',
-                                label: 'Combobox',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      fnCustomSet: '() => {}',
-                                      type: 'function',
-                                    },
-                                    action: {
-                                      actionCustomSet: '() => {}',
-                                    },
+                                    function: { fnCustomSet: '() => {}', type: 'function' },
+                                    action: { actionCustomSet: '() => {}' },
                                   },
                                 },
                                 allowTypes: false,
@@ -698,10 +597,7 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                   options: {
                                     state: {
@@ -712,25 +608,20 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                 },
                                 properties: {
-                                  label: 'Tipo de documento de inscrição',
+
                                   variant: 'single',
                                   placeholder: 'Select an option...',
+                                  required: true,
                                   selectLabel: 'No option found',
                                   showSearch: true,
+                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                   gridSize: 'full',
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
-                                  required: true,
                                 },
                                 childProperties: {},
                               },
@@ -738,35 +629,24 @@ const componentConfig: ComponentConfig = {
                                 id: 'inputtext_tricll',
                                 tag: 'numDocumentoInscricao',
                                 componentName: 'inputText',
-                                label: 'Input Text',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      type: 'function',
-                                    },
+                                    function: { type: 'function' },
                                     action: {},
                                   },
                                 },
                                 allowTypes: false,
                                 data: {},
                                 properties: {
-                                  value: '',
-                                  label: 'Número de documento de inscrição',
-                                  placeholder: '',
-                                  helperText: '',
-                                  iconProperties: {
-                                    showIcon: false,
-                                  },
-                                  disabled: false,
+
+                                  iconProperties: { showIcon: false },
                                   required: true,
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -774,35 +654,24 @@ const componentConfig: ComponentConfig = {
                                 id: 'inputtext_94m7xo',
                                 tag: 'denominacaoSocial',
                                 componentName: 'inputText',
-                                label: 'Input Text',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      type: 'function',
-                                    },
+                                    function: { type: 'function' },
                                     action: {},
                                   },
                                 },
                                 allowTypes: false,
                                 data: {},
                                 properties: {
-                                  value: '',
-                                  label: 'Denominação Social',
-                                  placeholder: '',
-                                  helperText: '',
-                                  iconProperties: {
-                                    showIcon: false,
-                                  },
-                                  disabled: false,
+
+                                  iconProperties: { showIcon: false },
                                   required: true,
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -810,35 +679,24 @@ const componentConfig: ComponentConfig = {
                                 id: 'inputtext_927gy6',
                                 tag: 'nomeComercial',
                                 componentName: 'inputText',
-                                label: 'Input Text',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      type: 'function',
-                                    },
+                                    function: { type: 'function' },
                                     action: {},
                                   },
                                 },
                                 allowTypes: false,
                                 data: {},
                                 properties: {
-                                  value: '',
-                                  label: 'Nome Comercial',
-                                  placeholder: '',
-                                  helperText: '',
-                                  iconProperties: {
-                                    showIcon: false,
-                                  },
-                                  disabled: false,
+
+                                  iconProperties: { showIcon: false },
                                   required: true,
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -846,16 +704,13 @@ const componentConfig: ComponentConfig = {
                                 id: 'combobox_8hi371',
                                 tag: 'codigoEstatuto',
                                 componentName: 'combobox',
-                                label: 'Combobox',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      fnCustomSet: '() => {}',
-                                      type: 'function',
-                                    },
+                                    function: { fnCustomSet: '() => {}', type: 'function' },
                                     action: {},
                                   },
                                 },
@@ -870,10 +725,7 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                   options: {
                                     state: {
@@ -884,27 +736,19 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                 },
                                 properties: {
-                                  label: 'Estatuto Juridico',
+
                                   variant: 'single',
                                   placeholder: 'Select an option...',
                                   required: true,
                                   selectLabel: 'No option found',
                                   showSearch: true,
                                   gridSize: 'full',
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -912,22 +756,19 @@ const componentConfig: ComponentConfig = {
                                 id: 'combobox_q4ey1i',
                                 tag: 'tipoRepresentacao',
                                 componentName: 'combobox',
-                                label: 'Combobox',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
                                     function: {
-                                      fnCustomSet: 'setSelecttipoRepresentacaoValue',
+                                      fnCustomSet:
+                                        '(value)=>setSelecttipoRepresentacaoValue(value as string)',
                                       type: 'function',
-                                      fnCustomCode: {
-                                        imports: [],
-                                      },
+                                      fnCustomCode: { imports: [] },
                                     },
-                                    action: {
-                                      actionCustomSet: '() => {}',
-                                    },
+                                    action: { actionCustomSet: '() => {}' },
                                   },
                                 },
                                 allowTypes: false,
@@ -941,10 +782,7 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                   options: {
                                     state: {
@@ -955,25 +793,20 @@ const componentConfig: ComponentConfig = {
                                       imports: [],
                                       generate: true,
                                     },
-                                    value: {
-                                      id: '',
-                                      code: '',
-                                    },
+                                    value: { id: '', code: '' },
                                   },
                                 },
                                 properties: {
-                                  label: 'Tipo de representação',
+
                                   variant: 'single',
                                   placeholder: 'Select an option...',
                                   required: true,
                                   selectLabel: 'No option found',
                                   showSearch: true,
-                                  gridSize: 'full',
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
+                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
+                                  gridSize: '',
                                 },
                                 childProperties: {},
                                 rules: [],
@@ -982,35 +815,24 @@ const componentConfig: ComponentConfig = {
                                 id: 'inputtext_24oey4',
                                 tag: 'nomeResponsavel',
                                 componentName: 'inputText',
-                                label: 'Input Text',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      type: 'function',
-                                    },
+                                    function: { type: 'function' },
                                     action: {},
                                   },
                                 },
                                 allowTypes: false,
                                 data: {},
                                 properties: {
-                                  value: '',
-                                  label: 'Nome do Responsável ',
-                                  placeholder: '',
-                                  helperText: '',
-                                  iconProperties: {
-                                    showIcon: false,
-                                  },
-                                  disabled: false,
+
+                                  iconProperties: { showIcon: false },
                                   required: true,
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -1018,15 +840,13 @@ const componentConfig: ComponentConfig = {
                                 id: 'inputdatepicker_po3deb',
                                 tag: 'dataInicioAtividade',
                                 componentName: 'inputDatePicker',
-                                label: 'Date Picker',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onDateChange: {
                                     type: 'function',
-                                    function: {
-                                      type: 'function',
-                                    },
+                                    function: { type: 'function' },
                                     action: {},
                                   },
                                 },
@@ -1034,10 +854,8 @@ const componentConfig: ComponentConfig = {
                                 data: {},
                                 properties: {
                                   date: '2025-01-01',
-                                  label: 'Data de Início de Atividade',
+
                                   placeholder: 'Please select a date...',
-                                  helperText: '',
-                                  disabled: false,
                                   required: true,
                                   gridSize: 'full',
                                   dateFormat: 'dd/MM/yyyy',
@@ -1049,25 +867,11 @@ const componentConfig: ComponentConfig = {
                                   month: '2025-01-01',
                                   endMonth: '2025-12-31',
                                   numberOfMonths: '1',
-                                  weekStartsOn: 0,
                                   pagedNavigation: false,
                                   reverseMonths: false,
-                                  hideNavigation: false,
-                                  disableNavigation: false,
-                                  fixedWeeks: false,
-                                  hideWeekdays: false,
-                                  showOutsideDays: false,
-                                  showWeekNumber: false,
-                                  animate: false,
-                                  broadcastCalendar: false,
-                                  ISOWeek: false,
                                   captionLayout: 'label',
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {},
-                                  className: '',
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -1077,49 +881,24 @@ const componentConfig: ComponentConfig = {
                             data: {},
                             properties: {
                               gap: 4,
-                              variant: 'cols3',
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              variant: { default: 'cols1', md: 'cols2', lg: '', xs: '' },
+                              commonProperties: { generateReference: false },
                             },
-                            childProperties: {
-                              className: 'col-span-1',
-                            },
-                            style: {
-                              layout: {
-                                type: 'grid',
-                                flex: {
-                                  direction: 'row',
-                                  wrap: 'nowrap',
-                                  alignItems: 'stretch',
-                                  justifyContent: 'flex-start',
-                                  gap: '2',
-                                },
-                                grid: {
-                                  templateColumns: '3',
-                                  templateRows: '1',
-                                  gap: '2',
-                                  justifyItems: 'stretch',
-                                  alignItems: 'start',
-                                  direction: 'row',
-                                  dense: false,
-                                },
-                                block: {},
-                              },
-                            },
+                            childProperties: { className: 'col-span-1' },
+                            style: {},
                           },
                           {
                             id: 'container_4n20xj',
                             tag: 'container1',
                             componentName: 'container',
-                            label: 'Container',
+
                             type: 'group',
                             children: [
                               {
                                 id: 'text_dys27z',
                                 tag: 'text1',
                                 componentName: 'text',
-                                label: 'Text',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {},
@@ -1146,9 +925,7 @@ const componentConfig: ComponentConfig = {
                                   animate: false,
                                   truncate: false,
                                   maxLines: 3,
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
+                                  commonProperties: { generateReference: false },
                                 },
                                 childProperties: {},
                               },
@@ -1156,16 +933,13 @@ const componentConfig: ComponentConfig = {
                                 id: 'combobox_fk02jf',
                                 tag: 'uuidSede',
                                 componentName: 'combobox',
-                                label: 'Combobox',
+
                                 type: 'group',
                                 children: [],
                                 interactions: {
                                   onChange: {
                                     type: 'function',
-                                    function: {
-                                      fnCustomSet: '() => {}',
-                                      type: 'function',
-                                    },
+                                    function: { fnCustomSet: '() => {}', type: 'function' },
                                     action: {},
                                   },
                                 },
@@ -1193,20 +967,16 @@ const componentConfig: ComponentConfig = {
                                   },
                                 },
                                 properties: {
-                                  label: 'Contribuinte SEDE',
+
                                   variant: 'single',
                                   placeholder: 'Select an option...',
                                   required: true,
                                   selectLabel: 'No option found',
                                   showSearch: true,
+                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                                  dataProperties: { isVirtual: false, isType: true },
+                                  commonProperties: { generateReference: false },
                                   gridSize: 'full',
-                                  dataProperties: {
-                                    isVirtual: false,
-                                    isType: true,
-                                  },
-                                  commonProperties: {
-                                    generateReference: false,
-                                  },
                                 },
                                 childProperties: {},
                               },
@@ -1215,9 +985,7 @@ const componentConfig: ComponentConfig = {
                             allowTypes: false,
                             data: {},
                             properties: {
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              commonProperties: { generateReference: false },
                               className: 'border rounded-sm p-2',
                             },
                             childProperties: {},
@@ -1254,28 +1022,17 @@ const componentConfig: ComponentConfig = {
                             id: 'inputhidden_vtwlok',
                             tag: 'soatUsado',
                             componentName: 'inputHidden',
-                            label: 'Input Hidden',
+
                             type: 'group',
                             children: [],
                             interactions: {},
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'soatUsado',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1289,10 +1046,7 @@ const componentConfig: ComponentConfig = {
                           commonProperties: {},
                           className: '',
                         },
-                        childProperties: {
-                          className: '',
-                          commonProperties: {},
-                        },
+                        childProperties: { className: '', commonProperties: {} },
                         style: {
                           layout: {
                             type: 'block',
@@ -1320,56 +1074,49 @@ const componentConfig: ComponentConfig = {
                         id: 'cardfooter_hbqeuz',
                         tag: 'cardFooter1',
                         componentName: 'cardFooter',
-                        label: 'Card Footer',
+
                         children: [],
                         interactions: {},
                         allowTypes: false,
                         data: {},
-                        properties: {
-                          commonProperties: {},
-                        },
+                        properties: { commonProperties: {} },
                       },
                     ],
                     interactions: {},
                     allowTypes: false,
                     data: {},
-                    properties: {
-                      commonProperties: {
-                        generateReference: true,
-                      },
-                    },
+                    properties: { commonProperties: { generateReference: true } },
                     childProperties: {},
                   },
                   {
                     id: 'formlist_4ayxgn',
                     tag: 'actividadesEconomicas',
                     componentName: 'formList',
-                    label: 'Form List',
+
                     type: 'group',
                     children: [
                       {
                         id: 'grid_00pig4',
                         tag: 'grid2',
                         componentName: 'grid',
-                        label: 'Grid',
+
                         type: 'group',
                         children: [
                           {
                             id: 'combobox_39cam7',
                             tag: 'idActividadeEconomica',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
                                 function: {
-                                  fnCustomSet: '(value) => {updateActividade(value, index)}',
+                                  fnCustomSet:
+                                    '(value) => {updateActividade(value as string, index)}',
                                   type: 'function',
-                                  fnCustomCode: {
-                                    imports: [],
-                                  },
+                                  fnCustomCode: { imports: [] },
                                 },
                                 action: {},
                               },
@@ -1385,10 +1132,7 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                               options: {
                                 state: {
@@ -1399,27 +1143,19 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                             },
                             properties: {
-                              label: 'Actividade',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
+                              required: true,
                               selectLabel: 'No option found',
                               showSearch: true,
-                              gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                              required: true,
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1427,69 +1163,68 @@ const componentConfig: ComponentConfig = {
                             id: 'inputnumber_ezr6bm',
                             tag: 'soat',
                             componentName: 'inputNumber',
-                            label: 'Number',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'SOAT',
+
                               name: 'number',
-                              defaultValue: 0,
-                              formatOptions: '',
-                              min: 0,
                               max: 9999999,
                               step: 1,
-                              disabled: true,
                               required: true,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                              disabled: true,
                             },
                             childProperties: {},
                           },
                           {
                             id: 'checkbox_bi8c08',
-                            tag: 'nivelActividade',
+                            tag: 'principal',
                             componentName: 'checkbox',
-                            label: 'Checkbox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onCheckedChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
-                            data: {
-                              checked: {},
-                            },
+                            data: {},
                             properties: {
-                              label: 'Principal',
-                              commonProperties: {
-                                generateReference: false,
-                              },
-                              dataProperties: {
-                                isType: true,
-                              },
+
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputhidden_c3pyhj',
+                            tag: 'inputHidden2',
+                            componentName: 'inputHidden',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {},
+                            properties: {
+
+                              required: false,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1499,14 +1234,10 @@ const componentConfig: ComponentConfig = {
                         data: {},
                         properties: {
                           gap: 4,
-                          variant: 'cols2',
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
+                          commonProperties: { generateReference: false },
                         },
-                        childProperties: {
-                          className: 'col-span-1',
-                        },
+                        childProperties: { className: 'col-span-1' },
                       },
                     ],
                     interactions: {},
@@ -1521,10 +1252,7 @@ const componentConfig: ComponentConfig = {
                           imports: [],
                           generate: true,
                         },
-                        value: {
-                          id: '',
-                          code: '',
-                        },
+                        value: { id: '', code: '' },
                       },
                       badgeValue: {
                         state: {
@@ -1537,25 +1265,19 @@ const componentConfig: ComponentConfig = {
                       },
                     },
                     properties: {
-                      label: 'Sector de Actividade/SOAT',
+
                       description: 'Atividades econômicas do contribuinte',
                       color: 'primary',
                       variant: 'solid',
                       badgeValue: 'SOAT Ponderado: 0.00%',
-                      computeLabel: {
-                        code: 'Item ${index}',
-                      },
+                      computeLabel: { code: 'Item ${index}' },
                       iconProperties: {
                         showIcon: false,
-                        iconName: 'Briefcase',
                         addButtonIconName: 'Plus',
+                        iconName: 'Briefcase',
                       },
                       addButtonLabel: 'Add',
-                      dot: false,
-                      className: '',
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                      commonProperties: { generateReference: true },
                     },
                     childProperties: {},
                     style: {
@@ -1585,30 +1307,27 @@ const componentConfig: ComponentConfig = {
                     id: 'formlist_x67fp6',
                     tag: 'enderecos',
                     componentName: 'formList',
-                    label: 'Form List',
+
                     type: 'group',
                     children: [
                       {
                         id: 'grid_wpujgp',
                         tag: 'grid3',
                         componentName: 'grid',
-                        label: 'Grid',
+
                         type: 'group',
                         children: [
                           {
                             id: 'combobox_28kwl8',
                             tag: 'tipoEndereco',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
-                                },
+                                function: { fnCustomSet: '() => {}', type: 'function' },
                                 action: {},
                               },
                             },
@@ -1623,10 +1342,7 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                               options: {
                                 state: {
@@ -1637,27 +1353,20 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                             },
                             properties: {
-                              label: 'Tipo de Endereço',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
                               required: true,
                               selectLabel: 'No option found',
                               showSearch: true,
-                              gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                              gridSize: '',
                             },
                             childProperties: {},
                           },
@@ -1665,37 +1374,24 @@ const componentConfig: ComponentConfig = {
                             id: 'inputtext_9s7kmv',
                             tag: 'rua',
                             componentName: 'inputText',
-                            label: 'Input Text',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Endereço',
-                              placeholder: '',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: true,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1703,37 +1399,24 @@ const componentConfig: ComponentConfig = {
                             id: 'inputtext_iwa52m',
                             tag: 'pontoRef',
                             componentName: 'inputText',
-                            label: 'Input Text',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Ponto Referência  ',
-                              placeholder: '',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: true,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1741,16 +1424,13 @@ const componentConfig: ComponentConfig = {
                             id: 'combobox_w4zn59',
                             tag: 'idGeografia',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
-                                },
+                                function: { fnCustomSet: '() => {}', type: 'function' },
                                 action: {},
                               },
                             },
@@ -1765,10 +1445,7 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                               options: {
                                 state: {
@@ -1779,27 +1456,20 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                             },
                             properties: {
-                              label: 'Região',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
                               required: true,
                               selectLabel: 'No option found',
                               showSearch: true,
-                              gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                              gridSize: '',
                             },
                             childProperties: {},
                           },
@@ -1807,37 +1477,24 @@ const componentConfig: ComponentConfig = {
                             id: 'inputtext_u4ya54',
                             tag: 'caixaPostal',
                             componentName: 'inputText',
-                            label: 'Input Text',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Caixa Postal',
-                              placeholder: '',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1845,37 +1502,42 @@ const componentConfig: ComponentConfig = {
                             id: 'inputtext_dm8n05',
                             tag: 'numPorta',
                             componentName: 'inputText',
-                            label: 'Input Text',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Numero de Porta',
-                              placeholder: '',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputhidden_7ez4pt',
+                            tag: 'inputHidden1',
+                            componentName: 'inputHidden',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {},
+                            properties: {
+
+                              required: false,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -1885,14 +1547,11 @@ const componentConfig: ComponentConfig = {
                         data: {},
                         properties: {
                           gap: 4,
-                          variant: 'cols3',
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
+                          commonProperties: { generateReference: false },
                         },
-                        childProperties: {
-                          className: 'col-span-1',
-                        },
+                        childProperties: { className: 'col-span-1' },
+                        style: {},
                       },
                     ],
                     interactions: {},
@@ -1910,24 +1569,19 @@ const componentConfig: ComponentConfig = {
                       },
                     },
                     properties: {
-                      label: 'Endereços',
+
                       description: 'Endereços do contribuinte',
                       color: 'primary',
                       variant: 'solid',
                       badgeValue: '',
-                      computeLabel: {
-                        code: 'Item ${index}',
-                      },
+                      computeLabel: { code: 'Item ${index}' },
                       iconProperties: {
                         showIcon: false,
-                        iconName: 'MapPin',
                         addButtonIconName: 'Plus',
+                        iconName: 'MapPin',
                       },
                       addButtonLabel: 'Add',
-                      dot: false,
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                      commonProperties: { generateReference: true },
                     },
                     childProperties: {},
                   },
@@ -1935,30 +1589,27 @@ const componentConfig: ComponentConfig = {
                     id: 'formlist_j5e1ei',
                     tag: 'contactos',
                     componentName: 'formList',
-                    label: 'Form List',
+
                     type: 'group',
                     children: [
                       {
                         id: 'grid_t2sdvb',
                         tag: 'grid1',
                         componentName: 'grid',
-                        label: 'Grid',
+
                         type: 'group',
                         children: [
                           {
                             id: 'combobox_wunewz',
                             tag: 'tipoContacto',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
-                                },
+                                function: { fnCustomSet: '() => {}', type: 'function' },
                                 action: {},
                               },
                             },
@@ -1973,10 +1624,7 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                               options: {
                                 state: {
@@ -1987,27 +1635,20 @@ const componentConfig: ComponentConfig = {
                                   imports: [],
                                   generate: true,
                                 },
-                                value: {
-                                  id: '',
-                                  code: '',
-                                },
+                                value: { id: '', code: '' },
                               },
                             },
                             properties: {
-                              label: 'Tipo de Contato',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
                               required: true,
                               selectLabel: 'No option found',
                               showSearch: true,
-                              gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                              gridSize: '',
                             },
                             childProperties: {},
                           },
@@ -2015,37 +1656,42 @@ const componentConfig: ComponentConfig = {
                             id: 'inputtext_03844c',
                             tag: 'contacto',
                             componentName: 'inputText',
-                            label: 'Input Text',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
+                                function: { type: 'function' },
                                 action: {},
                               },
                             },
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Contacto',
-                              placeholder: '',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputhidden_v89g4u',
+                            tag: 'inputHidden3',
+                            componentName: 'inputHidden',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {},
+                            properties: {
+
+                              required: false,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -2056,13 +1702,9 @@ const componentConfig: ComponentConfig = {
                         properties: {
                           gap: 4,
                           variant: 'cols2',
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          commonProperties: { generateReference: false },
                         },
-                        childProperties: {
-                          className: 'col-span-1',
-                        },
+                        childProperties: { className: 'col-span-1' },
                         style: {
                           layout: {
                             type: 'grid',
@@ -2099,29 +1741,19 @@ const componentConfig: ComponentConfig = {
                           imports: [],
                           generate: true,
                         },
-                        value: {
-                          id: '',
-                          code: '',
-                        },
+                        value: { id: '', code: '' },
                       },
                     },
                     properties: {
-                      label: 'Contactos',
-                      computeLabel: {
-                        code: 'Item ${index}',
-                      },
+
+                      computeLabel: { code: 'Item ${index}' },
                       addButtonLabel: 'Add',
                       addButtonIconName: 'Plus',
-                      commonProperties: {
-                        generateReference: true,
-                      },
+                      commonProperties: { generateReference: true },
                       color: 'primary',
                       variant: 'solid',
                       badgeValue: '',
-                      iconProperties: {
-                        showIcon: true,
-                        iconName: 'Phone',
-                      },
+                      iconProperties: { showIcon: true, iconName: 'Phone' },
                       dot: false,
                       className: 'md:grid-cols-2',
                     },
@@ -2153,30 +1785,27 @@ const componentConfig: ComponentConfig = {
                     id: 'formlist_3flio8',
                     tag: 'dadosBancarios',
                     componentName: 'formList',
-                    label: 'Form List',
+
                     type: 'group',
                     children: [
                       {
                         id: 'grid_j24fe6',
                         tag: 'grid4',
                         componentName: 'grid',
-                        label: 'Grid',
+
                         type: 'group',
                         children: [
                           {
                             id: 'combobox_vy4apt',
                             tag: 'idOperadora',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
-                                },
+                                function: { fnCustomSet: '() => {}', type: 'function' },
                                 action: {},
                               },
                             },
@@ -2204,98 +1833,72 @@ const componentConfig: ComponentConfig = {
                               },
                             },
                             properties: {
-                              label: 'Banco',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
                               required: true,
                               selectLabel: 'No option found',
                               showSearch: true,
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                               gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
                             },
                             childProperties: {},
                           },
                           {
-                            id: 'inputnumber_rnc302',
+                            id: 'inputtext_vzm1mj',
                             tag: 'nib',
-                            componentName: 'inputNumber',
-                            label: 'Number',
+                            componentName: 'inputText',
+
                             type: 'group',
                             children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
-                                action: {},
-                              },
-                            },
+                            interactions: {},
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'NIB',
-                              name: 'number',
-                              defaultValue: 0,
-                              formatOptions: '',
-                              min: 0,
-                              max: 9999999,
-                              step: 1,
-                              disabled: false,
-                              required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+
+                              iconProperties: { showIcon: false },
+                              required: true,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
                           {
-                            id: 'inputnumber_jeukei',
+                            id: 'inputtext_mtqayc',
                             tag: 'numConta',
-                            componentName: 'inputNumber',
-                            label: 'Number',
+                            componentName: 'inputText',
+
                             type: 'group',
                             children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  type: 'function',
-                                },
-                                action: {},
-                              },
-                            },
+                            interactions: {},
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'N Conta',
-                              name: 'number',
-                              defaultValue: 0,
-                              formatOptions: '',
-                              min: 0,
-                              max: 9999999,
-                              step: 1,
-                              disabled: false,
+
+                              iconProperties: { showIcon: false },
                               required: true,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputhidden_2lmdr8',
+                            tag: 'inputHidden4',
+                            componentName: 'inputHidden',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {},
+                            properties: {
+
+                              required: false,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -2305,14 +1908,11 @@ const componentConfig: ComponentConfig = {
                         data: {},
                         properties: {
                           gap: 4,
-                          variant: 'cols3',
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          variant: { default: 'cols1', md: 'cols2', lg: 'cols3' },
+                          commonProperties: { generateReference: false },
                         },
-                        childProperties: {
-                          className: 'col-span-1',
-                        },
+                        childProperties: { className: 'col-span-1' },
+                        style: {},
                       },
                     ],
                     interactions: {},
@@ -2330,24 +1930,19 @@ const componentConfig: ComponentConfig = {
                       },
                     },
                     properties: {
-                      label: 'Dados Bancários',
+
                       description: 'Informações bancárias do contribuinte',
                       color: 'primary',
                       variant: 'solid',
                       badgeValue: '',
-                      computeLabel: {
-                        code: 'Item ${index}',
-                      },
+                      computeLabel: { code: 'Item ${index}' },
                       iconProperties: {
                         showIcon: true,
-                        iconName: 'CreditCard',
                         addButtonIconName: 'Plus',
+                        iconName: 'CreditCard',
                       },
                       addButtonLabel: 'Add',
-                      dot: false,
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                      commonProperties: { generateReference: true },
                     },
                     childProperties: {},
                   },
@@ -2355,30 +1950,27 @@ const componentConfig: ComponentConfig = {
                     id: 'formlist_i0c7bj',
                     tag: 'anexos',
                     componentName: 'formList',
-                    label: 'Form List',
+
                     type: 'group',
                     children: [
                       {
                         id: 'grid_v41n5f',
                         tag: 'grid5',
                         componentName: 'grid',
-                        label: 'Grid',
+
                         type: 'group',
                         children: [
                           {
                             id: 'combobox_xcimvq',
                             tag: 'idTipoDocumento',
                             componentName: 'combobox',
-                            label: 'Combobox',
+
                             type: 'group',
                             children: [],
                             interactions: {
                               onChange: {
                                 type: 'function',
-                                function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
-                                },
+                                function: { fnCustomSet: '() => {}', type: 'function' },
                                 action: {},
                               },
                             },
@@ -2406,19 +1998,15 @@ const componentConfig: ComponentConfig = {
                               },
                             },
                             properties: {
-                              label: 'Tipo de Documento',
+
                               variant: 'single',
                               placeholder: 'Select an option...',
                               selectLabel: 'No option found',
                               showSearch: true,
+                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                               gridSize: 'full',
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
                             },
                             childProperties: {},
                           },
@@ -2426,7 +2014,7 @@ const componentConfig: ComponentConfig = {
                             id: 'inputfile_k2fl4m',
                             tag: 'inputFile1',
                             componentName: 'inputFile',
-                            label: 'Upload File',
+
                             type: 'group',
                             children: [],
                             interactions: {
@@ -2434,6 +2022,8 @@ const componentConfig: ComponentConfig = {
                                 type: 'function',
                                 function: {
                                   type: 'function',
+                                  fnCustomCode: { imports: [] },
+                                  fnCustomSet: '(e)=>handleUploadFile(index,e)',
                                 },
                                 action: {},
                               },
@@ -2441,48 +2031,80 @@ const componentConfig: ComponentConfig = {
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Input File',
+
                               accept: 'application/pdf',
-                              multiple: false,
-                              disabled: false,
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: true, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
                           {
+                            id: 'uploadstate_lotvqj',
+                            tag: 'UploadState1',
+                            componentName: 'UploadState',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {
+                              isUploading: {
+                                state: {
+                                  id: '',
+                                  name: 'isUploading',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                              uploadedFiles: {
+                                state: {
+                                  id: '',
+                                  name: 'uploadedFiles',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                              index: { value: { id: '', code: 'index' } },
+                            },
+                            properties: { customProperties: {} },
+                            childProperties: {},
+                          },
+                          {
                             id: 'inputhidden_3pr884',
-                            tag: 'idDocumento',
+                            tag: 'url',
                             componentName: 'inputHidden',
-                            label: 'Input Hidden',
+
                             type: 'group',
                             children: [],
                             interactions: {},
                             allowTypes: false,
                             data: {},
                             properties: {
-                              value: '',
-                              label: 'Hidden',
-                              helperText: '',
-                              iconProperties: {
-                                showIcon: false,
-                              },
-                              disabled: false,
+
                               required: false,
-                              dataProperties: {
-                                isVirtual: false,
-                                isType: true,
-                              },
-                              commonProperties: {
-                                generateReference: false,
-                              },
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputhidden_wjyqmr',
+                            tag: 'inputHidden5',
+                            componentName: 'inputHidden',
+
+                            type: 'group',
+                            children: [],
+                            interactions: {},
+                            allowTypes: false,
+                            data: {},
+                            properties: {
+
+                              required: false,
+                              dataProperties: { isVirtual: false, isType: true },
+                              commonProperties: { generateReference: false },
                             },
                             childProperties: {},
                           },
@@ -2492,14 +2114,10 @@ const componentConfig: ComponentConfig = {
                         data: {},
                         properties: {
                           gap: 4,
-                          variant: 'cols2',
-                          commonProperties: {
-                            generateReference: false,
-                          },
+                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
+                          commonProperties: { generateReference: false },
                         },
-                        childProperties: {
-                          className: 'col-span-1',
-                        },
+                        childProperties: { className: 'col-span-1' },
                       },
                     ],
                     interactions: {},
@@ -2517,24 +2135,19 @@ const componentConfig: ComponentConfig = {
                       },
                     },
                     properties: {
-                      label: 'Documentos',
+
                       description: 'Documentos do contribuinte',
                       color: 'primary',
                       variant: 'solid',
                       badgeValue: '',
-                      computeLabel: {
-                        code: 'Item ${index}',
-                      },
+                      computeLabel: { code: 'Item ${index}' },
                       iconProperties: {
                         showIcon: true,
-                        iconName: 'FileText',
                         addButtonIconName: 'Plus',
+                        iconName: 'FileText',
                       },
                       addButtonLabel: 'Add',
-                      dot: false,
-                      commonProperties: {
-                        generateReference: false,
-                      },
+                      commonProperties: { generateReference: true },
                     },
                     childProperties: {},
                   },
@@ -2542,42 +2155,34 @@ const componentConfig: ComponentConfig = {
                     id: 'container_jt1kmy',
                     tag: 'obs',
                     componentName: 'container',
-                    label: 'Container',
+
                     type: 'group',
                     children: [
                       {
                         id: 'inputtextarea_bzhoju',
                         tag: 'observacao',
                         componentName: 'inputTextarea',
-                        label: 'Textarea',
+
                         type: 'group',
                         children: [],
                         interactions: {
                           onChange: {
                             type: 'function',
-                            function: {
-                              type: 'function',
-                            },
+                            function: { type: 'function' },
                             action: {},
                           },
                         },
                         allowTypes: false,
                         data: {},
                         properties: {
-                          value: '',
                           name: 'textarea',
-                          label: 'Observaçōes',
-                          helperText: '',
-                          rows: 3,
-                          disabled: false,
-                          required: false,
-                          dataProperties: {
-                            isVirtual: false,
-                            isType: true,
-                          },
-                          commonProperties: {
-                            generateReference: false,
-                          },
+
+                          rows: '3a',
+                          required: true,
+                          dataProperties: { isVirtual: false, isType: true },
+                          commonProperties: { generateReference: false },
+                          placeholder:
+                            '123456',
                         },
                         childProperties: {},
                       },
@@ -2585,25 +2190,22 @@ const componentConfig: ComponentConfig = {
                     interactions: {},
                     allowTypes: false,
                     data: {},
-                    properties: {
-                      commonProperties: {
-                        generateReference: true,
-                      },
-                    },
+                    properties: { commonProperties: { generateReference: true } },
                     childProperties: {},
                   },
                 ],
                 interactions: [],
                 tag: '',
+                childProperties: {},
               },
             ],
             interactions: {},
             allowTypes: false,
             data: {},
             properties: {
-              variant: 'cols12',
+              variant: { default: 'cols1', md: '', lg: 'cols4' },
               gap: 4,
-              commonProperties: {},
+              commonProperties: { generateReference: false },
             },
             childProperties: {},
           },
@@ -2612,44 +2214,31 @@ const componentConfig: ComponentConfig = {
           onSubmit: {
             type: 'function',
             function: {
-              fnCustomSet: 'handleFormSubmit',
+              fnCustomSet: '',
               type: 'function',
-              fnCustomCode: {
-                imports: [
-                  {
-                    namespace: "import {useUtente} from '@/app/[locale]/(myapp)/hooks/use-utente'",
-                    id: 'fk313ak7qd',
-                  },
-                ],
-              },
+              fnCustomCode: { imports: [] },
+              fnName: 'handleFormSubmit',
             },
-            action: {
-              actionCustomSet: '(e) => {}',
-            },
+            action: { actionCustomSet: '(e) => {}' },
           },
         },
         allowTypes: true,
         data: {
           defaultValues: {
             state: {
-              id: '',
-              type: 'z.infer<any>',
-              name: 'contentFormform1',
+              id: 'oevk6snrjf',
+              type: 'any',
+              name: 'formContribuinteData',
               defaultValue: 'initFormContribuinte',
               imports: [],
               generate: true,
-            },
-            value: {
-              id: '',
-              code: '',
             },
           },
         },
         properties: {
           validationMode: 'onBlur',
-          gridClassName: 'flex flex-col',
-          resetAfterSubmit: false,
-          commonProperties: {},
+          gridClassName: '',
+          commonProperties: { generateReference: false },
         },
         childProperties: {},
         dataType: 'formContribuinte',
@@ -2665,33 +2254,25 @@ const componentConfig: ComponentConfig = {
           fnCustomCode: {
             imports: [
               {
-                namespace: "import {submitUtente} from '@/app/[locale]/(myapp)/hooks/use-utente'",
-                id: '5ryc7nkzwe',
-              },
-              {
-                id: 'import_zUTfna',
                 namespace:
-                  "import { useIGRPToast, } from '@igrp/igrp-framework-react-design-system';",
-              },
-              {
-                namespace:
-                  "import {useNewContribuinteParameterizations} from '@/app/[locale]/(myapp)/hooks/use-parameterization'",
+                  "import {useNewContribuinteParameterizations} from '@/app/(myapp)/hooks/use-parameterization'",
                 id: 'tbwwrd2njo',
               },
               {
-                namespace:
-                  "import {submitContribuinte} from '@/app/[locale]/(myapp)/hooks/use-contribuinte'",
-                id: 'fzso5yrgh2',
+                id: 'import_rL8Qze',
+                namespace: 'import { useRouter } from "next/navigation"',
               },
               {
-                namespace: "import {useUtente} from '@/app/[locale]/(myapp)/hooks/use-utente'",
-                id: '2hgqctwz6i',
+                namespace:
+                  "import {createOrUpdateContribuinte} from '@/app/(myapp)/hooks/use-contribuinte'",
+                id: 'vzvpikea7d',
               },
             ],
             fnCode:
-              "const { igrpToast } = useIGRPToast();\nconst { tipoContato, tipoEndereco, tiposDocumento, tiposActividades, geografias, tiposAnexos, tiposEstaduto, bancos, tiposRespresentacao, sedes, isLoading } = useNewContribuinteParameterizations();\n\nuseEffect(() => {\n  if (isLoading) return;\n  setSelecttipoDocumentoOptions(tiposDocumento || [])\n  setSelecttipoEnderecoOptions(tipoEndereco || []);\n  setSelecttipoContactoOptions(tipoContato || []);\n  setSelectcodigoEstatutoOptions(tiposEstaduto || [])\n  setSelectidOperadoraOptions(bancos || [])\n  setSelectidTipoDocumentoOptions(tiposAnexos || [])\n  setSelectidActividadeEconomicaOptions(tiposActividades || [])\n  setSelectidGeografiaOptions(geografias || [])\n  setSelecttipoRepresentacaoOptions(tiposRespresentacao || [])\n  setSelectuuidSedeOptions(sedes || [])\n\n\n}, [isLoading]);\n\nuseEffect(() => {\n  if (formform1Ref.current) {\n    const subscription = formform1Ref.current.watch((value) => {\n      setActividadesEconomicas(value.actividadesEconomicas);\n    });\n\n    return () => subscription.unsubscribe();\n  }\n}, [formform1Ref.current]);\n\nuseEffect(() => {\n  if (actividadesEconomicas) {\n    const weighted = calculeSOATPoderado();\n    setActividadesEconomicasBadgeValue(`SOAT Ponderado:${weighted}%`);\n  }\n}, [actividadesEconomicas]);\n\nconst handleFormSubmit = async (values: z.infer<Form1ZodType>) => {\n  // TODO: Map form values to Beneficiario type here\n  const contribuinte: any = {\n    ...values,\n  };\n  try {\n    await submitContribuinte(contribuinte);\n    igrpToast({\n      title: 'Sucesso',\n      description: 'Contribuinte gravado com sucesso',\n    });\n  } catch (error) {\n    igrpToast({\n      title: 'Erro',\n      description: 'Ocorreu um erro ao processar o formulário.',\n    })\n  }\n};",
+              "const router = useRouter()\nconst { tipoContato, tipoEndereco, tiposDocumento, tiposActividades, geografias, tiposAnexos, tiposEstaduto, bancos, tiposRespresentacao, sedes, isLoading } = useNewContribuinteParameterizations();\n\nuseEffect(() => {\n  if (isLoading) return;\n  setSelecttipoDocumentoOptions(tiposDocumento || [])\n  setSelecttipoEnderecoOptions(tipoEndereco || []);\n  setSelecttipoContactoOptions(tipoContato || []);\n  setSelectcodigoEstatutoOptions(tiposEstaduto || [])\n  setSelectidOperadoraOptions(bancos || [])\n  setSelectidTipoDocumentoOptions(tiposAnexos || [])\n  setSelectidActividadeEconomicaOptions((tiposActividades || []) as any);\n  setSelectidGeografiaOptions(geografias || [])\n  setSelecttipoRepresentacaoOptions(tiposRespresentacao || [])\n  setSelectuuidSedeOptions(sedes || [])\n\n\n\n}, [isLoading]);\n\nuseEffect(() => {\n  if (formform1Ref.current) {\n    const subscription = formform1Ref.current.watch((value) => {\n      setActividadesEconomicas(value.actividadesEconomicas);\n    });\n\n    return () => subscription.unsubscribe();\n  }\n}, [formform1Ref.current]);\n\nuseEffect(() => {\n  if (actividadesEconomicas) {\n    const weighted = calculeSOATPoderado();\n    setActividadesEconomicasBadgeValue(`SOAT Ponderado:${weighted}%`);\n  }\n}, [actividadesEconomicas]);\n\nuseEffect(() => {\n  if (shouldSubmit) {\n    formform1Ref.current?.submit();\n    onAfterSubmit?.();\n  }\n}, [shouldSubmit, onAfterSubmit]);\n\nuseEffect(() => {\n  if (initialData) {\n    setFormContribuinteData({\n      ...initialData,\n      dataInicioAtividade: initialData.dataInicioAtividade\n        ? new Date(initialData.dataInicioAtividade)\n        : undefined,\n    });\n    setMenuNavigation1BadgeContent(isEdit ? 'Edição' : 'Novo');\n  }\n}, [initialData, isEdit]);\n",
           },
         },
+        action: {},
       },
     },
     childProperties: {},
@@ -2701,29 +2282,21 @@ const componentConfig: ComponentConfig = {
       id: 'fnc_YV1t3t',
       name: 'calculeSOATPoderado',
       code: "if (actividadesEconomicas && actividadesEconomicas.length > 0) {\n  const total = actividadesEconomicas.reduce(\n    (sum: number, act: any) => sum + (Number.parseFloat(act.soat) || 0),\n    0,\n  );\n  const weighted = (total / actividadesEconomicas.length).toFixed(2);\n  return weighted;\n} else {\n  return '0.00';\n}",
-      returnValue: {
-        type: 'string',
-        isNullable: true,
-        isList: false,
-      },
+      returnValue: { type: 'string', isNullable: true, isList: false },
       imports: [],
       arguments: [],
     },
     {
       id: 'fnc_AxVGnC',
       name: 'updateActividade',
-      code: "// Find the selected CAE code\nconst selectedCae = tiposActividades.find((cae) => cae.value === value);\n\n// Get current form values\nconst currentValues = formform1Ref.current?.getValues();\n\n// Create the updated atividadesEconomicas array\nconst updatedAtividades = [...(currentValues?.actividadesEconomicas || [])];\nif (selectedCae && index !== undefined && index >= 0) {\n  updatedAtividades[index] = {\n    ...updatedAtividades[index],\n    soat: selectedCae.metadata.taxa,\n  };\n}\n\nformform1Ref.current?.setValue('actividadesEconomicas', updatedAtividades);\n\nconst weighted = calculeSOATPoderado();\n\nformform1Ref.current?.setValue('soatUsado', weighted);\n\n",
-      returnValue: {
-        type: 'void',
-        isNullable: true,
-        isList: false,
-      },
+      code: "// Find the selected CAE code\nconst selectedCae = tiposActividades.find((cae) => cae.value?.toString() === value.toString());\n\n// Get current form values\nconst currentValues = formform1Ref.current?.getValues();\n\n// Create the updated atividadesEconomicas array\nconst updatedAtividades = [...(currentValues?.actividadesEconomicas || [])];\nif (selectedCae && index !== undefined && index >= 0) {\n  updatedAtividades[index] = {\n    ...updatedAtividades[index],\n    soat: selectedCae.metadata?.taxa || 0,\n  };\n}\n\nformform1Ref.current?.setValue('actividadesEconomicas', updatedAtividades);\n\nconst weighted = calculeSOATPoderado();\n\nformform1Ref.current?.setValue('soatUsado', weighted);\n\n",
+      returnValue: { type: 'void', isNullable: true, isList: false },
       imports: [],
       arguments: [
         {
           id: '1',
           name: 'value',
-          type: 'number',
+          type: 'string',
           isList: false,
           isOptional: false,
           isInterface: false,
@@ -2741,6 +2314,65 @@ const componentConfig: ComponentConfig = {
           isState: false,
         },
       ],
+      isAsync: false,
+    },
+    {
+      id: 'fnc_ampnHI',
+      name: 'handleUploadFile',
+      code: "const file = e?.target?.files?.[0];\n    if (!file) return;\n    console.log('File selected:', file);\n    console.log('Index:', index);\n    console.log('File name:', file.name);\n    console.log('File size:', file.size);\n    console.log('File type:', file.type);\n\n    // Store the file in state\n    setUploadedFiles((prev) => ({\n      ...prev,\n      [index]: { file, uploaded: false },\n    }));\n\n    // Set uploading state\n    setIsUploading((prev) => ({\n      ...prev,\n      [index]: true,\n    }));\n\n    try {\n      // Get the tipo documento from the form\n      const currentFormData = formform1Ref.current?.getValues();\n\n      // Upload the file\n      const uploadResponse =await uploadDocument({ file });\n\n      console.log(uploadResponse);\n\n      // Update the uploaded file state\n      setUploadedFiles((prev: any) => ({\n        ...prev,\n        [index]: {\n          file,\n          uploaded: true,\n          url: uploadResponse.displayName,\n        },\n      }));\n      // Update the form with the uploaded file URL\n      const updatedDocumentos = [...(currentFormData?.anexos || [])];\n      updatedDocumentos[index] = {\n        ...updatedDocumentos[index],\n        url: uploadResponse.displayName,\n      };\n\n      setFormContribuinteData((prev: any) => ({\n        ...prev,\n        ...currentFormData,\n        anexos: updatedDocumentos,\n      }));\n\n      igrpToast({\n        title: 'Sucesso',\n        description: 'Arquivo enviado com sucesso!',\n        type: 'success',\n      });\n    } catch (error) {\n      igrpToast({\n        title: 'Erro',\n        description: 'Erro ao enviar arquivo. Tente novamente.',\n        type: 'error',\n      });\n\n      // Remove the file from state on error\n      setUploadedFiles((prev) => {\n        const newState = { ...prev };\n        delete newState[index];\n        return newState;\n      });\n    } finally {\n      // Clear uploading state\n      setIsUploading((prev) => ({\n        ...prev,\n        [index]: false,\n      }));\n    }",
+      returnValue: { type: 'void', isNullable: true, isList: false },
+      imports: [
+        {
+          namespace: "import {uploadDocument} from '@/app/(myapp)/hooks/use-contribuinte'",
+          id: 'dah9a88mlv',
+        },
+      ],
+      isAsync: true,
+      arguments: [
+        {
+          id: '1',
+          name: 'index',
+          type: 'number',
+          isList: false,
+          isOptional: false,
+          isInterface: false,
+          isFunction: false,
+          isState: false,
+          functionParameters: [],
+        },
+        {
+          id: '2',
+          name: 'e',
+          type: 'any',
+          isList: false,
+          isOptional: false,
+          isInterface: false,
+          isFunction: false,
+          isState: false,
+          functionParameters: [],
+        },
+      ],
+    },
+    {
+      id: 'fnc_M_s6lA',
+      name: 'handleFormSubmit',
+      code: "const contribuinte: any = {\n  ...values,\n  contribuinteId: initialData?.contribuinteId\n};\ntry {\n  await createOrUpdateContribuinte(contribuinte);\n  igrpToast({\n    title: 'Sucesso',\n    description: isEdit\n      ? 'Contribuinte atualizado com sucesso'\n      : 'Contribuinte gravado com sucesso',\n    type: 'success',\n  });\n  router.push('/contribuintes');\n} catch (error:any) {\n  igrpToast({\n    title: 'Erro',\n    description: `Ocorreu um erro ao processar o formulário. [${error.message}]`,\n    type: 'error',\n  });\n  console.log(error);\n}\n",
+      returnValue: { type: 'void', isNullable: true, isList: false },
+      imports: [],
+      isAsync: true,
+      arguments: [
+        {
+          id: '1',
+          name: 'values',
+          type: 'z.infer<any>',
+          isList: false,
+          isOptional: false,
+          isInterface: false,
+          isFunction: false,
+          isState: false,
+          functionParameters: [],
+        },
+      ],
     },
   ],
   types: [
@@ -2755,6 +2387,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputtext_tricll',
@@ -2762,6 +2395,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputtext_94m7xo',
@@ -2769,6 +2403,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputtext_927gy6',
@@ -2776,6 +2411,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'combobox_8hi371',
@@ -2783,6 +2419,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'combobox_q4ey1i',
@@ -2790,6 +2427,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputtext_24oey4',
@@ -2797,6 +2435,7 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputdatepicker_po3deb',
@@ -2804,27 +2443,27 @@ const componentConfig: ComponentConfig = {
           type: 'date',
           required: true,
           defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'combobox_fk02jf',
           name: 'uuidSede',
           type: 'string',
           required: false,
-          defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'inputhidden_vtwlok',
           name: 'soatUsado',
           type: 'string',
           required: false,
-          defaultValue: '',
+          isList: false,
         },
         {
           componentId: 'formlist_4ayxgn',
           name: 'actividadesEconomicas',
           type: 'object',
           required: false,
-          defaultValue: '',
           isList: true,
           fields: [
             {
@@ -2833,6 +2472,8 @@ const componentConfig: ComponentConfig = {
               type: 'number',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputnumber_ezr6bm',
@@ -2840,13 +2481,25 @@ const componentConfig: ComponentConfig = {
               type: 'number',
               required: false,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'checkbox_bi8c08',
-              name: 'nivelActividade',
+              name: 'principal',
               type: 'boolean',
               required: false,
               defaultValue: '',
+
+              isList: false,
+            },
+            {
+              componentId: 'inputhidden_c3pyhj',
+              name: 'id',
+              type: 'number',
+              required: false,
+
+              isList: false,
             },
           ],
         },
@@ -2855,7 +2508,6 @@ const componentConfig: ComponentConfig = {
           name: 'enderecos',
           type: 'object',
           required: false,
-          defaultValue: '',
           isList: true,
           fields: [
             {
@@ -2864,6 +2516,8 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputtext_9s7kmv',
@@ -2871,6 +2525,8 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputtext_iwa52m',
@@ -2878,6 +2534,8 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'combobox_w4zn59',
@@ -2885,6 +2543,8 @@ const componentConfig: ComponentConfig = {
               type: 'number',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputtext_u4ya54',
@@ -2892,6 +2552,8 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: false,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputtext_dm8n05',
@@ -2899,6 +2561,16 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: false,
               defaultValue: '',
+
+              isList: false,
+            },
+            {
+              componentId: 'inputhidden_7ez4pt',
+              name: 'id',
+              type: 'number',
+              required: false,
+
+              isList: false,
             },
           ],
         },
@@ -2907,7 +2579,6 @@ const componentConfig: ComponentConfig = {
           name: 'contactos',
           type: 'object',
           required: false,
-          defaultValue: '',
           isList: true,
           fields: [
             {
@@ -2916,13 +2587,25 @@ const componentConfig: ComponentConfig = {
               type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputtext_03844c',
               name: 'contacto',
               type: 'string',
-              required: true,
+              required: false,
               defaultValue: '',
+              isList: false,
+              validation: {  },
+            },
+            {
+              componentId: 'inputhidden_v89g4u',
+              name: 'id',
+              type: 'number',
+              required: false,
+
+              isList: false,
             },
           ],
         },
@@ -2931,7 +2614,6 @@ const componentConfig: ComponentConfig = {
           name: 'dadosBancarios',
           type: 'object',
           required: false,
-          defaultValue: '',
           isList: true,
           fields: [
             {
@@ -2940,20 +2622,36 @@ const componentConfig: ComponentConfig = {
               type: 'number',
               required: true,
               defaultValue: '',
+
+              isList: false,
             },
             {
-              componentId: 'inputnumber_rnc302',
+              componentId: 'inputtext_vzm1mj',
               name: 'nib',
-              type: 'number',
+              type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
+              validation: { regex: '/^[0-9]+$/', startsWith: '', maxLength: 21 },
             },
             {
-              componentId: 'inputnumber_jeukei',
+              componentId: 'inputtext_mtqayc',
               name: 'numConta',
-              type: 'number',
+              type: 'string',
               required: true,
               defaultValue: '',
+
+              isList: false,
+              validation: { regex: '/^[0-9]+$/' },
+            },
+            {
+              componentId: 'inputhidden_2lmdr8',
+              name: 'id',
+              type: 'number',
+              required: false,
+
+              isList: false,
             },
           ],
         },
@@ -2962,7 +2660,6 @@ const componentConfig: ComponentConfig = {
           name: 'anexos',
           type: 'object',
           required: false,
-          defaultValue: '',
           isList: true,
           fields: [
             {
@@ -2971,20 +2668,25 @@ const componentConfig: ComponentConfig = {
               type: 'number',
               required: true,
               defaultValue: '',
-            },
-            {
-              componentId: 'inputfile_k2fl4m',
-              name: 'upload',
-              type: 'string',
-              required: false,
-              defaultValue: '',
+
+              isList: false,
             },
             {
               componentId: 'inputhidden_3pr884',
-              name: 'idDocumento',
+              name: 'url',
               type: 'string',
               required: false,
               defaultValue: '',
+
+              isList: false,
+            },
+            {
+              componentId: 'inputhidden_wjyqmr',
+              name: 'id',
+              type: 'number',
+              required: false,
+
+              isList: false,
             },
           ],
         },
@@ -2994,24 +2696,18 @@ const componentConfig: ComponentConfig = {
           type: 'string',
           required: true,
           defaultValue: '',
+          isList: false,
         },
       ],
     },
   ],
   states: [
     {
-      id: 'state_0wBXiI',
-      name: 'inputText2HelperText',
-      type: 'string',
-      imports: [],
-      defaultValue: 'fgfgfgffgff',
-    },
-    {
       id: 'state__mQ5Zh',
       name: 'actividadesEconomicasBadgeValue',
       type: 'string',
       imports: [],
-      defaultValue: 'SOAT Ponderado: 0.00%',
+      defaultValue: "'SOAT Ponderado: 0.00%'",
     },
     {
       id: 'state_KBZkPH',
@@ -3020,42 +2716,32 @@ const componentConfig: ComponentConfig = {
       defaultValue: '',
       imports: [],
     },
+    {
+      id: 'state_tubki7',
+      name: 'menuNavigation1BadgeContent',
+      type: 'string',
+      imports: [],
+      defaultValue: "'Novo'",
+    },
+    {
+      id: 'state_SIyLL',
+      name: 'isUploading',
+      type: 'UploadingState',
+      defaultValue: '{}',
+      imports: [
+        { namespace: "import {UploadingState} from '@/app/(myapp)/types/index'", id: '2z11xvk1c3' },
+      ],
+    },
+    {
+      id: 'state_C3Q8dt',
+      name: 'uploadedFiles',
+      type: 'UploadingFiles',
+      defaultValue: '{}',
+      imports: [
+        { namespace: "import {UploadingFiles} from '@/app/(myapp)/types/index'", id: '20jwv4g1lv' },
+      ],
+    },
   ],
-  imports: [],
-};
-
-const componentConfig2: ComponentConfig = {
-  type: 'component',
-  scope: 'app',
-  description: 'NewCompoennt',
-  name: 'newCompoennt',
-  id: '89aw44nlml',
-  args: [],
-  components: {
-    id: 'component_1e2gen',
-    componentName: 'component',
-    properties: {
-      commonProperties: {
-        generateReference: false,
-      },
-    },
-    children: [],
-    tag: 'component2',
-    data: {},
-    interactions: {
-      onLoad: {
-        type: 'function',
-        function: {
-          type: 'function',
-        },
-        action: {},
-      },
-    },
-    childProperties: {},
-  },
-  functions: [],
-  types: [],
-  states: [],
   imports: [],
 };
 

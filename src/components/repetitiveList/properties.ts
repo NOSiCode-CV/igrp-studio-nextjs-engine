@@ -1,8 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import { INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function repetitiveListProperties() {
   return {
-    items: { type: 'array', items: { type: 'object' }, required: true },
+    variable: { type: 'string', required: false, default: 'item' },
+    dataKey: { type: 'string', required: true, default: 'id' },
     ...commonProperties(),
   };
 }
@@ -36,4 +38,17 @@ export function repetitiveListRules() {
   return {
     ...baseRules()
   }
+}
+
+export function repetitiveListData() {
+  return {
+    items: { ...baseData(undefined, INTERACTIONS_TYPES.ITEMS,
+        {
+          id: '',
+          name: 'repetitiveList{{id}}',
+          type: '{{type}}[]',
+          defaultValue: '[]',
+        }, true
+      ), required: true },
+  };
 }
