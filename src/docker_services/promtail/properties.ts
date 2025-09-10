@@ -44,7 +44,7 @@ export function promtailProperties() {
     environments: {
       type: 'array',
       default: [
-        { key: 'PROMTAIL_SERVICE_INTERNAL_PORT', value: '9080' },
+        { key: 'PROMTAIL_SERVICE_PORT', value: '9080' },
         { key: 'LOKI_SERVICE_INTERNAL_PORT', value: '3100' },
       ],
       items: {

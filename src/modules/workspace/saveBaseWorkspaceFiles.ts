@@ -361,7 +361,6 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
 
             // Database configuration
             { key: 'POSTGRES_HOST', value: '${IGRP_LOCAL_DATABASE_HOSTNAME}' },
-            { key: 'POSTGRES_INTERNAL_PORT', value: '5432' },
             { key: 'POSTGRES_DATABASE', value: '${IGRP_DATABASE_NAME}' },
             { key: 'POSTGRES_USER', value: '${IGRP_DATABASE_USER}' },
             { key: 'POSTGRES_PASSWORD', value: '${IGRP_DATABASE_PASSWORD}' },
