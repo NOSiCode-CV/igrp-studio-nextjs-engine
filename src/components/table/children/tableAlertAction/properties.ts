@@ -7,6 +7,7 @@ export function tableAlertActionProperties() {
   return {
     ...actionProperties('Alert'),
     title: { type: 'string', required: false, default: 'New Alert' },
+    content: { type: 'string', required: false },
     showCancel: { type: 'boolean', required: false, default: true },
     labelCancel: { type: 'string', required: false, default: 'Cancel' },
     classNameCancel: { type: 'string', required: false },

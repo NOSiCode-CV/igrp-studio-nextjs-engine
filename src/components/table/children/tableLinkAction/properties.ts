@@ -6,6 +6,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableLinkActionProperties() {
   return {
     ...actionProperties('Link'),
+    content: { type: 'string', required: false },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     ...commonProperties(),
   };
