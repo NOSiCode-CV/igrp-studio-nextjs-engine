@@ -7,6 +7,7 @@ import {
   commonPropertiesMapping,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function datePickerRangeProperties() {
   return {
@@ -42,9 +43,23 @@ export function datePickerRangeChildPropertiesMapping() {
   return {};
 }
 
+function onDateChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function datePickerRangeInteractions() {
   return {
-    onDateChange: { ...baseInteraction(), required: true },
+    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: true },
   };
 }
 
