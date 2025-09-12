@@ -609,13 +609,13 @@ export const registerComponents = (config: ComponentRegistrationConfig) => {
   );
 };
 
-export const setEngineConfiguration = (config: EngineConfigurationSettings) => {
+export const setEngineConfiguration = (config: EngineConfigurationSettings, name?: string) => {
   const isConfigValid = engineConfigurationRegistrationValidate(config);
 
   if(!isConfigValid && engineConfigurationRegistrationValidate.errors)
     throw engineConfigurationRegistrationValidate.errors;
 
-  setConfiguration((e) => defaultEngineModule.register(e, config))
+  setConfiguration((e) => defaultEngineModule.register(e, config), name)
 
 }
 
