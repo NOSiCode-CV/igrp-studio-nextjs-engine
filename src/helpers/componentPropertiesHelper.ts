@@ -487,7 +487,7 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${v? typeof v : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${v? typeof v : undefined}`)} }`;
               })
               .join('\n');
           } else {

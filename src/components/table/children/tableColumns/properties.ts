@@ -52,7 +52,7 @@ export function actionProperties(labelTrigger?: string) {
     iconProperties: {
       type: 'object',
       properties: {
-        iconName: { type: 'string', required: false, default: "ArrowRight" },
+        iconName: { type: 'string', required: false, default: "ArrowRight", 'x-ui-widget': 'icon' },
       },
     },
     segments: segmentInterface,
@@ -86,7 +86,7 @@ export function dropdownItemProperties(labelTrigger?: string) {
     iconProperties: {
       type: 'object',
       properties: {
-        iconName: { type: 'string', required: false },
+        iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
         iconClassName: { type: 'string', required: false },
       },
       required: false

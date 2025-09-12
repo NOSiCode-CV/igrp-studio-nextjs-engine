@@ -26,7 +26,7 @@ export function inputSearchProperties() {
     },
     disabled: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Disabled'} },
     required: { type: 'boolean', required: true, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Required'} },
-    submitButtonLabel: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
+    submitButtonLabel: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
     submitButtonClassName: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Class Name'} },
     className: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Class Name'} },
     ...dataCommonProperties(),

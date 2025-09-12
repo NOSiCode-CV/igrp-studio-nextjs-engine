@@ -22,7 +22,7 @@ export function statsCardProperties() {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: true },
-        iconName: { type: 'string', required: false, default: "Box" },
+        iconName: { type: 'string', required: false, default: "Box", 'x-ui-widget': 'icon' },
         iconSize: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'] },
         iconVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
         iconPlacement: { type: 'string', required: true, default: 'end', enum: ['start', 'end' ] },

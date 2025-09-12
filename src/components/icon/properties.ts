@@ -2,7 +2,7 @@ import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from 
 
 export function iconProperties() {
   return {
-    iconName: { type: 'string', required: true, default: 'Heart' },
+    iconName: { type: 'string', required: true, default: 'Heart', 'x-ui-widget': 'icon' },
     size: { type: 'string', required: false, default: '24' },
     className: { type: 'string', required: false },
     ...commonProperties(),
