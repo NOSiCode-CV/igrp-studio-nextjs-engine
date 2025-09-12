@@ -27,12 +27,14 @@ import {
   ProcessConfig,
   ProcessStepConfig,
   CustomFunctionConfig,
+  EngineConfigurationSettings,
 } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
 import { register, registryAsObject } from './components';
+import { configurationAsObject, setConfiguration } from './config';
 import { dockerRegistryAsObject, register as registerService } from './docker_services';
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
@@ -43,6 +45,7 @@ import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import defaultModule from './components/default';
 import defaultServiceModule from './docker_services/default';
 import defaultCodeModule from './code_snippets/default';
+import defaultEngineModule from './config/default';
 import { componentRegistrationValidate } from './schema/componentRegisterConfig';
 import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
@@ -71,9 +74,10 @@ import { generateProcessStep } from './modules/process/generateProcessStep';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
 import { processStepConfigValidate } from './schema/processStepConfig';
 import { saveProcessStepConfig } from './modules/process/saveProcessStepConfig';
+import { engineConfigurationRegistrationValidate } from './schema/engineConfigurationRegisterConfig';
 
 export function getPaths(version?: string): PathConfig {
-  const environment = process.env.VITE_NODE_ENV || process.env.ENGINE_ENV;
+  const environment = loadEngineConfiguration().environment;
   const PROJECT_TEMPLATE_VERSION = version ?? '0.0.1-alpha.0';
 
   if (environment === 'production') {
@@ -605,6 +609,16 @@ export const registerComponents = (config: ComponentRegistrationConfig) => {
   );
 };
 
+export const setEngineConfiguration = (config: EngineConfigurationSettings) => {
+  const isConfigValid = engineConfigurationRegistrationValidate(config);
+
+  if(!isConfigValid && engineConfigurationRegistrationValidate.errors)
+    throw engineConfigurationRegistrationValidate.errors;
+
+  setConfiguration((e) => defaultEngineModule.register(e, config))
+
+}
+
 export const registerServices = (config: DockerServiceRegistrationConfig) => {
   const isConfigValid = dockerServiceRegistrationValidate(config);
 
@@ -638,6 +652,10 @@ export const loadServiceRegistry = () => {
 export const loadCodeSnippetsRegistry = () => {
   return codeRegistryAsObject();
 };
+
+export const loadEngineConfiguration = (name?: string) => {
+  return configurationAsObject(name);
+}
 
 export const addCodeSnippet = (config: CodeSnippetConfig): string => {
   return renderCode(config)

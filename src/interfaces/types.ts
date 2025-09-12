@@ -1002,6 +1002,10 @@ export interface CodeSnippetsRegistrationConfig extends VersionableElement {
   codes: CodeSnippetsRegisterConfig[]
 }
 
+export interface EngineConfigurationSettings {
+  environment?: string
+}
+
 // Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same
 export type RenderContext<T = undefined, P = undefined> = {
   resourceConfig: T;
