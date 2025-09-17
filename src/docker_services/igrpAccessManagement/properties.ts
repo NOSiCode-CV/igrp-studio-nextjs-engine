@@ -2,7 +2,7 @@ import { IGRP_ACCESS_MANAGEMENT } from './index';
 
 export function igrpAccessManagementProperties() {
   return {
-    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/access-management-api:latest' },
+    image: { type: 'string', required: true, default: 'registry.nosi.cv/igrp/access-management-api-native:latest' },
     container_name: { type: 'string', required: false, default: 'igrp-access-management' },
     restart: {
       type: 'string',

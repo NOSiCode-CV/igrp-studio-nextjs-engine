@@ -347,7 +347,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         id: "igrp_am",
         name: IGRP_ACCESS_MANAGEMENT,
         properties: {
-          image: "registry.nosi.cv/igrp/access-management-api:latest",
+          image: "registry.nosi.cv/igrp/access-management-api-native:latest",
           container_name: `${baseContext.resourceConfig.slug}-igrp-access-management`,
           dependsOn: [
             { service: `${baseContext.resourceConfig.slug}-igrp-iam-keycloak` },
