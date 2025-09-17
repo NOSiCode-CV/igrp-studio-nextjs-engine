@@ -12,7 +12,6 @@ events {
     multi_accept      on;
 }
 
-
 http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
@@ -53,8 +52,6 @@ http {
         application/atom+xml
         image/svg+xml;
 
-
-
     # Preserve the client proto
     map $http_x_forwarded_proto $client_scheme {
         default  $scheme;
@@ -67,24 +64,11 @@ http {
         ''        close;
     }
 
-
-
-
     #── Security Headers ──────────────────────────────────────────────────────
     add_header X-Frame-Options        "SAMEORIGIN"                      always;
     add_header X-Content-Type-Options "nosniff"                         always;
     add_header X-XSS-Protection       "1; mode=block"                   always;
     add_header Referrer-Policy        "strict-origin-when-cross-origin" always;
-
-  #  proxy_hide_header Content-Security-Policy;
-  #  add_header Content-Security-Policy                                  # [CHANGED]
-  #      "default-src 'self';                                            # [CHANGED] CSP mais genérica p/ não prender a localhost/porta
-  #      script-src  'self' 'unsafe-inline' 'unsafe-eval';               # [CHANGED]
-  #      style-src   'self' 'unsafe-inline';                              # [CHANGED]
-  #      img-src     'self' data:;                                        # [CHANGED]
-  #      font-src    'self' data:;                                        # [CHANGED]
-  #      connect-src 'self' http: https: ws: wss:;                        # [CHANGED] antes listava apenas localhost/2575
-  #      frame-src   'self';" always;                                     # [CHANGED] removidos hosts específicos
 
     #── Rate Limiting ─────────────────────────────────────────────────────────
     limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
@@ -95,7 +79,6 @@ http {
     resolver_timeout 5s;
 
     #── Common proxy settings ─────────────────────────────────────────────────
-   # proxy_redirect          on;
     proxy_connect_timeout   30s;
     proxy_send_timeout      30s;
     proxy_read_timeout      30s;
@@ -104,24 +87,15 @@ http {
     proxy_buffers           16 128k;
     proxy_busy_buffers_size 256k;
     proxy_set_header Host              $http_host;
-  #  proxy_set_header Host              $host;
     proxy_set_header X-Real-IP         $remote_addr;
     proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Host  $http_host;
-  #  proxy_set_header X-Forwarded-Host  $host;
     proxy_set_header X-Forwarded-Proto $client_scheme;
     proxy_set_header X-Forwarded-Port  $server_port;
-    #proxy_set_header X-Forwarded-Port $client_port;
-
-
-
 
     server {
         listen   2575 default_server;
         server_name _;
-
-
-
 
         # Health check
         location = /health {
@@ -130,6 +104,18 @@ http {
             return 200 'healthy';
         }
 
+        location = /pgadmin {
+            return 301 $scheme://$host:$server_port/pgadmin/;
+        }
+
+        location ^~ /pgadmin/ {
+            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-pgadmin:80;
+
+            proxy_set_header X-Script-Name /pgadmin;
+
+            proxy_pass http://$upstream;
+            proxy_redirect off;
+        }
 
         location = /auth {
            return 301 $client_scheme://$host:$server_port/auth/$is_args$args;
@@ -141,20 +127,14 @@ http {
             proxy_pass         http://$upstream;
         }
 
-
-
         location = /minio {
             return 301 $client_scheme://$host:$server_port/minio/$is_args$args;
         }
 
-
-
         location ^~ /minio {
             set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-minio:9001;
-            proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection "upgrade";
-            proxy_set_header Host       $host;
 
             rewrite ^/minio/(.*)$ /$1 break;
             proxy_pass http://$upstream;
@@ -168,7 +148,6 @@ http {
         location = /eureka/ {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761/;
             proxy_intercept_errors off;
         }
@@ -176,13 +155,9 @@ http {
         location ^~ /eureka/ {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761;
             proxy_intercept_errors off;
         }
-
-
-
 
         # API Gateway
         location ^~ /gateway-api/ {
@@ -196,28 +171,17 @@ http {
         location ~ ^/apps/(?<svc>[^/]+)(?<rest>/.*|$) {
             limit_req zone=api burst=20 nodelay;
             set $target "${svc}:3000";
-            proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
             proxy_pass http://$target$rest;
         }
 
-
-        location ^~ /home/ {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-application-center:3000;
-            proxy_pass http://$upstream/;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade    $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-        }
-
-        # UI Application (catch-all)
         location / {
             set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-application-center:3000;
             proxy_pass http://$upstream;
-            proxy_http_version 1.1;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
+            proxy_redirect off;
         }
 
         # Error pages

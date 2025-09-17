@@ -25,6 +25,7 @@ import { IGRP_API_GATEWAY } from '../../docker_services/igrpApiGateway/index';
 import { EUREKA } from '../../docker_services/eureka/index';
 import { REDIS } from '../../docker_services/redis/index';
 import { NGINX } from '../../docker_services/nginx/index';
+import { PGADMIN } from '../../docker_services/pgadmin/index';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -50,6 +51,7 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
     { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
     { output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },
     { output: context.basePath, template: TEMPLATES.IGRP_NGINX, name: SRC_CONFIG_FILES.IGRP_NGINX },
+    { output: context.basePath, template: TEMPLATES.IGRP_REDIS, name: SRC_CONFIG_FILES.IGRP_REDIS },
   ];
 
 };
@@ -100,8 +102,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           ports: [
             {
-              internal: "${NGINX_HTTP_PORT:-2575}",
-              external: "${NGINX_HTTP_PORT:-2575}"
+              internal: 2575,//"${NGINX_HTTP_PORT:-2575}",
+              external: 2575//"${NGINX_HTTP_PORT:-2575}"
             }
           ],
           restart: 'unless-stopped' as RestartTypes,
@@ -114,10 +116,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: '--spider'},
               { instruction: 'http://127.0.0.1:80/health'},
             ],
-            interval: 30,
-            timeout: 10,
+            interval: '30s',
+            timeout: '10s',
             retries: 3,
-            start_period: 40
+            start_period: '40'
           },
           labels: [
             { key: 'type', value: 'service-discovery'},
@@ -157,10 +159,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: 'CMD-SHELL'},
               { instruction: 'pg_isready -U ${IGRP_DATABASE_USER} -d ${IGRP_DATABASE_NAME}'},
             ],
-            interval: 30,
-            timeout: 10,
+            interval: '30s',
+            timeout: '10s',
             retries: 5,
-            start_period: 60
+            start_period: '60'
           },
           labels: [
             { key: 'type', value: 'database'},
@@ -194,10 +196,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: 'CMD-SHELL'},
               { instruction: 'curl -f http://localhost:8080/actuator/health || exit 1'},
             ],
-            interval: 30,
-            timeout: 10,
+            interval: '30s',
+            timeout: '10s',
             retries: 3,
-            start_period: 60
+            start_period: '60'
           },
           labels: [
             { key: 'type', value: 'web'},
@@ -221,10 +223,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: 'CMD-SHELL'},
               { instruction: 'curl -f http://localhost:8761/actuator/health || exit 1'},
             ],
-            interval: 30,
-            timeout: 10,
+            interval: '30s',
+            timeout: '10s',
             retries: 5,
-            start_period: 60
+            start_period: '60'
           },
           labels: [
             { key: 'type', value: 'service-discovery'},
@@ -285,8 +287,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
                 instruction: "exec 3<>/dev/tcp/localhost/8080;"
               },
             ],
-            interval: 10,
-            timeout: 5,
+            interval: '10s',
+            timeout: '5s',
             retries: 5
           },
           labels: [
@@ -330,10 +332,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: '-f' },
               { instruction: 'http://localhost:9000/minio/health/live' },
             ],
-            interval: 30,
-            timeout: 20,
+            interval: '30s',
+            timeout: '20s',
             retries: 3,
-            start_period: 60
+            start_period: '60'
           },
           labels: [
             { key: 'type', value: 'file'},
@@ -380,7 +382,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: 'MINIO_ACCESS_KEY', value: '${MINIO_ACCESS_KEY}' },
             { key: 'MINIO_SECRET_KEY', value: '${MINIO_SECRET_KEY}' },
             { key: 'MINIO_BUCKET_NAME', value: '${MINIO_BUCKET_NAME}' },
-            { key: 'MINIO_PRESIGNED_URL_EXPIRATION_TIME', value: '10' },
+            { key: 'MINIO_PRESIGNED_URL_EXPIRATION_TIME', value: '10s' },
 
             // Eureka discovery
             { key: 'EUREKA_CLIENT_ENABLED', value: 'true' },
@@ -389,6 +391,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
 
             // Redis
             { key: 'SPRING_DATA_REDIS_HOST', value: 'redis' },
+            { key: 'SPRING_DATA_REDIS_PASSWORD', value: 'jdflijd6542g4642yu4' },
 
             // Swagger configuration
             { key: 'SPRINGDOC_SWAGGER_UI_DISABLE_SWAGGER_DEFAULT_URL', value: 'true' },
@@ -401,15 +404,13 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           healthcheck: {
             test: [
-              { instruction: 'CMD' },
-              { instruction: 'curl' },
-              { instruction: '-f' },
-              { instruction: 'http://localhost:8080/actuator/health' },
+              { instruction: 'CMD-SHELL' },
+              { instruction: 'curl -f http://localhost:8080/actuator/health || exit 1' },
             ],
-            interval: 30,
-            timeout: 20,
+            interval: '30s',
+            timeout: '20s',
             retries: 3,
-            start_period: 60
+            start_period: '60'
           },
           restart: 'unless-stopped' as RestartTypes,
           labels: [
@@ -434,10 +435,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               { instruction: '-f' },
               { instruction: 'http://localhost:3000/api/health' },
             ],
-            interval: 30,
-            timeout: 20,
+            interval: '30s',
+            timeout: '20s',
             retries: 3,
-            start_period: 60
+            start_period: '60'
           },
           environments: [
             {
@@ -476,6 +477,34 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               key: "NODE_ENV",
               value: "production",
             },
+            {
+              key: "IGRP_APP_MANAGER_API",
+              value: "http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/access-management",
+            },
+            {
+              key: "IGRP_APP_CODE",
+              value: "APP_IGRP_CENTER",
+            },
+            {
+              key: "IGRP_PREVIEW_MODE",
+              value: "false",
+            },
+            {
+              key: "IGRP_LOGIN_URL",
+              value: "/login",
+            },
+            {
+              key: "IGRP_LOGOUT_URL",
+              value: "/logout",
+            },
+            {
+              key: "IGRP_APP_NAME_DESCRIPTION",
+              value: "IGRP",
+            },
+            {
+              key: "NEXTAUTH_TRUST_HOST",
+              value: "true",
+            }
           ],
           labels: [
             { key: 'type', value: 'web'},
@@ -489,9 +518,38 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         properties: {
           image: 'redis:latest',
           container_name: `${baseContext.resourceConfig.slug}-redis`,
-          restart: 'unless-stopped' as RestartTypes
+          restart: 'unless-stopped' as RestartTypes,
+          volumes: [
+            { name: './redis.conf', path: '/usr/local/etc/redis/redis.conf', driver: 'local' },
+          ],
+          command: [
+            { instruction: 'redis-server' },
+            { instruction: '/usr/local/etc/redis/redis.conf' },
+          ]
         }
-      }
+      },
+      {
+        id: 'igrp_pgadmin',
+        name: PGADMIN,
+        properties: {
+          image: 'dpage/pgadmin4:latest',
+          container_name: `${baseContext.resourceConfig.slug}-igrp-pgadmin`,
+          restart: 'unless-stopped' as RestartTypes,
+          environments: [
+            {  key: 'PGADMIN_DEFAULT_EMAIL', value: '${PGADMIN_DEFAULT_EMAIL:-admin@igrp.cv}' },
+            {  key: 'PGADMIN_DEFAULT_PASSWORD', value: '${PGADMIN_DEFAULT_PASSWORD:-igrp123456}' },
+            {  key: 'SCRIPT_NAME', value: '/pgadmin' },
+            { key: 'PGADMIN_LISTEN_PORT', value: '${PGADMIN_LISTEN_PORT:-80}' },
+          ],
+          volumes: [
+            { name: 'igrp-pgadmin_data', path: '/var/lib/pgadmin', driver: 'local' }
+          ],
+          expose: [
+            { port: 80 }
+          ]
+        }
+      },
+
     ],
   }
 

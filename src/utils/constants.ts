@@ -99,6 +99,7 @@ export const TEMPLATES = {
   AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
   IGRP_NGINX: 'workspace/nginx.conf.hbs',
+  IGRP_REDIS: 'workspace/redis.conf.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
@@ -134,6 +135,7 @@ export const SRC_CONFIG_FILES = {
   EN: 'en',
   VSCODE_SETTINGS: 'vscode_settings.json',
   IGRP_NGINX: 'nginx.conf',
+  IGRP_REDIS: 'redis.conf',
 };
 
 export const DST_CONFIG_FILES ={

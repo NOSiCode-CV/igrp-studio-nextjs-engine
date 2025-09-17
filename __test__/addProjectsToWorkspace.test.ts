@@ -1,4 +1,10 @@
-import { addProjectToWorkspace, addServiceToWorkspace, initServices, removeProjectFromWorkspace } from '../src';
+import {
+  addProjectToWorkspace,
+  addServiceToWorkspace,
+  initServices,
+  removeProjectFromWorkspace,
+  setEngineConfiguration,
+} from '../src';
 import { ProjectWorkspace, ServiceWorkspace, WorkspaceProjectsConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 import { COMMON_FILES, DIRECTORIES } from '../src/utils/constants';
@@ -660,6 +666,7 @@ const serviceConfig: ServiceWorkspace = {
 }
 
 beforeAll(async () => {
+  setEngineConfiguration({ environment: 'development' });
   await initServices();
 });
 

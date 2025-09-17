@@ -732,9 +732,9 @@ export interface Profile {
 }
 
 export interface Port {
-  internal: number | string,
-  external: number | string,
-  reference?: number | string,
+  internal: number,
+  external: number,
+  reference?: number
 }
 
 export interface Host {
@@ -782,10 +782,10 @@ export interface DockerServiceResourceLimit {
 
 export interface DockerServiceHealthcheck {
   test?: DockerServiceInstruction[],
-  interval?: string | number,
-  timeout?: string | number,
+  interval?: string,
+  timeout?: string,
   retries?: number,
-  start_period?: string | number
+  start_period?: string
 }
 
 export interface DockerServiceResources {
