@@ -1,26 +1,29 @@
 # Workspace
-COMPOSE_PROJECT_NAME={{toLowerCase resourceConfig.workspace}}-workspace
+COMPOSE_PROJECT_NAME={{toLowerCase resourceConfig.workspace}}-igrp
 NGINX_HTTP_PORT=2575
 
 #ipconfig getifaddr en0
 DOCKER_IP=10.73.110.46
 
 # Database
-IGRP_LOCAL_DATABASE_HOSTNAME={{toLowerCase resourceConfig.workspace}}-igrp-database-postgres
+IGRP_LOCAL_DATABASE_HOSTNAME={{toLowerCase resourceConfig.workspace}}-database-postgres
 IGRP_DATABASE_NAME=igrp_db
 IGRP_DATABASE_USER=igrp
 IGRP_DATABASE_PASSWORD=1234
 
 # Object Storage
+IGRP_OBJECT_STORAGE_HOST={{toLowerCase resourceConfig.workspace}}-minio
+IGRP_OBJECT_STORAGE_PORT=9000
+IGRP_OBJECT_STORAGE_SECURITY=false
 IGRP_OBJECT_STORAGE_USER=admin
 IGRP_OBJECT_STORAGE_PASSWORD=admin123456
 IGRP_OBJECT_STORAGE_BUCKET_NAME=igrp
 
 # Cloud
-EUREKA_SERVICE_URL=http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761/eureka/
+EUREKA_SERVICE_URL=http://{{toLowerCase resourceConfig.workspace}}-eureka:8761/eureka/
 
 # IAM
-IGRP_IAM_HOSTNAME={{toLowerCase resourceConfig.workspace}}-igrp-iam-keycloak
+IGRP_IAM_HOSTNAME={{toLowerCase resourceConfig.workspace}}-iam-keycloak
 IGRP_IAM_DATABASE_NAME=igrp_iam_db
 IGRP_IAM_ADMIN_USER=admin
 IGRP_IAM_ADMIN_PASSWORD=password
@@ -30,13 +33,6 @@ IGRP_IAM_CLIENT_SECRET=FTpKJk9kIT2LBCpzIAzCDZfHfjbqzWCy
 
 # Process
 IGRP_PROCESS_DATABASE_NAME=igrp_process_db
-
-MINIO_URL={{toLowerCase resourceConfig.workspace}}-igrp-minio
-MINIO_PORT=9000
-MINIO_SECURITY=false
-MINIO_ACCESS_KEY=admin
-MINIO_SECRET_KEY=admin123456
-MINIO_BUCKET_NAME=igrp
 
 PGADMIN_DEFAULT_EMAIL=admin@igrp.cv
 PGADMIN_DEFAULT_PASSWORD=igrp123456

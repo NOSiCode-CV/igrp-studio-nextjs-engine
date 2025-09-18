@@ -165,7 +165,7 @@ export function keycloakProperties() {
 
 export function keycloakVolumes(): Record<string, VolumeFile> {
   return {
-    '/opt/keycloak/data/import/igrp-realm.json': {
+    '/opt/keycloak/data/import/igrp-realm.json:ro': {
       template: replaceTemplate(TEMPLATES.DOCKER_SERVICE_VOLUME, {
         name: KEYCLOAK,
         volume: 'igrp-realm.json',

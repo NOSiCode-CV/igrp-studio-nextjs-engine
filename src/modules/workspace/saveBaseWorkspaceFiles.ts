@@ -95,7 +95,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: NGINX,
         properties: {
           image: 'nginx:1.25-alpine',
-          container_name: `${baseContext.resourceConfig.slug}-igrp-nginx`,
+          container_name: `${baseContext.resourceConfig.slug}-nginx`,
           volumes: [
             { name: './nginx.conf', path: '/etc/nginx/nginx.conf:ro', driver: 'local' },
             { name: './logs/nginx', path: '/var/log/nginx', driver: 'local' },
@@ -132,25 +132,27 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: POSTGRES,
         properties: {
           image: "postgres:16-alpine",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-database-postgres`,
+          container_name: `${baseContext.resourceConfig.slug}-database-postgres`,
           restart: "unless-stopped" as RestartTypes,
           hostname: "${IGRP_LOCAL_DATABASE_HOSTNAME}",
           shm_size: "256mb",
+          env_file: [
+            { file: '.env' }
+          ],
           environments: [
             { key: "POSTGRES_DB", value: "${IGRP_DATABASE_NAME}" },
             { key: "POSTGRES_USER", value: "${IGRP_DATABASE_USER}" },
             { key: "POSTGRES_PASSWORD", value: "${IGRP_DATABASE_PASSWORD}" },
-            { key: "POSTGRES_INITDB_ARGS", value: "--auth-host=scram-sha-256" },
           ],
           volumes: [
             {
               name: "igrp-postgres_data",
-              path: "/var/lib/postgresql/data",
+              path: "/var/lib/postgresql/data2",
               driver: "local"
             },
             {
               name: `./${DIRECTORIES.IGRPSTUDIO}/${COMMON_FILES.INIT_IGRP_DB}`,
-              path: "/docker-entrypoint-initdb.d:ro",
+              path: "/docker-entrypoint-initdb.d/init.sh",
               driver: "none"
             }
           ],
@@ -175,9 +177,9 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: IGRP_API_GATEWAY,
         properties: {
           image: "registry.nosi.cv/igrp/igrp-gateway:latest",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-gateway`,
+          container_name: `${baseContext.resourceConfig.slug}-gateway`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-igrp-eureka` }
+            { service: `${baseContext.resourceConfig.slug}-eureka` }
           ],
           environments: [
             { key: 'SPRING_PROFILES_ACTIVE', value: 'development' },
@@ -212,7 +214,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: EUREKA,
         properties: {
           image: "registry.nosi.cv/igrp/igrp-eureka:latest",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-eureka`,
+          container_name: `${baseContext.resourceConfig.slug}-eureka`,
           restart: 'unless-stopped' as RestartTypes,
           environments: [
             { key: 'SERVER_PORT', value: '8761' },
@@ -239,11 +241,11 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: KEYCLOAK,
         properties: {
           image: "quay.io/keycloak/keycloak:26.3.2",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-iam-keycloak`,
+          container_name: `${baseContext.resourceConfig.slug}-iam-keycloak`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-igrp-database-postgres` }
+            { service: `${baseContext.resourceConfig.slug}-database-postgres` }
           ],
-          hostname: `${baseContext.resourceConfig.slug}-igrp-iam-keycloak`,
+          hostname: `${baseContext.resourceConfig.slug}-iam-keycloak`,
           restart: "unless-stopped" as RestartTypes,
           volumes: [
             {
@@ -253,7 +255,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             }
           ],
           command: [
-            { instruction: 'start-dev' },
+            { instruction: 'start' },
             { instruction: '--import-realm' },
           ],
           environments: [
@@ -263,7 +265,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: 'KC_PROXY_HEADERS', value: 'xforwarded' },
             { key: 'KC_PROXY_ADDRESS_FORWARDING', value: 'true' },
             { key: 'KC_HTTP_RELATIVE_PATH', value: 'auth' },
-            { key: 'KC_HOSTNAME', value: "${DOCKERIP}" },
+            { key: 'KC_HOSTNAME', value: "${DOCKER_IP}" },
             { key: 'KC_HOSTNAME_STRICT', value: 'false' },
             { key: 'KC_HOSTNAME_STRICT_HTTPS', value: 'false' },
             { key: 'KC_HOSTNAME_PORT', value: "${NGINX_HTTP_PORT}" },
@@ -280,16 +282,15 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           healthcheck: {
             test: [
-              {
-                instruction: "CMD-SHELL"
-              },
-              {
-                instruction: "exec 3<>/dev/tcp/localhost/8080;"
-              },
+              { instruction: "CMD" },
+              { instruction: "sh" },
+              { instruction: "-c" },
+              { instruction: "exec 3<>/dev/tcp/localhost/8080" },
             ],
-            interval: '10s',
-            timeout: '5s',
-            retries: 5
+            interval: '30s',
+            timeout: '10s',
+            retries: 5,
+            start_period: '120s'
           },
           labels: [
             { key: 'type', value: 'auth'},
@@ -302,8 +303,19 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: MINIO,
         properties: {
           image: "minio/minio:latest",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-minio`,
+          container_name: `${baseContext.resourceConfig.slug}-minio`,
           restart: "unless-stopped" as RestartTypes,
+          env_file: [
+            {
+              file: '.env'
+            }
+          ],
+          environments: [
+            { key: 'MINIO_ROOT_USER', value: '${IGRP_OBJECT_STORAGE_USER}' },
+            { key: 'MINIO_ROOT_PASSWORD', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
+            { key: 'MINIO_BUCKET_NAME', value: 'IGRP_OBJECT_STORAGE_BUCKET_NAME' },
+            { key: 'MINIO_BROWSER_REDIRECT_URL', value: 'http://${DOCKER_IP}:${NGINX_HTTP_PORT}/minio/' },
+          ],
           volumes: [
             {
               name: 'igrp-minio_data',
@@ -348,10 +360,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: IGRP_ACCESS_MANAGEMENT,
         properties: {
           image: "registry.nosi.cv/igrp/access-management-api-native:latest",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-access-management`,
+          container_name: `${baseContext.resourceConfig.slug}-access-management`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-igrp-iam-keycloak` },
-            { service: `${baseContext.resourceConfig.slug}-igrp-database-postgres` }
+            { service: `${baseContext.resourceConfig.slug}-iam-keycloak` },
+            { service: `${baseContext.resourceConfig.slug}-database-postgres` }
           ],
           environments: [
             { key: 'SPRING_PROFILES_ACTIVE', value: 'development' },
@@ -376,27 +388,29 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: 'AUTH_JWT_ISSUER', value: 'http://${DOCKER_IP}:${NGINX_HTTP_PORT}/auth/realms/igrp' },
 
             // Object storage configuration
-            { key: 'MINIO_URL', value: '${MINIO_URL}' },
-            { key: 'MINIO_PORT', value: '${MINIO_PORT}' },
-            { key: 'MINIO_SECURITY', value: '${MINIO_SECURITY}' },
-            { key: 'MINIO_ACCESS_KEY', value: '${MINIO_ACCESS_KEY}' },
-            { key: 'MINIO_SECRET_KEY', value: '${MINIO_SECRET_KEY}' },
-            { key: 'MINIO_BUCKET_NAME', value: '${MINIO_BUCKET_NAME}' },
-            { key: 'MINIO_PRESIGNED_URL_EXPIRATION_TIME', value: '10s' },
+            { key: 'MINIO_URL', value: '${IGRP_OBJECT_STORAGE_HOST}' },
+            { key: 'MINIO_PORT', value: '${IGRP_OBJECT_STORAGE_PORT}' },
+            { key: 'MINIO_SECURITY', value: '${IGRP_OBJECT_STORAGE_SECURITY}' },
+            { key: 'MINIO_ACCESS_KEY', value: '${IGRP_OBJECT_STORAGE_USER}' },
+            { key: 'MINIO_SECRET_KEY', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
+            { key: 'MINIO_BUCKET_NAME', value: '${IGRP_OBJECT_STORAGE_BUCKET_NAME}' },
+            { key: 'MINIO_PRESIGNED_URL_EXPIRATION_TIME', value: '10' },
 
             // Eureka discovery
             { key: 'EUREKA_CLIENT_ENABLED', value: 'true' },
             { key: 'SPRING_CLOUD_DISCOVERY_ENABLED', value: 'true' },
             { key: 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE', value: '${EUREKA_SERVICE_URL}' },
+            { key: 'EUREKA_CLIENT_SERVICEURL_DEFAULTZONE', value: '${EUREKA_SERVICE_URL}' },
+            { key: 'EUREKA_SERVICE_URL', value: '${EUREKA_SERVICE_URL}' },
 
             // Redis
-            { key: 'SPRING_DATA_REDIS_HOST', value: 'redis' },
+            { key: 'SPRING_DATA_REDIS_HOST', value: `${baseContext.resourceConfig.slug}-redis` },
             { key: 'SPRING_DATA_REDIS_PASSWORD', value: 'jdflijd6542g4642yu4' },
 
             // Swagger configuration
             { key: 'SPRINGDOC_SWAGGER_UI_DISABLE_SWAGGER_DEFAULT_URL', value: 'true' },
-            { key: 'SPRINGDOC_SWAGGER_UI_CONFIG_URL', value: '/gateway-api/access-management/v3/api-docs/swagger-config' },
-            { key: 'SPRINGDOC_SWAGGER_UI_URL', value: '/gateway-api/access-management/v3/api-docs' },
+            { key: 'SPRINGDOC_SWAGGER_UI_CONFIG_URL', value: `/gateway-api/${baseContext.resourceConfig.slug}-access-management/v3/api-docs/swagger-config` },
+            { key: 'SPRINGDOC_SWAGGER_UI_URL', value: `/gateway-api/${baseContext.resourceConfig.slug}-access-management/v3/api-docs` },
           ],
           command: [
             { instruction: '/app/access-management'},
@@ -424,9 +438,9 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: IGRP_APPLICATION_CENTER,
         properties: {
           image: "registry.nosi.cv/igrp/igrp-application-center:latest",
-          container_name: `${baseContext.resourceConfig.slug}-igrp-application-center`,
+          container_name: `${baseContext.resourceConfig.slug}-application-center`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-igrp-access-management` }
+            { service: `${baseContext.resourceConfig.slug}-access-management` }
           ],
           healthcheck: {
             test: [
@@ -462,24 +476,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               value: "${NEXTAUTH_SECRET:-4oC9C+V7ZrANFWiGhcmyvu3GTlOfVDthdxUyn3V3Mtk=}",
             },
             {
-              key: "APP_MANAGER_API",
-              value: `http://${baseContext.resourceConfig.slug}-igrp-gateway:8080/access-management`,
-            },
-            {
-              key: "APP_URL",
-              value: "http://${DOCKER_IP}",
-            },
-            {
-              key: "NEXT_PUBLIC_BASE_URL",
-              value: "http://${DOCKER_IP}:${NGINX_HTTP_PORT}",
-            },
-            {
-              key: "NODE_ENV",
-              value: "production",
-            },
-            {
               key: "IGRP_APP_MANAGER_API",
-              value: "http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/access-management",
+              value: `http://\${DOCKER_IP}:\${NGINX_HTTP_PORT}/gateway-api/${baseContext.resourceConfig.slug}-access-management`,
             },
             {
               key: "IGRP_APP_CODE",
@@ -533,7 +531,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
         name: PGADMIN,
         properties: {
           image: 'dpage/pgadmin4:latest',
-          container_name: `${baseContext.resourceConfig.slug}-igrp-pgadmin`,
+          container_name: `${baseContext.resourceConfig.slug}-pgadmin`,
           restart: 'unless-stopped' as RestartTypes,
           environments: [
             {  key: 'PGADMIN_DEFAULT_EMAIL', value: '${PGADMIN_DEFAULT_EMAIL:-admin@igrp.cv}' },
