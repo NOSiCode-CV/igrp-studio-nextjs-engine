@@ -97,8 +97,8 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           image: 'nginx:1.25-alpine',
           container_name: `${baseContext.resourceConfig.slug}-nginx`,
           volumes: [
-            { name: './nginx.conf', path: '/etc/nginx/nginx.conf:ro', driver: 'local' },
-            { name: './logs/nginx', path: '/var/log/nginx', driver: 'local' },
+            { name: './nginx.conf', path: '/etc/nginx/nginx.conf:ro', driver: 'none' },
+            { name: './logs/nginx', path: '/var/log/nginx', driver: 'none' },
           ],
           ports: [
             {
@@ -119,7 +119,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '10s',
             retries: 3,
-            start_period: '40'
+            start_period: '40s'
           },
           labels: [
             { key: 'type', value: 'service-discovery'},
@@ -164,7 +164,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '10s',
             retries: 5,
-            start_period: '60'
+            start_period: '60s'
           },
           labels: [
             { key: 'type', value: 'database'},
@@ -201,7 +201,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '10s',
             retries: 3,
-            start_period: '60'
+            start_period: '60s'
           },
           labels: [
             { key: 'type', value: 'web'},
@@ -228,7 +228,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '10s',
             retries: 5,
-            start_period: '60'
+            start_period: '60s'
           },
           labels: [
             { key: 'type', value: 'service-discovery'},
@@ -347,7 +347,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '20s',
             retries: 3,
-            start_period: '60'
+            start_period: '60s'
           },
           labels: [
             { key: 'type', value: 'file'},
@@ -368,7 +368,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           environments: [
             { key: 'SPRING_PROFILES_ACTIVE', value: 'development' },
             { key: 'SERVER_PORT', value: '8080' },
-            { key: 'SPRING_APPLICATION_NAME', value: 'access-management' },
+            { key: 'SPRING_APPLICATION_NAME', value: `${baseContext.resourceConfig.slug}-access-management` },
             { key: 'SPRING_JPA_HIBERNATE_DDL_AUTO', value: 'update' },
             { key: 'ENABLE_SWAGGER', value: 'true' },
             { key: 'JAVA_OPTS', value: '-Xmx512m -Xms256m -XX:+UseG1GC' },
@@ -424,7 +424,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '20s',
             retries: 3,
-            start_period: '60'
+            start_period: '60s'
           },
           restart: 'unless-stopped' as RestartTypes,
           labels: [
@@ -452,7 +452,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             interval: '30s',
             timeout: '20s',
             retries: 3,
-            start_period: '60'
+            start_period: '60s'
           },
           environments: [
             {
@@ -518,7 +518,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           container_name: `${baseContext.resourceConfig.slug}-redis`,
           restart: 'unless-stopped' as RestartTypes,
           volumes: [
-            { name: './redis.conf', path: '/usr/local/etc/redis/redis.conf', driver: 'local' },
+            { name: './redis.conf', path: '/usr/local/etc/redis/redis.conf', driver: 'none' },
           ],
           command: [
             { instruction: 'redis-server' },

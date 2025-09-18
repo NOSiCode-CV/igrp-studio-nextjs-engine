@@ -109,7 +109,7 @@ http {
         }
 
         location ^~ /pgadmin/ {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-pgadmin:80;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-pgadmin:80;
 
             proxy_set_header X-Script-Name /pgadmin;
 
@@ -123,7 +123,7 @@ http {
         }
 
         location /auth/ {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-iam-keycloak:8080;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-iam-keycloak:8080;
             proxy_pass         http://$upstream;
         }
 
@@ -132,7 +132,7 @@ http {
         }
 
         location ^~ /minio {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-minio:9001;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-minio:9001;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection "upgrade";
 
@@ -148,20 +148,22 @@ http {
         location = /eureka/ {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761/;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-eureka:8761;
+            proxy_pass http://$upstream/;
             proxy_intercept_errors off;
         }
 
         location ^~ /eureka/ {
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_pass http://{{toLowerCase resourceConfig.workspace}}-igrp-eureka:8761;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-eureka:8761;
+            proxy_pass http://$upstream;
             proxy_intercept_errors off;
         }
 
         # API Gateway
         location ^~ /gateway-api/ {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-gateway:8080;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-gateway:8080;
             rewrite ^/gateway-api/?(.*)$ /$1 break;
             limit_req zone=api burst=20 nodelay;
             proxy_pass http://$upstream;
@@ -177,7 +179,7 @@ http {
         }
 
         location / {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-igrp-application-center:3000;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-application-center:3000;
             proxy_pass http://$upstream;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
