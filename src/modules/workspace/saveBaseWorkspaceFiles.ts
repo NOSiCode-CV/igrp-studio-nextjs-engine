@@ -50,6 +50,7 @@ const generateBaseWorkspaceFiles = (context: RenderContext<WorkspaceConfig, Work
   return [
     { output: context.basePath, template: TEMPLATES.WORKSPACE_COMPOSE, name: SRC_CONFIG_FILES.IGRP_COMPOSE },
     { output: context.basePath, template: TEMPLATES.IGRP_ENV, name: ENVIRONMENT_FILES.IGRP_ENV },
+    { output: path.join(context.basePath, DIRECTORIES.IGRPSTUDIO, 'auth', 'data'), template: TEMPLATES.IGRP_AUTH_JSON, name: SRC_CONFIG_FILES.IGRP_AUTH_JSON },
     { output: context.basePath, template: TEMPLATES.IGRP_NGINX, name: SRC_CONFIG_FILES.IGRP_NGINX },
     { output: context.basePath, template: TEMPLATES.IGRP_REDIS, name: SRC_CONFIG_FILES.IGRP_REDIS },
   ];
@@ -121,11 +122,17 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 3,
             start_period: '40s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'service-discovery'},
             { key: 'name', value: NGINX}
           ]
-        }
+        },
       },
       {
         id: "igrp_db",
@@ -166,6 +173,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 5,
             start_period: '60s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'database'},
             { key: 'name', value: POSTGRES}
@@ -203,6 +216,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 3,
             start_period: '60s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'web'},
             { key: 'name', value: IGRP_API_GATEWAY},
@@ -230,6 +249,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 5,
             start_period: '60s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'service-discovery'},
             { key: 'name', value: EUREKA},
@@ -292,6 +317,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 5,
             start_period: '120s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'auth'},
             { key: 'name', value: KEYCLOAK},
@@ -349,11 +380,17 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             retries: 3,
             start_period: '60s'
           },
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'file'},
             { key: 'name', value: MINIO},
           ]
-        }
+        },
       },
       {
         id: "igrp_am",
@@ -427,6 +464,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             start_period: '60s'
           },
           restart: 'unless-stopped' as RestartTypes,
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'web'},
             { key: 'name', value: IGRP_ACCESS_MANAGEMENT},
@@ -504,6 +547,12 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               value: "true",
             }
           ],
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
+          ],
           labels: [
             { key: 'type', value: 'web'},
             { key: 'name', value: IGRP_APPLICATION_CENTER},
@@ -523,8 +572,14 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           command: [
             { instruction: 'redis-server' },
             { instruction: '/usr/local/etc/redis/redis.conf' },
+          ],
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
           ]
-        }
+        },
       },
       {
         id: 'igrp_pgadmin',
@@ -544,10 +599,15 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           ],
           expose: [
             { port: 80 }
+          ],
+          extra_hosts: [
+            {
+              hostname: `${baseContext.resourceConfig.slug}-igrp`,
+              ip: 'host-gateway'
+            }
           ]
-        }
+        },
       },
-
     ],
   }
 

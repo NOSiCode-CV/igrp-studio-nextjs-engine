@@ -757,12 +757,12 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "FTpKJk9kIT2LBCpzIAzCDZfHfjbqzWCy",
       "redirectUris": [
-        "http://10.73.110.46:2575/api/auth/callback/keycloak",
+        "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/api/auth/callback/keycloak",
         "http://localhost:3000/api/auth/callback/keycloak",
         "https://oauth.pstmn.io/v1/callback"
       ],
       "webOrigins": [
-        "http://10.73.110.46:2575",
+        "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575",
         "http://localhost:3000",
         "https://oauth.pstmn.io"
       ],
@@ -782,7 +782,7 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1746788355",
         "backchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "http://localhost:3000##http://10.73.110.46:2575##https://oauth.pstmn.io",
+        "post.logout.redirect.uris": "http://localhost:3000/*##http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/*##https://oauth.pstmn.io",
         "display.on.consent.screen": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "use.jwks.url": "false",
@@ -2362,7 +2362,7 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "http://10.73.110.46:2575/auth",
+    "frontendUrl": "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/auth",
     "organizationsEnabled": "false",
     "acr.loa.map": "{}",
     "shortVerificationUri": "",

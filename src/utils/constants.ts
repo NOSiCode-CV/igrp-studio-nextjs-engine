@@ -98,6 +98,7 @@ export const TEMPLATES = {
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
+  IGRP_AUTH_JSON: 'docker_services/keycloak/volumes/igrp-realm.json.hbs',
   IGRP_NGINX: 'workspace/nginx.conf.hbs',
   IGRP_REDIS: 'workspace/redis.conf.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
@@ -136,6 +137,7 @@ export const SRC_CONFIG_FILES = {
   VSCODE_SETTINGS: 'vscode_settings.json',
   IGRP_NGINX: 'nginx.conf',
   IGRP_REDIS: 'redis.conf',
+  IGRP_AUTH_JSON: 'igrp-realm.json',
 };
 
 export const DST_CONFIG_FILES ={

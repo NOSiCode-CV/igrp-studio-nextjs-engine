@@ -37,6 +37,8 @@ services:
       resources:
         limits:
           memory: 700m
+    extra_hosts:
+      {{toLowerCase resourceConfig.workspace}}-igrp: host-gateway
     labels:
       type: "web"
       is_project: true
@@ -63,6 +65,8 @@ services:
     {{#if this.environments}}
     env_file: ".{{toLowerCase this.config.name}}.env"
     {{/if}}
+    extra_hosts:
+      {{toLowerCase resourceConfig.workspace}}-igrp: host-gateway
     stdin_open: true
     labels:
       type: "web"
