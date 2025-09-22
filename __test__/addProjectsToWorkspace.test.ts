@@ -12,7 +12,7 @@ import { COMMON_FILES, DIRECTORIES } from '../src/utils/constants';
 export const OUTPUT_DIR = OUTPUT_WORKSPACE_TEST;
 
 const baseConfig: WorkspaceProjectsConfig = {
-  id: 'a03Yl1rsM1P1',
+  id: '5bce7a73-45a4-4fa8-a87d-497583123951',
   workspace: 'my-workspace',
   projects: [
     {
@@ -89,7 +89,8 @@ const baseConfig: WorkspaceProjectsConfig = {
       ],
     }
   ],
-  services: [
+  services: []
+  /*services: [
     {
       id: "postgres_1",
       name: "postgres",
@@ -566,29 +567,21 @@ const baseConfig: WorkspaceProjectsConfig = {
         ]
       }
     }
-  ]
+  ]*/
 };
 
 const projectConfig: ProjectWorkspace = {
   id: "2fabf785-0659-49f2-b03f-c6ea50659646",
   config: {
-    id: "2fabf785-0659-49f2-b03f-c6ea50659666",
-    type: 'springboot',
-    name: 'demoDomain',
-    group: 'com.petshop',
-    artifact: 'animals',
-    description: 'Demo project for Spring Boot',
-    database: 'Postgresql',
-    projectStructureStyle: 'domain',
-    enableObservability: "true",
-    enableEntityRevision: "true",
-    igrpCoreVersion: "0.0.1-alpha",
-    enableGraalVm: "false"
+      id: 'teste',
+      type: 'nextjs',
+      name: 'testeMan',
+      workspaceId: '5bce7a73-45a4-4fa8-a87d-497583123951'
   }
 }
 
 const serviceConfig: ServiceWorkspace = {
-  "id": "2fabf785-0659-49f2-b03f-c6ea50659646",
+  "id": "5bce7a73-45a4-4fa8-a87d-497583123951",
   "service": {
     "id": "svc-1744633175793",
     "name": "igrpAppLogic",
