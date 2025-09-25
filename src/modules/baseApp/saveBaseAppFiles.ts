@@ -60,7 +60,6 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
   return [
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.VSCODE_SETTINGS), dest: path.join(context.basePath, DST_CONFIG_FILES.VSCODE_SETTINGS)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, DST_CONFIG_FILES.GITLABCIYAML)},
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERFILE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERFILE)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERIGNORE)},
   ]
 }
