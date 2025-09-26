@@ -50,7 +50,9 @@ services:
   {{/if~}}
   {{#if (eq this.config.type 'nextjs')}}
   {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}:
-    build: ./projects/{{this.basePath}}
+    build: 
+      context: ./projects/{{this.basePath}}
+      dockerfile: docker/development/Dockerfile
     container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
