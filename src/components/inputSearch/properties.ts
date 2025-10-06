@@ -15,6 +15,8 @@ export function inputSearchProperties() {
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Placeholder'} },
     helperText: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Helper Text'} },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     showSubmitButton: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Submit Button'} },
     iconProperties: {
       type: 'object',

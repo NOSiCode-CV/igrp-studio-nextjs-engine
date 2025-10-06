@@ -176,13 +176,24 @@ http {
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
             proxy_pass http://$target$rest;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $client_scheme;
+            proxy_set_header X-Forwarded-Port  $server_port;
+            proxy_redirect off;
         }
 
         location / {
-            set $upstream {{toLowerCase resourceConfig.workspace}}-application-center:3000;
+            set $upstream my-workspace-application-center:3000;
             proxy_pass http://$upstream;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $client_scheme;
+            proxy_set_header X-Forwarded-Port  $server_port;
             proxy_redirect off;
         }
 

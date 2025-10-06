@@ -14,6 +14,8 @@ export function inputPasswordProperties() {
     label: { type: 'string', required: false, default: 'Input Password' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
     helperText: { type: 'string', required: false, default: '' },

@@ -37,6 +37,8 @@ export function inputPhoneProperties() {
     //floatingLabel: { type: 'boolean', required: false, default: false },
     name: { type: 'string', required: true, default: 'phone' },
     dir: { type: 'string', required: false, default: 'ltr' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
     helperText: { type: 'string', required: false, default: '' },

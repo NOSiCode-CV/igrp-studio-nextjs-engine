@@ -26,6 +26,8 @@ export function inputUrlProperties() {
     label: { type: 'string', required: false, default: 'Input URL' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     defaultValue: { type: 'string', required: false, default: '' },
     defaultProtocol: { type: 'string', required: false, enum: protocols, default: 'https://' },
     protocols: { type: 'array', required: false, items: { type: 'string', required: false, enum: protocols }},

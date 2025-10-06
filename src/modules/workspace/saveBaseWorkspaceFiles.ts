@@ -425,13 +425,13 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: 'AUTH_JWT_ISSUER', value: 'http://${DOCKER_IP}:${NGINX_HTTP_PORT}/auth/realms/igrp' },
 
             // Object storage configuration
-            { key: 'MINIO_URL', value: '${IGRP_OBJECT_STORAGE_HOST}' },
-            { key: 'MINIO_PORT', value: '${IGRP_OBJECT_STORAGE_PORT}' },
-            { key: 'MINIO_SECURITY', value: '${IGRP_OBJECT_STORAGE_SECURITY}' },
-            { key: 'MINIO_ACCESS_KEY', value: '${IGRP_OBJECT_STORAGE_USER}' },
-            { key: 'MINIO_SECRET_KEY', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
-            { key: 'MINIO_BUCKET_NAME', value: '${IGRP_OBJECT_STORAGE_BUCKET_NAME}' },
-            { key: 'MINIO_PRESIGNED_URL_EXPIRATION_TIME', value: '10' },
+            { key: 'S3_ENDPOINT', value: 'http://${IGRP_OBJECT_STORAGE_HOST}:${IGRP_OBJECT_STORAGE_PORT}' },
+            { key: 'S3_SECURITY', value: '${IGRP_OBJECT_STORAGE_SECURITY}' },
+            { key: 'S3_ACCESS_KEY', value: '${IGRP_OBJECT_STORAGE_USER}' },
+            { key: 'S3_SECRET_KEY', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
+            { key: 'S3_BUCKET_NAME', value: '${IGRP_OBJECT_STORAGE_BUCKET_NAME}' },
+            { key: 'S3_REGION', value: '${IGRP_OBJECT_STORAGE_REGION}' },
+            { key: 'S3_PRESIGNED_URL_EXPIRATION_TIME', value: '10' },
 
             // Eureka discovery
             { key: 'EUREKA_CLIENT_ENABLED', value: 'true' },
@@ -448,6 +448,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             { key: 'SPRINGDOC_SWAGGER_UI_DISABLE_SWAGGER_DEFAULT_URL', value: 'true' },
             { key: 'SPRINGDOC_SWAGGER_UI_CONFIG_URL', value: `/gateway-api/${baseContext.resourceConfig.slug}-access-management/v3/api-docs/swagger-config` },
             { key: 'SPRINGDOC_SWAGGER_UI_URL', value: `/gateway-api/${baseContext.resourceConfig.slug}-access-management/v3/api-docs` },
+            { key: 'OPENAPI_SERVER_API', value: `http://\${DOCKER_IP}:\${NGINX_HTTP_PORT}/gateway-api/${baseContext.resourceConfig.slug}-access-management` }
           ],
           command: [
             { instruction: '/app/access-management'},
@@ -541,10 +542,6 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             {
               key: "IGRP_APP_NAME_DESCRIPTION",
               value: "IGRP",
-            },
-            {
-              key: "NEXTAUTH_TRUST_HOST",
-              value: "true",
             }
           ],
           extra_hosts: [

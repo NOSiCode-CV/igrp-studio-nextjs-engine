@@ -17,6 +17,8 @@ export function inputTextareaProperties() {
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     placeholder: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     error: { type: 'string', required: false },
     rows: { type: 'number', required: false, default: 3 },
     disabled: { type: 'boolean', required: false, default: false },

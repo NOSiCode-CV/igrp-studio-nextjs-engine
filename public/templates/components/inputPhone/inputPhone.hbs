@@ -7,6 +7,12 @@
   {{#if (and resourceConfig.properties.dir (not resourceConfig.data.dir))}}
   dir={ `{{resourceConfig.properties.dir}}` }
   {{/if~}}
+  {{#if (and resourceConfig.properties.minLength (not resourceConfig.data.minLength))}}
+  minLength={ {{resourceConfig.properties.minLength }} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.maxLength (not resourceConfig.data.maxLength))}}
+  maxLength={ {{resourceConfig.properties.maxLength }} }
+  {{/if~}}
   {{#if (and resourceConfig.properties.defaultValue (not resourceConfig.data.defaultValue))}}
   defaultValue={ `{{resourceConfig.properties.defaultValue}}` }
   {{/if~}}

@@ -16,6 +16,8 @@ export function inputTextProperties() {
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
     helperText: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
