@@ -129,7 +129,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             }
           ],
           labels: [
-            { key: 'type', value: 'service-discovery'},
+            { key: 'type', value: 'proxy'},
             { key: 'name', value: NGINX}
           ]
         },
@@ -387,7 +387,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
             }
           ],
           labels: [
-            { key: 'type', value: 'file'},
+            { key: 'type', value: 'storage'},
             { key: 'name', value: MINIO},
           ]
         },
@@ -575,6 +575,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               hostname: `${baseContext.resourceConfig.slug}-igrp`,
               ip: 'host-gateway'
             }
+          ],
+          labels: [
+            { key: 'type', value: 'cache'},
+            { key: 'name', value: REDIS},
           ]
         },
       },
@@ -602,6 +606,10 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
               hostname: `${baseContext.resourceConfig.slug}-igrp`,
               ip: 'host-gateway'
             }
+          ],
+          labels: [
+            { key: 'type', value: 'database'},
+            { key: 'name', value: PGADMIN},
           ]
         },
       },
