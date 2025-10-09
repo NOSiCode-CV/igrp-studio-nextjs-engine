@@ -185,7 +185,7 @@ http {
         }
 
         location / {
-            set $upstream my-workspace-application-center:3000;
+            set $upstream {{toLowerCase resourceConfig.workspace}}-application-center:3000;
             proxy_pass http://$upstream;
             proxy_set_header Upgrade    $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
