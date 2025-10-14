@@ -298,6 +298,7 @@ export interface State extends IdentifiableElement {
   name: string,
   type: string,
   isArray?: boolean,
+  isOptional?: boolean,
   imports?: Import[],
   defaultValue?: string,
   generate?: boolean
