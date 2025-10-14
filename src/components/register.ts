@@ -83,6 +83,7 @@ import tableExpanderCellModule, { TABLE_EXPANDER_CELL } from './table/children/t
 import tableAmountCellModule, { TABLE_AMOUNT_CELL } from './table/children/tableAmountCell';
 import tableDateCellModule, { TABLE_DATE_CELL } from './table/children/tableDateCell';
 import tableBadgeCellModule, { TABLE_BADGE_CELL } from './table/children/tableBadgeCell';
+import tableLinkCellModule, { TABLE_LINK_CELL } from './table/children/tableLinkCell';
 import tableDateFilterModule, { TABLE_DATE_FILTER } from './table/children/tableDateFilter';
 import tableDropdownFilterModule, { TABLE_DROPDOWN_FILTER } from './table/children/tableDropdownFilter';
 import tableMinMaxFilterModule, { TABLE_MINMAX_FILTER } from './table/children/tableMixMaxFilter';
@@ -203,6 +204,7 @@ export function registerAllComponents() {
   register(TABLE_AMOUNT_CELL, tableAmountCellModule.register);
   register(TABLE_DATE_CELL, tableDateCellModule.register);
   register(TABLE_BADGE_CELL, tableBadgeCellModule.register);
+  register(TABLE_LINK_CELL, tableLinkCellModule.register);
   register(TABLE_BUTTON_LIST_CELL, tableButtonListCellModule.register);
   register(TABLE_DROPDOWN_MENU_CELL, tableDropdownMenuCellModule.register);
   register(TABLE_ACTION_LIST_CELL, tableActionListCellModule.register);

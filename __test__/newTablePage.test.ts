@@ -1,4 +1,4 @@
-import { initComponents, newPage } from '../src';
+import { initComponents, newPage, setEngineConfiguration } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 //import { inputLayout } from "./newInputPage.test";
@@ -119,6 +119,15 @@ const tableLayout: Layout = {
               }
             },
             {
+              id: 'link',
+              tag: 'link',
+              componentName: 'tableLinkCell',
+              properties: {
+                headerTitle: 'Link',
+                headerType: 'sortDropdown'
+              }
+            },
+            {
               id: 'actions',
               tag: 'actions',
               componentName: 'tableActionListCell',
@@ -161,7 +170,7 @@ const tableLayout: Layout = {
                     {
                       id: 'edit',
                       tag: 'edit',
-                      componentName: 'tableModalDropdownItem',
+                      componentName: 'tableCustomDropdownItem',
                       properties: {
                         iconProperties: {
                           iconName: 'Pencil',
@@ -313,6 +322,7 @@ const tableLayout: Layout = {
                   name: 'contentTabletable_default',
                   type: 'any',
                   defaultValue: '[]',
+                  isArray: true
                 }
               ],
               fnCode: `
@@ -348,6 +358,7 @@ const tableLayout: Layout = {
           contractDate: '01/01/2025',
           department: 'Administration',
           subRole: 'Master',
+          link: 'https://igrp.cv/'
         },
         {
           name: 'Jane Smith',
@@ -357,6 +368,7 @@ const tableLayout: Layout = {
           contractDate: '01/02/2025',
           department: 'HR',
           subRole: 'Default',
+          link: 'https://nosi.cv/'
         },
         {
           name: 'Bob Johnson',
@@ -366,6 +378,7 @@ const tableLayout: Layout = {
           contractDate: '01/03/2025',
           department: 'Collaborators',
           subRole: 'Temporary',
+          link: 'https://google.cv/'
         },
       ]
       setContentTabletable_default(data)
@@ -390,6 +403,7 @@ const pageConfig: PageConfig = {
 };
 
 beforeAll(async () => {
+  setEngineConfiguration({ environment: 'development' });
   await initComponents();
 });
 
