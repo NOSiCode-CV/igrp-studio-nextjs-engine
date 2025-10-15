@@ -1,5 +1,5 @@
 return <IGRPDataTableCellLink
-  href={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}row.getValue('{{resourceConfig.tag}}'){{/if}} }
+  {{#if resourceConfig.properties.href}}href={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}row.getValue('{{resourceConfig.tag}}'){{/if}} }{{/if}}
   {{#if resourceConfig.properties.target}}target={ `{{resourceConfig.properties.target}}` }{{/if~}}
   {{#if resourceConfig.properties.color}}color={ `{{resourceConfig.properties.color}}` }{{/if~}}
   {{#if resourceConfig.properties.iconProperties.showIcon}}showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }{{/if~}}
@@ -11,18 +11,20 @@ return <IGRPDataTableCellLink
   children={
     <>
     {{#if resourceConfig.content}}
-    {{resourceConfig.content}}
+    { row.getValue('{{resourceConfig.tag}}Desc') || `{{resourceConfig.content}}` }
     {{else}}
     {{#if (and resourceConfig.properties.content (not resourceConfig.data.content))}}
-    {{resourceConfig.properties.content}}
+    { row.getValue('{{resourceConfig.tag}}Desc') || `{{resourceConfig.properties.content}}` }
     {{else}}
     {{#if (and (not resourceConfig.properties.content) resourceConfig.data.content)}}
-    { {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}{{resourceConfig.data.content.state.name}}{{/if}} }
+    { {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}row.getValue('{{resourceConfig.tag}}Desc') || {{resourceConfig.data.content.state.name}}{{/if}} }
     {{else}}
     {{#if resourceConfig.children}}
     {{#each resourceConfig.children}}
     {{{render-layout this ../resourceConfig}}}
     {{/each}}
+    {{else}}
+    { row.getValue('{{resourceConfig.tag}}Desc') || '' }
     {{/if~}}
     {{/if~}}
     {{/if~}}
