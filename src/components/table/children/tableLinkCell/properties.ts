@@ -11,7 +11,8 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableLinkCellProperties() {
   return {
     ...cellProperties('Link Column'),
-    href: { type: 'string', required: true, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
+    content: { type: 'string', required: false },
+    href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     target: { type: 'string', required: false, enum: ['_self', '_blank', '_parent', '_top'], default: '_self' },
     color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     ...iconProperties(),
