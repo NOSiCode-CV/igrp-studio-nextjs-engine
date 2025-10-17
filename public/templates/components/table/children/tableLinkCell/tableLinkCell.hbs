@@ -8,8 +8,7 @@ return <IGRPDataTableCellLink
   {{#if resourceConfig.properties.iconProperties.iconPlacement}}iconPlacement={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }{{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}iconClassName={ `{{resourceConfig.properties.iconProperties.iconClassName}}` }{{/if~}}
   {{#if resourceConfig.properties.variant}}variant={ `{{resourceConfig.properties.variant}}` }{{/if~}}
-  children={
-    <>
+>
     {{#if resourceConfig.content}}
     { row.getValue('{{resourceConfig.tag}}Desc') || `{{resourceConfig.content}}` }
     {{else}}
@@ -29,7 +28,4 @@ return <IGRPDataTableCellLink
     {{/if~}}
     {{/if~}}
     {{/if~}}
-    </>
-  }
->
 </IGRPDataTableCellLink>

@@ -124,7 +124,9 @@ const tableLayout: Layout = {
               componentName: 'tableLinkCell',
               properties: {
                 headerTitle: 'Link',
-                headerType: 'sortDropdown'
+                headerType: 'sortDropdown',
+                href: 'https://igrp.cv/',
+                target: '_blank'
               }
             },
             {
