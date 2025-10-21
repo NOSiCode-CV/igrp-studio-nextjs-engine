@@ -69,7 +69,7 @@ import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
 import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
 import separatorModule, { SEPARATOR } from './separator/index';
-import sliderModule, { SLIDER } from './slider';
+//import sliderModule, { SLIDER } from './slider';
 import spanModule, { SPAN } from './span';
 import stackModule, { STACK } from './stack';
 import statsCardModule, { STATS_CARD } from './statsCard';
@@ -84,6 +84,7 @@ import tableAmountCellModule, { TABLE_AMOUNT_CELL } from './table/children/table
 import tableDateCellModule, { TABLE_DATE_CELL } from './table/children/tableDateCell';
 import tableBadgeCellModule, { TABLE_BADGE_CELL } from './table/children/tableBadgeCell';
 import tableLinkCellModule, { TABLE_LINK_CELL } from './table/children/tableLinkCell';
+import tableTooltipCellModule, { TABLE_TOOLTIP_CELL } from './table/children/tableTooltipCell';
 import tableDateFilterModule, { TABLE_DATE_FILTER } from './table/children/tableDateFilter';
 import tableDropdownFilterModule, { TABLE_DROPDOWN_FILTER } from './table/children/tableDropdownFilter';
 import tableMinMaxFilterModule, { TABLE_MINMAX_FILTER } from './table/children/tableMixMaxFilter';
@@ -99,7 +100,7 @@ import tableModalButtonModule, { TABLE_MODAL_BUTTON } from './table/children/tab
 import tableDropdownMenuCellModule, { TABLE_DROPDOWN_MENU_CELL } from './table/children/tableDropdownMenuCell';
 import tableAlertDropdownItemModule, { TABLE_ALERT_DROPDOWN_ITEM } from './table/children/tableAlertDropdownItem';
 import tableLinkDropdownItemModule, { TABLE_LINK_DROPDOWN_ITEM } from './table/children/tableLinkDropdownItem';
-import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table/children/tableModalDropdownItem';
+//import tableModalDropdownItemModule, { TABLE_MODAL_DROPDOWN_ITEM } from './table/children/tableModalDropdownItem';
 import tableCustomDropdownItemModule, { TABLE_CUSTOM_DROPDOWN_ITEM } from './table/children/tableCustomDropdownItem/index';
 import tableAlertActionModule, { TABLE_ALERT_ACTION } from './table/children/tableAlertAction';
 import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/tableLinkAction';
@@ -205,6 +206,7 @@ export function registerAllComponents() {
   register(TABLE_DATE_CELL, tableDateCellModule.register);
   register(TABLE_BADGE_CELL, tableBadgeCellModule.register);
   register(TABLE_LINK_CELL, tableLinkCellModule.register);
+  register(TABLE_TOOLTIP_CELL, tableTooltipCellModule.register);
   register(TABLE_BUTTON_LIST_CELL, tableButtonListCellModule.register);
   register(TABLE_DROPDOWN_MENU_CELL, tableDropdownMenuCellModule.register);
   register(TABLE_ACTION_LIST_CELL, tableActionListCellModule.register);
