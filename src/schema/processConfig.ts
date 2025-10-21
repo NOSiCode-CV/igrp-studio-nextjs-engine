@@ -45,8 +45,8 @@ const processConfigSchema: JSONSchemaType<ProcessConfig> = {
     },
     name: {
       type: "string",
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The process name must only contain letters and must not have spaces or special characters except underscore (_) and hyphen (-).',
+      pattern: PATTERNS.PROCESS_NAME_VALIDATION_PATTERN,
+      errorMessage: 'The process name must only contain letters and must not have spaces or special characters except underscore (_), hyphen (-) and dot (.).',
     },
     description: {
       type: 'string',
