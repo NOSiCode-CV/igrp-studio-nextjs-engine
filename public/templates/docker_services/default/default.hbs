@@ -13,8 +13,8 @@ restart: {{resourceConfig.restart}}
 {{#if resourceConfig.dependsOn}}
 depends_on:
   {{#each resourceConfig.dependsOn}}
-  {{this.service}}:
-    condition: service_healthy
+    {{this.service}}:
+    condition: {{#if this.condition}}{{this.condition}}{{else}}service_healthy{{/if}}
   {{/each}}
 {{/if}}
 {{#if resourceConfig.extends}}
