@@ -484,7 +484,7 @@ const saveBaseWorkspaceFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles
           image: "registry.nosi.cv/igrp/igrp-application-center:latest",
           container_name: `${baseContext.resourceConfig.slug}-application-center`,
           dependsOn: [
-            { service: `${baseContext.resourceConfig.slug}-access-management` }
+            { service: `${baseContext.resourceConfig.slug}-access-management`, condition: 'service_started'  }
           ],
           healthcheck: {
             test: [
