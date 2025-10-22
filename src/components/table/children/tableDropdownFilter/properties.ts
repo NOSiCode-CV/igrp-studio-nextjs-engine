@@ -5,6 +5,8 @@ export function tableDropdownFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
     placeholder: { type: 'string', required: false, default: 'Filtar...' },
+    showFilter: { type: 'boolean', required: false, default: true },
+    notFoundText: { type: 'string', required: false, default: 'No options found' },
     className: { type: 'string', required: false },
     ...commonProperties(),
   };

@@ -3,6 +3,8 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 export function tableDateFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
+    clearDates: { type: 'boolean', required: false, default: true },
+    className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }

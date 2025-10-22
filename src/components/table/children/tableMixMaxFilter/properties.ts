@@ -3,6 +3,9 @@ import { commonProperties, commonPropertiesMapping } from '../../../default/prop
 export function tableMinMaxFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
+    placeholderMin: { type: 'string', required: false, default: 'Min' },
+    placeholderMax: { type: 'string', required: false, default: 'Max' },
+    className: { type: 'string', required: false },
     ...commonProperties(),
   };
 }
