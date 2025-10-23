@@ -90,14 +90,15 @@ export function igrpAccessManagementProperties() {
         },
 
         // Object storage configuration
-        { key: 'S3_ENDPOINT', value: '${IGRP_OBJECT_STORAGE_HOST}' },
-        { key: 'S3_PORT', value: '${IGRP_OBJECT_STORAGE_PORT}' },
-        { key: 'S3_SECURITY', value: '${IGRP_OBJECT_STORAGE_SECURITY}' },
-        { key: 'S3_ACCESS_KEY', value: '${IGRP_OBJECT_STORAGE_USER}' },
-        { key: 'S3_SECRET_KEY', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
-        { key: 'S3_BUCKET_NAME', value: '${IGRP_OBJECT_STORAGE_BUCKET_NAME}' },
-        { key: 'S3_REGION', value: '${IGRP_OBJECT_STORAGE_REGION}' },
-        { key: 'S3_PRESIGNED_URL_EXPIRATION_TIME', value: '10' },
+        { key: 'IGRP_STORAGE_PROVIDER', value: 'minio' },
+        { key: 'IGRP_STORAGE_ENDPOINT', value: '${IGRP_OBJECT_STORAGE_HOST}' },
+        { key: 'IGRP_STORAGE_PORT', value: '${IGRP_OBJECT_STORAGE_PORT}' },
+        { key: 'IGRP_STORAGE_SECURITY', value: '${IGRP_OBJECT_STORAGE_SECURITY}' },
+        { key: 'IGRP_STORAGE_ACCESS_KEY', value: '${IGRP_OBJECT_STORAGE_USER}' },
+        { key: 'IGRP_STORAGE_SECRET_KEY', value: '${IGRP_OBJECT_STORAGE_PASSWORD}' },
+        { key: 'IGRP_STORAGE_BUCKET_NAME', value: '${IGRP_OBJECT_STORAGE_BUCKET_NAME}' },
+        { key: 'IGRP_STORAGE_REGION', value: '${IGRP_OBJECT_STORAGE_REGION}' },
+        { key: 'IGRP_STORAGE_PRESIGNED_URL_EXPIRATION_TIME', value: '300' },
 
         // Eureka discovery
         { key: 'EUREKA_CLIENT_ENABLED', value: 'true' },
