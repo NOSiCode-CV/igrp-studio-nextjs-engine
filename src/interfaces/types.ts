@@ -726,6 +726,7 @@ export interface VolumeFile {
 
 export interface Dependency {
   service: string
+  condition?: string
 }
 
 export interface Profile {
