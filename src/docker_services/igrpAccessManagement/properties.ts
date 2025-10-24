@@ -5,7 +5,7 @@ export function igrpAccessManagementProperties() {
     image: {
       type: 'string',
       required: true,
-      default: 'registry.nosi.cv/igrp/access-management-api-native:latest',
+      default: 'registry.nosi.cv/igrp/access-management-api-jvm:latest',
     },
     container_name: { type: 'string', required: false, default: '{{slug}}-igrp-access-management' },
     restart: {
