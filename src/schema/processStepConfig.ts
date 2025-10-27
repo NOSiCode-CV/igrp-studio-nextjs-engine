@@ -638,9 +638,8 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
     description: {
       type: 'string',
       nullable: true,
-      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage:
-        'The description, if provided, must only contain letters, numbers and spaces and must not have special characters.',
+        'The description, if provided, must be a string.',
     },
     processKey: {
       type: 'string',
