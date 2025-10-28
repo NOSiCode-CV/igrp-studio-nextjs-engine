@@ -1,10 +1,18 @@
-import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function repetitiveListProperties() {
   return {
     variable: { type: 'string', required: false, default: 'item' },
     dataKey: { type: 'string', required: true, default: 'id' },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

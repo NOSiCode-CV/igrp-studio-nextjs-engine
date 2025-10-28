@@ -1,4 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function rangeSliderProperties() {
   return {
@@ -10,6 +16,7 @@ export function rangeSliderProperties() {
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     message: { type: 'string', required: false },
+    ...classProperties(),
     ...commonPropertiesMapping()
   };
 }

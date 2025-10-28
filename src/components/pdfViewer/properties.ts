@@ -1,4 +1,11 @@
-import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function pdfViewerProperties() {
@@ -13,7 +20,7 @@ export function pdfViewerProperties() {
     labelButtonNewTab: { type: 'string', required: false, default: 'Open New Tab' },
     inlineHeight: { type: 'string', required: false },
     notFoundLabel: { type: 'string', required: false, default: 'Not Found' },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

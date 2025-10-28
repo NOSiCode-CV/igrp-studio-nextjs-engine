@@ -1,6 +1,6 @@
 import {
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../../../default/properties';
@@ -19,7 +19,7 @@ export function infoItemProperties() {
         iconClassName: { type: 'string', required: false },
       },
     },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

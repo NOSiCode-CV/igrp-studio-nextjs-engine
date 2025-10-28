@@ -1,4 +1,11 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../default/properties';
 
 export function dropdownProperties() {
   return {
@@ -7,8 +14,8 @@ export function dropdownProperties() {
     size: { type: 'string', required: false, default: 'icon', enum: ['default', 'sm', 'lg', 'icon'] },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false },
     actionItem: { type: 'array', items: { type: 'object', items: { href: { type: 'string', 'x-ui-widget': 'uri' } } }, required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

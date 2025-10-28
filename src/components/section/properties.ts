@@ -1,10 +1,17 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function sectionProperties() {
   return {
     //variant: { type: 'string', required: true, enum: ['default', 'compact', 'spacious'], default: 'compact' },
       spaceX: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'] },
       spaceY: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '6' },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

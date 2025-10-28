@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function tableInputFilterProperties() {
   return {
@@ -11,6 +11,7 @@ export function tableInputFilterProperties() {
         iconName: { type: 'string', required: false, default: 'Search' },
       }
     },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

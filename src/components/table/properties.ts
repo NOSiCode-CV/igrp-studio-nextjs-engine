@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -21,6 +21,7 @@ export function tableProperties() {
     tableHeaderClassName: { type: 'string', required: false },
     tableBodyClassName: { type: 'string', required: false },
     paginationClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }

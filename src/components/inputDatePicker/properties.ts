@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties, baseStyle, baseRules,
+  dataCommonProperties, baseStyle, baseRules, classProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -44,7 +44,7 @@ export function inputDatePickerProperties() {
     ISOWeek: { type: 'boolean', required: false, default: false },
     captionLayout: { type: 'string', required: false, enum: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'], default: 'label' },
     navLayout: { type: 'string', required: false, enum: ['around', 'after'] },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

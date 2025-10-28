@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -18,7 +18,7 @@ export function menuNavigationProperties() {
     badgeClassName: { type: 'string', required: false },
     showChevron: { type: 'boolean', default: true, required: false},
     isStickyTop: { type: 'boolean', default: false, required: false},
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }

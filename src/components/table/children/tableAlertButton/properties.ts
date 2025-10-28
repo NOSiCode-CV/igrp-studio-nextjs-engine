@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { buttonProperties, buttonPropertiesMapping } from '../tableColumns/properties';
 
 export function tableAlertButtonProperties() {
@@ -13,6 +13,7 @@ export function tableAlertButtonProperties() {
     labelConfirm: { type: 'string', required: false, default: 'Confirm' },
     classNameConfirm: { type: 'string', required: false },
     variantConfirm: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

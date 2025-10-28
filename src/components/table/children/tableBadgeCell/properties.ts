@@ -1,5 +1,5 @@
 import {
-  baseInteraction,
+  baseInteraction, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -24,6 +24,7 @@ export function tableBadgeCellProperties() {
     },
     variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'soft', 'outline'] },
     badgeClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

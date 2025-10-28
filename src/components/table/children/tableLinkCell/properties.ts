@@ -1,5 +1,5 @@
 import {
-  baseInteraction,
+  baseInteraction, classProperties,
   commonProperties,
   commonPropertiesMapping, dataCommonProperties,
   iconProperties,
@@ -19,6 +19,7 @@ export function tableLinkCellProperties() {
     ...iconProperties(),
     variant: {type: 'string', required: true, enum: ['outline', 'solid', 'soft'], default: 'solid'},
     rel: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

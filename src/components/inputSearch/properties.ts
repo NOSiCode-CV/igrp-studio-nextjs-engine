@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -30,7 +30,7 @@ export function inputSearchProperties() {
     required: { type: 'boolean', required: true, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Required'} },
     submitButtonLabel: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
     submitButtonClassName: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Class Name'} },
-    className: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Class Name'} },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

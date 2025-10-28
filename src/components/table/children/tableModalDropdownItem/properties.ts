@@ -1,4 +1,10 @@
-import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseInteraction,
+  baseRules,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -16,6 +22,7 @@ export function tableModalDropdownItemProperties() {
     labelConfirm: { type: 'string', required: false, default: 'Confirm' },
     classNameConfirm: { type: 'string', required: false },
     variantConfirm: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,6 +1,6 @@
 import {
   baseInteraction, baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -13,6 +13,7 @@ export function modalDialogProperties() {
     open: { type: 'boolean', required: false },
     defaultOpen: { type: 'boolean', required: false },
     modal: { type: 'boolean', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

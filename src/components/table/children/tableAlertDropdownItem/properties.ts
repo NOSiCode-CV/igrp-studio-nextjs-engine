@@ -1,4 +1,10 @@
-import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseInteraction,
+  baseRules,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 import { dropdownItemProperties, dropdownItemPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -19,6 +25,7 @@ export function tableAlertDropdownItemProperties() {
     classNameItem: { type: 'string', required: false },
     classNameConfirm: { type: 'string', required: false },
     classNameCancel: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 

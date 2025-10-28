@@ -1,8 +1,8 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
-  commonPropertiesMapping
+  commonPropertiesMapping,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -31,10 +31,10 @@ export function statsCardProperties() {
     itemPlacement: { type: 'string', required: true, default: 'start', enum: ['start', 'end' ] },
     image: { type: 'string', required: false },
     imageAlt: { type: 'string', required: false },
-    className: { type: 'string', required: false },
     cardClassName: { type: 'string', required: false },
     titleClassName: { type: 'string', required: false },
     valueClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

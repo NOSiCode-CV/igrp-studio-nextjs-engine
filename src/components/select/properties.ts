@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -19,7 +19,6 @@ export function selectProperties() {
     required: { type: 'boolean', required: true },
     selectClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
     //selectLabel: { type: 'string', required: false, default: "No option found" },
     error: { type: 'string', required: false },
     showSearch: { type: 'boolean', required: false },
@@ -30,6 +29,7 @@ export function selectProperties() {
     /*iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },*/
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

@@ -1,4 +1,11 @@
-import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function tabsProperties() {
@@ -14,6 +21,7 @@ export function tabsProperties() {
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
+    ...classProperties(),
     ...commonProperties()
   };
 }

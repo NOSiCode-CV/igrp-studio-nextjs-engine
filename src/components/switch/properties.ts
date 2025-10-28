@@ -1,7 +1,7 @@
 import {
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
@@ -17,7 +17,7 @@ export function switchProperties() {
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     labelClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties()
   };

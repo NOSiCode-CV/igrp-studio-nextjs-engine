@@ -1,6 +1,6 @@
 import {
   baseInteraction, baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -25,9 +25,9 @@ export function alertDialogProperties() {
     cancelLabel: { type: 'string', required: false, default: 'Cancel' },
     actionLabel: { type: 'string', required: false, default: 'Confirm' },
     open: { type: 'boolean', required: false },
-    className: { type: 'string', required: false },
     actionProps: { type: 'object', required: false, properties: buttonProperties() },
     cancelProps: { type: 'object', required: false, properties: buttonProperties() },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,4 +1,4 @@
-import { baseData, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseData, classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
 export function tableFacetedFilterProperties() {
@@ -9,6 +9,7 @@ export function tableFacetedFilterProperties() {
     labelSearchFilter: { type: 'string', required: false, default: 'Pesquisar...' },
     showFilter: { type: 'boolean', required: false, default: true },
     badgeClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

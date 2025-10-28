@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function tabsItemProperties() {
   return {
@@ -12,7 +12,7 @@ export function tabsItemProperties() {
       required: false
     },
     disabled: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,7 +1,7 @@
 import {
   baseData,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -33,9 +33,9 @@ export function formListProperties() {
     },
     addButtonLabel: { type: 'string', required: false, default: 'Add' },
     dot: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false, },
     badgeClassName: { type: 'string', required: false, },
     labelClassName: { type: 'string', required: false, },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

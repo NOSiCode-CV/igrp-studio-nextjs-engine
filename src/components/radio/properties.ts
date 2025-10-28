@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -24,7 +24,7 @@ export function radioGroupProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     message: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

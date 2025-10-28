@@ -1,9 +1,15 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function aspectProperties() {
   return {
     variant: { type: 'string', required: true, enum: ['square', 'video', 'auto', 'portrait', 'landscape'] },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

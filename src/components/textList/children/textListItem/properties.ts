@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function textListsItemProperties() {
   return {
@@ -16,6 +16,7 @@ export function textListsItemProperties() {
     badgeText: { type: 'string', required: false, default: 'Menu' },
     badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     badgeColor: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

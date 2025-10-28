@@ -1,10 +1,16 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 
 export function cardContentProperties() {
   return {
-    className: { type: 'string', required: false },
     spaceX: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
     spaceY: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,7 +1,7 @@
 import {
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -25,7 +25,7 @@ export function textListProperties() {
     size: { type: 'number', required: false, default: 3, 'x-ui-widget': 'number' },
     spacing: { type: 'number', required: false, default: 3, 'x-ui-widget': 'number' },
     variant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }

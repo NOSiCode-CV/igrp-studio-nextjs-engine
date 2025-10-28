@@ -1,4 +1,5 @@
 import {
+  classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -14,6 +15,7 @@ export function tableTooltipCellProperties() {
     maxTriggerWidth: { type: 'string', required: false },
     side: { type: 'string', required: false, default: 'top', enum: ['top', 'bottom', 'left', 'right'] },
     align: { type: 'string', required: false, default: 'start', enum: ['start', 'center', 'end'] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }
