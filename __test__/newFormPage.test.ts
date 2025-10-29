@@ -183,7 +183,7 @@ const pageConfig: PageConfig = {
       ],
       returnValue: {
         type: 'void',
-        isNullable: false
+        isOptional: false
       }
     }
   ],

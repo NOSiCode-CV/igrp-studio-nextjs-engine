@@ -1274,7 +1274,7 @@ const pageConfig: PageConfig = {
       code: 'router.push("/contribuintes/novo-form")',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1297,7 +1297,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1320,7 +1320,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1344,7 +1344,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: '{ iconName?: string, bgClass?: string, textClass?: string, label?: string, className?: string }',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1363,7 +1363,7 @@ const pageConfig: PageConfig = {
       returnValue: {
         type: 'string',
         isList: false,
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1375,7 +1375,7 @@ const pageConfig: PageConfig = {
       code: `console.log("Handling Download")`,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1387,7 +1387,7 @@ const pageConfig: PageConfig = {
       code: `console.log("Handling Import")`,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1399,7 +1399,7 @@ const pageConfig: PageConfig = {
       code: `updateTabletable_taxpayers();`,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
   ],
@@ -1413,7 +1413,7 @@ const pageConfig: PageConfig = {
       returnValue: {
         type: 'TaxPayer',
         isList: true,
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1425,7 +1425,7 @@ const pageConfig: PageConfig = {
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1437,7 +1437,7 @@ const pageConfig: PageConfig = {
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1449,7 +1449,7 @@ const pageConfig: PageConfig = {
       returnValue: {
         type: 'IGRPOptionsProps',
         isList: true,
-        isNullable: false,
+        isOptional: false,
       },
     },
   ],

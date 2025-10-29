@@ -1186,7 +1186,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1234,7 +1234,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1264,7 +1264,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
 
@@ -1295,7 +1295,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
 
@@ -1326,7 +1326,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
 
@@ -1357,7 +1357,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1393,7 +1393,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1406,7 +1406,7 @@ const pageConfig: PageConfig = {
       `,
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
   ],
@@ -1419,7 +1419,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1430,7 +1430,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1441,7 +1441,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1452,7 +1452,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1463,7 +1463,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1474,7 +1474,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1485,7 +1485,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1496,7 +1496,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1507,7 +1507,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1518,7 +1518,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1529,7 +1529,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1540,7 +1540,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1551,7 +1551,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
     {
@@ -1573,7 +1573,7 @@ const pageConfig: PageConfig = {
       path: '@/app/[locale]/(myapp)/actions/mock-actions',
       returnValue: {
         type: 'void',
-        isNullable: false,
+        isOptional: false,
       },
     },
   ],

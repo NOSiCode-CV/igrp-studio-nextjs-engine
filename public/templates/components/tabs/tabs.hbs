@@ -35,22 +35,22 @@
       {{#each (extractTabsItem resourceConfig.children)}}
         {
           {{#if this.properties.value}}
-          value: `{{this.properties.value}}`,
+          value: `{{{this.properties.value}}}`,
           {{/if~}}
           {{#if this.properties.label}}
-          label: `{{this.properties.label}}`,
+          label: `{{{this.properties.label}}}`,
           {{/if~}}
           {{#if this.properties.iconProperties.icon}}
-          icon: `{{this.properties.iconProperties.icon}}`,
+          icon: `{{{this.properties.iconProperties.icon}}}`,
           {{/if~}}
           {{#if this.properties.className}}
-          className: `{{this.properties.className}}`,
+          className: `{{{this.properties.className}}}`,
           {{/if~}}
           {{#if (and this.properties.disabled (not this.data.disabled))}}
           disabled: {{this.properties.disabled}}
           {{/if~}}
           {{#if (and (not this.properties.disabled) this.data.disabled)}}
-          disabled: {{this.data.disabled.state.name}}
+          disabled: {{{this.data.disabled.state.name}}}
           {{/if~}}
           content: (<>
             {{#if (gt (length this.children) 0)}}

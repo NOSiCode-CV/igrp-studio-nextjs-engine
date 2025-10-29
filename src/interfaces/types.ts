@@ -915,7 +915,7 @@ export interface TypeDef {
 export interface ReturnValue {
   type: string;
   isList?: boolean;
-  isNullable: boolean;
+  isOptional: boolean;
 }
 
 export interface ActionDef {

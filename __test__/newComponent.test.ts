@@ -2282,7 +2282,7 @@ const componentConfig2: ComponentConfig =  {
       id: 'fnc_YV1t3t',
       name: 'calculeSOATPoderado',
       code: "if (actividadesEconomicas && actividadesEconomicas.length > 0) {\n  const total = actividadesEconomicas.reduce(\n    (sum: number, act: any) => sum + (Number.parseFloat(act.soat) || 0),\n    0,\n  );\n  const weighted = (total / actividadesEconomicas.length).toFixed(2);\n  return weighted;\n} else {\n  return '0.00';\n}",
-      returnValue: { type: 'string', isNullable: true, isList: false },
+      returnValue: { type: 'string', isOptional: true, isList: false },
       imports: [],
       arguments: [],
     },
@@ -2290,7 +2290,7 @@ const componentConfig2: ComponentConfig =  {
       id: 'fnc_AxVGnC',
       name: 'updateActividade',
       code: "// Find the selected CAE code\nconst selectedCae = tiposActividades.find((cae) => cae.value?.toString() === value.toString());\n\n// Get current form values\nconst currentValues = formform1Ref.current?.getValues();\n\n// Create the updated atividadesEconomicas array\nconst updatedAtividades = [...(currentValues?.actividadesEconomicas || [])];\nif (selectedCae && index !== undefined && index >= 0) {\n  updatedAtividades[index] = {\n    ...updatedAtividades[index],\n    soat: selectedCae.metadata?.taxa || 0,\n  };\n}\n\nformform1Ref.current?.setValue('actividadesEconomicas', updatedAtividades);\n\nconst weighted = calculeSOATPoderado();\n\nformform1Ref.current?.setValue('soatUsado', weighted);\n\n",
-      returnValue: { type: 'void', isNullable: true, isList: false },
+      returnValue: { type: 'void', isOptional: true, isList: false },
       imports: [],
       arguments: [
         {
@@ -2320,7 +2320,7 @@ const componentConfig2: ComponentConfig =  {
       id: 'fnc_ampnHI',
       name: 'handleUploadFile',
       code: "const file = e?.target?.files?.[0];\n    if (!file) return;\n    console.log('File selected:', file);\n    console.log('Index:', index);\n    console.log('File name:', file.name);\n    console.log('File size:', file.size);\n    console.log('File type:', file.type);\n\n    // Store the file in state\n    setUploadedFiles((prev) => ({\n      ...prev,\n      [index]: { file, uploaded: false },\n    }));\n\n    // Set uploading state\n    setIsUploading((prev) => ({\n      ...prev,\n      [index]: true,\n    }));\n\n    try {\n      // Get the tipo documento from the form\n      const currentFormData = formform1Ref.current?.getValues();\n\n      // Upload the file\n      const uploadResponse =await uploadDocument({ file });\n\n      console.log(uploadResponse);\n\n      // Update the uploaded file state\n      setUploadedFiles((prev: any) => ({\n        ...prev,\n        [index]: {\n          file,\n          uploaded: true,\n          url: uploadResponse.displayName,\n        },\n      }));\n      // Update the form with the uploaded file URL\n      const updatedDocumentos = [...(currentFormData?.anexos || [])];\n      updatedDocumentos[index] = {\n        ...updatedDocumentos[index],\n        url: uploadResponse.displayName,\n      };\n\n      setFormContribuinteData((prev: any) => ({\n        ...prev,\n        ...currentFormData,\n        anexos: updatedDocumentos,\n      }));\n\n      igrpToast({\n        title: 'Sucesso',\n        description: 'Arquivo enviado com sucesso!',\n        type: 'success',\n      });\n    } catch (error) {\n      igrpToast({\n        title: 'Erro',\n        description: 'Erro ao enviar arquivo. Tente novamente.',\n        type: 'error',\n      });\n\n      // Remove the file from state on error\n      setUploadedFiles((prev) => {\n        const newState = { ...prev };\n        delete newState[index];\n        return newState;\n      });\n    } finally {\n      // Clear uploading state\n      setIsUploading((prev) => ({\n        ...prev,\n        [index]: false,\n      }));\n    }",
-      returnValue: { type: 'void', isNullable: true, isList: false },
+      returnValue: { type: 'void', isOptional: true, isList: false },
       imports: [
         {
           namespace: "import {uploadDocument} from '@/app/(myapp)/hooks/use-contribuinte'",
@@ -2357,7 +2357,7 @@ const componentConfig2: ComponentConfig =  {
       id: 'fnc_M_s6lA',
       name: 'handleFormSubmit',
       code: "const contribuinte: any = {\n  ...values,\n  contribuinteId: initialData?.contribuinteId\n};\ntry {\n  await createOrUpdateContribuinte(contribuinte);\n  igrpToast({\n    title: 'Sucesso',\n    description: isEdit\n      ? 'Contribuinte atualizado com sucesso'\n      : 'Contribuinte gravado com sucesso',\n    type: 'success',\n  });\n  router.push('/contribuintes');\n} catch (error:any) {\n  igrpToast({\n    title: 'Erro',\n    description: `Ocorreu um erro ao processar o formulário. [${error.message}]`,\n    type: 'error',\n  });\n  console.log(error);\n}\n",
-      returnValue: { type: 'void', isNullable: true, isList: false },
+      returnValue: { type: 'void', isOptional: true, isList: false },
       imports: [],
       isAsync: true,
       arguments: [

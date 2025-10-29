@@ -127,12 +127,12 @@ const returnValueSchema: JSONSchemaType<ReturnValue> = {
       nullable: true,
       errorMessage: 'The isList attribute must be a valid boolean.'
     },
-    isNullable: {
+    isOptional: {
       type: 'boolean',
-      errorMessage: 'The isList attribute must be a valid boolean.'
+      errorMessage: 'The isOptional attribute must be a valid boolean.'
     },
   },
-  required: ['type', 'isNullable'],
+  required: ['type', 'isOptional'],
   additionalProperties: false,
 }
 
