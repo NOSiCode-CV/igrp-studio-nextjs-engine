@@ -366,7 +366,7 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         isAsync: true,
         returnValue: {
           type: 'any',
-          isOptional: false
+          isNullable: false
         },
         code: `
     // TODO: Implement save logic
@@ -406,7 +406,7 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
         isAsync: true,
         returnValue: {
           type: 'any',
-          isOptional: false
+          isNullable: false
         },
         code: `
     // TODO: Implement complete logic
