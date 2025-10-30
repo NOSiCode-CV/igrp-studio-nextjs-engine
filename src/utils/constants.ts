@@ -207,7 +207,7 @@ export const INTERACTIONS_TYPES = {
 
 export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_NO_EVENT: '() => {}',
-  ON_CLICK_WITH_EVENT: '(e) => {}',
+  ON_CLICK_WITH_EVENT: '() => {}', //TODO:(e) => {} This will generate a error... must be reviewed. Going to change to ON_CLICK_NO_EVENT for now for onClickConfirm and OnSubmit
   FUNCTION_WITH_VALUE: '(value) => {}',
   FUNCTION_WITH_ITEM_INDEX: '(item, index) => {}',
   FUNCTION_WITH_STRING_VALUE: `(value) => ''`,

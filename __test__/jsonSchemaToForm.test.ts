@@ -95,7 +95,7 @@ const pageConfig: PageConfig = {
       onSubmit: {
         type: 'function',
         function: {
-          fnCustomSet: '(e) => {}',
+          fnCustomSet: '() => {}',
           type: 'function',
         },
         action: {},
