@@ -75,6 +75,7 @@ import { saveProcessConfig } from './modules/process/saveProcessConfig';
 import { processStepConfigValidate } from './schema/processStepConfig';
 import { saveProcessStepConfig } from './modules/process/saveProcessStepConfig';
 import { engineConfigurationRegistrationValidate } from './schema/engineConfigurationRegisterConfig';
+import { IGRPComponent, JsonSchema, jsonSchemaToIGRPForm } from './modules/converters/jsonSchemaToForm';
 
 export function getPaths(version?: string): PathConfig {
   const environment = loadEngineConfiguration().environment;
@@ -671,4 +672,8 @@ export async function loadAppExports(basePath: string): Promise<AppExportsConfig
   const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.EXPORTS_FILE}`);
   const resolvedConfig = loadExportsConfig(configPath);
   return await parseExportsConfig(resolvedConfig, basePath);
+}
+
+export function convertJsonSchemaToForm(schema: JsonSchema): IGRPComponent[] {
+  return jsonSchemaToIGRPForm(schema);
 }
