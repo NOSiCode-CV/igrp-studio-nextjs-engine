@@ -47,7 +47,7 @@ function onSubmitInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function formInteractions() {
   return {
-    onSubmit: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ON_SUBMIT, undefined, onSubmitInteractionFieldVisibility()), required: true },
+    onSubmit: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_SUBMIT, undefined, onSubmitInteractionFieldVisibility()), required: true },
     //exposeForm: { ...baseInteraction(INTERACTIONS_DEFAULTS.EXPOSE_FORM, INTERACTIONS_TYPES.EXPOSE_FORM, [ { state: `const form{{id}}Ref = useRef<IGRPFormHandle<{{type}}> | null>(null)` }]), required: false },
     //cancelAction: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.CANCEL_ACTION), required: false },
   };

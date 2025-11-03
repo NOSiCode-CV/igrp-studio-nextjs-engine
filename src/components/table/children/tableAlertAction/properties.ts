@@ -62,7 +62,7 @@ function onClickConfirmInteractionFieldVisibility(): InteractionFieldVisibility 
 
 export function tableAlertActionInteractions() {
   return {
-    onClickConfirm: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ON_CLICK_CONFIRM, undefined, onClickConfirmInteractionFieldVisibility()), required: true },
+    onClickConfirm: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK_CONFIRM, undefined, onClickConfirmInteractionFieldVisibility()), required: true },
   };
 }
 
