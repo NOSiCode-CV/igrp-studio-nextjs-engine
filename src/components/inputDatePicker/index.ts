@@ -17,10 +17,10 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPDatePicker')
+    component.loadComponentClass('IGRPDatePickerSingle')
     component.loadVariants(inputDatePickerVariants());
     component.loadGroup('formElements')
-    component.loadLabel('Date Picker')
+    component.loadLabel('Date Picker Single')
     component.getProperties(inputDatePickerProperties());
     component.getPropertiesMapping(inputDatePickerPropertiesMapping());
     component.getChildProperties(inputDatePickerChildProperties());

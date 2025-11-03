@@ -171,6 +171,7 @@ export const INTERACTIONS_TYPES = {
   ON_OPEN: 'On open',
   ON_SEARCH: 'On search',
   ON_LOAD: 'On load',
+  ON_ERROR: 'On error',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
   ON_ACTION: 'On action',
@@ -185,6 +186,8 @@ export const INTERACTIONS_TYPES = {
   EXPOSE_FORM: "Expose Form",
   CANCEL_ACTION: "Cancel Action",
   VALUE_CHANGE: "Value Change",
+  ON_START_TIME: "On Start Time",
+  ON_END_TIME: "On End Time",
 
   // Values
   CHECKED: "Checked",
@@ -203,11 +206,15 @@ export const INTERACTIONS_TYPES = {
   LINES: 'Lines',
   PIES: 'Pies',
   RADARS: 'Radars',
+
+  // Functions
+  LOADER: "Loader",
+
 }
 
 export const INTERACTIONS_DEFAULTS = {
   ON_CLICK_NO_EVENT: '() => {}',
-  ON_CLICK_WITH_EVENT: '() => {}', //TODO:(e) => {} This will generate a error... must be reviewed. Going to change to ON_CLICK_NO_EVENT for now for onClickConfirm and OnSubmit
+  ON_CLICK_WITH_EVENT: '(e) => {}',
   FUNCTION_WITH_VALUE: '(value) => {}',
   FUNCTION_WITH_ITEM_INDEX: '(item, index) => {}',
   FUNCTION_WITH_STRING_VALUE: `(value) => ''`,

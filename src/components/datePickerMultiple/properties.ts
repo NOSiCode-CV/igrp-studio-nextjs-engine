@@ -9,7 +9,7 @@ import {
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
-export function datePickerRangeProperties() {
+export function datePickerMultipleProperties() {
   return {
     label: { type: 'string', required: false },
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
@@ -30,17 +30,17 @@ export function datePickerRangeProperties() {
   };
 }
 
-export function datePickerRangePropertiesMapping() {
+export function datePickerMultiplePropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function datePickerRangeChildProperties() {
+export function datePickerMultipleChildProperties() {
   return {};
 }
 
-export function datePickerRangeChildPropertiesMapping() {
+export function datePickerMultipleChildPropertiesMapping() {
   return {};
 }
 
@@ -58,40 +58,39 @@ function onDateChangeInteractionFieldVisibility(): InteractionFieldVisibility {
   }
 }
 
-export function datePickerRangeInteractions() {
+export function datePickerMultipleInteractions() {
   return {
     onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: true },
   };
 }
 
-export function datePickerRangeInteractionsMapping() {
+export function datePickerMultipleInteractionsMapping() {
   return {
 
   };
 }
 
-export function datePickerRangeData() {
+export function datePickerMultipleData() {
   return {
     date: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE, {
         id: '',
-        name: 'dateRange{{id}}Value',
-        type: 'DateRange | undefined',
-        defaultValue: '{ from: undefined, to: undefined }'
+        name: 'datePickerMultiple{{id}}Value',
+        type: 'Date[] | undefined',
       }), required: true },
   };
 }
 
-export function datePickerRangeVariants() {
+export function datePickerMultipleVariants() {
   return {};
 }
 
-export function datePickerRangeStyle() {
+export function datePickerMultipleStyle() {
   return {
     ...baseStyle()
   }
 }
 
-export function datePickerRangeRules() {
+export function datePickerMultipleRules() {
   return {
     ...baseRules()
   }

@@ -9,38 +9,30 @@ import {
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
-export function datePickerRangeProperties() {
+export function calendarRangeProperties() {
   return {
-    label: { type: 'string', required: false },
-    placeholder: { type: 'string', required: false, default: 'Enter the date' },
-    dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
-    helperText: { type: 'string', required: false, default: '' },
-    startDate: { type: 'date', required: false, default: '1900-01-01', 'x-ui-widget': 'date' },
-    endDate: { type: 'date', required: false, default: '2099-12-31', 'x-ui-widget': 'date' },
-    //floatingLabel: { type: 'boolean', required: false },
-    error: { type: 'string', required: false },
+    disableDayOfWeek: { type: 'number', required: false },
+    disableBefore: { type: 'date', required: false, default: '1900-01-01', 'x-ui-widget': 'date' },
+    disableAfter: { type: 'date', required: false, default: '2099-12-31', 'x-ui-widget': 'date' },
+    defaultMonth: { type: 'date', required: false, default: '2026-01-01', 'x-ui-widget': 'date' },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
-    disabledPicker: { type: 'boolean', required: false },
-    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
-    dayButtonClassName: { type: 'string', required: false },
-    labelClassName: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };
 }
 
-export function datePickerRangePropertiesMapping() {
+export function calendarRangePropertiesMapping() {
   return {
     ...commonPropertiesMapping()
   };
 }
 
-export function datePickerRangeChildProperties() {
+export function calendarRangeChildProperties() {
   return {};
 }
 
-export function datePickerRangeChildPropertiesMapping() {
+export function calendarRangeChildPropertiesMapping() {
   return {};
 }
 
@@ -58,40 +50,41 @@ function onDateChangeInteractionFieldVisibility(): InteractionFieldVisibility {
   }
 }
 
-export function datePickerRangeInteractions() {
+export function calendarRangeInteractions() {
   return {
     onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: true },
+    onMonthChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_MONTH_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: false },
   };
 }
 
-export function datePickerRangeInteractionsMapping() {
+export function calendarRangeInteractionsMapping() {
   return {
 
   };
 }
 
-export function datePickerRangeData() {
+export function calendarRangeData() {
   return {
     date: { ...baseData(INTERACTIONS_DEFAULTS.UNDEFINED, INTERACTIONS_TYPES.DATE, {
         id: '',
-        name: 'dateRange{{id}}Value',
+        name: 'calendarRange{{id}}Value',
         type: 'DateRange | undefined',
         defaultValue: '{ from: undefined, to: undefined }'
       }), required: true },
   };
 }
 
-export function datePickerRangeVariants() {
+export function calendarRangeVariants() {
   return {};
 }
 
-export function datePickerRangeStyle() {
+export function calendarRangeStyle() {
   return {
     ...baseStyle()
   }
 }
 
-export function datePickerRangeRules() {
+export function calendarRangeRules() {
   return {
     ...baseRules()
   }
