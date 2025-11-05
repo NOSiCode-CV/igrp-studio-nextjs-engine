@@ -386,6 +386,8 @@ export interface ComponentRegisterConfig extends VersionableElement {
   imports: string[],
   defaultValue: boolean,
   allowTypes: boolean,
+  deprecated?: boolean,
+  replacedBy?: string,
   group: string,
   label: string,
   customClassName?: string,

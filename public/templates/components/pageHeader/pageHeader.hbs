@@ -1,6 +1,6 @@
 <IGRPPageHeader
   {{#if resourceConfig.tag}}
-  name={ `{{{resourceConfig.tag}}}` }
+  id={ `{{{resourceConfig.tag}}}` }
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }

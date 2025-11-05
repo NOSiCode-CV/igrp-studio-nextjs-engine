@@ -11,7 +11,6 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function alertDialogProperties() {
   return {
-    name: { type: 'string', required: true, default: 'alertDialog' },
     variant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     title: { type: 'string', required: false, default: 'Alert Dialog' },
     description: { type: 'string', required: false, default: 'A alert dialog' },

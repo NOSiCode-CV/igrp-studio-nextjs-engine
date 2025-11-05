@@ -35,6 +35,6 @@ export default {
   },
 };
 
-const INPUTDATEPICKER_SINGLE = 'inputDatePickerSingle'
+const INPUT_DATE_PICKER_SINGLE = 'inputDatePickerSingle'
 
-export { INPUTDATEPICKER_SINGLE };
+export { INPUT_DATE_PICKER_SINGLE };

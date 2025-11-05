@@ -13,7 +13,6 @@ export function inputColorProperties() {
     value: { type: 'string', required: false, default: '' },
     label: { type: 'string', required: false, default: 'Input Color' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: true, default: 'color' },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: '#000000' },
     helperText: { type: 'string', required: false, default: '' },

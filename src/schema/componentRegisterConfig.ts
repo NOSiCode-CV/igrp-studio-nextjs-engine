@@ -131,6 +131,16 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
       type: 'boolean',
       errorMessage: "The allow types attribute must be a boolean."
     },
+    deprecated: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: "The deprecated attribute must be a boolean."
+    },
+    replacedBy: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The replaced by attribute must be a valid string."
+    },
     group: {
       type: 'string',
       errorMessage: "The group attribute must be a valid string."

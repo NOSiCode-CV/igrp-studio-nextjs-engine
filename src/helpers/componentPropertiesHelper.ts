@@ -215,15 +215,19 @@ export function resolveStateDefault(
   }
 
   // Handle object with nested fields
-  if (type === 'object' && fields && fields.length > 0) {
-    const objectBody = fields
-      .map((f) => {
-        const value = resolveStateDefault(f.defaultValue, f.type, f.isList, f.fields);
-        return `${f.name}: ${value}`;
-      })
-      .join(', ');
-    const result = `{ ${objectBody} }`;
-    return isList === true ? `[${result}]` : result;
+  if (type === 'object') {
+    if (fields && fields.length > 0) {
+      const objectBody = fields
+        .map((f) => {
+          const value = resolveStateDefault(f.defaultValue, f.type, f.isList, f.fields);
+          return `${f.name}: ${value}`;
+        })
+        .join(', ');
+      const result = `{ ${objectBody} }`;
+      return isList === true ? `[${result}]` : result;
+    } else {
+      return isList === true ? `[${trimmed}]` : trimmed;
+    }
   }
 
   // Handle lists
@@ -487,11 +491,11 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${v? typeof v : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${v? typeof v : undefined}`)} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))}` : `${k}={ ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))} }`;
               })
               .join('\n');
           } else {
-            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)}` : `${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
+            return isJson === true? `${key}: ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))}` : `${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')

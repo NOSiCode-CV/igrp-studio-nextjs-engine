@@ -12,7 +12,6 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function inputTimeProperties() {
   return {
     value: { type: 'string', required: false, default: '' },
-    name: { type: 'string', required: true, default: 'time' },
     label: { type: 'string', required: false, default: 'Input Time' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },

@@ -12,7 +12,6 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function inputTextareaProperties() {
   return {
     value: { type: 'string', required: false, default: '' },
-    name: { type: 'string', required: true, default: 'textarea' },
     label: { type: 'string', required: false, default: 'Input Textarea' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },

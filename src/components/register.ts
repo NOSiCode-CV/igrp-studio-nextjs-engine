@@ -24,6 +24,7 @@ import comboboxModule, { COMBOBOX } from './combobox';
 import componentModule, { COMPONENT } from './component';
 import containerModule, { CONTAINER } from './container';
 import datePickerRangeModule, { DATE_PICKER_RANGE } from './datePickerRange';
+import datePickerSingleModule, { DATE_PICKER_SINGLE } from './datePickerSingle';
 import datePickerMultipleModule, { DATE_PICKER_MULTIPLE } from './datePickerMultiple';
 import dropdownModule, { DROPDOWN } from './dropdown';
 import dropdownItemModule, { DROPDOWN_ITEM } from './dropdown/children/dropdownItem';
@@ -153,6 +154,7 @@ export function registerAllComponents() {
   register(COMPONENT, componentModule.register);
   register(CONTAINER, containerModule.register);
   register(DATE_PICKER_RANGE, datePickerRangeModule.register);
+  register(DATE_PICKER_SINGLE, datePickerSingleModule.register);
   register(DATE_PICKER_MULTIPLE, datePickerMultipleModule.register);
   register(DROPDOWN, dropdownModule.register);
   register(DROPDOWN_ITEM, dropdownItemModule.register);

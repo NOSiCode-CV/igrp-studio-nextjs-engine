@@ -1,4 +1,4 @@
-import { initComponents, newPage } from '../src';
+import { initComponents, newPage, setEngineConfiguration } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
@@ -39,8 +39,6 @@ export const inputLayout: Layout = {
           tag: 'input_password',
           componentName: 'inputPassword',
           properties: {
-            type: 'password',
-            name: 'input_password',
             placeholder: 'Enter your password',
           },
         },
@@ -64,56 +62,308 @@ export const inputLayout: Layout = {
             format: 'dd/MM/yyyy',
             locale: 'pt',
             iconPlacement: 'start',
+            disabledBefore: '2025-01-01',
             required: true
+          },
+          data: {
+            date: {
+              state: {
+                id: 'date_picker_val_st',
+                name: 'datePickerDate',
+                type: 'Date | undefined',
+                defaultValue: 'new Date()',
+                generate: true,
+              },
+            },
           },
           interactions: {
             onDateChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputRegDate(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputRegDate, setInputRegDate] = useState < Date | undefined > (new Date());` }
-                  ]
-                },
+                fnName: 'setDatePickerDate',
               },
-              type: 'function'
             },
+          },
+        },
+        {
+          id: 'input_date_single',
+          tag: 'input_date_single',
+          componentName: 'inputDatePickerSingle',
+          properties: {
+            label: 'Registration Date',
+            format: 'dd/MM/yyyy',
+            locale: 'pt',
+            iconPlacement: 'start',
+            disabledBefore: '2025-01-01',
+            required: true
+          },
+          data: {
             date: {
-              fnCustomSet: 'inputRegDate',
-              type: 'function'
-            }
+              state: {
+                id: 'date_picker_single_val_st',
+                name: 'inputDatePickerSingleDate',
+                type: 'Date | undefined',
+                defaultValue: 'new Date()',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setInputDatePickerSingleDate',
+              },
+            },
+          },
+        },
+        {
+          id: 'date_picker_range',
+          tag: 'date_picker_range',
+          componentName: 'datePickerRange',
+          properties: {
+            label: 'Registration Interval',
+            placeholder: 'Select the registration interval',
+            disabledBefore: '2025-01-01'
+          },
+          data: {
+            date: {
+              state: {
+                id: 'date_picker_range_val_st',
+                name: 'datePickerRangeDate',
+                type: 'DateRange | undefined',
+                defaultValue: 'undefined',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setDatePickerRangeDate',
+              },
+            },
+          },
+        },
+        {
+          id: 'calendar_single',
+          tag: 'calendar_single',
+          componentName: 'calendarSingle',
+          properties: {
+            label: 'Registration Date',
+            format: 'dd/MM/yyyy',
+            disableBefore: '2025-8-12',
+            disableAfter: '2025-11-12',
+            disableDayOfWeek: ['0', '6']
+          },
+          data: {
+            date: {
+              state: {
+                id: 'calendar_single_val_st',
+                name: 'calendarSingleDate',
+                type: 'Date | undefined',
+                defaultValue: 'new Date()',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarSingleDate',
+              },
+            },
+          },
+        },
+        {
+          id: 'calendar_single_time',
+          tag: 'calendar_single_time',
+          componentName: 'calendarSingleTime',
+          properties: {
+            label: 'Audition Date and Time',
+          },
+          data: {
+            date: {
+              state: {
+                id: 'calendar_single_time_val_st',
+                name: 'calendarSingleTimeDate',
+                type: 'Date | undefined',
+                defaultValue: 'new Date()',
+                generate: true,
+              },
+            },
+            startTime: {
+              state: {
+                id: 'calendar_single_time_start_time_val_st',
+                name: 'calendarSingleTimeStartTime',
+                type: 'string | undefined',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarSingleTimeDate',
+              },
+            },
+            onStartTime: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarSingleTimeStartTime',
+              },
+            },
+          },
+        },
+        {
+          id: 'calendar_range',
+          tag: 'calendar_range',
+          componentName: 'calendarRange',
+          properties: {
+            disableBefore: '2025-8-12',
+            disableAfter: '2025-11-12',
+            disableDayOfWeek: ['0', '6']
+          },
+          data: {
+            date: {
+              state: {
+                id: 'calendar_range_val_st',
+                name: 'calendarRangeDate',
+                type: 'DateRange | undefined',
+                defaultValue: 'undefined',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarRangeDate',
+              },
+            },
           }
         },
         {
-          id: 'input_date_end_not_req',
-          tag: 'input_date_end_not_req',
-          componentName: 'inputDatePicker',
+          id: 'calendar_range_time',
+          tag: 'calendar_range_time',
+          componentName: 'calendarRangeTime',
           properties: {
-            label: 'Birthdate',
-            placeholder: 'Enter the birthdate',
-            //floatingLabel: true,
-            format: 'yyyy-MM-dd',
-            locale: 'en',
-            iconPlacement: 'end',
-            required: false
+            label: 'Calendar Range Time',
+            disableBefore: '2025-8-12',
+            disableAfter: '2025-11-12',
+            disableDayOfWeek: ['0', '6']
+          },
+          data: {
+            date: {
+              state: {
+                id: 'calendar_range_time_val_st',
+                name: 'calendarRangeTimeDate',
+                type: 'DateRange | undefined',
+                defaultValue: 'undefined',
+                generate: true,
+              },
+            },
+            startTime: {
+              state: {
+                id: 'calendar_range_time_start_time_val_st',
+                name: 'calendarRangeTimeStartTime',
+                type: 'string | undefined',
+                defaultValue: '',
+                generate: true,
+              },
+            },
           },
           interactions: {
             onDateChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputBirthdate(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputBirthdate, setInputBirthdate] = useState < Date | undefined > (new Date());` }
-                  ]
-                },
+                fnName: 'setCalendarRangeTimeDate',
               },
-              type: 'function'
             },
+            onStartTime: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarRangeTimeStartTime',
+              },
+            },
+          },
+        },
+        {
+          id: 'calendar_multiple',
+          tag: 'calendar_multiple',
+          componentName: 'calendarMultiple',
+          properties: {
+            label: 'Scheduled Dates',
+            disableBefore: '2025-8-12',
+            disableAfter: '2025-11-12',
+            disableDayOfWeek: ['0', '6']
+          },
+          data: {
             date: {
-              fnCustomSet: 'inputBirthdate',
-              type: 'function'
-            }
-          }
+              state: {
+                id: 'calendar_multiple_val_st',
+                name: 'calendarMultipleDate',
+                type: 'Date[] | undefined',
+                defaultValue: '[]',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarMultipleDate',
+              },
+            },
+          },
+        },
+        {
+          id: 'calendar_multiple_time',
+          tag: 'calendar_multiple_time',
+          componentName: 'calendarMultipleTime',
+          properties: {
+            label: 'Scheduled Dates and Times',
+          },
+          data: {
+            date: {
+              state: {
+                id: 'calendar_multiple_time_val_st',
+                name: 'calendarMultipleTimeDate',
+                type: 'Date[] | undefined',
+                defaultValue: '[]',
+                generate: true,
+              },
+            },
+            startTime: {
+              state: {
+                id: 'calendar_multiple_time_start_time_val_st',
+                name: 'calendarMultipleTimeStartTime',
+                type: 'string | undefined',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
+          interactions: {
+            onDateChange: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarMultipleTimeDate',
+              },
+            },
+            onStartTime: {
+              type: 'function',
+              function: {
+                fnName: 'setCalendarMultipleTimeStartTime',
+              },
+            },
+          },
         },
         {
           id: 'input_text_label_not_req',
@@ -178,28 +428,30 @@ export const inputLayout: Layout = {
               iconName: "CornerDownRight",
             },
             options: [
-              { value: '01', label: 'Option 1' },
-              { value: '02', label: 'Option 2' },
-              { value: '03', label: 'Option 3' },
+              { value: 'opt01', label: 'Option 1' },
+              { value: 'opt02', label: 'Option 2' },
+              { value: 'opt03', label: 'Option 3' },
             ],
+          },
+          data: {
+            value: {
+              state: {
+                id: 'select_val_st',
+                name: 'select',
+                type: 'string | undefined',
+                defaultValue: '',
+                generate: true,
+              },
+            },
           },
           interactions: {
             onValueChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setSelect(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [select, setSelect] = useState("");` }
-                  ]
-                },
+                fnName: 'setSelect',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'select',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_combobox',
@@ -216,28 +468,30 @@ export const inputLayout: Layout = {
               iconName: "CornerDownRight",
             },
             options: [
-              { value: '01', label: 'Option 1' },
-              { value: '02', label: 'Option 2' },
-              { value: '03', label: 'Option 3' },
+              { value: 'opt01', label: 'Option 1' },
+              { value: 'opt02', label: 'Option 2' },
+              { value: 'opt03', label: 'Option 3' },
             ],
+          },
+          data: {
+            value: {
+              state: {
+                id: 'combobox_val_st',
+                name: 'combobox',
+                isOptional: false,
+                defaultValue: '',
+                generate: true,
+              },
+            },
           },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setCombobox(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [combobox, setCombobox] = useState(null);` }
-                  ]
-                },
+                fnName: 'setCombobox',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'combobox',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_color',
@@ -255,23 +509,25 @@ export const inputLayout: Layout = {
             defaultValue: '#999999',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'color_val_st',
+                name: 'color',
+                type: 'string',
+                defaultValue: '#6366f1',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setColor(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [color, setColor] = useState("#6366f1");` }
-                  ]
-                },
+                fnName: 'setColor',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'color',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_file_single',
@@ -284,23 +540,25 @@ export const inputLayout: Layout = {
             error: 'Unsupported file extension',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'file_single_val_st',
+                name: 'fileSingle',
+                type: 'any',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
                 fnCustomSet: '(e) => setFileSingle(e.target.value)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [fileSingle, setFileSingle] = useState(null);` }
-                  ]
-                },
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'fileSingle',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_file_multiple',
@@ -314,23 +572,25 @@ export const inputLayout: Layout = {
             error: 'Unsupported file(s) extension(s)',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'file_multiple_st',
+                name: 'fileMultiple',
+                type: 'any',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
                 fnCustomSet: '(e) => setFileMultiple(e.target.value)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [fileMultiple, setFileMultiple] = useState(null);` }
-                  ]
-                },
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'fileMultiple',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_number',
@@ -347,23 +607,25 @@ export const inputLayout: Layout = {
             errorMessage: 'Invalid number format',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'input_number_val_st',
+                name: 'inputNumber',
+                type: 'number',
+                defaultValue: '0',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputNumber(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputNumber, setInputNumber] = useState(0);` }
-                  ]
-                },
+                fnName: 'setInputNumber',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'inputNumber',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_phone',
@@ -378,23 +640,25 @@ export const inputLayout: Layout = {
             defaultCountry: 'CV',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'phone_number_val_st',
+                name: 'phoneNumber',
+                type: 'string | undefined',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setPhoneNumber(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [phoneNumber, setPhoneNumber] = useState("");` }
-                  ]
-                },
+                fnName: 'setPhoneNumber',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'phoneNumber',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_time',
@@ -407,23 +671,25 @@ export const inputLayout: Layout = {
             error: 'Invalid time format',
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'input_time_val_st',
+                name: 'inputTime',
+                type: 'string',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputTime(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputTime, setInputTime] = useState("");` }
-                  ]
-                },
+                fnName: 'setInputTime',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'inputTime',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_add_on',
@@ -434,29 +700,31 @@ export const inputLayout: Layout = {
             helperText: 'Select an option',
             error: 'Invalid option',
             options: [
-              { value: '01', label: 'Option 1' },
-              { value: '02', label: 'Option 2' },
-              { value: '03', label: 'Option 3' },
+              { value: 'opt01', label: 'Option 1' },
+              { value: 'opt02', label: 'Option 2' },
+              { value: 'opt03', label: 'Option 3' },
             ],
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'input_add_on_val_st',
+                name: 'inputAddOn',
+                type: 'string',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onSelectValueChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputAddOn(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputAddOn, setInputAddOn] = useState("");` }
-                  ]
-                },
+                fnName: 'setInputAddOn',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'inputAddOn',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_url',
@@ -471,23 +739,25 @@ export const inputLayout: Layout = {
             protocols: ["https://", "wss://"],
             required: true,
           },
+          data: {
+            value: {
+              state: {
+                id: 'input_url_val_st',
+                name: 'inputUrl',
+                type: 'string',
+                defaultValue: '',
+                generate: true,
+              },
+            },
+          },
           interactions: {
             onChange: {
+              type: 'function',
               function: {
-                fnCustomSet: '(e) => setInputUrl(e)',
-                fnCustomCode: {
-                  states: [
-                    { state: `const [inputUrl, setInputUrl] = useState("");` }
-                  ]
-                },
+                fnName: 'setInputUrl',
               },
-              type: 'function'
             },
-            value: {
-              fnCustomSet: 'inputUrl',
-              type: 'function'
-            }
-          }
+          },
         },
         {
           id: 'input_hidden',
@@ -521,23 +791,25 @@ export const inputLayout: Layout = {
         helperText: 'Describe your problem',
         rows: 6
       },
+      data: {
+        value: {
+          state: {
+            id: 'textarea_val_st',
+            name: 'textarea',
+            type: 'string',
+            defaultValue: '',
+            generate: true,
+          },
+        },
+      },
       interactions: {
         onChange: {
+          type: 'function',
           function: {
             fnCustomSet: '(e) => setTextarea(e.target.value)',
-            fnCustomCode: {
-              states: [
-                { state: `const [textarea, setTextarea] = useState("");` }
-              ]
-            },
           },
-          type: 'function'
         },
-        value: {
-          fnCustomSet: 'textarea',
-          type: 'function'
-        }
-      }
+      },
     },
   ]
 };
@@ -552,6 +824,7 @@ const pageConfig: PageConfig = {
 };
 
 beforeAll(async () => {
+  await setEngineConfiguration({ environment: 'development' })
   await initComponents();
 });
 

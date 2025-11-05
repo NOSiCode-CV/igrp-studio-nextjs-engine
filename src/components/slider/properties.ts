@@ -8,7 +8,6 @@ import {
 
 export function rangeSliderProperties() {
   return {
-    name: { type: 'string', required: true },
     label: { type: 'string', required: false },
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 100 },
@@ -37,7 +36,6 @@ export function rangeSliderPropertiesMapping() {
 
 export function rangeSliderChildProperties() {
   return {
-    name: { type: 'string', required: true },
     label: { type: 'string', required: false },
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 100 },

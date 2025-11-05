@@ -11,7 +11,6 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function radioGroupProperties() {
   return {
-    name: { type: 'string', required: true },
     label: { type: 'string', required: false },
     dir: { type: 'string', required: false, enum: ['ltr', 'rtl'], default: 'ltr' },
     orientation: { type: 'string', required: false, enum: ['horizontal', 'vertical'], default: 'vertical' },

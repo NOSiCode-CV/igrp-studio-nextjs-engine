@@ -49,6 +49,8 @@ export type Component = {
   allowTypes: boolean;
   forceStateLoad: boolean;
   forceReferenceLoad: boolean;
+  deprecated?: boolean;
+  replacedBy?: string;
   label: string;
   group: string;
   parent: string;
@@ -70,6 +72,8 @@ export type Component = {
   setAllowTypes:(value: boolean) => void;
   setForceStateLoad:(value: boolean) => void;
   setForceReferenceLoad:(value: boolean) => void;
+  setDeprecated:(value: boolean) => void;
+  loadReplacedBy:(replacedBy: string) => void;
   loadLabel:(label: string) => void;
   loadGroup:(group: string) => void;
   loadParent:(parent: string) => void;
@@ -136,6 +140,8 @@ function initComponent(): Component {
     allowTypes: false,
     forceStateLoad: false,
     forceReferenceLoad: false,
+    deprecated: false,
+    replacedBy: undefined,
     label: 'Component',
     group: '',
     parent: '',
@@ -183,6 +189,14 @@ function initComponent(): Component {
 
     loadDefault(defaultValue: boolean) {
       this.defaultValue = defaultValue
+    },
+
+    setDeprecated(value: boolean) {
+      this.deprecated = value
+    },
+
+    loadReplacedBy(replacedBy: string) {
+      this.replacedBy = replacedBy
     },
 
     loadLabel(label: string) {
@@ -329,6 +343,8 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     imports: [],
     defaultValue: isDefault ?? defaultValue,
     allowTypes: value.allowTypes,
+    deprecated: value.deprecated,
+    replacedBy: value.replacedBy,
     group: value.group,
     label: value.label,
     customClassName: value.customClassName,
@@ -513,7 +529,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
       if(!component.data || (component.data && !component.data[key]))
-        return ` ${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
+        return ` ${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
       else return
     }).join("")
     : ``

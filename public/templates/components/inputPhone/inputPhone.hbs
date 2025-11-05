@@ -3,7 +3,7 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  name={ `{{resourceConfig.tag}}` }
+  id={ `{{resourceConfig.tag}}` }
   {{#if (and resourceConfig.properties.dir (not resourceConfig.data.dir))}}
   dir={ `{{resourceConfig.properties.dir}}` }
   {{/if~}}
