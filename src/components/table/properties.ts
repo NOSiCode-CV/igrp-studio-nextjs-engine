@@ -10,6 +10,7 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function tableProperties() {
   return {
+    data: { type: 'string', required: false },
     showFilter: { type: 'boolean', required: false, default: false },
     showPagination: { type: 'boolean', required: false, default: false },
     showToggleColumn: { type: 'boolean', required: false, default: false },

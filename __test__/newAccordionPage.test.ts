@@ -55,7 +55,7 @@ const accordionLayout: Layout = {
       tag: 'accordion_default',
       componentName: 'accordion',
       properties: {
-        value: 'A demo basic info accordion',
+        value: 'Name',
         name: 'Basic Info'
       },
       children: [
