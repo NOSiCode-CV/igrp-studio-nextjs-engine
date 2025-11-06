@@ -23,6 +23,8 @@ import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textList
 import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
 import { PROCESS_STEP } from '../components/processStep/index';
+import { CARD_DETAILS_ITEM } from '../components/cardDetails/children/cardDetailsItem/index';
+import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -393,6 +395,14 @@ export function extractInfoSection(children: Layout[]) {
 
 export function extractInfoItem(children: Layout[]) {
   return children.filter((it) => it.componentName === INFO_ITEM);
+}
+
+export function extractCardDetailsItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === CARD_DETAILS_ITEM);
+}
+
+export function extractAccordionItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === ACCORDION_ITEM);
 }
 
 export function extractProcessSteps(children: Layout[]) {

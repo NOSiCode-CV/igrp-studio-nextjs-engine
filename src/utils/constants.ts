@@ -188,6 +188,8 @@ export const INTERACTIONS_TYPES = {
   VALUE_CHANGE: "Value Change",
   ON_START_TIME: "On Start Time",
   ON_END_TIME: "On End Time",
+  ON_COPY_SUCCESS: "On Copy Success",
+  ON_COPY_ERROR: "On Copy Error",
 
   // Values
   CHECKED: "Checked",

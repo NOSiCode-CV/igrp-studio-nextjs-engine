@@ -1,4 +1,6 @@
 import { register } from './index';
+import accordionModule, { ACCORDION } from './accordion';
+import accordionItemModule, { ACCORDION_ITEM } from './accordion/children/accordionItem';
 import alertModule, { ALERT } from './alert/index';
 import alertDialogModule, { ALERT_DIALOG } from './alertDialog';
 import aspectModule, { ASPECT } from './aspect';
@@ -13,6 +15,8 @@ import calendarMultipleModule, { CALENDAR_MULTIPLE } from './calendarMultiple';
 import calendarMultipleTimeModule, { CALENDAR_MULTIPLE_TIME } from './calendarMultipleTime';
 import cardModule, { CARD } from './card';
 import cardContentModule, { CARD_CONTENT } from './card/children/cardContent';
+import cardDetailsModule, { CARD_DETAILS } from './cardDetails';
+import cardDetailsItemModule, { CARD_DETAILS_ITEM } from './cardDetails/children/cardDetailsItem';
 import cardFooterModule, { CARD_FOOTER } from './card/children/cardFooter';
 import cardHeaderModule, { CARD_HEADER } from './card/children/cardHeader';
 import chartModule, { AREACHART } from './areachart';
@@ -23,6 +27,7 @@ import columnsModule, { COLUMNS } from './columns';
 import comboboxModule, { COMBOBOX } from './combobox';
 import componentModule, { COMPONENT } from './component';
 import containerModule, { CONTAINER } from './container';
+import copyToModule, { COPY_TO } from './copyTo';
 import datePickerRangeModule, { DATE_PICKER_RANGE } from './datePickerRange';
 import datePickerSingleModule, { DATE_PICKER_SINGLE } from './datePickerSingle';
 import datePickerMultipleModule, { DATE_PICKER_MULTIPLE } from './datePickerMultiple';
@@ -128,6 +133,8 @@ import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 import videoEmbedModule, { VIDEO_EMBED } from './videoEmbed'
 
 export function registerAllComponents() {
+  register(ACCORDION, accordionModule.register);
+  register(ACCORDION_ITEM, accordionItemModule.register);
   register(ALERT, alertModule.register);
   register(ALERT_DIALOG, alertDialogModule.register);
   register(AREACHART, chartModule.register);
@@ -143,6 +150,8 @@ export function registerAllComponents() {
   register(CALENDAR_MULTIPLE_TIME, calendarMultipleTimeModule.register);
   register(CARD, cardModule.register);
   register(CARD_CONTENT, cardContentModule.register);
+  register(CARD_DETAILS, cardDetailsModule.register);
+  register(CARD_DETAILS_ITEM, cardDetailsItemModule.register);
   register(CARD_FOOTER, cardFooterModule.register);
   register(CARD_HEADER, cardHeaderModule.register);
   //register(CAROUSEL, carouselModule.register);
@@ -153,6 +162,7 @@ export function registerAllComponents() {
   register(COMBOBOX, comboboxModule.register);
   register(COMPONENT, componentModule.register);
   register(CONTAINER, containerModule.register);
+  register(COPY_TO, copyToModule.register);
   register(DATE_PICKER_RANGE, datePickerRangeModule.register);
   register(DATE_PICKER_SINGLE, datePickerSingleModule.register);
   register(DATE_PICKER_MULTIPLE, datePickerMultipleModule.register);

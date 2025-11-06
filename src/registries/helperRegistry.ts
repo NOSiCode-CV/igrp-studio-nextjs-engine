@@ -40,7 +40,7 @@ import {
   resolveQueryParams, resolveArrayElementRules,
   resolveSegmentPath,
   resolveStateDefault,
-  resolveZodTypes, checkRules,
+  resolveZodTypes, checkRules, extractAccordionItem, extractCardDetailsItem,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -90,6 +90,8 @@ Handlebars.registerHelper("extractTextListItemSubItems", extractTextListItemSubI
 Handlebars.registerHelper("extractTextListItemContent", extractTextListItemContent);
 Handlebars.registerHelper("extractInfoSection", extractInfoSection);
 Handlebars.registerHelper("extractInfoItem", extractInfoItem);
+Handlebars.registerHelper("extractCardDetailsItem", extractCardDetailsItem);
+Handlebars.registerHelper("extractAccordionItem", extractAccordionItem);
 Handlebars.registerHelper("resolveComponent", resolveComponent);
 Handlebars.registerHelper("indexedTag", indexedTag);
 Handlebars.registerHelper("replaceId", replaceId);
