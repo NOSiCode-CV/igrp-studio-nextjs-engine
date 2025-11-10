@@ -21,7 +21,7 @@ export default {
     component.loadComponentClass('IGRPCardDetails');
     component.loadVariants(cardDetailsVariants());
     component.loadGroup('basicElements');
-    component.loadLabel('Info Card');
+    component.loadLabel('Card Details');
     component.getProperties(cardDetailsProperties());
     component.getPropertiesMapping(cardDetailsPropertiesMapping());
     component.getChildProperties(cardDetailsChildProperties());

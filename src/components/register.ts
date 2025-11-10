@@ -138,7 +138,7 @@ export function registerAllComponents() {
   register(ALERT, alertModule.register);
   register(ALERT_DIALOG, alertDialogModule.register);
   register(AREACHART, chartModule.register);
-  register(ASPECT, aspectModule.register);
+  //register(ASPECT, aspectModule.register);
   register(AVATAR, avatarModule.register);
   register(BADGE, badgeModule.register);
   register(BUTTON, buttonModule.register);
@@ -222,7 +222,7 @@ export function registerAllComponents() {
   register(SEPARATOR, separatorModule.register);
   //register(SLIDER, sliderModule.register);
   register(SPAN, spanModule.register);
-  register(STACK, stackModule.register);
+  //register(STACK, stackModule.register);
   register(STATS_CARD, statsCardModule.register);
   register(STATUS_BANNER, statusBannerModule.register);
   register(SWITCH, switchModule.register);
