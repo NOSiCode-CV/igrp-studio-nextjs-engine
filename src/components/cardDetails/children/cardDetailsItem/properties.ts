@@ -8,7 +8,9 @@ import {
 export function cardDetailsItemProperties() {
   return {
     label: { type: 'string', required: false, default: 'Text' },
+    content: { type: 'string', required: false },
     value: { type: 'string', required: false, default: 'Lorem ipsum dolor sit amet' },
+    showCopyTo: { type: 'boolean', required: false },
     ...commonProperties(),
   };
 }

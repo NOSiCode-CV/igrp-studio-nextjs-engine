@@ -5,7 +5,7 @@ import {
   baseStyle,
   classProperties,
   commonProperties,
-  commonPropertiesMapping,
+  commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
@@ -20,6 +20,7 @@ export function copyToProperties() {
     toastDuration: { type: 'number', required: false },
     triggerClassName: { type: 'string', required: false },
     ...classProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }

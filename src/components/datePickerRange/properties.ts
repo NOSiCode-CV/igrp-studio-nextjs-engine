@@ -4,7 +4,7 @@ import {
   baseRules,
   baseStyle, classProperties,
   commonProperties,
-  commonPropertiesMapping,
+  commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -26,6 +26,7 @@ export function datePickerRangeProperties() {
     dayButtonClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
     ...classProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }
