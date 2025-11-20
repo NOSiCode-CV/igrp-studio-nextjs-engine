@@ -12,9 +12,9 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function calendarMultipleProperties() {
   return {
     disableDayOfWeek: { type: 'number', required: false },
-    disableBefore: { type: 'date', required: false, default: '1900-01-01', 'x-ui-widget': 'date' },
-    disableAfter: { type: 'date', required: false, default: '2099-12-31', 'x-ui-widget': 'date' },
-    defaultMonth: { type: 'date', required: false, default: '2026-01-01', 'x-ui-widget': 'date' },
+    disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
     ...classProperties(),
@@ -53,7 +53,7 @@ function onDateChangeInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function calendarMultipleInteractions() {
   return {
-    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: true },
+    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: false },
     onMonthChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_MONTH_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: false },
   };
 }

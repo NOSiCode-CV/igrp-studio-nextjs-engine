@@ -191,16 +191,25 @@ export function resolveStateDefault(
   fields?: ElementField[],
 ): string {
 
-  if(type === 'string') {
-    if(defaultValue === undefined)
-      return 'undefined';
-    else return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+  // Helper to check ISO date format
+  const isISODate = (val: string) => {
+    const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
+    return isoRegex.test(val);
+  };
+
+  if (type === 'string') {
+    if (defaultValue === undefined) return 'undefined';
+    if(!isISODate(defaultValue.trim())) {
+      return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+    }
   }
 
   const trimmed = defaultValue?.trim() ?? '';
 
+  // Empty values for non-string/object types
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
 
+  // Handle booleans, numbers, arrays, objects as string literals
   if (
     type !== 'string' &&
     (trimmed === 'null' ||
@@ -214,6 +223,11 @@ export function resolveStateDefault(
       (trimmed.startsWith('{') && trimmed.endsWith('}')))
   ) {
     return trimmed;
+  }
+
+  // Handle ISO date strings
+  if (isISODate(trimmed)) {
+    return `new Date("${trimmed}")`;
   }
 
   // Handle object with nested fields
@@ -237,7 +251,7 @@ export function resolveStateDefault(
     return trimmed !== '' ? trimmed : '[]';
   }
 
-  // Handle strings and fallback
+  // Fallback for strings
   return type === 'string' ? `\`${trimmed.replace(/"/g, '\\"')}\`` : trimmed;
 }
 

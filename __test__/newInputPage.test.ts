@@ -94,7 +94,7 @@ export const inputLayout: Layout = {
             format: 'dd/MM/yyyy',
             locale: 'pt',
             iconPlacement: 'start',
-            disabledBefore: '2025-01-01',
+            disabledBefore: '2025-11-20T12:00:00Z',
             required: true
           },
           data: {
@@ -155,7 +155,7 @@ export const inputLayout: Layout = {
             format: 'dd/MM/yyyy',
             disableBefore: '2025-8-12',
             disableAfter: '2025-11-12',
-            disableDayOfWeek: ['0', '6']
+            disableDayOfWeek: [0, 6]
           },
           data: {
             date: {

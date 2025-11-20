@@ -15,8 +15,8 @@ export function datePickerRangeProperties() {
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     helperText: { type: 'string', required: false, default: '' },
-    startDate: { type: 'date', required: false, default: '1900-01-01', 'x-ui-widget': 'date' },
-    endDate: { type: 'date', required: false, default: '2099-12-31', 'x-ui-widget': 'date' },
+    startDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
     //floatingLabel: { type: 'boolean', required: false },
     error: { type: 'string', required: false },
     required: { type: 'boolean', required: false },
@@ -61,7 +61,7 @@ function onDateChangeInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function datePickerRangeInteractions() {
   return {
-    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: true },
+    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onDateChangeInteractionFieldVisibility()), required: false },
   };
 }
 
