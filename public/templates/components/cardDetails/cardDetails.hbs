@@ -66,5 +66,11 @@
     },
   {{/each}}
   ] }
+  {{else}}
+  {{#if resourceConfig.data.items}}
+  { {{#if resourceConfig.data.items.value}}items={ {{resourceConfig.data.items.value.code}} }{{else}}items={ {{resourceConfig.data.items.state.name}} }{{/if}} }
+  {{else}}
+  items={[]}
+  {{/if~}}
   {{/if~}}
 />
