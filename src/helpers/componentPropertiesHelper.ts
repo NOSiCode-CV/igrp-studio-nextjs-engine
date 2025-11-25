@@ -277,7 +277,7 @@ export function resolveZodTypes(field?: ElementField): string {
       default: zodType = 'z.unknown()';
     }
   } else {
-    zodType = `${toCamelCase(type)}`;
+    zodType = `z.${toCamelCase(type)}()`;
   }
 
   // Apply validations

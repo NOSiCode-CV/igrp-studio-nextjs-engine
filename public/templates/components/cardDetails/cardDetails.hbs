@@ -26,7 +26,7 @@
   {{#if resourceConfig.data}}
   {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
-  {{#if resourceConfig.children}}
+  {{#if (and resourceConfig.children (not resourceConfig.data.items)) }}
   items={ [
   {{#each (extractCardDetailsItem resourceConfig.children)}}
     {
