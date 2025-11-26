@@ -291,70 +291,21 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
+  processStepConfig.imports = [
+    { id: 'process_imports', namespace: `import { StepComponentConfig, StepMethods } from '@/app/(igrp)/(generated)/process/[...process]/ProcessPageRenderer'` }
+  ]
+
   processStepConfig.args = [
     {
-      id: 'processKey_arg',
-      type: "string",
-      name: "processKey",
+      id: 'config_arg',
+      type: "StepComponentConfig",
+      name: "config",
       isList: false,
       isOptional: false,
-      isInterface: false,
+      isInterface: true,
       isFunction: false,
       isState: false,
-    },
-    {
-      id: 'processInstanceId_arg',
-      type: "string",
-      name: "processInstanceId",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    {
-      id: 'userTaskInstanceId_arg',
-      type: "string",
-      name: "userTaskInstanceId",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    {
-      id: 'onRegisterMethods_fnc',
-      type: "void",
-      name: "onRegisterMethods",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: true,
-      isState: false,
-      functionParameters: [
-        {
-          id: 'methods_arg',
-          type: "StepMethods",
-          name: "methods",
-          isList: false,
-          isOptional: false,
-          isInterface: true,
-          isFunction: false,
-          isState: false
-        },
-      ]
-    },
-    {
-      id: 'variables_arg',
-      type: "Array<{ name: string; value: string }> | undefined",
-      name: "variables",
-      isList: false,
-      isOptional: true,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    // variables?: Array<{ name: string; value: string }> | undefined
+    }
   ]
 
   if((processStepConfig.functions?.length ?? 0) === 0) {
