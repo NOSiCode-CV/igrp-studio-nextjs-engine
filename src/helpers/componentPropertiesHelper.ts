@@ -270,7 +270,7 @@ export function resolveZodTypes(field?: ElementField): string {
   } else if (isPrimitive) {
     switch (lowerType) {
       case 'string': zodType = 'z.string()'; break;
-      case 'number': zodType = 'z.number()'; break;
+      case 'number': zodType = 'z.coerce.number()'; break;
       case 'boolean': zodType = 'z.boolean()'; break;
       case 'date': zodType = 'z.date()'; break;
       case 'any': zodType = 'z.any()'; break;
