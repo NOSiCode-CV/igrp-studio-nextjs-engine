@@ -3,7 +3,7 @@ import {
   switchProperties,
   switchVariants,
   switchChildProperties,
-  switchChildPropertiesMapping, switchInteractions, switchInteractionsMapping, switchRules, switchStyle,
+  switchChildPropertiesMapping, switchInteractions, switchInteractionsMapping, switchRules, switchStyle, switchData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 
@@ -22,6 +22,7 @@ export default {
     component.getChildPropertiesMapping(switchChildPropertiesMapping());
     component.getInteractions(switchInteractions())
     component.getInteractionsMapping(switchInteractionsMapping())
+    component.getData(switchData())
     component.getRules(switchRules())
     component.getStyle(switchStyle())
     component.loadStates([
