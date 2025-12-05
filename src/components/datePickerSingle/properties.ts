@@ -42,7 +42,7 @@ export function datePickerSingleProperties() {
     animate: { type: 'boolean', required: false, default: false },
     broadcastCalendar: { type: 'boolean', required: false, default: false },
     ISOWeek: { type: 'boolean', required: false, default: false },
-    captionLayout: { type: 'string', required: false, enum: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'], default: 'label' },
+    captionLayout: { type: 'string', required: false, enum: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'], default: 'dropdown' },
     navLayout: { type: 'string', required: false, enum: ['around', 'after'] },
     ...classProperties(),
     ...dataCommonProperties(),

@@ -1,4 +1,4 @@
-import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseRules, classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function tabsItemProperties() {
   return {
@@ -15,6 +15,12 @@ export function tabsItemProperties() {
     ...classProperties(),
     ...commonProperties(),
   };
+}
+
+export function tabsRules() {
+  return {
+    ...baseRules()
+  }
 }
 
 export function tabsItemPropertiesMapping() {

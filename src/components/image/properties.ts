@@ -11,10 +11,10 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function imageProperties() {
   return {
-    src: { type: 'string', required: true, 'x-meta': { label: 'Source'}  },
+    src: { type: 'string', required: true, 'x-meta': { label: 'Source'}, default: 'https://placehold.co/400'  },
     ratio: { type: 'string', required: false, default: '16/9', enum: ['1/1', '4/3', '16/9', '21/9'] },
-    alt: { type: 'string', required: true, 'x-meta': { label: 'Alternative'}  },
-    placeholder: { type: 'string', required: false },
+    alt: { type: 'string', required: true, 'x-meta': { label: 'Alternative'}, default: 'Image'  },
+    placeholder: { type: 'string', required: false, default: 'empty' },
     loading: { type: 'string', required: false, default: 'lazy', enum: ['lazy', 'eager'] },
     decoding: { type: 'string', required: false, default: 'async', enum: ['async', 'sync', 'auto'] },
     width: { type: 'number', required: false },

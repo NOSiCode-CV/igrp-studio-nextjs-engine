@@ -33,6 +33,7 @@
     [
     {{#if resourceConfig.children}}
       {{#each (extractTabsItem resourceConfig.children)}}
+        {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
         {
           {{#if this.properties.value}}
           value: `{{{this.properties.value}}}`,
@@ -59,7 +60,7 @@
             {{/each}}
             {{/if~}}
           </>),
-        },
+        }{{#if (checkRules this)}}] : []){{/if}}
       {{/each}}
     {{/if~}}
     ]

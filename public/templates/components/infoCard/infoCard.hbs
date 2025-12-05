@@ -9,6 +9,9 @@
   {{#if (and resourceConfig.properties.colorSection (not resourceConfig.data.colorSection))}}
   colorSection={ `{{resourceConfig.properties.colorSection}}` }
   {{/if~}}
+  {{#if (and resourceConfig.properties.orientation (not resourceConfig.data.orientation))}}
+  orientation={ `{{resourceConfig.properties.orientation}}` }
+  {{/if~}}
   {{#if (and resourceConfig.properties.titleClassName (not resourceConfig.data.titleClassName))}}
   titleClassName={ `{{resourceConfig.properties.titleClassName}}` }
   {{/if~}}
