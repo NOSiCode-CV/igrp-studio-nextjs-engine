@@ -33,6 +33,9 @@
   {{#if (and resourceConfig.properties.dot (not resourceConfig.data.dot))}}
   dot={ {{{resourceConfig.properties.dot}}} }
   {{/if~}}
+  {{#if (and resourceConfig.properties.allowEmpty (not resourceConfig.data.allowEmpty))}}
+  allowEmpty={ {{{resourceConfig.properties.allowEmpty}}} }
+  {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName={ `{{{resourceConfig.properties.iconProperties.iconClassName}}}` }
   {{/if~}}

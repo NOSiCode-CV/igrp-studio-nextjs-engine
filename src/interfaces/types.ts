@@ -12,7 +12,8 @@ export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
   workspaceId: string;
   name: string;
-  description?: string
+  description?: string;
+  displayName?: string;
 }
 
 export interface PageConfig extends IdentifiableElement, VersionableElement {

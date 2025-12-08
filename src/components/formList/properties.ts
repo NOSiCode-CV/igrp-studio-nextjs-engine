@@ -33,6 +33,7 @@ export function formListProperties() {
     },
     addButtonLabel: { type: 'string', required: false, default: 'Add' },
     dot: { type: 'boolean', required: false, default: false },
+    allowEmpty: { type: 'boolean', required: false, default: false },
     badgeClassName: { type: 'string', required: false, },
     labelClassName: { type: 'string', required: false, },
     ...classProperties(),

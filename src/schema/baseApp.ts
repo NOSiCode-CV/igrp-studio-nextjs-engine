@@ -37,6 +37,10 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       type: 'string',
       nullable: true,
     },
+    displayName: {
+      type: 'string',
+      nullable: true,
+    },
   },
   required: ['id', 'workspaceId', 'type', 'name'],
   additionalProperties: false,

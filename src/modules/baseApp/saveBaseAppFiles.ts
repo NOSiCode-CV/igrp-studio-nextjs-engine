@@ -85,6 +85,7 @@ const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE
   if(configs.length > 0) {
     const template = configs[0];
     template.name = context.baseConfig?.name ?? 'igrp-app'
+    template.displayName = context.baseConfig?.displayName ?? template.name
     await saveToFile(JSON.stringify(template, null, 2), outputPath);
   }
 
