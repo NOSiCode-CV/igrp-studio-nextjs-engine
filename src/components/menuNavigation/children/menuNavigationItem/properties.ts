@@ -1,4 +1,4 @@
-import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseRules, classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function menuNavigationsItemProperties() {
   return {
@@ -33,4 +33,10 @@ export function menuNavigationsItemChildPropertiesMapping() {
 
 export function menuNavigationsItemVariants() {
   return {};
+}
+
+export function menuNavigationsItemRules() {
+  return {
+    ...baseRules()
+  }
 }

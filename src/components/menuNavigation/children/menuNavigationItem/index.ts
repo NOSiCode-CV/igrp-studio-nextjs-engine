@@ -3,7 +3,7 @@ import {
   menuNavigationsItemProperties,
   menuNavigationsItemVariants,
   menuNavigationsItemChildProperties,
-  menuNavigationsItemChildPropertiesMapping,
+  menuNavigationsItemChildPropertiesMapping, menuNavigationsItemRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { MENU_NAVIGATION } from '../../index';
@@ -22,6 +22,7 @@ export default {
     component.getChildPropertiesMapping(menuNavigationsItemChildPropertiesMapping());
 
     component.loadStates([]);
+    component.getRules(menuNavigationsItemRules());
 
     component.setRenderer(hbsRenderer);
   },
