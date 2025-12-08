@@ -6,7 +6,7 @@ import {
   tabsChildPropertiesMapping,
   tabsStyle,
   tabsRules,
-  tabsData,
+  tabsData, tabsInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { TABS_ITEM } from './children/tabsItem/index';
@@ -26,6 +26,7 @@ export default {
     component.getPropertiesMapping(tabsPropertiesMapping());
     component.getChildProperties(tabsChildProperties());
     component.getChildPropertiesMapping(tabsChildPropertiesMapping());
+    component.getInteractions(tabsInteractions());
     component.getStyle(tabsStyle());
     component.getRules(tabsRules());
     component.getData(tabsData());

@@ -12,6 +12,10 @@ export function tabsItemProperties() {
       required: false
     },
     disabled: { type: 'boolean', required: false, default: false },
+    badgeContent: { type: 'string', required: false },
+    badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    badgeColor: { type: 'string', required: false, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    badgeClassName: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };
