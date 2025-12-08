@@ -51,10 +51,18 @@
     {{#if this.data.content}}
       content: {{this.data.content.state.name}},
     {{else}}
+      {{#if (gt (length this.children) 0)}}
+      content: (<>
+        {{#each this.children}}
+        {{{render-layout this ../resourceConfig}}}
+        {{/each}}
+      </>),
+      {{else}}
       {{#if this.properties.content}}
       content: `{{this.properties.content}}`,
       {{else}}
       content: "",
+      {{/if~}}
       {{/if~}}
     {{/if~}}
     },
