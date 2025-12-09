@@ -3,7 +3,7 @@ import {
   tabsItemProperties,
   tabsItemVariants,
   tabsItemChildProperties,
-  tabsItemChildPropertiesMapping,
+  tabsItemChildPropertiesMapping, tabsItemRules,
 } from './properties';
 import { Component, hbsRenderer } from '../../../index';
 import { TABS } from '../../index';
@@ -23,6 +23,7 @@ export default {
     component.getChildPropertiesMapping(tabsItemChildPropertiesMapping());
 
     component.loadStates([]);
+    component.getRules(tabsItemRules());
 
     component.setRenderer(hbsRenderer);
   },

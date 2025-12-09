@@ -21,7 +21,7 @@ export function tabsItemProperties() {
   };
 }
 
-export function tabsRules() {
+export function tabsItemRules() {
   return {
     ...baseRules()
   }
