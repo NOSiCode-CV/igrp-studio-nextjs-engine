@@ -8,9 +8,18 @@ import {
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
+import { tabsItemProperties } from './children/tabsItem/properties';
 
 export function tabsProperties() {
   return {
+    items: {
+      type: 'array',
+      items: {
+        ...tabsItemProperties()
+      },
+      required: false,
+      'x-ui-widget': 'list'
+    },
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'outline', 'pills', 'underline', 'cards'] },
     contentBorder: { type: 'boolean', required: false },
     fullWidth: { type: 'boolean', required: false },
@@ -65,14 +74,7 @@ export function tabsRules() {
 }
 
 export function tabsData() {
-  return {
-    items: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
-        id: '',
-        name: 'tabs{{id}}Items',
-        type: 'IGRPTabItem[]',
-        defaultValue: '[]'
-      }, true), required: true },
-  };
+  return {};
 }
 
 function onValueChangeInteractionFieldVisibility(): InteractionFieldVisibility {

@@ -50,9 +50,9 @@
   {{/if~}}
   {{/if}}
   {{/if}}
+  {{#if (and resourceConfig.children (not resourceConfig.data.items))}}
   items={
-    [
-    {{#if resourceConfig.children}}
+      [
       {{#each (extractTabsItem resourceConfig.children)}}
         {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
         {
@@ -107,7 +107,7 @@
           </>),
         }{{#if (checkRules this)}}] : []){{/if}},
       {{/each}}
-    {{/if~}}
-    ]
+      ]
   }
+  {{/if~}}
 />
