@@ -54,7 +54,7 @@
       {{#if (gt (length this.children) 0)}}
       content: (<>
         {{#each this.children}}
-        {{{render-layout this ../resourceConfig}}}
+        {{{render-layout this ../this}}}
         {{/each}}
       </>),
       {{else}}

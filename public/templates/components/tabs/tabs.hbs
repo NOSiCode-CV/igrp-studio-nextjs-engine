@@ -101,7 +101,7 @@
           content: (<>
             {{#if (gt (length this.children) 0)}}
             {{#each this.children}}
-            {{{render-layout this ../resourceConfig}}}
+            {{{render-layout this ../this}}}
             {{/each}}
             {{/if~}}
           </>),
