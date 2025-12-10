@@ -191,13 +191,13 @@ const renderFunction = (fun: CustomFunctionConfig) => {
 
 export const renderState = (state: State, component?: any) => {
   return renderSyncTemplate(TEMPLATES.DEFAULT_STATE, {
-    resourceConfig: { defaultValue: state.defaultValue ?? 'undefined', ...state, component: component},
+    resourceConfig: { defaultValue: state.defaultValue, ...state, component: component},
   });
 };
 
 export const renderReference = (reference: Reference, component?: any) => {
   return renderSyncTemplate(TEMPLATES.DEFAULT_REFERENCE, {
-    resourceConfig: { defaultValue: reference.defaultValue ?? 'undefined', component: component, ...reference },
+    resourceConfig: { defaultValue: reference.defaultValue, component: component, ...reference },
   });
 };
 
