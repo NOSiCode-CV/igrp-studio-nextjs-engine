@@ -10,6 +10,7 @@ import { INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function repetitiveListProperties() {
   return {
+    items: { type: 'string', required: false },
     variable: { type: 'string', required: false, default: 'item' },
     dataKey: { type: 'string', required: true, default: 'id' },
     ...classProperties(),

@@ -20,6 +20,7 @@ export function tabsProperties() {
       required: false,
       'x-ui-widget': 'list'
     },
+    value: { type: 'string', required: false},
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'outline', 'pills', 'underline', 'cards'] },
     contentBorder: { type: 'boolean', required: false },
     fullWidth: { type: 'boolean', required: false },
