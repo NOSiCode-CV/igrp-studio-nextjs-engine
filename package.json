@@ -1,6 +1,6 @@
 {
   "name": "@igrp/igrp-studio-nextjs-engine",
-  "version": "0.1.0-beta.58",
+  "version": "0.1.0-beta.59",
   "description": "The NextJS engine application allows to create a new NextJS application",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",

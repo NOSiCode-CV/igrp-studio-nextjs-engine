@@ -16,6 +16,7 @@ export function tableProperties() {
     showToggleColumn: { type: 'boolean', required: false, default: false },
     isNumericPagination: { type: 'boolean', required: false, default: false },
     isServerSide: { type: 'boolean', required: false, default: false },
+    pageSizePagination: { type: 'array', items: { type: 'number' }, 'x-ui-widget': 'chips', required: false },
     toggleLabel: { type: 'string', required: false },
     toggleOptionsLabel: { type: 'string', required: false },
     tableClassName: { type: 'string', required: false },

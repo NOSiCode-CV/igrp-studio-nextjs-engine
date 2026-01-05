@@ -39,6 +39,9 @@
   {{#if (and resourceConfig.properties.paginationClassName (not resourceConfig.data.paginationClassName))}}
   paginationClassName={ `{{resourceConfig.properties.paginationClassName}}` }
   {{/if~}}
+  {{#if (and resourceConfig.properties.pageSizePagination (not resourceConfig.data.pageSizePagination))}}
+  pageSizePagination={ [{{#each resourceConfig.properties.pageSizePagination}}{{this}}{{#if @last}}{{else}}, {{/if}}{{/each}}] }
+  {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}

@@ -11,7 +11,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function calendarMultipleProperties() {
   return {
-    disableDayOfWeek: { type: 'number', required: false },
+    disableDayOfWeek: { type: 'array', items: { type: 'number' }, 'x-ui-widget': 'chips', required: false },
     disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },
     disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
     defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
