@@ -36,6 +36,7 @@
     [
     {{#if resourceConfig.children}}
       {{#each (extractInfoSection resourceConfig.children)}}
+      {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
       {{#if this.data.items}}
       {
         items: {{#if this.data.items.value}}{{replaceId this.data.items.value.code this}}{{else}}{{replaceId this.data.items.state.name this}}{{/if}}
@@ -44,6 +45,7 @@
       {
         items: [
         {{#each (extractInfoItem this.children)}}
+        {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
           {
           {{#if this.data.text}}
             text: {{this.data.text.state.name}},
@@ -100,10 +102,10 @@
               colorItem: "",
             {{/if~}}
           {{/if~}}
-          },
+          }{{#if (checkRules this)}}] : []){{/if}},
         {{/each}}
         ]
-      },
+      }{{#if (checkRules this)}}] : []){{/if}},
       {{/if~}}
       {{/each}}
     {{/if~}}

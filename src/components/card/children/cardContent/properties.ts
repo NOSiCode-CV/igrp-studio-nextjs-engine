@@ -10,7 +10,7 @@ export function cardContentProperties() {
   return {
     spaceX: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
     spaceY: { type: 'string', required: false, enum: ['1', '2', '3', '4', '5', '6'], default: '3' },
-    ...classProperties(),
+    className: { type: 'string', required: false, 'x-meta': { label: 'Class Name' }, default: 'space-y-4' },
     ...commonProperties(),
   };
 }

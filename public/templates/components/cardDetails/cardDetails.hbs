@@ -29,6 +29,7 @@
   {{#if (and resourceConfig.children (not resourceConfig.data.items)) }}
   items={ [
   {{#each (extractCardDetailsItem resourceConfig.children)}}
+  {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
     {
     {{#if this.data.label}}
       label: {{this.data.label.state.name}},
@@ -63,7 +64,7 @@
       showCopyTo: {{this.properties.showCopyTo}},
       {{/if~}}
     {{/if~}}
-    },
+    }{{#if (checkRules this)}}] : []){{/if}},
   {{/each}}
   ] }
   {{/if~}}

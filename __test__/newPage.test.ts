@@ -4,146 +4,14 @@ import { OUTPUT_TEST2 } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST2;
 
-const dashboardLayout: Layout = {
-  id: 'grid_dashboard',
-  tag: 'grid_dashboard',
-  componentName: 'grid',
-  properties: {
-    variant: 'cols2',
-    className: 'border rounded-lg',
-    padding: '4',
-  },
-  children: [
-    {
-      id: 'flex_sidebar',
-      tag: 'flex_sidebar',
-      componentName: 'flex',
-      properties: {
-        variant: 'col',
-        className: 'border-r',
-        width: '1/4',
-        padding: '4',
-      },
-      children: [
-        {
-          id: 'card_profile',
-          tag: 'card_profile',
-          componentName: 'card',
-          properties: {
-            variant: 'bordered',
-          },
-        },
-      ],
-    },
-    {
-      id: 'container_main',
-      tag: 'container_main',
-      componentName: 'container',
-      properties: {
-        variant: 'default',
-      },
-      children: [
-        {
-          id: 'section_content',
-          tag: 'section_content',
-          componentName: 'section',
-          properties: {
-            className: 'bg-gray-100 rounded-lg',
-            padding: '6',
-          },
-        },
-        {
-          id: 'label_field',
-          tag: 'label_field',
-          componentName: 'label',
-          content: 'Name',
-        },
-        {
-          id: 'input_field',
-          tag: 'input_field',
-          componentName: 'input',
-          properties: {
-            placeholder: 'Enter the name',
-          },
-        },
-        {
-          id: 'checkbox_1',
-          tag: 'checkbox_1',
-          componentName: 'checkbox',
-        },
-        {
-          id: 'button_submit',
-          tag: 'button_submit',
-          componentName: 'button',
-          content: 'Submit',
-          interactions: {
-            onClick: {
-              formSubmit: {
-                targetForm: 'form1',
-              },
-            },
-          },
-        },
-      ],
-    },
-  ],
-};
-
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'viewImovel',
-  path: 'imoveis/[uuid]',
-  description: 'Visualizar Imóvel',
+  pageName: 'viewManifestacao',
+  path: 'imoveis/fraccao/[uuid]/manifestacao/[idManifestacao]/interesse/view',
+  description: 'Visualizar Manifestação de Interesse',
   forceDynamic: false,
-  id: 'page_view_imovel',
+  id: 'page_view_manifestacao',
   types: [
-    {
-      componentId: 'table_fracoes',
-      name: 'tableFracoes',
-      path: '',
-      fields: [
-        {
-          componentId: 'tabletextcell_codigo',
-          name: 'codigo',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_tipologia',
-          name: 'tipologia',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_area',
-          name: 'area',
-          type: 'number',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_valor',
-          name: 'valor',
-          type: 'number',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tablebadgecell_estado',
-          name: 'estado',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-      ],
-    },
     {
       componentId: 'table_documentos',
       name: 'tableDocumentos',
@@ -170,109 +38,184 @@ const pageConfig: PageConfig = {
   ],
   states: [
     {
-      id: 'state_codigo',
-      name: 'codigoText',
+      id: 'state_modalidade',
+      name: 'modalidadeInteresseText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_tipo',
-      name: 'tipoImovelText',
+      id: 'state_inquilino',
+      name: 'inquilinoText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
       id: 'state_nome',
       name: 'nomeText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_rua',
-      name: 'ruaText',
+      id: 'state_sexo',
+      name: 'sexoText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_valor',
-      name: 'valorText',
+      id: 'state_dtNascimento',
+      name: 'dataNascimentoText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_area_tc',
-      name: 'areaTotalConstruidaText',
+      id: 'state_nomePai',
+      name: 'nomePaiText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_area_td',
-      name: 'areaTotalDescobertaText',
+      id: 'state_nomeMae',
+      name: 'nomeMaeText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_area_tt',
-      name: 'areaTotalText',
+      id: 'state_tipoDoc',
+      name: 'tipoDocumentoText',
       type: 'string',
       imports: [],
-      defaultValue: "''",
+      defaultValue: "'N/A'",
     },
     {
-      id: 'state_statusBanner',
+      id: 'state_numDoc',
+      name: 'numeroDocumentoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_numBenef',
+      name: 'numeroBeneficiarioText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_numFunc',
+      name: 'numeroFuncionarioText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nif',
+      name: 'nifText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_localizacao',
+      name: 'localizacaoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_endereco',
+      name: 'enderecoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nomeComercial',
+      name: 'nomeComercialText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_registoComercial',
+      name: 'numeroRegistoComercialText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nifEmpresa',
+      name: 'nifEmpresaText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_finalidade',
+      name: 'finalidadeAluguelText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_email',
+      name: 'emailText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_telefone',
+      name: 'telefoneText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_telemovel',
+      name: 'telemovelText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_statusBanner_estado',
       name: 'statusBannerEstado',
       type: 'string',
       imports: [],
       defaultValue: "''",
     },
     {
-      id: 'state_tbl_fracoes',
-      name: 'contentTabletableFracoes',
-      type: 'tableFracoes[]',
+      id: 'state_statusBanner_codigo',
+      name: 'statusBannerCodigo',
+      type: 'string',
       imports: [],
-      defaultValue: '[]',
-    },
-    {
-      id: 'state_tbl_documentos',
-      name: 'contentTabletableDocumentos',
-      type: 'tableDocumentos[]',
-      imports: [],
-      defaultValue: '[]',
+      defaultValue: "''",
     },
   ],
-  functions: [
-    {
-      id: 'fnc_goToEdit',
-      name: 'goToEdit',
-      code: 'router.push(`/imoveis/${uuid}/edit`)',
-      returnValue: {
-        type: 'void',
-        isNullable: true,
-        isList: false,
-      },
-      imports: [
-        {
-          id: 'import_router',
-          namespace: 'import { useRouter } from "next/navigation";',
-        },
-      ],
-      arguments: [],
-      isAsync: false,
-    },
-  ],
+  functions: [],
   parentName: 'imoveis',
   args: [
     {
       id: 'arg_uuid',
       type: 'string',
       name: 'uuid',
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'arg_idManifestacao',
+      type: 'string',
+      name: 'idManifestacao',
       isList: false,
       isOptional: false,
       isInterface: false,
@@ -308,8 +251,9 @@ const pageConfig: PageConfig = {
             tag: 'pageHeader1',
             componentName: 'pageHeader',
             label: 'Page Header',
+            children: [],
             properties: {
-              title: 'Visualizar Imóvel',
+              title: 'Visualizar Manifestação de Interesse',
               description: '',
               variant: 'h3',
               iconProperties: {
@@ -318,12 +262,19 @@ const pageConfig: PageConfig = {
               commonProperties: {
                 generateReference: false,
               },
+              urlBackButton: 'imoveis/fraccao/[uuid]/manifestacao/interesse',
               showBackButton: true,
-              urlBackButton: 'imoveis',
+              segments: [
+                {
+                  name: '[uuid]',
+                  tag: 'uuid',
+                  context: 'pageParam',
+                },
+              ],
             },
           },
           {
-            id: 'statusbanner_imovel',
+            id: 'statusbanner_manifestacao',
             tag: 'statusBanner1',
             componentName: 'statusBanner',
             label: 'Status Banner',
@@ -332,6 +283,15 @@ const pageConfig: PageConfig = {
                 state: {
                   id: '',
                   name: 'statusBannerEstado',
+                  type: '',
+                  imports: [],
+                  generate: false,
+                },
+              },
+              badgeText: {
+                state: {
+                  id: '',
+                  name: 'statusBannerCodigo',
                   type: '',
                   imports: [],
                   generate: false,
@@ -363,27 +323,27 @@ const pageConfig: PageConfig = {
                 label: 'Column',
                 children: [
                   {
-                    id: 'infocard_basic',
+                    id: 'infocard_manifestacao',
                     tag: 'infoBasicas',
                     componentName: 'infoCard',
                     label: 'Info Card',
                     children: [
                       {
-                        id: 'infosection_basic1',
-                        tag: 'infoSection1',
+                        id: 'infoSection_processo',
                         componentName: 'infoSection',
-                        label: 'Info Section',
+                        label: 'Secção',
                         children: [
                           {
-                            id: 'infoitem_codigo',
-                            tag: 'codigo',
+                            id: 'infoitem_modalidade',
+                            tag: 'modalidadeInteresse',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'codigoText',
+                                  name: 'modalidadeInteresseText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -391,7 +351,7 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Código',
+                              label: 'Modalidade',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
@@ -405,15 +365,16 @@ const pageConfig: PageConfig = {
                             },
                           },
                           {
-                            id: 'infoitem_tipo',
-                            tag: 'tipoImovel',
+                            id: 'infoitem_finalidade',
+                            tag: 'finalidadeAluguel',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'tipoImovelText',
+                                  name: 'finalidadeAluguelText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -421,7 +382,38 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Tipo de Imóvel',
+                              label: 'Finalidade de Aluguel',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_inquilino',
+                            tag: 'inquilino',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'inquilinoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Inquilino',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
@@ -439,6 +431,7 @@ const pageConfig: PageConfig = {
                             tag: 'nome',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
@@ -465,15 +458,16 @@ const pageConfig: PageConfig = {
                             },
                           },
                           {
-                            id: 'infoitem_rua',
-                            tag: 'rua',
+                            id: 'infoitem_nif',
+                            tag: 'nif',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'ruaText',
+                                  name: 'nifText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -481,7 +475,7 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Rua',
+                              label: 'NIF',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
@@ -495,15 +489,16 @@ const pageConfig: PageConfig = {
                             },
                           },
                           {
-                            id: 'infoitem_valor',
-                            tag: 'valor',
+                            id: 'infoitem_numDocumento',
+                            tag: 'numeroDocumento',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'valorText',
+                                  name: 'numeroDocumentoText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -511,7 +506,162 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Valor',
+                              label: 'Número Documento',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_endereco',
+                            tag: 'endereco',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'enderecoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Endereço',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_localizacao',
+                            tag: 'localizacao',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'localizacaoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Localização',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_email',
+                            tag: 'email',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'emailText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Email',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_telefone',
+                            tag: 'telefone',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'telefoneText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Telefone',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_telemovel',
+                            tag: 'telemovel',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'telemovelText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Telemóvel',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
@@ -525,23 +675,29 @@ const pageConfig: PageConfig = {
                             },
                           },
                         ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
                       },
                       {
-                        id: 'infosection_basic2',
-                        tag: 'infoSection2',
+                        id: 'infoSection_cidadao',
                         componentName: 'infoSection',
-                        label: 'Info Section',
+                        label: 'Secção',
                         children: [
                           {
-                            id: 'infoitem_area_tc',
-                            tag: 'areaTC',
+                            id: 'infoitem_sexo',
+                            tag: 'sexo',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'areaTotalConstruidaText',
+                                  name: 'sexoText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -549,13 +705,13 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Área Total Construída',
+                              label: 'Sexo',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
                               iconProperties: {
-                                icon: 'Square',
-                                showIcon: true,
+                                showIcon: false,
+                                icon: 'Info',
                               },
                               commonProperties: {
                                 generateReference: false,
@@ -563,15 +719,16 @@ const pageConfig: PageConfig = {
                             },
                           },
                           {
-                            id: 'infoitem_area_td',
-                            tag: 'areaTD',
+                            id: 'infoitem_dtNascimento',
+                            tag: 'dataNascimento',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'areaTotalDescobertaText',
+                                  name: 'dataNascimentoText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -579,13 +736,13 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Área Total Descoberta',
+                              label: 'Data de Nascimento',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
                               iconProperties: {
-                                icon: 'Square',
-                                showIcon: true,
+                                showIcon: false,
+                                icon: 'Info',
                               },
                               commonProperties: {
                                 generateReference: false,
@@ -593,15 +750,16 @@ const pageConfig: PageConfig = {
                             },
                           },
                           {
-                            id: 'infoitem_area_tt',
-                            tag: 'areaTT',
+                            id: 'infoitem_tipoDocumento',
+                            tag: 'tipoDocumento',
                             componentName: 'infoItem',
                             label: 'InfoItem',
+                            children: [],
                             data: {
                               text: {
                                 state: {
                                   id: '',
-                                  name: 'areaTotalText',
+                                  name: 'tipoDocumentoText',
                                   type: '',
                                   imports: [],
                                   generate: false,
@@ -609,30 +767,187 @@ const pageConfig: PageConfig = {
                               },
                             },
                             properties: {
-                              label: 'Área Total',
+                              label: 'Tipo Documento',
                               text: '',
                               colorItem: 'primary',
                               variantItem: 'solid',
                               iconProperties: {
-                                icon: 'Square',
-                                showIcon: true,
+                                showIcon: false,
+                                icon: 'Info',
                               },
                               commonProperties: {
                                 generateReference: false,
                               },
                             },
+                          },
+                          {
+                            id: 'infoitem_numBenef',
+                            tag: 'numeroBeneficiario',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroBeneficiarioText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Número Beneficiário',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_numFunc',
+                            tag: 'numeroFuncionario',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroFuncionarioText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Número Funcionário',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                        ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        rules: [
+                          {
+                            type: 'visibility',
+                            condition: "(inquilinoText == 'Cidadão' || inquilinoText == 'CIDADAO')",
+                          },
+                        ],
+                      },
+                      {
+                        id: 'infoSection_empresa',
+                        componentName: 'infoSection',
+                        label: 'Secção',
+                        children: [
+                          {
+                            id: 'infoitem_nomeComercial',
+                            tag: 'nomeComercial',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'nomeComercialText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Nome Comercial',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                          {
+                            id: 'infoitem_registoComercial',
+                            tag: 'numeroRegistoComercial',
+                            componentName: 'infoItem',
+                            label: 'InfoItem',
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroRegistoComercialText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              label: 'Nº Registo Comercial',
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: {
+                                showIcon: false,
+                                icon: 'Info',
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                          },
+                        ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        rules: [
+                          {
+                            type: 'visibility',
+                            condition: "(inquilinoText == 'Empresa' || inquilinoText == 'EMPRESA')",
                           },
                         ],
                       },
                     ],
                     properties: {
+                      title: 'Informações Básicas',
                       colorSection: 'primary',
                       variantSection: 'solid',
+                      orientation: 'vertical',
                       commonProperties: {
                         generateReference: false,
                       },
-                      title: 'Informações Básicas',
                     },
+                    childProperties: {},
                   },
                 ],
                 properties: {
@@ -651,235 +966,62 @@ const pageConfig: PageConfig = {
                 label: 'Column',
                 children: [
                   {
-                    id: 'tabs_imovel',
-                    tag: 'tabs1',
-                    componentName: 'tabs',
-                    label: 'Tabs',
+                    id: 'table_documentos',
+                    tag: 'tableDocumentos',
+                    componentName: 'table',
+                    label: 'Table',
                     children: [
                       {
-                        id: 'tabsitem_fracoes',
-                        tag: 'tabsItemFrac',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
+                        id: 'tablecolumns_docs',
+                        tag: 'tableColumnsDocs',
+                        componentName: 'tableColumns',
+                        label: 'Table Column',
                         children: [
                           {
-                            id: 'table_fracoes',
-                            tag: 'tableFracoes',
-                            componentName: 'table',
-                            label: 'Table',
-                            children: [
-                              {
-                                id: 'tablecolumns_fracoes',
-                                tag: 'tableColumnsFrac',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_codigo',
-                                    tag: 'codigo2',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    properties: {
-                                      headerTitle: 'Código',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                  {
-                                    id: 'tabletextcell_tipologia',
-                                    tag: 'tipologia',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    properties: {
-                                      headerTitle: 'Tipologia',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                  {
-                                    id: 'tabletextcell_area',
-                                    tag: 'area',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    properties: {
-                                      headerTitle: 'Área',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                  {
-                                    id: 'tabletextcell_valor',
-                                    tag: 'valor2',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    properties: {
-                                      headerTitle: 'Valor',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                  {
-                                    id: 'tablebadgecell_estado',
-                                    tag: 'estado',
-                                    componentName: 'tableBadgeCell',
-                                    label: 'Badge Column',
-                                    properties: {
-                                      headerTitle: 'Estado',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      iconProperties: {
-                                        showIcon: false,
-                                        iconName: 'Info',
-                                        iconPlacement: 'start',
-                                      },
-                                      variant: 'soft',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                ],
-                              },
-                            ],
+                            id: 'tabletextcell_tipo',
+                            tag: 'descricaoTipoDocumento',
+                            componentName: 'tableTextCell',
+                            label: 'Text Column',
                             properties: {
+                              headerTitle: 'Tipo de Documento',
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              variant: 'default',
                               commonProperties: {
                                 generateReference: false,
                               },
                             },
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  name: 'contentTabletableFracoes',
-                                  type: 'tableFracoes[]',
-                                  defaultValue: '[]',
-                                  generate: true,
-                                },
-                              },
-                            },
-                            dataType: 'tableFracoes',
                           },
-                        ],
-                        properties: {
-                          value: 'fracoes',
-                          label: 'Fracções',
-                          iconProperties: {
-                            icon: 'Blocks',
-                          },
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
-                      },
-                      {
-                        id: 'tabsitem_documentos',
-                        tag: 'tabsItemDocs',
-                        componentName: 'tabsItem',
-                        label: 'Tabs Item',
-                        children: [
                           {
-                            id: 'table_documentos',
-                            tag: 'tableDocumentos',
-                            componentName: 'table',
-                            label: 'Table',
-                            children: [
-                              {
-                                id: 'tablecolumns_docs',
-                                tag: 'tableColumnsDocs',
-                                componentName: 'tableColumns',
-                                label: 'Table Column',
-                                children: [
-                                  {
-                                    id: 'tabletextcell_tipo',
-                                    tag: 'descricaoTipoDocumento',
-                                    componentName: 'tableTextCell',
-                                    label: 'Text Column',
-                                    properties: {
-                                      headerTitle: 'Tipo de Documento',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      variant: 'default',
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                  {
-                                    id: 'tablelinkcell_url',
-                                    tag: 'url',
-                                    componentName: 'tableLinkCell',
-                                    label: 'Link Column',
-                                    properties: {
-                                      headerTitle: 'URL',
-                                      dataProperties: {
-                                        isVirtual: false,
-                                        isType: true,
-                                      },
-                                      commonProperties: {
-                                        generateReference: false,
-                                      },
-                                    },
-                                  },
-                                ],
-                              },
-                            ],
+                            id: 'tablelinkcell_url',
+                            tag: 'url',
+                            componentName: 'tableLinkCell',
+                            label: 'Link Column',
+                            children: [],
                             properties: {
+                              headerTitle: 'Documento',
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              href: '${row.original.url}',
+                              target: '_blank',
+                              color: 'secondary',
+                              iconProperties: {
+                                showIcon: true,
+                                iconName: 'FileText',
+                              },
+                              variant: 'solid',
                               commonProperties: {
                                 generateReference: false,
                               },
+                              content: 'Ver Documento',
+                              params: [],
                             },
-                            data: {
-                              data: {
-                                state: {
-                                  id: '',
-                                  name: 'contentTabletableDocumentos',
-                                  type: 'tableDocumentos[]',
-                                  defaultValue: '[]',
-                                  generate: true,
-                                },
-                              },
-                            },
-                            dataType: 'tableDocumentos',
                           },
                         ],
-                        properties: {
-                          value: 'documentos',
-                          label: 'Documentos',
-                          iconProperties: {
-                            icon: 'Attachment',
-                          },
-                          commonProperties: {
-                            generateReference: false,
-                          },
-                        },
                       },
                     ],
                     properties: {
@@ -887,30 +1029,42 @@ const pageConfig: PageConfig = {
                         generateReference: false,
                       },
                     },
+                    data: {
+                      data: {
+                        state: {
+                          id: '',
+                          name: 'contentTabletableDocumentos',
+                          type: 'TableDocumentos[]',
+                          defaultValue: '[]',
+                          generate: true,
+                        },
+                      },
+                    },
+                    dataType: 'tableDocumentos',
                   },
                 ],
-                properties: {
-                  commonProperties: {
-                    generateReference: false,
-                  },
-                },
+                properties: {},
               },
             ],
+            interactions: {},
+            allowTypes: false,
+            data: {},
             properties: {
-              gap: 4,
               variant: {
                 default: 'cols2',
                 md: 'cols2',
+                lg: 'cols2',
               },
+              gap: 4,
               commonProperties: {
                 generateReference: false,
               },
+              className: 'border rounded-sm',
             },
+            childProperties: {},
+            style: {},
           },
         ],
-        tag: 'section1',
-        data: {},
-        interactions: {},
       },
     ],
     tag: 'page1',
@@ -923,23 +1077,18 @@ const pageConfig: PageConfig = {
           fnCustomCode: {
             imports: [
               {
-                id: 'import_useImovelHook',
-                namespace: "import { useDetalheImovel } from '@/app/(myapp)/hooks/use-imovel';",
-              },
-              {
-                id: 'import_imovel_api',
+                id: 'import_useManifestacaoHook',
                 namespace:
-                  "import { fetchFracoes, fetchImovelDocumentos } from '@/app/(myapp)/functions/imovel';",
+                  "import { useDetalheManifestacao } from '@/app/(myapp)/hooks/use-imovel'",
               },
             ],
             fnCode:
-              "const { data, isLoading } = useDetalheImovel(uuid);\n\nuseEffect(() => {\n  if (isLoading || !data) return;\n\n  // Fill info items\n  setCodigoText(data?.codigo || '');\n  setTipoImovelText(data?.tipoImovel || '');\n  setNomeText(data?.nome || '');\n  setRuaText(data?.rua || '');\n  setValorText(typeof data?.valor === 'number' ? `F CFA ${data.valor.toLocaleString('pt-PT')}` : '');\n  setAreaTotalConstruidaText(typeof data?.areaTotalConstruida === 'number' ? String(data.areaTotalConstruida) : '');\n  setAreaTotalDescobertaText(typeof data?.areaTotalDescoberta === 'number' ? String(data.areaTotalDescoberta) : '');\n  setAreaTotalText(typeof data?.areaTotal === 'number' ? String(data.areaTotal) : '');\n  setStatusBannerEstado(data?.estado || '');\n\n  // Fill tables (Fracções and Documentos)\n  (async () => {\n    const imovelId = data?.imovelId || data?.uuid || '';\n    try {\n      const fracoesResp = await fetchFracoes(imovelId);\n      setContentTabletableFracoes((fracoesResp?.content || []).map((item: any) => ({ ...item })));\n    } catch (e) { /* noop */ }\n    try {\n      const docsResp = await fetchImovelDocumentos(imovelId);\n      setContentTabletableDocumentos((docsResp?.content || []).map((item: any) => ({ ...item })));\n    } catch (e) { /* noop */ }\n  })();\n}, [isLoading, data]);",
+              "const { data: manifestacao } = useDetalheManifestacao(idManifestacao);\n\nuseEffect(() => {\n  if (!manifestacao) return;\n  setModalidadeInteresseText(manifestacao.modalidadeInteresseDesc || manifestacao.modalidadeInteresse || '');\n  setInquilinoText(manifestacao.inquilinoDesc || manifestacao.inquilino || '');\n  setNomeText(manifestacao.nome || '');\n  setSexoText(manifestacao.sexo || '');\n  setDataNascimentoText(manifestacao.dataNascimento || '');\n  setNomePaiText(manifestacao.nomePai || '');\n  setNomeMaeText(manifestacao.nomeMae || '');\n  setTipoDocumentoText(manifestacao.tipoDocumento || '');\n  setNumeroDocumentoText(manifestacao.numeroDocumento || '');\n  setNumeroBeneficiarioText(manifestacao.numeroBeneficiario || '');\n  setNumeroFuncionarioText(manifestacao.numeroFuncionario || '');\n  setNifText(manifestacao.nif || '');\n  setEnderecoText(manifestacao.endereco || '');\n  setLocalizacaoText(manifestacao.localizacao || '');\n  setNomeComercialText(manifestacao.nomeComercial || '');\n  setNumeroRegistoComercialText(manifestacao.numeroRegistoComercial || '');\n  setNifEmpresaText(manifestacao.nifEmpresa || '');\n  setFinalidadeAluguelText(manifestacao.finalidadeAluguelDesc || manifestacao.finalidadeAluguel  || '');\n  setEmailText(manifestacao.email || '');\n  setTelefoneText(manifestacao.telefone || '');\n  setTelemovelText(manifestacao.telemovel || '');\n  setStatusBannerEstado(manifestacao?.estado || 'Não atribuído');\n  setStatusBannerCodigo(manifestacao?.numeroDocumento || '');\n  setContentTabletableDocumentos((manifestacao.documentos || []).map((item: any) => ({ ...item, url: `/api/documento?fileId=${item.url}` })));\n}, [manifestacao]);",
           },
         },
         action: {},
       },
     },
-    childProperties: {},
   },
   imports: [],
 };
