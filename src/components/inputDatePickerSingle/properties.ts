@@ -11,6 +11,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function inputDatePickerSingleProperties() {
   return {
+    date: { type: 'string', required: false, default: '2025-01-01' },
     label: { type: 'string', required: false, default: 'Date Picker' },
     disableDayOfWeek: { type: 'array', items: { type: 'number' }, 'x-ui-widget': 'chips', required: false },
     disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },

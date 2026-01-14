@@ -11,6 +11,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function datePickerRangeProperties() {
   return {
+    date: { type: 'string', required: false },
     label: { type: 'string', required: false },
     placeholder: { type: 'string', required: false, default: 'Enter the date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },

@@ -19,32 +19,26 @@
   {{#if (and resourceConfig.properties.displayMode (not resourceConfig.data.displayMode))}}
   displayMode={ `{{resourceConfig.properties.displayMode}}` }
   {{/if~}}
-  {{#if (and (not resourceConfig.properties.displayMode) resourceConfig.data.displayMode)}}
-  displayMode={ {{#if resourceConfig.data.displayMode.state}}{{resourceConfig.data.displayMode.state.name}}{{else}}{{resourceConfig.data.displayMode.value.code}}{{/if}} }
+  {{#if (and resourceConfig.properties.viewerPreference (not resourceConfig.data.viewerPreference))}}
+  viewerPreference={ `{{resourceConfig.properties.viewerPreference}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelButtonCancel (not resourceConfig.data.labelButtonCancel))}}
   labelButtonCancel={ `{{resourceConfig.properties.labelButtonCancel}}` }
   {{/if~}}
-  {{#if (and (not resourceConfig.properties.labelButtonCancel) resourceConfig.data.labelButtonCancel)}}
-  labelButtonCancel={ {{#if resourceConfig.data.labelButtonCancel.state}}{{resourceConfig.data.labelButtonCancel.state.name}}{{else}}{{resourceConfig.data.labelButtonCancel.value.code}}{{/if}} }
-  {{/if~}}
   {{#if (and resourceConfig.properties.labelButtonNewTab (not resourceConfig.data.labelButtonNewTab))}}
   labelButtonNewTab={ `{{resourceConfig.properties.labelButtonNewTab}}` }
-  {{/if~}}
-  {{#if (and (not resourceConfig.properties.labelButtonNewTab) resourceConfig.data.labelButtonNewTab)}}
-  labelButtonNewTab={ {{#if resourceConfig.data.labelButtonNewTab.state}}{{resourceConfig.data.labelButtonNewTab.state.name}}{{else}}{{resourceConfig.data.labelButtonNewTab.value.code}}{{/if}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.inlineHeight (not resourceConfig.data.inlineHeight))}}
   inlineHeight={ `{{resourceConfig.properties.inlineHeight}}` }
   {{/if~}}
-  {{#if (and (not resourceConfig.properties.inlineHeight) resourceConfig.data.inlineHeight)}}
-  inlineHeight={ {{#if resourceConfig.data.inlineHeight.state}}{{resourceConfig.data.inlineHeight.state.name}}{{else}}{{resourceConfig.data.inlineHeight.value.code}}{{/if}} }
-  {{/if~}}
   {{#if (and resourceConfig.properties.notFoundLabel (not resourceConfig.data.notFoundLabel))}}
   notFoundLabel={ `{{resourceConfig.properties.notFoundLabel}}` }
   {{/if~}}
-  {{#if (and (not resourceConfig.properties.notFoundLabel) resourceConfig.data.notFoundLabel)}}
-  notFoundLabel={ {{#if resourceConfig.data.notFoundLabel.state}}{{resourceConfig.data.notFoundLabel.state.name}}{{else}}{{resourceConfig.data.notFoundLabel.value.code}}{{/if}} }
+  {{#if (and resourceConfig.properties.loadErrorLabel (not resourceConfig.data.loadErrorLabel))}}
+  loadErrorLabel={ `{{resourceConfig.properties.loadErrorLabel}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.loadTimeoutMs (not resourceConfig.data.loadTimeoutMs))}}
+  loadTimeoutMs={ `{{resourceConfig.properties.loadTimeoutMs}}` }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
@@ -56,6 +50,12 @@
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}
