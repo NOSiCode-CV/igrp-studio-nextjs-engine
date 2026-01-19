@@ -15,7 +15,7 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, FieldValidation, PermittedActions,
+  ReturnValue, FieldValidation, PermittedActions, FieldValidationMetadata,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -260,6 +260,20 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   additionalProperties: false,
 };
 
+const fieldValidationMetadataSchema: JSONSchemaType<FieldValidationMetadata> = {
+  type: 'object',
+  properties: {
+    validationKey: {
+      type: 'string',
+    },
+    message: {
+      type: 'string',
+      nullable: true,
+    },
+  },
+  required: [],
+};
+
 const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
   type: 'object',
   properties: {
@@ -350,6 +364,10 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
       nullable: true,
       errorMessage: 'The attribute maxDate, if provided, must be a valid string',
     },
+    errors: {
+      type: 'array',
+      items: fieldValidationMetadataSchema
+    }
   },
   required: [],
   errorMessage: 'The validation, if provided, must be a valid validation object definition.',
@@ -571,28 +589,6 @@ const fieldConfigSchema: JSONSchemaType<FieldConfig> = {
   },
   required: ['type', 'name'],
   additionalProperties: false
-};
-
-// Schema para Field
-const fieldSchema: JSONSchemaType<Field> = {
-  type: 'object',
-  properties: {
-    type: { type: 'string' },
-    config: fieldConfigSchema,
-    validation: {
-      type: 'object',
-      nullable: true,
-      properties: {
-        minLeng: { type: 'number', nullable: true },
-        maxLeng: { type: 'number', nullable: true },
-        errorMinLeng: { type: 'string', nullable: true },
-        errorMaxLeng: { type: 'string', nullable: true },
-        requiredMessage: { type: 'string', nullable: true },
-      },
-      additionalProperties: false
-    }
-  },
-  required: ['type', 'config'],
 };
 
 // Schema para ConlumnConfig

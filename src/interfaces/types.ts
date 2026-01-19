@@ -891,6 +891,14 @@ export interface FieldValidation {
 
   minDate?: string; // ISO string or Date string
   maxDate?: string;
+
+  errors: FieldValidationMetadata[];
+
+}
+
+export interface FieldValidationMetadata {
+  message?: string,
+  validationKey: string
 }
 
 export interface ElementField {

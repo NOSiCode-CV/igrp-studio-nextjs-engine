@@ -1,5 +1,12 @@
 import { Component } from '../components';
-import { Arguments, ElementField, Layout, Segment, StyleDefinition } from '../interfaces/types';
+import {
+  Arguments,
+  ElementField,
+  FieldValidationMetadata,
+  Layout,
+  Segment,
+  StyleDefinition,
+} from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
@@ -9,7 +16,7 @@ import { renderCode } from '../utils/renderCode';
 import { layoutStyleToClasses } from './layoutStyleToClasses';
 import { spacingToClasses } from './spacingToClasses';
 import { sizeToClasses } from './sizeToClasses';
-import { isString, replaceTemplate } from '../utils/helpers';
+import { replaceTemplate } from '../utils/helpers';
 import { typographyStyleToClasses } from './typographyStyleToClasses';
 import { bordersStyleToClasses } from './bordersStyleToClasses';
 import { positionStyleToClasses } from './positionStyleToClasses';
@@ -22,7 +29,6 @@ import { TEXT_LIST_SUBITEMS } from '../components/textList/children/textListSubI
 import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
 import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
-import { PROCESS_STEP } from '../components/processStep/index';
 import { CARD_DETAILS_ITEM } from '../components/cardDetails/children/cardDetailsItem/index';
 import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/index';
 
@@ -259,70 +265,113 @@ export function resolveZodTypes(field?: ElementField): string {
   if (!field) return 'z.unknown()';
 
   const { type, isList, required, validation, fields } = field;
-  let zodType: string;
   const lowerType = type.toLowerCase();
+
+  const getError = (key: string): string => {
+    const msg = validation?.errors?.find(
+      (e: FieldValidationMetadata) => e.validationKey === key
+    )?.message;
+    return msg ? `, { error: "${msg}" }` : '';
+  };
 
   const isPrimitive = ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
 
-  if (lowerType === 'object' && fields && fields.length > 0) {
-    const inner = fields.map(f => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
+  let zodType: string;
+
+  if (lowerType === 'object' && fields?.length) {
+    const inner = fields
+      .map(f => `${f.name}: ${resolveZodTypes(f)}`)
+      .join(', ');
     zodType = `z.object({ ${inner} })`;
   } else if (isPrimitive) {
-    switch (lowerType) {
-      case 'string': zodType = 'z.string()'; break;
-      case 'number': zodType = 'z.coerce.number()'; break;
-      case 'boolean': zodType = 'z.boolean()'; break;
-      case 'date': zodType = 'z.date()'; break;
-      case 'any': zodType = 'z.any()'; break;
-      default: zodType = 'z.unknown()';
-    }
+    const primitiveMap: Record<string, string> = {
+      string: 'z.string()',
+      number: 'z.coerce.number()',
+      boolean: 'z.boolean()',
+      date: 'z.date()',
+      any: 'z.any()',
+      unknown: 'z.unknown()',
+    };
+    zodType = primitiveMap[lowerType] ?? 'z.unknown()';
   } else {
     zodType = `z.${toCamelCase(type)}()`;
   }
 
-  // Apply validations
   if (validation) {
-    const validators: string[] = [];
+    const v: string[] = [];
 
     if (lowerType === 'string') {
-      if (validation.minLength) validators.push(`.min(${validation.minLength})`);
-      if (validation.maxLength) validators.push(`.max(${validation.maxLength})`);
-      if (validation.regex) validators.push(`.regex(${validation.regex})`);
-      if (validation.email) validators.push(`.email()`);
-      if (validation.url) validators.push(`.url()`);
-      if (validation.uuid) validators.push(`.uuid()`);
-      if (validation.startsWith) validators.push(`.startsWith(${JSON.stringify(validation.startsWith)})`);
-      if (validation.endsWith) validators.push(`.endsWith(${JSON.stringify(validation.endsWith)})`);
-      if (validation.includes) validators.push(`.includes(${JSON.stringify(validation.includes)})`);
+      if (validation.minLength !== undefined)
+        v.push(`.min(${validation.minLength}${getError('minLength')})`);
+
+      if (validation.maxLength !== undefined)
+        v.push(`.max(${validation.maxLength}${getError('maxLength')})`);
+
+      if (validation.regex)
+        v.push(`.regex(${validation.regex}${getError('regex')})`);
+
+      if (validation.email)
+        v.push(`.email(${getError('email').replace(/^, /, '')})`);
+
+      if (validation.url)
+        v.push(`.url(${getError('url').replace(/^, /, '')})`);
+
+      if (validation.uuid)
+        v.push(`.uuid(${getError('uuid').replace(/^, /, '')})`);
+
+      if (validation.startsWith)
+        v.push(`.startsWith(${JSON.stringify(validation.startsWith)}${getError('startsWith')})`);
+
+      if (validation.endsWith)
+        v.push(`.endsWith(${JSON.stringify(validation.endsWith)}${getError('endsWith')})`);
+
+      if (validation.includes)
+        v.push(`.includes(${JSON.stringify(validation.includes)}${getError('includes')})`);
     }
 
     if (lowerType === 'number') {
-      if (validation.min !== undefined) validators.push(`.min(${validation.min})`);
-      if (validation.max !== undefined) validators.push(`.max(${validation.max})`);
-      if (validation.positive) validators.push(`.positive()`);
-      if (validation.negative) validators.push(`.negative()`);
-      if (validation.int) validators.push(`.int()`);
-      if (validation.finite) validators.push(`.finite()`);
+      if (validation.min !== undefined)
+        v.push(`.min(${validation.min}${getError('min')})`);
+
+      if (validation.max !== undefined)
+        v.push(`.max(${validation.max}${getError('max')})`);
+
+      if (validation.positive)
+        v.push(`.positive(${getError('positive').replace(/^, /, '')})`);
+
+      if (validation.negative)
+        v.push(`.negative(${getError('negative').replace(/^, /, '')})`);
+
+      if (validation.int)
+        v.push(`.int(${getError('int').replace(/^, /, '')})`);
+
+      if (validation.finite)
+        v.push(`.finite(${getError('finite').replace(/^, /, '')})`);
     }
 
     if (lowerType === 'date') {
-      if (validation.minDate) validators.push(`.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { message: 'Date must be after ${validation.minDate}' })`);
-      if (validation.maxDate) validators.push(`.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { message: 'Date must be before ${validation.maxDate}' })`);
+      if (validation.minDate)
+        v.push(
+          `.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { error: "${getError('minDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be after ${validation.minDate}`}" })`
+        );
+
+      if (validation.maxDate)
+        v.push(
+          `.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { error: "${getError('maxDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be before ${validation.maxDate}`}" })`
+        );
     }
 
-    zodType += validators.join('');
+    zodType += v.join('');
   }
 
-  if (isList === true) {
+  if (isList) {
     zodType = `z.array(${zodType})`;
   }
 
   if (!required) {
     zodType += '.optional()';
-  } else {
-    if(lowerType === "string") {
-      zodType += '.nonempty()';
-    }
+  } else if (lowerType === 'string') {
+    zodType += `.nonempty(${getError('required').replace(/^, /, '')})`;
   }
 
   return zodType;
@@ -417,10 +466,6 @@ export function extractCardDetailsItem(children: Layout[]) {
 
 export function extractAccordionItem(children: Layout[]) {
   return children.filter((it) => it.componentName === ACCORDION_ITEM);
-}
-
-export function extractProcessSteps(children: Layout[]) {
-  return children.filter((it) => it.componentName === PROCESS_STEP);
 }
 
 export function resolveComponent(
