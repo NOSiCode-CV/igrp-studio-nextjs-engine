@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -15,6 +15,8 @@ export function inputSearchProperties() {
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Placeholder'} },
     helperText: { type: 'string', required: false, default: '', 'x-ui-widget': 'text', 'x-meta': { label: 'Helper Text'} },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     showSubmitButton: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Show Submit Button'} },
     iconProperties: {
       type: 'object',
@@ -26,9 +28,9 @@ export function inputSearchProperties() {
     },
     disabled: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Disabled'} },
     required: { type: 'boolean', required: true, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Required'} },
-    submitButtonLabel: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
+    submitButtonLabel: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
     submitButtonClassName: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Class Name'} },
-    className: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Class Name'} },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

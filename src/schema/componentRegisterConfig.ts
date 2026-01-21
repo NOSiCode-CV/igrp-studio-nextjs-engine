@@ -57,6 +57,11 @@ const stateSchema: JSONSchemaType<State> = {
       nullable: true,
       errorMessage: 'The is array value, if provided, must be a valid boolean.'
     },
+    isOptional: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is optional value, if provided, must be a valid boolean.'
+    },
     imports: {
       type: 'array',
       nullable: true,
@@ -125,6 +130,16 @@ const componentRegisterConfigSchema: JSONSchemaType<ComponentRegisterConfig> = {
     allowTypes: {
       type: 'boolean',
       errorMessage: "The allow types attribute must be a boolean."
+    },
+    deprecated: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: "The deprecated attribute must be a boolean."
+    },
+    replacedBy: {
+      type: 'string',
+      nullable: true,
+      errorMessage: "The replaced by attribute must be a valid string."
     },
     group: {
       type: 'string',

@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties, baseStyle, baseRules,
+  dataCommonProperties, baseStyle, baseRules, classProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
@@ -22,7 +22,7 @@ export function inputAddOnProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
     classNameLabel: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

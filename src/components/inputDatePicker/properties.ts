@@ -4,9 +4,10 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties, baseStyle, baseRules,
+  dataCommonProperties, baseStyle, baseRules, classProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function inputDatePickerProperties() {
   return {
@@ -21,13 +22,13 @@ export function inputDatePickerProperties() {
     gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
     labelClassName: { type: 'string', required: false },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
-    today: { type: 'date', required: false, default: '2025-01-01' },
-    startDate: { type: 'date', required: false, default: '1900-01-01' },
-    endDate: { type: 'date', required: false, default: '2099-12-31' },
-    defaultMonth: { type: 'date', required: false, default: '2025-01-01' },
-    startMonth: { type: 'date', required: false, default: '2025-01-01' },
-    month: { type: 'date', required: false, default: '2025-01-01' },
-    endMonth: { type: 'date', required: false, default: '2025-12-31' },
+    today: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    startDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    month: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     numberOfMonths: { type: 'number', required: false, default: '1' },
     weekStartsOn: { type: 'number', required: false, enum: [0, 1, 2, 3, 4, 5, 6], default: 0 },
     pagedNavigation: { type: 'boolean', required: true, default: false },
@@ -43,7 +44,7 @@ export function inputDatePickerProperties() {
     ISOWeek: { type: 'boolean', required: false, default: false },
     captionLayout: { type: 'string', required: false, enum: ['label', 'dropdown', 'dropdown-months', 'dropdown-years'], default: 'label' },
     navLayout: { type: 'string', required: false, enum: ['around', 'after'] },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -63,11 +64,39 @@ export function inputDatePickerChildPropertiesMapping() {
   return {};
 }
 
+function onChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
+function onClickInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: true },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function inputDatePickerInteractions() {
   return {
-    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_DATE_CHANGE), required: true },
-    onMonthChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_MONTH_CHANGE), required: false },
-    onNextClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_NEXT_CLICK), required: false },
+    onDateChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_DATE_CHANGE, undefined, onChangeInteractionFieldVisibility()), required: true },
+    onMonthChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_MONTH_CHANGE, undefined, onChangeInteractionFieldVisibility()), required: false },
+    onNextClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_NEXT_CLICK, undefined, onClickInteractionFieldVisibility()), required: false },
   };
 }
 

@@ -1,9 +1,9 @@
 import {
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
-  } from '../default/properties';
+} from '../default/properties';
 
 export function statusBannerProperties() {
   return {
@@ -13,6 +13,7 @@ export function statusBannerProperties() {
     badgeColor: { type: 'string', required: true, default: 'secondary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     badgeText: { type: 'string', required: false, default: 'Status Banner' },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

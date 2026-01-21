@@ -11,10 +11,23 @@ const TARGET_FILE = 'igrp-next-template.zip';
 
 async function getLatestUploadedTemplate(): Promise<string | undefined> {
   try {
-    const response = await axios.get(API_URL);
-    const items = response.data.items;
+    let allItems: any[] = [];
+    let continuationToken: string | null = null;
 
-    const filtered = items
+    do {
+      const url: string = continuationToken
+        ? `${API_URL}&continuationToken=${continuationToken}`
+        : API_URL;
+
+      const response = await axios.get(url);
+      const data = response.data;
+
+      allItems = allItems.concat(data.items || []);
+      continuationToken = data.continuationToken || null;
+
+    } while (continuationToken);
+
+    const filtered = allItems
       .filter((item: any) =>
         item.path.startsWith(`${TARGET_DIR}/`) &&
         item.path.endsWith(`/${TARGET_FILE}`) &&
@@ -32,7 +45,7 @@ async function getLatestUploadedTemplate(): Promise<string | undefined> {
     }
 
     // Sort by lastModified descending
-    filtered.sort((a: any, b: any) => b.lastModified - a.lastModified);
+    filtered.sort((a: any, b: any) => b.lastModified.getTime() - a.lastModified.getTime());
 
     const latest: any = filtered[0];
     console.log('Latest Uploaded Version:', latest.version);
@@ -72,7 +85,9 @@ export const extractZipFromUrl = async (context: RenderContext) => {
 
   const zipUrl = await getLatestUploadedTemplate();
 
-  if (!zipUrl) { throw Error("No template available for the current version, try again later.")}
+  if (!zipUrl) {
+    throw Error("No template available for the current version, try again later.");
+  }
 
   const tryDownloadAndExtract = async (url: string) => {
     const data = await downloadZip(url);

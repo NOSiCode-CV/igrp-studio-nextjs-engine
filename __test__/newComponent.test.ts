@@ -1,18 +1,28 @@
-import { initComponents, newComponent } from '../src';
+import { initComponents, newComponent, setEngineConfiguration } from '../src';
 import { ComponentConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
 export const OUTPUT_DIR = OUTPUT_TEST;
 
-const componentConfig2: ComponentConfig =  {
+const componentConfig2: ComponentConfig = {
   type: 'component',
   scope: 'page',
-  pagePath: 'contribuintes',
-  pageName: 'contribuintes',
-  description: 'ContribuinteForm',
-  name: 'contribuinteForm',
-  id: 'iznykl6s1s',
+  pagePath: 'imoveis',
+  pageName: 'imoveis',
+  description: 'Formulário de Manifestação de Interesse',
+  name: 'manifestacaoInteresseForm',
+  id: 'm4n1f35t0',
   args: [
+    {
+      id: '0',
+      name: 'fracao',
+      type: 'any',
+      isList: false,
+      isOptional: true,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
     {
       id: '1',
       name: 'isEdit',
@@ -24,7 +34,7 @@ const componentConfig2: ComponentConfig =  {
       isState: false,
     },
     {
-      id: '3',
+      id: '2',
       name: 'initialData',
       type: 'any',
       isList: false,
@@ -34,7 +44,7 @@ const componentConfig2: ComponentConfig =  {
       isState: false,
     },
     {
-      id: '5',
+      id: '3',
       name: 'shouldSubmit',
       type: 'boolean',
       isList: false,
@@ -44,7 +54,7 @@ const componentConfig2: ComponentConfig =  {
       isState: false,
     },
     {
-      id: '6',
+      id: '4',
       name: 'onAfterSubmit',
       type: 'void',
       isList: false,
@@ -54,2277 +64,317 @@ const componentConfig2: ComponentConfig =  {
       isState: false,
     },
   ],
-  components: {
-    id: 'component_0hkjfi',
-    componentName: 'component',
-
-    properties: { commonProperties: { generateReference: false } },
-    children: [
-      {
-        id: 'form_bkqda6',
-        tag: 'form1',
-        componentName: 'form',
-
-        type: 'group',
-        children: [
-          {
-            id: 'columns_sis1nx',
-            tag: 'columns1',
-            componentName: 'columns',
-
-            type: 'group',
-            children: [
-              {
-                id: 'column_c8l63e',
-                tag: 'column1',
-                componentName: 'column',
-
-                children: [
-                  {
-                    id: 'menunavigation_gyktj3',
-                    tag: 'menuNavigation1',
-                    componentName: 'menuNavigation',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'menunavigationitem_twxi07',
-                        tag: 'menuNavigationItem1',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'identificacao',
-
-                          iconProperties: { icon: 'Building' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'menunavigationitem_cru33e',
-                        tag: 'menuNavigationItem6',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'actividadesEconomicas',
-
-                          iconProperties: { icon: 'Briefcase' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'menunavigationitem_fmrfvv',
-                        tag: 'menuNavigationItem3',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'enderecos',
-
-                          iconProperties: { icon: 'MapPin' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                        style: {
-                          layout: {
-                            type: 'flex',
-                            flex: {
-                              direction: 'row',
-                              wrap: 'nowrap',
-                              alignItems: 'stretch',
-                              justifyContent: 'flex-start',
-                              gap: '2',
-                            },
-                            grid: {
-                              templateColumns: '4',
-                              templateRows: '1',
-                              gap: '2',
-                              justifyItems: 'start',
-                              alignItems: 'start',
-                              direction: 'row',
-                              dense: false,
-                            },
-                            block: {},
-                          },
-                          spacing: {
-                            margin: {
-                              top: { value: '0', unit: 'px' },
-                              right: { value: '0', unit: 'px' },
-                              bottom: { value: '0', unit: 'px' },
-                              left: { value: '0', unit: 'px' },
-                            },
-                            padding: {
-                              top: { value: '0', unit: 'px' },
-                              right: { value: '0', unit: 'px' },
-                              bottom: { value: '0', unit: 'px' },
-                              left: { value: '0', unit: 'px' },
-                            },
-                          },
-                          backgrounds: [
-                            {
-                              type: 'color',
-                              value: '#ce1212',
-                              size: 'cover',
-                              position: 'center',
-                              repeat: 'no-repeat',
-                              attachment: 'scroll',
-                              blendMode: 'normal',
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        id: 'menunavigationitem_z22k7t',
-                        tag: 'menuNavigationItem27',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'contactos',
-
-                          iconProperties: { icon: 'Phone' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'menunavigationitem_xw9e0p',
-                        tag: 'menuNavigationItem5',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'dadosBancarios',
-
-                          iconProperties: { icon: 'CreditCard' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'menunavigationitem_kef1ox',
-                        tag: 'menuNavigationItem2',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'anexos',
-
-                          iconProperties: { icon: 'FileText' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'menunavigationitem_hts48h',
-                        tag: 'menuNavigationItem8',
-                        componentName: 'menuNavigationItem',
-
-                        type: '',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          targetRef: 'obs',
-
-                          iconProperties: { icon: 'MessageSquare' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      activeSection: {
-                        state: {
-                          id: '',
-                          type: 'string',
-                          name: 'menuNavigationmenuNavigation1ActiveSection',
-                          defaultValue: '',
-                          imports: [],
-                          generate: true,
-                        },
-                        value: { id: '', code: '' },
-                      },
-                      badgeContent: {
-                        state: {
-                          id: '',
-                          name: 'menuNavigation1BadgeContent',
-                          type: '',
-                          imports: [],
-                          generate: false,
-                        },
-                      },
-                    },
-                    properties: {
-                      title: 'Menu',
-                      badgeColor: 'secondary',
-                      badgeVariant: 'solid',
-                      badgeContent: 'Novo',
-                      showChevron: true,
-                      commonProperties: { generateReference: false },
-                      isStickyTop: true,
-                      className: 'top-32',
-                    },
-                    childProperties: {},
-                    style: { backgrounds: [] },
-                  },
-                  {
-                    id: 'alert_slynmu',
-                    tag: 'alert1',
-                    componentName: 'alert',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'text_wncsxk',
-                        tag: 'text3',
-                        componentName: 'text',
-
-                        type: 'group',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {
-                          highlight: {
-                            state: {
-                              id: '',
-                              type: 'string[]',
-                              name: 'highlight{{id}}Text',
-                              defaultValue: '[]',
-                              imports: [],
-                              generate: true,
-                            },
-                          },
-                        },
-                        properties: {
-                          content: 'Dicas',
-                          variant: 'info',
-                          weight: 'semibold',
-                          size: 'default',
-                          align: 'left',
-                          spacing: 'normal',
-                          animate: false,
-                          truncate: false,
-                          maxLines: 3,
-                          commonProperties: { generateReference: false },
-                          className: 'mb-0',
-                        },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'text_xfexaf',
-                        tag: 'text2',
-                        componentName: 'text',
-
-                        type: 'group',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {
-                          highlight: {
-                            state: {
-                              id: '',
-                              type: 'string[]',
-                              name: 'highlight{{id}}Text',
-                              defaultValue: '[]',
-                              imports: [],
-                              generate: true,
-                            },
-                          },
-                        },
-                        properties: {
-                          content:
-                            'Preencha todos os campos obrigatórios marcados com * e utilize a navegação lateral para se mover entre as seções.',
-                          variant: 'info',
-                          weight: 'normal',
-                          size: 'sm',
-                          align: 'left',
-                          spacing: 'normal',
-                          animate: false,
-                          truncate: false,
-                          maxLines: 3,
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: {
-                      color: 'info',
-                      variant: 'soft',
-                      textColored: true,
-                      borderColored: true,
-                      bgColored: true,
-                      iconProperties: {
-                        showIcon: true,
-                        iconName: 'Dot',
-                        iconPlacement: 'end',
-                        linkIcon: 'ArrowRight',
-                      },
-                      commonProperties: { generateReference: false },
-                    },
-                    childProperties: {},
-                  },
-                ],
-                interactions: {},
-                allowTypes: false,
-                data: {},
-                properties: {
-                  variant: { default: 'span1' },
-                  commonProperties: { generateReference: false },
-                },
-                childProperties: {},
-                style: {},
-              },
-              {
-                id: 'column_2_1bpcg2',
-                componentName: 'column',
-
-                properties: {
-                  variant: { default: 'span3' },
-                  commonProperties: { generateReference: false },
-                },
-                children: [
-                  {
-                    id: 'card_asn7ee',
-                    tag: 'identificacao',
-                    componentName: 'card',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'cardheader_uyqkqs',
-                        tag: 'cardHeader1',
-                        componentName: 'cardHeader',
-
-                        children: [
-                          {
-                            id: 'flex_cz2w6b',
-                            tag: 'flex1',
-                            componentName: 'flex',
-
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'headline_uep1az',
-                                tag: 'headline1',
-                                componentName: 'headline',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  title: 'Informações Básicas',
-                                  description: 'Dados principais do contribuinte',
-                                  variant: 'h5',
-                                  roleColor: 'solid',
-                                  color: 'primary',
-                                  iconProperties: { showIcon: true, iconName: 'Building' },
-                                  commonProperties: { generateReference: false },
-                                  className: 'mt-3',
-                                },
-                                childProperties: {},
-                                style: {
-                                  layout: {
-                                    type: 'flex',
-                                    flex: {
-                                      direction: 'row',
-                                      wrap: 'nowrap',
-                                      alignItems: 'stretch',
-                                      justifyContent: 'flex-start',
-                                      gap: '2',
-                                    },
-                                    grid: {
-                                      templateColumns: '4',
-                                      templateRows: '1',
-                                      gap: '2',
-                                      justifyItems: 'start',
-                                      alignItems: 'start',
-                                      direction: 'row',
-                                      dense: false,
-                                    },
-                                    block: {},
-                                  },
-                                  spacing: {
-                                    margin: {
-                                      top: { value: '0', unit: 'px' },
-                                      right: { value: '0', unit: 'px' },
-                                      bottom: { value: '0', unit: 'px' },
-                                      left: { value: '0', unit: 'px' },
-                                    },
-                                    padding: {
-                                      top: { value: '0', unit: 'px' },
-                                      right: { value: '0', unit: 'px' },
-                                      bottom: { value: '0', unit: 'px' },
-                                      left: { value: '0', unit: 'px' },
-                                    },
-                                  },
-                                },
-                              },
-                              {
-                                id: 'badge_r2ihcm',
-                                tag: 'badge1',
-                                componentName: 'badge',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  color: 'primary',
-                                  variant: 'solid',
-                                  size: 'md',
-                                  content: 'Obrigatório',
-                                  iconProperties: {
-                                    showIcon: false,
-                                    iconName: 'Info',
-                                    iconPlacement: 'start',
-                                  },
-                                  commonProperties: { generateReference: false },
-                                  dot: true,
-                                },
-                                childProperties: {},
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              variant: '',
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                            style: {
-                              layout: {
-                                type: 'flex',
-                                flex: {
-                                  direction: 'row',
-                                  wrap: 'nowrap',
-                                  alignItems: 'center',
-                                  justifyContent: 'space-between',
-                                  gap: '2',
-                                },
-                                grid: {
-                                  templateColumns: '4',
-                                  templateRows: '1',
-                                  gap: '2',
-                                  justifyItems: 'stretch',
-                                  alignItems: 'start',
-                                  direction: 'row',
-                                  dense: false,
-                                },
-                                block: {},
-                              },
-                            },
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: { commonProperties: {} },
-                        childProperties: {},
-                      },
-                      {
-                        id: 'cardcontent_04zpeq',
-                        tag: 'cardContent1',
-                        componentName: 'cardContent',
-
-                        children: [
-                          {
-                            id: 'grid_5i65am',
-                            tag: 'grid6',
-                            componentName: 'grid',
-
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'combobox_su2ger',
-                                tag: 'tipoDocumento',
-                                componentName: 'combobox',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { fnCustomSet: '() => {}', type: 'function' },
-                                    action: { actionCustomSet: '() => {}' },
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {
-                                  value: {
-                                    state: {
-                                      id: '',
-                                      type: 'string',
-                                      name: 'select{{id}}Value',
-                                      defaultValue: '',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                  options: {
-                                    state: {
-                                      id: '',
-                                      type: 'IGRPOptionsProps[]',
-                                      name: 'select{{id}}Options',
-                                      defaultValue: '[]',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                },
-                                properties: {
-
-                                  variant: 'single',
-                                  placeholder: 'Select an option...',
-                                  required: true,
-                                  selectLabel: 'No option found',
-                                  showSearch: true,
-                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                  gridSize: 'full',
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'inputtext_tricll',
-                                tag: 'numDocumentoInscricao',
-                                componentName: 'inputText',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-
-                                  iconProperties: { showIcon: false },
-                                  required: true,
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'inputtext_94m7xo',
-                                tag: 'denominacaoSocial',
-                                componentName: 'inputText',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-
-                                  iconProperties: { showIcon: false },
-                                  required: true,
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'inputtext_927gy6',
-                                tag: 'nomeComercial',
-                                componentName: 'inputText',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-
-                                  iconProperties: { showIcon: false },
-                                  required: true,
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'combobox_8hi371',
-                                tag: 'codigoEstatuto',
-                                componentName: 'combobox',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { fnCustomSet: '() => {}', type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {
-                                  value: {
-                                    state: {
-                                      id: '',
-                                      type: 'string',
-                                      name: 'select{{id}}Value',
-                                      defaultValue: '{{value}}',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                  options: {
-                                    state: {
-                                      id: '',
-                                      type: 'IGRPOptionsProps[]',
-                                      name: 'select{{id}}Options',
-                                      defaultValue: '[]',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                },
-                                properties: {
-
-                                  variant: 'single',
-                                  placeholder: 'Select an option...',
-                                  required: true,
-                                  selectLabel: 'No option found',
-                                  showSearch: true,
-                                  gridSize: 'full',
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'combobox_q4ey1i',
-                                tag: 'tipoRepresentacao',
-                                componentName: 'combobox',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: {
-                                      fnCustomSet:
-                                        '(value)=>setSelecttipoRepresentacaoValue(value as string)',
-                                      type: 'function',
-                                      fnCustomCode: { imports: [] },
-                                    },
-                                    action: { actionCustomSet: '() => {}' },
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {
-                                  value: {
-                                    state: {
-                                      id: '',
-                                      type: 'string',
-                                      name: 'select{{id}}Value',
-                                      defaultValue: '',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                  options: {
-                                    state: {
-                                      id: '',
-                                      type: 'IGRPOptionsProps[]',
-                                      name: 'select{{id}}Options',
-                                      defaultValue: '[]',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                    value: { id: '', code: '' },
-                                  },
-                                },
-                                properties: {
-
-                                  variant: 'single',
-                                  placeholder: 'Select an option...',
-                                  required: true,
-                                  selectLabel: 'No option found',
-                                  showSearch: true,
-                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                  gridSize: '',
-                                },
-                                childProperties: {},
-                                rules: [],
-                              },
-                              {
-                                id: 'inputtext_24oey4',
-                                tag: 'nomeResponsavel',
-                                componentName: 'inputText',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-
-                                  iconProperties: { showIcon: false },
-                                  required: true,
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'inputdatepicker_po3deb',
-                                tag: 'dataInicioAtividade',
-                                componentName: 'inputDatePicker',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onDateChange: {
-                                    type: 'function',
-                                    function: { type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  date: '2025-01-01',
-
-                                  placeholder: 'Please select a date...',
-                                  required: true,
-                                  gridSize: 'full',
-                                  dateFormat: 'dd/MM/yyyy',
-                                  today: '2025-01-01',
-                                  startDate: '1900-01-01',
-                                  endDate: '2099-12-31',
-                                  defaultMonth: '2025-01-01',
-                                  startMonth: '2025-01-01',
-                                  month: '2025-01-01',
-                                  endMonth: '2025-12-31',
-                                  numberOfMonths: '1',
-                                  pagedNavigation: false,
-                                  reverseMonths: false,
-                                  captionLayout: 'label',
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              gap: 4,
-                              variant: { default: 'cols1', md: 'cols2', lg: '', xs: '' },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: { className: 'col-span-1' },
-                            style: {},
-                          },
-                          {
-                            id: 'container_4n20xj',
-                            tag: 'container1',
-                            componentName: 'container',
-
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'text_dys27z',
-                                tag: 'text1',
-                                componentName: 'text',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {
-                                  highlight: {
-                                    state: {
-                                      id: '',
-                                      type: 'string[]',
-                                      name: 'highlight{{id}}Text',
-                                      defaultValue: '[]',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                  },
-                                },
-                                properties: {
-                                  content: 'Informações da SEDE',
-                                  variant: 'primary',
-                                  weight: 'semibold',
-                                  size: 'sm',
-                                  align: 'left',
-                                  spacing: 'normal',
-                                  animate: false,
-                                  truncate: false,
-                                  maxLines: 3,
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'combobox_fk02jf',
-                                tag: 'uuidSede',
-                                componentName: 'combobox',
-
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onChange: {
-                                    type: 'function',
-                                    function: { fnCustomSet: '() => {}', type: 'function' },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {
-                                  value: {
-                                    state: {
-                                      id: '',
-                                      type: 'string',
-                                      name: 'select{{id}}Value',
-                                      defaultValue: '{{value}}',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                  },
-                                  options: {
-                                    state: {
-                                      id: '',
-                                      type: 'IGRPOptionsProps[]',
-                                      name: 'select{{id}}Options',
-                                      defaultValue: '[]',
-                                      imports: [],
-                                      generate: true,
-                                    },
-                                  },
-                                },
-                                properties: {
-
-                                  variant: 'single',
-                                  placeholder: 'Select an option...',
-                                  required: true,
-                                  selectLabel: 'No option found',
-                                  showSearch: true,
-                                  iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                  gridSize: 'full',
-                                },
-                                childProperties: {},
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              commonProperties: { generateReference: false },
-                              className: 'border rounded-sm p-2',
-                            },
-                            childProperties: {},
-                            style: {
-                              layout: {
-                                type: 'grid',
-                                flex: {
-                                  direction: 'row',
-                                  wrap: 'nowrap',
-                                  alignItems: 'stretch',
-                                  justifyContent: 'flex-start',
-                                  gap: '2',
-                                },
-                                grid: {
-                                  templateColumns: '3',
-                                  templateRows: '1',
-                                  gap: '2',
-                                  justifyItems: 'stretch',
-                                  alignItems: 'start',
-                                  direction: 'row',
-                                  dense: false,
-                                },
-                                block: {},
-                              },
-                            },
-                            rules: [
-                              {
-                                type: 'visibility',
-                                condition: "selecttipoRepresentacaoValue==='F'",
-                              },
-                            ],
-                          },
-                          {
-                            id: 'inputhidden_vtwlok',
-                            tag: 'soatUsado',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          spaceX: '3',
-                          spaceY: '3',
-                          commonProperties: {},
-                          className: '',
-                        },
-                        childProperties: { className: '', commonProperties: {} },
-                        style: {
-                          layout: {
-                            type: 'block',
-                            flex: {
-                              direction: 'row',
-                              wrap: 'nowrap',
-                              alignItems: 'stretch',
-                              justifyContent: 'flex-start',
-                              gap: '2',
-                            },
-                            grid: {
-                              templateColumns: '4',
-                              templateRows: '1',
-                              gap: '2',
-                              justifyItems: 'start',
-                              alignItems: 'start',
-                              direction: 'row',
-                              dense: false,
-                            },
-                            block: {},
-                          },
-                        },
-                      },
-                      {
-                        id: 'cardfooter_hbqeuz',
-                        tag: 'cardFooter1',
-                        componentName: 'cardFooter',
-
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: { commonProperties: {} },
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: { commonProperties: { generateReference: true } },
-                    childProperties: {},
-                  },
-                  {
-                    id: 'formlist_4ayxgn',
-                    tag: 'actividadesEconomicas',
-                    componentName: 'formList',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'grid_00pig4',
-                        tag: 'grid2',
-                        componentName: 'grid',
-
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_39cam7',
-                            tag: 'idActividadeEconomica',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  fnCustomSet:
-                                    '(value) => {updateActividade(value as string, index)}',
-                                  type: 'function',
-                                  fnCustomCode: { imports: [] },
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              required: true,
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputnumber_ezr6bm',
-                            tag: 'soat',
-                            componentName: 'inputNumber',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              name: 'number',
-                              max: 9999999,
-                              step: 1,
-                              required: true,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              disabled: true,
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'checkbox_bi8c08',
-                            tag: 'principal',
-                            componentName: 'checkbox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onCheckedChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_c3pyhj',
-                            tag: 'inputHidden2',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          gap: 4,
-                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: { className: 'col-span-1' },
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      defaultItem: {
-                        state: {
-                          id: '',
-                          type: '{{type}}',
-                          name: 'formList{{id}}Default',
-                          defaultValue: '{}',
-                          imports: [],
-                          generate: true,
-                        },
-                        value: { id: '', code: '' },
-                      },
-                      badgeValue: {
-                        state: {
-                          id: '',
-                          name: 'actividadesEconomicasBadgeValue',
-                          type: '',
-                          imports: [],
-                          generate: false,
-                        },
-                      },
-                    },
-                    properties: {
-
-                      description: 'Atividades econômicas do contribuinte',
-                      color: 'primary',
-                      variant: 'solid',
-                      badgeValue: 'SOAT Ponderado: 0.00%',
-                      computeLabel: { code: 'Item ${index}' },
-                      iconProperties: {
-                        showIcon: false,
-                        addButtonIconName: 'Plus',
-                        iconName: 'Briefcase',
-                      },
-                      addButtonLabel: 'Add',
-                      commonProperties: { generateReference: true },
-                    },
-                    childProperties: {},
-                    style: {
-                      layout: {
-                        type: 'block',
-                        flex: {
-                          direction: 'row',
-                          wrap: 'nowrap',
-                          alignItems: 'stretch',
-                          justifyContent: 'flex-start',
-                          gap: '2',
-                        },
-                        grid: {
-                          templateColumns: '2',
-                          templateRows: '1',
-                          gap: '2',
-                          justifyItems: 'stretch',
-                          alignItems: 'start',
-                          direction: 'row',
-                          dense: false,
-                        },
-                        block: {},
-                      },
-                    },
-                  },
-                  {
-                    id: 'formlist_x67fp6',
-                    tag: 'enderecos',
-                    componentName: 'formList',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'grid_wpujgp',
-                        tag: 'grid3',
-                        componentName: 'grid',
-
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_28kwl8',
-                            tag: 'tipoEndereco',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { fnCustomSet: '() => {}', type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              required: true,
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: '',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_9s7kmv',
-                            tag: 'rua',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: true,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_iwa52m',
-                            tag: 'pontoRef',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: true,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'combobox_w4zn59',
-                            tag: 'idGeografia',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { fnCustomSet: '() => {}', type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              required: true,
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: '',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_u4ya54',
-                            tag: 'caixaPostal',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_dm8n05',
-                            tag: 'numPorta',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_7ez4pt',
-                            tag: 'inputHidden1',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          gap: 4,
-                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: { className: 'col-span-1' },
-                        style: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      defaultItem: {
-                        state: {
-                          id: '',
-                          type: '{{type}}',
-                          name: 'formList{{id}}Default',
-                          defaultValue: '{}',
-                          imports: [],
-                          generate: true,
-                        },
-                      },
-                    },
-                    properties: {
-
-                      description: 'Endereços do contribuinte',
-                      color: 'primary',
-                      variant: 'solid',
-                      badgeValue: '',
-                      computeLabel: { code: 'Item ${index}' },
-                      iconProperties: {
-                        showIcon: false,
-                        addButtonIconName: 'Plus',
-                        iconName: 'MapPin',
-                      },
-                      addButtonLabel: 'Add',
-                      commonProperties: { generateReference: true },
-                    },
-                    childProperties: {},
-                  },
-                  {
-                    id: 'formlist_j5e1ei',
-                    tag: 'contactos',
-                    componentName: 'formList',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'grid_t2sdvb',
-                        tag: 'grid1',
-                        componentName: 'grid',
-
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_wunewz',
-                            tag: 'tipoContacto',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { fnCustomSet: '() => {}', type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              required: true,
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: '',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_03844c',
-                            tag: 'contacto',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_v89g4u',
-                            tag: 'inputHidden3',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          gap: 4,
-                          variant: 'cols2',
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: { className: 'col-span-1' },
-                        style: {
-                          layout: {
-                            type: 'grid',
-                            flex: {
-                              direction: 'row',
-                              wrap: 'nowrap',
-                              alignItems: 'stretch',
-                              justifyContent: 'flex-start',
-                              gap: '2',
-                            },
-                            grid: {
-                              templateColumns: '2',
-                              templateRows: '1',
-                              gap: '2',
-                              justifyItems: 'stretch',
-                              alignItems: 'start',
-                              direction: 'row',
-                              dense: false,
-                            },
-                            block: {},
-                          },
-                        },
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      defaultItem: {
-                        state: {
-                          id: '',
-                          type: 'any',
-                          name: 'formListformList1Default',
-                          defaultValue: '{}',
-                          imports: [],
-                          generate: true,
-                        },
-                        value: { id: '', code: '' },
-                      },
-                    },
-                    properties: {
-
-                      computeLabel: { code: 'Item ${index}' },
-                      addButtonLabel: 'Add',
-                      addButtonIconName: 'Plus',
-                      commonProperties: { generateReference: true },
-                      color: 'primary',
-                      variant: 'solid',
-                      badgeValue: '',
-                      iconProperties: { showIcon: true, iconName: 'Phone' },
-                      dot: false,
-                      className: 'md:grid-cols-2',
-                    },
-                    childProperties: {},
-                    style: {
-                      layout: {
-                        type: 'block',
-                        flex: {
-                          direction: 'row',
-                          wrap: 'nowrap',
-                          alignItems: 'stretch',
-                          justifyContent: 'flex-start',
-                          gap: '2',
-                        },
-                        grid: {
-                          templateColumns: '4',
-                          templateRows: '1',
-                          gap: '2',
-                          justifyItems: 'stretch',
-                          alignItems: 'start',
-                          direction: 'row',
-                          dense: false,
-                        },
-                        block: {},
-                      },
-                    },
-                  },
-                  {
-                    id: 'formlist_3flio8',
-                    tag: 'dadosBancarios',
-                    componentName: 'formList',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'grid_j24fe6',
-                        tag: 'grid4',
-                        componentName: 'grid',
-
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_vy4apt',
-                            tag: 'idOperadora',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { fnCustomSet: '() => {}', type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              required: true,
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: 'full',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_vzm1mj',
-                            tag: 'nib',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: true,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputtext_mtqayc',
-                            tag: 'numConta',
-                            componentName: 'inputText',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              iconProperties: { showIcon: false },
-                              required: true,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_2lmdr8',
-                            tag: 'inputHidden4',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          gap: 4,
-                          variant: { default: 'cols1', md: 'cols2', lg: 'cols3' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: { className: 'col-span-1' },
-                        style: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      defaultItem: {
-                        state: {
-                          id: '',
-                          type: '{{type}}',
-                          name: 'formList{{id}}Default',
-                          defaultValue: '{}',
-                          imports: [],
-                          generate: true,
-                        },
-                      },
-                    },
-                    properties: {
-
-                      description: 'Informações bancárias do contribuinte',
-                      color: 'primary',
-                      variant: 'solid',
-                      badgeValue: '',
-                      computeLabel: { code: 'Item ${index}' },
-                      iconProperties: {
-                        showIcon: true,
-                        addButtonIconName: 'Plus',
-                        iconName: 'CreditCard',
-                      },
-                      addButtonLabel: 'Add',
-                      commonProperties: { generateReference: true },
-                    },
-                    childProperties: {},
-                  },
-                  {
-                    id: 'formlist_i0c7bj',
-                    tag: 'anexos',
-                    componentName: 'formList',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'grid_v41n5f',
-                        tag: 'grid5',
-                        componentName: 'grid',
-
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_xcimvq',
-                            tag: 'idTipoDocumento',
-                            componentName: 'combobox',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: { fnCustomSet: '() => {}', type: 'function' },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                              },
-                            },
-                            properties: {
-
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              selectLabel: 'No option found',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: 'full',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputfile_k2fl4m',
-                            tag: 'inputFile1',
-                            componentName: 'inputFile',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  type: 'function',
-                                  fnCustomCode: { imports: [] },
-                                  fnCustomSet: '(e)=>handleUploadFile(index,e)',
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              accept: 'application/pdf',
-                              required: false,
-                              dataProperties: { isVirtual: true, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'uploadstate_lotvqj',
-                            tag: 'UploadState1',
-                            componentName: 'UploadState',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {
-                              isUploading: {
-                                state: {
-                                  id: '',
-                                  name: 'isUploading',
-                                  type: '',
-                                  imports: [],
-                                  generate: false,
-                                },
-                              },
-                              uploadedFiles: {
-                                state: {
-                                  id: '',
-                                  name: 'uploadedFiles',
-                                  type: '',
-                                  imports: [],
-                                  generate: false,
-                                },
-                              },
-                              index: { value: { id: '', code: 'index' } },
-                            },
-                            properties: { customProperties: {} },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_3pr884',
-                            tag: 'url',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'inputhidden_wjyqmr',
-                            tag: 'inputHidden5',
-                            componentName: 'inputHidden',
-
-                            type: 'group',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-
-                              required: false,
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          gap: 4,
-                          variant: { default: 'cols1', md: 'cols2', lg: 'cols4' },
-                          commonProperties: { generateReference: false },
-                        },
-                        childProperties: { className: 'col-span-1' },
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      defaultItem: {
-                        state: {
-                          id: '',
-                          type: '{{type}}',
-                          name: 'formList{{id}}Default',
-                          defaultValue: '{}',
-                          imports: [],
-                          generate: true,
-                        },
-                      },
-                    },
-                    properties: {
-
-                      description: 'Documentos do contribuinte',
-                      color: 'primary',
-                      variant: 'solid',
-                      badgeValue: '',
-                      computeLabel: { code: 'Item ${index}' },
-                      iconProperties: {
-                        showIcon: true,
-                        addButtonIconName: 'Plus',
-                        iconName: 'FileText',
-                      },
-                      addButtonLabel: 'Add',
-                      commonProperties: { generateReference: true },
-                    },
-                    childProperties: {},
-                  },
-                  {
-                    id: 'container_jt1kmy',
-                    tag: 'obs',
-                    componentName: 'container',
-
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'inputtextarea_bzhoju',
-                        tag: 'observacao',
-                        componentName: 'inputTextarea',
-
-                        type: 'group',
-                        children: [],
-                        interactions: {
-                          onChange: {
-                            type: 'function',
-                            function: { type: 'function' },
-                            action: {},
-                          },
-                        },
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          name: 'textarea',
-
-                          rows: '3a',
-                          required: true,
-                          dataProperties: { isVirtual: false, isType: true },
-                          commonProperties: { generateReference: false },
-                          placeholder:
-                            '123456',
-                        },
-                        childProperties: {},
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {},
-                    properties: { commonProperties: { generateReference: true } },
-                    childProperties: {},
-                  },
-                ],
-                interactions: [],
-                tag: '',
-                childProperties: {},
-              },
-            ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              variant: { default: 'cols1', md: '', lg: 'cols4' },
-              gap: 4,
-              commonProperties: { generateReference: false },
+  types: [
+    {
+      componentId: 'form_manifestacao',
+      name: 'formManifestacao',
+      path: '',
+      fields: [
+        {
+          componentId: 'radio_modalidade',
+          name: 'modalidade',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'radio_finalidade',
+          name: 'finalidade',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'combobox_tipopessoa',
+          name: 'tipoPessoa',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'combobox_tipodocumento',
+          name: 'tipoDocumento',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_nif',
+          name: 'nif',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_nome',
+          name: 'nome',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'date_nascimento',
+          name: 'dataNascimento',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'combobox_sexo',
+          name: 'sexo',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_pai',
+          name: 'nomePai',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_mae',
+          name: 'nomeMae',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_num_func',
+          name: 'numFuncionarioInss',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'combobox_estadocivil',
+          name: 'estadoCivil',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_reg_com',
+          name: 'numRegistoComercial',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'search_localizacao',
+          name: 'localizacao',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_endereco',
+          name: 'endereco',
+          type: 'string',
+          required: true,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_telefone',
+          name: 'telefone',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_email',
+          name: 'email',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'input_telemovel',
+          name: 'telemovel',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'formlist_documentos',
+          name: 'documentos',
+          type: 'object',
+          required: false,
+          defaultValue: '',
+          isList: true,
+          fields: [
+            {
+              componentId: 'combobox_id_tipo_doc',
+              name: 'idTipoDocumento',
+              type: 'string',
+              required: true,
+              
+              defaultValue: '',
+              isList: false,
             },
-            childProperties: {},
-          },
-        ],
-        interactions: {
-          onSubmit: {
-            type: 'function',
-            function: {
-              fnCustomSet: '',
-              type: 'function',
-              fnCustomCode: { imports: [] },
-              fnName: 'handleFormSubmit',
+            {
+              componentId: 'combobox_obrigatoriedade',
+              name: 'obrigatoriedade',
+              type: 'string',
+              required: false,
+              
+              isList: false,
             },
-            action: { actionCustomSet: '(e) => {}' },
-          },
-        },
-        allowTypes: true,
-        data: {
-          defaultValues: {
-            state: {
-              id: 'oevk6snrjf',
-              type: 'any',
-              name: 'formContribuinteData',
-              defaultValue: 'initFormContribuinte',
-              imports: [],
-              generate: true,
+            {
+              componentId: 'inputhidden_documentos_url',
+              name: 'url',
+              type: 'string',
+              required: false,
+              
+              isList: false,
             },
-          },
+          ],
         },
-        properties: {
-          validationMode: 'onBlur',
-          gridClassName: '',
-          commonProperties: { generateReference: false },
-        },
-        childProperties: {},
-        dataType: 'formContribuinte',
-      },
-    ],
-    tag: 'component1',
-    data: {},
-    interactions: {
-      onLoad: {
-        type: 'function',
-        function: {
-          type: 'function',
-          fnCustomCode: {
-            imports: [
-              {
-                namespace:
-                  "import {useNewContribuinteParameterizations} from '@/app/(myapp)/hooks/use-parameterization'",
-                id: 'tbwwrd2njo',
-              },
-              {
-                id: 'import_rL8Qze',
-                namespace: 'import { useRouter } from "next/navigation"',
-              },
-              {
-                namespace:
-                  "import {createOrUpdateContribuinte} from '@/app/(myapp)/hooks/use-contribuinte'",
-                id: 'vzvpikea7d',
-              },
-            ],
-            fnCode:
-              "const router = useRouter()\nconst { tipoContato, tipoEndereco, tiposDocumento, tiposActividades, geografias, tiposAnexos, tiposEstaduto, bancos, tiposRespresentacao, sedes, isLoading } = useNewContribuinteParameterizations();\n\nuseEffect(() => {\n  if (isLoading) return;\n  setSelecttipoDocumentoOptions(tiposDocumento || [])\n  setSelecttipoEnderecoOptions(tipoEndereco || []);\n  setSelecttipoContactoOptions(tipoContato || []);\n  setSelectcodigoEstatutoOptions(tiposEstaduto || [])\n  setSelectidOperadoraOptions(bancos || [])\n  setSelectidTipoDocumentoOptions(tiposAnexos || [])\n  setSelectidActividadeEconomicaOptions((tiposActividades || []) as any);\n  setSelectidGeografiaOptions(geografias || [])\n  setSelecttipoRepresentacaoOptions(tiposRespresentacao || [])\n  setSelectuuidSedeOptions(sedes || [])\n\n\n\n}, [isLoading]);\n\nuseEffect(() => {\n  if (formform1Ref.current) {\n    const subscription = formform1Ref.current.watch((value) => {\n      setActividadesEconomicas(value.actividadesEconomicas);\n    });\n\n    return () => subscription.unsubscribe();\n  }\n}, [formform1Ref.current]);\n\nuseEffect(() => {\n  if (actividadesEconomicas) {\n    const weighted = calculeSOATPoderado();\n    setActividadesEconomicasBadgeValue(`SOAT Ponderado:${weighted}%`);\n  }\n}, [actividadesEconomicas]);\n\nuseEffect(() => {\n  if (shouldSubmit) {\n    formform1Ref.current?.submit();\n    onAfterSubmit?.();\n  }\n}, [shouldSubmit, onAfterSubmit]);\n\nuseEffect(() => {\n  if (initialData) {\n    setFormContribuinteData({\n      ...initialData,\n      dataInicioAtividade: initialData.dataInicioAtividade\n        ? new Date(initialData.dataInicioAtividade)\n        : undefined,\n    });\n    setMenuNavigation1BadgeContent(isEdit ? 'Edição' : 'Novo');\n  }\n}, [initialData, isEdit]);\n",
-          },
-        },
-        action: {},
-      },
+      ],
     },
-    childProperties: {},
-  },
+  ],
+  states: [
+    {
+      id: 'state_card_items',
+      name: 'cardDetailsItems',
+      type: 'any',
+      imports: [],
+      defaultValue: '[]',
+    },
+    {
+      id: 'state_modalidade_val',
+      name: 'radioModalidadeInteresseValue',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: '',
+    },
+    {
+      id: 'state_modalidade_opt',
+      name: 'radioModalidadeInteresseOptions',
+      type: 'IGRPOptionsProps[]',
+      imports: [],
+      defaultValue: '[]',
+    },
+    {
+      id: 'state_finalidade_val',
+      name: 'radioFinalidadeAluguelValue',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: '',
+    },
+    {
+      id: 'state_finalidade_opt',
+      name: 'radioFinalidadeAluguelOptions',
+      type: 'IGRPOptionsProps[]',
+      imports: [],
+      defaultValue: '[]',
+    },
+    {
+      id: 'state_selectedUtente',
+      name: 'selectedUtenteValue',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: '',
+    },
+    {
+      id: 'state_selectedGeo',
+      name: 'selectedGeografiaValue',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: '',
+    },
+    {
+      id: 'state_error_contact',
+      name: 'contactsError',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: '',
+    },
+    {
+      id: 'state_is_uploading_documentos',
+      name: 'isUploadingDocumentos',
+      type: 'any',
+      imports: [],
+      defaultValue: '{}',
+    },
+    {
+      id: 'state_uploaded_files_documentos',
+      name: 'uploadedFilesDocumentos',
+      type: 'any',
+      imports: [],
+      defaultValue: '{}',
+    },
+    {
+      id: 'state_selected_fracao_id',
+      name: 'selectedFracaoId',
+      type: 'string | undefined',
+      imports: [],
+      defaultValue: 'undefined',
+    },
+  ],
   functions: [
     {
-      id: 'fnc_YV1t3t',
-      name: 'calculeSOATPoderado',
-      code: "if (actividadesEconomicas && actividadesEconomicas.length > 0) {\n  const total = actividadesEconomicas.reduce(\n    (sum: number, act: any) => sum + (Number.parseFloat(act.soat) || 0),\n    0,\n  );\n  const weighted = (total / actividadesEconomicas.length).toFixed(2);\n  return weighted;\n} else {\n  return '0.00';\n}",
-      returnValue: { type: 'string', isNullable: true, isList: false },
-      imports: [],
-      arguments: [],
-    },
-    {
-      id: 'fnc_AxVGnC',
-      name: 'updateActividade',
-      code: "// Find the selected CAE code\nconst selectedCae = tiposActividades.find((cae) => cae.value?.toString() === value.toString());\n\n// Get current form values\nconst currentValues = formform1Ref.current?.getValues();\n\n// Create the updated atividadesEconomicas array\nconst updatedAtividades = [...(currentValues?.actividadesEconomicas || [])];\nif (selectedCae && index !== undefined && index >= 0) {\n  updatedAtividades[index] = {\n    ...updatedAtividades[index],\n    soat: selectedCae.metadata?.taxa || 0,\n  };\n}\n\nformform1Ref.current?.setValue('actividadesEconomicas', updatedAtividades);\n\nconst weighted = calculeSOATPoderado();\n\nformform1Ref.current?.setValue('soatUsado', weighted);\n\n",
-      returnValue: { type: 'void', isNullable: true, isList: false },
-      imports: [],
+      id: 'fnc_submit_manifestacao',
+      name: 'handleFormSubmit',
+      code: "const documentosOptions = Array.isArray(selectidTipoDocumentoOptions) ? selectidTipoDocumentoOptions : [];\nconst documentosClean = Array.isArray(values?.documentos)\n  ? values.documentos\n      .filter((d: any) => !!d?.url && String(d?.idTipoDocumento ?? '').trim() !== '')\n      .map((d: any) => ({\n        ...d,\n        idTipoDocumento: d?.idTipoDocumento,\n        descricaoTipoDocumento: documentosOptions.find((opt: any) => String(opt?.value) === String(d?.idTipoDocumento))?.label,\n      }))\n  : [];\n\nif (values?.modalidade !== 'ALUGUEL') {\n  delete (values as any).finalidade;\n}\n\nconst payload = {\n  ...values,\n  documentos: documentosClean,\n};\n\nconst router = useRouter();\n\ntry {\n  if(!selectedFracaoId) {\n    router.push('/imoveis');\n    return;\n  }\n  await submitManifestacaoInteresse(selectedFracaoId, payload);\n  igrpToast({ title: 'Sucesso', description: 'Manifestação gravada com sucesso', type: 'success' });\n  router.push(`/imoveis/${fracao?.idImovel}`);\n } catch (error: any) {\n  igrpToast({ title: 'Erro', description: `Ocorreu um erro ao enviar a manifestação. [${error?.message}]`, type: 'error' });\n  console.log(error);\n}\n",
+      returnValue: {
+        type: 'void',
+        isNullable: true,
+        isList: false,
+      },
+      imports: [
+        {
+          namespace: "import { submitManifestacaoInteresse } from '@/app/(myapp)/functions/imovel'",
+          id: 'import_submit_manifestacao',
+        },
+      ],
       arguments: [
         {
           id: '1',
-          name: 'value',
-          type: 'string',
+          name: 'values',
+          type: 'z.infer<any>',
           isList: false,
           isOptional: false,
           isInterface: false,
           isFunction: false,
           isState: false,
-        },
-        {
-          id: '2',
-          name: 'index',
-          type: 'number',
-          isList: false,
-          isOptional: false,
-          isInterface: false,
-          isFunction: false,
-          isState: false,
+          functionParameters: [],
         },
       ],
-      isAsync: false,
+      isAsync: true,
     },
     {
-      id: 'fnc_ampnHI',
-      name: 'handleUploadFile',
-      code: "const file = e?.target?.files?.[0];\n    if (!file) return;\n    console.log('File selected:', file);\n    console.log('Index:', index);\n    console.log('File name:', file.name);\n    console.log('File size:', file.size);\n    console.log('File type:', file.type);\n\n    // Store the file in state\n    setUploadedFiles((prev) => ({\n      ...prev,\n      [index]: { file, uploaded: false },\n    }));\n\n    // Set uploading state\n    setIsUploading((prev) => ({\n      ...prev,\n      [index]: true,\n    }));\n\n    try {\n      // Get the tipo documento from the form\n      const currentFormData = formform1Ref.current?.getValues();\n\n      // Upload the file\n      const uploadResponse =await uploadDocument({ file });\n\n      console.log(uploadResponse);\n\n      // Update the uploaded file state\n      setUploadedFiles((prev: any) => ({\n        ...prev,\n        [index]: {\n          file,\n          uploaded: true,\n          url: uploadResponse.displayName,\n        },\n      }));\n      // Update the form with the uploaded file URL\n      const updatedDocumentos = [...(currentFormData?.anexos || [])];\n      updatedDocumentos[index] = {\n        ...updatedDocumentos[index],\n        url: uploadResponse.displayName,\n      };\n\n      setFormContribuinteData((prev: any) => ({\n        ...prev,\n        ...currentFormData,\n        anexos: updatedDocumentos,\n      }));\n\n      igrpToast({\n        title: 'Sucesso',\n        description: 'Arquivo enviado com sucesso!',\n        type: 'success',\n      });\n    } catch (error) {\n      igrpToast({\n        title: 'Erro',\n        description: 'Erro ao enviar arquivo. Tente novamente.',\n        type: 'error',\n      });\n\n      // Remove the file from state on error\n      setUploadedFiles((prev) => {\n        const newState = { ...prev };\n        delete newState[index];\n        return newState;\n      });\n    } finally {\n      // Clear uploading state\n      setIsUploading((prev) => ({\n        ...prev,\n        [index]: false,\n      }));\n    }",
-      returnValue: { type: 'void', isNullable: true, isList: false },
+      id: 'fnc_upload_documentos',
+      name: 'handleUploadDocumentoFile',
+      code: "const file = e?.target?.files?.[0];\nif (!file) return;\n\nsetUploadedFilesDocumentos((prev: any) => ({\n  ...prev,\n  [index]: { file, uploaded: false },\n}));\n\nsetIsUploadingDocumentos((prev: any) => ({\n  ...prev,\n  [index]: true,\n}));\n\ntry {\n  const currentFormData = formformManifestacaoRef.current?.getValues();\n  const uploadResponse = await uploadDocument({ file });\n\n  setUploadedFilesDocumentos((prev: any) => ({\n    ...prev,\n    [index]: {\n      file,\n      uploaded: true,\n      url: uploadResponse.fileId,\n    },\n  }));\n\n  const updatedDocumentos = [...(currentFormData?.documentos || [])];\n  updatedDocumentos[index] = {\n    ...updatedDocumentos[index],\n    url: uploadResponse.fileId,\n  };\n\n  setFormManifestacaoData((prev: any) => ({\n    ...prev,\n    ...currentFormData,\n    documentos: updatedDocumentos,\n  }));\n\n  igrpToast({ title: 'Sucesso', description: 'Arquivo enviado com sucesso!', type: 'success' });\n} catch (error) {\n  igrpToast({ title: 'Erro', description: 'Erro ao enviar arquivo. Tente novamente.', type: 'error' });\n  setUploadedFilesDocumentos((prev: any) => { const ns = { ...prev }; delete ns[index]; return ns; });\n} finally {\n  setIsUploadingDocumentos((prev: any) => ({ ...prev, [index]: false }));\n}\n",
+      returnValue: {
+        type: 'void',
+        isNullable: true,
+        isList: false,
+      },
       imports: [
         {
           namespace: "import {uploadDocument} from '@/app/(myapp)/hooks/use-contribuinte'",
-          id: 'dah9a88mlv',
+          id: 'import_upload_documentos',
         },
       ],
       isAsync: true,
@@ -2353,400 +403,1283 @@ const componentConfig2: ComponentConfig =  {
         },
       ],
     },
+  ],
+  imports: [
     {
-      id: 'fnc_M_s6lA',
-      name: 'handleFormSubmit',
-      code: "const contribuinte: any = {\n  ...values,\n  contribuinteId: initialData?.contribuinteId\n};\ntry {\n  await createOrUpdateContribuinte(contribuinte);\n  igrpToast({\n    title: 'Sucesso',\n    description: isEdit\n      ? 'Contribuinte atualizado com sucesso'\n      : 'Contribuinte gravado com sucesso',\n    type: 'success',\n  });\n  router.push('/contribuintes');\n} catch (error:any) {\n  igrpToast({\n    title: 'Erro',\n    description: `Ocorreu um erro ao processar o formulário. [${error.message}]`,\n    type: 'error',\n  });\n  console.log(error);\n}\n",
-      returnValue: { type: 'void', isNullable: true, isList: false },
-      imports: [],
-      isAsync: true,
-      arguments: [
-        {
-          id: '1',
-          name: 'values',
-          type: 'z.infer<any>',
-          isList: false,
-          isOptional: false,
-          isInterface: false,
-          isFunction: false,
-          isState: false,
-          functionParameters: [],
-        },
-      ],
+      id: 'import_enums_multi',
+      namespace: "import { useMultipleEnumOptions } from '@/app/(myapp)/hooks/use-enum-options'",
+    },
+    {
+      id: 'import_enums_single',
+      namespace: "import { useEnumOptions } from '@/app/(myapp)/hooks/use-enum-options'",
+    },
+    {
+      id: 'import_combobox',
+      namespace: "import { useComboBox } from '@/app/(myapp)/hooks/use-combobox'",
     },
   ],
-  types: [
-    {
-      componentId: 'form_bkqda6',
-      name: 'formContribuinte',
-      path: '',
-      fields: [
-        {
-          componentId: 'combobox_su2ger',
-          name: 'tipoDocumento',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'inputtext_tricll',
-          name: 'numDocumentoInscricao',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'inputtext_94m7xo',
-          name: 'denominacaoSocial',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'inputtext_927gy6',
-          name: 'nomeComercial',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'combobox_8hi371',
-          name: 'codigoEstatuto',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'combobox_q4ey1i',
-          name: 'tipoRepresentacao',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'inputtext_24oey4',
-          name: 'nomeResponsavel',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'inputdatepicker_po3deb',
-          name: 'dataInicioAtividade',
-          type: 'date',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'combobox_fk02jf',
-          name: 'uuidSede',
-          type: 'string',
-          required: false,
-          isList: false,
-        },
-        {
-          componentId: 'inputhidden_vtwlok',
-          name: 'soatUsado',
-          type: 'string',
-          required: false,
-          isList: false,
-        },
-        {
-          componentId: 'formlist_4ayxgn',
-          name: 'actividadesEconomicas',
-          type: 'object',
-          required: false,
-          isList: true,
-          fields: [
-            {
-              componentId: 'combobox_39cam7',
-              name: 'idActividadeEconomica',
-              type: 'number',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputnumber_ezr6bm',
-              name: 'soat',
-              type: 'number',
-              required: false,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'checkbox_bi8c08',
-              name: 'principal',
-              type: 'boolean',
-              required: false,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputhidden_c3pyhj',
-              name: 'id',
-              type: 'number',
-              required: false,
-
-              isList: false,
-            },
-          ],
-        },
-        {
-          componentId: 'formlist_x67fp6',
-          name: 'enderecos',
-          type: 'object',
-          required: false,
-          isList: true,
-          fields: [
-            {
-              componentId: 'combobox_28kwl8',
-              name: 'tipoEndereco',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_9s7kmv',
-              name: 'rua',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_iwa52m',
-              name: 'pontoRef',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'combobox_w4zn59',
-              name: 'idGeografia',
-              type: 'number',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_u4ya54',
-              name: 'caixaPostal',
-              type: 'string',
-              required: false,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_dm8n05',
-              name: 'numPorta',
-              type: 'string',
-              required: false,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputhidden_7ez4pt',
-              name: 'id',
-              type: 'number',
-              required: false,
-
-              isList: false,
-            },
-          ],
-        },
-        {
-          componentId: 'formlist_j5e1ei',
-          name: 'contactos',
-          type: 'object',
-          required: false,
-          isList: true,
-          fields: [
-            {
-              componentId: 'combobox_wunewz',
-              name: 'tipoContacto',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_03844c',
-              name: 'contacto',
-              type: 'string',
-              required: false,
-              defaultValue: '',
-              isList: false,
-              validation: {  },
-            },
-            {
-              componentId: 'inputhidden_v89g4u',
-              name: 'id',
-              type: 'number',
-              required: false,
-
-              isList: false,
-            },
-          ],
-        },
-        {
-          componentId: 'formlist_3flio8',
-          name: 'dadosBancarios',
-          type: 'object',
-          required: false,
-          isList: true,
-          fields: [
-            {
-              componentId: 'combobox_vy4apt',
-              name: 'idOperadora',
-              type: 'number',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputtext_vzm1mj',
-              name: 'nib',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-              validation: { regex: '/^[0-9]+$/', startsWith: '', maxLength: 21 },
-            },
-            {
-              componentId: 'inputtext_mtqayc',
-              name: 'numConta',
-              type: 'string',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-              validation: { regex: '/^[0-9]+$/' },
-            },
-            {
-              componentId: 'inputhidden_2lmdr8',
-              name: 'id',
-              type: 'number',
-              required: false,
-
-              isList: false,
-            },
-          ],
-        },
-        {
-          componentId: 'formlist_i0c7bj',
-          name: 'anexos',
-          type: 'object',
-          required: false,
-          isList: true,
-          fields: [
-            {
-              componentId: 'combobox_xcimvq',
-              name: 'idTipoDocumento',
-              type: 'number',
-              required: true,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputhidden_3pr884',
-              name: 'url',
-              type: 'string',
-              required: false,
-              defaultValue: '',
-
-              isList: false,
-            },
-            {
-              componentId: 'inputhidden_wjyqmr',
-              name: 'id',
-              type: 'number',
-              required: false,
-
-              isList: false,
-            },
-          ],
-        },
-        {
-          componentId: 'inputtextarea_bzhoju',
-          name: 'observacao',
-          type: 'string',
-          required: true,
-          defaultValue: '',
-          isList: false,
-        },
-      ],
+  components: {
+    id: 'component_root',
+    tag: 'component_root',
+    componentName: 'component',
+    
+    properties: {
+      commonProperties: {
+        generateReference: false,
+      },
     },
-  ],
-  states: [
-    {
-      id: 'state__mQ5Zh',
-      name: 'actividadesEconomicasBadgeValue',
-      type: 'string',
-      imports: [],
-      defaultValue: "'SOAT Ponderado: 0.00%'",
-    },
-    {
-      id: 'state_KBZkPH',
-      name: 'actividadesEconomicas',
-      type: 'any',
-      defaultValue: '',
-      imports: [],
-    },
-    {
-      id: 'state_tubki7',
-      name: 'menuNavigation1BadgeContent',
-      type: 'string',
-      imports: [],
-      defaultValue: "'Novo'",
-    },
-    {
-      id: 'state_SIyLL',
-      name: 'isUploading',
-      type: 'UploadingState',
-      defaultValue: '{}',
-      imports: [
-        { namespace: "import {UploadingState} from '@/app/(myapp)/types/index'", id: '2z11xvk1c3' },
-      ],
-    },
-    {
-      id: 'state_C3Q8dt',
-      name: 'uploadedFiles',
-      type: 'UploadingFiles',
-      defaultValue: '{}',
-      imports: [
-        { namespace: "import {UploadingFiles} from '@/app/(myapp)/types/index'", id: '20jwv4g1lv' },
-      ],
-    },
-  ],
-  imports: [],
+    childProperties: {},
+    children: [
+      {
+        id: 'form_manifestacao',
+        tag: 'formManifestacao',
+        componentName: 'form',
+        
+        type: 'group',
+        children: [
+          {
+            id: 'tabs_manifestacao',
+            tag: 'tabs1',
+            componentName: 'tabs',
+            
+            children: [
+              {
+                id: 'tab_manifestacao',
+                tag: 'tabsItemManifestacao',
+                componentName: 'tabsItem',
+                
+                properties: {
+                  value: 'tabsItemManifestacao',
+                  
+                  commonProperties: {
+                    generateReference: false,
+                  },
+                },
+                childProperties: {},
+                children: [
+                  {
+                    id: 'carddetails_fracao',
+                    tag: 'cardDetailsFracao',
+                    componentName: 'cardDetails',
+                    
+                    children: [],
+                    data: {
+                      items: {
+                        state: {
+                          id: '',
+                          name: 'cardDetailsItems',
+                          type: '',
+                          imports: [],
+                          generate: false,
+                        },
+                      },
+                    },
+                    properties: {
+                      title: 'Detalhes da Fração',
+                      description: '',
+                      commonProperties: {
+                        generateReference: false,
+                      },
+                      items: [],
+                    },
+                    childProperties: {},
+                    style: {
+                      spacing: {
+                        margin: {
+                          top: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          right: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          bottom: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          left: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                        },
+                        padding: {
+                          top: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          right: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          bottom: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                          left: {
+                            value: '0',
+                            unit: 'px',
+                          },
+                        },
+                      },
+                    },
+                  },
+                  {
+                    id: 'grid_manifestacao_radio',
+                    tag: 'grid-manifestacao',
+                    componentName: 'grid',
+                    
+                    properties: {
+                      gap: 4,
+                      variant: {
+                        default: 'cols1',
+                        md: 'cols2',
+                        lg: 'cols2',
+                      },
+                      commonProperties: {
+                        generateReference: false,
+                      },
+                    },
+                    childProperties: {},
+                    children: [
+                      {
+                        id: 'radio_modalidade',
+                        tag: 'ModalidadeInteresse',
+                        componentName: 'radio',
+                        
+                        data: {
+                          value: {
+                            state: {
+                              id: '',
+                              name: 'radioModalidadeInteresseValue',
+                              type: 'string | undefined',
+                              imports: [],
+                              generate: false,
+                            },
+                          },
+                          options: {
+                            state: {
+                              id: '',
+                              name: 'radioModalidadeInteresseOptions',
+                              type: 'IGRPOptionsProps[]',
+                              imports: [],
+                              generate: false,
+                            },
+                          },
+                        },
+                        properties: {
+                          
+                          variant: 'default',
+                          required: true,
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'radio_finalidade',
+                        tag: 'FinalidadeAluguel',
+                        componentName: 'radio',
+                        
+                        data: {
+                          value: {
+                            state: {
+                              id: '',
+                              name: 'radioFinalidadeAluguelValue',
+                              type: 'string | undefined',
+                              imports: [],
+                              generate: false,
+                            },
+                          },
+                          options: {
+                            state: {
+                              id: '',
+                              name: 'radioFinalidadeAluguelOptions',
+                              type: 'IGRPOptionsProps[]',
+                              imports: [],
+                              generate: false,
+                            },
+                          },
+                        },
+                        properties: {
+                          
+                          variant: 'default',
+                          required: true,
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {},
+                        rules: [
+                          {
+                            type: 'visibility',
+                            condition: "radioModalidadeInteresseValue === 'ALUGUEL'",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: 'tab_requerente',
+                tag: 'tabsItemRequerente',
+                componentName: 'tabsItem',
+                
+                properties: {
+                  value: 'tabsItemRequerente',
+                  
+                  commonProperties: {
+                    generateReference: false,
+                  },
+                },
+                childProperties: {},
+                children: [
+                  {
+                    id: 'grid_requerente',
+                    tag: 'grid-requerente',
+                    componentName: 'grid',
+                    
+                    properties: {
+                      gap: 4,
+                      variant: {
+                        default: 'cols1',
+                        md: 'cols1',
+                        lg: 'cols1',
+                      },
+                      commonProperties: {
+                        generateReference: false,
+                      },
+                    },
+                    children: [
+                      {
+                        id: 'grid_cgy6jw',
+                        tag: 'grid1',
+                        componentName: 'grid',
+                        
+                        type: 'group',
+                        children: [
+                          {
+                            id: 'combobox_tipopessoa',
+                            tag: 'TipoPessoa',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'selectTipoPessoaValue',
+                                  defaultValue: '',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'selectTipoPessoaOptions',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: true,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'combobox_tipodocumento',
+                            tag: 'TipoDocumento',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'selectTipoDocumentoValue',
+                                  defaultValue: '',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'selectTipoDocumentoOptions',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: true,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                          },
+                        ],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          gap: 4,
+                          variant: {
+                            default: 'cols2',
+                            md: 'cols2',
+                            lg: 'cols2',
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {
+                          className: 'col-span-1',
+                        },
+                      },
+                      {
+                        id: 'grid_yfv3jg',
+                        tag: 'grid2',
+                        componentName: 'grid',
+                        
+                        type: 'group',
+                        children: [
+                          {
+                            id: 'input_nome',
+                            tag: 'Nome',
+                            componentName: 'inputText',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  name: 'inputNomeValue',
+                                  type: 'string',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              required: true,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition:
+                                  "selectTipoPessoaValue === 'CIDADAO' || selectTipoPessoaValue === 'EMPRESA'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'combobox_sexo',
+                            tag: 'Sexo',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'selectSexoValue',
+                                  defaultValue: '',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'selectSexoOptions',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: true,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'CIDADAO'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'date_nascimento',
+                            tag: 'dataNascimento',
+                            componentName: 'datePickerSingle',
+                            
+                            data: {},
+                            properties: {
+                              date: '',
+                              
+                              placeholder: 'Please select a date...',
+                              required: true,
+                              dateFormat: 'dd/MM/yyyy',
+                              numberOfMonths: '1',
+                              pagedNavigation: false,
+                              reverseMonths: false,
+                              captionLayout: 'dropdown',
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'CIDADAO'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'combobox_estadocivil',
+                            tag: 'EstadoCivil',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'selectEstadoCivilValue',
+                                  defaultValue: '',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'selectEstadoCivilOptions',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: true,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'CIDADAO'",
+                              },
+                            ],
+                          },
+                        ],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          gap: 4,
+                          variant: {
+                            default: 'cols4',
+                            md: 'cols2',
+                            lg: 'cols4',
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {
+                          className: 'col-span-1',
+                        },
+                      },
+                      {
+                        id: 'search_utente',
+                        tag: 'SearchUtenteBar1',
+                        componentName: 'SearchUtenteBar',
+                        
+                        children: [],
+                        interactions: {},
+                        data: {},
+                        properties: {
+                          customProperties: {},
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'nif_search_placeholder',
+                        tag: 'nifSearch',
+                        componentName: 'paragraph',
+                        
+                        properties: {
+                          content: 'Dados do Requerente',
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'separator_6ry49e',
+                        tag: 'separator1',
+                        componentName: 'separator',
+                        
+                        type: 'group',
+                        children: [],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          orientation: 'horizontal',
+                          commonProperties: {},
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'grid_4d24bf',
+                        tag: 'grid4',
+                        componentName: 'grid',
+                        
+                        type: 'group',
+                        children: [
+                          {
+                            id: 'input_pai',
+                            tag: 'nomePai',
+                            componentName: 'inputText',
+                            
+                            data: {},
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'CIDADAO'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'input_mae',
+                            tag: 'nomeMae',
+                            componentName: 'inputText',
+                            
+                            data: {},
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'CIDADAO'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'input_reg_com',
+                            tag: 'numRegistoComercial',
+                            componentName: 'inputText',
+                            
+                            data: {},
+                            properties: {
+                              
+                              required: true,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: "selectTipoPessoaValue === 'EMPRESA'",
+                              },
+                            ],
+                          },
+                          {
+                            id: 'input_nif',
+                            tag: 'nif',
+                            componentName: 'inputText',
+                            
+                            data: {},
+                            properties: {
+                              
+                              required: true,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                        ],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          gap: 4,
+                          variant: {
+                            default: 'cols2',
+                            md: 'cols2',
+                            lg: 'cols2',
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {
+                          className: 'col-span-1',
+                        },
+                      },
+                      {
+                        id: 'input_num_func',
+                        tag: 'numFuncionarioInss',
+                        componentName: 'inputText',
+                        
+                        data: {},
+                        properties: {
+                          
+                          required: false,
+                          dataProperties: {
+                            isVirtual: false,
+                            isType: true,
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'grid_qex31q',
+                        tag: 'grid5',
+                        componentName: 'grid',
+                        
+                        type: 'group',
+                        children: [
+                          {
+                            id: 'search_localizacao',
+                            tag: 'SearchGeografiaBar1',
+                            componentName: 'SearchGeografiaBar',
+                            
+                            children: [],
+                            interactions: {},
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'selectedGeografiaValue',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              customProperties: {
+                                text: 'Localização',
+                              },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'input_endereco',
+                            tag: 'endereco',
+                            componentName: 'inputText',
+                            
+                            data: {},
+                            properties: {
+                              
+                              required: true,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                        ],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          gap: 4,
+                          variant: {
+                            default: 'cols2',
+                            md: 'cols2',
+                            lg: 'cols2',
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {
+                          className: 'col-span-1',
+                        },
+                      },
+                      {
+                        id: 'paragraph_r2mx02',
+                        tag: 'paragraph1',
+                        componentName: 'paragraph',
+                        
+                        type: 'group',
+                        children: [],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          content: 'Contactos',
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'separator_3xotzg',
+                        tag: 'separator2',
+                        componentName: 'separator',
+                        
+                        type: 'group',
+                        children: [],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          orientation: 'horizontal',
+                          commonProperties: {},
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'grid_uzj63l',
+                        tag: 'grid6',
+                        componentName: 'grid',
+                        
+                        type: 'group',
+                        children: [
+                          {
+                            id: 'input_telefone',
+                            tag: 'Telefone',
+                            componentName: 'inputText',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  name: 'inputTelefoneValue',
+                                  type: 'string',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'input_email',
+                            tag: 'Email',
+                            componentName: 'inputText',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  name: 'inputEmailValue',
+                                  type: 'string',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'input_telemovel',
+                            tag: 'Telemovel',
+                            componentName: 'inputText',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  name: 'inputTelemovelValue',
+                                  type: 'string',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                        ],
+                        interactions: {},
+                        allowTypes: false,
+                        data: {},
+                        properties: {
+                          gap: 4,
+                          variant: {
+                            default: 'cols3',
+                            md: 'cols3',
+                            lg: 'cols3',
+                          },
+                          commonProperties: {
+                            generateReference: false,
+                          },
+                        },
+                        childProperties: {
+                          className: 'col-span-1',
+                        },
+                      },
+                    ],
+                    childProperties: {
+                      className: 'col-span-1',
+                    },
+                  },
+                ],
+              },
+              {
+                id: 'tab_anexos',
+                tag: 'tabsItemAnexos',
+                componentName: 'tabsItem',
+                
+                properties: {
+                  value: 'tabsItemAnexos',
+                  
+                  commonProperties: {
+                    generateReference: false,
+                  },
+                },
+                childProperties: {},
+                children: [
+                  {
+                    id: 'formlist_documentos',
+                    tag: 'documentos',
+                    componentName: 'formList',
+                    
+                    childProperties: {},
+                    children: [
+                      {
+                        id: 'grid_documentos',
+                        tag: 'grid3',
+                        componentName: 'grid',
+                        
+                        childProperties: {},
+                        children: [
+                          {
+                            id: 'combobox_id_tipo_doc',
+                            tag: 'idTipoDocumento',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'select{{id}}Value',
+                                  defaultValue: '{{value}}',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'select{{id}}Options',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: false,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                                iconName: 'CornerDownRight',
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'combobox_obrigatoriedade',
+                            tag: 'Obrigatorio',
+                            componentName: 'combobox',
+                            
+                            data: {
+                              value: {
+                                state: {
+                                  id: '',
+                                  type: 'string | undefined',
+                                  name: 'select{{id}}Value',
+                                  defaultValue: '{{value}}',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                              options: {
+                                state: {
+                                  id: '',
+                                  type: 'IGRPOptionsProps[]',
+                                  name: 'select{{id}}Options',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              variant: 'single',
+                              placeholder: 'Select an option...',
+                              required: false,
+
+                              showSearch: true,
+                              iconProperties: {
+                                showIcon: false,
+                              },
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              options: [],
+                            },
+                            childProperties: {},
+                          },
+                          {
+                            id: 'inputfile_doc',
+                            tag: 'documento',
+                            componentName: 'inputFile',
+                            
+                            interactions: {
+                              onChange: {
+                                type: 'function',
+                                function: {
+                                  type: 'function',
+                                  fnCustomCode: {
+                                    imports: [],
+                                  },
+                                  fnCustomSet: '(e: any)=>handleUploadDocumentoFile(index,e)',
+                                },
+                                action: {},
+                              },
+                            },
+                            properties: {
+                              
+                              accept: 'application/pdf',
+                              required: false,
+                              dataProperties: {
+                                isVirtual: true,
+                                isType: false,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                              multiple: false,
+                            },
+                            childProperties: {},
+                            rules: [
+                              {
+                                type: 'visibility',
+                                condition: 'isEditingDocumentos[index]',
+                              },
+                            ],
+                          },
+                          {
+                            id: 'inputhidden_documentos_url',
+                            tag: 'url',
+                            componentName: 'inputHidden',
+                            
+                            properties: {
+                              
+                              required: false,
+                              dataProperties: {
+                                isVirtual: false,
+                                isType: true,
+                              },
+                              commonProperties: {
+                                generateReference: false,
+                              },
+                            },
+                            childProperties: {},
+                          },
+                        ],
+                      },
+                    ],
+                    data: {
+                      defaultItem: {
+                        state: {
+                          id: '',
+                          type: '{{type}}',
+                          name: 'formList{{id}}Default',
+                          defaultValue: '{}',
+                          imports: [],
+                          generate: true,
+                        },
+                      },
+                    },
+                    properties: {
+                      
+                      iconProperties: {
+                        showIcon: true,
+                        addButtonIconName: 'Plus',
+                        iconName: 'Blocks',
+                      },
+                      commonProperties: {
+                        generateReference: false,
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+            interactions: {},
+            allowTypes: false,
+            data: {},
+            properties: {
+              variant: 'default',
+              badgePlacement: 'end',
+              orientation: 'vertical',
+              iconProperties: {
+                showIcon: false,
+                iconPlacement: 'start',
+              },
+              commonProperties: {
+                generateReference: false,
+              },
+            },
+            childProperties: {},
+          },
+        ],
+        interactions: {
+          onLoad: {
+            type: 'function',
+            function: {
+              type: 'function',
+              fnCustomCode: {
+                imports: [
+                  {
+                    id: 'import_router',
+                    namespace: 'import { useRouter } from "next/navigation"',
+                  },
+                  {
+                    id: 'import_enums_multi',
+                    namespace:
+                      "import { useMultipleEnumOptions } from '@/app/(myapp)/hooks/use-enum-options'",
+                  },
+                  {
+                    id: 'import_enums_single',
+                    namespace:
+                      "import { useEnumOptions } from '@/app/(myapp)/hooks/use-enum-options'",
+                  },
+                  {
+                    id: 'import_combobox',
+                    namespace: "import { useComboBox } from '@/app/(myapp)/hooks/use-combobox'",
+                  },
+                ],
+                fnCode:
+                  "const router = useRouter();\n\nuseEffect(() => {\n  if (shouldSubmit) {\n    formformManifestacaoRef.current?.submit();\n    onAfterSubmit?.();\n  }\n}, [shouldSubmit, onAfterSubmit]);\n\nuseEffect(() => {\n  if (initialData) {\n    setFormManifestacaoData({\n      ...initialData,\n    });\n  }\n}, [initialData]);\n\nuseEffect(() => {\n  if (!fracao) return;\n  const items = [\n    {  content: fracao?.codigo ?? '' },\n    {  content: fracao?.tipologia ?? '' },\n    {  content: typeof fracao?.area === 'number' ? String(fracao.area) : fracao?.area ?? '' },\n    {  content: (typeof fracao?.valorFracao === 'number' ? fracao.valorFracao : fracao?.valorFracao ?? '-') + ' F CFA' },\n    {  content: fracao?.estadoFracaoDescricao ?? fracao?.estadoFracao ?? '' },\n    {  content: fracao?.complementoLocalizacao ?? '' },\n  ];\n  setSelectedFracaoId(fracao?.id);\n  setCardDetailsItems(items);\n}, [fracao]);\n\nconst { options, isLoading: isLoadingEnums } = useMultipleEnumOptions([ 'ModalidadeInteresse', 'FinalidadeAluguel', 'TipoPessoa', 'TipoDocumento', 'Sexo', 'EstadoCivil' ]);\nconst { options: obrigOptions, isLoading: isLoadingObrig } = useEnumOptions('Obrigatorio');\nconst { data: tiposDocumentoProc, isLoading: loadingTiposDoc } = useComboBox('tipos-documento-processo', { codigoProcesso: 'P5.1.2' });\n\nuseEffect(() => {\n  if (isLoadingEnums) return;\n  setRadioModalidadeInteresseOptions(options['ModalidadeInteresse'] || []);\n  setRadioFinalidadeAluguelOptions(options['FinalidadeAluguel'] || []);\n  setSelectTipoPessoaOptions(options['TipoPessoa'] || []);\n  setSelectTipoDocumentoOptions(options['TipoDocumento'] || []);\n  setSelectSexoOptions(options['Sexo'] || []);\n  setSelectEstadoCivilOptions(options['EstadoCivil'] || []);\n}, [isLoadingEnums]);\n\nuseEffect(() => {\n  if (isLoadingObrig) return;\n  setSelectObrigatorioOptions(obrigOptions || []);\n}, [isLoadingObrig]);\n\nuseEffect(() => {\n  if (loadingTiposDoc) return;\n  setSelectidTipoDocumentoOptions(tiposDocumentoProc?.map((item: any) => ({ value: item?.value, label: item?.label })) || []);\n}, [loadingTiposDoc, tiposDocumentoProc]);\n",
+              },
+            },
+            action: {},
+          },
+          onSubmit: {
+            type: 'function',
+            function: {
+              fnCustomSet: '',
+              type: 'function',
+              fnCustomCode: {
+                imports: [],
+              },
+              fnName: 'handleFormSubmit',
+            },
+            action: {
+              actionCustomSet: '(e) => {}',
+            },
+          },
+        },
+        data: {
+          defaultValues: {
+            state: {
+              id: '',
+              type: 'any',
+              name: 'formManifestacaoData',
+              defaultValue: 'initFormManifestacao',
+              imports: [],
+              generate: true,
+            },
+          },
+        },
+        dataType: 'formManifestacao',
+        childProperties: {},
+      },
+    ],
+  },
 };
-
 beforeAll(async () => {
   await initComponents();
+  setEngineConfiguration({ environment: 'development' });
 });
 
 describe('Component module', () => {

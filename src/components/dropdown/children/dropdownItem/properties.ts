@@ -1,5 +1,5 @@
 import {
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -13,7 +13,7 @@ export function dropdownItemProperties() {
     size: { type: 'string', required: false, default: 'icon', enum: ['default', 'sm', 'lg', 'icon'] },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -25,7 +25,7 @@ export function datePickerProperties() {
     //floatingLabel: { type: 'boolean', required: false },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

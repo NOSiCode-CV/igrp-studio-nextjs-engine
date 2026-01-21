@@ -3,11 +3,8 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  {{#if resourceConfig.id}}
-  id={ `{{{resourceConfig.id}}}` }
-  {{/if~}}
   {{#if resourceConfig.tag}}
-  name={ `{{{resourceConfig.tag}}}` }
+  id={ `{{{resourceConfig.tag}}}` }
   {{/if~}}
   {{#if (and resourceConfig.properties.label (not resourceConfig.data.label))}}
   label={ `{{{resourceConfig.properties.label}}}` }
@@ -35,6 +32,9 @@
   {{/if~}}
   {{#if (and resourceConfig.properties.dot (not resourceConfig.data.dot))}}
   dot={ {{{resourceConfig.properties.dot}}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.allowEmpty (not resourceConfig.data.allowEmpty))}}
+  allowEmpty={ {{{resourceConfig.properties.allowEmpty}}} }
   {{/if~}}
   {{#if resourceConfig.properties.iconProperties.iconClassName}}
   iconClassName={ `{{{resourceConfig.properties.iconProperties.iconClassName}}}` }

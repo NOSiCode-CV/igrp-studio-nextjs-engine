@@ -1,4 +1,11 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping, iconProperties } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+  iconProperties,
+} from '../default/properties';
 
 export function headlineProperties() {
   return {
@@ -8,7 +15,7 @@ export function headlineProperties() {
     roleColor: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     ...iconProperties(),
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

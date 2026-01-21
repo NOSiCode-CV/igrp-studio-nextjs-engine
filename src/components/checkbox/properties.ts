@@ -2,11 +2,12 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function checkboxProperties() {
   return {
@@ -14,6 +15,7 @@ export function checkboxProperties() {
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     message: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -41,9 +43,23 @@ export function checkboxChildPropertiesMapping() {
   };
 }
 
+function onValueChangeInteractionFieldVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false }
+    },
+  }
+}
+
 export function checkboxInteractions() {
   return {
-    onCheckedChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHECK), required: true },
+    onCheckedChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CHECK, undefined, onValueChangeInteractionFieldVisibility()), required: true },
   };
 }
 
@@ -52,7 +68,6 @@ export function checkboxInteractionsMapping() {
 
   };
 }
-
 
 export function checkboxData() {
   return {

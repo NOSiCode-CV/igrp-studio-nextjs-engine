@@ -1,4 +1,11 @@
-import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function textProperties() {
@@ -12,7 +19,7 @@ export function textProperties() {
     animate: { type: 'boolean', default: false, required: false},
     truncate: { type: 'boolean', default: false, required: false},
     maxLines: { type: 'number', default: 3, required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

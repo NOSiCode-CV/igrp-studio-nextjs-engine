@@ -1,9 +1,10 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableButtonListCellProperties() {
   return {
     ...cellProperties('Actions Column'),
+    ...classProperties(),
     ...commonProperties(),
   };
 }

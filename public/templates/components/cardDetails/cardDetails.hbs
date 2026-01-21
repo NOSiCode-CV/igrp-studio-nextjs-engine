@@ -1,0 +1,71 @@
+<IGRPCardDetails
+  {{#if resourceConfig.properties.commonProperties.generateReference}}
+  ref={ getSectionRef('{{resourceConfig.tag}}') }
+  data-section-id={ '{{resourceConfig.tag}}' }
+  {{/if}}
+  {{#if (and resourceConfig.properties.title (not resourceConfig.data.title))}}
+  title={ `{{resourceConfig.properties.title}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.description (not resourceConfig.data.description))}}
+  description={ `{{resourceConfig.properties.description}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.contentClassName (not resourceConfig.data.contentClassName))}}
+  contentClassName={ `{{resourceConfig.properties.contentClassName}}` }
+  {{/if~}}
+  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
+  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{else}}
+  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
+  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
+  {{/if~}}
+  {{/if}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
+  {{/if}}
+  {{#if (and resourceConfig.children (not resourceConfig.data.items)) }}
+  items={ [
+  {{#each (extractCardDetailsItem resourceConfig.children)}}
+  {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
+    {
+    {{#if this.data.label}}
+      label: {{this.data.label.state.name}},
+    {{else}}
+    {{#if this.properties.label}}
+      label: `{{this.properties.label}}`,
+    {{else}}
+      label: "",
+    {{/if~}}
+    {{/if~}}
+    {{#if (gt (length this.children) 0)}}
+      content: (<>
+      {{#each this.children}}
+        {{{render-layout this ../resourceConfig}}}
+      {{/each}}
+      </>),
+    {{else}}
+    {{#if this.data.content}}
+      content: {{this.data.content.state.name}},
+    {{else}}
+      {{#if this.properties.content}}
+      content: `{{this.properties.content}}`,
+      {{else}}
+      content: (<></>),
+      {{/if~}}
+    {{/if~}}
+    {{/if~}}
+    {{#if this.data.showCopyTo}}
+      showCopyTo: {{this.data.showCopyTo.state.name}},
+    {{else}}
+      {{#if this.properties.showCopyTo}}
+      showCopyTo: {{this.properties.showCopyTo}},
+      {{/if~}}
+    {{/if~}}
+    }{{#if (checkRules this)}}] : []){{/if}},
+  {{/each}}
+  ] }
+  {{/if~}}
+/>

@@ -12,12 +12,33 @@
   {{#if (and resourceConfig.properties.tabContentClassName (not resourceConfig.data.tabContentClassName))}}
   tabContentClassName={ `{{{resourceConfig.properties.tabContentClassName}}}` }
   {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.showIcon}}
+  {{#if (and resourceConfig.properties.iconProperties.showIcon (not resourceConfig.data.showIcon))}}
   showIcon={ {{resourceConfig.properties.iconProperties.showIcon}} }
   {{/if~}}
-  {{#if resourceConfig.properties.iconProperties.iconPlacement}}
+  {{#if (and resourceConfig.properties.iconProperties.iconPlacement (not resourceConfig.data.iconPlacement))}}
   iconPlacement={ `{{resourceConfig.properties.iconProperties.iconPlacement}}` }
   {{/if~}}
+  {{#if (and resourceConfig.properties.contentBorder (not resourceConfig.data.contentBorder))}}
+  contentBorder={ {{resourceConfig.properties.contentBorder}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.fullWidth (not resourceConfig.data.fullWidth))}}
+  fullWidth={ {{resourceConfig.properties.fullWidth}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.showBadge (not resourceConfig.data.showBadge))}}
+  showBadge={ {{resourceConfig.properties.showBadge}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.badgePlacement (not resourceConfig.data.badgePlacement))}}
+  badgePlacement={ `{{resourceConfig.properties.badgePlacement}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.orientation (not resourceConfig.data.orientation))}}
+  orientation={ `{{resourceConfig.properties.orientation}}` }
+  {{/if~}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
   {{#if (or (and resourceConfig.properties.tabListClassName parentResourceConfig) resourceConfig.style)}}
   tabListClassName={ cn({{{concat "'" resourceConfig.properties.tabListClassName "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
@@ -29,39 +50,64 @@
   {{/if~}}
   {{/if}}
   {{/if}}
+  {{#if (and resourceConfig.children (not resourceConfig.data.items))}}
   items={
-    [
-    {{#if resourceConfig.children}}
+      [
       {{#each (extractTabsItem resourceConfig.children)}}
+        {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
         {
           {{#if this.properties.value}}
-          value: `{{this.properties.value}}`,
+          value: `{{{this.properties.value}}}`,
           {{/if~}}
           {{#if this.properties.label}}
-          label: `{{this.properties.label}}`,
+          label: `{{{this.properties.label}}}`,
           {{/if~}}
           {{#if this.properties.iconProperties.icon}}
-          icon: `{{this.properties.iconProperties.icon}}`,
+          icon: `{{{this.properties.iconProperties.icon}}}`,
           {{/if~}}
           {{#if this.properties.className}}
-          className: `{{this.properties.className}}`,
+          className: `{{{this.properties.className}}}`,
           {{/if~}}
           {{#if (and this.properties.disabled (not this.data.disabled))}}
-          disabled: {{this.properties.disabled}}
+          disabled: {{this.properties.disabled}},
           {{/if~}}
           {{#if (and (not this.properties.disabled) this.data.disabled)}}
-          disabled: {{this.data.disabled.state.name}}
+          disabled: {{{this.data.disabled.state.name}}},
+          {{/if~}}
+          {{#if (and this.properties.badgeContent (not this.data.badgeContent))}}
+          badgeContent: `{{this.properties.badgeContent}}`,
+          {{/if~}}
+          {{#if (and (not this.properties.badgeContent) this.data.badgeContent)}}
+          badgeContent: {{{this.data.badgeContent.state.name}}},
+          {{/if~}}
+          {{#if (and this.properties.badgeVariant (not this.data.badgeVariant))}}
+          badgeVariant: `{{this.properties.badgeVariant}}`,
+          {{/if~}}
+          {{#if (and (not this.properties.badgeVariant) this.data.badgeVariant)}}
+          badgeVariant: {{{this.data.badgeVariant.state.name}}},
+          {{/if~}}
+          {{#if (and this.properties.badgeColor (not this.data.badgeColor))}}
+          badgeColor: `{{this.properties.badgeColor}}`,
+          {{/if~}}
+          {{#if (and (not this.properties.badgeColor) this.data.badgeColor)}}
+          badgeColor: {{{this.data.badgeColor.state.name}}},
+          {{/if~}}
+          {{#if (and this.properties.badgeClassName (not this.data.badgeClassName))}}
+          badgeClassName: `{{this.properties.badgeClassName}}`,
+          {{/if~}}
+          {{#if (and (not this.properties.badgeClassName) this.data.badgeClassName)}}
+          badgeClassName: {{{this.data.badgeClassName.state.name}}},
           {{/if~}}
           content: (<>
             {{#if (gt (length this.children) 0)}}
             {{#each this.children}}
-            {{{render-layout this ../resourceConfig}}}
+            {{{render-layout this ../this}}}
             {{/each}}
             {{/if~}}
           </>),
-        },
+        }{{#if (checkRules this)}}] : []){{/if}},
       {{/each}}
-    {{/if~}}
-    ]
+      ]
   }
+  {{/if~}}
 />

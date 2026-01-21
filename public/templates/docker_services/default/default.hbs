@@ -13,7 +13,8 @@ restart: {{resourceConfig.restart}}
 {{#if resourceConfig.dependsOn}}
 depends_on:
   {{#each resourceConfig.dependsOn}}
-  - {{this.service}}
+    {{this.service}}:
+      condition: {{#if this.condition}}{{this.condition}}{{else}}service_healthy{{/if}}
   {{/each}}
 {{/if}}
 {{#if resourceConfig.extends}}
@@ -143,6 +144,9 @@ healthcheck:
   {{/if}}
   {{#if resourceConfig.healthcheck.retries}}
   retries: {{resourceConfig.healthcheck.retries}}
+  {{/if}}
+  {{#if resourceConfig.healthcheck.start_period}}
+  start_period: {{resourceConfig.healthcheck.start_period}}
   {{/if}}
 {{/if}}
 {{#if resourceConfig.logging}}

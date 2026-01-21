@@ -15,7 +15,13 @@ import {
   ElementField,
   CustomFunctionConfig,
   Reference,
-  ReturnValue, FieldValidation, ProcessArtifact, Variable, ProcessStepConfig, PermittedActions,
+  ReturnValue,
+  FieldValidation,
+  ProcessArtifact,
+  Variable,
+  ProcessStepConfig,
+  PermittedActions,
+  FieldValidationMetadata,
 } from '../interfaces/types';
 import { FIELD_TYPES, PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -117,6 +123,11 @@ const stateSchema: JSONSchemaType<State> = {
       type: 'boolean',
       nullable: true,
       errorMessage: 'The is array value, if provided, must be a valid boolean.'
+    },
+    isOptional: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is optional value, if provided, must be a valid boolean.'
     },
     imports: {
       type: 'array',
@@ -267,6 +278,21 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   additionalProperties: false,
 };
 
+const fieldValidationMetadataSchema: JSONSchemaType<FieldValidationMetadata> = {
+  type: 'object',
+  properties: {
+    validationKey: {
+      type: 'string',
+    },
+    message: {
+      type: 'string',
+      nullable: true,
+    },
+  },
+  required: [],
+};
+
+
 const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
   type: 'object',
   properties: {
@@ -357,6 +383,10 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
       nullable: true,
       errorMessage: 'The attribute maxDate, if provided, must be a valid string',
     },
+    errors: {
+      type: 'array',
+      items: fieldValidationMetadataSchema
+    }
   },
   required: [],
   errorMessage: 'The validation, if provided, must be a valid validation object definition.',
@@ -627,15 +657,14 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
     },
     name: {
       type: "string",
-      pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
-      errorMessage: 'The process step name name must only contain letters and must not have spaces or special characters except underscore (_) and hyphen (-).',
+      pattern: PATTERNS.PROCESS_NAME_VALIDATION_PATTERN,
+      errorMessage: 'The process step name name must only contain letters and must not have spaces or special characters except underscore (_), hyphen (-) and dot (.).',
     },
     description: {
       type: 'string',
       nullable: true,
-      pattern: PATTERNS.VALID_ALPHA_NUMERIC_CONVENTIONAL,
       errorMessage:
-        'The description, if provided, must only contain letters, numbers and spaces and must not have special characters.',
+        'The description, if provided, must be a string.',
     },
     processKey: {
       type: 'string',

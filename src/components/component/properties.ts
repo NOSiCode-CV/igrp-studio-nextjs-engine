@@ -1,7 +1,7 @@
 import {
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -10,6 +10,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function componentProperties() {
   return {
+    ...classProperties(),
     ...commonProperties(),
   }
 }

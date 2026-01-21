@@ -1,9 +1,15 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 
 export function modalDialogFooterProperties() {
   return {
-    className: { type: 'string', required: false },
     stickyFooter: { type: 'boolean', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

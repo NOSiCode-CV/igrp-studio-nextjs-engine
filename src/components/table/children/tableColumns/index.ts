@@ -12,9 +12,11 @@ import { TABLE_TEXT_CELL } from '../tableTextCell';
 import { TABLE_AMOUNT_CELL } from '../tableAmountCell';
 import { TABLE_DATE_CELL } from '../tableDateCell';
 import { TABLE_BADGE_CELL } from '../tableBadgeCell';
+import { TABLE_LINK_CELL } from '../tableLinkCell/index';
 import { TABLE_ACTION_LIST_CELL } from '../tableActionListCell';
 import { TABLE_CHECKBOX_CELL } from '../tableCheckboxCell/index';
 import { TABLE_HIDDEN_CELL } from '../tableHiddenCell/index';
+import { TABLE_TOOLTIP_CELL } from '../tableTooltipCell/index';
 
 export default {
   register(component: Component) {
@@ -39,6 +41,8 @@ export default {
       { name: TABLE_AMOUNT_CELL, isDefault: false },
       { name: TABLE_DATE_CELL, isDefault: false },
       { name: TABLE_BADGE_CELL, isDefault: false },
+      { name: TABLE_LINK_CELL, isDefault: false },
+      { name: TABLE_TOOLTIP_CELL, isDefault: false },
       { name: TABLE_ACTION_LIST_CELL, isDefault: false },
       { name: TABLE_HIDDEN_CELL, isDefault: false },
     ]);
@@ -50,6 +54,8 @@ export default {
       { name: TABLE_AMOUNT_CELL, isDefault: false },
       { name: TABLE_DATE_CELL, isDefault: false },
       { name: TABLE_BADGE_CELL, isDefault: false },
+      { name: TABLE_LINK_CELL, isDefault: false },
+      { name: TABLE_TOOLTIP_CELL, isDefault: false },
       { name: TABLE_ACTION_LIST_CELL, isDefault: false },
       { name: TABLE_HIDDEN_CELL, isDefault: false },
     ])

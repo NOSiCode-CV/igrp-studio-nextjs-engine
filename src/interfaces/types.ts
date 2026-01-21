@@ -12,7 +12,8 @@ export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
   workspaceId: string;
   name: string;
-  description?: string
+  description?: string;
+  displayName?: string;
 }
 
 export interface PageConfig extends IdentifiableElement, VersionableElement {
@@ -298,6 +299,7 @@ export interface State extends IdentifiableElement {
   name: string,
   type: string,
   isArray?: boolean,
+  isOptional?: boolean,
   imports?: Import[],
   defaultValue?: string,
   generate?: boolean
@@ -385,6 +387,8 @@ export interface ComponentRegisterConfig extends VersionableElement {
   imports: string[],
   defaultValue: boolean,
   allowTypes: boolean,
+  deprecated?: boolean,
+  replacedBy?: string,
   group: string,
   label: string,
   customClassName?: string,
@@ -725,6 +729,7 @@ export interface VolumeFile {
 
 export interface Dependency {
   service: string
+  condition?: string
 }
 
 export interface Profile {
@@ -732,9 +737,9 @@ export interface Profile {
 }
 
 export interface Port {
-  internal: number | string,
-  external: number | string,
-  reference?: number | string,
+  internal: number,
+  external: number,
+  reference?: number
 }
 
 export interface Host {
@@ -782,10 +787,10 @@ export interface DockerServiceResourceLimit {
 
 export interface DockerServiceHealthcheck {
   test?: DockerServiceInstruction[],
-  interval?: string | number,
-  timeout?: string | number,
+  interval?: string,
+  timeout?: string,
   retries?: number,
-  start_period?: string | number
+  start_period?: string
 }
 
 export interface DockerServiceResources {
@@ -886,6 +891,14 @@ export interface FieldValidation {
 
   minDate?: string; // ISO string or Date string
   maxDate?: string;
+
+  errors: FieldValidationMetadata[];
+
+}
+
+export interface FieldValidationMetadata {
+  message?: string,
+  validationKey: string
 }
 
 export interface ElementField {
@@ -1000,6 +1013,10 @@ export interface CodeSnippetsRegisterConfig extends VersionableElement {
 
 export interface CodeSnippetsRegistrationConfig extends VersionableElement {
   codes: CodeSnippetsRegisterConfig[]
+}
+
+export interface EngineConfigurationSettings {
+  environment?: string
 }
 
 // Keep your existing interfaces (TypeDef, ActionDef, FunctionDef) the same

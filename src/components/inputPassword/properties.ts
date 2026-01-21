@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -14,13 +14,15 @@ export function inputPasswordProperties() {
     label: { type: 'string', required: false, default: 'Input Password' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     placeholder: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 'igrpsecret' },
     helperText: { type: 'string', required: false, default: '' },
     showPasswordToggle: { type: 'boolean', required: false, default: true },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -46,7 +48,7 @@ function onChangeInteractionFieldVisibility(): InteractionFieldVisibility {
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }

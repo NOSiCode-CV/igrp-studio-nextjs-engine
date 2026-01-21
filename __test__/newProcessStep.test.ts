@@ -1,4 +1,4 @@
-import { initComponents, newProcessStep } from '../src';
+import { initComponents, newProcessStep, setEngineConfiguration } from '../src';
 import { ProcessStepConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 import { badgeLayout } from './newBadgePage.test';
@@ -36,6 +36,7 @@ const processStepConfig: ProcessStepConfig = {
 
 beforeAll(async () => {
   await initComponents();
+  setEngineConfiguration({ environment: 'development' })
 });
 
 describe('Process Step module', () => {

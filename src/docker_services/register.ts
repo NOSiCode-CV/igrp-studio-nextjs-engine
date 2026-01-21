@@ -27,6 +27,7 @@ import igrpAccessManagementModule, { IGRP_ACCESS_MANAGEMENT } from './igrpAccess
 import igrpApiGatewayModule, { IGRP_API_GATEWAY } from './igrpApiGateway/index';
 import eurekaModule, { EUREKA } from './eureka/index';
 import nginxModule, { NGINX } from './nginx/index';
+import pgAdminModule, { PGADMIN} from './pgadmin/index';
 
 export function registerAllServices() {
 
@@ -45,6 +46,7 @@ export function registerAllServices() {
   register(POSTGRES, postgresModule.register);
   register(MYSQL, mysqlModule.register);
   register(ORACLE, oracleModule.register);
+  register(PGADMIN, pgAdminModule.register);
 
   // Authentication
   register(KEYCLOAK, keycloakModule.register);

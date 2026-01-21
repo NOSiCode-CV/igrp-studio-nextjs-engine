@@ -11,6 +11,7 @@ import {
 import { Component, hbsRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
+import { DATE_PICKER_SINGLE } from '../datePickerSingle/index';
 
 export default {
   register(component: Component) {
@@ -18,6 +19,8 @@ export default {
     ]);
 
     component.loadComponentClass('IGRPDatePicker')
+    component.setDeprecated(true);
+    component.loadReplacedBy(DATE_PICKER_SINGLE);
     component.loadVariants(inputDatePickerVariants());
     component.loadGroup('formElements')
     component.loadLabel('Date Picker')

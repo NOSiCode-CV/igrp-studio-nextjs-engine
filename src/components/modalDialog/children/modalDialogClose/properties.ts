@@ -1,6 +1,6 @@
 import {
   baseInteraction, baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -11,7 +11,7 @@ import { InteractionFieldVisibility } from '../../../../interfaces/types';
 export function modalDialogCloseProperties() {
   return {
     content: { type: 'string', required: true, default: 'Close' },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

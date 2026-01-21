@@ -1,8 +1,13 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function rangeSliderProperties() {
   return {
-    name: { type: 'string', required: true },
     label: { type: 'string', required: false },
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 100 },
@@ -10,6 +15,7 @@ export function rangeSliderProperties() {
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     message: { type: 'string', required: false },
+    ...classProperties(),
     ...commonPropertiesMapping()
   };
 }
@@ -30,7 +36,6 @@ export function rangeSliderPropertiesMapping() {
 
 export function rangeSliderChildProperties() {
   return {
-    name: { type: 'string', required: true },
     label: { type: 'string', required: false },
     min: { type: 'number', required: false, default: 0 },
     max: { type: 'number', required: false, default: 100 },

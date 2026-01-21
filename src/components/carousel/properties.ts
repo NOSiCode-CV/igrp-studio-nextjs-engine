@@ -1,10 +1,17 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function carouselProperties() {
   return {
     items: { type: 'array', required: true, items: { type: 'object'} },
     autoPlay: { type: 'boolean', required: false },
     interval: { type: 'number', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -6,7 +6,7 @@ const { iconName, bgClass, textClass, label, className } = {{resourceConfig.inte
 
 return <IGRPDataTableCellBadge
   {{!--field={ row.getValue('{{resourceConfig.tag}}') }--}}
-  label={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}{{#if resourceConfig.interactions.customize.function.fnName}}label ?? {{/if}}row.original.{{resourceConfig.tag}}{{/if}} }
+  label={ {{#if resourceConfig.data.label.value.code}}{{{resourceConfig.data.label.value.code}}}{{else}}{{#if resourceConfig.interactions.customize.function.fnName}}label ?? {{/if}}row.original.{{resourceConfig.tag}}{{/if}} }
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}

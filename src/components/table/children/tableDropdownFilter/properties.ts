@@ -1,11 +1,13 @@
-import { baseData, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseData, classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 
 export function tableDropdownFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
     placeholder: { type: 'string', required: false, default: 'Filtar...' },
-    className: { type: 'string', required: false },
+    showFilter: { type: 'boolean', required: false, default: true },
+    notFoundText: { type: 'string', required: false, default: 'No options found' },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,4 +1,11 @@
-import { baseData, baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseData,
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function infoCardProperties() {
@@ -6,8 +13,9 @@ export function infoCardProperties() {
     title: { type: 'string', required: false, default: 'Lorem Ipsum' },
     colorSection: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     variantSection: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    orientation: { type: 'string', required: false, default: 'vertical', enum: ['horizontal', 'vertical'] },
     titleClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }

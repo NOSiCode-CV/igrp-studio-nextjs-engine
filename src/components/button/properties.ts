@@ -1,6 +1,6 @@
 import {
   baseInteraction, baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
@@ -15,7 +15,7 @@ export function buttonProperties() {
     size: { type: 'string', required: false, default: 'default', enum: ['default', 'sm', 'lg', 'icon'] },
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

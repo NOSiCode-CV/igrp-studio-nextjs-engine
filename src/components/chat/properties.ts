@@ -1,10 +1,16 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function chatProperties() {
   return {
     apiEndpoint: { type: 'string', required: true, default: 'https://api.igrp.cv/chat' },
     labelDescription: { type: 'string', required: false, default: 'Chat' },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

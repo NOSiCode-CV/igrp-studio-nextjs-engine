@@ -2,16 +2,16 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
-  commonPropertiesMapping,
+  commonPropertiesMapping, dataCommonProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function radioGroupProperties() {
   return {
-    name: { type: 'string', required: true },
+    value: { type: 'string', required: false },
     label: { type: 'string', required: false },
     dir: { type: 'string', required: false, enum: ['ltr', 'rtl'], default: 'ltr' },
     orientation: { type: 'string', required: false, enum: ['horizontal', 'vertical'], default: 'vertical' },
@@ -24,7 +24,8 @@ export function radioGroupProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     message: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
+    ...dataCommonProperties(),
     ...commonProperties(),
   };
 }

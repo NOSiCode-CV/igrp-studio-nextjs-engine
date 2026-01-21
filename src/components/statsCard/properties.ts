@@ -1,8 +1,8 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
-  commonPropertiesMapping
+  commonPropertiesMapping,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -22,7 +22,7 @@ export function statsCardProperties() {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: true },
-        iconName: { type: 'string', required: false, default: "Box" },
+        iconName: { type: 'string', required: false, default: "Box", 'x-ui-widget': 'icon' },
         iconSize: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'] },
         iconVariant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
         iconPlacement: { type: 'string', required: true, default: 'end', enum: ['start', 'end' ] },
@@ -31,10 +31,10 @@ export function statsCardProperties() {
     itemPlacement: { type: 'string', required: true, default: 'start', enum: ['start', 'end' ] },
     image: { type: 'string', required: false },
     imageAlt: { type: 'string', required: false },
-    className: { type: 'string', required: false },
     cardClassName: { type: 'string', required: false },
     titleClassName: { type: 'string', required: false },
     valueClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

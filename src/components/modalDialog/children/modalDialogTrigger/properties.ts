@@ -1,15 +1,15 @@
 import {
   baseInteraction, baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
-  commonPropertiesMapping
+  commonPropertiesMapping,
 } from '../../../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 
 export function modalDialogTriggerProperties() {
   return {
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

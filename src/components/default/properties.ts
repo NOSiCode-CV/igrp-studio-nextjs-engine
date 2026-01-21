@@ -1,6 +1,12 @@
 import { PATTERNS } from '../../utils/constants';
 import { InteractionFieldVisibility, State } from '../../interfaces/types';
 
+export function classProperties() {
+  return {
+    className: { type: 'string', required: false, 'x-meta': { label: 'Class Name' } },
+  }
+}
+
 export function commonProperties() {
   return {
     commonProperties: {
@@ -72,7 +78,7 @@ export function iconProperties() {
       properties: {
         showIcon: { type: 'boolean', required: false, default: false },
         iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
-        iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
+        iconPlacement: { type: 'string', required: false, enum: ['start', 'center', 'end'] },
         iconClassName: { type: 'string', required: false },
         iconSize: { type: 'number', required: false },
       },

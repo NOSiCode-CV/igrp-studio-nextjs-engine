@@ -44,6 +44,7 @@
     [
     {{#if resourceConfig.children}}
       {{#each (extractMenuNavigationItems resourceConfig.children)}}
+        {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
         {
           id: "{{this.properties.targetRef}}",
           {{#if this.properties.label}}
@@ -58,7 +59,7 @@
           {{#if (and (not this.properties.disabled) this.data.disabled)}}
           disabled: {{this.data.disabled.state.name}}
           {{/if~}}
-        },
+        }{{#if (checkRules this)}}] : []){{/if}},
       {{/each}}
     {{/if~}}
     ]

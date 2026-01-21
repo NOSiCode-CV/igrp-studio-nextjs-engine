@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -18,7 +18,7 @@ export function menuNavigationProperties() {
     badgeClassName: { type: 'string', required: false },
     showChevron: { type: 'boolean', default: true, required: false},
     isStickyTop: { type: 'boolean', default: false, required: false},
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }
@@ -72,7 +72,7 @@ function onSectionChangeInteractionFieldVisibility(): InteractionFieldVisibility
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }

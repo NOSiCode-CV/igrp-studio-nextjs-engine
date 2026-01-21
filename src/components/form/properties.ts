@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -20,6 +20,7 @@ export function formProperties() {
     //submitVariant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
     //cancelText: { type: 'string', required: false, default: 'Cancel' },
     //cancelVariant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }
@@ -46,7 +47,7 @@ function onSubmitInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function formInteractions() {
   return {
-    onSubmit: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_WITH_EVENT, INTERACTIONS_TYPES.ON_SUBMIT, undefined, onSubmitInteractionFieldVisibility()), required: true },
+    onSubmit: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_SUBMIT, undefined, onSubmitInteractionFieldVisibility()), required: true },
     //exposeForm: { ...baseInteraction(INTERACTIONS_DEFAULTS.EXPOSE_FORM, INTERACTIONS_TYPES.EXPOSE_FORM, [ { state: `const form{{id}}Ref = useRef<IGRPFormHandle<{{type}}> | null>(null)` }]), required: false },
     //cancelAction: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.CANCEL_ACTION), required: false },
   };

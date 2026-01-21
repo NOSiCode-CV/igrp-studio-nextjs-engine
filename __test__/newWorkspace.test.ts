@@ -1,4 +1,4 @@
-import { initServices, newWorkspace } from '../src';
+import { initServices, newWorkspace, setEngineConfiguration } from '../src';
 import { WorkspaceConfig } from '../src/interfaces/types';
 import { OUTPUT_WORKSPACE_TEST } from '../src/utils/testPath';
 
@@ -14,6 +14,7 @@ const baseConfig: WorkspaceConfig = {
 };
 
 beforeAll(async () => {
+  setEngineConfiguration({ environment: 'development' });
   await initServices();
 });
 

@@ -1,4 +1,7 @@
 <IGRPPieChart
+  {{#if resourceConfig.tag}}
+  id={ `{{{resourceConfig.tag}}}` }
+  {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
@@ -87,6 +90,9 @@
   {{!--loading={ {{resourceConfig.id}}Loading }--}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

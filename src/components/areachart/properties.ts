@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -64,7 +64,7 @@ export function areaChartProperties() {
     backgroundColor: { type: 'string', required: false },
     referenceLineColor: { type: 'string', required: false },
     axisColor: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

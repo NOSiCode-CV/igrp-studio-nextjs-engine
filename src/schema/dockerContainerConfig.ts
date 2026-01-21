@@ -24,6 +24,12 @@ const dependencySchema: JSONSchemaType<Dependency> = {
       pattern: PATTERNS.DOCKER_SERVICE_VALIDATION_PATTERN,
       errorMessage: 'The service must only contain letters and must not have spaces or special characters except underscore (_) and hyphen (-).'
     },
+    condition: {
+      type: 'string',
+      nullable: true,
+      enum: ['service_started', 'service_healthy', 'service_completed_successfully'],
+      errorMessage: "The 'condition' attribute, if provided, must be only 'service_started', 'service_healthy', or 'service_completed_successfully'."
+    },
   },
   required: ['service'],
   additionalProperties: false,

@@ -1,4 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function flexProperties() {
   return {
@@ -37,7 +43,7 @@ export function flexProperties() {
         'center-col',
       ]
     },
-    className: {type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

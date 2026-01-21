@@ -1,4 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 const variantProperties = { type: 'string', required: true, enum: [
     'span1',
@@ -28,6 +34,7 @@ export function columnProperties() {
         xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
       },
     },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

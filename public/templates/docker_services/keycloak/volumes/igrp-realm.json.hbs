@@ -28,7 +28,7 @@
   "oauth2DeviceCodeLifespan": 600,
   "oauth2DevicePollingInterval": 5,
   "enabled": true,
-  "sslRequired": "external",
+  "sslRequired": "none",
   "registrationAllowed": false,
   "registrationEmailAsUsername": false,
   "rememberMe": false,
@@ -48,7 +48,7 @@
   "failureFactor": 30,
   "defaultRole": {
     "id": "09ab6ca5-7163-44dc-9d60-4b32b0d68e42",
-    "name": "default-roles-quickstart",
+    "name": "default-roles-igrp",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -152,6 +152,34 @@
       "serviceAccountClientId": "access-management",
       "disableableCredentialTypes": [],
       "requiredActions": [],
+      "clientRoles": {
+        "realm-management": [
+          "view-events",
+          "create-client",
+          "view-clients",
+          "manage-events",
+          "view-realm",
+          "view-identity-providers",
+          "manage-clients",
+          "manage-identity-providers",
+          "query-realms",
+          "query-users",
+          "realm-admin",
+          "query-groups",
+          "view-authorization",
+          "manage-users",
+          "manage-authorization",
+          "manage-realm",
+          "impersonation",
+          "query-clients",
+          "view-users"
+        ],
+        "account": [
+          "delete-account",
+          "view-groups",
+          "manage-account"
+        ]
+      },
       "notBefore": 0
     }
   ],
@@ -180,13 +208,13 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/quickstart/account/",
+      "baseUrl": "/realms/igrp/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/quickstart/account/*"
+        "/realms/igrp/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -226,13 +254,13 @@
       "clientId": "account-console",
       "name": "${client_account-console}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/quickstart/account/",
+      "baseUrl": "/realms/igrp/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/quickstart/account/*"
+        "/realms/igrp/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -474,14 +502,14 @@
       "clientId": "minio",
       "name": "minio",
       "description": "",
-      "rootUrl": "http://igrp-minio:9000/",
-      "adminUrl": "http://igrp-minio:9000/",
+      "rootUrl": "http://localhost:9000/",
+      "adminUrl": "http://localhost:9000/",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "FTpKJk9kIT2LBCpzIAzCDZfHfjbqzWCy",
       "redirectUris": [
         "*"
       ],
@@ -652,13 +680,13 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/quickstart/console/",
+      "baseUrl": "/admin/igrp/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/quickstart/console/*"
+        "http://localhost/auth/admin/igrp/console/*"
       ],
       "webOrigins": [
         "+"
@@ -727,16 +755,16 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "FTpKJk9kIT2LBCpzIAzCDZfHfjbqzWCy",
       "redirectUris": [
-        "http://igrp-ui:3000/api/auth/callback/keycloak",
+        "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/api/auth/callback/keycloak",
         "http://localhost:3000/api/auth/callback/keycloak",
-        "https://oauth.pstmn.io/v1/callback",
-        "https://oauth.pstmn.io/v1/browser-callback"
+        "https://oauth.pstmn.io/v1/callback"
       ],
       "webOrigins": [
-        "https://igrp-ui:3000",
-        "http://localhost:3000"
+        "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575",
+        "http://localhost:3000",
+        "https://oauth.pstmn.io"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -754,7 +782,7 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1746788355",
         "backchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "https://igrp-ui:3000##http://localhost:3000",
+        "post.logout.redirect.uris": "http://localhost:3000/*##http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/*##https://oauth.pstmn.io",
         "display.on.consent.screen": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "use.jwks.url": "false",
@@ -810,6 +838,22 @@
             "access.token.claim": "true",
             "claim.name": "clientHost",
             "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "2ebe39d4-2a59-4457-b381-74f0051c6d14",
+          "name": "iGRP Roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": {
+            "full.path": "true",
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "igrp_roles"
           }
         }
       ],
@@ -2318,7 +2362,7 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "http://localhost:8080",
+    "frontendUrl": "http://{{toLowerCase resourceConfig.workspace}}-igrp:2575/auth",
     "organizationsEnabled": "false",
     "acr.loa.map": "{}",
     "shortVerificationUri": "",

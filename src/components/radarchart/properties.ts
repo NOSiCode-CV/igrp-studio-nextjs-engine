@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -76,7 +76,7 @@ export function radarChartProperties() {
     showGridLines: { type: 'boolean', required: false },
     showRadiusLines: { type: 'boolean', required: false },
     gridFilled: { type: 'boolean', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   }
 }
