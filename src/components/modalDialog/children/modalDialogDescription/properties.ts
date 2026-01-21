@@ -1,9 +1,15 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 
 export function modalDialogDescriptionProperties() {
   return {
     content: { type: 'string', required: false, default: 'Lorem ipsum dolor sit amet' },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

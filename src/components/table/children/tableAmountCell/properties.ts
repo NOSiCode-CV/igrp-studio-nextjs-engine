@@ -1,4 +1,5 @@
 import {
+  classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -15,6 +16,7 @@ export function tableAmountCellProperties() {
     formatStyle: {type: 'string', required: false, default: 'currency', enum: ['currency', 'decimal', 'percent']},
     icons: {type: 'array', required: false, items: { type: 'string', required: true, enum: ['ChevronDown', 'ChevronUp'] }},
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -2,7 +2,7 @@ import {
   baseData,
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -10,17 +10,20 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants
 
 export function tableProperties() {
   return {
+    data: { type: 'string', required: false },
     showFilter: { type: 'boolean', required: false, default: false },
     showPagination: { type: 'boolean', required: false, default: false },
     showToggleColumn: { type: 'boolean', required: false, default: false },
     isNumericPagination: { type: 'boolean', required: false, default: false },
     isServerSide: { type: 'boolean', required: false, default: false },
+    pageSizePagination: { type: 'array', items: { type: 'number' }, 'x-ui-widget': 'chips', required: false },
     toggleLabel: { type: 'string', required: false },
     toggleOptionsLabel: { type: 'string', required: false },
     tableClassName: { type: 'string', required: false },
     tableHeaderClassName: { type: 'string', required: false },
     tableBodyClassName: { type: 'string', required: false },
     paginationClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties()
   };
 }

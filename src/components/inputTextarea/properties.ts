@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties, baseStyle, baseRules,
+  dataCommonProperties, baseStyle, baseRules, classProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -12,16 +12,17 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function inputTextareaProperties() {
   return {
     value: { type: 'string', required: false, default: '' },
-    name: { type: 'string', required: true, default: 'textarea' },
     label: { type: 'string', required: false, default: 'Input Textarea' },
     //floatingLabel: { type: 'boolean', required: false, default: false },
     helperText: { type: 'string', required: false, default: '' },
     placeholder: { type: 'string', required: false, default: '' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     error: { type: 'string', required: false },
     rows: { type: 'number', required: false, default: 3 },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -47,7 +48,7 @@ function onChangeInteractionFieldVisibility(): InteractionFieldVisibility {
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }

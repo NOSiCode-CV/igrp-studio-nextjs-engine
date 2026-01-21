@@ -44,7 +44,8 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
     { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S},
-    { output: kubernetesPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML}
+    //{ output: kubernetesPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML},
+    { output: mainPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML}
   ];
 };
 
@@ -59,8 +60,6 @@ const generateConfigFiles = (context: RenderContext): BASE_CONFIG_FILES => {
 
   return [
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.VSCODE_SETTINGS), dest: path.join(context.basePath, DST_CONFIG_FILES.VSCODE_SETTINGS)},
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.GITLABCIYAML), dest: path.join(context.basePath, DST_CONFIG_FILES.GITLABCIYAML)},
-    {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERFILE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERFILE)},
     {src: path.join(CONFIGS, SRC_CONFIG_FILES.DOCKERIGNORE), dest: path.join(context.basePath, DST_CONFIG_FILES.DOCKERIGNORE)},
   ]
 }
@@ -86,6 +85,7 @@ const saveBaseAppFiles = async (baseFiles: BASE_API_FILES, baseConfigFiles: BASE
   if(configs.length > 0) {
     const template = configs[0];
     template.name = context.baseConfig?.name ?? 'igrp-app'
+    template.displayName = context.baseConfig?.displayName ?? template.name
     await saveToFile(JSON.stringify(template, null, 2), outputPath);
   }
 

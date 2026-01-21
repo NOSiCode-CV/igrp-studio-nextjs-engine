@@ -1,9 +1,9 @@
 import {
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
-  } from '../default/properties';
+} from '../default/properties';
 
 export function badgeProperties() {
   return {
@@ -23,6 +23,7 @@ export function badgeProperties() {
       },
     },
     badgeClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

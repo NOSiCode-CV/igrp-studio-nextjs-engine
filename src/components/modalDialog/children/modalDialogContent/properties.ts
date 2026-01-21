@@ -1,9 +1,15 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 
 export function modalDialogContentProperties() {
   return {
     size: { type: 'string', required: false, enum: ["sm", "md", "lg", "xl", "full"], default: "md" },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

@@ -1,5 +1,5 @@
 import {
-  baseInteraction,
+  baseInteraction, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -18,12 +18,13 @@ export function tableBadgeCellProperties() {
       type: 'object',
       properties: {
         showIcon: { type: 'boolean', required: false, default: false },
-        iconName: { type: 'string', required: false, default: 'Info' },
+        iconName: { type: 'string', required: false, default: 'Info', 'x-ui-widget': 'icon' },
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
     variant: { type: 'string', required: false, default: 'soft', enum: ['solid', 'soft', 'outline'] },
     badgeClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

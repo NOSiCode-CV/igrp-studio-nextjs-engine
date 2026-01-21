@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { buttonProperties, buttonPropertiesMapping } from '../tableColumns/properties';
 
 const segmentInterface = {
@@ -21,6 +21,7 @@ export function tableLinkButtonProperties() {
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     segments: segmentInterface,
     params: segmentInterface,
+    ...classProperties(),
     ...commonProperties(),
   };
 }

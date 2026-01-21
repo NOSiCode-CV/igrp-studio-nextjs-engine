@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableExpanderCellProperties() {
@@ -7,6 +7,7 @@ export function tableExpanderCellProperties() {
     field: {type: 'string', required: true},
     icons: {type: 'array', required: false, items: { type: 'string', required: true, enum: ['ChevronDown', 'ChevronUp'] }},
     variant: {type: 'string', required: true, enum: ['default'], default: 'default'},
+    ...classProperties(),
     ...commonProperties(),
   };
 }

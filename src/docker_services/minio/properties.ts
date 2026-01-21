@@ -160,7 +160,7 @@ export function minioProperties() {
         },
         {
           key: 'type',
-          value: 'file',
+          value: 'storage',
         },
         {
           key: 'uuid',

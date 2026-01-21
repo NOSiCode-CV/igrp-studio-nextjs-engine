@@ -1,4 +1,4 @@
-import { initComponents, newProcess } from '../src';
+import { initComponents, newProcess, setEngineConfiguration } from '../src';
 import { ProcessConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
@@ -21,6 +21,7 @@ const processConfig: ProcessConfig = {
 
 beforeAll(async () => {
   await initComponents();
+  setEngineConfiguration({ environment: 'development' })
 });
 
 describe('Process module', () => {

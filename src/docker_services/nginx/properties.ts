@@ -48,7 +48,7 @@ export function nginxProperties() {
         },
         {
           key: 'type',
-          value: 'service-discovery',
+          value: 'proxy',
         },
         {
           key: 'uuid',

@@ -32,7 +32,13 @@ export const mapProjectToWorkspace = async (
   workspace.projects.push({
     config: config.config,
     basePath: `${config.config.name}`,
-    environments: [],
+    environments: isSpringBoot? [
+      { key: 'EUREKA_CLIENT_ENABLED', value: 'true' },
+      { key: 'SPRING_CLOUD_DISCOVERY_ENABLED', value: 'true' },
+      { key: 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE', value: '${EUREKA_SERVICE_URL}' },
+      { key: 'EUREKA_CLIENT_SERVICEURL_DEFAULTZONE', value: '${EUREKA_SERVICE_URL}' },
+      { key: 'EUREKA_SERVICE_URL', value: '${EUREKA_SERVICE_URL}' },
+    ] : [],
     ports: {
       internal: basePort + index,
       external: basePort + index, // ensure uniqueness by index

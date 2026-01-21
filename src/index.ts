@@ -27,12 +27,14 @@ import {
   ProcessConfig,
   ProcessStepConfig,
   CustomFunctionConfig,
+  EngineConfigurationSettings,
 } from './interfaces/types';
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
 import { register, registryAsObject } from './components';
+import { configurationAsObject, setConfiguration } from './config';
 import { dockerRegistryAsObject, register as registerService } from './docker_services';
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
@@ -43,6 +45,7 @@ import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import defaultModule from './components/default';
 import defaultServiceModule from './docker_services/default';
 import defaultCodeModule from './code_snippets/default';
+import defaultEngineModule from './config/default';
 import { componentRegistrationValidate } from './schema/componentRegisterConfig';
 import { workspaceConfigValidate } from './schema/baseWorkspace';
 import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
@@ -71,9 +74,11 @@ import { generateProcessStep } from './modules/process/generateProcessStep';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
 import { processStepConfigValidate } from './schema/processStepConfig';
 import { saveProcessStepConfig } from './modules/process/saveProcessStepConfig';
+import { engineConfigurationRegistrationValidate } from './schema/engineConfigurationRegisterConfig';
+import { IGRPComponent, JsonSchema, jsonSchemaToIGRPForm } from './modules/converters/jsonSchemaToForm';
 
 export function getPaths(version?: string): PathConfig {
-  const environment = process.env.VITE_ENGINE_IGRP_STUDIO_ENV || process.env.ENGINE_ENV;
+  const environment = loadEngineConfiguration().environment;
   const PROJECT_TEMPLATE_VERSION = version ?? '0.0.1-alpha.0';
 
   if (environment === 'production') {
@@ -286,70 +291,21 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
+  processStepConfig.imports = [
+    { id: 'process_imports', namespace: `import { StepComponentConfig, StepMethods } from '@/app/(igrp)/(generated)/process/[...process]/ProcessPageRenderer'` }
+  ]
+
   processStepConfig.args = [
     {
-      id: 'processKey_arg',
-      type: "string",
-      name: "processKey",
+      id: 'config_arg',
+      type: "StepComponentConfig",
+      name: "config",
       isList: false,
       isOptional: false,
-      isInterface: false,
+      isInterface: true,
       isFunction: false,
       isState: false,
-    },
-    {
-      id: 'processInstanceId_arg',
-      type: "string",
-      name: "processInstanceId",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    {
-      id: 'userTaskInstanceId_arg',
-      type: "string",
-      name: "userTaskInstanceId",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    {
-      id: 'onRegisterMethods_fnc',
-      type: "void",
-      name: "onRegisterMethods",
-      isList: false,
-      isOptional: false,
-      isInterface: false,
-      isFunction: true,
-      isState: false,
-      functionParameters: [
-        {
-          id: 'methods_arg',
-          type: "StepMethods",
-          name: "methods",
-          isList: false,
-          isOptional: false,
-          isInterface: true,
-          isFunction: false,
-          isState: false
-        },
-      ]
-    },
-    {
-      id: 'variables_arg',
-      type: "Array<{ name: string; value: string }> | undefined",
-      name: "variables",
-      isList: false,
-      isOptional: true,
-      isInterface: false,
-      isFunction: false,
-      isState: false,
-    },
-    // variables?: Array<{ name: string; value: string }> | undefined
+    }
   ]
 
   if((processStepConfig.functions?.length ?? 0) === 0) {
@@ -605,6 +561,16 @@ export const registerComponents = (config: ComponentRegistrationConfig) => {
   );
 };
 
+export const setEngineConfiguration = (config: EngineConfigurationSettings, name?: string) => {
+  const isConfigValid = engineConfigurationRegistrationValidate(config);
+
+  if(!isConfigValid && engineConfigurationRegistrationValidate.errors)
+    throw engineConfigurationRegistrationValidate.errors;
+
+  setConfiguration((e) => defaultEngineModule.register(e, config), name)
+
+}
+
 export const registerServices = (config: DockerServiceRegistrationConfig) => {
   const isConfigValid = dockerServiceRegistrationValidate(config);
 
@@ -639,6 +605,10 @@ export const loadCodeSnippetsRegistry = () => {
   return codeRegistryAsObject();
 };
 
+export const loadEngineConfiguration = (name?: string) => {
+  return configurationAsObject(name);
+}
+
 export const addCodeSnippet = (config: CodeSnippetConfig): string => {
   return renderCode(config)
 }
@@ -653,4 +623,8 @@ export async function loadAppExports(basePath: string): Promise<AppExportsConfig
   const configPath = path.join(basePath, `${DIRECTORIES.APP}/${COMMON_FILES.EXPORTS_FILE}`);
   const resolvedConfig = loadExportsConfig(configPath);
   return await parseExportsConfig(resolvedConfig, basePath);
+}
+
+export function convertJsonSchemaToForm(schema: JsonSchema): IGRPComponent[] {
+  return jsonSchemaToIGRPForm(schema);
 }

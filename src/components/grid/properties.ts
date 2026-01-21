@@ -1,4 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 const variantProperties = {
   type: 'string',
@@ -36,7 +42,7 @@ export function gridProperties() {
         xl: { ...variantProperties, 'x-meta': { label: 'Extra Large'}  },
       },
     },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

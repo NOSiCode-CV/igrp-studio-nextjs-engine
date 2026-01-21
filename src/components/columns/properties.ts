@@ -1,4 +1,10 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 const variantProperties = { type: 'string', required: true, enum: [
     'cols1',
@@ -52,7 +58,7 @@ export function columnsProperties() {
         '64',
       ],
     },
-
+    ...classProperties(),
     ...commonProperties(),
   };
 }

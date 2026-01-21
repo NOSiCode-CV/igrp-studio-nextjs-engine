@@ -1,4 +1,4 @@
-import { commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import { baseRules, classProperties, commonProperties, commonPropertiesMapping } from '../../../default/properties';
 
 export function tabsItemProperties() {
   return {
@@ -12,9 +12,19 @@ export function tabsItemProperties() {
       required: false
     },
     disabled: { type: 'boolean', required: false, default: false },
-    className: { type: 'string', required: false },
+    badgeContent: { type: 'string', required: false },
+    badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
+    badgeColor: { type: 'string', required: false, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    badgeClassName: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
+}
+
+export function tabsItemRules() {
+  return {
+    ...baseRules()
+  }
 }
 
 export function tabsItemPropertiesMapping() {

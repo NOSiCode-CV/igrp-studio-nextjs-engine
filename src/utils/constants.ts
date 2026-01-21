@@ -18,6 +18,7 @@ export const PATTERNS = {
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/ ]*$',
   BUILD_PATH_VALIDATION_PATTERN: '^[A-Za-z0-9._/-]+$',
+  PROCESS_NAME_VALIDATION_PATTERN: '^[A-Za-z0-9._-]+$',
   HOSTNAME_VALIDATION_PATTERN: '^((\\$\\{?[A-Za-z_][A-Za-z0-9_]*\\}?)|(([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*))(:\\d{1,5})?$',
   DOCKER_SERVICE_VALIDATION_PATTERN: '^[a-zA-Z][a-zA-Z0-9_-]*$'
 }
@@ -98,7 +99,9 @@ export const TEMPLATES = {
   FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
   AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
   IGRP_ENV: 'workspace/igrp-env.hbs',
+  IGRP_AUTH_JSON: 'docker_services/keycloak/volumes/igrp-realm.json.hbs',
   IGRP_NGINX: 'workspace/nginx.conf.hbs',
+  IGRP_REDIS: 'workspace/redis.conf.hbs',
   SERVICE_ENV: 'workspace/service-env.hbs',
   WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
@@ -134,6 +137,8 @@ export const SRC_CONFIG_FILES = {
   EN: 'en',
   VSCODE_SETTINGS: 'vscode_settings.json',
   IGRP_NGINX: 'nginx.conf',
+  IGRP_REDIS: 'redis.conf',
+  IGRP_AUTH_JSON: 'igrp-realm.json',
 };
 
 export const DST_CONFIG_FILES ={
@@ -166,6 +171,7 @@ export const INTERACTIONS_TYPES = {
   ON_OPEN: 'On open',
   ON_SEARCH: 'On search',
   ON_LOAD: 'On load',
+  ON_ERROR: 'On error',
   ON_CANCEL: 'On cancel',
   ON_CONFIRM: 'On confirm',
   ON_ACTION: 'On action',
@@ -180,6 +186,10 @@ export const INTERACTIONS_TYPES = {
   EXPOSE_FORM: "Expose Form",
   CANCEL_ACTION: "Cancel Action",
   VALUE_CHANGE: "Value Change",
+  ON_START_TIME: "On Start Time",
+  ON_END_TIME: "On End Time",
+  ON_COPY_SUCCESS: "On Copy Success",
+  ON_COPY_ERROR: "On Copy Error",
 
   // Values
   CHECKED: "Checked",
@@ -198,6 +208,10 @@ export const INTERACTIONS_TYPES = {
   LINES: 'Lines',
   PIES: 'Pies',
   RADARS: 'Radars',
+
+  // Functions
+  LOADER: "Loader",
+
 }
 
 export const INTERACTIONS_DEFAULTS = {

@@ -1,6 +1,6 @@
 import {
   baseData,
-  baseInteraction, baseRules, baseStyle,
+  baseInteraction, baseRules, baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
   dataCommonProperties,
@@ -35,7 +35,7 @@ export function comboboxProperties() {
     },
     selectClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -59,7 +59,7 @@ function onChangeInteractionFieldVisibility(): InteractionFieldVisibility {
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }

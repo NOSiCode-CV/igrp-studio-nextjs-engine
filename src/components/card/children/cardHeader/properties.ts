@@ -1,8 +1,14 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 
 export function cardHeaderProperties() {
   return {
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

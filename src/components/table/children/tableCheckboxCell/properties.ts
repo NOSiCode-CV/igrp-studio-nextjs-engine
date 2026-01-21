@@ -1,9 +1,15 @@
-import { commonProperties, commonPropertiesMapping, dataCommonProperties } from '../../../default/properties';
+import {
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+  dataCommonProperties,
+} from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableCheckboxCellProperties() {
   return {
     ...cellProperties('Checkbox Column'),
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };

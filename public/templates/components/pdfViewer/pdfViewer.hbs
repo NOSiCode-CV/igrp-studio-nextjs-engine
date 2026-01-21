@@ -1,4 +1,7 @@
 <IGRPPdfViewer
+  {{#if resourceConfig.tag}}
+  id={ `{{{resourceConfig.tag}}}` }
+  {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
@@ -18,6 +21,12 @@
   {{/if~}}
   {{#if (and (not resourceConfig.properties.displayMode) resourceConfig.data.displayMode)}}
   displayMode={ {{#if resourceConfig.data.displayMode.state}}{{resourceConfig.data.displayMode.state.name}}{{else}}{{resourceConfig.data.displayMode.value.code}}{{/if}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.viewerPreference (not resourceConfig.data.viewerPreference))}}
+  viewerPreference={ `{{resourceConfig.properties.viewerPreference}}` }
+  {{/if~}}
+  {{#if (and (not resourceConfig.properties.viewerPreference) resourceConfig.data.viewerPreference)}}
+  viewerPreference={ {{#if resourceConfig.data.viewerPreference.state}}{{resourceConfig.data.viewerPreference.state.name}}{{else}}{{resourceConfig.data.viewerPreference.value.code}}{{/if}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.labelButtonCancel (not resourceConfig.data.labelButtonCancel))}}
   labelButtonCancel={ `{{resourceConfig.properties.labelButtonCancel}}` }
@@ -43,6 +52,18 @@
   {{#if (and (not resourceConfig.properties.notFoundLabel) resourceConfig.data.notFoundLabel)}}
   notFoundLabel={ {{#if resourceConfig.data.notFoundLabel.state}}{{resourceConfig.data.notFoundLabel.state.name}}{{else}}{{resourceConfig.data.notFoundLabel.value.code}}{{/if}} }
   {{/if~}}
+  {{#if (and resourceConfig.properties.loadErrorLabel (not resourceConfig.data.loadErrorLabel))}}
+  loadErrorLabel={ `{{resourceConfig.properties.loadErrorLabel}}` }
+  {{/if~}}
+  {{#if (and (not resourceConfig.properties.loadErrorLabel) resourceConfig.data.loadErrorLabel)}}
+  loadErrorLabel={ {{#if resourceConfig.data.loadErrorLabel.state}}{{resourceConfig.data.loadErrorLabel.state.name}}{{else}}{{resourceConfig.data.loadErrorLabel.value.code}}{{/if}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.loadTimeoutMs (not resourceConfig.data.loadTimeoutMs))}}
+  loadTimeoutMs={ `{{resourceConfig.properties.loadTimeoutMs}}` }
+  {{/if~}}
+  {{#if (and (not resourceConfig.properties.loadTimeoutMs) resourceConfig.data.loadTimeoutMs)}}
+  loadTimeoutMs={ {{#if resourceConfig.data.loadTimeoutMs.state}}{{resourceConfig.data.loadTimeoutMs.state.name}}{{else}}{{resourceConfig.data.loadTimeoutMs.value.code}}{{/if}} }
+  {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}
@@ -53,6 +74,9 @@
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
+  {{/if}}
+  {{#if resourceConfig.interactions}}
+  {{{render-interactions resourceConfig.interactions}}}
   {{/if}}
   {{#if resourceConfig.properties.commonProperties.customProperties}}
   {{{render-properties resourceConfig.properties.commonProperties.customProperties}}}

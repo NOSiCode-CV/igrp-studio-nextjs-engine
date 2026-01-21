@@ -1,11 +1,16 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function pageHeaderProperties() {
   return {
     title: { type: 'string', required: true, default: 'Page Title' },
     description: { type: 'string', required: false, default: 'Page Description' },
     variant: { type: 'string', required: false, enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], default: 'h3' },
-    className: { type: 'string', required: false },
     headlineClassName: { type: 'string', required: false },
     isSticky: { type: 'boolean', required: false },
     showBackButton: { type: 'boolean', required: false, default: false },
@@ -16,6 +21,7 @@ export function pageHeaderProperties() {
         iconBackButton: { type: 'string', required: false, default: 'ArrowLeft', 'x-ui-widget': 'icon', 'x-meta': { label: 'Back Button Icon'} },
       }
     },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

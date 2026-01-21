@@ -48,7 +48,7 @@ export function eurekaProperties() {
         },
         {
           key: 'type',
-          value: 'web',
+          value: 'service-discovery',
         },
         {
           key: 'uuid',

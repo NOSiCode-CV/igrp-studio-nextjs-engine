@@ -1,8 +1,15 @@
-import { baseRules, baseStyle, commonProperties, commonPropertiesMapping } from '../default/properties';
+import {
+  baseRules,
+  baseStyle,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../default/properties';
 
 export function stackProperties() {
   return {
     variant: { type: 'string', required: true, enum: ['xs', 'sm', 'md', 'lg'] },
+    ...classProperties(),
     ...commonProperties()
   }
 }

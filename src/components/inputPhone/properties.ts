@@ -4,7 +4,7 @@ import {
   commonProperties,
   commonPropertiesMapping,
   iconProperties,
-  dataCommonProperties, baseStyle, baseRules,
+  dataCommonProperties, baseStyle, baseRules, classProperties,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 import { InteractionFieldVisibility } from '../../interfaces/types';
@@ -35,8 +35,9 @@ export function inputPhoneProperties() {
     label: { type: 'string', required: false, default: 'Input Phone' },
     description: { type: 'string', required: false },
     //floatingLabel: { type: 'boolean', required: false, default: false },
-    name: { type: 'string', required: true, default: 'phone' },
     dir: { type: 'string', required: false, default: 'ltr' },
+    minLength: { type: 'number', required: false },
+    maxLength: { type: 'number', required: false },
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
     helperText: { type: 'string', required: false, default: '' },
@@ -45,7 +46,7 @@ export function inputPhoneProperties() {
     international: { type: 'boolean', required: false, default: true },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    className: { type: 'string', required: false },
+    ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),
   };
@@ -71,7 +72,7 @@ function onChangeInteractionFieldVisibility(): InteractionFieldVisibility {
     actionName: { visible: false },
     fnCustomSet: { visible: true },
     fnCustomCode: {
-      imports: { visible: false },
+      imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
       actionCode: { visible: false }

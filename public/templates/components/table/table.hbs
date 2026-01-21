@@ -1,4 +1,7 @@
 <IGRPDataTable{{{typeFormatter resourceConfig.dataType}}}
+  {{#if resourceConfig.tag}}
+  id={ `{{{resourceConfig.tag}}}` }
+  {{/if}}
   {{#if resourceConfig.properties.commonProperties.generateReference}}
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
@@ -7,7 +10,7 @@
   showFilter={ {{resourceConfig.properties.showFilter}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.showPagination (not resourceConfig.data.showPagination))}}
-  showPagination={ {{resourceConfig.properties.showFilter}} }
+  showPagination={ {{resourceConfig.properties.showPagination}} }
   {{/if~}}
   {{#if (and resourceConfig.properties.showToggleColumn (not resourceConfig.data.showToggleColumn))}}
   showToggleColumn={ {{resourceConfig.properties.showToggleColumn}} }
@@ -35,6 +38,9 @@
   {{/if~}}
   {{#if (and resourceConfig.properties.paginationClassName (not resourceConfig.data.paginationClassName))}}
   paginationClassName={ `{{resourceConfig.properties.paginationClassName}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.pageSizePagination (not resourceConfig.data.pageSizePagination))}}
+  pageSizePagination={ [{{#each resourceConfig.properties.pageSizePagination}}{{this}}{{#if @last}}{{else}}, {{/if}}{{/each}}] }
   {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }

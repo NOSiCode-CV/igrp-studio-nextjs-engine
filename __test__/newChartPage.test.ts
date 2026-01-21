@@ -1,4 +1,4 @@
-import { initComponents, newPage } from '../src';
+import { initComponents, newPage, setEngineConfiguration } from '../src';
 import { Layout, PageConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 import { baseInteraction } from '../src/components/default/properties';
@@ -32,13 +32,15 @@ export const chartLayout: Layout = {
           id: 'chart_area',
           tag: 'chart_area',
           componentName: 'areachart',
+          data: {
+            areas: {
+              value: {
+                id: 'areas_data',
+                code: 'areas'
+              }
+            }
+          },
           properties: {
-            areas: [
-              {
-                dataKey: 'temperature',
-                type: 'linear',
-              },
-            ],
             categoryKey: "mes",
             title: "Temperatura Média",
             description: "Janeiro - Junho 2024",
@@ -85,13 +87,15 @@ export const chartLayout: Layout = {
           id: 'hor_chart_bar',
           tag: 'hor_chart_bar',
           componentName: 'horizontalBarchart',
+          data: {
+            bars: {
+              value: {
+                id: 'bars_temp_data',
+                code: 'barsTemp'
+              }
+            }
+          },
           properties: {
-            bars: [
-              {
-                dataKey: 'temperature',
-                radius: 5
-              },
-            ],
             categoryKey: "mes",
             title: "Temperatura Média",
             description: "Janeiro - Junho 2024",
@@ -126,13 +130,15 @@ export const chartLayout: Layout = {
           id: 'ver_chart_bar',
           tag: 'ver_chart_bar',
           componentName: 'verticalBarchart',
+          data: {
+            bars: {
+              value: {
+                id: 'bars_temp_data',
+                code: 'barsTemp'
+              }
+            }
+          },
           properties: {
-            bars: [
-              {
-                dataKey: 'temperature',
-                radius: 5
-              },
-            ],
             categoryKey: "mes",
             title: "Temperatura Média",
             description: "Janeiro - Junho 2024",
@@ -167,13 +173,15 @@ export const chartLayout: Layout = {
           id: 'rad_chart_bar',
           tag: 'rad_chart_bar',
           componentName: 'radialBarchart',
+          data: {
+            bars: {
+              value: {
+                id: 'bars_desktop_data',
+                code: 'barsDesktop'
+              }
+            }
+          },
           properties: {
-            bars: [
-              {
-                dataKey: "desktop",
-                name: "Desktop",
-              },
-            ],
             categoryKey: "month",
             nameKey: "month",
             title: "Monthly Stats",
@@ -224,12 +232,15 @@ export const chartLayout: Layout = {
           id: 'line_chart',
           tag: 'line_chart',
           componentName: 'linechart',
+          data: {
+            lines: {
+              value: {
+                id: 'lines_temp_data',
+                code: 'linesTemp'
+              }
+            }
+          },
           properties: {
-            lines: [
-              {
-                dataKey: 'temperature',
-              },
-            ],
             categoryKey: "mes",
             title: "Temperatura Média",
             description: "Janeiro - Junho 2024",
@@ -264,14 +275,16 @@ export const chartLayout: Layout = {
           id: 'pie_chart',
           tag: 'pie_chart',
           componentName: 'piechart',
+          data: {
+            pies: {
+              value: {
+                id: 'pies_users_data',
+                code: 'piesUsers'
+              }
+            }
+          },
           properties: {
             nameKey: 'browser',
-            pies: [
-              {
-                dataKey: 'users',
-                showLabels: true
-              },
-            ],
             categoryKey: "browser",
             title: "Média de Utilizadores",
             description: "Janeiro - Junho 2024",
@@ -317,13 +330,15 @@ export const chartLayout: Layout = {
           id: 'radar_chart',
           tag: 'radar_chart',
           componentName: 'radarchart',
+          data: {
+            radars: {
+              value: {
+                id: 'radars_users_data',
+                code: 'radarsUsers'
+              }
+            }
+          },
           properties: {
-            radars: [
-              {
-                dataKey: 'users',
-                showLabels: true
-              },
-            ],
             categoryKey: "browser",
             title: "Média de Utilizadores",
             description: "Janeiro - Junho 2024",
@@ -359,16 +374,78 @@ export const chartLayout: Layout = {
   ]
 };
 
+const pageLayout: Layout = {
+  id: 'page_layout',
+  tag: 'page_layout',
+  componentName: 'page',
+  properties: {
+
+  },
+  children: [chartLayout],
+  interactions: {
+    onLoad: {
+      function: {
+        fnCustomCode: {
+          fnCode: `
+  const areas: IGRPAreaConfig[] = [
+    {
+      dataKey: 'temperature',
+      type: 'linear',
+    },
+  ];
+  
+  const barsTemp: IGRPBarConfig[] = [
+    {
+      dataKey: 'temperature',
+      radius: 5
+    },
+  ];
+  
+  const barsDesktop: IGRPBarConfig[] = [
+    {
+      dataKey: "desktop",
+      name: "Desktop",
+    },
+  ];
+  
+  const linesTemp: IGRPLineConfig[] = [
+    {
+      dataKey: 'temperature',
+    },
+  ];
+  
+  const piesUsers: IGRPPieConfig[] = [
+    {
+      dataKey: 'users',
+      showLabels: true
+    },
+  ];
+  
+  const radarsUsers: IGRPRadarConfig[] = [
+    {
+      dataKey: 'users'
+    },
+  ];
+  
+          `,
+        },
+      },
+      type: "function"
+    },
+  }
+}
+
 const pageConfig: PageConfig = {
   id: 'i89Ayp9lmL2p',
   type: 'page',
   types: [],
   pageName: 'charts',
   path: 'charts',
-  components: chartLayout,
+  components: pageLayout,
 };
 
 beforeAll(async () => {
+  setEngineConfiguration({ environment: 'development' });
   await initComponents();
 });
 

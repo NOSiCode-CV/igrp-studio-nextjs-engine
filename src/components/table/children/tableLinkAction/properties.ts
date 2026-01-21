@@ -1,4 +1,10 @@
-import { baseInteraction, baseRules, commonProperties, commonPropertiesMapping } from '../../../default/properties';
+import {
+  baseInteraction,
+  baseRules,
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+} from '../../../default/properties';
 import { actionProperties, actionPropertiesMapping } from '../tableColumns/properties';
 import { InteractionFieldVisibility } from '../../../../interfaces/types';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/constants';
@@ -6,7 +12,9 @@ import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../../../utils/con
 export function tableLinkActionProperties() {
   return {
     ...actionProperties('Link'),
+    content: { type: 'string', required: false },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
+    ...classProperties(),
     ...commonProperties(),
   };
 }

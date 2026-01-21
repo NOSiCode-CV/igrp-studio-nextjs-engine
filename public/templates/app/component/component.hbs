@@ -9,14 +9,12 @@
 
 {{{resolve-imports resourceConfig.components registry resourceConfig.name basePath undefined resourceConfig}}}
 
+export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{ {{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}}, {{/if}}{{/each}} } : { {{{resolveFunctionArgs resourceConfig.args}}} }{{/if}}) {
+
 {{#if (eq resourceConfig.type 'processStep')}}
-interface StepMethods {
-  saveStep: () => Promise<{ success: boolean; data?: any; error?: string }>;
-  completeStep: () => Promise<{ success: boolean; data?: any; error?: string }>;
-}
+  const { processKey, processInstanceId, userTaskInstanceId, onRegisterMethods, variables } = config;
 {{/if~}}
 
-export default function {{capitalize (toCamelCaseFromNatural resourceConfig.name)}}({{#if resourceConfig.args}}{ {{#each resourceConfig.args}}{{{this.name}}}{{#if @last}}{{else}}, {{/if}}{{/each}} } : { {{{resolveFunctionArgs resourceConfig.args}}} }{{/if}}) {
 {{#if (notNullOrEmpty resourceConfig.components)}}
 
   {{#if resourceConfig.types}}

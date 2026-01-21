@@ -1,7 +1,7 @@
 import {
   baseInteraction,
   baseRules,
-  baseStyle,
+  baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
@@ -11,6 +11,7 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function pageProperties() {
   return {
     variant: { type: 'string', required: true, enum: ['default', 'narrow', 'wide'], default: 'default' },
+    ...classProperties(),
     ...commonProperties(),
   }
 }

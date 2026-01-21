@@ -1,4 +1,4 @@
-name: '{{toLowerCase resourceConfig.workspace}}-workspace'
+name: '{{toLowerCase resourceConfig.workspace}}-igrp'
 
 networks:
   {{toLowerCase resourceConfig.workspace}}-network:
@@ -37,6 +37,8 @@ services:
       resources:
         limits:
           memory: 700m
+    extra_hosts:
+      {{toLowerCase ../resourceConfig.workspace}}-igrp: host-gateway
     labels:
       type: "web"
       is_project: true
@@ -48,7 +50,9 @@ services:
   {{/if~}}
   {{#if (eq this.config.type 'nextjs')}}
   {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}:
-    build: ./projects/{{this.basePath}}
+    build: 
+      context: ./projects/{{this.basePath}}
+      dockerfile: docker/development/Dockerfile
     container_name: {{#if this.containerName}}{{this.containerName}}{{else}}{{normalizeHostname this.config.name}}-ui{{/if}}
     ports:
       - "{{this.ports.external}}:{{this.ports.internal}}"
@@ -63,6 +67,8 @@ services:
     {{#if this.environments}}
     env_file: ".{{toLowerCase this.config.name}}.env"
     {{/if}}
+    extra_hosts:
+      {{toLowerCase ../resourceConfig.workspace}}-igrp: host-gateway
     stdin_open: true
     labels:
       type: "web"

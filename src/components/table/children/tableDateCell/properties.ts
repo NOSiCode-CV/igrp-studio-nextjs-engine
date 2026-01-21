@@ -1,4 +1,9 @@
-import { commonProperties, commonPropertiesMapping, dataCommonProperties } from '../../../default/properties';
+import {
+  classProperties,
+  commonProperties,
+  commonPropertiesMapping,
+  dataCommonProperties,
+} from '../../../default/properties';
 import { cellProperties, cellPropertiesMapping } from '../tableColumns/properties';
 
 export function tableDateCellProperties() {
@@ -7,6 +12,7 @@ export function tableDateCellProperties() {
     ...dataCommonProperties(),
     date: {type: 'string', required: true, default: '01/01/2025'},
     dateFormat: {type: 'string', required: false, default: 'dd/MM/YYYY', enum: ['dd/MM/yyyy', 'dd-MM-YYYY', 'yyyy/MM/dd', 'yyyy-MM-dd']},
+    ...classProperties(),
     ...commonProperties(),
   };
 }

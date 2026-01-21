@@ -14,7 +14,7 @@ import {
   Import,
   State,
   Reference,
-  FieldValidation, PermittedActions,
+  FieldValidation, PermittedActions, FieldValidationMetadata,
 } from '../interfaces/types';
 import { PATTERNS, VALID_SEGMENT_PATTERN } from '../utils/constants';
 import { ajvInstance } from '../utils/ajv-instance';
@@ -66,6 +66,11 @@ const stateSchema: JSONSchemaType<State> = {
       type: 'boolean',
       nullable: true,
       errorMessage: 'The is array value, if provided, must be a valid boolean.'
+    },
+    isOptional: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The is optional value, if provided, must be a valid boolean.'
     },
     imports: {
       type: 'array',
@@ -254,6 +259,21 @@ const functionSchema: JSONSchemaType<CustomFunctionConfig> = {
   additionalProperties: false,
 };
 
+const fieldValidationMetadataSchema: JSONSchemaType<FieldValidationMetadata> = {
+  type: 'object',
+  properties: {
+    validationKey: {
+      type: 'string',
+    },
+    message: {
+      type: 'string',
+      nullable: true,
+    },
+  },
+  required: [],
+};
+
+
 const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
   type: 'object',
   properties: {
@@ -344,6 +364,10 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
       nullable: true,
       errorMessage: 'The attribute maxDate, if provided, must be a valid string',
     },
+    errors: {
+      type: 'array',
+      items: fieldValidationMetadataSchema
+    }
   },
   required: [],
   errorMessage: 'The validation, if provided, must be a valid validation object definition.',
@@ -397,7 +421,7 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
         required: [],
         type: 'object'
       },
-    }
+    },
   },
   required: ['name', 'componentId', 'type', 'required'],
   additionalProperties: false,

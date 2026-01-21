@@ -1,5 +1,12 @@
 import { Component } from '../components';
-import { Arguments, ElementField, Layout, Segment, StyleDefinition } from '../interfaces/types';
+import {
+  Arguments,
+  ElementField,
+  FieldValidationMetadata,
+  Layout,
+  Segment,
+  StyleDefinition,
+} from '../interfaces/types';
 import { TABLE_COLUMNS } from '../components/table/children/tableColumns';
 import { TABLE_FILTERS } from '../components/table/children/tableFilters';
 import { CARD_CONTENT } from '../components/card/children/cardContent';
@@ -9,7 +16,7 @@ import { renderCode } from '../utils/renderCode';
 import { layoutStyleToClasses } from './layoutStyleToClasses';
 import { spacingToClasses } from './spacingToClasses';
 import { sizeToClasses } from './sizeToClasses';
-import { isString, replaceTemplate } from '../utils/helpers';
+import { replaceTemplate } from '../utils/helpers';
 import { typographyStyleToClasses } from './typographyStyleToClasses';
 import { bordersStyleToClasses } from './bordersStyleToClasses';
 import { positionStyleToClasses } from './positionStyleToClasses';
@@ -22,7 +29,8 @@ import { TEXT_LIST_SUBITEMS } from '../components/textList/children/textListSubI
 import { TEXT_LIST_ITEM_CONTENT } from '../components/textList/children/textListItemContent/index';
 import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
-import { PROCESS_STEP } from '../components/processStep/index';
+import { CARD_DETAILS_ITEM } from '../components/cardDetails/children/cardDetailsItem/index';
+import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/index';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -189,16 +197,25 @@ export function resolveStateDefault(
   fields?: ElementField[],
 ): string {
 
-  if(type === 'string') {
-    if(defaultValue === undefined)
-      return 'undefined';
-    else return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+  // Helper to check ISO date format
+  const isISODate = (val: string) => {
+    const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
+    return isoRegex.test(val);
+  };
+
+  if (type === 'string') {
+    if (defaultValue === undefined) return 'undefined';
+    if(!isISODate(defaultValue.trim())) {
+      return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+    }
   }
 
   const trimmed = defaultValue?.trim() ?? '';
 
+  // Empty values for non-string/object types
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
 
+  // Handle booleans, numbers, arrays, objects as string literals
   if (
     type !== 'string' &&
     (trimmed === 'null' ||
@@ -214,16 +231,25 @@ export function resolveStateDefault(
     return trimmed;
   }
 
+  // Handle ISO date strings
+  if (isISODate(trimmed)) {
+    return `new Date("${trimmed}")`;
+  }
+
   // Handle object with nested fields
-  if (type === 'object' && fields && fields.length > 0) {
-    const objectBody = fields
-      .map((f) => {
-        const value = resolveStateDefault(f.defaultValue, f.type, f.isList, f.fields);
-        return `${f.name}: ${value}`;
-      })
-      .join(', ');
-    const result = `{ ${objectBody} }`;
-    return isList === true ? `[${result}]` : result;
+  if (type === 'object') {
+    if (fields && fields.length > 0) {
+      const objectBody = fields
+        .map((f) => {
+          const value = resolveStateDefault(f.defaultValue, f.type, f.isList, f.fields);
+          return `${f.name}: ${value}`;
+        })
+        .join(', ');
+      const result = `{ ${objectBody} }`;
+      return isList === true ? `[${result}]` : result;
+    } else {
+      return isList === true ? `[${trimmed}]` : trimmed;
+    }
   }
 
   // Handle lists
@@ -231,7 +257,7 @@ export function resolveStateDefault(
     return trimmed !== '' ? trimmed : '[]';
   }
 
-  // Handle strings and fallback
+  // Fallback for strings
   return type === 'string' ? `\`${trimmed.replace(/"/g, '\\"')}\`` : trimmed;
 }
 
@@ -239,70 +265,113 @@ export function resolveZodTypes(field?: ElementField): string {
   if (!field) return 'z.unknown()';
 
   const { type, isList, required, validation, fields } = field;
-  let zodType: string;
   const lowerType = type.toLowerCase();
+
+  const getError = (key: string): string => {
+    const msg = validation?.errors?.find(
+      (e: FieldValidationMetadata) => e.validationKey === key
+    )?.message;
+    return msg ? `, { error: "${msg}" }` : '';
+  };
 
   const isPrimitive = ['string', 'number', 'boolean', 'date', 'any', 'unknown'].includes(lowerType);
 
-  if (lowerType === 'object' && fields && fields.length > 0) {
-    const inner = fields.map(f => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
+  let zodType: string;
+
+  if (lowerType === 'object' && fields?.length) {
+    const inner = fields
+      .map(f => `${f.name}: ${resolveZodTypes(f)}`)
+      .join(', ');
     zodType = `z.object({ ${inner} })`;
   } else if (isPrimitive) {
-    switch (lowerType) {
-      case 'string': zodType = 'z.string()'; break;
-      case 'number': zodType = 'z.number()'; break;
-      case 'boolean': zodType = 'z.boolean()'; break;
-      case 'date': zodType = 'z.date()'; break;
-      case 'any': zodType = 'z.any()'; break;
-      default: zodType = 'z.unknown()';
-    }
+    const primitiveMap: Record<string, string> = {
+      string: 'z.string()',
+      number: 'z.coerce.number()',
+      boolean: 'z.boolean()',
+      date: 'z.date()',
+      any: 'z.any()',
+      unknown: 'z.unknown()',
+    };
+    zodType = primitiveMap[lowerType] ?? 'z.unknown()';
   } else {
-    zodType = `${toCamelCase(type)}`;
+    zodType = `z.${toCamelCase(type)}()`;
   }
 
-  // Apply validations
   if (validation) {
-    const validators: string[] = [];
+    const v: string[] = [];
 
     if (lowerType === 'string') {
-      if (validation.minLength) validators.push(`.min(${validation.minLength})`);
-      if (validation.maxLength) validators.push(`.max(${validation.maxLength})`);
-      if (validation.regex) validators.push(`.regex(${validation.regex})`);
-      if (validation.email) validators.push(`.email()`);
-      if (validation.url) validators.push(`.url()`);
-      if (validation.uuid) validators.push(`.uuid()`);
-      if (validation.startsWith) validators.push(`.startsWith(${JSON.stringify(validation.startsWith)})`);
-      if (validation.endsWith) validators.push(`.endsWith(${JSON.stringify(validation.endsWith)})`);
-      if (validation.includes) validators.push(`.includes(${JSON.stringify(validation.includes)})`);
+      if (validation.minLength !== undefined)
+        v.push(`.min(${validation.minLength}${getError('minLength')})`);
+
+      if (validation.maxLength !== undefined)
+        v.push(`.max(${validation.maxLength}${getError('maxLength')})`);
+
+      if (validation.regex)
+        v.push(`.regex(${validation.regex}${getError('regex')})`);
+
+      if (validation.email)
+        v.push(`.email(${getError('email').replace(/^, /, '')})`);
+
+      if (validation.url)
+        v.push(`.url(${getError('url').replace(/^, /, '')})`);
+
+      if (validation.uuid)
+        v.push(`.uuid(${getError('uuid').replace(/^, /, '')})`);
+
+      if (validation.startsWith)
+        v.push(`.startsWith(${JSON.stringify(validation.startsWith)}${getError('startsWith')})`);
+
+      if (validation.endsWith)
+        v.push(`.endsWith(${JSON.stringify(validation.endsWith)}${getError('endsWith')})`);
+
+      if (validation.includes)
+        v.push(`.includes(${JSON.stringify(validation.includes)}${getError('includes')})`);
     }
 
     if (lowerType === 'number') {
-      if (validation.min !== undefined) validators.push(`.min(${validation.min})`);
-      if (validation.max !== undefined) validators.push(`.max(${validation.max})`);
-      if (validation.positive) validators.push(`.positive()`);
-      if (validation.negative) validators.push(`.negative()`);
-      if (validation.int) validators.push(`.int()`);
-      if (validation.finite) validators.push(`.finite()`);
+      if (validation.min !== undefined)
+        v.push(`.min(${validation.min}${getError('min')})`);
+
+      if (validation.max !== undefined)
+        v.push(`.max(${validation.max}${getError('max')})`);
+
+      if (validation.positive)
+        v.push(`.positive(${getError('positive').replace(/^, /, '')})`);
+
+      if (validation.negative)
+        v.push(`.negative(${getError('negative').replace(/^, /, '')})`);
+
+      if (validation.int)
+        v.push(`.int(${getError('int').replace(/^, /, '')})`);
+
+      if (validation.finite)
+        v.push(`.finite(${getError('finite').replace(/^, /, '')})`);
     }
 
     if (lowerType === 'date') {
-      if (validation.minDate) validators.push(`.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { message: 'Date must be after ${validation.minDate}' })`);
-      if (validation.maxDate) validators.push(`.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { message: 'Date must be before ${validation.maxDate}' })`);
+      if (validation.minDate)
+        v.push(
+          `.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { error: "${getError('minDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be after ${validation.minDate}`}" })`
+        );
+
+      if (validation.maxDate)
+        v.push(
+          `.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { error: "${getError('maxDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be before ${validation.maxDate}`}" })`
+        );
     }
 
-    zodType += validators.join('');
+    zodType += v.join('');
   }
 
-  if (isList === true) {
+  if (isList) {
     zodType = `z.array(${zodType})`;
   }
 
   if (!required) {
     zodType += '.optional()';
-  } else {
-    if(lowerType === "string") {
-      zodType += '.nonempty()';
-    }
+  } else if (lowerType === 'string') {
+    zodType += `.nonempty(${getError('required').replace(/^, /, '')})`;
   }
 
   return zodType;
@@ -391,8 +460,12 @@ export function extractInfoItem(children: Layout[]) {
   return children.filter((it) => it.componentName === INFO_ITEM);
 }
 
-export function extractProcessSteps(children: Layout[]) {
-  return children.filter((it) => it.componentName === PROCESS_STEP);
+export function extractCardDetailsItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === CARD_DETAILS_ITEM);
+}
+
+export function extractAccordionItem(children: Layout[]) {
+  return children.filter((it) => it.componentName === ACCORDION_ITEM);
 }
 
 export function resolveComponent(
@@ -487,11 +560,11 @@ export function renderProperties(
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)}` : `${k}={ ${resolveStateDefault(`${v}`, `${value? typeof value : undefined}`)} }`;
+                return isJson === true? `${k}: ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))}` : `${k}={ ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))} }`;
               })
               .join('\n');
           } else {
-            return isJson === true? `${key}: ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)}` : `${key}={ ${resolveStateDefault(`${value}`, `${value? typeof value : undefined}`)} }`;
+            return isJson === true? `${key}: ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))}` : `${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')

@@ -3,7 +3,7 @@
   ref={ getSectionRef('{{resourceConfig.tag}}') }
   data-section-id={ '{{resourceConfig.tag}}' }
   {{/if}}
-  name={ `{{resourceConfig.tag}}` }
+  id={ `{{resourceConfig.tag}}` }
   {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}
@@ -21,6 +21,12 @@
   {{/if~}}
   {{#if (and resourceConfig.properties.defaultProtocol (not resourceConfig.data.defaultProtocol))}}
   defaultProtocol={ `{{resourceConfig.properties.defaultProtocol}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.minLength (not resourceConfig.data.minLength))}}
+  minLength={ {{resourceConfig.properties.minLength }} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.maxLength (not resourceConfig.data.maxLength))}}
+  maxLength={ {{resourceConfig.properties.maxLength }} }
   {{/if~}}
   {{#if (and resourceConfig.properties.error (not resourceConfig.data.error))}}
   error={ `{{resourceConfig.properties.error}}` }

@@ -1,7 +1,14 @@
 <IGRPDataTableFilterDropdown
   column={column}
+  {{#if resourceConfig.properties.placeholder}}
   placeholder={ `{{resourceConfig.properties.placeholder}}` }
-  {{!--onChange={setInput{{resourceConfig.tag}}Value}--}}
+  {{/if}}
+  {{#if resourceConfig.properties.showFilter}}
+  showFilter={ {{resourceConfig.properties.showFilter}} }
+  {{/if}}
+  {{#if resourceConfig.properties.notFoundText}}
+  notFoundText={ `{{resourceConfig.properties.notFoundText}}` }
+  {{/if}}
   {{#if (and resourceConfig.properties.disabled (not resourceConfig.data.disabled))}}
   disabled
   {{/if~}}

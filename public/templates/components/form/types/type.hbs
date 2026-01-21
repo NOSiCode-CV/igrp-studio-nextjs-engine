@@ -1,3 +1,5 @@
+z.config(z.locales.en());
+
 {{#each resourceConfig.types}}
 {{#if this.isEnum}}
 const {{toCamelCase this.name}} = z.enum([{{#each this.fields}}'{{#if this.defaultValue}}{{{this.defaultValue}}}{{else}}{{{this.name}}}{{/if}}'{{#if @last}}{{else}}, {{/if}}{{/each}}])
