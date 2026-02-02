@@ -66,32 +66,30 @@ function parseComponentProps(propsContent: string): { props: ComponentDef['props
 
   const cleanContent = propsContent.trim();
 
-  // Destructured with type reference ({ a, b }: Type)
+  // Handle type reference ({ a, b }: Type)
   const refMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*([A-Z][a-zA-Z0-9_]*)/);
   if (refMatch) {
-    const propNames = refMatch[1].split(',').map(p => parseNameDefault(p.trim()));
-    for (const { name, optional, defaultValue } of propNames) {
+    const propsStr = refMatch[1];
+    const propItems = parsePropsString(propsStr);
+
+    for (const { name, optional, defaultValue } of propItems) {
       props.push(createPropDefinition(name, 'any', optional, defaultValue));
     }
     argumentsInterface = refMatch[2];
     return { props, argumentsInterface };
   }
 
-  // Destructured with inline type definition
-  const inlineMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*(\{[\s\S]*?\})(?:\s*[^}])?/);
+  // Handle inline type definition - improved regex to capture function types
+  const inlineMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*(\{[\s\S]*?\})(?:\s*[=),])?/);
   if (inlineMatch) {
-    const propNames = inlineMatch[1].split(',').map(p => parseNameDefault(p.trim()));
+    const propsStr = inlineMatch[1];
     const typeContent = inlineMatch[2];
-    const typeRegex = /(\w+)(\??)\s*:\s*([^;\n}]+)(?=\s*(?:;|\}|\n|$))/g;
-    const typeMap = new Map<string, { type: string; optional: boolean }>();
-    let typeMatch;
-    while ((typeMatch = typeRegex.exec(typeContent)) !== null) {
-      typeMap.set(typeMatch[1].trim(), {
-        type: typeMatch[3].trim(),
-        optional: !!typeMatch[2]
-      });
-    }
-    for (const { name, optional, defaultValue } of propNames) {
+    const propItems = parsePropsString(propsStr);
+
+    // Parse the type definition
+    const typeMap = parseTypeDefinition(typeContent);
+
+    for (const { name, optional, defaultValue } of propItems) {
       if (typeMap.has(name)) {
         const typeDef = typeMap.get(name)!;
         props.push(createPropDefinition(name, typeDef.type, optional || typeDef.optional, defaultValue));
@@ -99,17 +97,230 @@ function parseComponentProps(propsContent: string): { props: ComponentDef['props
         props.push(createPropDefinition(name, 'any', optional, defaultValue));
       }
     }
-    return { props: props.filter((it) => it.name != '') };
+    return { props: props.filter((it) => it.name !== '') };
   }
 
   return { props: [], argumentsInterface: undefined };
 }
 
+function parseTypeDefinition(typeContent: string): Map<string, { type: string; optional: boolean }> {
+  const typeMap = new Map<string, { type: string; optional: boolean }>();
+
+  // Remove outer braces if present
+  let content = typeContent.trim();
+  if (content.startsWith('{') && content.endsWith('}')) {
+    content = content.slice(1, -1).trim();
+  }
+
+  let i = 0;
+
+  while (i < content.length) {
+    // Skip whitespace
+    while (i < content.length && /\s/.test(content[i])) i++;
+    if (i >= content.length) break;
+
+    // Parse property name
+    let propertyName = '';
+    let isOptional = false;
+
+    while (i < content.length && content[i] !== ':' && content[i] !== '?') {
+      propertyName += content[i];
+      i++;
+    }
+
+    propertyName = propertyName.trim();
+
+    // Check for optional marker
+    if (i < content.length && content[i] === '?') {
+      isOptional = true;
+      i++;
+    }
+
+    // Skip whitespace after property name
+    while (i < content.length && /\s/.test(content[i])) i++;
+
+    // Expect colon
+    if (i < content.length && content[i] === ':') {
+      i++;
+    } else {
+      // Skip to next property
+      while (i < content.length && content[i] !== ',' && content[i] !== '}') i++;
+      i++; // Skip comma or closing brace
+      continue;
+    }
+
+    // Skip whitespace after colon
+    while (i < content.length && /\s/.test(content[i])) i++;
+
+    // Parse type value
+    let typeValue = '';
+    let depth = 0;
+    let inString = false;
+    let stringChar = '';
+
+    while (i < content.length) {
+      const char = content[i];
+
+      // Handle strings
+      if ((char === '"' || char === "'" || char === '`') && !inString) {
+        inString = true;
+        stringChar = char;
+        typeValue += char;
+        i++;
+        continue;
+      } else if (inString && char === stringChar) {
+        inString = false;
+        typeValue += char;
+        i++;
+        continue;
+      } else if (inString) {
+        typeValue += char;
+        i++;
+        continue;
+      }
+
+      // Handle brackets and parentheses
+      if (char === '(' || char === '{' || char === '[') {
+        depth++;
+      } else if (char === ')' || char === '}' || char === ']') {
+        depth--;
+      }
+
+      // Check for end of type (comma at depth 0)
+      if (char === ',' && depth === 0) {
+        break;
+      }
+
+      typeValue += char;
+      i++;
+    }
+
+    // Clean up type value
+    typeValue = typeValue.trim();
+
+    if (propertyName && typeValue) {
+      typeMap.set(propertyName, {
+        type: typeValue,
+        optional: isOptional
+      });
+    }
+
+    // Skip the comma
+    if (i < content.length && content[i] === ',') {
+      i++;
+    }
+  }
+
+  return typeMap;
+}
+
+function parsePropsString(propsStr: string): Array<{name: string; optional: boolean; defaultValue?: string}> {
+  const result = [];
+  let current = '';
+  let depth = 0;
+  let inString = false;
+  let stringChar = '';
+
+  for (let i = 0; i < propsStr.length; i++) {
+    const char = propsStr[i];
+
+    // Handle strings
+    if ((char === '"' || char === "'" || char === '`') && !inString) {
+      inString = true;
+      stringChar = char;
+      current += char;
+      continue;
+    } else if (inString && char === stringChar) {
+      inString = false;
+      current += char;
+      continue;
+    } else if (inString) {
+      current += char;
+      continue;
+    }
+
+    // Handle brackets and parentheses
+    if (char === '(' || char === '{' || char === '[') {
+      depth++;
+    } else if (char === ')' || char === '}' || char === ']') {
+      depth--;
+    }
+
+    // Check for comma separator at depth 0
+    if (char === ',' && depth === 0 && !inString) {
+      const trimmed = current.trim();
+      if (trimmed) {
+        result.push(parseNameDefault(trimmed));
+      }
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  // Add the last item
+  const trimmed = current.trim();
+  if (trimmed) {
+    result.push(parseNameDefault(trimmed));
+  }
+
+  return result;
+}
+
 function parseNameDefault(raw: string): { name: string; optional: boolean; defaultValue?: string } {
-  const [namePart, defaultValue] = raw.split('=');
-  const name = namePart.trim().replace('?', '');
-  const optional = namePart.includes('?');
-  return { name, optional, defaultValue: defaultValue?.trim() };
+  // Check if this is a spread operator or empty
+  if (raw.startsWith('...') || !raw) {
+    return { name: '', optional: false };
+  }
+
+  // Split by '=', but be careful with strings and nested structures
+  let namePart = raw;
+  let defaultValue;
+
+  let depth = 0;
+  let inString = false;
+  let stringChar = '';
+  let splitIndex = -1;
+
+  for (let i = 0; i < raw.length; i++) {
+    const char = raw[i];
+
+    // Handle strings
+    if ((char === '"' || char === "'" || char === '`') && !inString) {
+      inString = true;
+      stringChar = char;
+      continue;
+    } else if (inString && char === stringChar) {
+      inString = false;
+      continue;
+    } else if (inString) {
+      continue;
+    }
+
+    // Handle brackets and parentheses
+    if (char === '(' || char === '{' || char === '[') {
+      depth++;
+    } else if (char === ')' || char === '}' || char === ']') {
+      depth--;
+    }
+
+    // Look for '=' only when not in string and at depth 0
+    if (char === '=' && depth === 0 && !inString) {
+      splitIndex = i;
+      break;
+    }
+  }
+
+  if (splitIndex > -1) {
+    namePart = raw.substring(0, splitIndex).trim();
+    defaultValue = raw.substring(splitIndex + 1).trim();
+  }
+
+  const name = namePart.replace(/\?$/, '').trim();
+  const optional = namePart.endsWith('?') || namePart.includes('?:');
+
+  return { name, optional, defaultValue };
 }
 
 function createPropDefinition(name: string, type: string, isOptional: boolean, defaultValue?: string): ComponentDef['props'][0] {
