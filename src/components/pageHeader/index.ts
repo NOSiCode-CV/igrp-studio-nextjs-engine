@@ -3,7 +3,7 @@ import {
   pageHeaderProperties,
   pageHeaderVariants,
   pageHeaderChildProperties,
-  pageHeaderChildPropertiesMapping, pageHeaderRules, pageHeaderStyle,
+  pageHeaderChildPropertiesMapping, pageHeaderRules, pageHeaderStyle, pageHeaderInteractions,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
@@ -22,6 +22,7 @@ export default {
     component.getPropertiesMapping(pageHeaderPropertiesMapping());
     component.getChildProperties(pageHeaderChildProperties());
     component.getChildPropertiesMapping(pageHeaderChildPropertiesMapping());
+    component.getInteractions(pageHeaderInteractions());
     component.getRules(pageHeaderRules())
     component.getStyle(pageHeaderStyle())
     component.loadStates([]);
