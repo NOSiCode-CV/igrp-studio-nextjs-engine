@@ -17,6 +17,8 @@ export function inputDatePickerSingleProperties() {
     disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },
     disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
     defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     helperText: { type: 'string', required: false, default: '' },
     required: { type: 'boolean', required: false },

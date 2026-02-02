@@ -18,6 +18,8 @@ export function datePickerMultipleProperties() {
     helperText: { type: 'string', required: false, default: '' },
     startDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
     endDate: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     //floatingLabel: { type: 'boolean', required: false },
     error: { type: 'string', required: false },
     required: { type: 'boolean', required: false },

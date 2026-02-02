@@ -17,6 +17,8 @@ export function calendarMultipleTimeProperties() {
     endTimeLabel: { type: 'string', required: false, default: 'End Time' },
     showTimeIndicator: { type: 'boolean', required: false, default: false },
     hideEndTimePicker: { type: 'boolean', required: false, default: false },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
     ...classProperties(),
