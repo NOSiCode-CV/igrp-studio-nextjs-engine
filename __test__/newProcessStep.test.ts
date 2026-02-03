@@ -6,12 +6,13 @@ import { badgeLayout } from './newBadgePage.test';
 export const OUTPUT_DIR = OUTPUT_TEST;
 
 const processStepConfig: ProcessStepConfig = {
-  id: 'process_step_1',
+  id: 'process_step_2',
   version: '0.1.0-beta',
   type: 'processStep',
-  name: 'pedido',
+  name: 'qualificacao',
+  key: 'Qualificacao.v2',
   processKey: 'inscricao',
-  processVersion: 'v1',
+  processVersion: 'v5',
   types: [],
   components: {
     id: 'processstep_yneyw4',

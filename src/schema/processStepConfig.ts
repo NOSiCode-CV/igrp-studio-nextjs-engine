@@ -660,6 +660,10 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
       pattern: PATTERNS.PROCESS_NAME_VALIDATION_PATTERN,
       errorMessage: 'The process step name name must only contain letters and must not have spaces or special characters except underscore (_), hyphen (-) and dot (.).',
     },
+    key: {
+      type: "string",
+      errorMessage: 'The process step key must be a string.',
+    },
     description: {
       type: 'string',
       nullable: true,
@@ -743,7 +747,7 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
       errorMessage: 'The artifact variables attribute must be an array of valid variable definition configuration.'
     },
   },
-  required: ['type', 'name', 'projectArtifactId', 'taskKey', 'artifactVariables'],
+  required: ['type', 'name', 'key', 'projectArtifactId', 'taskKey', 'artifactVariables'],
   additionalProperties: false,
 };
 

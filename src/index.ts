@@ -292,13 +292,13 @@ export const newProcessStep = async (processStepConfig: ProcessStepConfig, baseP
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
   processStepConfig.imports = [
-    { id: 'process_imports', namespace: `import { StepComponentConfig, StepMethods } from '@/app/(igrp)/(generated)/process/[...process]/ProcessPageRenderer'` }
+    { id: 'process_imports', namespace: `import { IGRPStepComponentConfig, IGRPStepMethods } from '@igrp/platform-process-management-client-ui'` }
   ]
 
   processStepConfig.args = [
     {
       id: 'config_arg',
-      type: "StepComponentConfig",
+      type: "IGRPStepComponentConfig",
       name: "config",
       isList: false,
       isOptional: false,

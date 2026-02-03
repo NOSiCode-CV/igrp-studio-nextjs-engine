@@ -27,8 +27,7 @@ export const saveProcessStepConfig = async (
     basePath,
     DIRECTORIES.IGRPSTUDIO_PROCESS,
     processStepConfig.processKey,
-    processStepConfig.processVersion,
-    `${processStepConfig.name}${EXTENSIONS.JSON}`,
+    `${processStepConfig.key}${EXTENSIONS.JSON}`,
   );
 
   await saveToFile(
@@ -50,8 +49,9 @@ export const saveProcessStepConfig = async (
     process.steps
       ?.filter((step) => step.name != processStepConfig.name)
       .forEach(async (step) => {
-        const config = await loadProcessStepConfig(basePath, step.name, process);
+        const config = await loadProcessStepConfig(basePath, step.key, process);
         config.processVersion = processStepConfig.processVersion;
+        console.log("Editando : ", config)
         await saveProcessStepConfig(config, basePath);
 
         const context: RenderContext<ProcessStepConfig, ProcessStepConfig> = {
@@ -71,7 +71,7 @@ export const saveProcessStepConfig = async (
   const stepExists = process.steps.some((step) => step.name === processStepConfig.name);
 
   if (!stepExists) {
-    process.steps.push({ id: processStepConfig.id, name: processStepConfig.name });
+    process.steps.push({ id: processStepConfig.id, name: processStepConfig.name, key: processStepConfig.key });
   }
 
   await saveProcessConfig(process, basePath);

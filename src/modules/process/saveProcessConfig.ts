@@ -22,7 +22,6 @@ export const saveProcessConfig = async (processConfig: ProcessConfig, basePath: 
     basePath,
     DIRECTORIES.IGRPSTUDIO_PROCESS,
     processConfig.name,
-    processConfig.processVersion,
     `${processConfig.name}${EXTENSIONS.JSON}`,
   );
   

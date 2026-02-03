@@ -24,7 +24,7 @@ export default {
     component.loadCodeBlock(
       `
 // Create and register step methods
-const stepMethods: StepMethods = {
+const stepMethods: IGRPStepMethods = {
   saveStep: async () => {
     // No validation needed for save
     try {

@@ -57,6 +57,7 @@ export interface ProcessArtifact {
 
 export interface ProcessStep extends IdentifiableElement {
   name: string;
+  key: string;
 }
 
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
@@ -94,6 +95,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
 
 export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
   type: 'processStep';
+  key: string;
   name: string;
   description?: string;
   processKey: string;
