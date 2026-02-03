@@ -391,6 +391,7 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let { layout, spacing, size, typography, borders, position, backgrounds } = component.style ?? {}
   let { variant, customProperties, content, className: cn, ...common } = component.properties ?? {};
+  let { variant: _, customProperties: ___, content: __, className: cn_, ...commonData } = component.data ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -408,8 +409,8 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     }).join("")
     : ``
 
-  props += component.data
-    ? Object.entries(component.data).map(([key, value]) => {
+  props += commonData
+    ? Object.entries(commonData).map(([key, value]) => {
       return ` ${key}={ ${value.state?.name ?? value.value?.code ?? ''} }`;
     }).join("")
     : ``
@@ -529,6 +530,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   if(!element) return () => renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: component.componentName })
 
   let { customProperties, content, className: cn, ...common } = component.properties ?? {};
+  let { variant: _, customProperties: ___, content: __, className: cn_, ...commonData } = component.data ?? {};
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
@@ -546,8 +548,8 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
     }).join("")
     : ``
 
-  props += component.data
-    ? Object.entries(component.data).map(([key, value]) => {
+  props += commonData
+    ? Object.entries(commonData).map(([key, value]) => {
       return ` ${key}={ ${value.state?.name ?? value.value?.code ?? ''} }`;
     }).join("")
     : ``
