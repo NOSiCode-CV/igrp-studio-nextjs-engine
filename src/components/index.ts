@@ -394,7 +394,8 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let props = common
     ? Object.entries(common).map(([key, value]) => {
-      return element.propertiesMapping[key]?.property? ` ${element.propertiesMapping[key]?.property ?? key}="${value}"` : ``;
+      if(!component.data || (component.data && !component.data[key]))
+        return element.propertiesMapping[key]?.property? ` ${element.propertiesMapping[key]?.property ?? key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }` : ``;
     }).join("")
     : ``
 
@@ -402,7 +403,14 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   props += customProperties
     ? Object.entries(customProperties).map(([key, value]) => {
-      return (key === (element.classNamePropertyTag ?? "className"))? `` : ` ${key}="${value}"`;
+      if(!component.data || (component.data && !component.data[key]))
+        return (key === (element.classNamePropertyTag ?? "className"))? `` : ` ${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
+    }).join("")
+    : ``
+
+  props += component.data
+    ? Object.entries(component.data).map(([key, value]) => {
+      return ` ${key}={ ${value.state?.name ?? value.value?.code ?? ''} }`;
     }).join("")
     : ``
 
@@ -491,21 +499,25 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
 
   let str = ""
 
-  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `${element.classNamePropertyTag ?? 'className'}={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
+  str += `<${element.customComponentTag ?? 'div'} ${element.noClassName ? `` : `${element.classNamePropertyTag ?? 'className'}={ cn(${element.customClassName !== undefined ? (element.customClassName !== '' ? `'${element.customClassName}',` : ``) : `'${component.componentName}',`}`}${variant ? resolveVariants(variant, element) : ``}${displayClasses !== '' ? `'${displayClasses}',` : ``}${spacingClasses !== '' ? `'${spacingClasses}',` : ``}${sizeClasses !== '' ? `'${sizeClasses}',` : ``}${classNames !== '' ? `'${classNames}',` : ``}${childVariant ? (element.variants[childVariant] !== '' && element.variants[childVariant] !== undefined ? `'${element.variants[childVariant]}',` : ``) : ``}${childClassNames !== '' ? `'${childClassNames}',` : ``}${element.noClassName ? `` : `)}`} ${props} ${childProps} ${interactions} >`;
 
   if (component.children && component.children.length > 0) {
     str += "\n\t"
     str += component.children.map((child) => renderLayout(child, component)).join('\n');
-  }
+  } else {
 
-  if(component.content) {
-    str += "\n\t"
-    str += component.content
-  }
+    const resolvedContent =
+      component.data?.content?.state?.name ??
+      component.data?.content?.value?.code ??
+      component.content ??
+      content ??
+      '';
 
-  if(content) {
-    str += "\n\t"
-    str += content
+    if (resolvedContent) {
+      str += '\n\t';
+      str += resolvedContent;
+    }
+
   }
 
   str += `</${element.customComponentTag ?? 'div'}>`
@@ -573,16 +585,18 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   if (component.children && component.children.length > 0) {
     str += "\n\t"
     str += component.children.map((child) => renderLayout(child, component)).join('\n');
-  }
+  } else {
+    const resolvedContent =
+      component.data?.content?.state?.name ??
+      component.data?.content?.value?.code ??
+      component.content ??
+      content ??
+      '';
 
-  if(component.content) {
-    str += "\n\t"
-    str += component.content
-  }
-
-  if(content) {
-    str += "\n\t"
-    str += content
+    if (resolvedContent) {
+      str += '\n\t';
+      str += resolvedContent;
+    }
   }
 
   str += `</${element.customComponentTag ?? 'div'}>`
