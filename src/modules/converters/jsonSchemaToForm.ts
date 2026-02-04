@@ -355,7 +355,6 @@ function createFormList(
     tag: name + `.\${index}.` + field.tag,
     properties: {
       ...field.properties,
-      gridSize: 'full',
     },
   }));
 

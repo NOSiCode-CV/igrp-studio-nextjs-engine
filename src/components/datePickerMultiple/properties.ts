@@ -25,7 +25,6 @@ export function datePickerMultipleProperties() {
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
     disabledPicker: { type: 'boolean', required: false },
-    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
     dayButtonClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
     ...classProperties(),

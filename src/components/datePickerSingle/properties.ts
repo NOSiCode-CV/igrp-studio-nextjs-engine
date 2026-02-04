@@ -19,7 +19,6 @@ export function datePickerSingleProperties() {
     helperText: { type: 'string', required: false, default: '' },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
-    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
     labelClassName: { type: 'string', required: false },
     dateFormat: { type: 'string', required: false, default: 'dd/MM/yyyy' },
     today: { type: 'date', required: false, 'x-ui-widget': 'date' },

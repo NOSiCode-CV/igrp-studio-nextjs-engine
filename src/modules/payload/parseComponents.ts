@@ -79,7 +79,7 @@ function parseComponentProps(propsContent: string): { props: ComponentDef['props
     return { props, argumentsInterface };
   }
 
-  // Handle inline type definition - improved regex to capture function types
+  // Handle inline type definition
   const inlineMatch = cleanContent.match(/^{\s*([^}]*)\s*}\s*:\s*(\{[\s\S]*?\})(?:\s*[=),])?/);
   if (inlineMatch) {
     const propsStr = inlineMatch[1];
@@ -88,6 +88,33 @@ function parseComponentProps(propsContent: string): { props: ComponentDef['props
 
     // Parse the type definition
     const typeMap = parseTypeDefinition(typeContent);
+
+    for (const { name, optional, defaultValue } of propItems) {
+      if (typeMap.has(name)) {
+        const typeDef = typeMap.get(name)!;
+        props.push(createPropDefinition(name, typeDef.type, optional || typeDef.optional, defaultValue));
+      } else {
+        // Fallback for props not found in type map
+        props.push(createPropDefinition(name, 'any', optional, defaultValue));
+      }
+    }
+    return { props: props.filter((it) => it.name !== '') };
+  }
+
+  // Try a more robust approach if the regex didn't match
+  const propsAndTypeMatch = cleanContent.match(/^\{([^}]*)\}\s*:\s*\{([^}]+)\}/);
+  if (propsAndTypeMatch) {
+    const propsStr = propsAndTypeMatch[1];
+    const typeStr = propsAndTypeMatch[2];
+
+    // Clean up the type string - remove everything after the last complete type
+    const cleanTypeStr = typeStr.replace(/;[^;]*$/, '').trim();
+
+    // Reconstruct the type object with braces
+    const reconstructedType = `{${cleanTypeStr}}`;
+
+    const propItems = parsePropsString(propsStr);
+    const typeMap = parseTypeDefinition(reconstructedType);
 
     for (const { name, optional, defaultValue } of propItems) {
       if (typeMap.has(name)) {
@@ -186,8 +213,8 @@ function parseTypeDefinition(typeContent: string): Map<string, { type: string; o
         depth--;
       }
 
-      // Check for end of type (comma at depth 0)
-      if (char === ',' && depth === 0) {
+      // Check for end of type (comma or semicolon at depth 0)
+      if ((char === ',' || char === ';') && depth === 0) {
         break;
       }
 
@@ -205,8 +232,8 @@ function parseTypeDefinition(typeContent: string): Map<string, { type: string; o
       });
     }
 
-    // Skip the comma
-    if (i < content.length && content[i] === ',') {
+    // Skip the comma or semicolon
+    if (i < content.length && (content[i] === ',' || content[i] === ';')) {
       i++;
     }
   }
