@@ -1,7 +1,16 @@
 return <IGRPDataTableCellAmount
   field={ {{#if resourceConfig.data.value.code}}{{{resourceConfig.data.value.code}}}{{else}}row.getValue('{{resourceConfig.tag}}'){{/if}} }
-  {{#if resourceConfig.properties.currency}}currency={ `{{resourceConfig.properties.currency}}` }{{/if~}}
-  {{#if resourceConfig.properties.language}}language={ `{{resourceConfig.properties.language}}` }{{/if~}}
-  {{#if resourceConfig.properties.formatStyle}}formatStyle={ `{{resourceConfig.properties.formatStyle}}` }{{/if~}}
+  {{#if (and resourceConfig.properties.currency (not resourceConfig.data.currency))}}
+  currency={ `{{resourceConfig.properties.currency }}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.language (not resourceConfig.data.language))}}
+  language={ `{{resourceConfig.properties.language }}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.formatStyle (not resourceConfig.data.formatStyle))}}
+  formatStyle={ `{{resourceConfig.properties.formatStyle }}` }
+  {{/if~}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
+  {{/if}}
 >
 </IGRPDataTableCellAmount>

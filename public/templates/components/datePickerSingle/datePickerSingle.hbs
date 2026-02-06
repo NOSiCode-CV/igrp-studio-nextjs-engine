@@ -68,6 +68,12 @@
   {{#if (and resourceConfig.properties.endMonth (not resourceConfig.data.endMonth))}}
   endMonth={ new Date(`{{resourceConfig.properties.endMonth}}`) }
   {{/if~}}
+  {{#if (and resourceConfig.properties.disableBefore (not resourceConfig.data.disableBefore))}}
+  disableBefore={ new Date(`{{resourceConfig.properties.disableBefore}}`) }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.disableAfter (not resourceConfig.data.disableAfter))}}
+  disableAfter={ new Date(`{{resourceConfig.properties.disableAfter}}`) }
+  {{/if~}}
   {{#if (and resourceConfig.properties.numberOfMonths (not resourceConfig.data.numberOfMonths))}}
   numberOfMonths={ {{resourceConfig.properties.numberOfMonths}} }
   {{/if~}}
@@ -129,6 +135,9 @@
   className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{/if~}}
   {{/if}}
+  {{/if}}
+  {{#if resourceConfig.data}}
+  {{{render-data resourceConfig.data}}}
   {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}

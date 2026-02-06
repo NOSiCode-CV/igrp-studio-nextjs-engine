@@ -28,6 +28,8 @@ export function datePickerSingleProperties() {
     startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     month: { type: 'date', required: false, 'x-ui-widget': 'date' },
     endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
     numberOfMonths: { type: 'number', required: false, default: '1' },
     weekStartsOn: { type: 'number', required: false, enum: [0, 1, 2, 3, 4, 5, 6], default: 0 },
     pagedNavigation: { type: 'boolean', required: true, default: false },
