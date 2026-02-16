@@ -507,12 +507,16 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
     str += component.children.map((child) => renderLayout(child, component)).join('\n');
   } else {
 
-    const resolvedContent =
-      component.data?.content?.state?.name ??
-      component.data?.content?.value?.code ??
-      component.content ??
-      content ??
-      '';
+    const nestedContent = component.data?.content?.state?.name ?? component.data?.content?.value?.code;
+    const directContent = component.content ?? content;
+
+    let resolvedContent = '';
+
+    if (nestedContent) {
+      resolvedContent = `{ ${nestedContent} }`;
+    } else if (directContent) {
+      resolvedContent = directContent;
+    }
 
     if (resolvedContent) {
       str += '\n\t';
@@ -588,12 +592,17 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
     str += "\n\t"
     str += component.children.map((child) => renderLayout(child, component)).join('\n');
   } else {
-    const resolvedContent =
-      component.data?.content?.state?.name ??
-      component.data?.content?.value?.code ??
-      component.content ??
-      content ??
-      '';
+
+    const nestedContent = component.data?.content?.state?.name ?? component.data?.content?.value?.code;
+    const directContent = component.content ?? content;
+
+    let resolvedContent = '';
+
+    if (nestedContent) {
+      resolvedContent = `{ ${nestedContent} }`;
+    } else if (directContent) {
+      resolvedContent = directContent;
+    }
 
     if (resolvedContent) {
       str += '\n\t';
