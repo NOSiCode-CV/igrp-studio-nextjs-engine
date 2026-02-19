@@ -970,6 +970,12 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       const: "component",
       errorMessage: "The Component type must be 'component'.",
     },
+    useClient: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage:
+        'The use client attribute must be a valid boolean.',
+    },
     scope: {
       type: "string",
       enum: ['app', 'page'],

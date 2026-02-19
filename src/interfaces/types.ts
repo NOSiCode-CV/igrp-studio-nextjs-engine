@@ -18,6 +18,7 @@ export interface AppConfig extends IdentifiableElement, VersionableElement {
 
 export interface PageConfig extends IdentifiableElement, VersionableElement {
   type: 'page';
+  useClient?: boolean;
   path: string;
   description?: string;
   parentName?: string;
@@ -67,6 +68,7 @@ export interface PageComponentConfig extends IdentifiableElement, VersionableEle
 
 export interface ComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'component';
+  useClient?: boolean;
   name: string;
   description?: string;
   pagePath?: string;

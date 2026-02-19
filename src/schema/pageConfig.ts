@@ -967,6 +967,12 @@ const pageConfigSchema: JSONSchemaType<PageConfig> = {
       const: 'page',
       errorMessage: "The Page type must be 'page'.",
     },
+    useClient: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage:
+        'The use client attribute must be a valid boolean.',
+    },
     forceDynamic: {
       type: 'boolean',
       nullable: true,

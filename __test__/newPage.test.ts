@@ -535,7 +535,7 @@ const pageConfig: PageConfig = {
                                 children: [
                                   {
                                     id: 'tablelinkaction_editar_vistoria',
-                                    tag: 'tableLinkAction1',
+                                    tag: 'tableLinkAction2',
                                     componentName: 'tableLinkAction',
 
                                     type: '',
