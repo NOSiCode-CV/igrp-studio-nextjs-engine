@@ -432,38 +432,54 @@ const typeDefSchema: JSONSchemaType<TypeDef> = {
   properties: {
     name: {
       type: 'string',
-      errorMessage: 'The name must be a valid string.'
+      errorMessage: 'The name must be a valid string.',
     },
     componentId: {
       type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
+      errorMessage: 'The component ID must be a valid string.',
     },
     path: {
       type: 'string',
-      errorMessage: 'The path must be a valid string.'
+      errorMessage: 'The path must be a valid string.',
     },
     tags: {
       type: 'array',
       nullable: true,
       items: {
-        type: 'string'
+        type: 'string',
       },
-      errorMessage: 'The tag must be a valid string array.'
+      errorMessage: 'The tag must be a valid string array.',
     },
     fields: {
       type: 'array',
       items: elementFieldSchema,
-      errorMessage: 'The fields must be an array of valid field configuration.'
+      errorMessage: 'The fields must be an array of valid field configuration.',
     },
     isMainType: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The main type check, if provided, must be a valid boolean.'
+      errorMessage: 'The main type check, if provided, must be a valid boolean.',
     },
     isEnum: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The enum type check, if provided, must be a valid boolean.'
+      errorMessage: 'The enum type check, if provided, must be a valid boolean.',
+    },
+    definitionType: {
+      type: 'string',
+      enum: ['zod-object', 'json-schema', 'auto'],
+      nullable: true,
+      errorMessage: 'The definition type, if provided, must be zod-object, json-schema or auto.',
+    },
+    customInstanceName: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The custom instance name, if provided, must be a valid string.',
+    },
+    customInitInstanceName: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The custom init instance name, if provided, must be a valid string.',
     },
   },
   required: ['name', 'path', 'fields'],

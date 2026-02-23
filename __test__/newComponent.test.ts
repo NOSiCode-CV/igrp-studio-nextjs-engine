@@ -69,6 +69,9 @@ const componentConfig2: ComponentConfig = {
       componentId: 'form_manifestacao',
       name: 'formManifestacao',
       path: '',
+      definitionType: 'zod-object',
+      customInstanceName: 'myCustomInstance',
+      customInitInstanceName: 'myCustomInitInstance',
       fields: [
         {
           componentId: 'radio_modalidade',
@@ -416,6 +419,14 @@ const componentConfig2: ComponentConfig = {
     {
       id: 'import_combobox',
       namespace: "import { useComboBox } from '@/app/(myapp)/hooks/use-combobox'",
+    },
+    {
+      id: 'import_my_custom_instance',
+      namespace: "import { myCustomInstance } from '@/app/(myapp)/types/zod-types'",
+    },
+    {
+      id: 'import_my_custom_init_instance',
+      namespace: "import { myCustomInitInstance } from '@/app/(myapp)/types/zod-types'",
     },
   ],
   components: {

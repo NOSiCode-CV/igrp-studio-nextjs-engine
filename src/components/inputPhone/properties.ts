@@ -41,7 +41,7 @@ export function inputPhoneProperties() {
     errorMessage: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: 0 },
     helperText: { type: 'string', required: false, default: '' },
-    defaultCountry: { type: 'string', required: false, default: 'CV', enum: countries },
+    defaultCountry: { type: 'string', required: false, default: 'CV', enum: countries, 'x-ui-widget': 'country' },
     countries: { type: 'array', items: { type: 'string', required: true, enum: countries, default: 'CPV'}, required: false },
     international: { type: 'boolean', required: false, default: true },
     disabled: { type: 'boolean', required: false, default: false },

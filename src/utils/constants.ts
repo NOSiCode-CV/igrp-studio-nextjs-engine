@@ -368,6 +368,12 @@ export const RESTART_TYPES = [
   'unless-stopped'
 ] as const;
 
+export const DEFINITION_TYPES = [
+  'zod-object',
+  'json-schema',
+  'auto'
+] as const;
+
 export const filterTypes: FilterType[] = [
   { name: 'blur', min: '0', max: '20', unit: 'px' },
   { name: 'brightness', min: '0', max: '200', unit: '%' },

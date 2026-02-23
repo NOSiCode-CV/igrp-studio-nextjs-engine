@@ -1,23 +1,41 @@
 z.config(z.locales.en());
 
 {{#each resourceConfig.types}}
-{{#if this.isEnum}}
-const {{toCamelCase this.name}} = z.enum([{{#each this.fields}}'{{#if this.defaultValue}}{{{this.defaultValue}}}{{else}}{{{this.name}}}{{/if}}'{{#if @last}}{{else}}, {{/if}}{{/each}}])
+{{#if (and (eq this.definitionType 'zod-object') this.customInstanceName)}}
+  const {{toCamelCase this.name}} = {{this.customInstanceName}};
+
+  type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
+
+  const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {{this.customInitInstanceName}}
 
 {{else}}
-const {{toCamelCase this.name}} = z.object({
+  {{#if (and (eq this.definitionType 'json-schema') this.customInstanceName)}}
+  const {{toCamelCase this.name}} = z.fromJsonSchema({{this.customInstanceName}});
+
+  type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
+
+  const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {{this.customInitInstanceName}}
+
+  {{else}}
+  {{#if this.isEnum}}
+  const {{toCamelCase this.name}} = z.enum([{{#each this.fields}}'{{#if this.defaultValue}}{{{this.defaultValue}}}{{else}}{{{this.name}}}{{/if}}'{{#if @last}}{{else}}, {{/if}}{{/each}}])
+
+  {{else}}
+  const {{toCamelCase this.name}} = z.object({
   {{#each this.fields}}
     {{this.name}}: {{{resolveZodTypes this}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
-})
+  })
 
-type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
+  type {{capitalize this.name}}ZodType = typeof {{toCamelCase this.name}};
 
-const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {
+  const init{{capitalize this.name}}: z.infer<{{capitalize this.name}}ZodType> = {
   {{#each this.fields}}
     {{this.name}}: {{{resolveStateDefault this.defaultValue this.type this.isList this.fields}}}{{#if @last}}{{else}},{{/if}}
   {{/each}}
-}
+  }
 
+{{/if}}
+{{/if}}
 {{/if}}
 {{/each}}

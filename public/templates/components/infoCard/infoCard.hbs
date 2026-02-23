@@ -48,7 +48,7 @@
         {{#if (checkRules this)}}{{{resolveArrayElementRules this}}}{{/if}}
           {
           {{#if this.data.text}}
-            text: {{this.data.text.state.name}},
+            text: {{this.data.text.state.name}} as string,
           {{else}}
             {{#if this.properties.text}}
             text: `{{this.properties.text}}`,
@@ -57,7 +57,7 @@
             {{/if~}}
           {{/if~}}
           {{#if this.data.label}}
-            label: {{this.data.label.state.name}},
+            label: {{this.data.label.state.name}} as string,
           {{else}}
             {{#if this.properties.label}}
             label: `{{this.properties.label}}`,
