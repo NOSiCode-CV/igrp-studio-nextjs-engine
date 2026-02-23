@@ -888,6 +888,10 @@ export interface FieldValidation {
 
   min?: number;
   max?: number;
+  gt?: number;
+  gte?: number;
+  lt?: number;
+  lte?: number;
   positive?: boolean;
   negative?: boolean;
   int?: boolean;

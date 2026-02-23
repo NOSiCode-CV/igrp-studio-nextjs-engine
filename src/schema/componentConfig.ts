@@ -292,37 +292,37 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
     regex: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute regex, if provided, must be a valid string'
+      errorMessage: 'The attribute regex, if provided, must be a valid string',
     },
     email: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute email, if provided, must be a valid boolean'
+      errorMessage: 'The attribute email, if provided, must be a valid boolean',
     },
     url: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute url, if provided, must be a valid boolean'
+      errorMessage: 'The attribute url, if provided, must be a valid boolean',
     },
     uuid: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute uuid, if provided, must be a valid boolean'
+      errorMessage: 'The attribute uuid, if provided, must be a valid boolean',
     },
     startsWith: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute startsWith, if provided, must be a valid string'
+      errorMessage: 'The attribute startsWith, if provided, must be a valid string',
     },
     endsWith: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute endsWith, if provided, must be a valid string'
+      errorMessage: 'The attribute endsWith, if provided, must be a valid string',
     },
     includes: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute includes, if provided, must be a valid string'
+      errorMessage: 'The attribute includes, if provided, must be a valid string',
     },
     min: {
       type: 'number',
@@ -334,25 +334,45 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
       nullable: true,
       errorMessage: 'The attribute max, if provided, must be a valid number',
     },
+    gt: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute greater than, if provided, must be a valid number',
+    },
+    gte: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute greater than or equal, if provided, must be a valid number',
+    },
+    lt: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute less than, if provided, must be a valid number',
+    },
+    lte: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute less than or equal, if provided, must be a valid number',
+    },
     positive: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute positive, if provided, must be a valid boolean'
+      errorMessage: 'The attribute positive, if provided, must be a valid boolean',
     },
     negative: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute negative, if provided, must be a valid boolean'
+      errorMessage: 'The attribute negative, if provided, must be a valid boolean',
     },
     int: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute int, if provided, must be a valid boolean'
+      errorMessage: 'The attribute int, if provided, must be a valid boolean',
     },
     finite: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute finite, if provided, must be a valid boolean'
+      errorMessage: 'The attribute finite, if provided, must be a valid boolean',
     },
     minDate: {
       type: 'string',
@@ -366,13 +386,13 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
     },
     errors: {
       type: 'array',
-      items: fieldValidationMetadataSchema
-    }
+      items: fieldValidationMetadataSchema,
+    },
   },
   required: [],
   errorMessage: 'The validation, if provided, must be a valid validation object definition.',
-  additionalProperties: false
-}
+  additionalProperties: false,
+};
 
 const elementFieldSchema: JSONSchemaType<ElementField> = {
   type: 'object',

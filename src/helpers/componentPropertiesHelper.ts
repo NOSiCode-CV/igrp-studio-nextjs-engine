@@ -328,6 +328,14 @@ export function resolveZodTypes(field?: ElementField): string {
 
       if (validation.max !== undefined) v.push(`.max(${validation.max}${getError('max')})`);
 
+      if (validation.gt !== undefined) v.push(`.gt(${validation.gt}${getError('gt')})`);
+
+      if (validation.gte !== undefined) v.push(`.gte(${validation.gte}${getError('gte')})`);
+
+      if (validation.lt !== undefined) v.push(`.lt(${validation.lt}${getError('lt')})`);
+
+      if (validation.lte !== undefined) v.push(`.lte(${validation.lte}${getError('lte')})`);
+
       if (validation.positive) v.push(`.positive(${getError('positive').replace(/^, /, '')})`);
 
       if (validation.negative) v.push(`.negative(${getError('negative').replace(/^, /, '')})`);
