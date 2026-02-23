@@ -915,6 +915,7 @@ export interface ElementField {
   isKey?: boolean,
   fields?: ElementField[]
   required: boolean;
+  nullable?: boolean;
 }
 
 export interface TypeDef {

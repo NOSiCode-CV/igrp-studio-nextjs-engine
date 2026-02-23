@@ -398,49 +398,54 @@ const elementFieldSchema: JSONSchemaType<ElementField> = {
   properties: {
     name: {
       type: 'string',
-      errorMessage: 'The name must be a valid string.'
+      errorMessage: 'The name must be a valid string.',
     },
     componentId: {
       type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
+      errorMessage: 'The component ID must be a valid string.',
     },
     type: {
       type: 'string',
-      errorMessage: 'The type must be a valid string.'
+      errorMessage: 'The type must be a valid string.',
     },
     required: {
       type: 'boolean',
-      errorMessage: 'The required must be a valid boolean.'
+      errorMessage: 'The required must be a valid boolean.',
+    },
+    nullable: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The nullable, if provided, must be a valid boolean.',
     },
     isList: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The is list attribute must be a valid boolean.'
+      errorMessage: 'The is list attribute must be a valid boolean.',
     },
     isKey: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The is key attribute must be a valid boolean.'
+      errorMessage: 'The is key attribute must be a valid boolean.',
     },
     validation: {
-      type: "object",
+      type: 'object',
       nullable: true,
       anyOf: [fieldValidationSchema],
-      errorMessage: "Validation must match the FieldValidation schema, if provided."
+      errorMessage: 'Validation must match the FieldValidation schema, if provided.',
     },
     defaultValue: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The default value, if provided, must be a valid string.'
+      errorMessage: 'The default value, if provided, must be a valid string.',
     },
     fields: {
       type: 'array',
       nullable: true,
       items: {
         required: [],
-        type: 'object'
+        type: 'object',
       },
-    }
+    },
   },
   required: ['name', 'componentId', 'type', 'required'],
   additionalProperties: false,

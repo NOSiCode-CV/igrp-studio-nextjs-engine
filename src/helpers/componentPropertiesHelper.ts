@@ -264,12 +264,12 @@ export function resolveStateDefault(
 export function resolveZodTypes(field?: ElementField): string {
   if (!field) return 'z.unknown()';
 
-  const { type, isList, required, validation, fields } = field;
+  const { type, isList, required, validation, fields, nullable } = field;
   const lowerType = type.toLowerCase();
 
   const getError = (key: string): string => {
     const msg = validation?.errors?.find(
-      (e: FieldValidationMetadata) => e.validationKey === key
+      (e: FieldValidationMetadata) => e.validationKey === key,
     )?.message;
     return msg ? `, { error: "${msg}" }` : '';
   };
@@ -279,9 +279,7 @@ export function resolveZodTypes(field?: ElementField): string {
   let zodType: string;
 
   if (lowerType === 'object' && fields?.length) {
-    const inner = fields
-      .map(f => `${f.name}: ${resolveZodTypes(f)}`)
-      .join(', ');
+    const inner = fields.map((f) => `${f.name}: ${resolveZodTypes(f)}`).join(', ');
     zodType = `z.object({ ${inner} })`;
   } else if (isPrimitive) {
     const primitiveMap: Record<string, string> = {
@@ -307,17 +305,13 @@ export function resolveZodTypes(field?: ElementField): string {
       if (validation.maxLength !== undefined)
         v.push(`.max(${validation.maxLength}${getError('maxLength')})`);
 
-      if (validation.regex)
-        v.push(`.regex(${validation.regex}${getError('regex')})`);
+      if (validation.regex) v.push(`.regex(${validation.regex}${getError('regex')})`);
 
-      if (validation.email)
-        v.push(`.email(${getError('email').replace(/^, /, '')})`);
+      if (validation.email) v.push(`.email(${getError('email').replace(/^, /, '')})`);
 
-      if (validation.url)
-        v.push(`.url(${getError('url').replace(/^, /, '')})`);
+      if (validation.url) v.push(`.url(${getError('url').replace(/^, /, '')})`);
 
-      if (validation.uuid)
-        v.push(`.uuid(${getError('uuid').replace(/^, /, '')})`);
+      if (validation.uuid) v.push(`.uuid(${getError('uuid').replace(/^, /, '')})`);
 
       if (validation.startsWith)
         v.push(`.startsWith(${JSON.stringify(validation.startsWith)}${getError('startsWith')})`);
@@ -330,34 +324,28 @@ export function resolveZodTypes(field?: ElementField): string {
     }
 
     if (lowerType === 'number') {
-      if (validation.min !== undefined)
-        v.push(`.min(${validation.min}${getError('min')})`);
+      if (validation.min !== undefined) v.push(`.min(${validation.min}${getError('min')})`);
 
-      if (validation.max !== undefined)
-        v.push(`.max(${validation.max}${getError('max')})`);
+      if (validation.max !== undefined) v.push(`.max(${validation.max}${getError('max')})`);
 
-      if (validation.positive)
-        v.push(`.positive(${getError('positive').replace(/^, /, '')})`);
+      if (validation.positive) v.push(`.positive(${getError('positive').replace(/^, /, '')})`);
 
-      if (validation.negative)
-        v.push(`.negative(${getError('negative').replace(/^, /, '')})`);
+      if (validation.negative) v.push(`.negative(${getError('negative').replace(/^, /, '')})`);
 
-      if (validation.int)
-        v.push(`.int(${getError('int').replace(/^, /, '')})`);
+      if (validation.int) v.push(`.int(${getError('int').replace(/^, /, '')})`);
 
-      if (validation.finite)
-        v.push(`.finite(${getError('finite').replace(/^, /, '')})`);
+      if (validation.finite) v.push(`.finite(${getError('finite').replace(/^, /, '')})`);
     }
 
     if (lowerType === 'date') {
       if (validation.minDate)
         v.push(
-          `.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { error: "${getError('minDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be after ${validation.minDate}`}" })`
+          `.refine(d => d >= new Date(${JSON.stringify(validation.minDate)}), { error: "${getError('minDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be after ${validation.minDate}`}" })`,
         );
 
       if (validation.maxDate)
         v.push(
-          `.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { error: "${getError('maxDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be before ${validation.maxDate}`}" })`
+          `.refine(d => d <= new Date(${JSON.stringify(validation.maxDate)}), { error: "${getError('maxDate')?.replace(/^, \{ error: "|"}$/, '') || `Date must be before ${validation.maxDate}`}" })`,
         );
     }
 
@@ -368,10 +356,16 @@ export function resolveZodTypes(field?: ElementField): string {
     zodType = `z.array(${zodType})`;
   }
 
+  if (lowerType === 'string' && required) {
+    zodType += `.nonempty(${getError('required').replace(/^, /, '')})`;
+  }
+
   if (!required) {
     zodType += '.optional()';
-  } else if (lowerType === 'string') {
-    zodType += `.nonempty(${getError('required').replace(/^, /, '')})`;
+  }
+
+  if (nullable === true) {
+    zodType += '.nullable()';
   }
 
   return zodType;
