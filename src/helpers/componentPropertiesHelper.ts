@@ -287,8 +287,8 @@ export function resolveZodTypes(field?: ElementField): string {
     const primitiveMap: Record<string, string> = {
       string: 'z.string()',
       number: 'z.coerce.number()',
-      boolean: 'z.boolean()',
-      date: 'z.date()',
+      boolean: 'z.coerce.boolean()',
+      date: 'z.coerce.date()',
       any: 'z.any()',
       unknown: 'z.unknown()',
     };
