@@ -15,6 +15,8 @@ export function calendarRangeProperties() {
     disableBefore: { type: 'date', required: false, 'x-ui-widget': 'date' },
     disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
     defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     required: { type: 'boolean', required: false },
     disabled: { type: 'boolean', required: false },
     ...classProperties(),

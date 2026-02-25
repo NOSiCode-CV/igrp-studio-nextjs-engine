@@ -25,7 +25,6 @@ export function selectProperties() {
     showGroup: { type: 'boolean', required: false },
     showStatus: { type: 'boolean', required: false },
     showIcon: { type: 'boolean', required: false },
-    gridSize: { type: 'string', required: false, enum: ['full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'full' },
     /*iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
     },*/

@@ -1,4 +1,4 @@
-import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
+import { COMPONENTS_NAMES, COMPONENTS_TYPES, CONFIG_TYPES, DEFINITION_TYPES, FIELD_TYPES, RESTART_TYPES } from '../utils/constants';
 
 interface VersionableElement {
   version?: string
@@ -18,6 +18,7 @@ export interface AppConfig extends IdentifiableElement, VersionableElement {
 
 export interface PageConfig extends IdentifiableElement, VersionableElement {
   type: 'page';
+  useClient?: boolean;
   path: string;
   description?: string;
   parentName?: string;
@@ -57,6 +58,7 @@ export interface ProcessArtifact {
 
 export interface ProcessStep extends IdentifiableElement {
   name: string;
+  key: string;
 }
 
 export interface PageComponentConfig extends IdentifiableElement, VersionableElement {
@@ -66,6 +68,7 @@ export interface PageComponentConfig extends IdentifiableElement, VersionableEle
 
 export interface ComponentConfig extends IdentifiableElement, VersionableElement {
   type: 'component';
+  useClient?: boolean;
   name: string;
   description?: string;
   pagePath?: string;
@@ -94,6 +97,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
 
 export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
   type: 'processStep';
+  key: string;
   name: string;
   description?: string;
   processKey: string;
@@ -884,6 +888,10 @@ export interface FieldValidation {
 
   min?: number;
   max?: number;
+  gt?: number;
+  gte?: number;
+  lt?: number;
+  lte?: number;
   positive?: boolean;
   negative?: boolean;
   int?: boolean;
@@ -911,6 +919,7 @@ export interface ElementField {
   isKey?: boolean,
   fields?: ElementField[]
   required: boolean;
+  nullable?: boolean;
 }
 
 export interface TypeDef {
@@ -920,6 +929,9 @@ export interface TypeDef {
   tags?: string[];
   isMainType?: boolean,
   isEnum?: boolean,
+  definitionType?: DefinitionType,
+  customInstanceName?: string,
+  customInitInstanceName?: string,
   fields: ElementField[];
 }
 
@@ -998,17 +1010,17 @@ export interface CodeSnippetConfig extends IdentifiableElement {
 }
 
 export interface CodeSnippetsRegisterConfig extends VersionableElement {
-  name: string,
-  title: string,
-  description: string,
-  code: string,
-  defaultProperties: Record<string, any>,
-  properties: Record<string, any>,
-  propertiesMapping: Record<string, any>,
-  renderer: 'default' | 'hbs' | 'custom',
-  templatePath?: string,
-  imports: string[],
-  states: string[],
+  name: string;
+  title: string;
+  description: string;
+  code: string;
+  defaultProperties: Record<string, any>;
+  properties: Record<string, any>;
+  propertiesMapping: Record<string, any>;
+  renderer: 'default' | 'hbs' | 'custom';
+  templatePath?: string;
+  imports: string[];
+  states: string[];
 }
 
 export interface CodeSnippetsRegistrationConfig extends VersionableElement {
@@ -1035,3 +1047,4 @@ export type ComponentTypes = (typeof COMPONENTS_TYPES)[number];
 export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
 export type RestartTypes = (typeof RESTART_TYPES)[number];
+export type DefinitionType = (typeof DEFINITION_TYPES)[number];

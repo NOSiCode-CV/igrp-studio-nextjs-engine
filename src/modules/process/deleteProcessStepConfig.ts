@@ -29,8 +29,7 @@ export const deleteProcessStepConfig = async (
     basePath,
     DIRECTORIES.IGRPSTUDIO_PROCESS,
     processStepConfig.processKey,
-    processStepConfig.processVersion,
-    `${processStepConfig.name}${EXTENSIONS.JSON}`,
+    `${processStepConfig.key}${EXTENSIONS.JSON}`,
   );
 
   if (await fs.pathExists(processStepConfigOutputPath))
@@ -51,7 +50,7 @@ export const deleteProcessStepConfig = async (
 
   process.steps
     .forEach(async (step) => {
-      const config = await loadProcessStepConfig(basePath, step.name, process);
+      const config = await loadProcessStepConfig(basePath, step.key, process);
       config.processVersion = 'v' + (parseInt(config.processVersion.replace('v', '')) + 1);
       await saveProcessStepConfig(config, basePath);
 

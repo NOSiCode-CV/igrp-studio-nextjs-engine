@@ -42,8 +42,7 @@ export const getComponentDir = (context: RenderContext<ComponentConfig, Componen
 export const getProcessStepDir = (
   context: RenderContext<ProcessStepConfig, ProcessStepConfig>
 ) => {
-  const name = context.resourceConfig.name;
-  const version = context.resourceConfig.processVersion;
+  const key = context.resourceConfig.key;
   const pagePath = path.join(DIRECTORIES.PROCESS, DIRECTORIES.PROCESS_PARAMS);
   const processKey = context.resourceConfig.processKey;
 
@@ -52,8 +51,7 @@ export const getProcessStepDir = (
     DIRECTORIES.GENERATED,
     pagePath,
     `(${processKey})`,
-    version,
-    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name }),
+    replaceTemplate(COMMON_FILES.COMPONENT_TSX, { name: key }),
   );
 };
 
@@ -129,6 +127,7 @@ export const getProcessPath = (context: RenderContext<ProcessConfig, ProcessConf
   return processSteps.map((it) => getProcessStepDir({ ...context, parentResourceConfig: undefined, resourceConfig: {
       type: 'processStep',
       name: it.name,
+      key: it.key,
       processKey: context.resourceConfig.name,
       processVersion: context.resourceConfig.processVersion,
       types: [],
@@ -184,21 +183,8 @@ export const loadProcessConfig = async (basePath: string, name: string): Promise
   const processBasePath = path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PROCESS, name);
 
   try {
-    const versionDirs = await fs.readdir(processBasePath, { withFileTypes: true });
 
-    // Filter folders with names like "v1", "v2", ..., "vn"
-    const versions = versionDirs
-      .filter(dirent => dirent.isDirectory() && /^v\d+$/.test(dirent.name))
-      .map(dirent => ({
-        name: dirent.name,
-        version: parseInt(dirent.name.slice(1), 10), // remove 'v' and parse number
-      }))
-      .sort((a, b) => b.version - a.version); // Sort descending to get latest
-
-    if (versions.length === 0) return undefined;
-
-    const latestVersionFolder = versions[0].name;
-    const jsonPath = path.join(processBasePath, latestVersionFolder, `${name}.json`);
+    const jsonPath = path.join(processBasePath, `${name}.json`);
 
     const jsonContent = await fs.readFile(jsonPath, 'utf-8');
     return JSON.parse(jsonContent) as ProcessConfig;
@@ -211,15 +197,14 @@ export const loadProcessConfig = async (basePath: string, name: string): Promise
 
 export const loadProcessStepConfig = async (
   basePath: string,
-  name: string,
+  key: string,
   processConfig: ProcessConfig
 ): Promise<ProcessStepConfig> => {
   const stepsPath = path.join(
     basePath,
     DIRECTORIES.IGRPSTUDIO,
     DIRECTORIES.PROCESS,
-    name,
-    `v${processConfig.version}`,
+    processConfig.name
   );
 
   const stepConfigs: Record<string, ProcessStepConfig> = {};
@@ -229,17 +214,17 @@ export const loadProcessStepConfig = async (
 
     for (const stepFile of stepFiles) {
       if (stepFile.endsWith('.json')) {
-        const stepName = stepFile.replace(/\.json$/, '');
+        const stepKey = stepFile.replace(/\.json$/, '');
 
         const content = await fs.readFile(path.join(stepsPath, stepFile), 'utf-8');
-        stepConfigs[stepName] = JSON.parse(content) as ProcessStepConfig;
+        stepConfigs[stepKey] = JSON.parse(content) as ProcessStepConfig;
       }
     }
   } catch (err) {
-    console.error(`Failed to load step configs for process ${name}:`, err);
+    console.error(`Failed to load step configs for process step key ${key}:`, err);
   }
 
-  return stepConfigs[name];
+  return stepConfigs[key];
 };
 
 export const loadPagesConfig = async (basePath: string) => {

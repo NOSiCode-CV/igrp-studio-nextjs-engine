@@ -1,4 +1,7 @@
+{{#if (eq resourceConfig.useClient false)}}
+{{else}}
 'use client'
+{{/if}}
 
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
@@ -21,7 +24,6 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
 
 {{#if (notNullOrEmpty resourceConfig.components)}}
 
-  {{!--const service: Partial<I{{toLowerCase resourceConfig.pageName}}Service> = {{capitalize resourceConfig.pageName}}Service;--}}
   {{#if resourceConfig.types}}
   {{{resolve-types this}}}
   {{/if}}
@@ -34,6 +36,3 @@ export default function Page{{capitalize (toCamelCaseFromNatural resourceConfig.
   );
 {{/if}}
 }
-{{!--export type I{{toLowerCase resourceConfig.pageName}}Service = {
-  {{{resolve-service-interface-methods resourceConfig.components registry}}}
-}--}}

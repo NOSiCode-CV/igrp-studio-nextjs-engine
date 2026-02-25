@@ -26,6 +26,7 @@ export function buttonPropertiesMapping() {
   };
 }
 
+
 export function buttonChildProperties() {
   return {};
 }

@@ -14,7 +14,8 @@ const processConfig: ProcessConfig = {
   steps: [
     {
       id: 'process_step_1',
-      name: 'pedido'
+      name: 'pedido',
+      key: 'Pedido.v1'
     }
   ]
 };
