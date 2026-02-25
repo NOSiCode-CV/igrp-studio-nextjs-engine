@@ -16,6 +16,8 @@ export function calendarSingleProperties() {
     disableAfter: { type: 'date', required: false, 'x-ui-widget': 'date' },
     defaultMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     required: { type: 'boolean', required: false },
+    startMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
+    endMonth: { type: 'date', required: false, 'x-ui-widget': 'date' },
     disabled: { type: 'boolean', required: false },
     ...classProperties(),
     ...dataCommonProperties(),

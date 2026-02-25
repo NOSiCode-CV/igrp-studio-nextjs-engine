@@ -30,6 +30,27 @@
   {{#if (and resourceConfig.properties.variant (not resourceConfig.data.variant))}}
   variant={ `{{resourceConfig.properties.variant}}` }
   {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonVariant (not resourceConfig.data.backButtonVariant))}}
+  backButtonVariant={ `{{resourceConfig.properties.backButtonVariant}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonSize (not resourceConfig.data.backButtonSize))}}
+  backButtonSize={ `{{resourceConfig.properties.backButtonSize}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonAriaLabel (not resourceConfig.data.backButtonAriaLabel))}}
+  backButtonAriaLabel={ `{{resourceConfig.properties.backButtonAriaLabel}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonShowText (not resourceConfig.data.backButtonShowText))}}
+  backButtonShowText={ {{resourceConfig.properties.backButtonShowText}} }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonText (not resourceConfig.data.backButtonText))}}
+  backButtonText={ `{{resourceConfig.properties.backButtonText}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonClassName (not resourceConfig.data.backButtonClassName))}}
+  backButtonClassName={ `{{resourceConfig.properties.backButtonClassName}}` }
+  {{/if~}}
+  {{#if (and resourceConfig.properties.backButtonUseBrowserBack (not resourceConfig.data.backButtonUseBrowserBack))}}
+  backButtonUseBrowserBack={ {{resourceConfig.properties.backButtonUseBrowserBack}} }
+  {{/if~}}
   {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
   className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
   {{else}}

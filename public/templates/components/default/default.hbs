@@ -31,10 +31,10 @@
   {{/if}}
 >
   {{#if resourceConfig.content}}
-  {{resourceConfig.content}}
+  {{{resourceConfig.content}}}
   {{else}}
   {{#if (and resourceConfig.properties.content (not resourceConfig.data.content))}}
-  {{resourceConfig.properties.content}}
+  {{{resourceConfig.properties.content}}}
   {{else}}
   {{#if (and (not resourceConfig.properties.content) resourceConfig.data.content)}}
   { {{#if resourceConfig.data.content.value}}{{resourceConfig.data.content.value.code}}{{else}}{{resourceConfig.data.content.state.name}}{{/if}} }

@@ -81,13 +81,13 @@
           badgeContent: {{{this.data.badgeContent.state.name}}},
           {{/if~}}
           {{#if (and this.properties.badgeVariant (not this.data.badgeVariant))}}
-          badgeVariant: `{{this.properties.badgeVariant}}`,
+          badgeVariant: `{{this.properties.badgeVariant}}` as const,
           {{/if~}}
           {{#if (and (not this.properties.badgeVariant) this.data.badgeVariant)}}
           badgeVariant: {{{this.data.badgeVariant.state.name}}},
           {{/if~}}
           {{#if (and this.properties.badgeColor (not this.data.badgeColor))}}
-          badgeColor: `{{this.properties.badgeColor}}`,
+          badgeColor: `{{this.properties.badgeColor}}` as const,
           {{/if~}}
           {{#if (and (not this.properties.badgeColor) this.data.badgeColor)}}
           badgeColor: {{{this.data.badgeColor.state.name}}},

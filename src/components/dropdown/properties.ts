@@ -1,4 +1,5 @@
 import {
+  baseData,
   baseRules,
   baseStyle,
   classProperties,
@@ -6,6 +7,7 @@ import {
   commonPropertiesMapping,
   iconProperties,
 } from '../default/properties';
+import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
 
 export function dropdownProperties() {
   return {
@@ -43,6 +45,17 @@ export function dropdownVariants() {
     ghost: "ghost",
     link: "link",
   };
+}
+
+export function dropdownData() {
+  return {
+    actionItem: { ...baseData(INTERACTIONS_DEFAULTS.EMPTY_ARRAY, INTERACTIONS_TYPES.ITEMS, {
+        id: '',
+        name: 'dropdown{{id}}Items',
+        type: 'IGRPOptionsProps[]',
+        defaultValue: '[]'
+      }, false), required: true },
+  }
 }
 
 export function dropdownStyle() {

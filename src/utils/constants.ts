@@ -164,6 +164,7 @@ export const INTERACTIONS_TYPES = {
   ON_CLICK: 'Mouse click (tap)',
   ON_NEXT_CLICK: 'On next click (tap)',
   ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
+  ON_CLICK_BACK_BUTTON: "Back Button Mouse click (tap)",
   ON_HOVER: 'Mouse hover',
   ON_CHANGE: 'On change',
   ON_DATE_CHANGE: 'On date change',
@@ -365,6 +366,12 @@ export const RESTART_TYPES = [
   'no',
   'on-failure',
   'unless-stopped'
+] as const;
+
+export const DEFINITION_TYPES = [
+  'zod-object',
+  'json-schema',
+  'auto'
 ] as const;
 
 export const filterTypes: FilterType[] = [

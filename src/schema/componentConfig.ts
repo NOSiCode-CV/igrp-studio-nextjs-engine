@@ -292,37 +292,37 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
     regex: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute regex, if provided, must be a valid string'
+      errorMessage: 'The attribute regex, if provided, must be a valid string',
     },
     email: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute email, if provided, must be a valid boolean'
+      errorMessage: 'The attribute email, if provided, must be a valid boolean',
     },
     url: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute url, if provided, must be a valid boolean'
+      errorMessage: 'The attribute url, if provided, must be a valid boolean',
     },
     uuid: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute uuid, if provided, must be a valid boolean'
+      errorMessage: 'The attribute uuid, if provided, must be a valid boolean',
     },
     startsWith: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute startsWith, if provided, must be a valid string'
+      errorMessage: 'The attribute startsWith, if provided, must be a valid string',
     },
     endsWith: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute endsWith, if provided, must be a valid string'
+      errorMessage: 'The attribute endsWith, if provided, must be a valid string',
     },
     includes: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The attribute includes, if provided, must be a valid string'
+      errorMessage: 'The attribute includes, if provided, must be a valid string',
     },
     min: {
       type: 'number',
@@ -334,25 +334,45 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
       nullable: true,
       errorMessage: 'The attribute max, if provided, must be a valid number',
     },
+    gt: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute greater than, if provided, must be a valid number',
+    },
+    gte: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute greater than or equal, if provided, must be a valid number',
+    },
+    lt: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute less than, if provided, must be a valid number',
+    },
+    lte: {
+      type: 'number',
+      nullable: true,
+      errorMessage: 'The attribute less than or equal, if provided, must be a valid number',
+    },
     positive: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute positive, if provided, must be a valid boolean'
+      errorMessage: 'The attribute positive, if provided, must be a valid boolean',
     },
     negative: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute negative, if provided, must be a valid boolean'
+      errorMessage: 'The attribute negative, if provided, must be a valid boolean',
     },
     int: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute int, if provided, must be a valid boolean'
+      errorMessage: 'The attribute int, if provided, must be a valid boolean',
     },
     finite: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The attribute finite, if provided, must be a valid boolean'
+      errorMessage: 'The attribute finite, if provided, must be a valid boolean',
     },
     minDate: {
       type: 'string',
@@ -366,62 +386,67 @@ const fieldValidationSchema: JSONSchemaType<FieldValidation> = {
     },
     errors: {
       type: 'array',
-      items: fieldValidationMetadataSchema
-    }
+      items: fieldValidationMetadataSchema,
+    },
   },
   required: [],
   errorMessage: 'The validation, if provided, must be a valid validation object definition.',
-  additionalProperties: false
-}
+  additionalProperties: false,
+};
 
 const elementFieldSchema: JSONSchemaType<ElementField> = {
   type: 'object',
   properties: {
     name: {
       type: 'string',
-      errorMessage: 'The name must be a valid string.'
+      errorMessage: 'The name must be a valid string.',
     },
     componentId: {
       type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
+      errorMessage: 'The component ID must be a valid string.',
     },
     type: {
       type: 'string',
-      errorMessage: 'The type must be a valid string.'
+      errorMessage: 'The type must be a valid string.',
     },
     required: {
       type: 'boolean',
-      errorMessage: 'The required must be a valid boolean.'
+      errorMessage: 'The required must be a valid boolean.',
+    },
+    nullable: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The nullable, if provided, must be a valid boolean.',
     },
     isList: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The is list attribute must be a valid boolean.'
+      errorMessage: 'The is list attribute must be a valid boolean.',
     },
     isKey: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The is key attribute must be a valid boolean.'
+      errorMessage: 'The is key attribute must be a valid boolean.',
     },
     validation: {
-      type: "object",
+      type: 'object',
       nullable: true,
       anyOf: [fieldValidationSchema],
-      errorMessage: "Validation must match the FieldValidation schema, if provided."
+      errorMessage: 'Validation must match the FieldValidation schema, if provided.',
     },
     defaultValue: {
       type: 'string',
       nullable: true,
-      errorMessage: 'The default value, if provided, must be a valid string.'
+      errorMessage: 'The default value, if provided, must be a valid string.',
     },
     fields: {
       type: 'array',
       nullable: true,
       items: {
         required: [],
-        type: 'object'
+        type: 'object',
       },
-    }
+    },
   },
   required: ['name', 'componentId', 'type', 'required'],
   additionalProperties: false,
@@ -432,38 +457,54 @@ const typeDefSchema: JSONSchemaType<TypeDef> = {
   properties: {
     name: {
       type: 'string',
-      errorMessage: 'The name must be a valid string.'
+      errorMessage: 'The name must be a valid string.',
     },
     componentId: {
       type: 'string',
-      errorMessage: 'The component ID must be a valid string.'
+      errorMessage: 'The component ID must be a valid string.',
     },
     path: {
       type: 'string',
-      errorMessage: 'The path must be a valid string.'
+      errorMessage: 'The path must be a valid string.',
     },
     tags: {
       type: 'array',
       nullable: true,
       items: {
-        type: 'string'
+        type: 'string',
       },
-      errorMessage: 'The tag must be a valid string array.'
+      errorMessage: 'The tag must be a valid string array.',
     },
     fields: {
       type: 'array',
       items: elementFieldSchema,
-      errorMessage: 'The fields must be an array of valid field configuration.'
+      errorMessage: 'The fields must be an array of valid field configuration.',
     },
     isMainType: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The main type check, if provided, must be a valid boolean.'
+      errorMessage: 'The main type check, if provided, must be a valid boolean.',
     },
     isEnum: {
       type: 'boolean',
       nullable: true,
-      errorMessage: 'The enum type check, if provided, must be a valid boolean.'
+      errorMessage: 'The enum type check, if provided, must be a valid boolean.',
+    },
+    definitionType: {
+      type: 'string',
+      enum: ['zod-object', 'json-schema', 'auto'],
+      nullable: true,
+      errorMessage: 'The definition type, if provided, must be zod-object, json-schema or auto.',
+    },
+    customInstanceName: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The custom instance name, if provided, must be a valid string.',
+    },
+    customInitInstanceName: {
+      type: 'string',
+      nullable: true,
+      errorMessage: 'The custom init instance name, if provided, must be a valid string.',
     },
   },
   required: ['name', 'path', 'fields'],
@@ -969,6 +1010,12 @@ const componentConfigSchema: JSONSchemaType<ComponentConfig> = {
       type: "string",
       const: "component",
       errorMessage: "The Component type must be 'component'.",
+    },
+    useClient: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage:
+        'The use client attribute must be a valid boolean.',
     },
     scope: {
       type: "string",

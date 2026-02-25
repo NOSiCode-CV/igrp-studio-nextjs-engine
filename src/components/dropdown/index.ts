@@ -3,7 +3,7 @@ import {
   dropdownProperties,
   dropdownVariants,
   dropdownChildProperties,
-  dropdownChildPropertiesMapping, dropdownRules, dropdownStyle,
+  dropdownChildPropertiesMapping, dropdownRules, dropdownStyle, dropdownData,
 } from './properties';
 import { Component, hbsRenderer } from '../index';
 import { DROPDOWN_ITEM } from './children/dropdownItem';
@@ -13,7 +13,7 @@ export default {
     component.loadImports([
     ]);
 
-    component.loadComponentClass('IGRPDropdown')
+    component.loadComponentClass('IGRPDropdownMenu')
     component.loadVariants(dropdownVariants());
     component.loadGroup('basicElements')
     component.loadLabel('Dropdown')
@@ -25,6 +25,8 @@ export default {
     component.loadChildrenTypes([{ name: DROPDOWN_ITEM, isDefault: true }]);
 
     component.loadAcceptedChildren([...component.childrenTypes])
+
+    component.getData(dropdownData())
 
     component.getRules(dropdownRules())
 

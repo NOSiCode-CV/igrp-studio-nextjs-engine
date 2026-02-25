@@ -19,7 +19,6 @@ export function radioGroupProperties() {
     error: { type: 'string', required: false },
     variant: { type: 'string', required: false, enum: ['default', 'outline', 'soft'], default: 'default' },
     size: { type: 'string', required: false, enum: ["sm", "md", "lg"], default: "md" },
-    gridSize: { type: 'string', required: false, enum: ['default', 'full', '1/2', '1/3', '2/3', '1/4', '3/4'], default: 'default' },
     required: { type: 'boolean', required: false, default: false },
     disabled: { type: 'boolean', required: false, default: false },
     message: { type: 'string', required: false },

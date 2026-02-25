@@ -18,8 +18,12 @@ const stepSchema: JSONSchemaType<ProcessStep> = {
       type: 'string',
       errorMessage: 'The artifact name must be a valid string.'
     },
+    key: {
+      type: 'string',
+      errorMessage: 'The artifact key must be a valid string.'
+    },
   },
-  required: ['id', 'name'],
+  required: ['id', 'name', 'key'],
   additionalProperties: false,
 }
 
