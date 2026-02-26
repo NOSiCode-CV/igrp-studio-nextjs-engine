@@ -162,6 +162,9 @@ export const INTERACTIONS_TYPES = {
 
   // Events
   ON_CLICK: 'Mouse click (tap)',
+  ON_ENTER: 'Mouse enter',
+  ON_DOWN: 'Mouse down',
+  ON_LEAVE: 'Mouse leave',
   ON_NEXT_CLICK: 'On next click (tap)',
   ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
   ON_CLICK_BACK_BUTTON: "Back Button Mouse click (tap)",

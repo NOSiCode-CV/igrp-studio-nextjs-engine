@@ -63,6 +63,9 @@ function onClickInteractionFieldVisibility(): InteractionFieldVisibility {
 export function buttonInteractions() {
   return {
     onClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK, undefined, onClickInteractionFieldVisibility()), required: true },
+    onMouseOver: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_HOVER, undefined, onClickInteractionFieldVisibility()), required: false },
+    onMouseDown: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_DOWN, undefined, onClickInteractionFieldVisibility()), required: false },
+    onMouseLeave: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_LEAVE, undefined, onClickInteractionFieldVisibility()), required: false },
   };
 }
 
