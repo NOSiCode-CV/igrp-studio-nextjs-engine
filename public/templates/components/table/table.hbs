@@ -90,27 +90,27 @@
     {{/if}}
     ]
   }
-  {{!-- table row subcomponent --}}
   {{#if (extractTableRowSubcomponent resourceConfig.children)}}
   {{#with (extractTableRowSubcomponent resourceConfig.children)}}
-    renderSubComponent={(row) => {
-      const rowData = row.original;
-      const matchRule = {{#if this.properties.rule}}{{{this.properties.rule}}};{{else}}true;{{/if}}
-      if(!matchRule) return undefined;
-      return (
-        <>
-          {{#if this.children}}
-          {{#each this.children}}
-          {{{render-layout this ../this}}}
-          {{/each}}
-          {{/if}}
-        </>
-      );
-    }}
+  getRowCanExpand={(row) => {
+    const rowData = row.original;
+    return !!({{#if this.properties.rule}}{{{this.properties.rule}}}{{else}}false{{/if}});
+  }}
+  renderSubComponent={(row) => {
+    const rowData = row.original;
+    const matchRule = {{#if this.properties.rule}}{{{this.properties.rule}}}{{else}}false{{/if}};
+    if(!matchRule) return undefined;
+    return (
+      <>
+        {{#if this.children}}
+        {{#each this.children}}
+        {{{render-layout this ../this}}}
+        {{/each}}
+        {{/if}}
+      </>
+    );
+  }}
   {{/with}}
-  />
-  {{else}}
-  />
   {{/if}}
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
@@ -119,5 +119,3 @@
   {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
 />
-
-  
