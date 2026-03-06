@@ -1,7 +1,7 @@
 import { baseRules, baseStyle } from "../../../default/properties";
 
 export function tableRowSubcomponentProperties(){
-    return{ rule:{type:'string' ,required: true}};
+    return{ rule:{type:'string' ,required: false}};
 }
 
 export function tableRowSubcomponentPropertiesMapping(){
