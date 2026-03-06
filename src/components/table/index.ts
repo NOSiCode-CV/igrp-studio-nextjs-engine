@@ -10,6 +10,7 @@ import { TABLE_COLUMNS } from './children/tableColumns';
 import { TABLE_FILTERS } from './children/tableFilters';
 import { TEMPLATES } from '../../utils/constants';
 import { replaceTemplate } from '../../utils/helpers';
+import { TABLE_ROW_SUBCOMPONENT } from './children/tableRowSubcomponent';
 
 export default {
   register(component: Component) {
@@ -19,7 +20,7 @@ export default {
 
     component.loadComponentClass('IGRPDataTable')
     component.loadVariants(tableVariants());
-    component.loadChildrenMax(2)
+    component.loadChildrenMax(3)
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
     component.setAllowTypes(true)
@@ -31,11 +32,11 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: TABLE }))
 
     component.loadChildrenTypes([
-      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }, {name: TABLE_ROW_SUBCOMPONENT, isDefault: false}
     ]);
 
     component.loadAcceptedChildren([
-      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }, {name: TABLE_ROW_SUBCOMPONENT, isDefault: false}
     ])
 
     component.loadStates([

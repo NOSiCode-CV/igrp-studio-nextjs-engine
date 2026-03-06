@@ -122,6 +122,7 @@ import tableAlertActionModule, { TABLE_ALERT_ACTION } from './table/children/tab
 import tableLinkActionModule, { TABLE_LINK_ACTION } from './table/children/tableLinkAction';
 import tableModalActionModule, { TABLE_MODAL_ACTION } from './table/children/tableModalAction';
 import tableFiltersModule, { TABLE_FILTERS } from './table/children/tableFilters';
+import tableRowSubcomponent, { TABLE_ROW_SUBCOMPONENT} from './table/children/tableRowSubcomponent';
 import tabsModule, { TABS } from './tabs';
 import tabsItemModule, { TABS_ITEM } from './tabs/children/tabsItem/index';
 import textModule, { TEXT } from './text/index';
@@ -269,6 +270,9 @@ export function registerAllComponents() {
   register(TABLE_MINMAX_FILTER, tableMinMaxFilterModule.register);
   register(TABLE_SELECT_FILTER, tableSelectFilterModule.register);
   register(TABLE_FACETED_FILTER, tableFacetedFilterModule.register);
+
+  //Table row components
+  register(TABLE_ROW_SUBCOMPONENT, tableRowSubcomponent.register);
   register(TABS, tabsModule.register);
   register(TABS_ITEM, tabsItemModule.register);
   register(TEXT, textModule.register);

@@ -1,94 +1,129 @@
-<IGRPDataTable{{{typeFormatter resourceConfig.dataType}}}
-  {{#if resourceConfig.tag}}
-  id={ `{{{resourceConfig.tag}}}` }
-  {{/if}}
-  {{#if resourceConfig.properties.commonProperties.generateReference}}
-  ref={ getSectionRef('{{resourceConfig.tag}}') }
-  data-section-id={ '{{resourceConfig.tag}}' }
-  {{/if}}
-  {{#if (and resourceConfig.properties.showFilter (not resourceConfig.data.showFilter))}}
-  showFilter={ {{resourceConfig.properties.showFilter}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.showPagination (not resourceConfig.data.showPagination))}}
-  showPagination={ {{resourceConfig.properties.showPagination}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.showToggleColumn (not resourceConfig.data.showToggleColumn))}}
-  showToggleColumn={ {{resourceConfig.properties.showToggleColumn}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.isNumericPagination (not resourceConfig.data.isNumericPagination))}}
-  isNumericPagination={ {{resourceConfig.properties.isNumericPagination}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.isServerSide (not resourceConfig.data.isServerSide))}}
-  isServerSide={ {{resourceConfig.properties.isServerSide}} }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.toggleLabel (not resourceConfig.data.toggleLabel))}}
-  toggleLabel={ `{{resourceConfig.properties.toggleLabel}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.toggleOptionsLabel (not resourceConfig.data.toggleOptionsLabel))}}
+<IGRPDataTable{{{typeFormatter resourceConfig.dataType}}} 
+{{#if resourceConfig.tag}} id={ `{{{resourceConfig.tag}}}` }
+  {{/if}} 
+  {{#if resourceConfig.properties.commonProperties.generateReference}} ref={
+  getSectionRef('{{resourceConfig.tag}}') } 
+  data-section-id={ '{{resourceConfig.tag}}' } 
+  {{/if}} {{#if (and
+  resourceConfig.properties.showFilter (not resourceConfig.data.showFilter))}} showFilter={
+  {{resourceConfig.properties.showFilter}} } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.showPagination (not
+  resourceConfig.data.showPagination))}} 
+  showPagination={ {{resourceConfig.properties.showPagination}} } 
+  {{/if~}} 
+  {{#if
+  (and resourceConfig.properties.showToggleColumn (not resourceConfig.data.showToggleColumn))}} 
+  showToggleColumn={
+  {{resourceConfig.properties.showToggleColumn}} } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.isNumericPagination
+  (not resourceConfig.data.isNumericPagination))}} 
+  isNumericPagination={
+  {{resourceConfig.properties.isNumericPagination}} } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.isServerSide (not
+  resourceConfig.data.isServerSide))}} 
+  isServerSide={ {{resourceConfig.properties.isServerSide}} } 
+  {{/if~}} 
+  {{#if (and
+  resourceConfig.properties.toggleLabel (not resourceConfig.data.toggleLabel))}} toggleLabel={
+  `{{resourceConfig.properties.toggleLabel}}` } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.toggleOptionsLabel (not
+  resourceConfig.data.toggleOptionsLabel))}} 
   toggleOptionsLabel={ `{{resourceConfig.properties.toggleOptionsLabel}}` }
-  {{/if~}}
+  {{/if~}} 
   {{#if (and resourceConfig.properties.tableClassName (not resourceConfig.data.tableClassName))}}
-  tableClassName={ `{{resourceConfig.properties.tableClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.tableHeaderClassName (not resourceConfig.data.tableHeaderClassName))}}
-  tableHeaderClassName={ `{{resourceConfig.properties.tableHeaderClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.tableBodyClassName (not resourceConfig.data.tableBodyClassName))}}
-  tableBodyClassName={ `{{resourceConfig.properties.tableBodyClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.paginationClassName (not resourceConfig.data.paginationClassName))}}
-  paginationClassName={ `{{resourceConfig.properties.paginationClassName}}` }
-  {{/if~}}
-  {{#if (and resourceConfig.properties.pageSizePagination (not resourceConfig.data.pageSizePagination))}}
-  pageSizePagination={ [{{#each resourceConfig.properties.pageSizePagination}}{{this}}{{#if @last}}{{else}}, {{/if}}{{/each}}] }
-  {{/if~}}
-  {{#if (or (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}}
-  className={ cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{else}}
-  {{#if (or (and (nullOrEmpty resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}}
-  className={ cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) }
-  {{/if~}}
+  tableClassName={ `{{resourceConfig.properties.tableClassName}}` } 
+  {{/if~}} 
+  {{#if (and
+  resourceConfig.properties.tableHeaderClassName (not resourceConfig.data.tableHeaderClassName))}}
+  tableHeaderClassName={ `{{resourceConfig.properties.tableHeaderClassName}}` } 
+  {{/if~}} 
+  {{#if (and
+  resourceConfig.properties.tableBodyClassName (not resourceConfig.data.tableBodyClassName))}} 
+  tableBodyClassName={
+  `{{resourceConfig.properties.tableBodyClassName}}` } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.paginationClassName
+  (not resourceConfig.data.paginationClassName))}} 
+  paginationClassName={
+  `{{resourceConfig.properties.paginationClassName}}` } 
+  {{/if~}} 
+  {{#if (and resourceConfig.properties.pageSizePagination
+  (not resourceConfig.data.pageSizePagination))}} 
+  pageSizePagination={ [
+  {{#each
+  resourceConfig.properties.pageSizePagination}}{{this}}
+  {{#if @last}}
+  {{else}}, 
   {{/if}}
+  {{/each}}] } 
+  {{/if~}} 
+  {{#if (or
+  (and resourceConfig.properties.className parentResourceConfig) resourceConfig.style)}} 
+  className={ cn({{{concat "'"
+  resourceConfig.properties.className "'," (addClassNameFromChildProperties parentResourceConfig registry)
+  (addClassNameFromProperties resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) } 
+  {{else}} 
+  {{#if
+  (or (and resourceConfig.properties.className (not parentResourceConfig)) resourceConfig.style)}} 
+  className={
+  cn({{{concat "'" resourceConfig.properties.className "'," (addClassNameFromProperties resourceConfig registry)
+  (addClassNameFromStyle resourceConfig.style)}}}) } 
+  {{else}} 
+  {{#if (or (and (nullOrEmpty
+  resourceConfig.properties.className) parentResourceConfig.childProperties) resourceConfig.style)}} 
+  className={
+  cn({{{concat (addClassNameFromChildProperties parentResourceConfig registry) (addClassNameFromProperties
+  resourceConfig registry) (addClassNameFromStyle resourceConfig.style)}}}) } {{/if~}} {{/if}} {{/if}} 
+  columns={ [ 
+  {{#if
+  resourceConfig.children}} 
+  {{#each (extractTableColumns resourceConfig.children)}} 
+  {{#each this.children}} 
+  {{#if ( not
+  (eq this.componentName 'tableHiddenCell' ))}} { 
+    {{#if (or this.properties.headerTitle
+  this.properties.headerType)}}header: {{> tableHeader this ~}},
+  {{/if~}}
+  {{#if this.properties.headerTitle}}accessorKey
+  {{else}}id
+  {{/if}}: '{{toCamelCase this.tag}}',
+  {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,
+  {{/if~}}
+  cell: ({ row }) => {
+  {{{render-table-row this ../../registry}}}
+  },
+  filterFn: 
+  {{#if (eq this.componentName
+  'tableDateCell')}}IGRPDataTableDateRangeFilterFn
+  {{else}}IGRPDataTableFacetedFilterFn
   {{/if}}
-  columns={
-    [
-    {{#if resourceConfig.children}}
-      {{#each (extractTableColumns resourceConfig.children)}}
-        {{#each this.children}}
-        {{#if ( not (eq this.componentName 'tableHiddenCell'))}}
-        {
-          {{#if (or this.properties.headerTitle this.properties.headerType)}}header: {{> tableHeader this ~}},{{/if~}}
-          {{#if this.properties.headerTitle}}accessorKey{{else}}id{{/if}}: '{{toCamelCase this.tag}}',
-          {{#if (eq this.componentName 'tableActionListCell')}}enableHiding: false,{{/if~}}
-          cell: ({ row }) => {
-          {{{render-table-row this ../../registry}}}
-          },
-          filterFn: {{#if (eq this.componentName 'tableDateCell')}}IGRPDataTableDateRangeFilterFn{{else}}IGRPDataTableFacetedFilterFn{{/if}}
-        },
-        {{/if}}
-        {{/each}}
-      {{/each}}
-    {{/if~}}
-    ]
+  },
+  {{/if}}
+  {{/each}}
+  {{/each}}
+  {{/if~}}
+  ]
   }
   clientFilters={
-    [
-    {{#if resourceConfig.children}}
-      {{#each (extractTableFilters resourceConfig.children)}}
-        {{#each this.children}}
-        {
-          {{#if this.properties.columnId}}columnId: `{{this.properties.columnId}}`,{{/if}}
-          component: (column) => (
-          {{{render-table-row this ../../registry}}}
-          )
-        },
-        {{/each}}
-      {{/each}}
-    {{/if}}
-    ]
+  [
+  {{#if resourceConfig.children}}
+  {{#each (extractTableFilters resourceConfig.children)}}
+  {{#each this.children}}
+  {
+  {{#if this.properties.columnId}}columnId: `{{this.properties.columnId}}`,
+  {{/if}}
+  component: (column) => (
+  {{{render-table-row this ../../registry}}}
+  )
+  },
+  {{/each}}
+  {{/each}}
+  {{/if}}
+  ]
   }
   {{#if resourceConfig.interactions}}
   {{{render-interactions resourceConfig.interactions}}}
@@ -96,4 +131,31 @@
   {{#if resourceConfig.data}}
   {{{render-data resourceConfig.data resourceConfig}}}
   {{/if}}
-/>
+
+  {{!-- table row subcomponent --}}
+  {{#if (extractTableRowSubcomponent resourceConfig.children)}}
+  {{#with (extractTableRowSubcomponent resourceConfig.children)}}
+  renderSubComponent={(row) => {
+  const rowData = row.original;
+  const matchRule = 
+  {{#if this.properties.rule}}{{{this.properties.rule}}};
+  {{else}}true;
+  {{/if}}
+  if(!matchRule) return undefined;
+  return (
+  <>
+  {{#if this.children}}
+  {{#each this.children}}
+  {{{render-layout this ../this}}}
+  {{/each}}
+  {{/if}}
+  </>
+  );
+}}
+  {{/with}}
+  />
+  {{else}}
+  />
+  {{/if}}
+
+  

@@ -312,6 +312,27 @@ const tableLayout: Layout = {
             },*/
           ],
         },
+        {
+          id: 'table_default_row_subcomponent',
+          tag: 'table_default_row_subcomponent',
+          componentName: 'tableRowSubcomponent',
+          properties: {
+            rule: 'rowData.role === "Admin"'
+          },
+          children: [
+            {
+              id: 'sub_headline',
+              tag: 'sub_headline',
+              componentName: 'headline',
+              properties: {
+                variant: 'h4',
+                title: 'Details',
+                description: 'Row details here',
+              }
+            }
+          ]
+        }
+
       ],
       interactions: {
         data: {
@@ -392,6 +413,7 @@ const tableLayout: Layout = {
         },
       }
     },
+
   ],
 };
 
@@ -409,8 +431,8 @@ beforeAll(async () => {
   await initComponents();
 });
 
-describe('Tables module',() =>{
-  it('should save the table page configuration file', async()=> {
+describe('Tables module', () => {
+  it('should save the table page configuration file', async () => {
     await newPage(pageConfig, OUTPUT_DIR);
   })
 

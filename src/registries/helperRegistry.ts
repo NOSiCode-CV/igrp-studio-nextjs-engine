@@ -26,6 +26,7 @@ import {
   extractCardFooter, extractInfoItem, extractInfoSection,
   extractMenuNavigationItems,
   extractTableColumns,
+  extractTableRowSubcomponent,
   extractTableFilters,
   extractTabsItem,
   extractTextListItemContent,
@@ -80,6 +81,7 @@ Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
 Handlebars.registerHelper("resolveArrayElementRules", resolveArrayElementRules);
 Handlebars.registerHelper("checkRules", checkRules);
 Handlebars.registerHelper("extractTableColumns", extractTableColumns);
+Handlebars.registerHelper("extractTableRowSubcomponent", extractTableRowSubcomponent);
 Handlebars.registerHelper("extractTableFilters", extractTableFilters);
 Handlebars.registerHelper("extractCardContent", extractCardContent);
 Handlebars.registerHelper("extractCardFooter", extractCardFooter);

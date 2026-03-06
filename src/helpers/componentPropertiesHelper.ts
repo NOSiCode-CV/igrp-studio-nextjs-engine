@@ -31,6 +31,7 @@ import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
 import { CARD_DETAILS_ITEM } from '../components/cardDetails/children/cardDetailsItem/index';
 import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/index';
+import { TABLE_ROW_SUBCOMPONENT } from '../components/table/children/tableRowSubcomponent';
 
 export function addClassNameFromChildProperties(
   parent: Layout,
@@ -420,6 +421,10 @@ export function checkRules(config: Layout): boolean {
 
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);
+}
+
+export function extractTableRowSubcomponent(children: Layout[]) {
+  return children.find((it) => it.componentName === TABLE_ROW_SUBCOMPONENT);
 }
 
 export function extractTableFilters(children: Layout[]) {

@@ -10,6 +10,14 @@ export const renderLayout = function (config: Layout, parent?: Layout): string {
   let str: string = ""
 
   const component = getComponent(config.componentName)
+  if (parent) {
+    const parentComponent = getComponent(parent.componentName);
+    if (parentComponent) {
+      const isHandledByTemplate = Array.from(parentComponent.acceptedChildren)
+        .some(child => child.name === config.componentName && !child.isDefault);
+      if (isHandledByTemplate) return '';  // ignora — o pai trata este filho no seu template
+    }
+  }
 
   if(!component) return renderSyncTemplate(TEMPLATES.UNREGISTERED_COMPONENT, { name: config.componentName })
 
