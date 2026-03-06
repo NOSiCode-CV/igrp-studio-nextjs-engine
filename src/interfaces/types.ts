@@ -97,6 +97,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
 
 export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
   type: 'processStep';
+  useClient?: boolean;
   key: string;
   name: string;
   description?: string;
@@ -387,36 +388,37 @@ export interface DockerServiceRegisterConfig extends VersionableElement {
 }
 
 export interface ComponentRegisterConfig extends VersionableElement {
-  name: string,
-  imports: string[],
-  defaultValue: boolean,
-  allowTypes: boolean,
-  deprecated?: boolean,
-  replacedBy?: string,
-  group: string,
-  label: string,
-  customClassName?: string,
-  customComponentTag?: string,
-  variants: Record<string, any>,
-  metadata: Record<string, any>,
-  properties: Record<string, any>,
-  propertiesMapping: Record<string, any>,
-  interactions: Record<string, any>,
-  interactionsMapping: Record<string, any>,
-  data: Record<string, any>,
-  dataMapping: Record<string, any>,
-  style: Record<string, any>,
-  styleMapping: Record<string, any>,
-  rules: Record<string, any>,
-  rulesMapping: Record<string, any>,
-  childProperties?: Record<string, any>,
-  childPropertiesMapping?: Record<string, any>,
-  states: RegisterState[],
-  childrenTypes: ComponentRegisterConfig[],
-  acceptedChildren: ComponentRegisterConfig[],
-  defaultChildren: DefaultChildComponent[],
-  renderer: 'default' | 'hbs' | 'custom' | 'none',
-  templatePath?: string
+  name: string;
+  imports: string[];
+  defaultValue: boolean;
+  allowTypes: boolean;
+  allowChildren?: boolean;
+  deprecated?: boolean;
+  replacedBy?: string;
+  group: string;
+  label: string;
+  customClassName?: string;
+  customComponentTag?: string;
+  variants: Record<string, any>;
+  metadata: Record<string, any>;
+  properties: Record<string, any>;
+  propertiesMapping: Record<string, any>;
+  interactions: Record<string, any>;
+  interactionsMapping: Record<string, any>;
+  data: Record<string, any>;
+  dataMapping: Record<string, any>;
+  style: Record<string, any>;
+  styleMapping: Record<string, any>;
+  rules: Record<string, any>;
+  rulesMapping: Record<string, any>;
+  childProperties?: Record<string, any>;
+  childPropertiesMapping?: Record<string, any>;
+  states: RegisterState[];
+  childrenTypes: ComponentRegisterConfig[];
+  acceptedChildren: ComponentRegisterConfig[];
+  defaultChildren: DefaultChildComponent[];
+  renderer: 'default' | 'hbs' | 'custom' | 'none';
+  templatePath?: string;
 }
 
 export interface Visibility {
@@ -971,6 +973,7 @@ export interface ComponentDef {
   }[];
   hooks: string[]; // Names of hooks used
   children: string[]; // Names of child components used
+  allowChildren?: boolean;
 }
 
 export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';

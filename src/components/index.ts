@@ -47,6 +47,7 @@ export type Component = {
   defaultValue: boolean;
   noClassName: boolean;
   allowTypes: boolean;
+  allowChildren?: boolean;
   forceStateLoad: boolean;
   forceReferenceLoad: boolean;
   deprecated?: boolean;
@@ -70,6 +71,7 @@ export type Component = {
   loadDefault:(defaultValue: boolean) => void;
   setNoClassName:(value: boolean) => void;
   setAllowTypes:(value: boolean) => void;
+  setAllowChildren:(value: boolean) => void;
   setForceStateLoad:(value: boolean) => void;
   setForceReferenceLoad:(value: boolean) => void;
   setDeprecated:(value: boolean) => void;
@@ -138,6 +140,7 @@ function initComponent(): Component {
     defaultValue: false,
     noClassName: false,
     allowTypes: false,
+    allowChildren: undefined,
     forceStateLoad: false,
     forceReferenceLoad: false,
     deprecated: false,
@@ -177,6 +180,10 @@ function initComponent(): Component {
 
     setAllowTypes(value: boolean) {
       this.allowTypes = value
+    },
+
+    setAllowChildren(value: boolean) {
+      this.allowChildren = value
     },
 
     setForceStateLoad(value: boolean) {
@@ -343,6 +350,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     imports: [],
     defaultValue: isDefault ?? defaultValue,
     allowTypes: value.allowTypes,
+    allowChildren: value.allowChildren,
     deprecated: value.deprecated,
     replacedBy: value.replacedBy,
     group: value.group,

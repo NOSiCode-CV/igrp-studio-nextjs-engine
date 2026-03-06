@@ -21,7 +21,8 @@ export function parseComponents(componentFilePath: string): ComponentDef[] {
 
     const { props, argumentsInterface } = parseComponentProps(extracted.params);
     if (props || argumentsInterface) {
-      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [] });
+      const allowChildren = detectChildrenProp(props);
+      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [], allowChildren });
     }
   }
 
@@ -36,7 +37,8 @@ export function parseComponents(componentFilePath: string): ComponentDef[] {
 
     const { props, argumentsInterface } = parseComponentProps(extracted.params);
     if (props || argumentsInterface) {
-      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [] });
+      const allowChildren = detectChildrenProp(props);
+      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [], allowChildren });
     }
   }
 
@@ -385,4 +387,15 @@ function parseChildComponents(returnContent: string): string[] {
   }
 
   return Array.from(components);
+}
+
+function detectChildrenProp(props: { name: string; type: string }[]): boolean {
+  return props.some(
+    (p) =>
+      p.name === 'children' &&
+      (p.type.includes('ReactNode') ||
+        p.type.includes('ReactElement') ||
+        p.type.includes('JSX.Element') ||
+        p.type === 'any')
+  );
 }

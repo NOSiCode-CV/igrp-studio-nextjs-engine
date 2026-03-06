@@ -683,42 +683,48 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
     version: {
       type: 'string',
       nullable: true,
-      errorMessage:
-        'The engine version attribute must be a valid string.',
+      errorMessage: 'The engine version attribute must be a valid string.',
     },
     id: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+      errorMessage:
+        'The id attribute must only contain alphanumeric characters and must not have spaces or special characters.',
     },
     type: {
-      type: "string",
-      const: "processStep",
+      type: 'string',
+      const: 'processStep',
       errorMessage: "The type must be 'processStep'.",
     },
+    useClient: {
+      type: 'boolean',
+      nullable: true,
+      errorMessage: 'The use client attribute must be a valid boolean.',
+    },
     name: {
-      type: "string",
+      type: 'string',
       pattern: PATTERNS.PROCESS_NAME_VALIDATION_PATTERN,
-      errorMessage: 'The process step name name must only contain letters and must not have spaces or special characters except underscore (_), hyphen (-) and dot (.).',
+      errorMessage:
+        'The process step name name must only contain letters and must not have spaces or special characters except underscore (_), hyphen (-) and dot (.).',
     },
     key: {
-      type: "string",
+      type: 'string',
       errorMessage: 'The process step key must be a string.',
     },
     description: {
       type: 'string',
       nullable: true,
-      errorMessage:
-        'The description, if provided, must be a string.',
+      errorMessage: 'The description, if provided, must be a string.',
     },
     processKey: {
       type: 'string',
-      errorMessage: 'The process key attribute must be a valid string.'
+      errorMessage: 'The process key attribute must be a valid string.',
     },
     processVersion: {
       type: 'string',
       pattern: PATTERNS.WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS,
-      errorMessage: 'The process version attribute must only contain alphanumeric characters and must not have spaces or special characters.'
+      errorMessage:
+        'The process version attribute must only contain alphanumeric characters and must not have spaces or special characters.',
     },
     components: {
       type: 'object',
@@ -729,12 +735,12 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
     forceDynamic: {
       type: 'boolean',
       nullable: true,
-      errorMessage: "The force dynamic attribute, if provided, must be valid boolean.",
+      errorMessage: 'The force dynamic attribute, if provided, must be valid boolean.',
     },
     args: {
       type: 'array',
       items: {
-        anyOf: [argsSchema]
+        anyOf: [argsSchema],
       },
       nullable: true,
       errorMessage: 'Arguments must contain valid args configuration.',
@@ -743,49 +749,55 @@ const processStepConfigSchema: JSONSchemaType<ProcessStepConfig> = {
       type: 'array',
       nullable: true,
       items: functionSchema,
-      errorMessage: 'The functions attribute must be an array of valid function definition configuration.'
+      errorMessage:
+        'The functions attribute must be an array of valid function definition configuration.',
     },
     actions: {
       type: 'array',
       nullable: true,
       items: functionSchema,
-      errorMessage: 'The actions attribute must be an array of valid function definition configuration.'
+      errorMessage:
+        'The actions attribute must be an array of valid function definition configuration.',
     },
     references: {
       type: 'array',
       nullable: true,
       items: referenceSchema,
-      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+      errorMessage:
+        'The states attribute must be an array of valid state definition configuration.',
     },
     types: {
       type: 'array',
       items: typeDefSchema,
-      errorMessage: 'The types attribute must be an array of valid type definition configuration.'
+      errorMessage: 'The types attribute must be an array of valid type definition configuration.',
     },
     imports: {
       type: 'array',
       nullable: true,
       items: importSchema,
-      errorMessage: 'The imports attribute must be an array of valid import definition configuration.'
+      errorMessage:
+        'The imports attribute must be an array of valid import definition configuration.',
     },
     states: {
       type: 'array',
       nullable: true,
       items: stateSchema,
-      errorMessage: 'The states attribute must be an array of valid state definition configuration.'
+      errorMessage:
+        'The states attribute must be an array of valid state definition configuration.',
     },
     projectArtifactId: {
       type: 'string',
-      errorMessage: 'The project artifact ID must be a valid string.'
+      errorMessage: 'The project artifact ID must be a valid string.',
     },
     taskKey: {
       type: 'string',
-      errorMessage: 'The task key must be a valid string.'
+      errorMessage: 'The task key must be a valid string.',
     },
     artifactVariables: {
       type: 'array',
       items: variableSchema,
-      errorMessage: 'The artifact variables attribute must be an array of valid variable definition configuration.'
+      errorMessage:
+        'The artifact variables attribute must be an array of valid variable definition configuration.',
     },
   },
   required: ['type', 'name', 'key', 'projectArtifactId', 'taskKey', 'artifactVariables'],
