@@ -1,87 +1,87 @@
 <IGRPInputUrl
-  {% if resourceConfig.properties.commonProperties.generateReference %}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
-  {% endif %}
+  {% endif -%}
   id={ `{{ resourceConfig.tag }}` }
-  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled %}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
   disabled
-  {% endif %}
-  {% if resourceConfig.properties.label and not resourceConfig.data.label %}
+  {% endif -%}
+  {% if resourceConfig.properties.label and not resourceConfig.data.label -%}
   label={ `{{ resourceConfig.properties.label }}` }
-  {% endif %}
-  {% if resourceConfig.properties.floatingLabel and not resourceConfig.data.floatingLabel %}
+  {% endif -%}
+  {% if resourceConfig.properties.floatingLabel and not resourceConfig.data.floatingLabel -%}
   floatingLabel={ {{ resourceConfig.properties.floatingLabel }} }
-  {% endif %}
-  {% if resourceConfig.properties.helperText and not resourceConfig.data.helperText %}
+  {% endif -%}
+  {% if resourceConfig.properties.helperText and not resourceConfig.data.helperText -%}
   helperText={ `{{ resourceConfig.properties.helperText }}` }
-  {% endif %}
-  {% if resourceConfig.properties.defaultValue and not resourceConfig.data.defaultValue %}
+  {% endif -%}
+  {% if resourceConfig.properties.defaultValue and not resourceConfig.data.defaultValue -%}
   defaultValue={ `{{ resourceConfig.properties.defaultValue }}` }
-  {% endif %}
-  {% if resourceConfig.properties.defaultProtocol and not resourceConfig.data.defaultProtocol %}
+  {% endif -%}
+  {% if resourceConfig.properties.defaultProtocol and not resourceConfig.data.defaultProtocol -%}
   defaultProtocol={ `{{ resourceConfig.properties.defaultProtocol }}` }
-  {% endif %}
-  {% if resourceConfig.properties.minLength and not resourceConfig.data.minLength %}
+  {% endif -%}
+  {% if resourceConfig.properties.minLength and not resourceConfig.data.minLength -%}
   minLength={ {{ resourceConfig.properties.minLength }} }
-  {% endif %}
-  {% if resourceConfig.properties.maxLength and not resourceConfig.data.maxLength %}
+  {% endif -%}
+  {% if resourceConfig.properties.maxLength and not resourceConfig.data.maxLength -%}
   maxLength={ {{ resourceConfig.properties.maxLength }} }
-  {% endif %}
-  {% if resourceConfig.properties.error and not resourceConfig.data.error %}
+  {% endif -%}
+  {% if resourceConfig.properties.error and not resourceConfig.data.error -%}
   error={ `{{ resourceConfig.properties.error }}` }
-  {% endif %}
-  {% if resourceConfig.properties.protocols and not resourceConfig.data.protocols %}
+  {% endif -%}
+  {% if resourceConfig.properties.protocols and not resourceConfig.data.protocols -%}
   protocols={
     [
-    {% for this in resourceConfig.properties.protocols %}
+    {% for this in resourceConfig.properties.protocols -%}
       {
         value: '{{ this }}',
         label: '{{ this }}'
       },
-    {% endfor %}
+    {% endfor -%}
     ]
   }
-  {% endif %}
-  {% if resourceConfig.properties.showIcon and not resourceConfig.data.showIcon %}
+  {% endif -%}
+  {% if resourceConfig.properties.showIcon and not resourceConfig.data.showIcon -%}
   showIcon={ {{ resourceConfig.properties.showIcon }} }
-  {% endif %}
-  {% if resourceConfig.properties.required and not resourceConfig.data.required %}
+  {% endif -%}
+  {% if resourceConfig.properties.required and not resourceConfig.data.required -%}
   required={ {{ resourceConfig.properties.required }} }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
   iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconSize %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize -%}
   iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconPlacement %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconPlacement -%}
   iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.readOnly and not resourceConfig.data.readOnly %}
+  {% endif -%}
+  {% if resourceConfig.properties.readOnly and not resourceConfig.data.readOnly -%}
   readOnly
-  {% endif %}
-  {% if resourceConfig.properties.autofocus and not resourceConfig.data.autofocus %}
+  {% endif -%}
+  {% if resourceConfig.properties.autofocus and not resourceConfig.data.autofocus -%}
   autoFocus={ {{ resourceConfig.properties.autofocus }} }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
-  {% if resourceConfig.interactions %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 />

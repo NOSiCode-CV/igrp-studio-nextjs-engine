@@ -1,15 +1,15 @@
 const rowData = row.original;
 
-{% if resourceConfig.interactions.customize.function.fnName %}
+{% if resourceConfig.interactions.customize.function.fnName -%}
 const { iconName, bgClass, textClass, label, className } = {{ resourceConfig.interactions.customize.function.fnName }}(rowData);
-{% endif %}
+{% endif -%}
 
 return <IGRPDataTableCellBadge
   {% comment %}field={ row.getValue('{{ resourceConfig.tag }}') }{% endcomment %}
   label={ {% if resourceConfig.data.label.value.code %}{{ resourceConfig.data.label.value.code }}{% else %}{% if resourceConfig.interactions.customize.function.fnName %}label ?? {% endif %}row.original.{{ resourceConfig.tag }}{% endif %} }
-  {% if resourceConfig.properties.variant and not resourceConfig.data.variant %}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
   variant={ `{{ resourceConfig.properties.variant }}` }
-  {% endif %}
+  {% endif -%}
   badgeClassName={ {% if resourceConfig.interactions.customize.function.fnName %}`${bgClass} ${textClass} ${className}`{% else %}`{{ resourceConfig.properties.className }}`{% endif %} }
 >
 

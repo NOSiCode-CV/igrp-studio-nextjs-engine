@@ -3,10 +3,10 @@ igrpToast({
   loading: "{{ resourceConfig.loading }}",
   success: "{{ resourceConfig.success }}",
   error: "{{ resourceConfig.error }}",
-  {% if resourceConfig.action %}
+  {% if resourceConfig.action -%}
   action: {
     label: "{{ resourceConfig.action.label }}",
     onClick: () => console.log("{{ resourceConfig.action.label }}"),
   },
-  {% endif %}
+  {% endif -%}
 })

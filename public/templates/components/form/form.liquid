@@ -1,56 +1,56 @@
 <IGRPForm
-  {% if resourceConfig.properties.commonProperties.generateReference %}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
-  {% endif %}
-  {% if resourceConfig.dataType %}
+  {% endif -%}
+  {% if resourceConfig.dataType -%}
   schema={ {{ '' | toCamelCase: resourceConfig.dataType }} }
-  {% endif %}
-  {% if resourceConfig.properties.validationMode and not resourceConfig.data.validationMode %}
+  {% endif -%}
+  {% if resourceConfig.properties.validationMode and not resourceConfig.data.validationMode -%}
   validationMode={ `{{ resourceConfig.properties.validationMode }}` }
-  {% endif %}
-  {% if resourceConfig.properties.gridClassName and not resourceConfig.data.gridClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.gridClassName and not resourceConfig.data.gridClassName -%}
   gridClassName={ `{{ resourceConfig.properties.gridClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.resetAfterSubmit and not resourceConfig.data.resetAfterSubmit %}
+  {% endif -%}
+  {% if resourceConfig.properties.resetAfterSubmit and not resourceConfig.data.resetAfterSubmit -%}
   resetAfterSubmit={ {{ resourceConfig.properties.resetAfterSubmit }} }
-  {% endif %}
-  {% if resourceConfig.properties.showAction and not resourceConfig.data.showAction %}
+  {% endif -%}
+  {% if resourceConfig.properties.showAction and not resourceConfig.data.showAction -%}
   showAction={ {{ resourceConfig.properties.showAction }} }
-  {% endif %}
-  {% if resourceConfig.properties.submitText and not resourceConfig.data.submitText %}
+  {% endif -%}
+  {% if resourceConfig.properties.submitText and not resourceConfig.data.submitText -%}
   submitText={ `{{ resourceConfig.properties.submitText }}` }
-  {% endif %}
-  {% if resourceConfig.properties.submitVariant and not resourceConfig.data.submitVariant %}
+  {% endif -%}
+  {% if resourceConfig.properties.submitVariant and not resourceConfig.data.submitVariant -%}
   submitVariant={ `{{ resourceConfig.properties.submitVariant }}` }
-  {% endif %}
+  {% endif -%}
   formRef={ form{{ resourceConfig.tag }}Ref }
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
-  {% if resourceConfig.interactions %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.data %}
+  {% endif -%}
+  {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 >
   <>
-  {% if resourceConfig.children %}
-  {% for this in resourceConfig.children %}
-  {{ '' | render-layout: this, resourceConfig }}
-  {% endfor %}
-  {% endif %}
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
   </>
 </IGRPForm>

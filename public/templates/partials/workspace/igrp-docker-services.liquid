@@ -82,9 +82,9 @@ minio:
   volumes:
     - {% if resourceConfig.platform.file.volumes %}{{ resourceConfig.platform.file.volumes.name }}{% else %}./data{% endif %}:{% if resourceConfig.platform.file.volumes %}{% if resourceConfig.platform.file.volumes.path %}{{ resourceConfig.platform.file.volumes.path }}{% else %}/minio_data{% endif %}{% else %}/minio_data{% endif %}
   ports:
-    {% for this in resourceConfig.platform.file.ports %}
+    {% for this in resourceConfig.platform.file.ports -%}
     - "{{ this.external }}:{{ this.internal }}"
-    {% endfor %}
+    {% endfor -%}
   networks:
     - {{ '' | toLowerCase: resourceConfig.workspace }}-network
   command: server /data --console-address :{{ '' | getAttribute: resourceConfig.platform.file.ports, 1, 'internal' }}

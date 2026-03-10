@@ -1,8 +1,8 @@
 <IGRPDataTableDropdownMenu
   items={
     [
-      {% if resourceConfig.children %}
-      {% for this in resourceConfig.children %}
+      {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children -%}
       {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}{
         component: {{ '' | resolveComponent: this.componentName, registry }},
         props: {
@@ -29,23 +29,23 @@
           {% if this.properties.classNameItem %}classNameItem: `{{ this.properties.classNameItem }}`,{% endif %}
           {% if this.properties.variantConfirm %}variantConfirm: `{{ this.properties.variantConfirm }}`,{% endif %}
           {% if this.properties.actionConfirm %}onClickConfirm: () => {{ this.properties.actionConfirm }}(rowData),{% endif %}
-          {% if this.interactions %}
+          {% if this.interactions -%}
           {{ '' | render-interactions: this.interactions, true }}
-          {% endif %}
-          {% if this.children %}
+          {% endif -%}
+          {% if this.children -%}
           children:
-          {% for this in this.children %}
-          {{ '' | render-layout: this, resourceConfig }}
-          {% endfor %}
-          {% else %}
-          {% if this.properties.content %}
+          {% for child in this.children -%}
+          {{ '' | render-layout: child, this }}
+          {% endfor -%}
+          {% else -%}
+          {% if this.properties.content -%}
           children: <>{{ this.properties.content }}</>
-          {% endif %}
-          {% endif %}
+          {% endif -%}
+          {% endif -%}
         }
       }{% if this %}] : []){% endif %},
-      {% endfor %}
-      {% endif %}
+      {% endfor -%}
+      {% endif -%}
     ]
   }
 >

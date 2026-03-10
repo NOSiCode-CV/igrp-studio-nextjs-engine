@@ -2,10 +2,10 @@ const rowData = row.original;
 
 return (
 <IGRPDataTableRowAction>
-  {% if resourceConfig.children %}
-  {% for this in resourceConfig.children %}
-  {{ '' | render-layout: this, resourceConfig }}
-  {% endfor %}
-  {% endif %}
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
 </IGRPDataTableRowAction>
 );

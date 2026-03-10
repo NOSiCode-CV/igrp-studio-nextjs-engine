@@ -1,9 +1,9 @@
 const {{ '' | capitalize: this.id }}Props: IGRP_{{ this.componentName }}.Props<I{{ '' | capitalize: this.id }}Fields> = {
   service: service?.{{ '' | toLowerCase: this.id }},
   fields: {
-    {% for this in this.fields %}
+    {% for this in this.fields -%}
     {{ this.config.name }}: {{ '' | json: this }}{% if forloop.last %}{% else %},{% endif %}
-    {% endfor %}
+    {% endfor -%}
   },
   config: {{ '' | json: this.config }}
 };

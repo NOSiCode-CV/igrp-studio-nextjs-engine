@@ -3,8 +3,8 @@ const rowData = row.original;
 return <IGRPDataTableButtonList
   actionButtons={
     [
-      {% if resourceConfig.children %}
-      {% for this in resourceConfig.children %}
+      {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children -%}
       {
         type: {{ this.properties.type }},
         component: {{ '' | resolveComponent: this.componentName, registry }},
@@ -28,16 +28,16 @@ return <IGRPDataTableButtonList
           {% if this.properties.classNameConfirm %}classNameConfirm: `{{ this.properties.classNameConfirm }}`,{% endif %}
           {% if this.properties.variantConfirm %}variantConfirm: `{{ this.properties.variantConfirm }}`,{% endif %}
           {% if this.properties.actionConfirm %}onClickConfirm: () => {{ this.properties.actionConfirm }}(rowData),{% else %}onClickConfirm: () => {},{% endif %}
-          {% if this.children %}
+          {% if this.children -%}
           children:
-          {% for this in this.children %}
-          {{ '' | render-layout: this, resourceConfig }}
-          {% endfor %}
-          {% endif %}
+          {% for child in this.children -%}
+          {{ '' | render-layout: child, this }}
+          {% endfor -%}
+          {% endif -%}
         }
       },
-      {% endfor %}
-      {% endif %}
+      {% endfor -%}
+      {% endif -%}
     ]
   }
 >

@@ -175,7 +175,7 @@ engine.registerTag('partial', {
   parse(this: any, tagToken: any) {
     this.args = tagToken.args;
   },
-  async render(this: any, ctx: any) {
+  render(this: any, ctx: any) {
     const rawArgs = String(this.args || '').split(',').map((x) => x.trim()).filter(Boolean);
     const nameArg = rawArgs.shift() || '';
     const partialName = nameArg.replace(/^['"]|['"]$/g, '');
@@ -191,7 +191,14 @@ engine.registerTag('partial', {
         hash[`value${index}`] = ctx.get([arg]);
       }
     });
-    return engine.parseAndRender(source, { ...ctx.environments, ...hash });
+    const ast = engine.parse(source);
+    const renderContext: Record<string, any> = { ...ctx.environments };
+    const primaryContext = hash.value0;
+    if (primaryContext && typeof primaryContext === 'object' && !Array.isArray(primaryContext)) {
+      Object.assign(renderContext, primaryContext);
+    }
+    Object.assign(renderContext, hash);
+    return engine.renderSync(ast, renderContext);
   },
 });
 

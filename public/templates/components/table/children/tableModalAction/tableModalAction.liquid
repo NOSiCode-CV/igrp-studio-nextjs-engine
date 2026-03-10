@@ -1,92 +1,92 @@
 <IGRPDataTableButtonModal
-  {% if resourceConfig.properties.title and not resourceConfig.data.title %}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   modalTitle={ `{{ resourceConfig.properties.title }}` }
-  {% endif %}
-  {% if resourceConfig.properties.labelTrigger and not resourceConfig.data.labelTrigger %}
+  {% endif -%}
+  {% if resourceConfig.properties.labelTrigger and not resourceConfig.data.labelTrigger -%}
   labelTrigger={ `{{ resourceConfig.properties.labelTrigger }}` }
-  {% endif %}
-  {% if resourceConfig.properties.variant and not resourceConfig.data.variant %}
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
   variant={ `{{ resourceConfig.properties.variant }}` }
-  {% endif %}
-  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled %}
+  {% endif -%}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
   disabled={ {{ resourceConfig.properties.disabled }} }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
   icon={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.variantCancel and not resourceConfig.data.variantCancel %}
+  {% endif -%}
+  {% if resourceConfig.properties.variantCancel and not resourceConfig.data.variantCancel -%}
   variantCancel={ `{{ resourceConfig.properties.variantCancel }}` }
-  {% endif %}
-  {% if resourceConfig.properties.variantConfirm and not resourceConfig.data.variantConfirm %}
+  {% endif -%}
+  {% if resourceConfig.properties.variantConfirm and not resourceConfig.data.variantConfirm -%}
   variantConfirm={ `{{ resourceConfig.properties.variantConfirm }}` }
-  {% endif %}
-  {% if resourceConfig.properties.labelCancel and not resourceConfig.data.labelCancel %}
+  {% endif -%}
+  {% if resourceConfig.properties.labelCancel and not resourceConfig.data.labelCancel -%}
   labelCancel={ `{{ resourceConfig.properties.labelCancel }}` }
-  {% endif %}
-  {% if resourceConfig.properties.labelConfirm and not resourceConfig.data.labelConfirm %}
+  {% endif -%}
+  {% if resourceConfig.properties.labelConfirm and not resourceConfig.data.labelConfirm -%}
   labelConfirm={ `{{ resourceConfig.properties.labelConfirm }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showCancel and not resourceConfig.data.showCancel %}
+  {% endif -%}
+  {% if resourceConfig.properties.showCancel and not resourceConfig.data.showCancel -%}
   showCancel={ {{ resourceConfig.properties.showCancel }} }
-  {% endif %}
-  {% if resourceConfig.properties.showConfirm and not resourceConfig.data.showConfirm %}
+  {% endif -%}
+  {% if resourceConfig.properties.showConfirm and not resourceConfig.data.showConfirm -%}
   showConfirm={ {{ resourceConfig.properties.showCancel }} }
-  {% endif %}
-  {% if resourceConfig.properties.classNameCancel and not resourceConfig.data.classNameCancel %}
+  {% endif -%}
+  {% if resourceConfig.properties.classNameCancel and not resourceConfig.data.classNameCancel -%}
   classNameCancel={ `{{ resourceConfig.properties.classNameCancel }}` }
-  {% endif %}
-  {% if resourceConfig.properties.classNameConfirm and not resourceConfig.data.classNameConfirm %}
+  {% endif -%}
+  {% if resourceConfig.properties.classNameConfirm and not resourceConfig.data.classNameConfirm -%}
   classNameConfirm={ `{{ resourceConfig.properties.classNameConfirm }}` }
-  {% endif %}
-  {% if resourceConfig.properties.classNameTrigger and not resourceConfig.data.classNameTrigger %}
+  {% endif -%}
+  {% if resourceConfig.properties.classNameTrigger and not resourceConfig.data.classNameTrigger -%}
   classNameTrigger={ `{{ resourceConfig.properties.classNameTrigger }}` }
-  {% endif %}
-  {% if resourceConfig.properties.modalSize and not resourceConfig.data.modalSize %}
+  {% endif -%}
+  {% if resourceConfig.properties.modalSize and not resourceConfig.data.modalSize -%}
   modalSize={ `{{ resourceConfig.properties.modalSize }}` }
-  {% endif %}
-  {% if resourceConfig.properties.modalTitle and not resourceConfig.data.modalTitle %}
+  {% endif -%}
+  {% if resourceConfig.properties.modalTitle and not resourceConfig.data.modalTitle -%}
   modalTitle={ `{{ resourceConfig.properties.modalTitle }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showStickyFooter and not resourceConfig.data.showStickyFooter %}
+  {% endif -%}
+  {% if resourceConfig.properties.showStickyFooter and not resourceConfig.data.showStickyFooter -%}
   showStickyFooter={ {{ resourceConfig.properties.showStickyFooter }} }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
   {% comment %}loading={ {{ resourceConfig.tag }}Loading }{% endcomment %}
-  {% if resourceConfig.interactions %}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 >
-  {% if resourceConfig.content %}
+  {% if resourceConfig.content -%}
   {{ resourceConfig.content }}
-  {% else %}
-  {% if resourceConfig.properties.content and not resourceConfig.data.content %}
+  {% else -%}
+  {% if resourceConfig.properties.content and not resourceConfig.data.content -%}
   {{ resourceConfig.properties.content }}
-  {% else %}
-  {% if not resourceConfig.properties.content and resourceConfig.data.content %}
+  {% else -%}
+  {% if not resourceConfig.properties.content and resourceConfig.data.content -%}
   { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}{{ resourceConfig.data.content.state.name }}{% endif %} }
-  {% else %}
-  {% if resourceConfig.children %}
-  {% for this in resourceConfig.children %}
-  {{ '' | render-layout: this, resourceConfig }}
-  {% endfor %}
-  {% endif %}
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% else -%}
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
 </IGRPDataTableButtonModal>

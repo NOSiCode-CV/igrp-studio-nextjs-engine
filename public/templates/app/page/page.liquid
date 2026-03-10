@@ -1,7 +1,7 @@
-{% if resourceConfig.useClient == false %}
-{% else %}
+{% if resourceConfig.useClient == false -%}
+{% else -%}
 'use client'
-{% endif %}
+{% endif -%}
 
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
@@ -12,21 +12,21 @@
 
 {{ '' | resolve-imports: resourceConfig.components, registry, resourceConfig.pageName, basePath, resourceConfig }}
 
-{% if resourceConfig.forceDynamic %}
+{% if resourceConfig.forceDynamic -%}
 export const dynamic = 'force-dynamic'
-{% endif %}
+{% endif -%}
 
 export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if resourceConfig.args %}{ params } : { params: Promise<{ {{ '' | resolveFunctionArgs: resourceConfig.args }} }> } {% endif %}) {
 
-  {% if resourceConfig.args %}
+  {% if resourceConfig.args -%}
   const { {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } = use(params);
-  {% endif %}
+  {% endif -%}
 
-{% if resourceConfig.components %}
+{% if resourceConfig.components -%}
 
-  {% if resourceConfig.types %}
-  {{ '' | resolve-types: this }}
-  {% endif %}
+  {% if resourceConfig.types -%}
+  {{ '' | resolve-types: resourceConfig, registry }}
+  {% endif -%}
   {{ '' | resolve-states: resourceConfig.components, registry }}
   {{ '' | resolve-references: resourceConfig.components, registry }}
   {{ '' | resolve-code-blocks: resourceConfig.components, registry, resourceConfig }}
@@ -34,5 +34,5 @@ export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural 
   return (
 {{ '' | render-layout: resourceConfig.components }}
   );
-{% endif %}
+{% endif -%}
 }

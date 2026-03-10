@@ -1,49 +1,49 @@
 return <IGRPDataTableCellLink
-  {% if resourceConfig.properties.href %}
+  {% if resourceConfig.properties.href -%}
   href={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
-  {% endif %}
-  {% if resourceConfig.properties.target %}
+  {% endif -%}
+  {% if resourceConfig.properties.target -%}
   target={ `{{ resourceConfig.properties.target }}` }
-  {% endif %}
-  {% if resourceConfig.properties.color %}
+  {% endif -%}
+  {% if resourceConfig.properties.color -%}
   color={ `{{ resourceConfig.properties.color }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.showIcon %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.showIcon -%}
   showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
   iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconSize %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize -%}
   iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconPlacement %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconPlacement -%}
   iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.variant %}
+  {% endif -%}
+  {% if resourceConfig.properties.variant -%}
   variant={ `{{ resourceConfig.properties.variant }}` }
-  {% endif %}
+  {% endif -%}
 >
-    {% if resourceConfig.content %}
+    {% if resourceConfig.content -%}
     { row.getValue('{{ resourceConfig.tag }}Desc') || `{{ resourceConfig.content }}` }
-    {% else %}
-    {% if resourceConfig.properties.content and not resourceConfig.data.content %}
+    {% else -%}
+    {% if resourceConfig.properties.content and not resourceConfig.data.content -%}
     { row.getValue('{{ resourceConfig.tag }}Desc') || `{{ resourceConfig.properties.content }}` }
-    {% else %}
-    {% if not resourceConfig.properties.content and resourceConfig.data.content %}
+    {% else -%}
+    {% if not resourceConfig.properties.content and resourceConfig.data.content -%}
     { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}Desc') || {{ resourceConfig.data.content.state.name }}{% endif %} }
-    {% else %}
-    {% if resourceConfig.children %}
-    {% for this in resourceConfig.children %}
-    {{ '' | render-layout: this, resourceConfig }}
-    {% endfor %}
-    {% else %}
+    {% else -%}
+    {% if resourceConfig.children -%}
+    {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+    {% endfor -%}
+    {% else -%}
     { row.getValue('{{ resourceConfig.tag }}Desc') || '' }
-    {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endif %}
+    {% endif -%}
+    {% endif -%}
+    {% endif -%}
+    {% endif -%}
 </IGRPDataTableCellLink>

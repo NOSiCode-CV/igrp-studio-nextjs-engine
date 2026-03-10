@@ -1,200 +1,200 @@
 {% if resourceConfig.container_name %}{{ resourceConfig.container_name }}{% else %}{{ serviceName }}{% endif %}:
 {% indent 4 %}
 image: {{ resourceConfig.image }}
-{% if resourceConfig.build %}
+{% if resourceConfig.build -%}
 build: {{ resourceConfig.build }}
-{% endif %}
-{% if resourceConfig.container_name %}
+{% endif -%}
+{% if resourceConfig.container_name -%}
 container_name: {{ resourceConfig.container_name }}
-{% endif %}
-{% if resourceConfig.restart %}
+{% endif -%}
+{% if resourceConfig.restart -%}
 restart: {{ resourceConfig.restart }}
-{% endif %}
-{% if resourceConfig.dependsOn %}
+{% endif -%}
+{% if resourceConfig.dependsOn -%}
 depends_on:
-  {% for this in resourceConfig.dependsOn %}
+  {% for this in resourceConfig.dependsOn -%}
     {{ this.service }}:
       condition: {% if this.condition %}{{ this.condition }}{% else %}service_healthy{% endif %}
-  {% endfor %}
-{% endif %}
-{% if resourceConfig.extends %}
+  {% endfor -%}
+{% endif -%}
+{% if resourceConfig.extends -%}
 extends: {{ resourceConfig.extends }}
-{% endif %}
-{% if resourceConfig.hostname %}
+{% endif -%}
+{% if resourceConfig.hostname -%}
 hostname: {{ resourceConfig.hostname }}
-{% endif %}
-{% if resourceConfig.profiles %}
+{% endif -%}
+{% if resourceConfig.profiles -%}
 profiles:
-  {% for this in resourceConfig.profiles %}
+  {% for this in resourceConfig.profiles -%}
   - {{ this.profile }}
-  {% endfor %}
-{% endif %}
-{% if resourceConfig.ports %}
+  {% endfor -%}
+{% endif -%}
+{% if resourceConfig.ports -%}
 ports:
-  {% for this in resourceConfig.ports %}
-  {% if this.reference %}
+  {% for this in resourceConfig.ports -%}
+  {% if this.reference -%}
   - {{ this.reference }}
-  {% else %}
+  {% else -%}
   - "{{ this.external }}:{{ this.internal }}"
-  {% endif %}
-  {% endfor %}
-{% endif %}
-{% if resourceConfig.expose %}
+  {% endif -%}
+  {% endfor -%}
+{% endif -%}
+{% if resourceConfig.expose -%}
 expose:
-{% for this in resourceConfig.expose %}
+{% for this in resourceConfig.expose -%}
   - "{{ this.port }}"
-{% endfor %}
-{% endif %}
-{% if resourceConfig.networks %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.networks -%}
 networks:
-{% for this in resourceConfig.networks %}
+{% for this in resourceConfig.networks -%}
   - {{ this.network }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.domainname %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.domainname -%}
 domainname: {{ resourceConfig.domainname }}
-{% endif %}
-{% if resourceConfig.environments %}
+{% endif -%}
+{% if resourceConfig.environments -%}
 environment:
-{% for this in resourceConfig.environments %}
+{% for this in resourceConfig.environments -%}
   - {{ this.key }}={{ this.value }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.env_file %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.env_file -%}
 env_file:
-{% for this in resourceConfig.env_file %}
+{% for this in resourceConfig.env_file -%}
   - {{ this.file }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.extra_hosts %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.extra_hosts -%}
 extra_hosts:
-  {% for this in resourceConfig.extra_hosts %}
+  {% for this in resourceConfig.extra_hosts -%}
   - "{{ this.hostname }}:{{ this.ip }}"
-  {% endfor %}
-{% endif %}
-{% if resourceConfig.labels %}
+  {% endfor -%}
+{% endif -%}
+{% if resourceConfig.labels -%}
 labels:
-{% for this in resourceConfig.labels %}
+{% for this in resourceConfig.labels -%}
   {{ this.key }}: "{{ this.value }}"
-{% endfor %}
-{% endif %}
-{% if resourceConfig.volumes %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.volumes -%}
 volumes:
-{% for this in resourceConfig.volumes %}
+{% for this in resourceConfig.volumes -%}
   - {{ this.name }}:{{ this.path }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.tmpfs %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.tmpfs -%}
 tmpfs:
-{% for this in resourceConfig.tmpfs %}
+{% for this in resourceConfig.tmpfs -%}
   - {{ this.storage }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.secrets %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.secrets -%}
 secrets:
-{% for this in resourceConfig.secrets %}
+{% for this in resourceConfig.secrets -%}
   - {{ this.secret }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.configs %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.configs -%}
 configs:
-{% for this in resourceConfig.configs %}
+{% for this in resourceConfig.configs -%}
   - {{ this.config }}
-{% endfor %}
-{% endif %}
-{% if resourceConfig.command %}
+{% endfor -%}
+{% endif -%}
+{% if resourceConfig.command -%}
 command: [{% for this in resourceConfig.command %}"{{ this.instruction }}"{% if forloop.last %}{% else %}, {% endif %}{% endfor %}]
-{% endif %}
-{% if resourceConfig.entrypoint %}
+{% endif -%}
+{% if resourceConfig.entrypoint -%}
 entrypoint: [{% for this in resourceConfig.entrypoint %}"{{ this.instruction }}"{% if forloop.last %}{% else %}, {% endif %}{% endfor %}]
-{% endif %}
-{% if resourceConfig.deploy %}
+{% endif -%}
+{% if resourceConfig.deploy -%}
 deploy:
-  {% if resourceConfig.deploy.replicas %}
+  {% if resourceConfig.deploy.replicas -%}
   replicas: {{ resourceConfig.deploy.replicas }}
-  {% endif %}
-  {% if resourceConfig.deploy.restart_policy %}
+  {% endif -%}
+  {% if resourceConfig.deploy.restart_policy -%}
   restart_policy:
     condition: {{ resourceConfig.deploy.restart_policy }}
-  {% endif %}
-  {% if resourceConfig.deploy.resources %}
+  {% endif -%}
+  {% if resourceConfig.deploy.resources -%}
   resources:
-    {% if resourceConfig.deploy.resources.limits %}
+    {% if resourceConfig.deploy.resources.limits -%}
     limits:
       cpus: "{{ resourceConfig.deploy.resources.limits.cpus }}"
       memory: "{{ resourceConfig.deploy.resources.limits.memory }}"
-    {% endif %}
-    {% if resourceConfig.deploy.resources.reservations %}
+    {% endif -%}
+    {% if resourceConfig.deploy.resources.reservations -%}
     reservations:
       cpus: "{{ resourceConfig.deploy.resources.reservations.cpus }}"
       memory: "{{ resourceConfig.deploy.resources.reservations.memory }}"
-    {% endif %}
-  {% endif %}
-{% endif %}
-{% if resourceConfig.healthcheck %}
+    {% endif -%}
+  {% endif -%}
+{% endif -%}
+{% if resourceConfig.healthcheck -%}
 healthcheck:
-  {% if resourceConfig.healthcheck.test %}
+  {% if resourceConfig.healthcheck.test -%}
   test: [{% for this in resourceConfig.healthcheck.test %}"{{ this.instruction }}"{% if forloop.last %}{% else %}, {% endif %}{% endfor %}]
-  {% endif %}
-  {% if resourceConfig.healthcheck.interval %}
+  {% endif -%}
+  {% if resourceConfig.healthcheck.interval -%}
   interval: {{ resourceConfig.healthcheck.interval }}
-  {% endif %}
-  {% if resourceConfig.healthcheck.timeout %}
+  {% endif -%}
+  {% if resourceConfig.healthcheck.timeout -%}
   timeout: {{ resourceConfig.healthcheck.timeout }}
-  {% endif %}
-  {% if resourceConfig.healthcheck.retries %}
+  {% endif -%}
+  {% if resourceConfig.healthcheck.retries -%}
   retries: {{ resourceConfig.healthcheck.retries }}
-  {% endif %}
-  {% if resourceConfig.healthcheck.start_period %}
+  {% endif -%}
+  {% if resourceConfig.healthcheck.start_period -%}
   start_period: {{ resourceConfig.healthcheck.start_period }}
-  {% endif %}
-{% endif %}
-{% if resourceConfig.logging %}
+  {% endif -%}
+{% endif -%}
+{% if resourceConfig.logging -%}
 logging:
-  {% if resourceConfig.logging.driver %}
+  {% if resourceConfig.logging.driver -%}
   driver: "{{ resourceConfig.logging.driver }}"
-  {% endif %}
-  {% if resourceConfig.logging.options %}
+  {% endif -%}
+  {% if resourceConfig.logging.options -%}
   options:
-    {% if resourceConfig.logging.options.max_size %}
+    {% if resourceConfig.logging.options.max_size -%}
     max-size: "{{ resourceConfig.logging.options.max_size }}"
-    {% endif %}
-    {% if resourceConfig.logging.options.min_size %}
+    {% endif -%}
+    {% if resourceConfig.logging.options.min_size -%}
     min-size: "{{ resourceConfig.logging.options.min_size }}"
-    {% endif %}
-  {% endif %}
-{% endif %}
-{% if resourceConfig.ulimits %}
+    {% endif -%}
+  {% endif -%}
+{% endif -%}
+{% if resourceConfig.ulimits -%}
 ulimits:
-  {% if resourceConfig.ulimits.memlock %}
+  {% if resourceConfig.ulimits.memlock -%}
   memlock:
-    {% if resourceConfig.ulimits.memlock.soft %}
+    {% if resourceConfig.ulimits.memlock.soft -%}
     soft: "{{ resourceConfig.ulimits.memlock.soft }}"
-    {% endif %}
-    {% if resourceConfig.ulimits.memlock.hard %}
+    {% endif -%}
+    {% if resourceConfig.ulimits.memlock.hard -%}
     hard: "{{ resourceConfig.ulimits.memlock.hard }}"
-    {% endif %}
-  {% endif %}
-{% endif %}
-{% if resourceConfig.ipc %}
+    {% endif -%}
+  {% endif -%}
+{% endif -%}
+{% if resourceConfig.ipc -%}
 ipc: {{ resourceConfig.ipc }}
-{% endif %}
-{% if resourceConfig.pid %}
+{% endif -%}
+{% if resourceConfig.pid -%}
 pid: {{ resourceConfig.pid }}
-{% endif %}
-{% if resourceConfig.runtime %}
+{% endif -%}
+{% if resourceConfig.runtime -%}
 runtime: {{ resourceConfig.runtime }}
-{% endif %}
-{% if resourceConfig.init %}
+{% endif -%}
+{% if resourceConfig.init -%}
 init: {{ resourceConfig.init }}
-{% endif %}
-{% if resourceConfig.stdin_open %}
+{% endif -%}
+{% if resourceConfig.stdin_open -%}
 stdin_open: {{ resourceConfig.stdin_open }}
-{% endif %}
-{% if resourceConfig.stop_signal %}
+{% endif -%}
+{% if resourceConfig.stop_signal -%}
 stop_signal: {{ resourceConfig.stop_signal }}
-{% endif %}
-{% if resourceConfig.shm_size %}
+{% endif -%}
+{% if resourceConfig.shm_size -%}
 shm_size: {{ resourceConfig.shm_size }}
-{% endif %}
+{% endif -%}
 {% endindent %}

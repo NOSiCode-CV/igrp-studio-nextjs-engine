@@ -1,115 +1,115 @@
 <IGRPRadarChart
-  {% if resourceConfig.tag %}
+  {% if resourceConfig.tag -%}
   id={ `{{ resourceConfig.tag }}` }
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.generateReference %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
-  {% endif %}
+  {% endif -%}
   categoryKey={ `{{ resourceConfig.properties.categoryKey }}` }
   angleAxisKey={ `{{ resourceConfig.properties.angleAxisKey }}` }
-  {% if resourceConfig.properties.title and not resourceConfig.data.title %}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   title={ `{{ resourceConfig.properties.title }}` }
-  {% endif %}
-  {% if resourceConfig.properties.description and not resourceConfig.data.description %}
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
   description={ `{{ resourceConfig.properties.description }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showGrid and not resourceConfig.data.showGrid %}
+  {% endif -%}
+  {% if resourceConfig.properties.showGrid and not resourceConfig.data.showGrid -%}
   showGrid={ {{ resourceConfig.properties.showGrid }} }
-  {% endif %}
-  {% if resourceConfig.properties.showTooltip and not resourceConfig.data.showTooltip %}
+  {% endif -%}
+  {% if resourceConfig.properties.showTooltip and not resourceConfig.data.showTooltip -%}
   showTooltip={ {{ resourceConfig.properties.showTooltip }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideAxis and not resourceConfig.data.hideAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideAxis and not resourceConfig.data.hideAxis -%}
   hideAxis={ {{ resourceConfig.properties.hideAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideXAxis and not resourceConfig.data.hideXAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideXAxis and not resourceConfig.data.hideXAxis -%}
   hideXAxis={ {{ resourceConfig.properties.hideXAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideYAxis and not resourceConfig.data.hideYAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideYAxis and not resourceConfig.data.hideYAxis -%}
   hideYAxis={ {{ resourceConfig.properties.hideYAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.stacked and not resourceConfig.data.stacked %}
+  {% endif -%}
+  {% if resourceConfig.properties.stacked and not resourceConfig.data.stacked -%}
   stacked={ {{ resourceConfig.properties.stacked }} }
-  {% endif %}
-  {% if resourceConfig.properties.expanded and not resourceConfig.data.expanded %}
+  {% endif -%}
+  {% if resourceConfig.properties.expanded and not resourceConfig.data.expanded -%}
   expanded={ {{ resourceConfig.properties.expanded }} }
-  {% endif %}
-  {% if resourceConfig.properties.height and not resourceConfig.data.height %}
+  {% endif -%}
+  {% if resourceConfig.properties.height and not resourceConfig.data.height -%}
   height={ {{ resourceConfig.properties.height }} }
-  {% endif %}
-  {% if resourceConfig.properties.width and not resourceConfig.data.width %}
+  {% endif -%}
+  {% if resourceConfig.properties.width and not resourceConfig.data.width -%}
   width={ {{ resourceConfig.properties.width }} }
-  {% endif %}
-  {% if resourceConfig.properties.showReferenceZero and not resourceConfig.data.showReferenceZero %}
+  {% endif -%}
+  {% if resourceConfig.properties.showReferenceZero and not resourceConfig.data.showReferenceZero -%}
   showReferenceZero={ {{ resourceConfig.properties.showReferenceZero }} }
-  {% endif %}
-  {% if resourceConfig.properties.gridColor and not resourceConfig.data.gridColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.gridColor and not resourceConfig.data.gridColor -%}
   gridColor={ `{{ resourceConfig.properties.gridColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.backgroundColor and not resourceConfig.data.backgroundColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.backgroundColor and not resourceConfig.data.backgroundColor -%}
   backgroundColor={ `{{ resourceConfig.properties.backgroundColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.axisColor and not resourceConfig.data.axisColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.axisColor and not resourceConfig.data.axisColor -%}
   axisColor={ `{{ resourceConfig.properties.axisColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.footer and not resourceConfig.data.footer %}
+  {% endif -%}
+  {% if resourceConfig.properties.footer and not resourceConfig.data.footer -%}
   footer={
     {
       description: `{{ resourceConfig.properties.footer.description }}`
     }
   }
-  {% endif %}
-  {% if resourceConfig.properties.polarGridType and not resourceConfig.data.polarGridType %}
+  {% endif -%}
+  {% if resourceConfig.properties.polarGridType and not resourceConfig.data.polarGridType -%}
   polarGridType={ `{{ resourceConfig.properties.polarGridType }}` }
-  {% endif %}
-  {% if resourceConfig.properties.polarGridLineType and not resourceConfig.data.polarGridLineType %}
+  {% endif -%}
+  {% if resourceConfig.properties.polarGridLineType and not resourceConfig.data.polarGridLineType -%}
   polarGridLineType={ `{{ resourceConfig.properties.polarGridLineType }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showPolarGrid and not resourceConfig.data.showPolarGrid %}
+  {% endif -%}
+  {% if resourceConfig.properties.showPolarGrid and not resourceConfig.data.showPolarGrid -%}
   showPolarGrid={ {{ resourceConfig.properties.showPolarGrid }} }
-  {% endif %}
-  {% if resourceConfig.properties.showRadiusAxis and not resourceConfig.data.showRadiusAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.showRadiusAxis and not resourceConfig.data.showRadiusAxis -%}
   showRadiusAxis={ {{ resourceConfig.properties.showRadiusAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.radiusAxisDomain and not resourceConfig.data.radiusAxisDomain %}
+  {% endif -%}
+  {% if resourceConfig.properties.radiusAxisDomain and not resourceConfig.data.radiusAxisDomain -%}
   radiusAxisDomain=[{{ resourceConfig.properties.radiusAxisDomain.min }}, {{ resourceConfig.properties.radiusAxisDomain.max }}]
-  {% endif %}
-  {% if resourceConfig.properties.radiusAxisAngle and not resourceConfig.data.radiusAxisAngle %}
+  {% endif -%}
+  {% if resourceConfig.properties.radiusAxisAngle and not resourceConfig.data.radiusAxisAngle -%}
   radiusAxisAngle={ {{ resourceConfig.properties.radiusAxisAngle }} }
-  {% endif %}
-  {% if resourceConfig.properties.customAngleAsisTick and not resourceConfig.data.customAngleAsisTick %}
+  {% endif -%}
+  {% if resourceConfig.properties.customAngleAsisTick and not resourceConfig.data.customAngleAsisTick -%}
   customAngleAsisTick={ {{ '' | json: resourceConfig.properties.customAngleAsisTick }} }
-  {% endif %}
-  {% if resourceConfig.properties.showGridLines and not resourceConfig.data.showGridLines %}
+  {% endif -%}
+  {% if resourceConfig.properties.showGridLines and not resourceConfig.data.showGridLines -%}
   showGridLines={ {{ resourceConfig.properties.showGridLines }} }
-  {% endif %}
-  {% if resourceConfig.properties.showRadiusLines and not resourceConfig.data.showRadiusLines %}
+  {% endif -%}
+  {% if resourceConfig.properties.showRadiusLines and not resourceConfig.data.showRadiusLines -%}
   showRadiusLines={ {{ resourceConfig.properties.showRadiusLines }} }
-  {% endif %}
-  {% if resourceConfig.properties.gridFilled and not resourceConfig.data.gridFilled %}
+  {% endif -%}
+  {% if resourceConfig.properties.gridFilled and not resourceConfig.data.gridFilled -%}
   gridFilled={ {{ resourceConfig.properties.gridFilled }} }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
   {% comment %}loading={ {{ resourceConfig.id }}Loading }{% endcomment %}
-  {% if resourceConfig.interactions %}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.data %}
+  {% endif -%}
+  {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 >
 </IGRPRadarChart>

@@ -1,112 +1,112 @@
 <IGRPVerticalBarChart
-  {% if resourceConfig.tag %}
+  {% if resourceConfig.tag -%}
   id={ `{{ resourceConfig.tag }}` }
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.generateReference %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
-  {% endif %}
-  {% if resourceConfig.properties.customLegend and not resourceConfig.data.customLegend %}
+  {% endif -%}
+  {% if resourceConfig.properties.customLegend and not resourceConfig.data.customLegend -%}
   customLegend={
     <>
     {{ resourceConfig.properties.customLegend }}
     </>
   }
-  {% endif %}
+  {% endif -%}
   categoryKey={ `{{ resourceConfig.properties.categoryKey }}` }
-  {% if resourceConfig.properties.title and not resourceConfig.data.title %}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   title={ `{{ resourceConfig.properties.title }}` }
-  {% endif %}
-  {% if resourceConfig.properties.description and not resourceConfig.data.description %}
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
   description={ `{{ resourceConfig.properties.description }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showGrid and not resourceConfig.data.showGrid %}
+  {% endif -%}
+  {% if resourceConfig.properties.showGrid and not resourceConfig.data.showGrid -%}
   showGrid={ {{ resourceConfig.properties.showGrid }} }
-  {% endif %}
-  {% if resourceConfig.properties.showTooltip and not resourceConfig.data.showTooltip %}
+  {% endif -%}
+  {% if resourceConfig.properties.showTooltip and not resourceConfig.data.showTooltip -%}
   showTooltip={ {{ resourceConfig.properties.showTooltip }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideAxis and not resourceConfig.data.hideAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideAxis and not resourceConfig.data.hideAxis -%}
   hideAxis={ {{ resourceConfig.properties.hideAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideXAxis and not resourceConfig.data.hideXAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideXAxis and not resourceConfig.data.hideXAxis -%}
   hideXAxis={ {{ resourceConfig.properties.hideXAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.hideYAxis and not resourceConfig.data.hideYAxis %}
+  {% endif -%}
+  {% if resourceConfig.properties.hideYAxis and not resourceConfig.data.hideYAxis -%}
   hideYAxis={ {{ resourceConfig.properties.hideYAxis }} }
-  {% endif %}
-  {% if resourceConfig.properties.stacked and not resourceConfig.data.stacked %}
+  {% endif -%}
+  {% if resourceConfig.properties.stacked and not resourceConfig.data.stacked -%}
   stacked={ {{ resourceConfig.properties.stacked }} }
-  {% endif %}
-  {% if resourceConfig.properties.expanded and not resourceConfig.data.expanded %}
+  {% endif -%}
+  {% if resourceConfig.properties.expanded and not resourceConfig.data.expanded -%}
   expanded={ {{ resourceConfig.properties.expanded }} }
-  {% endif %}
-  {% if resourceConfig.properties.height and not resourceConfig.data.height %}
+  {% endif -%}
+  {% if resourceConfig.properties.height and not resourceConfig.data.height -%}
   height={ {{ resourceConfig.properties.height }} }
-  {% endif %}
-  {% if resourceConfig.properties.width and not resourceConfig.data.width %}
+  {% endif -%}
+  {% if resourceConfig.properties.width and not resourceConfig.data.width -%}
   width={ {{ resourceConfig.properties.width }} }
-  {% endif %}
-  {% if resourceConfig.properties.barRadius and not resourceConfig.data.barRadius %}
+  {% endif -%}
+  {% if resourceConfig.properties.barRadius and not resourceConfig.data.barRadius -%}
   barRadius={ {{ resourceConfig.properties.barRadius }} }
-  {% endif %}
-  {% if resourceConfig.properties.barGap and not resourceConfig.data.barGap %}
+  {% endif -%}
+  {% if resourceConfig.properties.barGap and not resourceConfig.data.barGap -%}
   barGap={ {{ resourceConfig.properties.barGap }} }
-  {% endif %}
-  {% if resourceConfig.properties.barCategoryGap and not resourceConfig.data.barCategoryGap %}
+  {% endif -%}
+  {% if resourceConfig.properties.barCategoryGap and not resourceConfig.data.barCategoryGap -%}
   barCategoryGap={ `{{ resourceConfig.properties.barCategoryGap }}` }
-  {% endif %}
-  {% if resourceConfig.properties.showReferenceZero and not resourceConfig.data.showReferenceZero %}
+  {% endif -%}
+  {% if resourceConfig.properties.showReferenceZero and not resourceConfig.data.showReferenceZero -%}
   showReferenceZero={ {{ resourceConfig.properties.showReferenceZero }} }
-  {% endif %}
-  {% if resourceConfig.properties.gridColor and not resourceConfig.data.gridColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.gridColor and not resourceConfig.data.gridColor -%}
   gridColor={ `{{ resourceConfig.properties.gridColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.backgroundColor and not resourceConfig.data.backgroundColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.backgroundColor and not resourceConfig.data.backgroundColor -%}
   backgroundColor={ `{{ resourceConfig.properties.backgroundColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.referenceLineColor and not resourceConfig.data.referenceLineColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.referenceLineColor and not resourceConfig.data.referenceLineColor -%}
   referenceLineColor={ `{{ resourceConfig.properties.referenceLineColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.axisColor and not resourceConfig.data.axisColor %}
+  {% endif -%}
+  {% if resourceConfig.properties.axisColor and not resourceConfig.data.axisColor -%}
   axisColor={ `{{ resourceConfig.properties.axisColor }}` }
-  {% endif %}
-  {% if resourceConfig.properties.footer and not resourceConfig.data.footer %}
+  {% endif -%}
+  {% if resourceConfig.properties.footer and not resourceConfig.data.footer -%}
   footer={
     {
       description: `{{ resourceConfig.properties.footer.description }}`
     }
   }
-  {% endif %}
-  {% if resourceConfig.properties.legendPosition and not resourceConfig.data.legendPosition %}
+  {% endif -%}
+  {% if resourceConfig.properties.legendPosition and not resourceConfig.data.legendPosition -%}
   legendPosition={ `{{ resourceConfig.properties.legendPosition }}` }
-  {% endif %}
-  {% if resourceConfig.properties.size and not resourceConfig.data.size %}
+  {% endif -%}
+  {% if resourceConfig.properties.size and not resourceConfig.data.size -%}
   size={ `{{ resourceConfig.properties.size }}` }
-  {% endif %}
-  {% if resourceConfig.properties.valueDomain and not resourceConfig.data.valueDomain %}
+  {% endif -%}
+  {% if resourceConfig.properties.valueDomain and not resourceConfig.data.valueDomain -%}
   valueDomain={ [{{ resourceConfig.properties.valueDomain.min }}, {{ resourceConfig.properties.valueDomain.max }}] }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
   {% comment %}loading={ {{ resourceConfig.id }}Loading }{% endcomment %}
-  {% if resourceConfig.interactions %}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.data %}
+  {% endif -%}
+  {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 >
 </IGRPVerticalBarChart>

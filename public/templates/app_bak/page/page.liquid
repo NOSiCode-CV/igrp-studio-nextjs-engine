@@ -1,79 +1,79 @@
 'use client'
 
-{% if resourceConfig.components %}
+{% if resourceConfig.components -%}
 import * as yup from 'yup';
-{% endif %}
+{% endif -%}
 import React, { useEffect, useRef, useState } from "react";
 import { Col, Row, Container } from 'reactstrap'
 import { {{ '' | capitalize: resourceConfig.pageName }}Service} from '@/services/{{ '' | toLowerCase: resourceConfig.pageName }}/{{ '' | capitalize: resourceConfig.pageName }}Service'
 
-{% if resourceConfig.components %}
+{% if resourceConfig.components -%}
 
-{% if length > velzonImports %}
+{% if velzonImports -%}
 import{ {% for this in velzonImports %}IGRP_{{ this }}{% if forloop.last %}{% else %},
-{% endif %}
-{% endfor %}
+{% endif -%}
+{% endfor -%}
 }from '@igrp/nosi-velzon-ts'
-{% endif %}
+{% endif -%}
 
-{% for this in resourceConfig.components %}
-{% for this in Row %}
-{% for this in Col %}
-{% for this in components %}
+{% for this in resourceConfig.components -%}
+{% for this in Row -%}
+{% for this in Col -%}
+{% for this in components -%}
 type I{{ '' | capitalize: this.id }}Fields = { {% if this.componentName == 'FormLayout' %}{% for this in this.fields %}
   {{ this.config.name }}: IGRP_{{ this.componentName }}.Field.{{ this.type }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}
-  {% endif %}
+  {% endif -%}
 }
-{% endfor %}
-{% endfor %}
-{% endfor %}
-{% endfor %}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
 
-{% endif %}
+{% endif -%}
 export type I{{ '' | toLowerCase: resourceConfig.pageName }}Service = {
-  {% for this in resourceConfig.components %}
-  {% for this in Row %}
-  {% for this in Col %}
-  {% for this in components %} 
-  {% if this.componentName == 'Button' %}
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
+  {% if this.componentName == 'Button' -%}
   {{ this.id }}: (data?: Record<string, unknown>) => void;
-  {% else %}
+  {% else -%}
   {{ '' | toLowerCase: this.id }}: IGRP_{{ this.componentName }}.Props<I{{ '' | capitalize: this.id }}Fields>['service']{% if forloop.last %}{% else %},{% endif %}
   {% comment %} Declaring button action inside table {% endcomment %}
-  {% if this.componentName == 'TableComponent' %}
-  {% if this.actions %}
-  {% for this in this.actions %}
+  {% if this.componentName == 'TableComponent' -%}
+  {% if this.actions -%}
+  {% for this in this.actions -%}
   {{ this.id }}: ((data?: Record<string, any>) => void);
-  {% endfor %}
-  {% endif %}
-  {% endif %}
+  {% endfor -%}
+  {% endif -%}
+  {% endif -%}
   {% comment %} End declare button action inside table {% endcomment %} 
-  {% endif %}
+  {% endif -%}
   {% comment %} Declaring button action inside form {% endcomment %}
-  {% if this.componentName == 'FormLayout' %}
-  {% for this in this.fields %}
-  {% if this.type == 'IGRP_ButtonInput' %}
+  {% if this.componentName == 'FormLayout' -%}
+  {% for this in this.fields -%}
+  {% if this.type == 'IGRP_ButtonInput' -%}
   {{ this.config.name }}:(data: Record<string, unknown>) => void;
   {% endif %}{% endfor %}
-  {% endif %}
+  {% endif -%}
   {% comment %} End declare button action inside form {% endcomment %}  
-  {% endfor %}
-  {% endfor %}
-  {% endfor %}
-  {% endfor %}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
 }
 
 export default function {{ resourceConfig.pageName }}() {
-  {% if resourceConfig.components %}
+  {% if resourceConfig.components -%}
   const service: I{{ '' | toLowerCase: resourceConfig.pageName }}Service = {{ '' | capitalize: resourceConfig.pageName }}Service;
   {% comment %} Declaring form references {% endcomment %}
-  {% for this in resourceConfig.components %}
-  {% for this in Row %}
-  {% for this in Col %}
-  {% for this in components %}
-  {% if this.componentName == 'FormLayout' %}
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
+  {% if this.componentName == 'FormLayout' -%}
   const {{ this.id }}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {% endif %}
-  {% if this.componentName == 'TableComponent' %}
+  {% if this.componentName == 'TableComponent' -%}
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function {{ resourceConfig.pageName }}() {
       setData([...fakeData])
     }
   }
-  {% if this.actions %}
+  {% if this.actions -%}
   {% for this in this.actions %}{% if this.config.refreshTable %}
   const handle{{ '' | capitalize: this.id }} = (data: any) => {
     service.{{ this.id }}(data);
@@ -101,17 +101,17 @@ export default function {{ resourceConfig.pageName }}() {
   {% comment %} end declaring form refences {% endcomment %}
 
 
-  {% for this in resourceConfig.components %}
-  {% for this in Row %}
-  {% for this in Col %}
-  {% for this in components %}
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
   const {{ '' | capitalize: this.id }}Props: IGRP_{{ this.componentName }}.Props<{{ '' | component-name-helper: this }}> = {
-  {% if this.componentName == 'Button' %}
-    {% if applyToAll this.config %}
+  {% if this.componentName == 'Button' -%}
+    {% if applyToAll this.config -%}
     formRefs: {
-      {% for this in formRefs %}
+      {% for this in formRefs -%}
       {{ this }}: {{ this }}Ref,
-      {% endfor %}
+      {% endfor -%}
     },{% else %}{% if action-type this.config %} formRefs: { {% for this in this.config.targetForms %}
     {{ this }}: {{ this }}Ref,
     {% endfor %} }, {% endif %}{% endif %}
@@ -120,49 +120,49 @@ export default function {{ resourceConfig.pageName }}() {
       updateTable()
     },{% else %}service.{{ this.id }},{% endif %}
     config: {{ '' | json: this.config }},
-  {% else %}
+  {% else -%}
     service: service?.{{ '' | toLowerCase: this.id }},
     fields: {{ '' | field-helper: this }},
     config: {{ '' | json: this.config }}{% if this.actions %},
     actions: (cell: any) => {
       return (
         <React.Fragment>
-          {% for this in this.actions %}
+          {% for this in this.actions -%}
           <IGRP_Button._Button
             values={cell.row.original}
             serviceAction={ {% if this.config.refreshTable %}() => {
               handle{{ '' | capitalize: this.id }}(cell.row.original)
             }
-              {% else %}
+              {% else -%}
               service.{{ this.id }}
-              {% endif %}
+              {% endif -%}
             }           
             config={ 
               {{ '' | json: this.config }} 
             }
             />
-          {% endfor %}
+          {% endfor -%}
         </React.Fragment>
       )
     }{% endif %}{% endif %}  
   }
-  {% if this.componentName == 'TableComponent' %}
+  {% if this.componentName == 'TableComponent' -%}
   {{ '' | capitalize: this.id }}Props.config.data = data
-  {% endif %}
-  {% for this in this.fields %}
+  {% endif -%}
+  {% for this in this.fields -%}
   {% if componentName == 'FormLayout' %}{% if isValidation this %} {% comment %} check validation fields {% endcomment %}
   {{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.validation = {{ '' | yup-validation: this }}{% endif %}{% comment %} end check validation fields {% endcomment %}
   {% if this.type == 'IGRP_ButtonInput' %}{% comment %} set formRef and serviceAction to the button field {% endcomment %}
   {% if this.config.targetForms %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.formRefs = {
-    {% for this in this.config.targetForms %}
+    {% for this in this.config.targetForms -%}
     {{ this }}: {{ this }}Ref,
-    {% endfor %} 
+    {% endfor -%}
   }
-  {% endif %}
+  {% endif -%}
   {% if applyToAll this.config %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.formRefs = {
-    {% for this in formRefs %}
+    {% for this in formRefs -%}
     {{ this }}: {{ this }}Ref,
-    {% endfor %}
+    {% endfor -%}
   }
   {% endif %}{% if this.config.refreshTable %}
   {{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.serviceAction = async(data) => {
@@ -171,37 +171,37 @@ export default function {{ resourceConfig.pageName }}() {
   };
   {% else %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.serviceAction = service.{{ this.config.name }}{% endif %}
   {% endif %}{% comment %} end set formRef and serviceAction to the button field {% endcomment %}
-  {% endif %}
-  {% endfor %}
-  {% endfor %}
-  {% endfor %}
-  {% endfor %}
-  {% endfor %}
+  {% endif -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
 
   return (
     <React.Fragment>
       <Container fluid>
-        {% for this in resourceConfig.components %}
+        {% for this in resourceConfig.components -%}
         <Row>
-        {% for this in Row %}
-        {% for this in Col %}
+        {% for this in Row -%}
+        {% for this in Col -%}
           <Col lg={ {{ this.colSize }} }>
-          {% for this in components %}
-            {% if this.componentName == 'Button' %}
+          {% for this in components -%}
+            {% if this.componentName == 'Button' -%}
             <IGRP_{{ this.componentName }}._Button {...{{ '' | capitalize: this.id }}Props} />
-            {% else %}
+            {% else -%}
             <IGRP_{{ this.componentName }}.{{ this.componentName }} {...{{ '' | capitalize: this.id }}Props} {% if this.componentName == 'FormLayout' %}ref={ {{ this.id }}Ref }{% endif %}/>
-            {% endif %}
-          {% endfor %}
+            {% endif -%}
+          {% endfor -%}
           </Col>
-          {% endfor %}
-        {% endfor %}
+          {% endfor -%}
+        {% endfor -%}
         </Row>
-        {% endfor %}
+        {% endfor -%}
       </Container>
     </React.Fragment>
   )
-  {% else %}
+  {% else -%}
   return (
     <Container fluid className="d-flex vh-100">
       <Row className="justify-content-center align-items-center w-100">
@@ -213,5 +213,5 @@ export default function {{ resourceConfig.pageName }}() {
       </Row>
     </Container>
   )
-  {% endif %}
+  {% endif -%}
 }

@@ -1,57 +1,57 @@
 <IGRPDataTableButtonLink
   labelTrigger={ `{{ resourceConfig.properties.labelTrigger }}` }
-  {% if resourceConfig.properties.href and not resourceConfig.data.href %}
+  {% if resourceConfig.properties.href and not resourceConfig.data.href -%}
   href={ `{{ '' | resolve-segment-path: resourceConfig.properties.href, resourceConfig.properties.segments }}{% if resourceConfig.properties.params %}{{ '' | resolve-query-params: resourceConfig.properties.params }}{% endif %}` }
-  {% endif %}
-  {% if resourceConfig.properties.variant and not resourceConfig.data.variant %}
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
   variant={ `{{ resourceConfig.properties.variant }}` }
-  {% endif %}
-  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled %}
+  {% endif -%}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
   disabled={ {{ resourceConfig.properties.disabled }} }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
   icon={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.classNameTrigger and not resourceConfig.data.classNameTrigger %}
+  {% endif -%}
+  {% if resourceConfig.properties.classNameTrigger and not resourceConfig.data.classNameTrigger -%}
   classNameTrigger={ `{{ resourceConfig.properties.classNameTrigger }}` }
-  {% endif %}
-  {% if resourceConfig.properties.iconProperties.iconClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
   {% comment %}loading={ {{ resourceConfig.tag }}Loading }{% endcomment %}
-  {% if resourceConfig.interactions %}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
-  {% endif %}
+  {% endif -%}
 >
-  {% if resourceConfig.content %}
+  {% if resourceConfig.content -%}
   {{ resourceConfig.content }}
-  {% else %}
-  {% if resourceConfig.properties.content and not resourceConfig.data.content %}
+  {% else -%}
+  {% if resourceConfig.properties.content and not resourceConfig.data.content -%}
   {{ resourceConfig.properties.content }}
-  {% else %}
-  {% if not resourceConfig.properties.content and resourceConfig.data.content %}
+  {% else -%}
+  {% if not resourceConfig.properties.content and resourceConfig.data.content -%}
   { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}{{ resourceConfig.data.content.state.name }}{% endif %} }
-  {% else %}
-  {% if resourceConfig.children %}
-  {% for this in resourceConfig.children %}
-  {{ '' | render-layout: this, resourceConfig }}
-  {% endfor %}
-  {% endif %}
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% else -%}
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
 </IGRPDataTableButtonLink>

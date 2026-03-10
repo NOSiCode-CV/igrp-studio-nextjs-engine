@@ -1,33 +1,33 @@
 <IGRPDataTableFilterFaceted
   column={column}
   placeholder={ `{{ resourceConfig.properties.placeholder }}` }
-  {% if resourceConfig.properties.showFilter %}
+  {% if resourceConfig.properties.showFilter -%}
   showFilter={ {{ resourceConfig.properties.showFilter }} }
-  {% endif %}
-  {% if resourceConfig.properties.labelFilter %}
+  {% endif -%}
+  {% if resourceConfig.properties.labelFilter -%}
   labelFilter={ `{{ resourceConfig.properties.labelFilter }}` }
-  {% endif %}
-  {% if resourceConfig.properties.labelSearchFilter %}
+  {% endif -%}
+  {% if resourceConfig.properties.labelSearchFilter -%}
   labelSearchFilter={ `{{ resourceConfig.properties.labelSearchFilter }}` }
-  {% endif %}
-  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled %}
+  {% endif -%}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
   disabled
-  {% endif %}
-  {% if resourceConfig.interactions %}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
-  {% endif %}
-  {% if resourceConfig.data %}
+  {% endif -%}
+  {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
-  {% endif %}
-  {% if resourceConfig.properties.className and parentResourceConfig %}
+  {% endif -%}
+  {% if resourceConfig.properties.className and parentResourceConfig -%}
   badgeClassName={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig -%}
   badgeClassName={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties -%}
   badgeClassName={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
 />

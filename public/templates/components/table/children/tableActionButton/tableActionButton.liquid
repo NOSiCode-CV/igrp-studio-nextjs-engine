@@ -23,12 +23,12 @@
         {% if resourceConfig.properties.classNameConfirm %}classNameConfirm: `{{ resourceConfig.properties.classNameConfirm }}`,{% endif %}
         {% if resourceConfig.properties.variantConfirm %}variantConfirm: `{{ resourceConfig.properties.variantConfirm }}`,{% endif %}
         {% if resourceConfig.properties.actionConfirm and not resourceConfig.data.actionConfirm %}onClickConfirm: () => {{ resourceConfig.properties.actionConfirm }}(rowData),{% endif %}
-        {% if resourceConfig.children %}
+        {% if resourceConfig.children -%}
         children:
-        {% for this in resourceConfig.children %}
-        {{ '' | render-layout: this, resourceConfig }}
-        {% endfor %}
-        {% endif %}
+        {% for child in resourceConfig.children -%}
+        {{ '' | render-layout: child, resourceConfig }}
+        {% endfor -%}
+        {% endif -%}
       }
     }
   }

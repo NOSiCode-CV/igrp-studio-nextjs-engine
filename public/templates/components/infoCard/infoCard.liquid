@@ -1,113 +1,113 @@
 <IGRPInfoCard
-  {% if resourceConfig.properties.commonProperties.generateReference %}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
-  {% endif %}
-  {% if resourceConfig.properties.variantSection and not resourceConfig.data.variantSection %}
+  {% endif -%}
+  {% if resourceConfig.properties.variantSection and not resourceConfig.data.variantSection -%}
   variantSection={ `{{ resourceConfig.properties.variantSection }}` }
-  {% endif %}
-  {% if resourceConfig.properties.colorSection and not resourceConfig.data.colorSection %}
+  {% endif -%}
+  {% if resourceConfig.properties.colorSection and not resourceConfig.data.colorSection -%}
   colorSection={ `{{ resourceConfig.properties.colorSection }}` }
-  {% endif %}
-  {% if resourceConfig.properties.orientation and not resourceConfig.data.orientation %}
+  {% endif -%}
+  {% if resourceConfig.properties.orientation and not resourceConfig.data.orientation -%}
   orientation={ `{{ resourceConfig.properties.orientation }}` }
-  {% endif %}
-  {% if resourceConfig.properties.titleClassName and not resourceConfig.data.titleClassName %}
+  {% endif -%}
+  {% if resourceConfig.properties.titleClassName and not resourceConfig.data.titleClassName -%}
   titleClassName={ `{{ resourceConfig.properties.titleClassName }}` }
-  {% endif %}
-  {% if resourceConfig.properties.title and not resourceConfig.data.title %}
+  {% endif -%}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   title={ `{{ resourceConfig.properties.title }}` }
-  {% endif %}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  {% endif -%}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else %}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
   className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif %}
-  {% endif %}
-  {% endif %}
-  {% if resourceConfig.data %}
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+  {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
-  {% endif %}
+  {% endif -%}
   sections={
     [
-    {% if resourceConfig.children %}
-      {% for this in resourceConfig.children | extractInfoSection %}
+    {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children | extractInfoSection -%}
       {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
-      {% if this.data.items %}
+      {% if this.data.items -%}
       {
         items: {% if this.data.items.value %}{{ '' | replaceId: this.data.items.value.code, this }}{% else %}{{ '' | replaceId: this.data.items.state.name, this }}{% endif %}
       },
-      {% else %}
+      {% else -%}
       {
         items: [
-        {% for this in this.children | extractInfoItem %}
+        {% for this in this.children | extractInfoItem -%}
         {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
           {
-          {% if this.data.text %}
+          {% if this.data.text -%}
             text: {{ this.data.text.state.name }} as string,
-          {% else %}
-            {% if this.properties.text %}
+          {% else -%}
+            {% if this.properties.text -%}
             text: `{{ this.properties.text }}`,
-            {% else %}
+            {% else -%}
             text: "",
-            {% endif %}
-          {% endif %}
-          {% if this.data.label %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.label -%}
             label: {{ this.data.label.state.name }} as string,
-          {% else %}
-            {% if this.properties.label %}
+          {% else -%}
+            {% if this.properties.label -%}
             label: `{{ this.properties.label }}`,
-            {% else %}
+            {% else -%}
             label: "",
-            {% endif %}
-          {% endif %}
-          {% if this.data.icon %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.icon -%}
             icon: {{ this.data.icon.state.name }},
-          {% else %}
-            {% if this.properties.iconProperties.icon %}
+          {% else -%}
+            {% if this.properties.iconProperties.icon -%}
             icon: `{{ this.properties.iconProperties.icon }}`,
-            {% endif %}
-          {% endif %}
-          {% if this.data.showIcon %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.showIcon -%}
             showIcon: {{ this.data.showIcon.state.name }},
-          {% else %}
-            {% if this.properties.iconProperties.showIcon %}
+          {% else -%}
+            {% if this.properties.iconProperties.showIcon -%}
             showIcon: {{ this.properties.iconProperties.showIcon }},
-            {% endif %}
-          {% endif %}
-          {% if this.data.iconClassName %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.iconClassName -%}
             icon: {{ this.data.iconClassName.state.name }},
-          {% else %}
-            {% if this.properties.iconProperties.iconClassName %}
+          {% else -%}
+            {% if this.properties.iconProperties.iconClassName -%}
             iconClassName: `{{ this.properties.iconProperties.iconClassName }}`,
-            {% endif %}
-          {% endif %}
-          {% if this.data.variantItem %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.variantItem -%}
             variantItem: {{ this.data.variantItem.state.name }},
-          {% else %}
-            {% if this.properties.variantItem %}
+          {% else -%}
+            {% if this.properties.variantItem -%}
             variantItem: `{{ this.properties.variantItem }}` as const,
-            {% endif %}
-          {% endif %}
-          {% if this.data.colorItem %}
+            {% endif -%}
+          {% endif -%}
+          {% if this.data.colorItem -%}
             colorItem: {{ this.data.colorItem.state.name }},
-          {% else %}
-            {% if this.properties.colorItem %}
+          {% else -%}
+            {% if this.properties.colorItem -%}
             colorItem: `{{ this.properties.colorItem }}` as const,
-            {% else %}
-            {% endif %}
-          {% endif %}
+            {% else -%}
+            {% endif -%}
+          {% endif -%}
           }{% if this %}] : []){% endif %},
-        {% endfor %}
+        {% endfor -%}
         ]
       }{% if this %}] : []){% endif %},
-      {% endif %}
-      {% endfor %}
-    {% endif %}
+      {% endif -%}
+      {% endfor -%}
+    {% endif -%}
     ]
   }
 />

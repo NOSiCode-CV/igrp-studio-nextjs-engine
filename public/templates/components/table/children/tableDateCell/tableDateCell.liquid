@@ -1,10 +1,10 @@
 return <IGRPDataTableCellDate
   date={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
-  {% if resourceConfig.properties.dateFormat and not resourceConfig.data.dateFormat %}
+  {% if resourceConfig.properties.dateFormat and not resourceConfig.data.dateFormat -%}
   dateFormat={ `{{ resourceConfig.properties.dateFormat }}` }
-  {% endif %}
-  {% if resourceConfig.data.dateFormat %}
+  {% endif -%}
+  {% if resourceConfig.data.dateFormat -%}
   dateFormat={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}{{ resourceConfig.data.state.name }}{% endif %} }
-  {% endif %}
+  {% endif -%}
 >
 </IGRPDataTableCellDate>
