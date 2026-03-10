@@ -1,4 +1,5 @@
-import * as Handlebars from 'handlebars'
+import { Liquid } from 'liquidjs';
+import fs from 'fs-extra';
 import { resolveImports } from "../helpers/resolveImports";
 import { resolveStates } from "../helpers/resolveState";
 import {
@@ -47,156 +48,179 @@ import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
 import { renderTableRow } from '../helpers/renderTableRow';
 import { registry } from '../components';
-import fs from 'fs-extra';
 import { replaceTemplate } from '../utils/helpers';
 import { getPaths } from '../index';
-import { extractVolumes, indent, normalizeHostname } from '../helpers/workspaceHelper';
+import { extractVolumes, normalizeHostname } from '../helpers/workspaceHelper';
 import { PARTIALS } from '../utils/constants';
 import { renderService } from '../utils/renderService';
 import { resolveTypes } from '../helpers/resolveTypes';
 import { resolveReferences } from '../helpers/resolveReference';
 import { renderTextListItem } from '../helpers/renderTextListItem';
 
-// Components
-Handlebars.registerHelper("resolve-imports", resolveImports);
-Handlebars.registerHelper("resolve-states", resolveStates);
-Handlebars.registerHelper("resolve-references", resolveReferences);
-Handlebars.registerHelper("resolve-types", resolveTypes);
-Handlebars.registerHelper("resolve-code-blocks", resolveCodeBlocks);
-Handlebars.registerHelper("resolve-service-interface-methods", resolveServiceInterfaceMethods);
-Handlebars.registerHelper("resolve-query-params", resolveQueryParams);
-Handlebars.registerHelper("resolve-segment-path", resolveSegmentPath);
-Handlebars.registerHelper("component-name-helper", componentNameHelper);
-Handlebars.registerHelper("field-helper", fieldHelper);
-Handlebars.registerHelper("render-layout", renderLayout);
-Handlebars.registerHelper("render-table-row", renderTableRow);
-Handlebars.registerHelper("render-text-list-item", renderTextListItem);
-Handlebars.registerHelper("addClassNameFromProperties", addClassNameFromProperties);
-Handlebars.registerHelper("addClassNameFromChildProperties", addClassNameFromChildProperties);
-Handlebars.registerHelper("addClassNameFromStyle", addClassNameFromStyle);
-Handlebars.registerHelper("resolveFirstType", resolveFirstType);
-Handlebars.registerHelper("resolveStateDefault", resolveStateDefault);
-Handlebars.registerHelper("resolveZodTypes", resolveZodTypes);
-Handlebars.registerHelper("resolveFunctionArgs", resolveFunctionArgs);
-Handlebars.registerHelper("resolveArrayElementRules", resolveArrayElementRules);
-Handlebars.registerHelper("checkRules", checkRules);
-Handlebars.registerHelper("extractTableColumns", extractTableColumns);
-Handlebars.registerHelper("extractTableRowSubcomponent", extractTableRowSubcomponent);
-Handlebars.registerHelper("extractTableFilters", extractTableFilters);
-Handlebars.registerHelper("extractCardContent", extractCardContent);
-Handlebars.registerHelper("extractCardFooter", extractCardFooter);
-Handlebars.registerHelper("extractTabsItem", extractTabsItem);
-Handlebars.registerHelper("extractMenuNavigationItems", extractMenuNavigationItems);
-Handlebars.registerHelper("extractTextListItems", extractTextListItems);
-Handlebars.registerHelper("extractTextListItemSubItems", extractTextListItemSubItems);
-Handlebars.registerHelper("extractTextListItemContent", extractTextListItemContent);
-Handlebars.registerHelper("extractInfoSection", extractInfoSection);
-Handlebars.registerHelper("extractInfoItem", extractInfoItem);
-Handlebars.registerHelper("extractCardDetailsItem", extractCardDetailsItem);
-Handlebars.registerHelper("extractAccordionItem", extractAccordionItem);
-Handlebars.registerHelper("resolveComponent", resolveComponent);
-Handlebars.registerHelper("indexedTag", indexedTag);
-Handlebars.registerHelper("replaceId", replaceId);
-Handlebars.registerHelper("replaceType", replaceType);
-Handlebars.registerHelper("replaceValue", replaceValue);
-Handlebars.registerHelper("resolveClassNameProperty", resolveClassNameProperty);
-Handlebars.registerHelper("render-properties", renderProperties);
-Handlebars.registerHelper("render-interactions", renderInteractions);
-Handlebars.registerHelper("render-data", renderData);
+export const engine = new Liquid({
+  strictFilters: false,
+  dynamicPartials: true,
+  jsTruthy: true,
+  extname: '.liquid',
+});
 
-// Workspace
-Handlebars.registerHelper("extractVolumes", extractVolumes)
-Handlebars.registerHelper("render-service", renderService)
-Handlebars.registerHelper("indent", indent)
-Handlebars.registerHelper("normalizeHostname", normalizeHostname)
+const partialTemplates = new Map<string, string>();
 
-// String
-Handlebars.registerHelper('toLowerCase', toLowerCase);
-Handlebars.registerHelper('toCamelCase', toCamelCase);
-Handlebars.registerHelper("capitalize", capitalize);
-Handlebars.registerHelper("trim", trim);
-Handlebars.registerHelper("json", json);
-Handlebars.registerHelper("toProps", toProps);
-Handlebars.registerHelper("concat", concat);
-Handlebars.registerHelper("toCamelCaseFromNatural", toCamelCaseFromNatural);
-Handlebars.registerHelper("typeResolution", typeResolution);
-Handlebars.registerHelper("typeFormatter", typeFormatter);
-Handlebars.registerHelper("singleTypeFormatter", singleTypeFormatter);
+const registerFilter = (name: string, fn: (...args: any[]) => any) => {
+  engine.registerFilter(name, (input: any, ...args: any[]) => {
+    if (input === '' || input === undefined || input === null) {
+      return fn(...args);
+    }
+    return fn(input, ...args);
+  });
+};
 
-// Array
-Handlebars.registerHelper("length", length);
-Handlebars.registerHelper("getIndex", getIndex);
-Handlebars.registerHelper("getAttribute", getAttribute);
-Handlebars.registerHelper('emptyArray', () => []);
+registerFilter("resolve-imports", resolveImports);
+registerFilter("resolve-states", resolveStates);
+registerFilter("resolve-references", resolveReferences);
+registerFilter("resolve-types", resolveTypes);
+registerFilter("resolve-code-blocks", resolveCodeBlocks);
+registerFilter("resolve-service-interface-methods", resolveServiceInterfaceMethods);
+registerFilter("resolve-query-params", resolveQueryParams);
+registerFilter("resolve-segment-path", resolveSegmentPath);
+registerFilter("component-name-helper", componentNameHelper);
+registerFilter("field-helper", fieldHelper);
+registerFilter("render-layout", renderLayout);
+registerFilter("render-table-row", renderTableRow);
+registerFilter("render-text-list-item", renderTextListItem);
+registerFilter("addClassNameFromProperties", addClassNameFromProperties);
+registerFilter("addClassNameFromChildProperties", addClassNameFromChildProperties);
+registerFilter("addClassNameFromStyle", addClassNameFromStyle);
+registerFilter("resolveFirstType", resolveFirstType);
+registerFilter("resolveStateDefault", resolveStateDefault);
+registerFilter("resolveZodTypes", resolveZodTypes);
+registerFilter("resolveFunctionArgs", resolveFunctionArgs);
+registerFilter("resolveArrayElementRules", resolveArrayElementRules);
+registerFilter("checkRules", checkRules);
+registerFilter("extractTableColumns", extractTableColumns);
+registerFilter("extractTableRowSubcomponent", extractTableRowSubcomponent);
+registerFilter("extractTableFilters", extractTableFilters);
+registerFilter("extractCardContent", extractCardContent);
+registerFilter("extractCardFooter", extractCardFooter);
+registerFilter("extractTabsItem", extractTabsItem);
+registerFilter("extractMenuNavigationItems", extractMenuNavigationItems);
+registerFilter("extractTextListItems", extractTextListItems);
+registerFilter("extractTextListItemSubItems", extractTextListItemSubItems);
+registerFilter("extractTextListItemContent", extractTextListItemContent);
+registerFilter("extractInfoSection", extractInfoSection);
+registerFilter("extractInfoItem", extractInfoItem);
+registerFilter("extractCardDetailsItem", extractCardDetailsItem);
+registerFilter("extractAccordionItem", extractAccordionItem);
+registerFilter("resolveComponent", resolveComponent);
+registerFilter("indexedTag", indexedTag);
+registerFilter("replaceId", replaceId);
+registerFilter("replaceType", replaceType);
+registerFilter("replaceValue", replaceValue);
+registerFilter("resolveClassNameProperty", resolveClassNameProperty);
+registerFilter("render-properties", renderProperties);
+registerFilter("render-interactions", renderInteractions);
+registerFilter("render-data", renderData);
+registerFilter("extractVolumes", extractVolumes);
+registerFilter("render-service", renderService);
+registerFilter("normalizeHostname", normalizeHostname);
+registerFilter('toLowerCase', toLowerCase);
+registerFilter('toCamelCase', toCamelCase);
+registerFilter("capitalize", capitalize);
+registerFilter("trim", trim);
+registerFilter("json", json);
+registerFilter("toProps", toProps);
+registerFilter("concat", concat);
+registerFilter("toCamelCaseFromNatural", toCamelCaseFromNatural);
+registerFilter("typeResolution", typeResolution);
+registerFilter("typeFormatter", typeFormatter);
+registerFilter("singleTypeFormatter", singleTypeFormatter);
+registerFilter("length", length);
+registerFilter("getIndex", getIndex);
+registerFilter("getAttribute", getAttribute);
+registerFilter('emptyArray', () => []);
+registerFilter("gt", greaterThan);
+registerFilter("eq", equals);
+registerFilter("and", and);
+registerFilter("or", or);
+registerFilter("not", not);
+registerFilter("isValidation", isValidation);
+registerFilter("yup-validation", yupValidation);
+registerFilter("target-helper", targetHelper);
+registerFilter("import-actions-type", importActionsType);
+registerFilter("action-type", actionType);
+registerFilter("applyToAll", applyToAll);
+registerFilter("default", Default);
+registerFilter("notNullOrEmpty", notNullOrEmpty);
+registerFilter("nullOrEmpty", nullOrEmpty);
+registerFilter("getPropertyByKey", getPropertyByKey);
 
-// Comparison
-Handlebars.registerHelper("gt", greaterThan);
-Handlebars.registerHelper("eq", equals);
-Handlebars.registerHelper("and", and);
-Handlebars.registerHelper("or", or);
-Handlebars.registerHelper("not", not);
+engine.registerTag('indent', {
+  parse(this: any, tagToken: any, remainTokens: any[]) {
+    this.spaces = Number(tagToken.args?.trim() || 0);
+    this.templates = [];
+    const stream = this.liquid.parser.parseStream(remainTokens);
+    stream.on('tag:endindent', () => stream.stop());
+    stream.on('template', (tpl: any) => this.templates.push(tpl));
+    stream.start();
+  },
+  * render(this: any, ctx: any, emitter: any): Generator<any, void, any> {
+    const html = yield this.liquid.renderer.renderTemplates(this.templates, ctx);
+    const pad = ' '.repeat(this.spaces);
+    const indented = String(html).split('\n').map((line) => (line ? pad + line : line)).join('\n');
+    emitter.write(indented);
+  },
+});
 
-// Validation
-Handlebars.registerHelper("isValidation", isValidation)
-Handlebars.registerHelper("yup-validation", yupValidation)
+engine.registerTag('partial', {
+  parse(this: any, tagToken: any) {
+    this.args = tagToken.args;
+  },
+  async render(this: any, ctx: any) {
+    const rawArgs = String(this.args || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const nameArg = rawArgs.shift() || '';
+    const partialName = nameArg.replace(/^['"]|['"]$/g, '');
+    const source = partialTemplates.get(partialName);
+    if (!source) return '';
+    const hash: Record<string, any> = {};
+    rawArgs.forEach((arg, index) => {
+      if (arg.includes(':')) {
+        const [k, ...rest] = arg.split(':');
+        const valueExpr = rest.join(':').trim();
+        hash[k.trim()] = ctx.get([valueExpr]);
+      } else {
+        hash[`value${index}`] = ctx.get([arg]);
+      }
+    });
+    return engine.parseAndRender(source, { ...ctx.environments, ...hash });
+  },
+});
 
-// Actions
-Handlebars.registerHelper("target-helper", targetHelper)
-Handlebars.registerHelper("import-actions-type", importActionsType)
-Handlebars.registerHelper("action-type", actionType)
-Handlebars.registerHelper("applyToAll", applyToAll)
-Handlebars.registerHelper("default", Default)
-
-// Objects
-Handlebars.registerHelper("notNullOrEmpty", notNullOrEmpty)
-Handlebars.registerHelper("nullOrEmpty", nullOrEmpty)
-Handlebars.registerHelper("getPropertyByKey", getPropertyByKey)
-
-/**
- * Dynamically loads and registers Handlebars partials in a React.js application.
- */
-export const loadComponentPartials = () : void => {
+export const loadComponentPartials = (): void => {
   try {
-    // Fetch a list of partial files (You may need to hardcode or retrieve this list from a backend API)
-    // Fetch each partial and register it
-    Object.entries(registry).map(async ([name, _]) => {
+    Object.entries(registry).forEach(([name]) => {
       const partialsPath = replaceTemplate(getPaths().componentPartials, { name });
       if (fs.pathExistsSync(partialsPath)) {
         const partialDir = fs.readdirSync(partialsPath);
         partialDir.forEach((partial) => {
-          const partialName = partial.replace('.hbs', '');
+          const partialName = partial.replace('.liquid', '');
           const partialContent: string = fs.readFileSync(`${partialsPath}/${partial}`, 'utf-8');
-          if (!partialContent) {
-            throw new Error(`Failed to load partial: ${partialName}`);
-          }
-          Handlebars.registerPartial(partialName, partialContent.trim()); // Register the partial
+          partialTemplates.set(partialName, partialContent.trim());
         });
       }
     });
-
   } catch (error) {
     console.error('Error loading partials:', error);
   }
 };
 
-/**
- * Dynamically loads and registers Handlebars partials in a React.js application.
- */
 export const loadPartials = (): void => {
   try {
-    // Fetch a list of partial files (You may need to hardcode or retrieve this list from a backend API)
-    // Fetch each partial and register it
-    PARTIALS.map((file) => {
-      const partialName = file.split('/').pop()?.replace('.hbs', '') ?? file.replace('.hbs', '');
+    PARTIALS.forEach((file) => {
+      const partialName = file.split('/').pop()?.replace('.liquid', '') ?? file.replace('.liquid', '');
       const partialContent: string = fs.readFileSync(`${getPaths().genericPartials}/${file}`, 'utf-8');
-      if (!partialContent) {
-        throw new Error(`Failed to load partial: ${file}`);
-      }
-      Handlebars.registerPartial(partialName, partialContent); // Register the partial
+      partialTemplates.set(partialName, partialContent);
     });
   } catch (error) {
     console.error('Error loading partials:', error);
   }
 };
-
-export { Handlebars };

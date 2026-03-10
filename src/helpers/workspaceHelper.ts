@@ -1,5 +1,4 @@
 import { Volume, WorkspaceProjectsConfig } from '../interfaces/types';
-import { HelperOptions } from 'handlebars';
 import { generateVolumeFiles } from '../modules/workspace/generateVolumeFiles';
 import { DockerService } from '../docker_services/index';
 
@@ -27,7 +26,7 @@ export function extractVolumes(config: WorkspaceProjectsConfig, basePath: string
  * @param options - Handlebars options object containing the block content.
  * @returns Indented string.
  */
-export function indent(this: any, spaces: number, options: HelperOptions): string {
+export function indent(this: any, spaces: number, options: { fn: (context: any) => string }): string {
   const pad = ' '.repeat(spaces);
   return options.fn(this)
     .split('\n')

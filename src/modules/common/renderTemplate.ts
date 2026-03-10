@@ -1,11 +1,21 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { Handlebars, loadComponentPartials, loadPartials } from '../../registries/helperRegistry';
+import { engine, loadComponentPartials, loadPartials } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE } from '../../utils/constants';
 import { registry } from '../../components';
 import { registry as registryService } from '../../docker_services';
 import { registry as registryCode } from '../../code_snippets';
 import { getPaths } from '../../index';
+
+const templateAstCache = new Map<string, { source: string; ast: any }>();
+
+const parseWithCache = async (templatePath: string, templateContent: string) => {
+  const cached = templateAstCache.get(templatePath);
+  if (cached && cached.source === templateContent) return cached.ast;
+  const ast = engine.parse(templateContent);
+  templateAstCache.set(templatePath, { source: templateContent, ast });
+  return ast;
+};
 
 /**
  * Generates content from a template and a context.
@@ -32,9 +42,8 @@ export const renderTemplate = async (templateName: string, context: any) => {
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
-  const template = Handlebars.compile(templateContent);
-
-  return template(context);
+  const ast = await parseWithCache(templatePath, templateContent);
+  return engine.render(ast, context);
 };
 
 /**
@@ -59,9 +68,8 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
-  const template = Handlebars.compile(templateContent);
-
-  return template(context);
+  const ast = engine.parse(templateContent);
+  return engine.renderSync(ast, context);
 };
 
 /**
@@ -87,13 +95,12 @@ export const renderServiceTemplate = (templateName: string, context: any, isShel
 
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
-  
-  const template = Handlebars.compile(templateContent);
+  const ast = engine.parse(templateContent);
 
   if (isShellScript) {
-    return template(context).replace(/\r\n/g, '\n');
+    return engine.renderSync(ast, context).replace(/\r\n/g, '\n');
   } else {
-    return template(context);
+    return engine.renderSync(ast, context);
   }
 
 };
@@ -120,9 +127,7 @@ export const renderCodeTemplate = (templateName: string, context: any) => {
 
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
-
-  const template = Handlebars.compile(templateContent);
-
-  return template(context);
+  const ast = engine.parse(templateContent);
+  return engine.renderSync(ast, context);
 
 };
