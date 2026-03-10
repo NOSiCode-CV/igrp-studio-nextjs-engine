@@ -1,0 +1,12 @@
+igrpToast({
+  promise: {{ resourceConfig.promise }},
+  loading: "{{ resourceConfig.loading }}",
+  success: "{{ resourceConfig.success }}",
+  error: "{{ resourceConfig.error }}",
+  {% if resourceConfig.action %}
+  action: {
+    label: "{{ resourceConfig.action.label }}",
+    onClick: () => console.log("{{ resourceConfig.action.label }}"),
+  },
+  {% endif %}
+})

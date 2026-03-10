@@ -1,0 +1,13 @@
+import { Col, Container, Row } from "reactstrap"
+
+export default function Page() {
+  return (
+    <Container fluid className="d-flex vh-100">
+      <Row className="justify-content-center align-items-center w-100">
+        <Col className="d-flex justify-content-center">
+          <h1 className="text-center">Welcome to {{ baseConfig.name }}</h1>
+        </Col>
+      </Row>
+    </Container>
+  );
+}

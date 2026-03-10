@@ -1,0 +1,16 @@
+{% if resourceConfig.dataSource.containerName %}{{ resourceConfig.dataSource.containerName }}{% else %}postgres-{{ '' | toLowerCase: resourceConfig.config.name }}{% endif %}:
+  image: postgres:{% if resourceConfig.dataSource.imageVersion %}{{ resourceConfig.dataSource.imageVersion }}{% else %}16-alpine{% endif %}
+  container_name: {% if resourceConfig.dataSource.containerName %}{{ resourceConfig.dataSource.containerName }}{% else %}postgres-{{ '' | toLowerCase: resourceConfig.config.name }}{% endif %}
+  environment:
+    - POSTGRES_USER="{% if resourceConfig.dataSource.dbUser %}{{ resourceConfig.dataSource.dbUser }}{% else %}postgres{% endif %}"
+    - POSTGRES_PASSWORD="{{ resourceConfig.dataSource.dbPassword }}"
+    - POSTGRES_DB="{{ resourceConfig.dataSource.dbName }}"
+  ports:
+    - "{{ resourceConfig.dataSource.ports.external }}:{{ resourceConfig.dataSource.ports.internal }}"
+  volumes:
+    - {{ resourceConfig.dataSource.volumes.name }}:{% if resourceConfig.dataSource.volumes.path %}{{ resourceConfig.dataSource.volumes.path }}{% else %}/var/lib/postgresql/data{% endif %}
+  restart: unless-stopped
+  networks:
+    - {{ '' | toLowerCase: workspace }}-network
+  labels:
+    type: database

@@ -1,0 +1,16 @@
+{% if resourceConfig.dataSource.containerName %}{{ resourceConfig.dataSource.containerName }}{% else %}mysql-{{ '' | toLowerCase: resourceConfig.config.name }}{% endif %}:
+  image: mysql:{% if resourceConfig.dataSource.imageVersion %}{{ resourceConfig.dataSource.imageVersion }}{% else %}8.0{% endif %}
+  container_name: {% if resourceConfig.dataSource.containerName %}{{ resourceConfig.dataSource.containerName }}{% else %}mysql-{{ '' | toLowerCase: resourceConfig.config.name }}{% endif %}
+  environment:
+    - MYSQL_PASSWORD="{% if resourceConfig.dataSource.dbPassword %}{{ resourceConfig.dataSource.dbPassword }}{% else %}root{% endif %}"
+    - MYSQL_ROOT_PASSWORD="{{ resourceConfig.dataSource.dbPassword }}"
+    - MYSQL_DATABASE="{{ resourceConfig.dataSource.dbName }}"
+  ports:
+    - "{{ resourceConfig.dataSource.ports.external }}:{{ resourceConfig.dataSource.ports.internal }}"
+  volumes:
+    - {{ resourceConfig.dataSource.volume.name }}:{% if resourceConfig.dataSource.volume.path %}{{ resourceConfig.dataSource.volume.path }}{% else %}/var/lib/postgresql/data{% endif %}
+  restart: unless-stopped
+  networks:
+    - {{ '' | toLowerCase: workspace }}-network
+  labels:
+    type: database

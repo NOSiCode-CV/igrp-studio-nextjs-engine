@@ -1,0 +1,56 @@
+<IGRPTextList
+  {% if resourceConfig.tag %}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.generateReference %}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif %}
+  {% if resourceConfig.properties.animate and not resourceConfig.data.animate %}
+  animate={ {{ resourceConfig.properties.animate }} }
+  {% endif %}
+  {% if resourceConfig.properties.interactive and not resourceConfig.data.interactive %}
+  interactive={ {{ resourceConfig.properties.interactive }} }
+  {% endif %}
+  {% if resourceConfig.properties.showNumbers and not resourceConfig.data.showNumbers %}
+  showNumbers={ {{ resourceConfig.properties.showNumbers }} }
+  {% endif %}
+  {% if resourceConfig.properties.collapsible and not resourceConfig.data.collapsible %}
+  collapsible={ {{ resourceConfig.properties.collapsible }} }
+  {% endif %}
+  {% if resourceConfig.properties.type and not resourceConfig.data.type %}
+  type={ `{{ resourceConfig.properties.type }}` }
+  {% endif %}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant %}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.iconGlobalColor %}
+  iconGlobalColor={ `{{ resourceConfig.properties.iconProperties.iconGlobalColor }}` }
+  {% endif %}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  items={
+    [
+    {% if resourceConfig.children %}
+      {% for this in resourceConfig.children | extractTextListItems %}
+        {{ '' | render-text-list-item: this }},
+      {% endfor %}
+    {% endif %}
+    ]
+  }
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif %}
+/>

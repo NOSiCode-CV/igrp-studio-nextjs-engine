@@ -1,0 +1,3 @@
+function {% if resourceConfig.name %}{{ resourceConfig.name }}{% else %}handle{{ '' | capitalize: resourceConfig.tag }}Navigation{% endif %} (row?: any): void {
+  router.push(`{{ '' | resolve-segment-path: resourceConfig.path, resourceConfig.segments }}{% if resourceConfig.params %}{{ '' | resolve-query-params: resourceConfig.params }}{% endif %}`);
+}

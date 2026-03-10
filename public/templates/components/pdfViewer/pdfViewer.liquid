@@ -1,0 +1,85 @@
+<IGRPPdfViewer
+  {% if resourceConfig.tag %}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.generateReference %}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif %}
+  document={
+    {
+      id: 1,
+      title: {% if resourceConfig.data.title %}{% if resourceConfig.data.title.state %}{{ resourceConfig.data.title.state.name }}{% else %}{{ resourceConfig.data.title.value.code }}{% endif %}{% else %}'{{ resourceConfig.properties.title }}'{% endif %},
+      description: {% if resourceConfig.data.description %}{% if resourceConfig.data.description.state %}{{ resourceConfig.data.description.state.name }}{% else %}{{ resourceConfig.data.description.value.code }}{% endif %}{% else %}'{{ resourceConfig.properties.description }}'{% endif %},
+      author: {% if resourceConfig.data.author %}{% if resourceConfig.data.author.state %}{{ resourceConfig.data.author.state.name }}{% else %}{{ resourceConfig.data.author.value.code }}{% endif %}{% else %}'{{ resourceConfig.properties.author }}'{% endif %},
+      date: {% if resourceConfig.data.date %}{% if resourceConfig.data.date.state %}{{ resourceConfig.data.date.state.name }}{% else %}{{ resourceConfig.data.date.value.code }}{% endif %}{% else %}'{{ resourceConfig.properties.date }}'{% endif %},
+      fileUrl: {% if resourceConfig.data.fileUrl %}{% if resourceConfig.data.fileUrl.state %}{{ resourceConfig.data.fileUrl.state.name }}{% else %}{{ resourceConfig.data.fileUrl.value.code }}{% endif %}{% else %}'{{ resourceConfig.properties.fileUrl }}'{% endif %},
+    }
+  }
+  {% if resourceConfig.properties.displayMode and not resourceConfig.data.displayMode %}
+  displayMode={ `{{ resourceConfig.properties.displayMode }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.displayMode and resourceConfig.data.displayMode %}
+  displayMode={ {% if resourceConfig.data.displayMode.state %}{{ resourceConfig.data.displayMode.state.name }}{% else %}{{ resourceConfig.data.displayMode.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.viewerPreference and not resourceConfig.data.viewerPreference %}
+  viewerPreference={ `{{ resourceConfig.properties.viewerPreference }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.viewerPreference and resourceConfig.data.viewerPreference %}
+  viewerPreference={ {% if resourceConfig.data.viewerPreference.state %}{{ resourceConfig.data.viewerPreference.state.name }}{% else %}{{ resourceConfig.data.viewerPreference.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.labelButtonCancel and not resourceConfig.data.labelButtonCancel %}
+  labelButtonCancel={ `{{ resourceConfig.properties.labelButtonCancel }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.labelButtonCancel and resourceConfig.data.labelButtonCancel %}
+  labelButtonCancel={ {% if resourceConfig.data.labelButtonCancel.state %}{{ resourceConfig.data.labelButtonCancel.state.name }}{% else %}{{ resourceConfig.data.labelButtonCancel.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.labelButtonNewTab and not resourceConfig.data.labelButtonNewTab %}
+  labelButtonNewTab={ `{{ resourceConfig.properties.labelButtonNewTab }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.labelButtonNewTab and resourceConfig.data.labelButtonNewTab %}
+  labelButtonNewTab={ {% if resourceConfig.data.labelButtonNewTab.state %}{{ resourceConfig.data.labelButtonNewTab.state.name }}{% else %}{{ resourceConfig.data.labelButtonNewTab.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.inlineHeight and not resourceConfig.data.inlineHeight %}
+  inlineHeight={ `{{ resourceConfig.properties.inlineHeight }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.inlineHeight and resourceConfig.data.inlineHeight %}
+  inlineHeight={ {% if resourceConfig.data.inlineHeight.state %}{{ resourceConfig.data.inlineHeight.state.name }}{% else %}{{ resourceConfig.data.inlineHeight.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.notFoundLabel and not resourceConfig.data.notFoundLabel %}
+  notFoundLabel={ `{{ resourceConfig.properties.notFoundLabel }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.notFoundLabel and resourceConfig.data.notFoundLabel %}
+  notFoundLabel={ {% if resourceConfig.data.notFoundLabel.state %}{{ resourceConfig.data.notFoundLabel.state.name }}{% else %}{{ resourceConfig.data.notFoundLabel.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.loadErrorLabel and not resourceConfig.data.loadErrorLabel %}
+  loadErrorLabel={ `{{ resourceConfig.properties.loadErrorLabel }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.loadErrorLabel and resourceConfig.data.loadErrorLabel %}
+  loadErrorLabel={ {% if resourceConfig.data.loadErrorLabel.state %}{{ resourceConfig.data.loadErrorLabel.state.name }}{% else %}{{ resourceConfig.data.loadErrorLabel.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.loadTimeoutMs and not resourceConfig.data.loadTimeoutMs %}
+  loadTimeoutMs={ `{{ resourceConfig.properties.loadTimeoutMs }}` }
+  {% endif %}
+  {% if not resourceConfig.properties.loadTimeoutMs and resourceConfig.data.loadTimeoutMs %}
+  loadTimeoutMs={ {% if resourceConfig.data.loadTimeoutMs.state %}{{ resourceConfig.data.loadTimeoutMs.state.name }}{% else %}{{ resourceConfig.data.loadTimeoutMs.value.code }}{% endif %} }
+  {% endif %}
+  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style %}
+  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif %}
+>
+</IGRPPdfViewer>

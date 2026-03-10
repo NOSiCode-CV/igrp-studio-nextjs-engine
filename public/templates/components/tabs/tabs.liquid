@@ -1,0 +1,113 @@
+<IGRPTabs
+  {% if resourceConfig.properties.commonProperties.generateReference %}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif %}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant %}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif %}
+  {% if resourceConfig.properties.tabTriggerClassName and not resourceConfig.data.tabTriggerClassName %}
+  tabTriggerClassName={ `{{ resourceConfig.properties.tabTriggerClassName }}` }
+  {% endif %}
+  {% if resourceConfig.properties.tabContentClassName and not resourceConfig.data.tabContentClassName %}
+  tabContentClassName={ `{{ resourceConfig.properties.tabContentClassName }}` }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.showIcon and not resourceConfig.data.showIcon %}
+  showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.iconPlacement and not resourceConfig.data.iconPlacement %}
+  iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
+  {% endif %}
+  {% if resourceConfig.properties.contentBorder and not resourceConfig.data.contentBorder %}
+  contentBorder={ {{ resourceConfig.properties.contentBorder }} }
+  {% endif %}
+  {% if resourceConfig.properties.fullWidth and not resourceConfig.data.fullWidth %}
+  fullWidth={ {{ resourceConfig.properties.fullWidth }} }
+  {% endif %}
+  {% if resourceConfig.properties.showBadge and not resourceConfig.data.showBadge %}
+  showBadge={ {{ resourceConfig.properties.showBadge }} }
+  {% endif %}
+  {% if resourceConfig.properties.badgePlacement and not resourceConfig.data.badgePlacement %}
+  badgePlacement={ `{{ resourceConfig.properties.badgePlacement }}` }
+  {% endif %}
+  {% if resourceConfig.properties.orientation and not resourceConfig.data.orientation %}
+  orientation={ `{{ resourceConfig.properties.orientation }}` }
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif %}
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.properties.tabListClassName or parentResourceConfig and resourceConfig.style %}
+  tabListClassName={ cn({{ '' | concat: "'", resourceConfig.properties.tabListClassName, "',", '', '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.tabListClassName and not parentResourceConfig or resourceConfig.style %}
+  tabListClassName={ cn({{ '' | concat: "'", resourceConfig.properties.tabListClassName, "',", '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.tabListClassName and parentResourceConfig.childProperties or resourceConfig.style %}
+  tabListClassName={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% if resourceConfig.children and not resourceConfig.data.items %}
+  items={
+      [
+      {% for this in resourceConfig.children | extractTabsItem %}
+        {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+        {
+          {% if this.properties.value %}
+          value: `{{ this.properties.value }}`,
+          {% endif %}
+          {% if this.properties.label %}
+          label: `{{ this.properties.label }}`,
+          {% endif %}
+          {% if this.properties.iconProperties.icon %}
+          icon: `{{ this.properties.iconProperties.icon }}`,
+          {% endif %}
+          {% if this.properties.className %}
+          className: `{{ this.properties.className }}`,
+          {% endif %}
+          {% if this.properties.disabled and not this.data.disabled %}
+          disabled: {{ this.properties.disabled }},
+          {% endif %}
+          {% if not this.properties.disabled and this.data.disabled %}
+          disabled: {{ this.data.disabled.state.name }},
+          {% endif %}
+          {% if this.properties.badgeContent and not this.data.badgeContent %}
+          badgeContent: `{{ this.properties.badgeContent }}`,
+          {% endif %}
+          {% if not this.properties.badgeContent and this.data.badgeContent %}
+          badgeContent: {{ this.data.badgeContent.state.name }},
+          {% endif %}
+          {% if this.properties.badgeVariant and not this.data.badgeVariant %}
+          badgeVariant: `{{ this.properties.badgeVariant }}` as const,
+          {% endif %}
+          {% if not this.properties.badgeVariant and this.data.badgeVariant %}
+          badgeVariant: {{ this.data.badgeVariant.state.name }},
+          {% endif %}
+          {% if this.properties.badgeColor and not this.data.badgeColor %}
+          badgeColor: `{{ this.properties.badgeColor }}` as const,
+          {% endif %}
+          {% if not this.properties.badgeColor and this.data.badgeColor %}
+          badgeColor: {{ this.data.badgeColor.state.name }},
+          {% endif %}
+          {% if this.properties.badgeClassName and not this.data.badgeClassName %}
+          badgeClassName: `{{ this.properties.badgeClassName }}`,
+          {% endif %}
+          {% if not this.properties.badgeClassName and this.data.badgeClassName %}
+          badgeClassName: {{ this.data.badgeClassName.state.name }},
+          {% endif %}
+          content: (<>
+            {% if length > this.children %}
+            {% for this in this.children %}
+            {{ '' | render-layout: this, this }}
+            {% endfor %}
+            {% endif %}
+          </>),
+        }{% if this %}] : []){% endif %},
+      {% endfor %}
+      ]
+  }
+  {% endif %}
+/>

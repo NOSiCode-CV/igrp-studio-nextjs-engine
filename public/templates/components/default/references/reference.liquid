@@ -1,0 +1,1 @@
+const {{ '' | replaceId: resourceConfig.name, resourceConfig.component }} = useRef{% if resourceConfig.type %}<{{ '' | replaceType: resourceConfig.type, resourceConfig.component, resourceConfig.isArray }}>{% endif %}({{ resourceConfig.defaultValue | replaceType: resourceConfig.type, resourceConfig.component | resolveStateDefault | replaceValue: resourceConfig.component }});

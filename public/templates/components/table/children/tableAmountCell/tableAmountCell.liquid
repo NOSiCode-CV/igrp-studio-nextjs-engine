@@ -1,0 +1,16 @@
+return <IGRPDataTableCellAmount
+  field={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
+  {% if resourceConfig.properties.currency and not resourceConfig.data.currency %}
+  currency={ `{{ resourceConfig.properties.currency }}` }
+  {% endif %}
+  {% if resourceConfig.properties.language and not resourceConfig.data.language %}
+  language={ `{{ resourceConfig.properties.language }}` }
+  {% endif %}
+  {% if resourceConfig.properties.formatStyle and not resourceConfig.data.formatStyle %}
+  formatStyle={ `{{ resourceConfig.properties.formatStyle }}` }
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data }}
+  {% endif %}
+>
+</IGRPDataTableCellAmount>

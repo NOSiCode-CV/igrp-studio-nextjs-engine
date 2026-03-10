@@ -1,0 +1,1 @@
+return {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue("{{ resourceConfig.tag }}"){% endif %}

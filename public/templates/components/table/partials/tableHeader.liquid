@@ -1,0 +1,13 @@
+{% if properties.headerType == 'sortToggle' %}
+({ column }) => (<IGRPDataTableHeaderSortToggle column={column} title={ `{{ properties.headerTitle }}` } />)
+{% else %}
+{% if properties.headerType == 'sortDropdown' %}
+({ column }) => <IGRPDataTableHeaderSortDropdown column={column} title={ `{{ properties.headerTitle }}` } />
+{% else %}
+{% if properties.headerType == 'rowsSelect' %}
+({ table }) => <IGRPDataTableHeaderRowsSelect table={table} title={ `{{ properties.headerTitle }}` } />
+{% else %}
+'{{ properties.headerTitle }}'
+{% endif %}
+{% endif %}
+{% endif %}

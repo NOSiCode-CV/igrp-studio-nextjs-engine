@@ -1,0 +1,46 @@
+# User Manager (UM) environment variables
+POSTGRES_DB=igrp_platform_db
+POSTGRES_USER=igrp
+POSTGRES_PORT=5432
+POSTGRES_PASSWORD=1234
+POSTGRES_HOSTNAME=igrp-db
+
+KEYCLOAK_CLIENT_ID=CLIENT_igrp-user-manager
+KEYCLOAK_CLIENT_SECRET=**********
+USER_MANAGEMENT_PORT=8081
+
+# Keycloak
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=password
+KEYCLOAK_HOSTNAME=keycloak
+KEYCLOAK_HOSTNAME_PORT=8080
+KEYCLOAK_REALM=quickstart
+KEYCLOAK_ISSUER=http://${KEYCLOAK_HOSTNAME}:${KEYCLOAK_HOSTNAME_PORT}/realms/${KEYCLOAK_REALM}
+
+MINIO_URL=http://igrp-minio:9000
+MINIO_PORT=9000
+MINIO_SECURITY=false
+MINIO_ACCESS_KEY=admin
+MINIO_SECRET_KEY=admin12345678
+MINIO_BUCKET_NAME=igrp
+
+APP_AUTHENTICATION_PROVIDER=keycloak
+# App Manager
+APP_MANAGER_URL=http://igrp-app-manager-api:8082
+
+# Email server configuration
+EMAIL_SENDER=
+EMAIL_HOST=
+EMAIL_PORT=587
+EMAIL_USERNAME=
+EMAIL_PASSWORD=
+
+{% if resourceConfig.platform.observability.enableObservability %}
+OTEL_ENABLED=true
+OTEL_HTTP_PORT={{ resourceConfig.platform.observability.collectorPort }}
+OTEL_COLLECTOR_ENDPOINT=http://host.docker.internal:{{ resourceConfig.platform.observability.collectorPort }}
+OTEL_METRICS_EXPORTER=otlp
+OTEL_LOGS_EXPORTER=otlp
+OTEL_TRACES_EXPORTER=otlp
+OTEL_SERVICE_NAME=igrp-user-management
+{% endif %}

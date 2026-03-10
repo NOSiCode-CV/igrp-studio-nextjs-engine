@@ -1,0 +1,36 @@
+<IGRPDataTableButton
+  actionButtons={
+    {
+      type: `{{ resourceConfig.properties.type }}`,
+      component: {{ '' | resolveComponent: resourceConfig.componentName, registry, 'button' }},
+      props: {
+        {% if resourceConfig.properties.title %}title: `{{ resourceConfig.properties.title }}`,{% endif %}
+        {% if resourceConfig.properties.labelTrigger and not resourceConfig.data.labelTrigger %}labelTrigger: `{{ resourceConfig.properties.labelTrigger }}`,{% endif %}
+        {% if resourceConfig.iconProperties.iconName %}icon: `{{ resourceConfig.properties.iconName }}`,{% endif %}
+        {% if resourceConfig.iconProperties.iconPlacement %}iconPlacement: `{{ resourceConfig.properties.iconPlacement }}`,{% endif %}
+        {% if resourceConfig.iconProperties.iconClassName %}iconClassName: `{{ resourceConfig.properties.iconClassName }}`,{% endif %}
+        {% if resourceConfig.properties.variant %}variant: `{{ resourceConfig.properties.variant }}`,{% endif %}
+        {% if resourceConfig.properties.href %}href: `{{ '' | resolve-segment-path: this.properties.href, this.properties.segments }}{% if this.properties.params %}{{ '' | resolve-query-params: this.properties.params }}{% endif %}`,{% endif %}
+        {% if resourceConfig.properties.className %}className: `{{ resourceConfig.properties.className }}`,{% endif %}
+        {% if resourceConfig.properties.action %}action: () => {{ resourceConfig.properties.action }}(rowData),{% endif %}
+        {% if resourceConfig.properties.showIcon %}showIcon: {{ resourceConfig.properties.showIcon }},{% endif %}
+        {% if resourceConfig.properties.showCancel %}showCancel: {{ resourceConfig.properties.showCancel }},{% endif %}
+        {% if resourceConfig.properties.labelCancel %}labelCancel: `{{ resourceConfig.properties.labelCancel }}`,{% endif %}
+        {% if resourceConfig.properties.classNameCancel %}classNameCancel: `{{ resourceConfig.properties.classNameCancel }}`,{% endif %}
+        {% if resourceConfig.properties.variantCancel %}variantCancel: `{{ resourceConfig.properties.variantCancel }}`,{% endif %}
+        {% if resourceConfig.properties.showConfirm %}showConfirm: {{ resourceConfig.properties.showConfirm }},{% endif %}
+        {% if resourceConfig.properties.labelConfirm %}labelConfirm: `{{ resourceConfig.properties.labelConfirm }}`,{% endif %}
+        {% if resourceConfig.properties.classNameConfirm %}classNameConfirm: `{{ resourceConfig.properties.classNameConfirm }}`,{% endif %}
+        {% if resourceConfig.properties.variantConfirm %}variantConfirm: `{{ resourceConfig.properties.variantConfirm }}`,{% endif %}
+        {% if resourceConfig.properties.actionConfirm and not resourceConfig.data.actionConfirm %}onClickConfirm: () => {{ resourceConfig.properties.actionConfirm }}(rowData),{% endif %}
+        {% if resourceConfig.children %}
+        children:
+        {% for this in resourceConfig.children %}
+        {{ '' | render-layout: this, resourceConfig }}
+        {% endfor %}
+        {% endif %}
+      }
+    }
+  }
+>
+</IGRPDataTableButton>

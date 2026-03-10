@@ -1,0 +1,148 @@
+<IGRPDatePickerSingle
+  {% if resourceConfig.properties.placeholder and not resourceConfig.data.placeholder %}
+  placeholder={ `{{ resourceConfig.properties.placeholder }}` }
+  {% endif %}
+  {% if resourceConfig.tag %}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif %}
+  {% if resourceConfig.properties.defaultValue and not resourceConfig.data.defaultValue %}
+  defaultValue={ `{{ resourceConfig.properties.defaultValue }}` }
+  {% endif %}
+  {% if resourceConfig.properties.error and not resourceConfig.data.error %}
+  error={ `{{ resourceConfig.properties.error }}` }
+  {% endif %}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled %}
+  disabled
+  {% endif %}
+  {% if resourceConfig.properties.label and not resourceConfig.data.label %}
+  label={ `{{ resourceConfig.properties.label }}` }
+  {% endif %}
+  {% if resourceConfig.properties.floatingLabel and not resourceConfig.data.floatingLabel %}
+  floatingLabel={ {{ resourceConfig.properties.floatingLabel }} }
+  {% endif %}
+  {% if resourceConfig.properties.helperText and not resourceConfig.data.helperText %}
+  helperText={ `{{ resourceConfig.properties.helperText }}` }
+  {% endif %}
+  {% if resourceConfig.properties.startDate and not resourceConfig.data.startDate %}
+  startDate={ new Date(`{{ resourceConfig.properties.startDate }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.endDate and not resourceConfig.data.endDate %}
+  endDate={ new Date(`{{ resourceConfig.properties.endDate }}`) }
+  {% endif %}
+  {% comment %}{% if resourceConfig.properties.showIcon and not resourceConfig.data.showIcon %}
+  showIcon={ {{ resourceConfig.properties.showIcon }} }
+  {% endif %}{% endcomment %}
+  {% if resourceConfig.properties.required and not resourceConfig.data.required %}
+  required={ {{ resourceConfig.properties.required }} }
+  {% endif %}
+  {% if resourceConfig.properties.labelClassName and not resourceConfig.data.labelClassName %}
+  labelClassName={ `{{ resourceConfig.properties.labelClassName }}` }
+  {% endif %}
+  {% comment %}{% if resourceConfig.properties.iconProperties.iconName %}
+  iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.iconSize %}
+  iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.iconPlacement %}
+  iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
+  {% endif %}
+  {% if resourceConfig.properties.iconProperties.iconClassName %}
+  iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif %}{% endcomment %}
+  {% if resourceConfig.properties.dateFormat and not resourceConfig.data.dateFormat %}
+  dateFormat={ `{{ resourceConfig.properties.dateFormat }}` }
+  {% endif %}
+  {% if resourceConfig.properties.today and not resourceConfig.data.today %}
+  today={ new Date(`{{ resourceConfig.properties.today }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.defaultMonth and not resourceConfig.data.defaultMonth %}
+  defaultMonth={ new Date(`{{ resourceConfig.properties.defaultMonth }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.startMonth and not resourceConfig.data.startMonth %}
+  startMonth={ new Date(`{{ resourceConfig.properties.startMonth }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.month and not resourceConfig.data.month %}
+  month={ new Date(`{{ resourceConfig.properties.month }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.endMonth and not resourceConfig.data.endMonth %}
+  endMonth={ new Date(`{{ resourceConfig.properties.endMonth }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.disableBefore and not resourceConfig.data.disableBefore %}
+  disableBefore={ new Date(`{{ resourceConfig.properties.disableBefore }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.disableAfter and not resourceConfig.data.disableAfter %}
+  disableAfter={ new Date(`{{ resourceConfig.properties.disableAfter }}`) }
+  {% endif %}
+  {% if resourceConfig.properties.numberOfMonths and not resourceConfig.data.numberOfMonths %}
+  numberOfMonths={ {{ resourceConfig.properties.numberOfMonths }} }
+  {% endif %}
+  {% if resourceConfig.properties.weekStartsOn and not resourceConfig.data.weekStartsOn %}
+  weekStartsOn={ {{ resourceConfig.properties.weekStartsOn }} }
+  {% endif %}
+  {% if resourceConfig.properties.pagedNavigation and not resourceConfig.data.pagedNavigation %}
+  pagedNavigation={ {{ resourceConfig.properties.pagedNavigation }} }
+  {% endif %}
+  {% if resourceConfig.properties.reverseMonths and not resourceConfig.data.reverseMonths %}
+  reverseMonths={ {{ resourceConfig.properties.reverseMonths }} }
+  {% endif %}
+  {% if resourceConfig.properties.hideNavigation and not resourceConfig.data.hideNavigation %}
+  hideNavigation={ {{ resourceConfig.properties.hideNavigation }} }
+  {% endif %}
+  {% if resourceConfig.properties.disableNavigation and not resourceConfig.data.disableNavigation %}
+  disableNavigation={ {{ resourceConfig.properties.disableNavigation }} }
+  {% endif %}
+  {% if resourceConfig.properties.fixedWeeks and not resourceConfig.data.fixedWeeks %}
+  fixedWeeks={ {{ resourceConfig.properties.fixedWeeks }} }
+  {% endif %}
+  {% if resourceConfig.properties.hideWeekdays and not resourceConfig.data.hideWeekdays %}
+  hideWeekdays={ {{ resourceConfig.properties.hideWeekdays }} }
+  {% endif %}
+  {% if resourceConfig.properties.showOutsideDays and not resourceConfig.data.showOutsideDays %}
+  showOutsideDays={ {{ resourceConfig.properties.showOutsideDays }} }
+  {% endif %}
+  {% if resourceConfig.properties.showWeekNumber and not resourceConfig.data.showWeekNumber %}
+  showWeekNumber={ {{ resourceConfig.properties.showWeekNumber }} }
+  {% endif %}
+  {% if resourceConfig.properties.animate and not resourceConfig.data.animate %}
+  animate={ {{ resourceConfig.properties.animate }} }
+  {% endif %}
+  {% if resourceConfig.properties.broadcastCalendar and not resourceConfig.data.broadcastCalendar %}
+  broadcastCalendar={ {{ resourceConfig.properties.broadcastCalendar }} }
+  {% endif %}
+  {% if resourceConfig.properties.ISOWeek and not resourceConfig.data.ISOWeek %}
+  ISOWeek={ {{ resourceConfig.properties.ISOWeek }} }
+  {% endif %}
+  {% if resourceConfig.properties.captionLayout and not resourceConfig.data.captionLayout %}
+  captionLayout={ `{{ resourceConfig.properties.captionLayout }}` }
+  {% endif %}
+  {% if resourceConfig.properties.navLayout and not resourceConfig.data.navLayout %}
+  navLayout={ `{{ resourceConfig.properties.navLayout }}` }
+  {% endif %}
+  {% if resourceConfig.properties.readOnly and not resourceConfig.data.readOnly %}
+  readOnly
+  {% endif %}
+  {% if resourceConfig.properties.autofocus and not resourceConfig.data.autofocus %}
+  autoFocus={ {{ resourceConfig.properties.autofocus }} }
+  {% endif %}
+  {% if resourceConfig.properties.className and parentResourceConfig %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and not parentResourceConfig %}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
+  {% else %}
+  {% if resourceConfig.properties.className and parentResourceConfig %}
+  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data }}
+  {% endif %}
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif %}
+/>

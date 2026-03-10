@@ -1,0 +1,28 @@
+<IGRPModalDialog
+  {% if resourceConfig.properties.children and not resourceConfig.data.children %}
+  children={
+    <>
+    {% if resourceConfig.children %}
+    {% for this in resourceConfig.children %}
+    {{ '' | render-layout: this, resourceConfig }}
+    {% endfor %}
+    {% endif %}
+    </>
+  }
+  {% endif %}
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif %}
+>
+  {% if resourceConfig.children %}
+  {% for this in resourceConfig.children %}
+  {{ '' | render-layout: this, resourceConfig }}
+  {% endfor %}
+  {% endif %}
+</IGRPModalDialog>

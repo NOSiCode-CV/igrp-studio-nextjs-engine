@@ -1,0 +1,50 @@
+<{{ '' | resolveComponent: resourceConfig.componentName, registry }}
+  {% if resourceConfig.tag %}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.generateReference %}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif %}
+  {% if resourceConfig.properties %}
+  {{ '' | render-properties: resourceConfig.properties, resourceConfig.data, '' }}
+  {% endif %}
+  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty %}
+  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{ '' | concat: "'", '', "',", '', '', '' }}) }
+  {% else %}
+  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty %}
+  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{ '' | concat: "'", '', "',", '', '' }}) }
+  {% else %}
+  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty %}
+  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% if resourceConfig.interactions %}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif %}
+  {% if resourceConfig.data %}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif %}
+  {% if resourceConfig.properties.commonProperties.customProperties %}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif %}
+>
+  {% if resourceConfig.content %}
+  {{ resourceConfig.content }}
+  {% else %}
+  {% if resourceConfig.properties.content and not resourceConfig.data.content %}
+  {{ resourceConfig.properties.content }}
+  {% else %}
+  {% if not resourceConfig.properties.content and resourceConfig.data.content %}
+  { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}{{ resourceConfig.data.content.state.name }}{% endif %} }
+  {% else %}
+  {% if resourceConfig.children %}
+  {% for this in resourceConfig.children %}
+  {{ '' | render-layout: this, resourceConfig }}
+  {% endfor %}
+  {% endif %}
+  {% endif %}
+  {% endif %}
+  {% endif %}
+</{{ '' | resolveComponent: resourceConfig.componentName, registry }}>
