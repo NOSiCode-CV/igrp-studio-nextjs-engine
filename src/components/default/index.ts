@@ -14,6 +14,9 @@ export default {
     if(config.customClassName !== undefined)
       component.loadCustomClassName(config.customClassName);
 
+    if(config.allowChildren !== undefined)
+      component.setAllowChildren(config.allowChildren);
+
     component.loadTemplatePath(config.templatePath);
     component.loadVariants(config.variants)
     component.loadMetadata(config.metadata)
