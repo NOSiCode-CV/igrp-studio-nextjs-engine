@@ -54,7 +54,7 @@
   items={
       [
       {% for this in resourceConfig.children | extractTabsItem -%}
-        {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+        {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
         {
           {% if this.properties.value -%}
           value: `{{ this.properties.value }}`,
@@ -105,7 +105,7 @@
             {% endfor -%}
             {% endif -%}
           </>),
-        }{% if this %}] : []){% endif %},
+        }{% if this | checkRules %}] : []){% endif %},
       {% endfor -%}
       ]
   }

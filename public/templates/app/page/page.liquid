@@ -16,7 +16,7 @@
 export const dynamic = 'force-dynamic'
 {% endif -%}
 
-export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if resourceConfig.args %}{ params } : { params: Promise<{ {{ '' | resolveFunctionArgs: resourceConfig.args }} }> } {% endif %}) {
+export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if resourceConfig.args - %}{ params } : { params: Promise<{ {{ '' | resolveFunctionArgs: resourceConfig.args }} }> } {% endif %}) {
 
   {% if resourceConfig.args -%}
   const { {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } = use(params);

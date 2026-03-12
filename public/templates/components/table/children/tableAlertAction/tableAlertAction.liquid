@@ -42,16 +42,10 @@
   {% if resourceConfig.properties.iconProperties.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconClassName }}` }
   {% endif -%}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
-  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif -%}
-  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
   {% endif -%}
   {% comment %}loading={ {{ resourceConfig.tag }}Loading }{% endcomment %}
   {% if resourceConfig.interactions -%}

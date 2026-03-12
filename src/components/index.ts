@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
-import { renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { addClassNameFromChildProperties, renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
 import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
 import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
 import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
@@ -494,14 +494,9 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
         .join('')
       : ``;
 
-    childClassNames = childCommon
-      ? Object.entries(childCommon)
-        .map(([key, value]) => {
-          return parentElement?.childPropertiesMapping[key]?.className
-            ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
-            : ``;
-        })
-        .join('')
+    const inheritedChildClassNames = addClassNameFromChildProperties(parentComponent, registry);
+    childClassNames = inheritedChildClassNames
+      ? inheritedChildClassNames.replace(/'/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim()
       : ``;
 
   }

@@ -6,19 +6,19 @@
   ref={ getSectionRef('{{ resourceConfig.tag }}') }
   data-section-id={ '{{ resourceConfig.tag }}' }
   {% endif -%}
+  {% assign classNameProperty = '' | resolveClassNameProperty: resourceConfig, registry -%}
   {% if resourceConfig.properties -%}
-  {{ '' | render-properties: resourceConfig.properties, resourceConfig.data, '' }}
+  {{ '' | render-properties: resourceConfig.properties, resourceConfig.data, classNameProperty }}
   {% endif -%}
-  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty -%}
-  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{ '' | concat: "'", '', "',", '', '', '' }}) }
-  {% else -%}
-  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty -%}
-  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{ '' | concat: "'", '', "',", '', '' }}) }
-  {% else -%}
-  {% if getPropertyByKey and resourceConfig.properties or resolveClassNameProperty -%}
-  {{ '' | resolveClassNameProperty: resourceConfig, registry }}={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if parentResourceConfig and parentResourceConfig.childProperties and parentResourceConfig.childProperties.className and not parentChildClassNames -%}
+  {% assign parentChildClassNames = "'" | append: parentResourceConfig.childProperties.className | append: "'," -%}
   {% endif -%}
-  {% endif -%}
+  {% assign componentClassName = resourceConfig.properties | getPropertyByKey: classNameProperty -%}
+  {% assign propertyClassNames = resourceConfig | addClassNameFromProperties: registry -%}
+  {% assign styleClassNames = resourceConfig.style | addClassNameFromStyle -%}
+  {% if componentClassName or parentChildClassNames or propertyClassNames or styleClassNames -%}
+  {{ classNameProperty }}={ cn({% if componentClassName %}'{{ componentClassName }}',{% endif %}{{ '' | concat: parentChildClassNames, propertyClassNames, styleClassNames }}) }
   {% endif -%}
   {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}

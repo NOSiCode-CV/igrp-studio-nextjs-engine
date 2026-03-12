@@ -18,16 +18,10 @@
   {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   title={ `{{ resourceConfig.properties.title }}` }
   {% endif -%}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
-  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif -%}
-  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
   {% endif -%}
   {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
@@ -36,7 +30,7 @@
     [
     {% if resourceConfig.children -%}
       {% for this in resourceConfig.children | extractInfoSection -%}
-      {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+      {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
       {% if this.data.items -%}
       {
         items: {% if this.data.items.value %}{{ '' | replaceId: this.data.items.value.code, this }}{% else %}{{ '' | replaceId: this.data.items.state.name, this }}{% endif %}
@@ -45,7 +39,7 @@
       {
         items: [
         {% for this in this.children | extractInfoItem -%}
-        {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+        {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
           {
           {% if this.data.text -%}
             text: {{ this.data.text.state.name }} as string,
@@ -101,10 +95,10 @@
             {% else -%}
             {% endif -%}
           {% endif -%}
-          }{% if this %}] : []){% endif %},
+          }{% if this | checkRules %}] : []){% endif %},
         {% endfor -%}
         ]
-      }{% if this %}] : []){% endif %},
+      }{% if this | checkRules %}] : []){% endif %},
       {% endif -%}
       {% endfor -%}
     {% endif -%}

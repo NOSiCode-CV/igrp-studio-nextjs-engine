@@ -3,7 +3,7 @@
     [
       {% if resourceConfig.children -%}
       {% for this in resourceConfig.children -%}
-      {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}{
+      {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}{
         component: {{ '' | resolveComponent: this.componentName, registry }},
         props: {
           {% if this.properties.title %}title: `{{ this.properties.title }}`,{% endif %}
@@ -43,7 +43,7 @@
           {% endif -%}
           {% endif -%}
         }
-      }{% if this %}] : []){% endif %},
+      }{% if this | checkRules %}] : []){% endif %},
       {% endfor -%}
       {% endif -%}
     ]

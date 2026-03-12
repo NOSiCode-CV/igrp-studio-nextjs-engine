@@ -9,6 +9,34 @@ import { getPaths } from '../../index';
 
 const templateAstCache = new Map<string, { source: string; ast: any }>();
 
+const mojibakePattern = /(Ã.|Â.|â.|ðŸ|�)/;
+
+const repairMojibake = (value: string): string => {
+  if (!mojibakePattern.test(value)) return value;
+  let current = value;
+  for (let index = 0; index < 3; index += 1) {
+    const decoded = Buffer.from(current, 'latin1').toString('utf8');
+    const currentScore = (current.match(mojibakePattern) ?? []).length;
+    const decodedScore = (decoded.match(mojibakePattern) ?? []).length;
+    if (decodedScore < currentScore) {
+      current = decoded;
+      continue;
+    }
+    break;
+  }
+  return current;
+};
+
+const normalizeContextText = (input: any): any => {
+  if (typeof input === 'string') return repairMojibake(input);
+  if (Array.isArray(input)) return input.map((item) => normalizeContextText(item));
+  if (input && typeof input === 'object') {
+    const entries = Object.entries(input).map(([key, value]) => [key, normalizeContextText(value)]);
+    return Object.fromEntries(entries);
+  }
+  return input;
+};
+
 const parseWithCache = async (templatePath: string, templateContent: string) => {
   const cached = templateAstCache.get(templatePath);
   if (cached && cached.source === templateContent) return cached.ast;
@@ -37,13 +65,14 @@ export const renderTemplate = async (templateName: string, context: any) => {
 
   loadPartials();
 
-  context.registryService = registryService
-  context.registry = registry
+  const normalizedContext = normalizeContextText(context);
+  normalizedContext.registryService = registryService
+  normalizedContext.registry = registry
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   const ast = await parseWithCache(templatePath, templateContent);
-  return engine.render(ast, context);
+  return engine.render(ast, normalizedContext);
 };
 
 /**
@@ -64,12 +93,13 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
 
   loadComponentPartials();
 
-  context.registry = registry
+  const normalizedContext = normalizeContextText(context);
+  normalizedContext.registry = registry
 
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
-  return engine.renderSync(ast, context);
+  return engine.renderSync(ast, normalizedContext);
 };
 
 /**
@@ -91,16 +121,17 @@ export const renderServiceTemplate = (templateName: string, context: any, isShel
 
   loadPartials();
 
-  context.registryService = registryService
+  const normalizedContext = normalizeContextText(context);
+  normalizedContext.registryService = registryService
 
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
 
   if (isShellScript) {
-    return engine.renderSync(ast, context).replace(/\r\n/g, '\n');
+    return engine.renderSync(ast, normalizedContext).replace(/\r\n/g, '\n');
   } else {
-    return engine.renderSync(ast, context);
+    return engine.renderSync(ast, normalizedContext);
   }
 
 };
@@ -123,11 +154,12 @@ export const renderCodeTemplate = (templateName: string, context: any) => {
 
   loadPartials();
 
-  context.registryCode = registryCode
+  const normalizedContext = normalizeContextText(context);
+  normalizedContext.registryCode = registryCode
 
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
-  return engine.renderSync(ast, context);
+  return engine.renderSync(ast, normalizedContext);
 
 };

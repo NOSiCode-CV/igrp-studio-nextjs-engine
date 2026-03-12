@@ -12,16 +12,10 @@
   {% if resourceConfig.properties.contentClassName and not resourceConfig.data.contentClassName -%}
   contentClassName={ `{{ resourceConfig.properties.contentClassName }}` }
   {% endif -%}
-  {% if resourceConfig.properties.className or parentResourceConfig and resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and not parentResourceConfig or resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
-  {% else -%}
-  {% if resourceConfig.properties.className and parentResourceConfig.childProperties or resourceConfig.style -%}
-  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
-  {% endif -%}
-  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
   {% endif -%}
   {% if resourceConfig.data -%}
   {{ '' | render-data: resourceConfig.data, resourceConfig }}
@@ -29,7 +23,7 @@
   {% if resourceConfig.children and not resourceConfig.data.items -%}
   items={ [
   {% for this in resourceConfig.children | extractCardDetailsItem -%}
-  {% if this %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+  {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
     {
     {% if this.data.label -%}
       label: {{ this.data.label.state.name }},
@@ -64,7 +58,7 @@
       showCopyTo: {{ this.properties.showCopyTo }},
       {% endif -%}
     {% endif -%}
-    }{% if this %}] : []){% endif %},
+    }{% if this | checkRules %}] : []){% endif %},
   {% endfor -%}
   ] }
   {% endif -%}

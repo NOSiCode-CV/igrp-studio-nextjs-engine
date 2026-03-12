@@ -12,7 +12,7 @@
 
 {{ '' | resolve-imports: resourceConfig.components, registry, resourceConfig.name, basePath, undefined, resourceConfig }}
 
-export default function {{ resourceConfig.name | toCamelCaseFromNatural | capitalize }}({% if resourceConfig.args %}{ {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } : { {{ '' | resolveFunctionArgs: resourceConfig.args }} }{% endif %}) {
+export default function {{ resourceConfig.name | toCamelCaseFromNatural | capitalize }}({% if resourceConfig.args - %}{ {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } : { {{ '' | resolveFunctionArgs: resourceConfig.args }} }{% endif %}) {
 
 {% if resourceConfig.type == 'processStep' -%}
   const { processKey, processInstanceId, userTaskInstanceId, onRegisterMethods, variables } = config;

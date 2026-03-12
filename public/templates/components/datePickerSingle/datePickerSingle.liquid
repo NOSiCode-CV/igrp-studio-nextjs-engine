@@ -126,7 +126,7 @@
   autoFocus={ {{ resourceConfig.properties.autofocus }} }
   {% endif -%}
   {% if resourceConfig.properties.className and parentResourceConfig -%}
-  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '', '' }}) }
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
   {% else -%}
   {% if resourceConfig.properties.className and not parentResourceConfig -%}
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
