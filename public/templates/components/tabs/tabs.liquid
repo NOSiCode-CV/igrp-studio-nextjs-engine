@@ -46,7 +46,7 @@
   tabListClassName={ cn({{ '' | concat: "'", resourceConfig.properties.tabListClassName, "',", '', '' }}) }
   {% else -%}
   {% if resourceConfig.properties.tabListClassName and parentResourceConfig.childProperties or resourceConfig.style -%}
-  tabListClassName={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  tabListClassName={ cn({{ parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
   {% endif -%}
   {% endif -%}
   {% endif -%}

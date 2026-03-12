@@ -16,10 +16,12 @@
 export const dynamic = 'force-dynamic'
 {% endif -%}
 
-export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if resourceConfig.args - %}{ params } : { params: Promise<{ {{ '' | resolveFunctionArgs: resourceConfig.args }} }> } {% endif %}) {
+{% assign pageArgsType = '' | resolveFunctionArgs: resourceConfig.args -%}
+{% assign pageArgNames = '' | resolveArgNames: resourceConfig.args -%}
+export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if pageArgsType != '' and pageArgNames != '' - %}{ params } : { params: Promise<{ {{ pageArgsType }} }> } {% endif %}) {
 
-  {% if resourceConfig.args -%}
-  const { {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } = use(params);
+  {% if pageArgsType != '' and pageArgNames != '' -%}
+  const { {{ pageArgNames }} } = use(params);
   {% endif -%}
 
 {% if resourceConfig.components -%}

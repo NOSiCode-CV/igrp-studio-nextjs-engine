@@ -38,7 +38,7 @@ import {
   renderInteractions,
   renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
   resolveComponent,
-  resolveFirstType, resolveFunctionArgs,
+  resolveFirstType, resolveFunctionArgs, resolveArgNames,
   resolveQueryParams, resolveArrayElementRules,
   resolveSegmentPath,
   resolveStateDefault,
@@ -95,6 +95,7 @@ registerFilter("resolveFirstType", resolveFirstType);
 registerFilter("resolveStateDefault", resolveStateDefault);
 registerFilter("resolveZodTypes", resolveZodTypes);
 registerFilter("resolveFunctionArgs", resolveFunctionArgs);
+registerFilter("resolveArgNames", resolveArgNames);
 registerFilter("resolveArrayElementRules", resolveArrayElementRules);
 registerFilter("checkRules", checkRules);
 registerFilter("extractTableColumns", extractTableColumns);

@@ -55,7 +55,7 @@
       <>
         {% if resourceConfig.children -%}
         {% for this in resourceConfig.children -%}
-        {{this | indexedTag: resourceConfig.tag | render-layout: resourceConfig}}
+        {{ this | indexedTag: resourceConfig.tag | render-layout: resourceConfig }}
         {% endfor -%}
         {% endif -%}
       </>

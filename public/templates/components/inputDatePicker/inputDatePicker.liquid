@@ -126,7 +126,7 @@
   className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
   {% else -%}
   {% if resourceConfig.properties.className and parentResourceConfig -%}
-  className={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  className={ cn({{ parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
   {% endif -%}
   {% endif -%}
   {% endif -%}

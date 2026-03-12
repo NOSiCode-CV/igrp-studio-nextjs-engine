@@ -222,14 +222,26 @@ export function resolveStateDefault(
     return isoRegex.test(val);
   };
 
+  const trimmed = defaultValue?.trim() ?? '';
+  const isReservedLiteral = (
+    trimmed === 'null' ||
+    trimmed === 'undefined' ||
+    trimmed === 'true' ||
+    trimmed === 'false' ||
+    trimmed === '[]' ||
+    trimmed === '{}' ||
+    (!isNaN(Number(trimmed)) && trimmed !== '') ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+  );
+
   if (type === 'string') {
     if (defaultValue === undefined) return 'undefined';
-    if(!isISODate(defaultValue.trim())) {
+    if (isReservedLiteral) return trimmed;
+    if (!isISODate(trimmed)) {
       return `\`${defaultValue.replace(/"/g, '\\"')}\``;
     }
   }
-
-  const trimmed = defaultValue?.trim() ?? '';
 
   // Empty values for non-string/object types
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
@@ -237,15 +249,7 @@ export function resolveStateDefault(
   // Handle booleans, numbers, arrays, objects as string literals
   if (
     type !== 'string' &&
-    (trimmed === 'null' ||
-      trimmed === 'undefined' ||
-      trimmed === 'true' ||
-      trimmed === 'false' ||
-      trimmed === '[]' ||
-      trimmed === '{}' ||
-      (!isNaN(Number(trimmed)) && trimmed !== '') ||
-      (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-      (trimmed.startsWith('{') && trimmed.endsWith('}')))
+    isReservedLiteral
   ) {
     return trimmed;
   }
@@ -406,6 +410,14 @@ export function resolveFunctionArgs(args: Arguments[]): string {
       const type = resolveType(arg);
       return `${name}${optional}: ${type}`;
     })
+    .join(', ');
+}
+
+export function resolveArgNames(args: Arguments[]): string {
+  if (!args?.length) return '';
+  return args
+    .map((arg) => arg?.name)
+    .filter((name): name is string => typeof name === 'string' && name.trim() !== '')
     .join(', ');
 }
 

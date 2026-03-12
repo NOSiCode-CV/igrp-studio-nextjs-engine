@@ -26,7 +26,7 @@
   badgeClassName={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
   {% else -%}
   {% if resourceConfig.properties.className and parentResourceConfig.childProperties -%}
-  badgeClassName={ cn({{parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  badgeClassName={ cn({{ parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
   {% endif -%}
   {% endif -%}
   {% endif -%}

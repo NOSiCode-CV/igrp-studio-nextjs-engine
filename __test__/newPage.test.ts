@@ -6,68 +6,392 @@ export const OUTPUT_DIR = OUTPUT_TEST2;
 
 const pageConfig: PageConfig = {
   type: 'page',
-  pageName: 'imoveis',
-  path: 'imoveis',
-  description: 'Lista de Imóveis',
+  pageName: 'viewManifestacao',
+  path: 'imoveis/fraccao/[uuid]/manifestacao/[idManifestacao]/interesse/view',
+  description: 'Visualizar Manifestação de Interesse',
   forceDynamic: false,
-  id: 'imoveis_2wjd8a',
-  args: [],
+  id: 'page_view_manifestacao',
+  types: [
+    {
+      componentId: 'table_documentos',
+      name: 'tableDocumentos',
+      path: '',
+      fields: [
+        {
+          componentId: 'tabletextcell_tipo',
+          name: 'descricaoTipoDocumento',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tablelinkcell_url',
+          name: 'url',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+      ],
+    },
+    {
+      componentId: 'table_uqqko7',
+      name: 'table1',
+      path: '',
+      fields: [
+        {
+          componentId: 'tabledatecell_ekarp8',
+          name: 'dataContato',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tabletextcell_po4aqb',
+          name: 'formaContato',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tablehiddencell_mbiud9',
+          name: 'idNegociacao',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+      ],
+    },
+    {
+      componentId: 'table_vistorias',
+      name: 'TableVistorias',
+      path: '',
+      fields: [
+        {
+          componentId: 'tabledatecell_data_vistoria',
+          name: 'dataVisita',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tabletextcell_tipo_vistoria',
+          name: 'horaVisita',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tabletextcell_estado',
+          name: 'estadoVistoria',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tablehiddencell_id_vistoria',
+          name: 'idVistoria',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+      ],
+    },
+    {
+      componentId: 'table_acordos',
+      name: 'TableAcordos',
+      path: '',
+      fields: [
+        {
+          componentId: 'tabledatecell_data_acordo',
+          name: 'dataContrato',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tableamountcell_z0ynip',
+          name: 'valorAcordo',
+          type: 'number',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tablebadgecell_7193jm',
+          name: 'periodicidade',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+        {
+          componentId: 'tablehiddencell_id_acordo',
+          name: 'idAcordo',
+          type: 'string',
+          required: false,
+          defaultValue: '',
+          isList: false,
+        },
+      ],
+    },
+  ],
+  states: [
+    {
+      id: 'state_modalidade',
+      name: 'modalidadeInteresseText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_inquilino',
+      name: 'inquilinoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    { id: 'state_nome', name: 'nomeText', type: 'string', imports: [], defaultValue: "'N/A'" },
+    { id: 'state_sexo', name: 'sexoText', type: 'string', imports: [], defaultValue: "'N/A'" },
+    {
+      id: 'state_dtNascimento',
+      name: 'dataNascimentoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nomePai',
+      name: 'nomePaiText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nomeMae',
+      name: 'nomeMaeText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_tipoDoc',
+      name: 'tipoDocumentoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_numDoc',
+      name: 'numeroDocumentoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_numBenef',
+      name: 'numeroBeneficiarioText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_numFunc',
+      name: 'numeroFuncionarioText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    { id: 'state_nif', name: 'nifText', type: 'string', imports: [], defaultValue: "'N/A'" },
+    {
+      id: 'state_localizacao',
+      name: 'localizacaoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_endereco',
+      name: 'enderecoText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nomeComercial',
+      name: 'nomeComercialText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_registoComercial',
+      name: 'numeroRegistoComercialText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_nifEmpresa',
+      name: 'nifEmpresaText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_finalidade',
+      name: 'finalidadeAluguelText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    { id: 'state_email', name: 'emailText', type: 'string', imports: [], defaultValue: "'N/A'" },
+    {
+      id: 'state_telefone',
+      name: 'telefoneText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_telemovel',
+      name: 'telemovelText',
+      type: 'string',
+      imports: [],
+      defaultValue: "'N/A'",
+    },
+    {
+      id: 'state_statusBanner_estado',
+      name: 'statusBannerEstado',
+      type: 'string',
+      imports: [],
+      defaultValue: "''",
+    },
+    {
+      id: 'state_statusBanner_codigo',
+      name: 'statusBannerCodigo',
+      type: 'string',
+      imports: [],
+      defaultValue: "''",
+    },
+    {
+      id: 'state_LftPCb',
+      name: 'openDecisaoModal',
+      type: 'boolean',
+      defaultValue: 'false',
+      imports: [],
+      isArray: false,
+      isOptional: false,
+    },
+    {
+      id: 'state_p1aXdx',
+      name: 'openVistoriaModal',
+      type: 'boolean',
+      defaultValue: 'false',
+      imports: [],
+      isArray: false,
+      isOptional: false,
+    },
+    {
+      id: 'state_selectedVistoria',
+      name: 'selectedVistoria',
+      type: 'string',
+      defaultValue: 'undefined',
+      imports: [],
+      isOptional: true,
+    },
+    {
+      id: 'state_openEntregaChavesModal',
+      name: 'openEntregaChavesModal',
+      type: 'boolean',
+      imports: [],
+      defaultValue: 'false',
+      generate: true,
+    },
+  ],
+  functions: [],
+  parentName: 'imoveis',
+  args: [
+    {
+      id: 'arg_uuid',
+      type: 'string',
+      name: 'uuid',
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+    {
+      id: 'arg_idManifestacao',
+      type: 'string',
+      name: 'idManifestacao',
+      isList: false,
+      isOptional: false,
+      isInterface: false,
+      isFunction: false,
+      isState: false,
+    },
+  ],
   components: {
-    id: 'page_imoveis',
-    tag: 'page_imoveis',
+    id: 'page_root',
     componentName: 'page',
     
     properties: { variant: 'default', commonProperties: { generateReference: false } },
-    interactions: {
-      onLoad: {
-        type: 'function',
-        function: {
-          type: 'function',
-          fnCustomCode: {
-            imports: [
-              {
-                id: 'import_queryClient',
-                namespace: "import { useQueryClient } from '@tanstack/react-query';",
-              },
-              {
-                id: 'import_useImovelHooks',
-                namespace:
-                  "import { useImoveis, useImovelEstatistica } from '@/app/(myapp)/hooks/use-imovel';",
-              },
-              {
-                id: 'import_useEnumOptions',
-                namespace:
-                  "import { useMultipleEnumOptions } from '@/app/(myapp)/hooks/use-enum-options';",
-              },
-              {
-                id: 'import_deleteImovelFn',
-                namespace: "import { deleteImovelFn } from '@/app/(myapp)/hooks/use-imovel';",
-              },
-            ],
-            fnCode:
-              'const queryClient = useQueryClient();\n\n// Lista de imóveis com filtros provenientes dos estados da UI\nconst { data, isLoading } = useImoveis({\n  search: searchValue,\n  tipoImovel: selecttipoImovelFltValue,\n  nome: inputnomeValue,\n  areaImovelInicio: inputareaInicialValue,\n  areaImovelFim: inputareaFinalValue,\n  codigoFracao: inputcodigoFracaoValue,\n  estadoImovel: selectestadoImovelFltValue,\n  localizacao: inputruaValue,\n  tipologiaFracao: selecttipologiaFltValue,\n  valorImovelInicio: inputvalorInicialValue,\n  valorImovelFim: inputvalorFinalValue,\n});\n\n// Estatísticas dos imóveis para os cards do topo\nconst { data: statsData } = useImovelEstatistica();\n\n// Carregar opções dos combos via enums\nconst { options, isLoading: isLoadingEnums } = useMultipleEnumOptions([\n  "EstadoImovel",\n  "TipoImovel",\n  "TipologiaFracao",\n]);\n\n// Mapear opções aos estados dos comboboxes\nuseEffect(() => {\n  if (isLoadingEnums) return;\n  setSelectestadoImovelFltOptions(options["EstadoImovel"] || []);\n  setSelecttipoImovelFltOptions(options["TipoImovel"] || []);\n  setSelecttipologiaFltOptions(options["TipologiaFracao"] || []);\n}, [isLoadingEnums]);\n\n// Mapear conteúdo da tabela\nuseEffect(() => {\n  if (isLoading || !data || !data.content) return;\n  setContentTabletable1((data.content || []).map((item: any) => ({\n    ...item,\n  })));\n}, [isLoading, data]);\n\n// Mapear valores dos cards de estatística\nuseEffect(() => {\n  if (!statsData) return;\n  setStatstatsCardTotalImovelValue(statsData?.totalImovel ?? 0);\n  setStatstatsCardImoveisDisponiveisValue(statsData?.imoveisDisponiveis ?? 0);\n  setStatstatsCardContratosActivosValue(statsData?.contratosActivos ?? 0);\n}, [statsData]);',
-          },
-        },
-        action: {},
-      },
-    },
     children: [
       {
-        id: 'section_imoveis',
+        id: 'section_main',
         componentName: 'section',
         
-        properties: { spaceX: '3', spaceY: '6', commonProperties: {} },
+        properties: { spaceX: '6', spaceY: '6', commonProperties: { generateReference: false } },
         children: [
           {
-            id: 'pageheader_imoveis',
+            id: 'pageheader_view',
             tag: 'pageHeader1',
             componentName: 'pageHeader',
             
-            type: 'group',
             children: [
               {
-                id: 'button_n2orqd',
+                id: 'button_69vz4d',
                 tag: 'button1',
+                componentName: 'button',
+                
+                type: 'group',
+                children: [],
+                interactions: {
+                  onClick: {
+                    type: 'function',
+                    function: {
+                      fnCustomSet: '() => { setOpenDecisaoModal(true); }',
+                      fnCustomCode: { imports: [] },
+                      type: 'function',
+                    },
+                    action: {},
+                  },
+                },
+                allowTypes: false,
+                data: {},
+                properties: {
+                  content: 'Decisão',
+                  variant: 'default',
+                  size: 'default',
+                  iconProperties: { showIcon: true, iconName: 'Gavel' },
+                  commonProperties: { generateReference: false },
+                },
+                childProperties: {},
+              },
+              {
+                id: 'button_kfw1l3',
+                tag: 'button2',
                 componentName: 'button',
                 
                 type: 'group',
@@ -81,1193 +405,1474 @@ const pageConfig: PageConfig = {
                       type: 'function',
                     },
                     action: {},
-                    navigate: { path: 'imoveis/novo', name: 'goTonovoImovel', params: [] },
+                    navigate: {
+                      path: 'imoveis/manifestacao/[uuid]/negociacao/novo',
+                      name: 'goTonovaNegociacao',
+                      segments: [{ name: '[uuid]', tag: 'idManifestacao', context: 'pageParam' }],
+                      params: [],
+                    },
                   },
                 },
                 allowTypes: false,
                 data: {},
                 properties: {
-                  content: 'Novo',
+                  content: 'Nova Negociação',
+                  variant: 'secondary',
+                  size: 'default',
+                  iconProperties: { showIcon: true, iconName: 'Handshake' },
+                  commonProperties: { generateReference: false },
+                },
+                childProperties: {},
+                rules: [
+                  {
+                    type: 'visibility',
+                    condition:
+                      "manifestacao?.decisao !== null && manifestacao?.decisao.decisao === 'AVANCAR' && negociacoes.length === 0",
+                  },
+                ],
+              },
+              {
+                id: 'button_yargl9',
+                tag: 'button2_copy',
+                componentName: 'button',
+                
+                type: 'group',
+                children: [],
+                interactions: {
+                  onClick: {
+                    type: 'navigate',
+                    function: {
+                      fnCustomSet: '() => {}',
+                      fnCustomCode: { imports: [] },
+                      type: 'function',
+                    },
+                    action: {},
+                    navigate: {
+                      path: 'imoveis/manifestacao/[uuid]/negociacao/edit',
+                      name: 'goToeditarNegociacao',
+                      segments: [{ name: '[uuid]', tag: 'idManifestacao', context: 'pageParam' }],
+                      params: [],
+                    },
+                  },
+                },
+                allowTypes: false,
+                data: {},
+                properties: {
+                  content: 'Editar Negociações',
+                  variant: 'secondary',
+                  size: 'default',
+                  iconProperties: { showIcon: true, iconName: 'Handshake' },
+                  commonProperties: { generateReference: false },
+                },
+                childProperties: {},
+                rules: [
+                  {
+                    type: 'visibility',
+                    condition:
+                      "manifestacao?.decisao !== null && manifestacao?.decisao.decisao === 'AVANCAR' && negociacoes.length > 0",
+                  },
+                ],
+              },
+              {
+                id: 'button_registar_acordo',
+                tag: 'buttonRegistarAcordo',
+                componentName: 'button',
+                
+                type: 'group',
+                children: [],
+                interactions: {
+                  onClick: {
+                    type: 'navigate',
+                    function: {
+                      fnCustomSet: '() => {}',
+                      type: 'function',
+                      fnCustomCode: { imports: [] },
+                    },
+                    action: {},
+                    navigate: {
+                      path: 'imoveis/manifestacao/[uuid]/acordo/novo',
+                      name: 'goTonovoAcordo',
+                      segments: [{ name: '[uuid]', tag: 'idManifestacao', context: 'pageParam' }],
+                      params: [],
+                    },
+                  },
+                },
+                allowTypes: false,
+                data: {},
+                properties: {
+                  content: 'Registar Acordo',
+                  variant: 'outline',
+                  size: 'default',
+                  iconProperties: { showIcon: true, iconName: 'BookA' },
+                  commonProperties: { generateReference: false },
+                },
+                childProperties: {},
+                rules: [{ type: 'visibility', condition: '(negociacoes || []).length > 0' }],
+              },
+              {
+                id: 'button_sb712q',
+                tag: 'buttonRegistarVistoria',
+                componentName: 'button',
+                
+                type: 'group',
+                children: [],
+                interactions: {
+                  onClick: {
+                    type: 'function',
+                    function: {
+                      fnCustomSet: '() => {\r\nsetOpenVistoriaModal(true);\r\n}',
+                      type: 'function',
+                      fnCustomCode: { imports: [] },
+                    },
+                    action: {},
+                    navigate: {
+                      path: 'imoveis/manifestacao/[uuid]/acordo/novo',
+                      name: 'goTonovoAcordo',
+                      segments: [{ name: '[uuid]', tag: 'idManifestacao', context: 'pageParam' }],
+                      params: [],
+                    },
+                  },
+                },
+                allowTypes: false,
+                data: {},
+                properties: {
+                  content: 'Registar Vistoria',
                   variant: 'default',
                   size: 'default',
-                  iconProperties: { showIcon: true, iconName: 'Plus' },
+                  iconProperties: { showIcon: true, iconName: 'PackageSearch' },
                   commonProperties: { generateReference: false },
+                  className: 'bg-blue-600 hover:bg-blue-700',
+                },
+                childProperties: {},
+                rules: [{ type: 'visibility', condition: '(negociacoes || []).length > 0' }],
+              },
+              {
+                id: 'button_entrega_chaves',
+                tag: 'buttonEntregaChaves',
+                componentName: 'button',
+                
+                type: 'group',
+                children: [],
+                interactions: {
+                  onClick: {
+                    type: 'function',
+                    function: {
+                      fnCustomSet: '() => { setOpenEntregaChavesModal(true) }',
+                      type: 'function',
+                      fnCustomCode: { imports: [] },
+                    },
+                    action: {},
+                  },
+                },
+                allowTypes: false,
+                data: {},
+                properties: {
+                  content: 'Entrega de Chaves',
+                  variant: 'default',
+                  size: 'default',
+                  iconProperties: { showIcon: true, iconName: 'Key' },
+                  commonProperties: { generateReference: false },
+                  className: 'bg-green-600 hover:bg-green-700',
                 },
                 childProperties: {},
               },
             ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
             properties: {
-              title: 'Imóveis',
-              description: 'Gerencie os imóveis do sistema de segurança social',
+              title: 'Manifestação de Interesse',
+              description: '',
               variant: 'h3',
-              iconProperties: { iconBackButton: 'Search' },
+              backButtonVariant: 'default',
+              backButtonSize: 'default',
+              iconProperties: { iconBackButton: 'ArrowLeft' },
+              commonProperties: { generateReference: false },
+              urlBackButton: '',
+              showBackButton: true,
+              params: [],
+              backButtonUseBrowserBack: true,
+            },
+            childProperties: {},
+          },
+          {
+            id: 'statusbanner_manifestacao',
+            tag: 'statusBanner1',
+            componentName: 'statusBanner',
+            
+            data: {
+              text: {
+                state: {
+                  id: '',
+                  name: 'statusBannerEstado',
+                  type: '',
+                  imports: [],
+                  generate: false,
+                },
+              },
+              badgeText: {
+                state: {
+                  id: '',
+                  name: 'statusBannerCodigo',
+                  type: '',
+                  imports: [],
+                  generate: false,
+                },
+              },
+            },
+            properties: {
+              color: 'success',
+              variant: 'soft',
+              text: '',
+              badgeColor: 'secondary',
+              badgeVariant: 'solid',
+              badgeText: '',
               commonProperties: { generateReference: false },
             },
             childProperties: {},
           },
           {
-            id: 'grid_stats',
-            tag: 'grid1',
-            componentName: 'grid',
+            id: 'columns_basic',
+            tag: 'columns1',
+            componentName: 'columns',
             
-            type: 'group',
             children: [
               {
-                id: 'statscard_total',
-                tag: 'totalImoveis',
-                componentName: 'statsCard',
+                id: 'column_left',
+                tag: 'column1',
+                componentName: 'column',
                 
-                type: 'group',
-                children: [],
-                interactions: {},
-                allowTypes: false,
-                data: {
-                  value: {
-                    state: {
-                      id: '',
-                      type: 'string | number',
-                      name: 'statstatsCardTotalImovelValue',
-                      defaultValue: '0',
-                      imports: [],
-                      generate: true,
-                    },
-                    value: { id: '', code: '' },
-                  },
-                },
-                properties: {
-                  cardBorderPosition: 'top',
-                  cardBorder: 'rounded-md',
-                  cardVariant: 'info',
-                  iconBackground: 'rounded',
-                  title: 'Total de Imóveis',
-                  titleSize: 'sm',
-                  valueSize: 'sm',
-                  iconProperties: {
-                    showIcon: true,
-                    iconName: 'Building',
-                    iconSize: 'md',
-                    iconVariant: 'info',
-                    iconPlacement: 'end',
-                  },
-                  itemPlacement: 'start',
-                  commonProperties: { generateReference: false },
-                  showIconBackground: true,
-                },
-                childProperties: {},
-              },
-              {
-                id: 'statscard_construcao',
-                tag: 'statsCard1',
-                componentName: 'statsCard',
-                
-                type: 'group',
-                children: [],
-                interactions: {},
-                allowTypes: false,
-                data: {
-                  value: {
-                    state: {
-                      id: '',
-                      type: 'string | number',
-                      name: 'statstatsCardImoveisDisponiveisValue',
-                      defaultValue: '0',
-                      imports: [],
-                      generate: true,
-                    },
-                    value: { id: '', code: '' },
-                  },
-                },
-                properties: {
-                  cardBorderPosition: 'top',
-                  cardBorder: 'rounded-md',
-                  cardVariant: 'success',
-                  iconBackground: 'rounded',
-                  title: 'Imóveis Disponíveis',
-                  titleSize: 'sm',
-                  valueSize: 'sm',
-                  iconProperties: {
-                    showIcon: true,
-                    iconName: 'Building2',
-                    iconSize: 'md',
-                    iconVariant: 'success',
-                    iconPlacement: 'end',
-                  },
-                  itemPlacement: 'start',
-                  commonProperties: { generateReference: false },
-                  showIconBackground: true,
-                  showIconBorder: true,
-                },
-                childProperties: {},
-              },
-              {
-                id: 'statscard_construido',
-                tag: 'statsCard3',
-                componentName: 'statsCard',
-                
-                type: 'group',
-                children: [],
-                interactions: {},
-                allowTypes: false,
-                data: {
-                  value: {
-                    state: {
-                      id: '',
-                      type: 'string | number',
-                      name: 'statstatsCardContratosActivosValue',
-                      defaultValue: '0',
-                      imports: [],
-                      generate: true,
-                    },
-                    value: { id: '', code: '' },
-                  },
-                },
-                properties: {
-                  cardBorderPosition: 'top',
-                  cardBorder: 'rounded-md',
-                  cardVariant: 'indigo',
-                  iconBackground: 'rounded',
-                  title: 'Contratos Activos',
-                  titleSize: 'sm',
-                  valueSize: 'sm',
-                  iconProperties: {
-                    showIcon: true,
-                    iconName: 'FileCheck',
-                    iconSize: 'md',
-                    iconVariant: 'warning',
-                    iconPlacement: 'end',
-                  },
-                  itemPlacement: 'start',
-                  commonProperties: { generateReference: false },
-                  showIconBackground: true,
-                },
-                childProperties: {},
-              },
-              {
-                id: 'statscard_projetado',
-                tag: 'statsCard4',
-                componentName: 'statsCard',
-                
-                type: 'group',
-                children: [],
-                interactions: {},
-                allowTypes: false,
-                data: {
-                  value: {
-                    state: {
-                      id: '',
-                      type: 'string | number',
-                      name: 'statstatsCardHiddenValue',
-                      defaultValue: '0',
-                      imports: [],
-                      generate: true,
-                    },
-                    value: { id: '', code: '' },
-                  },
-                },
-                properties: {
-                  cardBorderPosition: 'top',
-                  cardBorder: 'rounded-md',
-                  cardVariant: 'info',
-                  iconBackground: 'rounded',
-                  title: '',
-                  titleSize: 'sm',
-                  valueSize: 'sm',
-                  iconProperties: {
-                    showIcon: false,
-                    iconName: 'FileCheck',
-                    iconSize: 'md',
-                    iconVariant: 'info',
-                    iconPlacement: 'end',
-                  },
-                  itemPlacement: 'start',
-                  commonProperties: { generateReference: false },
-                  showIconBackground: false,
-                  className: 'hidden',
-                },
-                childProperties: {},
-              },
-            ],
-            interactions: {},
-            allowTypes: false,
-            data: {},
-            properties: {
-              gap: 4,
-              variant: { default: '', md: 'cols2', lg: 'cols3' },
-              commonProperties: { generateReference: false },
-            },
-            childProperties: { className: 'col-span-1' },
-          },
-          {
-            id: 'card_table',
-            tag: 'cardTable',
-            componentName: 'container',
-            
-            type: 'group',
-            children: [
-              {
-                id: 'cardheader_filters',
-                tag: 'cardHeader1',
-                componentName: 'container',
-                
-                type: 'group',
                 children: [
                   {
-                    id: 'container_filters_header_card',
-                    tag: 'containerFiltersHeader',
-                    componentName: 'container',
+                    id: 'infocard_manifestacao',
+                    tag: 'infoBasicas',
+                    componentName: 'infoCard',
+                    
+                    children: [
+                      {
+                        id: 'infoSection_processo',
+                        componentName: 'infoSection',
+                        
+                        children: [
+                          {
+                            id: 'infoitem_modalidade',
+                            tag: 'modalidadeInteresse',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'modalidadeInteresseText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_finalidade',
+                            tag: 'finalidadeAluguel',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'finalidadeAluguelText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_inquilino',
+                            tag: 'inquilino',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'inquilinoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_nome',
+                            tag: 'nome',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'nomeText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_nif',
+                            tag: 'nif',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'nifText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_numDocumento',
+                            tag: 'numeroDocumento',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroDocumentoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_endereco',
+                            tag: 'endereco',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'enderecoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_localizacao',
+                            tag: 'localizacao',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'localizacaoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_email',
+                            tag: 'email',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'emailText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_telefone',
+                            tag: 'telefone',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'telefoneText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_telemovel',
+                            tag: 'telemovel',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'telemovelText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                        ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: { generateReference: false },
+                        },
+                      },
+                      {
+                        id: 'infoSection_cidadao',
+                        componentName: 'infoSection',
+                        
+                        children: [
+                          {
+                            id: 'infoitem_sexo',
+                            tag: 'sexo',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'sexoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_dtNascimento',
+                            tag: 'dataNascimento',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'dataNascimentoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_tipoDocumento',
+                            tag: 'tipoDocumento',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'tipoDocumentoText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_numBenef',
+                            tag: 'numeroBeneficiario',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroBeneficiarioText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_numFunc',
+                            tag: 'numeroFuncionario',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroFuncionarioText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                        ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: { generateReference: false },
+                        },
+                        rules: [
+                          {
+                            type: 'visibility',
+                            condition: "(inquilinoText == 'Cidadão' || inquilinoText == 'CIDADAO')",
+                          },
+                        ],
+                      },
+                      {
+                        id: 'infoSection_empresa',
+                        componentName: 'infoSection',
+                        
+                        children: [
+                          {
+                            id: 'infoitem_nomeComercial',
+                            tag: 'nomeComercial',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'nomeComercialText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                          {
+                            id: 'infoitem_registoComercial',
+                            tag: 'numeroRegistoComercial',
+                            componentName: 'infoItem',
+                            
+                            children: [],
+                            data: {
+                              text: {
+                                state: {
+                                  id: '',
+                                  name: 'numeroRegistoComercialText',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: {
+                              
+                              text: '',
+                              colorItem: 'primary',
+                              variantItem: 'solid',
+                              iconProperties: { showIcon: false, icon: 'Info' },
+                              commonProperties: { generateReference: false },
+                            },
+                          },
+                        ],
+                        properties: {
+                          variant: 'soft',
+                          commonProperties: { generateReference: false },
+                        },
+                        rules: [
+                          {
+                            type: 'visibility',
+                            condition: "(inquilinoText == 'Empresa' || inquilinoText == 'EMPRESA')",
+                          },
+                        ],
+                      },
+                    ],
+                    properties: {
+                      title: 'Informações Básicas',
+                      colorSection: 'primary',
+                      variantSection: 'outline',
+                      orientation: 'vertical',
+                      commonProperties: { generateReference: false },
+                    },
+                    childProperties: {},
+                  },
+                ],
+                properties: {
+                  variant: { default: 'span1' },
+                  commonProperties: { generateReference: false },
+                },
+              },
+              {
+                id: 'column_right',
+                tag: 'column2',
+                componentName: 'column',
+                
+                children: [
+                  {
+                    id: 'tabs_zypps5',
+                    tag: 'tabs1',
+                    componentName: 'tabs',
                     
                     type: 'group',
                     children: [
                       {
-                        id: 'container_filters_row_card',
-                        tag: 'containerFiltersRow',
-                        componentName: 'container',
+                        id: 'tabsitem_a1y8yp',
+                        tag: 'tabsItem1',
+                        componentName: 'tabsItem',
                         
-                        type: 'group',
                         children: [
                           {
-                            id: 'container_search_card',
-                            tag: 'containerSearchCard',
-                            componentName: 'container',
+                            id: 'table_documentos',
+                            tag: 'tableDocumentos',
+                            componentName: 'table',
                             
-                            type: 'group',
                             children: [
                               {
-                                id: 'inputsearch_imoveis_card',
-                                tag: 'inputSearchImoveisCard',
-                                componentName: 'inputSearch',
+                                id: 'tablecolumns_docs',
+                                tag: 'tableColumnsDocs',
+                                componentName: 'tableColumns',
                                 
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  setValueChange: {
-                                    type: 'function',
-                                    function: {
-                                      fnCustomSet: '',
-                                      type: 'function',
-                                      fnCustomCode: { imports: [] },
-                                    },
-                                    action: { actionCustomSet: "(value) => ''" },
-                                  },
-                                  onSearch: {
-                                    type: 'function',
-                                    function: {
-                                      fnCustomCode: { imports: [] },
-                                      fnCustomSet:
-                                        '(value) => { setSearchValue(value); refreshList(); }\n',
+                                children: [
+                                  {
+                                    id: 'tabletextcell_tipo',
+                                    tag: 'descricaoTipoDocumento',
+                                    componentName: 'tableTextCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Tipo de Documento',
+                                      dataProperties: { isVirtual: false, isType: true },
+                                      variant: 'default',
+                                      commonProperties: { generateReference: false },
                                     },
                                   },
-                                },
-                                allowTypes: false,
-                                data: {
-                                  value: {
-                                    state: {
-                                      id: '',
-                                      name: 'searchValue',
-                                      type: '',
-                                      imports: [],
-                                      generate: false,
+                                  {
+                                    id: 'tablelinkcell_url',
+                                    tag: 'url',
+                                    componentName: 'tableLinkCell',
+                                    
+                                    children: [],
+                                    properties: {
+                                      headerTitle: 'Documento',
+                                      dataProperties: { isVirtual: false, isType: true },
+                                      href: '${row.original.url}',
+                                      target: '_blank',
+                                      color: 'secondary',
+                                      iconProperties: { showIcon: true, iconName: 'FileText' },
+                                      variant: 'solid',
+                                      commonProperties: { generateReference: false },
+                                      content: 'Ver Documento',
+                                      params: [],
                                     },
                                   },
-                                },
-                                properties: {
-                                  
-                                  iconProperties: {
-                                    showStartIcon: true,
-                                    startIcon: 'Search',
-                                    submitIcon: 'ArrowRight',
-                                  },
-                                  required: false,
-                                  dataProperties: { isVirtual: false, isType: true },
-                                  commonProperties: { generateReference: false },
-                                  placeholder: 'Pesquisar imóveis por código ou nome...',
-                                  showSubmitButton: true,
-                                  
-                                  className: 'py-1',
-                                },
-                                childProperties: {},
+                                ],
                               },
                             ],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              commonProperties: { generateReference: false },
-                              className: 'flex-1 min-w-[240px]',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'flex_filters_toggle_card',
-                            tag: 'flexFiltersToggleCard',
-                            componentName: 'flex',
-                            
-                            type: 'group',
-                            children: [
-                              {
-                                id: 'button_toggle_filters_card',
-                                tag: 'buttonToggleFiltersCard',
-                                componentName: 'button',
-                                
-                                type: 'group',
-                                children: [],
-                                interactions: {
-                                  onClick: {
-                                    type: 'function',
-                                    function: {
-                                      fnCustomSet: '() => {setShowFilter(!showFilter)\n}',
-                                      fnCustomCode: { imports: [] },
-                                      type: 'function',
-                                    },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  content: 'Filtros',
-                                  variant: 'outline',
-                                  size: 'default',
-                                  iconProperties: { showIcon: true, iconName: 'SlidersHorizontal' },
-                                  commonProperties: { generateReference: false },
-                                },
-                                childProperties: {},
-                              },
-                            ],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: { commonProperties: {} },
-                            childProperties: {},
-                            style: {
-                              layout: {
-                                type: 'flex',
-                                flex: {
-                                  direction: 'row',
-                                  wrap: 'wrap',
-                                  alignItems: 'stretch',
-                                  justifyContent: 'flex-end',
-                                  gap: '2',
-                                },
-                                grid: {
-                                  templateColumns: '1',
-                                  templateRows: '1',
-                                  gap: '2',
-                                  justifyItems: 'start',
-                                  alignItems: 'start',
-                                  direction: 'row',
-                                  dense: false,
-                                },
-                                block: {},
-                              },
-                            },
-                          },
-                        ],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: { commonProperties: {}, className: '' },
-                        childProperties: {},
-                        style: {
-                          layout: {
-                            type: 'flex',
-                            flex: {
-                              direction: 'row',
-                              wrap: 'wrap',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              gap: '2',
-                            },
-                            grid: {
-                              templateColumns: '1',
-                              templateRows: '1',
-                              gap: '2',
-                              justifyItems: 'start',
-                              alignItems: 'start',
-                              direction: 'row',
-                              dense: false,
-                            },
-                            block: {},
-                          },
-                        },
-                      },
-                      {
-                        id: 'separator_filters_card',
-                        tag: 'separatorFiltersCard',
-                        componentName: 'separator',
-                        
-                        type: 'group',
-                        children: [],
-                        interactions: {},
-                        allowTypes: false,
-                        data: {},
-                        properties: {
-                          orientation: 'horizontal',
-                          className: 'my-3',
-                          commonProperties: {},
-                        },
-                        childProperties: {},
-                        rules: [{ type: 'visibility', condition: 'showFilter' }],
-                      },
-                      {
-                        id: 'grid_filters_card',
-                        tag: 'gridFiltersCard',
-                        componentName: 'grid',
-                        
-                        type: 'group',
-                        children: [
-                          {
-                            id: 'combobox_tipoImovel',
-                            tag: 'tipoImovelFlt',
-                            componentName: 'combobox',
-                            
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  fnCustomSet:
-                                    '(value) => { setSelecttipoImovelFltValue(value as string) }\n',
-                                  type: 'function',
-                                  fnCustomCode: { imports: [] },
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
+                            properties: { commonProperties: { generateReference: false } },
                             data: {
-                              value: {
+                              data: {
                                 state: {
                                   id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
+                                  name: 'contentTabletableDocumentos',
+                                  type: 'TableDocumentos[]',
                                   defaultValue: '[]',
-                                  imports: [],
                                   generate: true,
                                 },
-                                value: { id: '', code: '' },
                               },
                             },
-                            properties: {
-                              
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: 'full',
-                              options: [],
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'combobox_estadoImovel',
-                            tag: 'estadoImovelFlt',
-                            componentName: 'combobox',
-                            
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  fnCustomSet:
-                                    '(value) => { setSelectestadoImovelFltValue(value as string) }\n',
-                                  type: 'function',
-                                  fnCustomCode: { imports: [] },
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-                              
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: 'full',
-                              options: [],
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'combobox_tipologia',
-                            tag: 'tipologiaFlt',
-                            componentName: 'combobox',
-                            
-                            type: 'group',
-                            children: [],
-                            interactions: {
-                              onChange: {
-                                type: 'function',
-                                function: {
-                                  fnCustomSet:
-                                    '(value) => { setSelecttipologiaFltValue(value as string) }\n',
-                                  type: 'function',
-                                  fnCustomCode: { imports: [] },
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {
-                              value: {
-                                state: {
-                                  id: '',
-                                  type: 'string',
-                                  name: 'select{{id}}Value',
-                                  defaultValue: '{{value}}',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                              options: {
-                                state: {
-                                  id: '',
-                                  type: 'IGRPOptionsProps[]',
-                                  name: 'select{{id}}Options',
-                                  defaultValue: '[]',
-                                  imports: [],
-                                  generate: true,
-                                },
-                                value: { id: '', code: '' },
-                              },
-                            },
-                            properties: {
-                              
-                              variant: 'single',
-                              placeholder: 'Select an option...',
-                              showSearch: true,
-                              iconProperties: { showIcon: false, iconName: 'CornerDownRight' },
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: { generateReference: false },
-                              gridSize: 'full',
-                              options: [],
-                            },
-                            childProperties: {},
+                            dataType: 'tableDocumentos',
                           },
                         ],
                         interactions: {},
                         allowTypes: false,
                         data: {},
                         properties: {
-                          gap: 4,
-                          variant: { default: '', md: 'cols2', lg: 'cols4' },
+                          value: 'anexos',
+                          
+                          iconProperties: { icon: 'ArrowRight' },
+                          badgeVariant: 'solid',
+                          badgeColor: 'primary',
                           commonProperties: { generateReference: false },
                         },
                         childProperties: {},
-                        style: {},
-                        rules: [{ type: 'visibility', condition: 'showFilter' }],
                       },
                       {
-                        id: 'flex_clear_filters_card',
-                        tag: 'flexClearFiltersCard',
-                        componentName: 'flex',
+                        id: 'tabsitem_0u1h7y',
+                        tag: 'tabsItem2',
+                        componentName: 'tabsItem',
                         
-                        type: 'group',
+                        type: '',
                         children: [
                           {
-                            id: 'button_clear_filters_card',
-                            tag: 'buttonClearFiltersCard',
-                            componentName: 'button',
+                            id: 'table_uqqko7',
+                            tag: 'table1',
+                            componentName: 'table',
+                            
+                            type: 'group',
+                            children: [
+                              {
+                                id: 'tablecolumns_q2p7ia',
+                                tag: 'tableColumns1',
+                                componentName: 'tableColumns',
+                                
+                                children: [
+                                  {
+                                    id: 'tabledatecell_ekarp8',
+                                    tag: 'dataContato',
+                                    componentName: 'tableDateCell',
+                                    
+                                    type: '',
+                                    children: [],
+                                    interactions: {},
+                                    allowTypes: false,
+                                    data: {},
+                                    properties: {
+                                      headerTitle: 'Data de Contacto',
+                                      dataProperties: { isVirtual: false, isType: true },
+                                      date: '01/01/2025',
+                                      dateFormat: 'dd/MM/yyyy',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                    childProperties: {},
+                                  },
+                                  {
+                                    id: 'tabletextcell_po4aqb',
+                                    tag: 'formaContato',
+                                    componentName: 'tableTextCell',
+                                    
+                                    type: '',
+                                    children: [],
+                                    interactions: {},
+                                    allowTypes: false,
+                                    data: {},
+                                    properties: {
+                                      headerTitle: 'Forma de Contacto',
+                                      dataProperties: { isVirtual: false, isType: true },
+                                      variant: 'default',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                    childProperties: {},
+                                  },
+                                  {
+                                    id: 'tableactionlistcell_ujhsd9',
+                                    tag: 'tableActionListCell1',
+                                    componentName: 'tableActionListCell',
+                                    
+                                    type: '',
+                                    children: [
+                                      {
+                                        id: 'tablelinkaction_wpvqe7',
+                                        tag: 'tableLinkAction2',
+                                        componentName: 'tableLinkAction',
+                                        
+                                        type: '',
+                                        children: [],
+                                        interactions: {
+                                          action: {
+                                            type: 'function',
+                                            function: { fnCustomSet: '() => {}', type: 'function' },
+                                            action: {},
+                                          },
+                                        },
+                                        allowTypes: false,
+                                        data: {},
+                                        properties: {
+                                          labelTrigger: 'Visualizar',
+                                          iconProperties: { iconName: 'Eye' },
+                                          variant: 'ghost',
+                                          href: 'imoveis/negociacao/[uuid]/view',
+                                          commonProperties: { generateReference: false },
+                                          segments: [
+                                            {
+                                              name: '[uuid]',
+                                              tag: 'idNegociacao',
+                                              context: 'column',
+                                            },
+                                          ],
+                                          params: [],
+                                        },
+                                        childProperties: {},
+                                      },
+                                    ],
+                                    interactions: {},
+                                    allowTypes: false,
+                                    data: {},
+                                    properties: {
+                                      headerTitle: '',
+                                      type: 'inline',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                    childProperties: {},
+                                  },
+                                  {
+                                    id: 'tablehiddencell_mbiud9',
+                                    tag: 'idNegociacao',
+                                    componentName: 'tableHiddenCell',
+                                    
+                                    type: '',
+                                    children: [],
+                                    interactions: {},
+                                    allowTypes: false,
+                                    data: {},
+                                    properties: {
+                                      headerTitle: 'ID Negociacao',
+                                      dataProperties: { isVirtual: false, isType: true },
+                                      commonProperties: { generateReference: false },
+                                    },
+                                    childProperties: {},
+                                  },
+                                ],
+                                interactions: {},
+                                allowTypes: false,
+                                data: {},
+                                properties: { commonProperties: {} },
+                              },
+                              {
+                                id: 'tablefilters_ad5tak',
+                                tag: 'tableFilters1',
+                                componentName: 'tableFilters',
+                                
+                                children: [],
+                                interactions: {},
+                                allowTypes: false,
+                                data: {},
+                                properties: { commonProperties: {} },
+                              },
+                            ],
+                            interactions: {},
+                            allowTypes: true,
+                            data: {
+                              data: {
+                                state: {
+                                  id: '',
+                                  type: '{{type}}[]',
+                                  name: 'contentTable{{id}}',
+                                  defaultValue: '[]',
+                                  imports: [],
+                                  generate: true,
+                                },
+                              },
+                            },
+                            properties: { pageSizePagination: [], commonProperties: {} },
+                            dataType: 'table1',
+                          },
+                          {
+                            id: 'vistoriamodal_8i7shf',
+                            tag: 'VistoriaModal1',
+                            componentName: 'VistoriaFormModal',
                             
                             type: 'group',
                             children: [],
                             interactions: {
-                              onClick: {
+                              setIsOpen: {
                                 type: 'function',
                                 function: {
-                                  fnCustomSet: '() => {}',
-                                  type: 'function',
                                   fnCustomCode: { imports: [] },
-                                  fnName: 'clearFilters',
+                                  fnCustomSet: 'setOpenVistoriaModal\r\n',
                                 },
-                                action: { actionCustomSet: '() => {}' },
                               },
                             },
                             allowTypes: false,
-                            data: {},
-                            properties: {
-                              content: 'Limpar Filtros',
-                              variant: 'outline',
-                              size: 'default',
-                              iconProperties: { showIcon: true, iconName: 'X' },
-                              commonProperties: { generateReference: false },
-                              disabled: false,
+                            data: {
+                              manifestacao: { value: { id: '', code: 'manifestacao' } },
+                              isOpen: {
+                                state: {
+                                  id: '',
+                                  name: 'openVistoriaModal',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                              uuid: { value: { id: '', code: 'idManifestacao' } },
                             },
+                            properties: { customProperties: {} },
                             childProperties: {},
                           },
                         ],
                         interactions: {},
                         allowTypes: false,
                         data: {},
-                        properties: { commonProperties: {}, className: '' },
-                        childProperties: {},
-                        style: {
-                          layout: {
-                            type: 'flex',
-                            flex: {
-                              direction: 'row',
-                              wrap: 'wrap',
-                              alignItems: 'stretch',
-                              justifyContent: 'flex-end',
-                              gap: '2',
-                            },
-                            grid: {
-                              templateColumns: '1',
-                              templateRows: '1',
-                              gap: '2',
-                              justifyItems: 'start',
-                              alignItems: 'start',
-                              direction: 'row',
-                              dense: false,
-                            },
-                            block: {},
-                          },
+                        properties: {
+                          value: 'negociacoes',
+                          
+                          iconProperties: { icon: 'ArrowRight' },
+                          badgeVariant: 'solid',
+                          badgeColor: 'primary',
+                          commonProperties: { generateReference: false },
                         },
-                        rules: [{ type: 'visibility', condition: 'showFilter' }],
+                        childProperties: {},
+                      },
+                      {
+                        id: 'tabsitem_vistorias',
+                        tag: 'tabsItemVistorias',
+                        componentName: 'tabsItem',
+                        
+                        children: [
+                          {
+                            id: 'table_vistorias',
+                            tag: 'tableVistorias',
+                            componentName: 'table',
+                            
+                            type: 'group',
+                            children: [
+                              {
+                                id: 'tablecolumns_vistorias',
+                                tag: 'tableColumnsVistorias',
+                                componentName: 'tableColumns',
+                                
+                                children: [
+                                  {
+                                    id: 'tabledatecell_data_vistoria',
+                                    tag: 'dataVisita',
+                                    componentName: 'tableDateCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Data Vistoria',
+                                      dateFormat: 'dd/MM/yyyy',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tabletextcell_tipo_vistoria',
+                                    tag: 'horaVisita',
+                                    componentName: 'tableTextCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Hora Vistoria',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tabletextcell_estado',
+                                    tag: 'estadoVistoria',
+                                    componentName: 'tableTextCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Estado',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tableactionlistcell_actions_vistorias',
+                                    tag: 'tableActionListCell2',
+                                    componentName: 'tableActionListCell',
+                                    
+                                    children: [
+                                      {
+                                        id: 'tablelinkaction_editar_vistoria',
+                                        tag: 'tableLinkAction3',
+                                        componentName: 'tableLinkAction',
+                                        
+                                        interactions: {
+                                          action: {
+                                            type: 'function',
+                                            function: {
+                                              fnCustomSet:
+                                                '() => {\n  setOpenVistoriaModal(true);\n  setSelectedVistoria(rowData.idVistoria)\n}',
+                                              fnCustomCode: { imports: [] },
+                                              type: 'function',
+                                            },
+                                          },
+                                        },
+                                        properties: {
+                                          labelTrigger: 'Editar',
+                                          iconProperties: { iconName: 'Pencil' },
+                                          variant: 'ghost',
+                                          commonProperties: { generateReference: false },
+                                        },
+                                      },
+                                    ],
+                                    properties: {
+                                      headerTitle: 'Ações',
+                                      type: 'inline',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                    childProperties: {},
+                                  },
+                                  {
+                                    id: 'tablehiddencell_id_vistoria',
+                                    tag: 'idVistoria',
+                                    componentName: 'tableHiddenCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'ID Vistoria',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                            data: {
+                              data: {
+                                state: {
+                                  name: 'contentTabletableVistorias',
+                                  type: 'TableVistorias[]',
+                                  defaultValue: '[]',
+                                  generate: true,
+                                },
+                              },
+                            },
+                            dataType: 'TableVistorias',
+                            childProperties: {},
+                            properties: { commonProperties: { generateReference: false } },
+                          },
+                          {
+                            id: 'vistoriamodal_edit',
+                            tag: 'VistoriaModalEdit',
+                            componentName: 'VistoriaFormModal',
+                            
+                            type: 'group',
+                            children: [],
+                            interactions: {
+                              setIsOpen: {
+                                type: 'function',
+                                function: {
+                                  fnCustomCode: { imports: [] },
+                                  fnCustomSet: 'setOpenVistoriaModal',
+                                },
+                              },
+                            },
+                            allowTypes: false,
+                            data: {
+                              isOpen: {
+                                state: {
+                                  id: '',
+                                  name: 'openVistoriaModal',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                              uuid: {
+                                state: {
+                                  id: '',
+                                  name: 'selectedVistoria',
+                                  type: '',
+                                  imports: [],
+                                  generate: false,
+                                },
+                              },
+                            },
+                            properties: { customProperties: { isEdit: true } },
+                            childProperties: {},
+                          },
+                        ],
+                        properties: {
+                          value: 'vistoria',
+                          
+                          iconProperties: { icon: 'ArrowRight' },
+                          badgeVariant: 'solid',
+                          badgeColor: 'primary',
+                          commonProperties: { generateReference: false },
+                        },
+                        childProperties: {},
+                      },
+                      {
+                        id: 'tabsitem_acordos',
+                        tag: 'tabsItemAcordos',
+                        componentName: 'tabsItem',
+                        
+                        children: [
+                          {
+                            id: 'table_acordos',
+                            tag: 'tableAcordos',
+                            componentName: 'table',
+                            
+                            type: 'group',
+                            children: [
+                              {
+                                id: 'tablecolumns_acordos',
+                                tag: 'tableColumnsAcordos',
+                                componentName: 'tableColumns',
+                                
+                                children: [
+                                  {
+                                    id: 'tabledatecell_data_acordo',
+                                    tag: 'dataContrato',
+                                    componentName: 'tableDateCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Data Acordo',
+                                      dateFormat: 'dd/MM/yyyy',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tableamountcell_z0ynip',
+                                    tag: 'valorAcordo',
+                                    componentName: 'tableAmountCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Valor',
+                                      currency: 'CVE',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tablebadgecell_7193jm',
+                                    tag: 'periodicidade',
+                                    componentName: 'tableBadgeCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'Periodicidade',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tableactionlistcell_efb8zy',
+                                    tag: 'tableActionListCell3',
+                                    componentName: 'tableActionListCell',
+                                    
+                                    children: [
+                                      {
+                                        id: 'tablelinkaction_7x2uon',
+                                        tag: 'tableLinkAction1',
+                                        componentName: 'tableLinkAction',
+                                        
+                                        properties: {
+                                          labelTrigger: 'Editar',
+                                          iconProperties: { iconName: 'Pencil' },
+                                          variant: 'ghost',
+                                          href: 'imoveis/manifestacao/acordo/[uuid]/edit',
+                                          commonProperties: { generateReference: false },
+                                          segments: [
+                                            { name: '[uuid]', tag: 'idAcordo', context: 'column' },
+                                          ],
+                                        },
+                                      },
+                                    ],
+                                    properties: {
+                                      headerTitle: 'Ações',
+                                      type: 'inline',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                  {
+                                    id: 'tablehiddencell_id_acordo',
+                                    tag: 'idAcordo',
+                                    componentName: 'tableHiddenCell',
+                                    
+                                    properties: {
+                                      headerTitle: 'ID Acordo',
+                                      commonProperties: { generateReference: false },
+                                    },
+                                  },
+                                ],
+                              },
+                            ],
+                            data: {
+                              data: {
+                                state: {
+                                  name: 'contentTabletableAcordos',
+                                  type: 'TableAcordos[]',
+                                  defaultValue: '[]',
+                                  generate: true,
+                                },
+                              },
+                            },
+                            dataType: 'TableAcordos',
+                          },
+                        ],
+                        properties: {
+                          value: 'acordo',
+                          
+                          iconProperties: { icon: 'ArrowRight' },
+                          badgeVariant: 'solid',
+                          badgeColor: 'primary',
+                          commonProperties: { generateReference: false },
+                        },
+                        childProperties: {},
                       },
                     ],
                     interactions: {},
                     allowTypes: false,
                     data: {},
-                    properties: { className: 'px-4 pt-2 space-y-3', commonProperties: {} },
-                    childProperties: {},
-                  },
-                ],
-              },
-              {
-                id: 'cardcontent_table',
-                tag: 'cardContent2',
-                componentName: 'container',
-                
-                type: 'group',
-                children: [
-                  {
-                    id: 'table_imoveis',
-                    tag: 'table1',
-                    componentName: 'table',
-                    
-                    type: 'group',
-                    children: [
-                      {
-                        id: 'tablecolumns_imoveis',
-                        tag: 'tableColumns1',
-                        componentName: 'tableColumns',
-                        
-                        children: [
-                          {
-                            id: 'tablehiddencell_imovelId',
-                            tag: 'imovelId',
-                            componentName: 'tableHiddenCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'imovelId',
-                              value: '',
-                              dataProperties: { isVirtual: false, isType: true },
-                              commonProperties: {},
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tabletextcell_codigo',
-                            tag: 'codigo',
-                            componentName: 'tableTextCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'Código',
-                              dataProperties: { isVirtual: false, isType: true },
-                              variant: 'default',
-                              commonProperties: { generateReference: false },
-                              headerType: 'sortToggle',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tabletextcell_nome',
-                            tag: 'nomeImovel',
-                            componentName: 'tableTextCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerType: 'sortToggle',
-                              headerTitle: 'Nome',
-                              dataProperties: { isVirtual: false, isType: true },
-                              variant: 'default',
-                              commonProperties: {},
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tablebadgecell_oik3cg',
-                            tag: 'localizacao',
-                            componentName: 'tableBadgeCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {
-                              customize: {
-                                type: 'function',
-                                function: {
-                                  fnName: 'getLocalizacaoBadge',
-                                  fnCustomCode: {
-                                    imports: [
-                                      {
-                                        namespace:
-                                          "import {getLocalizacaoBadge} from '@/app/(myapp)/functions/global'",
-                                        id: '3z050vy36r',
-                                      },
-                                    ],
-                                  },
-                                  type: 'function',
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'Rua',
-                              dataProperties: { isVirtual: false, isType: true },
-                              
-                              iconProperties: {
-                                showIcon: false,
-                                iconName: 'Info',
-                                iconPlacement: 'start',
-                              },
-                              variant: 'soft',
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tabletextcell_area',
-                            tag: 'areaTotal',
-                            componentName: 'tableTextCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'Área (m²)',
-                              dataProperties: { isVirtual: false, isType: true },
-                              variant: 'default',
-                              commonProperties: {},
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tablebadgecell_estado',
-                            tag: 'estadoImovelDescricao',
-                            componentName: 'tableBadgeCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {
-                              customize: {
-                                type: 'function',
-                                function: {
-                                  type: 'function',
-                                  fnCustomCode: {
-                                    imports: [
-                                      {
-                                        namespace:
-                                          "import {getStatusColorImovel} from '@/app/(myapp)/functions/global'",
-                                        id: 'lzg13tn03k',
-                                      },
-                                    ],
-                                  },
-                                  fnName: 'getStatusColorImovel',
-                                },
-                                action: {},
-                              },
-                            },
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'Estado',
-                              dataProperties: { isVirtual: false, isType: true },
-                              iconProperties: {
-                                showIcon: false,
-                                iconName: 'Info',
-                                iconPlacement: 'start',
-                              },
-                              variant: 'soft',
-                              commonProperties: { generateReference: false },
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tabletextcell_valor',
-                            tag: 'valorImovel',
-                            componentName: 'tableAmountCell',
-                            
-                            type: '',
-                            children: [],
-                            interactions: {},
-                            allowTypes: false,
-                            data: {},
-                            properties: {
-                              headerTitle: 'Valor',
-                              dataProperties: { isVirtual: false, isType: true },
-                              currency: 'XOF',
-                              language: 'pt-PT',
-                              formatStyle: 'currency',
-                              variant: 'default',
-                              commonProperties: { generateReference: false },
-                              headerType: 'sortToggle',
-                            },
-                            childProperties: {},
-                          },
-                          {
-                            id: 'tableactionlistcell_actions',
-                            tag: 'tableActionListCell1',
-                            componentName: 'tableActionListCell',
-                            
-                            type: '',
-                            children: [
-                              {
-                                id: 'tablelinkaction_view',
-                                tag: 'tableLinkAction1',
-                                componentName: 'tableLinkAction',
-                                
-                                type: '',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  labelTrigger: 'Visualizar',
-                                  iconProperties: { iconName: 'Eye' },
-                                  variant: 'ghost',
-                                  href: 'imoveis/[uuid]',
-                                  commonProperties: { generateReference: false },
-                                  segments: [
-                                    { name: '[uuid]', tag: 'imovelId', context: 'column' },
-                                  ],
-                                  params: [],
-                                },
-                                childProperties: {},
-                              },
-                              {
-                                id: 'tablelinkaction_edit',
-                                tag: 'tableLinkAction2',
-                                componentName: 'tableLinkAction',
-                                
-                                type: '',
-                                children: [],
-                                interactions: {},
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  labelTrigger: 'Editar',
-                                  iconProperties: { iconName: 'SquarePen' },
-                                  variant: 'ghost',
-                                  href: 'imoveis/[uuid]/edit',
-                                  commonProperties: { generateReference: false },
-                                  segments: [
-                                    { name: '[uuid]', tag: 'imovelId', context: 'column' },
-                                  ],
-                                  params: [],
-                                },
-                                childProperties: {},
-                                rules: [],
-                              },
-                              {
-                                id: 'tablealertaction_delete_imovel',
-                                tag: 'tableAlertActionDelete',
-                                componentName: 'tableAlertAction',
-                                
-                                type: '',
-                                children: [],
-                                interactions: {
-                                  onClickConfirm: {
-                                    type: 'function',
-                                    function: {
-                                      fnCustomSet: '() => {deleteImovel(rowData.imovelId)}',
-                                      fnCustomCode: { imports: [] },
-                                      type: 'function',
-                                    },
-                                    action: {},
-                                  },
-                                },
-                                allowTypes: false,
-                                data: {},
-                                properties: {
-                                  labelTrigger: 'Eliminar',
-                                  iconProperties: { iconName: 'Trash' },
-                                  variant: 'ghost',
-                                  title: 'Eliminar Imóvel',
-                                  showCancel: true,
-                                  labelCancel: 'Cancel',
-                                  variantCancel: 'outline',
-                                  showConfirm: true,
-                                  labelConfirm: 'Eliminar',
-                                  variantConfirm: 'destructive',
-                                  commonProperties: { generateReference: false },
-                                  segments: [],
-                                  params: [],
-                                  content: 'Deseja eliminar o imóvel?',
-                                },
-                                childProperties: {},
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                    interactions: {},
-                    allowTypes: false,
-                    data: {
-                      data: {
-                        state: {
-                          id: '',
-                          type: 'Table1[]',
-                          name: 'contentTabletable1',
-                          defaultValue: '[]',
-                          imports: [],
-                          generate: true,
-                        },
-                        value: { id: '', code: '' },
-                      },
-                    },
                     properties: {
+                      variant: 'default',
+                      badgePlacement: 'end',
+                      orientation: 'horizontal',
+                      iconProperties: { showIcon: false, iconPlacement: 'start' },
                       commonProperties: { generateReference: false },
-                      showPagination: true,
-                      isNumericPagination: false,
+                      items: [],
                     },
-                    dataType: 'table1',
                     childProperties: {},
                   },
                 ],
-                interactions: {},
-                allowTypes: false,
-                data: {},
-                properties: { commonProperties: {} },
-                childProperties: {},
+                properties: {},
               },
             ],
             interactions: {},
             allowTypes: false,
             data: {},
             properties: {
-              className: 'border rounded-sm',
+              variant: { default: 'cols2', md: 'cols2', lg: 'cols2' },
+              gap: 4,
               commonProperties: { generateReference: false },
+              className: 'border rounded-sm',
             },
             childProperties: {},
             style: {},
           },
+          {
+            id: 'decisaomanifestacaomodal_nlh83q',
+            tag: 'DecisaoManifestacaoModal1',
+            componentName: 'DecisaoManifestacaoModal',
+            
+            type: 'group',
+            children: [],
+            interactions: {
+              setIsOpen: {
+                type: 'function',
+                function: { fnCustomCode: { imports: [] }, fnCustomSet: 'setOpenDecisaoModal' },
+              },
+            },
+            allowTypes: false,
+            data: {
+              isOpen: {
+                state: { id: '', name: 'openDecisaoModal', type: '', imports: [], generate: false },
+              },
+              manifestacao: { value: { id: '', code: 'manifestacao' } },
+            },
+            properties: { customProperties: {} },
+            childProperties: {},
+          },
+          {
+            id: 'entregachavesmodal_01',
+            tag: 'EntregaChavesModal1',
+            componentName: 'EntregaChavesModal',
+            
+            type: 'group',
+            children: [],
+            interactions: {
+              setIsOpen: {
+                type: 'function',
+                function: {
+                  fnCustomCode: { imports: [] },
+                  fnCustomSet: 'setOpenEntregaChavesModal',
+                },
+              },
+            },
+            allowTypes: false,
+            data: {
+              isOpen: {
+                state: {
+                  id: '',
+                  name: 'openEntregaChavesModal',
+                  type: '',
+                  imports: [],
+                  generate: false,
+                },
+              },
+              manifestacao: { value: { id: '', code: 'manifestacao' } },
+              uuid: { value: { id: '', code: 'idManifestacao' } },
+            },
+            properties: { customProperties: {} },
+            childProperties: {},
+          },
         ],
       },
     ],
+    tag: 'page1',
+    data: {},
+    interactions: {
+      onLoad: {
+        type: 'function',
+        function: {
+          type: 'function',
+          fnCustomCode: {
+            imports: [
+              {
+                id: 'import_useManifestacaoHook',
+                namespace:
+                  "import { useDetalheManifestacao , useVistorias, useAcordos } from '@/app/(myapp)/hooks/use-imovel'",
+              },
+              {
+                id: 'import_5r9Swb',
+                namespace: "import { useNegociacoes } from '@/app/(myapp)/hooks/use-imovel'",
+              },
+            ],
+            fnCode:
+              "const { data: manifestacao } = useDetalheManifestacao(idManifestacao);\n\nconst { data: negociacoes } = useNegociacoes(idManifestacao);\n\nuseEffect(() => {\n  if (!manifestacao) return;\n  manifestacao.id = idManifestacao;\n  setModalidadeInteresseText(manifestacao.modalidadeInteresseDesc || manifestacao.modalidadeInteresse || '');\n  setInquilinoText(manifestacao.inquilinoDesc || manifestacao.inquilino || '');\n  setNomeText(manifestacao.nome || '');\n  setSexoText(manifestacao.sexoDesc || manifestacao.sexo || '');\n  setDataNascimentoText(manifestacao.dataNascimento || '');\n  setNomePaiText(manifestacao.nomePai || '');\n  setNomeMaeText(manifestacao.nomeMae || '');\n  setTipoDocumentoText(manifestacao.tipoDocumento || '');\n  setNumeroDocumentoText(manifestacao.numeroDocumento || '');\n  setNumeroBeneficiarioText(manifestacao.numeroBeneficiario || '');\n  setNumeroFuncionarioText(manifestacao.numeroFuncionario || '');\n  setNifText(manifestacao.nif || '');\n  setEnderecoText(manifestacao.endereco || '');\n  setLocalizacaoText(manifestacao.localizacao || '');\n  setNomeComercialText(manifestacao.nomeComercial || '');\n  setNumeroRegistoComercialText(manifestacao.numeroRegistoComercial || '');\n  setNifEmpresaText(manifestacao.nifEmpresa || '');\n  setFinalidadeAluguelText(manifestacao.finalidadeAluguelDesc || manifestacao.finalidadeAluguel  || '');\n  setEmailText(manifestacao.email || '');\n  setTelefoneText(manifestacao.telefone || '');\n  setTelemovelText(manifestacao.telemovel || '');\n  setStatusBannerEstado(manifestacao?.nomeImovel || 'Não atribuído');\n  setStatusBannerCodigo(manifestacao?.codigoFracao || 'N/A');\n  setContentTabletableDocumentos((manifestacao.documentos || []).map((item: any) => ({ ...item, url: `/api/documento?fileId=${item.url}` })));\n  setContentTabletable1((negociacoes || []).map((item: any) => ({...item, dataContato: Date.parse(item.dataContato + 'T00:00:00')})));\n}, [manifestacao, negociacoes]);\n    const { data: vistorias } = useVistorias(idManifestacao);\n    const { data: acordos } = useAcordos(idManifestacao);\n\n    useEffect(() => {\n        setContentTabletableVistorias((vistorias || []).map((item: any) => ({...item, dataVisita: Date.parse(item.dataVisita + 'T00:00:00')})));\n    }, [vistorias]);\n\n    useEffect(() => {\n        setContentTabletableAcordos((acordos || []).map((item: any) => ({...item, dataContrato: Date.parse(item.dataContrato + 'T00:00:00')})));\n    }, [acordos]);\n    ",
+          },
+        },
+        action: {},
+      },
+    },
+    childProperties: {},
   },
-  functions: [
-    {
-      id: 'fnc_clear',
-      name: 'clearFilters',
-      code: 'setSearchValue("")\nsetSelecttipoImovelFltValue("")\nsetInputnomeValue("")\nsetInputareaInicialValue(0)\nsetInputareaFinalValue(0)\nsetInputcodigoFracaoValue("")\nsetSelectestadoImovelFltValue("")\nsetInputruaValue("")\nsetSelecttipologiaFltValue("")\nsetInputvalorInicialValue(0)\nsetInputvalorFinalValue(0)\n\nrefreshList();',
-      returnValue: { type: 'void', isNullable: true, isList: false },
-      imports: [],
-      isAsync: false,
-      arguments: [],
-    },
-    {
-      id: 'fnc_refresh',
-      name: 'refreshList',
-      code: "queryClient.invalidateQueries({ queryKey: ['imoveis'] });",
-      returnValue: { type: 'void', isNullable: true, isList: false },
-      imports: [],
-      isAsync: false,
-      arguments: [],
-    },
-    {
-      id: 'fnc_delete',
-      name: 'deleteImovel',
-      code: 'await deleteImovelFn(imovelId);\nrefreshList();',
-      returnValue: { type: 'void', isNullable: true, isList: false },
-      imports: [],
-      isAsync: true,
-      arguments: [
-        {
-          id: '1',
-          name: 'imovelId',
-          type: 'string',
-          isList: false,
-          isOptional: false,
-          isInterface: false,
-          isFunction: false,
-          isState: false,
-          functionParameters: [],
-        },
-      ],
-    },
-  ],
-  types: [
-    {
-      componentId: 'table_imoveis',
-      name: 'table1',
-      path: '',
-      fields: [
-        {
-          componentId: 'tablehiddencell_imovelId',
-          name: 'imovelId',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_codigo',
-          name: 'codigo',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_nome',
-          name: 'nomeImovel',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_rua',
-          name: 'localizacao',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_area',
-          name: 'areaTotal',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tablebadgecell_estado',
-          name: 'estadoImovelDescricao',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-        {
-          componentId: 'tabletextcell_valor',
-          name: 'valorImovel',
-          type: 'string',
-          required: false,
-          defaultValue: '',
-          isList: false,
-        },
-      ],
-    },
-  ],
-  states: [
-    { id: 'state_tlz9Y', name: 'showFilter', type: 'boolean', defaultValue: 'false', imports: [] },
-    { id: 'state_lDU4Xi', name: 'searchValue', type: 'string', imports: [], defaultValue: "''" },
-    { id: 'state_nome', name: 'inputnomeValue', type: 'string', imports: [], defaultValue: "''" },
-    {
-      id: 'state_areaIni',
-      name: 'inputareaInicialValue',
-      type: 'number',
-      imports: [],
-      defaultValue: '0',
-    },
-    {
-      id: 'state_areaFim',
-      name: 'inputareaFinalValue',
-      type: 'number',
-      imports: [],
-      defaultValue: '0',
-    },
-    {
-      id: 'state_codigoFracao',
-      name: 'inputcodigoFracaoValue',
-      type: 'string',
-      imports: [],
-      defaultValue: "''",
-    },
-    { id: 'state_rua', name: 'inputruaValue', type: 'string', imports: [], defaultValue: "''" },
-    {
-      id: 'state_valorIni',
-      name: 'inputvalorInicialValue',
-      type: 'number',
-      imports: [],
-      defaultValue: '0',
-    },
-    {
-      id: 'state_valorFim',
-      name: 'inputvalorFinalValue',
-      type: 'number',
-      imports: [],
-      defaultValue: '0',
-    },
-  ],
   imports: [],
 };
 
