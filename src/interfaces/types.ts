@@ -668,19 +668,9 @@ export interface RouteSegment {
 type SpacingValues = Record<Side, SpacingValue>;
 export type SpacingState = Record<SpacingType, SpacingValues>;
 
-// Workspace API
+// Workspace API - REMOVED (moved to @igrp/igrp-workspace-engine)
 
-export interface ProjectWorkspace extends IdentifiableElement {
-  config: any,
-  service?: WorkspaceService
-}
-
-export interface ServiceWorkspace extends IdentifiableElement {
-  service: WorkspaceService
-}
-
-// Workspace
-
+// Re-export workspace types for backward compatibility
 export interface WorkspaceConfig extends IdentifiableElement, VersionableElement {
   name: string;
   slug: string;
@@ -688,10 +678,19 @@ export interface WorkspaceConfig extends IdentifiableElement, VersionableElement
   projects?: any[];
 }
 
+export interface ProjectWorkspace extends IdentifiableElement {
+  config: any,
+  service?: any
+}
+
+export interface ServiceWorkspace extends IdentifiableElement {
+  service: any
+}
+
 export interface WorkspaceProjectsConfig extends IdentifiableElement {
   workspace: string,
-  projects: WorkspaceProject[],
-  services: WorkspaceService[]
+  projects: any[],
+  services: any[]
 }
 
 export interface WorkspaceProject {
@@ -700,12 +699,43 @@ export interface WorkspaceProject {
   basePath: string,
   environments: Environment[],
   ports: Port,
-  dependsOn: Dependency[],
+  dependsOn?: Dependency[]
 }
 
 export interface WorkspaceService extends IdentifiableElement {
   name: string,
   properties: DockerContainer
+}
+
+export interface Environment {
+  key: string;
+  value: string;
+}
+
+export interface Port {
+  internal: number;
+  external: number;
+}
+
+export interface Volume {
+  host: string;
+  container: string;
+  driver: string;
+}
+
+export interface Network {
+  name: string;
+}
+
+export interface DockerContainer {
+  image: string;
+  container_name?: string;
+  restart?: string;
+  ports?: Port[];
+  environments?: Environment[];
+  volumes?: Volume[];
+  networks?: Network[];
+  depends_on?: string[];
 }
 
 export interface ProjectDataSource {

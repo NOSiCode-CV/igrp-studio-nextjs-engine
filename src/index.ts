@@ -32,42 +32,11 @@ import {
 import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
-import { generateComponent } from './modules/components/generateComponent';
-import { register, registryAsObject } from './components';
-import { configurationAsObject, setConfiguration } from './config';
-import { dockerRegistryAsObject, register as registerService } from './docker_services';
-import { deleteValidation } from './schema/deleteConfig';
-import { deleteElementConfig } from './modules/delete/deleteElementConfig';
-import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
+import { pageConfigValidate } from './schema/pageConfig';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
-import { registerAllComponents } from './components/register';
-import { extractBaseApp } from './modules/baseApp/extractBaseApp';
-import defaultModule from './components/default';
-import defaultServiceModule from './docker_services/default';
-import defaultCodeModule from './code_snippets/default';
-import defaultEngineModule from './config/default';
-import { componentRegistrationValidate } from './schema/componentRegisterConfig';
-import { workspaceConfigValidate } from './schema/baseWorkspace';
-import { saveBaseWorkspaceFileConfig } from './modules/workspace/saveBaseWorkspaceConfig';
-import { createWorkspaceDirectories } from './modules/workspace/createWorkspaceDirectories';
-import path from 'path';
-import { generateWorkspaceFiles } from './modules/workspace/generateWorkspaceFiles';
-import { registerAllServices } from './docker_services/register';
-import { dockerServiceRegistrationValidate } from './schema/serviceRegisterConfig';
-import { saveWorkspaceComposeFile } from './modules/workspace/saveWorkspaceComposeFile';
-import {
-  mapProjectToWorkspace,
-  mapServiceToWorkspace,
-  removeProjectInWorkspace,
-  removeServiceInWorkspace,
-  updateProjectInWorkspace,
-  updateServiceInWorkspace,
-} from './modules/workspace/workspaceMapper';
 import { loadExportsConfig } from './modules/payload/loadExportsConfig';
 import { parseExportsConfig } from './modules/payload/parseExportsConfig';
-import { registerAllCodeSnippets } from './code_snippets/register';
 import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
-import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { renderCode } from './utils/renderCode';
 import { processConfigValidate } from './schema/processConfig';
 import { generateProcessStep } from './modules/process/generateProcessStep';
@@ -86,7 +55,6 @@ export function getPaths(version?: string): PathConfig {
       configs: path.join(__dirname, './configs'),
       template: path.join(__dirname, './templates'),
       baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
-      baseWorkspace: path.join(__dirname, './templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, './templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, './templates/partials'),
     };
@@ -95,7 +63,6 @@ export function getPaths(version?: string): PathConfig {
       configs: path.join(__dirname, '../public/configs'),
       template: path.join(__dirname, '../public/templates'),
       baseApp: `https://sonatype.nosi.cv/repository/igrp-templates/@igrp/framework-next/${PROJECT_TEMPLATE_VERSION}/igrp-next-template.zip`,
-      baseWorkspace: path.join(__dirname, '../public/templates/base_workspace.zip'),
       componentPartials: path.join(__dirname, '../public/templates/components/{{name}}/partials'),
       genericPartials: path.join(__dirname, '../public/templates/partials'),
     };
@@ -103,64 +70,13 @@ export function getPaths(version?: string): PathConfig {
 }
 
 /**
- * Initializes a new workspace by validating configuration, checking directory status,
- * and creating necessary files and folders.
- *
- * @async
- * @function newWorkspace
- * @param {AppConfig} baseConfig - The base configuration object for the workspace.
- * @param {string} basePath - The base path where the workspace directories and files will be created.
- *
- * @throws {Error} Throws an error if:
- * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
- * - The base path is not provided (`ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG`).
- * - The base path directory is not empty (`ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE`).
- *
- * @returns {Promise<void>} A promise that resolves when the workspace has been successfully initialized.
- *
- */
-export const newWorkspace = async (
-  baseConfig: WorkspaceConfig,
-  basePath: string,
-): Promise<void> => {
-  const isBaseConfigValid = workspaceConfigValidate(baseConfig);
-
-  if (!isBaseConfigValid && workspaceConfigValidate.errors) throw workspaceConfigValidate.errors;
-
-  if (!basePath) throw ERROR_MESSAGE.INVALID_WORKSPACE_CONFIG;
-
-  if (!(await checkIfDirectoryIsEmpty(basePath))) throw ERROR_MESSAGE.DIRECTORY_ALREADY_IN_USE;
-
-  const context: RenderContext<WorkspaceConfig, WorkspaceConfig> = {
-    resourceConfig: baseConfig,
-    basePath,
-  };
-
-  /**
-   * Creates the folder structure needed for the workspace.
-   */
-  await createWorkspaceDirectories(context);
-
-  /**
-   * Extracts the folder structure needed for the workspace.
-   */
-  // No need to extract from ZIP for now
-  //await extractBaseWorkspace(context);
-
-  /**
-   * Creates the configuration files based on the provided context.
-   */
-  await saveWorkspaceFileConfig(context);
-};
-
-/**
  * Initializes a new application by validating configuration, checking directory status,
  * and creating necessary files and folders.
  *
  * @async
  * @function newApp
- * @param {AppConfig} baseConfig - The base configuration object for the application.
- * @param {string} basePath - The base path where the application directories and files will be created.
+ * @param {AppConfig} baseConfig - The base configuration object for application.
+ * @param {string} basePath - The base path where application directories and files will be created.
  *
  * @throws {Error} Throws an error if:
  * - The base configuration is invalid or has validation errors (`ERROR_MESSAGE.INVALID_APP_CONFIG`).
@@ -201,15 +117,6 @@ export const newApp = async (baseConfig: AppConfig, basePath: string): Promise<v
    * Creates the configuration files based on the provided context.
    */
   await saveFileConfig(context);
-
-  /*const pageMetaConfig: PageMetaConfig = {
-    type: 'UI',
-    url: '',
-    description: baseConfig.description || 'Web description',
-    resourceItems: [],
-  };
-
-  await savePagesMeta(pageMetaConfig, basePath);*/
 };
 
 /**
@@ -505,6 +412,14 @@ const addProjectsToWorkspace = async (
 export const saveCustomWorkspaceComposeFile = async (yaml: object, basePath: string) => {
   await saveWorkspaceComposeFile(yaml, basePath);
 };
+
+export interface PathConfig {
+  configs: any;
+  template: any;
+  baseApp: string;
+  componentPartials: any;
+  genericPartials: any;
+}
 
 export const deleteElement = async (config: DeleteConfig, basePath: string) => {
   const valid = deleteValidation(config);
