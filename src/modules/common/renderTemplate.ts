@@ -6,6 +6,16 @@ import { registry } from '../../components';
 import { registry as registryService } from '../../docker_services';
 import { registry as registryCode } from '../../code_snippets';
 import { getPaths } from '../../index';
+import { format as formatAsync } from 'prettier';
+import { format as formatSync } from '@prettier/sync';
+
+const PRETTIER_OPTIONS = {
+  parser: 'babel-ts',
+  semi: true,
+  trailingComma: 'all' as const,
+  singleQuote: true,
+  printWidth: 100,
+};
 
 /**
  * Generates content from a template and a context.
@@ -34,7 +44,12 @@ export const renderTemplate = async (templateName: string, context: any) => {
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   const template = Handlebars.compile(templateContent);
 
-  return template(context);
+  const rendered = template(context);
+  try {
+    return await formatAsync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 };
 
 /**
@@ -61,7 +76,12 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
   const template = Handlebars.compile(templateContent);
 
-  return template(context);
+  const rendered = template(context);
+  try {
+    return formatSync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 };
 
 /**
@@ -119,10 +139,14 @@ export const renderCodeTemplate = (templateName: string, context: any) => {
   context.registryCode = registryCode
 
   const templatePath = path.join(getPaths().template, templateName);
-  let templateContent = fs.readFileSync(templatePath, 'utf-8');
+  const templateContent = fs.readFileSync(templatePath, 'utf-8');
 
   const template = Handlebars.compile(templateContent);
 
-  return template(context);
-
+  const rendered = template(context);
+  try {
+    return formatSync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 };
