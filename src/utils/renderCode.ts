@@ -1,4 +1,4 @@
-import { CodeSnippetConfig, WorkspaceService } from '../interfaces/types';
+import { CodeSnippetConfig } from '../interfaces/types';
 import { renderServiceTemplate } from '../modules/common/renderTemplate';
 import { TEMPLATES } from './constants';
 import { getCodeSnippets, registry } from '../code_snippets/index';

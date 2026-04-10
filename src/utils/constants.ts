@@ -1,19 +1,11 @@
 import { FilterType, TransformType } from '../interfaces/types';
 
-export const PARTIALS = [
-  'workspace/igrp-docker-services.hbs',
-  'workspace/mysql-docker-service.hbs',
-  'workspace/oracle-docker-service.hbs',
-  'workspace/postgres-docker-service.hbs',
-  'workspace/observability-docker-volumes.hbs',
-  'workspace/observability-docker-env.hbs',
-  'workspace/observability-env.hbs',
+export const PARTIALS: string[] = [
 ];
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
   VALID_APP_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
-  VALID_WORKSPACE_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[\\p{L}\\p{N}_ ]+$",
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/ ]*$',
@@ -41,7 +33,6 @@ export const COMMON_FILES = {
   JSON_IGRP_APP_LOGIC: 'igrp-app-logic.json',
   JSON_IGRP_APP_LOGIC_CREDENTIALS: 'igrp-app-logic-credentials.json',
   JSON_IGRP_APP_LOGIC_WORKFLOWS: 'igrp-app-logic-workflows.json',
-  WORKSPACE: 'workspace.json',
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
   COMPONENTS_META: 'componentsMeta.json',
@@ -92,18 +83,7 @@ export const TEMPLATES = {
   UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
   UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
   UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.hbs',
-  AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',
-  UM_IGRP_ENV: 'workspace/um-igrp-env.hbs',
-  UI_IGRP_ENV: 'workspace/ui-igrp-env.hbs',
-  IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
-  FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
-  AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
-  IGRP_ENV: 'workspace/igrp-env.hbs',
   IGRP_AUTH_JSON: 'docker_services/keycloak/volumes/igrp-realm.json.hbs',
-  IGRP_NGINX: 'workspace/nginx.conf.hbs',
-  IGRP_REDIS: 'workspace/redis.conf.hbs',
-  SERVICE_ENV: 'workspace/service-env.hbs',
-  WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
 };
 
 export const ENVIRONMENT_FILES = {
@@ -124,7 +104,6 @@ export const SRC_CONFIG_FILES = {
   DOCKERIGNORE: 'dockerignore_template',
   DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',
-  WORKSPACE_GITIGNORE: 'workspace_gitignore_template',
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'nextenv_template',
@@ -299,8 +278,6 @@ export const ERROR_MESSAGE = {
   EMPTY_CONTEXT: 'Provide a valid context. The context must not be empty.',
   INVALID_APP_CONFIG:
     'The provided APP configuration is invalid. Please verify the APP details and try again.',
-  INVALID_WORKSPACE_CONFIG:
-    'The provided workspace configuration is invalid. Please verify the workspace details and try again.',
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',

@@ -71,7 +71,14 @@ export function pieChartProperties() {
         }
       }
     },
-    valueDomain: { type: 'array', required: true, items: { type: 'object' } },
+    valueDomain: { 
+      type: 'object', 
+      required: true, 
+      properties: {
+        min: { type: 'number', default: 0 },
+        max: { type: 'number', default: 0 }
+      }
+    },
     gridColor: { type: 'string', required: false },
     backgroundColor: { type: 'string', required: false },
     axisColor: { type: 'string', required: false },

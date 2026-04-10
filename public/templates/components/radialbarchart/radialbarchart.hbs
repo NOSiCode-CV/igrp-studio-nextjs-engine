@@ -72,10 +72,10 @@
   {{#if (and resourceConfig.properties.centerText (not resourceConfig.data.centerText))}}
   centerText={
     {
-      show: {{resourceConfig.properties.centerText.show}}
-      value: `{{resourceConfig.properties.centerText.value}}"
-      label: `{{resourceConfig.properties.centerText.label}}"
-      formatter: (value: number) => "{{resourceConfig.properties.centerText.formatter}}"
+      show: {{resourceConfig.properties.centerText.show}},
+      value: `{{resourceConfig.properties.centerText.value}}`,
+      label: `{{resourceConfig.properties.centerText.label}}`,
+      formatter: (value: number) => `{{resourceConfig.properties.centerText.formatter}}`
     }
   }
   {{/if~}}
