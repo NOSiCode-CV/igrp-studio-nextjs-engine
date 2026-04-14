@@ -23,7 +23,7 @@ export function extractVolumes(config: WorkspaceProjectsConfig, basePath: string
 /**
  * Indents each line of a block by the given number of spaces.
  * @param spaces - Number of spaces to indent.
- * @param options - Handlebars options object containing the block content.
+ * @param options - Options object containing the block content.
  * @returns Indented string.
  */
 export function indent(this: any, spaces: number, options: { fn: (context: any) => string }): string {
