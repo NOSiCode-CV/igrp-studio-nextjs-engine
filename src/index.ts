@@ -33,9 +33,9 @@ import { pageConfigValidate } from './schema/pageConfig';
 import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
-import { register, registryAsObject } from './components';
+import { register, registryAsObject, liquidRenderer as componentLiquidRenderer } from './components';
 import { configurationAsObject, setConfiguration } from './config';
-import { dockerRegistryAsObject, register as registerService } from './docker_services';
+import { dockerRegistryAsObject, register as registerService, liquidRenderer as dockerLiquidRenderer } from './docker_services';
 import { deleteValidation } from './schema/deleteConfig';
 import { deleteElementConfig } from './modules/delete/deleteElementConfig';
 import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
@@ -628,3 +628,5 @@ export async function loadAppExports(basePath: string): Promise<AppExportsConfig
 export function convertJsonSchemaToForm(schema: JsonSchema): IGRPComponent[] {
   return jsonSchemaToIGRPForm(schema);
 }
+
+export const liquidRenderer = componentLiquidRenderer;

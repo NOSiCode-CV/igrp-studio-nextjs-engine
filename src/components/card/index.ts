@@ -5,7 +5,7 @@ import {
   cardChildProperties,
   cardChildPropertiesMapping, cardStyle, cardRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { CARD_CONTENT } from './children/cardContent';
 import { CARD_FOOTER } from './children/cardFooter';
 import { CARD_HEADER } from './children/cardHeader';
@@ -34,7 +34,7 @@ export default {
       { name: CARD_HEADER, isDefault: true }, { name: CARD_CONTENT, isDefault: true }, { name: CARD_FOOTER, isDefault: true },
     ])
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

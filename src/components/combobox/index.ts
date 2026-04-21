@@ -10,7 +10,7 @@ import {
   comboboxStyle,
   comboboxRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -52,7 +52,7 @@ export default {
     component.getChildPropertiesMapping(comboboxChildPropertiesMapping());
     component.getStyle(comboboxStyle())
     component.getRules(comboboxRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

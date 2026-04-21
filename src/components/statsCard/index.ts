@@ -10,7 +10,7 @@ import {
   statsCardRules,
   statsCardStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -34,7 +34,7 @@ export default {
     component.loadStates([
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

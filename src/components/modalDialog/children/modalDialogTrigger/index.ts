@@ -5,7 +5,7 @@ import {
   modalDialogTriggerChildProperties,
   modalDialogTriggerChildPropertiesMapping, modalDialogTriggerInteractions, modalDialogTriggerInteractionsMapping, modalDialogTriggerStyle, modalDialogTriggerRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { MODAL_DIALOG } from '../../index';
 import { BUTTON } from '../../../button/index';
 
@@ -39,7 +39,7 @@ export default {
       },
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

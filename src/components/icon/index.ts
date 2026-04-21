@@ -5,7 +5,7 @@ import {
   iconChildProperties,
   iconChildPropertiesMapping, iconRules, iconStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { TABLE_TEXT_CELL } from '../table/children/tableTextCell';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     component.loadStates([
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

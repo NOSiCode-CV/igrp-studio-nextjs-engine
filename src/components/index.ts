@@ -377,7 +377,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
       registry[it.name], it.isDefault)),
     defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
-    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
     templatePath: value.templatePath
   }
 }
@@ -618,7 +618,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   return () => str
 }
 
-export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
+export function liquidRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   //const name = component.componentName
   return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name: 'default' /*name*/ }), {
     resourceConfig: component,

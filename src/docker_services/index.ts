@@ -114,7 +114,7 @@ function dockerServiceAsObject(key: string, value: DockerService): DockerService
     custom: value.custom,
     properties: value.properties,
     propertiesMapping: {},
-    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
     templatePath: value.templatePath
   }
 }
@@ -164,7 +164,7 @@ export function customRenderer(
 
 }
 
-export function hbsRenderer(
+export function liquidRenderer(
   dockerService: DockerContainer,
   element?: DockerService
 ): (dockerService: DockerContainer) => string {

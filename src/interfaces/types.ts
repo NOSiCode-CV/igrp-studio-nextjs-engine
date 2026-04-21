@@ -383,7 +383,7 @@ export interface DockerServiceRegisterConfig extends VersionableElement {
   custom?: string,
   properties: Record<string, any>,
   propertiesMapping: Record<string, any>,
-  renderer: 'default' | 'hbs' | 'custom',
+  renderer: 'default' | 'liquid' | 'custom',
   templatePath?: string
 }
 
@@ -417,7 +417,7 @@ export interface ComponentRegisterConfig extends VersionableElement {
   childrenTypes: ComponentRegisterConfig[];
   acceptedChildren: ComponentRegisterConfig[];
   defaultChildren: DefaultChildComponent[];
-  renderer: 'default' | 'hbs' | 'custom' | 'none';
+  renderer: 'default' | 'liquid' | 'custom' | 'none';
   templatePath?: string;
 }
 
@@ -1013,6 +1013,7 @@ export interface CodeSnippetConfig extends IdentifiableElement {
 }
 
 export interface CodeSnippetsRegisterConfig extends VersionableElement {
+  renderer: 'default' | 'liquid' | 'custom';
   name: string;
   title: string;
   description: string;
@@ -1020,7 +1021,6 @@ export interface CodeSnippetsRegisterConfig extends VersionableElement {
   defaultProperties: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
-  renderer: 'default' | 'hbs' | 'custom';
   templatePath?: string;
   imports: string[];
   states: string[];

@@ -8,7 +8,7 @@ import {
   accordionRules,
   accordionData, accordionInteractions,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 import { ACCORDION_ITEM } from './children/accordionItem/index';
@@ -42,7 +42,7 @@ export default {
       { name: ACCORDION_ITEM, isDefault: true }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

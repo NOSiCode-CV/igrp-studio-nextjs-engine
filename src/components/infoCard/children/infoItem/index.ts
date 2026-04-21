@@ -5,7 +5,7 @@ import {
   infoItemChildProperties,
   infoItemChildPropertiesMapping, infoItemInteractions, infoItemInteractionsMapping, infoItemStyle, infoItemRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { INFO_SECTION } from '../infoSection/index';
 
 export default {
@@ -29,7 +29,7 @@ export default {
     ]);
     component.getStyle(infoItemStyle())
     component.getRules(infoItemRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

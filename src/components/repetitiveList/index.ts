@@ -5,7 +5,7 @@ import {
   repetitiveListChildProperties,
   repetitiveListChildPropertiesMapping, repetitiveListRules, repetitiveListStyle, repetitiveListData,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 
@@ -27,7 +27,7 @@ export default {
     component.getRules(repetitiveListRules())
     component.getStyle(repetitiveListStyle())
     component.getData(repetitiveListData())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

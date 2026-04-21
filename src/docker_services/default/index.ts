@@ -1,4 +1,4 @@
-import { DockerService, customRenderer, defaultRenderer, hbsRenderer } from '../index';
+import { DockerService, customRenderer, defaultRenderer, liquidRenderer } from '../index';
 import { DockerServiceRegisterConfig } from '../../interfaces/types';
 
 export default {
@@ -12,7 +12,7 @@ export default {
     dockerService.loadTemplatePath(config.templatePath);
     dockerService.getProperties(config.properties);
     dockerService.getPropertiesMapping(config.propertiesMapping);
-    dockerService.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : customRenderer);
+    dockerService.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'liquid' ? liquidRenderer : customRenderer);
 
   }
 };

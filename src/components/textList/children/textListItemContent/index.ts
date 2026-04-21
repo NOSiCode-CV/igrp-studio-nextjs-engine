@@ -5,7 +5,7 @@ import {
   textListItemContentChildProperties,
   textListItemContentChildPropertiesMapping,
 } from './properties';
-import { Component, defaultRenderer, hbsRenderer } from '../../../index';
+import { Component, defaultRenderer, liquidRenderer } from '../../../index';
 import { TEXT_LIST } from '../../index';
 import { TEXT_LIST_ITEM } from '../textListItem/index';
 

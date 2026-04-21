@@ -34,8 +34,8 @@ const dockerServiceRegisterConfigSchema: JSONSchemaType<DockerServiceRegisterCon
     },
     renderer: {
       type: 'string',
-      enum: ['hbs', 'default', 'custom'],
-      errorMessage: "The renderer attribute must only be 'hbs', 'custom' or 'default'."
+      enum: ['liquid', 'default', 'custom'],
+      errorMessage: "The renderer attribute must only be 'liquid', 'custom' or 'default'."
     },
     templatePath: {
       type: 'string',

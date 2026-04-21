@@ -5,7 +5,7 @@ import {
   switchChildProperties,
   switchChildPropertiesMapping, switchInteractions, switchInteractionsMapping, switchRules, switchStyle, switchData,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -37,7 +37,7 @@ export default {
       }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

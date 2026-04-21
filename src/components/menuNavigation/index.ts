@@ -8,7 +8,7 @@ import {
   menuNavigationRules,
   menuNavigationData, menuNavigationInteractions,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { MENU_NAVIGATION_ITEM } from './children/menuNavigationItem/index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
@@ -43,7 +43,7 @@ export default {
       { name: MENU_NAVIGATION_ITEM, isDefault: true }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

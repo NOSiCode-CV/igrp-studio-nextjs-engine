@@ -5,7 +5,7 @@ import {
   tableDropdownMenuCellChildProperties,
   tableDropdownMenuCellChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
 import { TABLE } from '../../index';
@@ -41,7 +41,7 @@ export default {
 
     component.loadAcceptedChildren([...component.childrenTypes])
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 
