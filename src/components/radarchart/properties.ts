@@ -70,7 +70,14 @@ export function radarChartProperties() {
     polarGridLineType: { type: 'string', required: false, enum: ['solid', 'dashed', 'dotted'] },
     showPolarGrid: { type: 'boolean', required: false },
     showRadiusAxis: { type: 'boolean', required: false },
-    radiusAxisDomain: { type: 'array', required: true, items: { type: 'object' } },
+    radiusAxisDomain: { 
+      type: 'object', 
+      required: true, 
+      properties: {
+        min: { type: 'number', default: 0 },
+        max: { type: 'number', default: 0 }
+      }
+    },
     radiusAxisAngle: { type: 'number', required: false },
     customAngleAsisTick: { type: 'object', required: false },
     showGridLines: { type: 'boolean', required: false },

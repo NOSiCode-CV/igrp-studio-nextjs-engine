@@ -10,7 +10,6 @@ interface IdentifiableElement {
 
 export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
-  workspaceId: string;
   name: string;
   description?: string;
   displayName?: string;
@@ -670,44 +669,79 @@ export interface RouteSegment {
 type SpacingValues = Record<Side, SpacingValue>;
 export type SpacingState = Record<SpacingType, SpacingValues>;
 
-// Workspace API
+// Workspace API - REMOVED (moved to @igrp/igrp-workspace-engine)
+// Use @igrp/igrp-workspace-engine for workspace functionality
 
-export interface ProjectWorkspace extends IdentifiableElement {
-  config: any,
-  service?: WorkspaceService
-}
-
-export interface ServiceWorkspace extends IdentifiableElement {
-  service: WorkspaceService
-}
-
-// Workspace
-
+// Type stubs for backward compatibility
 export interface WorkspaceConfig extends IdentifiableElement, VersionableElement {
   name: string;
   slug: string;
   description?: string;
-  projects?: any[];
+}
+
+export interface ProjectWorkspace extends IdentifiableElement {
+  config: any;
+  service?: any;
+}
+
+export interface ServiceWorkspace extends IdentifiableElement {
+  service: any;
 }
 
 export interface WorkspaceProjectsConfig extends IdentifiableElement {
-  workspace: string,
-  projects: WorkspaceProject[],
-  services: WorkspaceService[]
+  workspace: string;
+  projects: any[];
+  services: any[];
 }
 
-export interface WorkspaceProject {
-  config: any,
-  containerName?: string,
-  basePath: string,
-  environments: Environment[],
-  ports: Port,
-  dependsOn: Dependency[],
+export interface WorkspaceService {
+  name: string;
+  properties: any;
 }
 
-export interface WorkspaceService extends IdentifiableElement {
-  name: string,
-  properties: DockerContainer
+export interface Layout {
+  componentName: string;
+  id: string;
+  tag: string;
+  properties?: Record<string, any>;
+  interactions?: Record<string, any>;
+  data?: Record<string, any>;
+  forceStateLoad?: boolean;
+  forceReferenceLoad?: boolean;
+  dataType?: string;
+  children?: Layout[];
+}
+
+export interface FilterType {
+  name: string;
+  min: string;
+  max: string;
+  unit: string;
+}
+
+export interface TransformType {
+  name: string;
+  units: string[];
+}
+
+export interface Environment {
+  key: string;
+  value: string;
+}
+
+export interface Port {
+  internal: number;
+  external: number;
+}
+
+export interface Volume {
+  host: string;
+  container: string;
+  driver: string;
+}
+
+export interface Network {
+  name: string;
 }
 
 export interface ProjectDataSource {
@@ -870,7 +904,6 @@ export interface PathConfig {
   configs: string,
   template: string,
   baseApp: string,
-  baseWorkspace: string,
   componentPartials: string,
   genericPartials: string,
 }

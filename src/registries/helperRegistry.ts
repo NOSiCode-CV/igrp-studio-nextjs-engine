@@ -50,9 +50,7 @@ import { registry } from '../components';
 import fs from 'fs-extra';
 import { replaceTemplate } from '../utils/helpers';
 import { getPaths } from '../index';
-import { extractVolumes, indent, normalizeHostname } from '../helpers/workspaceHelper';
 import { PARTIALS } from '../utils/constants';
-import { renderService } from '../utils/renderService';
 import { resolveTypes } from '../helpers/resolveTypes';
 import { resolveReferences } from '../helpers/resolveReference';
 import { renderTextListItem } from '../helpers/renderTextListItem';
@@ -103,12 +101,6 @@ Handlebars.registerHelper("resolveClassNameProperty", resolveClassNameProperty);
 Handlebars.registerHelper("render-properties", renderProperties);
 Handlebars.registerHelper("render-interactions", renderInteractions);
 Handlebars.registerHelper("render-data", renderData);
-
-// Workspace
-Handlebars.registerHelper("extractVolumes", extractVolumes)
-Handlebars.registerHelper("render-service", renderService)
-Handlebars.registerHelper("indent", indent)
-Handlebars.registerHelper("normalizeHostname", normalizeHostname)
 
 // String
 Handlebars.registerHelper('toLowerCase', toLowerCase);
