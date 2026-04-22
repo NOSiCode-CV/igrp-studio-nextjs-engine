@@ -17,7 +17,13 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       errorMessage:
         'The project id attribute must be a valid string.',
     },
-    type: { 
+
+    workspaceId: {
+      type: 'string',
+      errorMessage:
+        'The workspace id attribute must be a valid string.',
+    },
+    type: {
       type: 'string', 
       const: 'nextjs',
       errorMessage: "The app config type attribute must be 'nextjs'."
@@ -36,7 +42,7 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       nullable: true,
     },
   },
-  required: ['id', 'type', 'name'],
+  required: ['id', 'workspaceId', 'type', 'name'],
   additionalProperties: false,
 };
 

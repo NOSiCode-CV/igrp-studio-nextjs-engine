@@ -3,7 +3,6 @@ import fs from 'fs-extra';
 import { Handlebars, loadComponentPartials, loadPartials } from '../../registries/helperRegistry';
 import { ERROR_MESSAGE } from '../../utils/constants';
 import { registry } from '../../components';
-import { registry as registryService } from '../../docker_services';
 import { registry as registryCode } from '../../code_snippets';
 import { getPaths } from '../../index';
 
@@ -27,7 +26,6 @@ export const renderTemplate = async (templateName: string, context: any) => {
 
   loadPartials();
 
-  context.registryService = registryService
   context.registry = registry
 
   const templatePath = path.join(getPaths().template, templateName);
@@ -82,8 +80,6 @@ export const renderServiceTemplate = (templateName: string, context: any, isShel
   }
 
   loadPartials();
-
-  context.registryService = registryService
 
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');

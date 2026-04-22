@@ -11,16 +11,17 @@ import {
   ComponentConfig,
   ComponentRegistrationConfig,
   DeleteConfig,
-  DockerServiceRegistrationConfig,
   PageComponentConfig,
   PageConfig,
   AppExportsConfig,
   RenderContext,
   PathConfig,
+  CodeSnippetsRegistrationConfig,
   CodeSnippetConfig,
   ProcessConfig,
   ProcessStepConfig,
   CustomFunctionConfig,
+  EngineConfigurationSettings,
 } from './interfaces/types';
 import { loadExportsConfig } from './modules/payload/loadExportsConfig';
 import { parseExportsConfig } from './modules/payload/parseExportsConfig';
@@ -29,6 +30,8 @@ import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
+import { register, registryAsObject } from './components';
+import { configurationAsObject, setConfiguration } from './config';
 import { processConfigValidate } from './schema/processConfig';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
 import { processStepConfigValidate } from './schema/processStepConfig';
@@ -39,11 +42,18 @@ import path from 'path';
 import { extractBaseApp } from './modules/baseApp/extractBaseApp';
 import { deleteValidation } from './schema/deleteConfig';
 import { generateProcessStep } from './modules/process/generateProcessStep';
+import { deleteElementConfig } from './modules/delete/deleteElementConfig';
+import { updateAndRenderPage } from './modules/components/updateAndRenderPage';
+import { registerAllComponents } from './components/register';
+import { registerAllCodeSnippets } from './code_snippets/register';
+import defaultModule from './components/default';
+import defaultCodeModule from './code_snippets/default';
+import defaultEngineModule from './config/default';
+import { componentRegistrationValidate } from './schema/componentRegisterConfig';
+import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
+import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
+import { engineConfigurationRegistrationValidate } from './schema/engineConfigurationRegisterConfig';
 
-// Stub functions for removed workspace functionality
-const loadEngineConfiguration = (name?: string) => {
-  return { environment: 'development' };
-}
 
 export function getPaths(version?: string): PathConfig {
   const environment = loadEngineConfiguration().environment;
@@ -330,8 +340,11 @@ export const addComponentToPage = async (config: PageComponentConfig, basePath: 
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  // Stub implementation for removed workspace functionality
-  console.log('addComponentToPage functionality removed during workspace migration');
+  const context: RenderContext<PageComponentConfig> = {
+    resourceConfig: config,
+    basePath: basePath,
+  };
+  await updateAndRenderPage(context);
 };
 
 export const deleteElement = async (config: DeleteConfig, basePath: string) => {
@@ -343,21 +356,75 @@ export const deleteElement = async (config: DeleteConfig, basePath: string) => {
 
   if (!basePath) throw ERROR_MESSAGE.INVALID_OUTPUT_PATH;
 
-  // Stub implementation for removed workspace functionality
-  console.log('deleteElement functionality removed during workspace migration');
+  const context: RenderContext<DeleteConfig> = {
+    resourceConfig: config,
+    basePath,
+  };
+
+  await deleteElementConfig(context);
+};
+
+export const initComponents = async () => {
+  try {
+    registerAllComponents();
+    console.log(`✅ Registered components`);
+  } catch (error) {
+    console.error(`❌ Failed to load components`, error);
+  }
+};
+
+export const initCodeSnippets = async () => {
+  try {
+    registerAllCodeSnippets();
+    console.log(`✅ Registered Code snippets`);
+  } catch (error) {
+    console.error(`❌ Failed to load Code snippets`, error);
+  }
+};
+
+export const registerComponents = (config: ComponentRegistrationConfig) => {
+  const isConfigValid = componentRegistrationValidate(config);
+
+  if (!isConfigValid && componentRegistrationValidate.errors)
+    throw componentRegistrationValidate.errors;
+
+  config.components.forEach((component) =>
+    register(component.name, (e) => defaultModule.register(e, component)),
+  );
+};
+
+export const setEngineConfiguration = (config: EngineConfigurationSettings, name?: string) => {
+  const isConfigValid = engineConfigurationRegistrationValidate(config);
+
+  if(!isConfigValid && engineConfigurationRegistrationValidate.errors)
+    throw engineConfigurationRegistrationValidate.errors;
+
+  setConfiguration((e) => defaultEngineModule.register(e, config), name)
+
+}
+
+export const registerCodeSnippets = (config: CodeSnippetsRegistrationConfig) => {
+  const isConfigValid = codeSnippetsRegistrationValidate(config);
+
+  if (!isConfigValid && codeSnippetsRegistrationValidate.errors)
+    throw codeSnippetsRegistrationValidate.errors;
+
+  config.codes.forEach((code) =>
+    registerCode(code.name, (e) => defaultCodeModule.register(e, code)),
+  );
 };
 
 export const loadRegistry = () => {
-  return {};
-};
-
-export const loadServiceRegistry = () => {
-  return {};
+  return registryAsObject();
 };
 
 export const loadCodeSnippetsRegistry = () => {
-  return {};
+  return codeRegistryAsObject();
 };
+
+export const loadEngineConfiguration = (name?: string) => {
+  return configurationAsObject(name);
+}
 
 export const addCodeSnippet = (config: CodeSnippetConfig): string => {
   return renderCode(config)
