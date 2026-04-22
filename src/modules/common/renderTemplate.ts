@@ -53,7 +53,7 @@ export const renderTemplate = async (templateName: string, context: any) => {
   const ast = await parseWithCache(templatePath, templateContent);
   const rendered = engine.render(ast, context);
   try {
-    return await formatAsync(rendered, PRETTIER_OPTIONS);
+    return await formatAsync(await rendered, PRETTIER_OPTIONS);
   } catch {
     return rendered;
   }
