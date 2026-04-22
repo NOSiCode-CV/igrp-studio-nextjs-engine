@@ -5,6 +5,16 @@ import { ERROR_MESSAGE } from '../../utils/constants';
 import { registry } from '../../components';
 import { registry as registryCode } from '../../code_snippets';
 import { getPaths } from '../../index';
+import { format as formatAsync } from 'prettier';
+import { format as formatSync } from '@prettier/sync';
+
+const PRETTIER_OPTIONS = {
+  parser: 'babel-ts',
+  semi: true,
+  trailingComma: 'all' as const,
+  singleQuote: true,
+  printWidth: 100,
+};
 
 const templateAstCache = new Map<string, { source: string; ast: any }>();
 
@@ -41,7 +51,12 @@ export const renderTemplate = async (templateName: string, context: any) => {
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = await fs.readFile(templatePath, 'utf-8');
   const ast = await parseWithCache(templatePath, templateContent);
-  return engine.render(ast, context);
+  const rendered = engine.render(ast, context);
+  try {
+    return await formatAsync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 };
 
 /**
@@ -67,7 +82,13 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
-  return engine.renderSync(ast, context);
+  const rendered = engine.renderSync(ast, context);
+
+  try {
+    return formatSync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 };
 
 /**
@@ -125,6 +146,12 @@ export const renderCodeTemplate = (templateName: string, context: any) => {
   const templatePath = path.join(getPaths().template, templateName);
   let templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
-  return engine.renderSync(ast, context);
+  const rendered = engine.renderSync(ast, context);
+
+  try {
+    return formatSync(rendered, PRETTIER_OPTIONS);
+  } catch {
+    return rendered;
+  }
 
 };
