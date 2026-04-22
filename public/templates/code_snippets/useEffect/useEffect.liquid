@@ -1,0 +1,3 @@
+useEffect(() => {
+  // Add your logic here
+},[{% if resourceConfig.properties.dependencies %}{% for this in resourceConfig.properties.dependencies %}{{ this.state }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}{% endif %}])

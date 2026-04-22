@@ -1,0 +1,104 @@
+<IGRPRadialBarChart
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  categoryKey={ `{{ resourceConfig.properties.categoryKey }}` }
+  nameKey={ `{{ resourceConfig.properties.nameKey }}` }
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
+  title={ `{{ resourceConfig.properties.title }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
+  description={ `{{ resourceConfig.properties.description }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.showGrid and not resourceConfig.data.showGrid -%}
+  showGrid={ {{ resourceConfig.properties.showGrid }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showTooltip and not resourceConfig.data.showTooltip -%}
+  showTooltip={ {{ resourceConfig.properties.showTooltip }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showBackground and not resourceConfig.data.showBackground -%}
+  showBackground={ {{ resourceConfig.properties.showBackground }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showRadiusAxis and not resourceConfig.data.showRadiusAxis -%}
+  showRadiusAxis={ {{ resourceConfig.properties.showRadiusAxis }} }
+  {% endif -%}
+  {% if resourceConfig.properties.height and not resourceConfig.data.height -%}
+  height={ {{ resourceConfig.properties.height }} }
+  {% endif -%}
+  {% if resourceConfig.properties.width and not resourceConfig.data.width -%}
+  width={ {{ resourceConfig.properties.width }} }
+  {% endif -%}
+  {% if resourceConfig.properties.startAngle and not resourceConfig.data.startAngle -%}
+  startAngle={ {{ resourceConfig.properties.startAngle }} }
+  {% endif -%}
+  {% if resourceConfig.properties.endAngle and not resourceConfig.data.endAngle -%}
+  endAngle={ {{ resourceConfig.properties.endAngle }} }
+  {% endif -%}
+  {% if resourceConfig.properties.innerRadius and not resourceConfig.data.innerRadius -%}
+  innerRadius={ `{{ resourceConfig.properties.innerRadius }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.outerRadius and not resourceConfig.data.outerRadius -%}
+  outerRadius={ `{{ resourceConfig.properties.outerRadius }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.barSize and not resourceConfig.data.barSize -%}
+  barSize={ {{ resourceConfig.properties.barSize }} }
+  {% endif -%}
+  {% if resourceConfig.properties.gridType and not resourceConfig.data.gridType -%}
+  gridType={ `{{ resourceConfig.properties.gridType }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.gridColor and not resourceConfig.data.gridColor -%}
+  gridColor={ `{{ resourceConfig.properties.gridColor }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backgroundColor and not resourceConfig.data.backgroundColor -%}
+  backgroundColor={ `{{ resourceConfig.properties.backgroundColor }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.referenceLineColor and not resourceConfig.data.referenceLineColor -%}
+  referenceLineColor={ `{{ resourceConfig.properties.referenceLineColor }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.axisColor and not resourceConfig.data.axisColor -%}
+  axisColor={ `{{ resourceConfig.properties.axisColor }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.footer and not resourceConfig.data.footer -%}
+  footer={
+    {
+      description: `{{ resourceConfig.properties.footer.description }}`
+    }
+  }
+  {% endif -%}
+  {% if resourceConfig.properties.centerText and not resourceConfig.data.centerText -%}
+  centerText={
+    {
+      show: {{ resourceConfig.properties.centerText.show }}
+      value: `{{ resourceConfig.properties.centerText.value }}"
+      label: `{{ resourceConfig.properties.centerText.label }}"
+      formatter: (value: number) => "{{ resourceConfig.properties.centerText.formatter }}"
+    }
+  }
+  {% endif -%}
+  {% if resourceConfig.properties.legendPosition and not resourceConfig.data.legendPosition -%}
+  legendPosition={ `{{ resourceConfig.properties.legendPosition }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.size and not resourceConfig.data.size -%}
+  size={ `{{ resourceConfig.properties.size }}` }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% comment %}loading={ {{ resourceConfig.id }}Loading }{% endcomment %}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+>
+</IGRPRadialBarChart>

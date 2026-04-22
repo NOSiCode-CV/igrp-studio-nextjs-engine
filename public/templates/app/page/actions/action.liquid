@@ -1,0 +1,9 @@
+'use server'
+
+{% comment %}{% if resourceConfig.imports %}
+{% for this in resourceConfig.imports -%}
+{{ this.namespace }}
+{% endfor -%}
+{% endif %}{% endcomment %}
+
+{{ resourceConfig.code }}

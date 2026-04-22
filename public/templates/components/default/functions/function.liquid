@@ -1,0 +1,5 @@
+{% if resourceConfig.isAsync %}async {% endif %}function {{ resourceConfig.name }} ({% for this in resourceConfig.arguments %}{{ this.name }}{% if this.isOptional %}?{% endif %}: {{ this.type }}{% if this.isList %}[]{% endif %}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}): {% if resourceConfig.isAsync %}Promise<{% endif %}{{ resourceConfig.returnValue.type }}{% if resourceConfig.returnValue.isList %}[]{% endif %}{% if resourceConfig.returnValue.isNullable %}  | undefined{% endif %}{% if resourceConfig.isAsync %}>{% endif %} {
+
+  {{ resourceConfig.code }}
+
+}

@@ -1,0 +1,69 @@
+<IGRPAlertDialog
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
+  title={ `{{ resourceConfig.properties.title }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
+  description={ `{{ resourceConfig.properties.description }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.actionLabel and not resourceConfig.data.actionLabel -%}
+  actionLabel={ `{{ resourceConfig.properties.actionLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.cancelLabel and not resourceConfig.data.cancelLabel -%}
+  cancelLabel={ `{{ resourceConfig.properties.cancelLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.showCancel and not resourceConfig.data.showCancel -%}
+  showCancel={ {{ resourceConfig.properties.showCancel }} }
+  {% endif -%}
+  {% if resourceConfig.properties.actionProps -%}
+  actionProps={
+    {
+      {{ '' | render-properties: resourceConfig.properties.actionProps, undefined, undefined, true }}
+    }
+  }
+  {% endif -%}
+  {% if resourceConfig.properties.cancelProps -%}
+  cancelProps={
+    {
+      {{ '' | render-properties: resourceConfig.properties.cancelProps, undefined, undefined, true }}
+    }
+  }
+  {% endif -%}
+  {% if resourceConfig.properties.titleClassName -%}
+  titleClassName={ `{{ resourceConfig.properties.titleClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.descriptionClassName -%}
+  descriptionClassName={ `{{ resourceConfig.properties.descriptionClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.footerClassName -%}
+  footerClassName={ `{{ resourceConfig.properties.footerClassName }}` }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+>
+  <>
+    {% if resourceConfig.children -%}
+    {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+    {% endfor -%}
+    {% endif -%}
+  </>
+</IGRPAlertDialog>

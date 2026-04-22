@@ -1,0 +1,11 @@
+return <IGRPDataTableCellExpander
+  row={ row }
+  field={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
+  {% if resourceConfig.properties.icons and not resourceConfig.data.icons %}icons={ [ {{ resourceConfig.properties.icons }} ] }{% endif %}
+>
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
+</IGRPDataTableCellExpander>

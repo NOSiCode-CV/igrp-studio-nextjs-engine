@@ -1,0 +1,37 @@
+<IGRPDropdownItem
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.size and not resourceConfig.data.size -%}
+  size={ `{{ resourceConfig.properties.size }}` }
+  {% endif -%}
+  disabled={ {{ resourceConfig.id }}Disabled }
+  {% if resourceConfig.properties.iconProperties.showIcon -%}
+  showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
+  iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconPlacement -%}
+  iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
+  iconClass={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize -%}
+  iconSize={{ resourceConfig.properties.iconProperties.iconSize }}
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% comment %}loading={ {{ resourceConfig.id }}Loading }{% endcomment %}
+  onClick={(e) => { {% if resourceConfig.properties.action and not resourceConfig.data.action %}{{ resourceConfig.properties.action }}(e){% else %}handle{{ resourceConfig.id }}Click(e){% endif %} }}
+>
+{% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+{% endif -%}
+</IGRPDropdownItem>

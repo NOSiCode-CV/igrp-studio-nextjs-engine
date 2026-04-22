@@ -1,0 +1,116 @@
+<IGRPDataTable{{ '' | typeFormatter: resourceConfig.dataType }}
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.showFilter and not resourceConfig.data.showFilter -%}
+  showFilter={ {{ resourceConfig.properties.showFilter }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showPagination and not resourceConfig.data.showPagination -%}
+  showPagination={ {{ resourceConfig.properties.showPagination }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showToggleColumn and not resourceConfig.data.showToggleColumn -%}
+  showToggleColumn={ {{ resourceConfig.properties.showToggleColumn }} }
+  {% endif -%}
+  {% if resourceConfig.properties.isNumericPagination and not resourceConfig.data.isNumericPagination -%}
+  isNumericPagination={ {{ resourceConfig.properties.isNumericPagination }} }
+  {% endif -%}
+  {% if resourceConfig.properties.isServerSide and not resourceConfig.data.isServerSide -%}
+  isServerSide={ {{ resourceConfig.properties.isServerSide }} }
+  {% endif -%}
+  {% if resourceConfig.properties.toggleLabel and not resourceConfig.data.toggleLabel -%}
+  toggleLabel={ `{{ resourceConfig.properties.toggleLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.toggleOptionsLabel and not resourceConfig.data.toggleOptionsLabel -%}
+  toggleOptionsLabel={ `{{ resourceConfig.properties.toggleOptionsLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.tableClassName and not resourceConfig.data.tableClassName -%}
+  tableClassName={ `{{ resourceConfig.properties.tableClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.tableHeaderClassName and not resourceConfig.data.tableHeaderClassName -%}
+  tableHeaderClassName={ `{{ resourceConfig.properties.tableHeaderClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.tableBodyClassName and not resourceConfig.data.tableBodyClassName -%}
+  tableBodyClassName={ `{{ resourceConfig.properties.tableBodyClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.paginationClassName and not resourceConfig.data.paginationClassName -%}
+  paginationClassName={ `{{ resourceConfig.properties.paginationClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.pageSizePagination and not resourceConfig.data.pageSizePagination -%}
+  pageSizePagination={ [{% for this in resourceConfig.properties.pageSizePagination %}{{ this }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}] }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  columns={
+    [
+    {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children | extractTableColumns -%}
+        {% for this in this.children -%}
+        {% if this.componentName != 'tableHiddenCell' -%}
+        {
+          {% if this.properties.headerTitle or this.properties.headerType %}header: {% partial 'tableHeader', value0: this %},{% endif %}
+          {% if this.properties.headerTitle %}accessorKey{% else %}id{% endif %}: '{{ '' | toCamelCase: this.tag }}',
+          {% if this.componentName == 'tableActionListCell' %}enableHiding: false,{% endif %}
+          cell: ({ row }) => {
+          {{ '' | render-table-row: this, registry }}
+          },
+          filterFn: {% if this.componentName == 'tableDateCell' %}IGRPDataTableDateRangeFilterFn{% else %}IGRPDataTableFacetedFilterFn{% endif %}
+        },
+        {% endif -%}
+        {% endfor -%}
+      {% endfor -%}
+    {% endif -%}
+    ]
+  }
+  clientFilters={
+    [
+    {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children | extractTableFilters -%}
+        {% for child in this.children -%}
+        {% if child.componentName contains 'Filter' -%}
+        {
+          {% if child.properties.columnId %}columnId: `{{ child.properties.columnId }}`,{% endif %}
+          component: (column) => (
+          {{ '' | render-table-row: child, registry }}
+          )
+        },
+        {% endif -%}
+        {% endfor -%}
+      {% endfor -%}
+    {% endif -%}
+    ]
+  }
+  {% assign rowSubcomponent = resourceConfig.children | extractTableRowSubcomponent %}
+  {% if rowSubcomponent -%}
+  getRowCanExpand={(row) => {
+    const rowData = row.original;
+    return !!({% if rowSubcomponent.properties.rule %}{{ rowSubcomponent.properties.rule }}{% else %}false{% endif %});
+  }}
+  renderSubComponent={(row) => {
+    const rowData = row.original;
+    const matchRule = {% if rowSubcomponent.properties.rule %}{{ rowSubcomponent.properties.rule }}{% else %}false{% endif %};
+    if(!matchRule) return undefined;
+    return (
+      <>
+        {% if rowSubcomponent.children -%}
+        {% for child in rowSubcomponent.children -%}
+        {{ '' | render-layout: child, rowSubcomponent }}
+        {% endfor -%}
+        {% endif -%}
+      </>
+    );
+  }}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+/>

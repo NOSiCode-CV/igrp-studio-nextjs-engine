@@ -1,4 +1,4 @@
-import { CodeSnippets, hbsRenderer } from '../index';
+import { CodeSnippets, liquidRenderer } from '../index';
 import { formReferenceUsageDefaultProperties, formReferenceUsageProperties } from './properties';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     codeSnippet.loadDescription("Code snippet to handle form submit through form references.");
     codeSnippet.getProperties(formReferenceUsageProperties());
     codeSnippet.getDefaultProperties(formReferenceUsageDefaultProperties());
-    codeSnippet.setRenderer(hbsRenderer);
+    codeSnippet.setRenderer(liquidRenderer);
   }
 
 };

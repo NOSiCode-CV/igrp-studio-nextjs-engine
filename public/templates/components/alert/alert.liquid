@@ -1,0 +1,61 @@
+<IGRPAlert
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.color and not resourceConfig.data.color -%}
+  color={ `{{ resourceConfig.properties.color }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.linkLabel and not resourceConfig.data.linkLabel -%}
+  linkLabel={ `{{ resourceConfig.properties.linkLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.linkUrl and not resourceConfig.data.linkUrl -%}
+  linkUrl={ `{{ resourceConfig.properties.linkUrl }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.showLink and not resourceConfig.data.showLink -%}
+  showLink={ {{ resourceConfig.properties.showLink }} }
+  {% endif -%}
+  {% if resourceConfig.properties.textColored and not resourceConfig.data.textColored -%}
+  textColored={ {{ resourceConfig.properties.textColored }} }
+  {% endif -%}
+  {% if resourceConfig.properties.borderColored and not resourceConfig.data.borderColored -%}
+  borderColored={ {{ resourceConfig.properties.borderColored }} }
+  {% endif -%}
+  {% if resourceConfig.properties.bgColored and not resourceConfig.data.bgColored -%}
+  bgColored={ {{ resourceConfig.properties.bgColored }} }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.showIcon and not resourceConfig.data.showIcon -%}
+  showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.icon -%}
+  icon={ `{{ resourceConfig.properties.iconProperties.icon }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.linkIcon -%}
+  linkIcon={ `{{ resourceConfig.properties.iconProperties.linkIcon }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
+  iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+>
+  <>
+    {% if resourceConfig.children -%}
+    {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+    {% endfor -%}
+    {% endif -%}
+  </>
+</IGRPAlert>

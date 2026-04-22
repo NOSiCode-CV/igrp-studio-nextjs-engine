@@ -1,0 +1,17 @@
+<IGRPDataTableDropdownMenu
+  items={
+    [
+      {% if resourceConfig.children -%}
+      {% for this in resourceConfig.children -%}
+      {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}{
+        component: {{ '' | resolveComponent: this.componentName, registry }},
+        props: {
+          {{ '' | render-layout: this, resourceConfig }}
+        }
+      }{% if this | checkRules %}] : []){% endif %},
+      {% endfor -%}
+      {% endif -%}
+    ]
+  }
+>
+</IGRPDataTableDropdownMenu>

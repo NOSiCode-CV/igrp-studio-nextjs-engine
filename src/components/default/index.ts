@@ -1,4 +1,4 @@
-import { Component, customRenderer, defaultRenderer, hbsRenderer, noRenderer } from '../index';
+import { Component, customRenderer, defaultRenderer, liquidRenderer, noRenderer } from '../index';
 import { ComponentRegisterConfig } from '../../interfaces/types';
 
 export default {
@@ -32,6 +32,6 @@ export default {
     component.getRules(config.rules)
     component.getRulesMapping(config.rulesMapping)
     component.loadDefaultChildren(config.defaultChildren)
-    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : config.renderer === 'custom' ? customRenderer : noRenderer);
+    component.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'liquid' ? liquidRenderer : config.renderer === 'custom' ? customRenderer : noRenderer);
   }
 };

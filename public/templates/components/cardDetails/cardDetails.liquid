@@ -1,0 +1,65 @@
+<IGRPCardDetails
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
+  title={ `{{ resourceConfig.properties.title }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
+  description={ `{{ resourceConfig.properties.description }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.contentClassName and not resourceConfig.data.contentClassName -%}
+  contentClassName={ `{{ resourceConfig.properties.contentClassName }}` }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% if resourceConfig.children and not resourceConfig.data.items -%}
+  items={ [
+  {% for this in resourceConfig.children | extractCardDetailsItem -%}
+  {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
+    {
+    {% if this.data.label -%}
+      label: {{ this.data.label.state.name }},
+    {% else -%}
+    {% if this.properties.label -%}
+      label: `{{ this.properties.label }}`,
+    {% else -%}
+      label: "",
+    {% endif -%}
+    {% endif -%}
+    {% if this.children -%}
+      content: (<>
+      {% for child in this.children -%}
+        {{ '' | render-layout: child, this }}
+      {% endfor -%}
+      </>),
+    {% else -%}
+    {% if this.data.content -%}
+      content: {{ this.data.content.state.name }},
+    {% else -%}
+      {% if this.properties.content -%}
+      content: `{{ this.properties.content }}`,
+      {% else -%}
+      content: (<></>),
+      {% endif -%}
+    {% endif -%}
+    {% endif -%}
+    {% if this.data.showCopyTo -%}
+      showCopyTo: {{ this.data.showCopyTo.state.name }},
+    {% else -%}
+      {% if this.properties.showCopyTo -%}
+      showCopyTo: {{ this.properties.showCopyTo }},
+      {% endif -%}
+    {% endif -%}
+    }{% if this | checkRules %}] : []){% endif %},
+  {% endfor -%}
+  ] }
+  {% endif -%}
+/>

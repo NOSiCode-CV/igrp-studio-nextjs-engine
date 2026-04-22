@@ -30,7 +30,7 @@ import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
-import { register, registryAsObject } from './components';
+import { register, registryAsObject, liquidRenderer as componentLiquidRenderer } from './components';
 import { configurationAsObject, setConfiguration } from './config';
 import { processConfigValidate } from './schema/processConfig';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
@@ -445,3 +445,5 @@ export async function loadAppExports(basePath: string): Promise<AppExportsConfig
 export function convertJsonSchemaToForm(schema: JsonSchema): IGRPComponent[] {
   return jsonSchemaToIGRPForm(schema);
 }
+
+export const liquidRenderer = componentLiquidRenderer;

@@ -4,7 +4,7 @@ import {
   lineChartChildProperties,
   lineChartChildPropertiesMapping, lineChartInteractions, lineChartData, lineChartRules, lineChartStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 
@@ -30,7 +30,7 @@ export default {
     component.loadStates([
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

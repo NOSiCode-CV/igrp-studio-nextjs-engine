@@ -1,0 +1,66 @@
+<IGRPAccordion
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.name and not resourceConfig.data.name -%}
+  name={ `{{ resourceConfig.properties.name }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.value and not resourceConfig.data.value -%}
+  value={ `{{ resourceConfig.properties.value }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.defaultValue and not resourceConfig.data.defaultValue -%}
+  defaultValue={ `{{ resourceConfig.properties.defaultValue }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.classNameContent and not resourceConfig.data.classNameContent -%}
+  classNameContent={ `{{ resourceConfig.properties.classNameContent }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.classNameTrigger and not resourceConfig.data.classNameTrigger -%}
+  classNameTrigger={ `{{ resourceConfig.properties.classNameTrigger }}` }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.children -%}
+  items={ [
+  {% for this in resourceConfig.children | extractAccordionItem -%}
+    {
+    {% if this.data.title -%}
+      title: {{ this.data.title.state.name }},
+    {% else -%}
+    {% if this.properties.title -%}
+      title: `{{ this.properties.title }}`,
+    {% else -%}
+      title: "",
+    {% endif -%}
+    {% endif -%}
+    {% if this.data.content -%}
+      content: {{ this.data.content.state.name }},
+    {% else -%}
+      {% if this.children -%}
+      content: (<>
+        {% for child in this.children -%}
+        {{ '' | render-layout: child, this }}
+        {% endfor -%}
+      </>),
+      {% else -%}
+      {% if this.properties.content -%}
+      content: `{{ this.properties.content }}`,
+      {% else -%}
+      content: (<></>),
+      {% endif -%}
+      {% endif -%}
+    {% endif -%}
+    },
+  {% endfor -%}
+  ] }
+  {% endif -%}
+/>

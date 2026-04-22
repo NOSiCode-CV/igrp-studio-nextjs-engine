@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
-import { renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { addClassNameFromChildProperties, renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
 import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
 import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
 import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
@@ -377,7 +377,7 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
       registry[it.name], it.isDefault)),
     defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
-    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
     templatePath: value.templatePath
   }
 }
@@ -494,14 +494,9 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
         .join('')
       : ``;
 
-    childClassNames = childCommon
-      ? Object.entries(childCommon)
-        .map(([key, value]) => {
-          return parentElement?.childPropertiesMapping[key]?.className
-            ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
-            : ``;
-        })
-        .join('')
+    const inheritedChildClassNames = addClassNameFromChildProperties(parentComponent, registry);
+    childClassNames = inheritedChildClassNames
+      ? inheritedChildClassNames.replace(/'/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim()
       : ``;
 
   }
@@ -623,7 +618,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   return () => str
 }
 
-export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
+export function liquidRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   //const name = component.componentName
   return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name: 'default' /*name*/ }), {
     resourceConfig: component,

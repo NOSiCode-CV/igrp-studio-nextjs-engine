@@ -54,36 +54,34 @@ export const EXTENSIONS = {
 }
 
 export const TEMPLATES = {
-  WELCOME_PAGE: 'config/page.hbs',
-  CONFIG_LAYOUT: 'config/layout.hbs',
-  CONFIG_PACKGE_JSON: 'config/package.json.hbs',
-  PAGE: 'app/page/page.hbs',
-  EXPORTS_FILE: 'app/igrp.config.ts.hbs',
-  COMPONENT: 'app/component/component.hbs',
-  ACTION: 'app/page/actions/action.hbs',
-  SERVICE: 'app/page/service.hbs',
-  MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
-  MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
-  CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
-  CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
-  CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
-  CONFIG_GITLAB_CI_CD: 'config/gitlab-ci.yml.hbs',
-  ELEMENT: 'components/{{name}}/{{name}}.hbs',
-  DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.hbs',
-  DEFAULT_CODE_SNIPPETS: 'code_snippets/default/default.hbs',
-  DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.hbs',
-  CODE_SNIPPETS: 'code_snippets/{{name}}/{{name}}.hbs',
-  DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.hbs',
-  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
-  TYPE_ELEMENT: 'components/{{element}}/types/type.hbs',
-  DEFAULT_FUNCTION: 'components/default/functions/function.hbs',
-  DEFAULT_STATE: 'components/default/states/state.hbs',
-  DEFAULT_REFERENCE: 'components/default/references/reference.hbs',
-  DEFAULT_NAVIGATE: 'components/default/navigation/navigate.hbs',
-  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
-  UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
-  UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.hbs',
-  IGRP_AUTH_JSON: 'docker_services/keycloak/volumes/igrp-realm.json.hbs',
+  WELCOME_PAGE: 'config/page.liquid',
+  CONFIG_LAYOUT: 'config/layout.liquid',
+  CONFIG_PACKGE_JSON: 'config/package.json.liquid',
+  PAGE: 'app/page/page.liquid',
+  EXPORTS_FILE: 'app/igrp.config.ts.liquid',
+  COMPONENT: 'app/component/component.liquid',
+  ACTION: 'app/page/actions/action.liquid',
+  SERVICE: 'app/page/service.liquid',
+  MAIN_LAYOUT: 'app/layouts/mainlayout.liquid',
+  MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.liquid',
+  CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.liquid',
+  CONFIG_INGRESS: 'config/k8s/ingressyaml.liquid',
+  CONFIG_SERVICE: 'config/k8s/serviceyaml.liquid',
+  CONFIG_GITLAB_CI_CD: 'config/gitlab-ci.yml.liquid',
+  ELEMENT: 'components/{{name}}/{{name}}.liquid',
+  DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.liquid',
+  DEFAULT_CODE_SNIPPETS: 'code_snippets/default/default.liquid',
+  DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.liquid',
+  CODE_SNIPPETS: 'code_snippets/{{name}}/{{name}}.liquid',
+  DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.liquid',
+  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.liquid',
+  TYPE_ELEMENT: 'components/{{element}}/types/type.liquid',
+  DEFAULT_FUNCTION: 'components/default/functions/function.liquid',
+  DEFAULT_STATE: 'components/default/states/state.liquid',
+  DEFAULT_REFERENCE: 'components/default/references/reference.liquid',
+  DEFAULT_NAVIGATE: 'components/default/navigation/navigate.liquid',
+  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.liquid',
+  UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.liquid',
 };
 
 export const ENVIRONMENT_FILES = {
@@ -212,7 +210,7 @@ export const INTERACTIONS_DEFAULTS = {
   EMPTY_OBJECT: '{}',
 }
 
-export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
+export const PACKAGE_JSON = {template: 'config/package.json.liquid', output: 'package.json'}
 
 export const DIRECTORIES = {
   APP: 'src/app',

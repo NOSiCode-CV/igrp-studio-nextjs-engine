@@ -1,0 +1,217 @@
+'use client'
+
+{% if resourceConfig.components -%}
+import * as yup from 'yup';
+{% endif -%}
+import React, { useEffect, useRef, useState } from "react";
+import { Col, Row, Container } from 'reactstrap'
+import { {{ '' | capitalize: resourceConfig.pageName }}Service} from '@/services/{{ '' | toLowerCase: resourceConfig.pageName }}/{{ '' | capitalize: resourceConfig.pageName }}Service'
+
+{% if resourceConfig.components -%}
+
+{% if velzonImports -%}
+import{ {% for this in velzonImports %}IGRP_{{ this }}{% if forloop.last %}{% else %},
+{% endif -%}
+{% endfor -%}
+}from '@igrp/nosi-velzon-ts'
+{% endif -%}
+
+{% for this in resourceConfig.components -%}
+{% for this in Row -%}
+{% for this in Col -%}
+{% for this in components -%}
+type I{{ '' | capitalize: this.id }}Fields = { {% if this.componentName == 'FormLayout' %}{% for this in this.fields %}
+  {{ this.config.name }}: IGRP_{{ this.componentName }}.Field.{{ this.type }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}
+  {% endif -%}
+}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
+{% endfor -%}
+
+{% endif -%}
+export type I{{ '' | toLowerCase: resourceConfig.pageName }}Service = {
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
+  {% if this.componentName == 'Button' -%}
+  {{ this.id }}: (data?: Record<string, unknown>) => void;
+  {% else -%}
+  {{ '' | toLowerCase: this.id }}: IGRP_{{ this.componentName }}.Props<I{{ '' | capitalize: this.id }}Fields>['service']{% if forloop.last %}{% else %},{% endif %}
+  {% comment %} Declaring button action inside table {% endcomment %}
+  {% if this.componentName == 'TableComponent' -%}
+  {% if this.actions -%}
+  {% for this in this.actions -%}
+  {{ this.id }}: ((data?: Record<string, any>) => void);
+  {% endfor -%}
+  {% endif -%}
+  {% endif -%}
+  {% comment %} End declare button action inside table {% endcomment %} 
+  {% endif -%}
+  {% comment %} Declaring button action inside form {% endcomment %}
+  {% if this.componentName == 'FormLayout' -%}
+  {% for this in this.fields -%}
+  {% if this.type == 'IGRP_ButtonInput' -%}
+  {{ this.config.name }}:(data: Record<string, unknown>) => void;
+  {% endif %}{% endfor %}
+  {% endif -%}
+  {% comment %} End declare button action inside form {% endcomment %}  
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+}
+
+export default function {{ resourceConfig.pageName }}() {
+  {% if resourceConfig.components -%}
+  const service: I{{ '' | toLowerCase: resourceConfig.pageName }}Service = {{ '' | capitalize: resourceConfig.pageName }}Service;
+  {% comment %} Declaring form references {% endcomment %}
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
+  {% if this.componentName == 'FormLayout' -%}
+  const {{ this.id }}Ref = useRef<IGRP_FormLayout.FormLayoutRef>(null) {% endif %}
+  {% if this.componentName == 'TableComponent' -%}
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    updateTable()
+  },[])
+
+  const updateTable = async () => {
+    if (service.{{ this.id }} && service.{{ this.id }}.populate) {
+      const fakeData = (await service.{{ this.id }}.populate()).rows
+      setData([...fakeData])
+    }
+  }
+  {% if this.actions -%}
+  {% for this in this.actions %}{% if this.config.refreshTable %}
+  const handle{{ '' | capitalize: this.id }} = (data: any) => {
+    service.{{ this.id }}(data);
+    updateTable();
+  }
+  {% endif %}{% endfor %}
+  {% endif %}{% endif %}
+  {% endfor %}{% comment %} end each components {% endcomment %}
+  {% endfor %} {% comment %} end each Col {% endcomment %}
+  {% endfor %} {% comment %} end each Row {% endcomment %}
+  {% endfor %} {% comment %} end each resourcesConfig.components {% endcomment %}
+  {% comment %} end declaring form refences {% endcomment %}
+
+
+  {% for this in resourceConfig.components -%}
+  {% for this in Row -%}
+  {% for this in Col -%}
+  {% for this in components -%}
+  const {{ '' | capitalize: this.id }}Props: IGRP_{{ this.componentName }}.Props<{{ '' | component-name-helper: this }}> = {
+  {% if this.componentName == 'Button' -%}
+    {% if applyToAll this.config -%}
+    formRefs: {
+      {% for this in formRefs -%}
+      {{ this }}: {{ this }}Ref,
+      {% endfor -%}
+    },{% else %}{% if action-type this.config %} formRefs: { {% for this in this.config.targetForms %}
+    {{ this }}: {{ this }}Ref,
+    {% endfor %} }, {% endif %}{% endif %}
+    serviceAction: {% if this.config.refreshTable %} async(data) => {
+      service.{{ this.id }}(data)
+      updateTable()
+    },{% else %}service.{{ this.id }},{% endif %}
+    config: {{ '' | json: this.config }},
+  {% else -%}
+    service: service?.{{ '' | toLowerCase: this.id }},
+    fields: {{ '' | field-helper: this }},
+    config: {{ '' | json: this.config }}{% if this.actions %},
+    actions: (cell: any) => {
+      return (
+        <React.Fragment>
+          {% for this in this.actions -%}
+          <IGRP_Button._Button
+            values={cell.row.original}
+            serviceAction={ {% if this.config.refreshTable %}() => {
+              handle{{ '' | capitalize: this.id }}(cell.row.original)
+            }
+              {% else -%}
+              service.{{ this.id }}
+              {% endif -%}
+            }           
+            config={ 
+              {{ '' | json: this.config }} 
+            }
+            />
+          {% endfor -%}
+        </React.Fragment>
+      )
+    }{% endif %}{% endif %}  
+  }
+  {% if this.componentName == 'TableComponent' -%}
+  {{ '' | capitalize: this.id }}Props.config.data = data
+  {% endif -%}
+  {% for this in this.fields -%}
+  {% if componentName == 'FormLayout' %}{% if isValidation this %} {% comment %} check validation fields {% endcomment %}
+  {{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.validation = {{ '' | yup-validation: this }}{% endif %}{% comment %} end check validation fields {% endcomment %}
+  {% if this.type == 'IGRP_ButtonInput' %}{% comment %} set formRef and serviceAction to the button field {% endcomment %}
+  {% if this.config.targetForms %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.formRefs = {
+    {% for this in this.config.targetForms -%}
+    {{ this }}: {{ this }}Ref,
+    {% endfor -%}
+  }
+  {% endif -%}
+  {% if applyToAll this.config %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.formRefs = {
+    {% for this in formRefs -%}
+    {{ this }}: {{ this }}Ref,
+    {% endfor -%}
+  }
+  {% endif %}{% if this.config.refreshTable %}
+  {{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.serviceAction = async(data) => {
+    service.{{ this.config.name }}(data),
+    updateTable()
+  };
+  {% else %}{{ '' | capitalize: id }}Props.fields.{{ this.config.name }}.config.serviceAction = service.{{ this.config.name }}{% endif %}
+  {% endif %}{% comment %} end set formRef and serviceAction to the button field {% endcomment %}
+  {% endif -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+  {% endfor -%}
+
+  return (
+    <React.Fragment>
+      <Container fluid>
+        {% for this in resourceConfig.components -%}
+        <Row>
+        {% for this in Row -%}
+        {% for this in Col -%}
+          <Col lg={ {{ this.colSize }} }>
+          {% for this in components -%}
+            {% if this.componentName == 'Button' -%}
+            <IGRP_{{ this.componentName }}._Button {...{{ '' | capitalize: this.id }}Props} />
+            {% else -%}
+            <IGRP_{{ this.componentName }}.{{ this.componentName }} {...{{ '' | capitalize: this.id }}Props} {% if this.componentName == 'FormLayout' %}ref={ {{ this.id }}Ref }{% endif %}/>
+            {% endif -%}
+          {% endfor -%}
+          </Col>
+          {% endfor -%}
+        {% endfor -%}
+        </Row>
+        {% endfor -%}
+      </Container>
+    </React.Fragment>
+  )
+  {% else -%}
+  return (
+    <Container fluid className="d-flex vh-100">
+      <Row className="justify-content-center align-items-center w-100">
+        <Col xl={12} className="d-flex justify-content-center">
+          <p className="text-center" style={ { fontSize: 35 } }>
+            Your components will be displayed here
+          </p>
+        </Col>
+      </Row>
+    </Container>
+  )
+  {% endif -%}
+}

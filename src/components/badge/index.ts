@@ -5,7 +5,7 @@ import {
   badgeChildProperties,
   badgeChildPropertiesMapping, badgeInteractions, badgeInteractionsMapping, badgeStyle, badgeRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -28,7 +28,7 @@ export default {
     ]);
     component.getStyle(badgeStyle())
     component.getRules(badgeRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

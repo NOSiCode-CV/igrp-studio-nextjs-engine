@@ -5,7 +5,7 @@ import {
   textListsSubItemsChildProperties,
   textListsSubItemsChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { TEXT_LIST_ITEM } from '../textListItem/index';
 
 export default {
@@ -23,7 +23,7 @@ export default {
 
     component.loadStates([]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

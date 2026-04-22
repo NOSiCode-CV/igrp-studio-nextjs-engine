@@ -5,7 +5,7 @@ import {
   tableChildProperties,
   tableChildPropertiesMapping, tableInteractionsMapping, tableData, tableStyle, tableRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
 import { TABLE_FILTERS } from './children/tableFilters';
 import { TEMPLATES } from '../../utils/constants';
@@ -57,7 +57,7 @@ export default {
 
     component.getStyle(tableStyle())
     component.getRules(tableRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

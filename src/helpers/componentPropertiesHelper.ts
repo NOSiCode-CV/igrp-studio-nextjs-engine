@@ -34,17 +34,35 @@ import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/i
 import { TABLE_ROW_SUBCOMPONENT } from '../components/table/children/tableRowSubcomponent';
 
 export function addClassNameFromChildProperties(
-  parent: Layout,
+  parent: Layout | undefined,
   registry: Record<string, Component>,
 ): string {
-  if (!parent.childProperties) return '';
-
+  if (!parent) return '';
   const parentElement = registry[parent.componentName];
+  const sourcePropertiesCandidates = [
+    parent.childProperties,
+    (parent as Record<string, any>)?.properties?.childProperties,
+    parentElement?.childProperties,
+  ].filter((candidate) => candidate && Object.keys(candidate).length > 0);
+  const sourceProperties = sourcePropertiesCandidates[0] as Record<string, any> | undefined;
+  if (!sourceProperties) return '';
 
-  return Object.entries(parent.childProperties)
+  return Object.entries(sourceProperties)
     .map(([key, value]) => {
+      let normalizedValue = value;
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        const valueAsObject = value as Record<string, any>;
+        if (valueAsObject.default !== undefined) normalizedValue = valueAsObject.default;
+        else if (valueAsObject.value?.code !== undefined) normalizedValue = valueAsObject.value.code;
+        else if (valueAsObject.state?.name !== undefined) normalizedValue = valueAsObject.state.name;
+        else if (valueAsObject.value !== undefined) normalizedValue = valueAsObject.value;
+      }
+      if (typeof normalizedValue !== 'string' && typeof normalizedValue !== 'number' && typeof normalizedValue !== 'boolean') {
+        return '';
+      }
+      if (normalizedValue === undefined || normalizedValue === null || normalizedValue === '') return '';
       return parentElement?.childPropertiesMapping[key]?.className !== undefined
-        ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${value}',`
+        ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${normalizedValue}',`
         : ``;
     })
     .join('');
@@ -204,14 +222,26 @@ export function resolveStateDefault(
     return isoRegex.test(val);
   };
 
+  const trimmed = defaultValue?.trim() ?? '';
+  const isReservedLiteral = (
+    trimmed === 'null' ||
+    trimmed === 'undefined' ||
+    trimmed === 'true' ||
+    trimmed === 'false' ||
+    trimmed === '[]' ||
+    trimmed === '{}' ||
+    (!isNaN(Number(trimmed)) && trimmed !== '') ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+    (trimmed.startsWith('{') && trimmed.endsWith('}'))
+  );
+
   if (type === 'string') {
     if (defaultValue === undefined) return 'undefined';
-    if(!isISODate(defaultValue.trim())) {
+    if (isReservedLiteral) return trimmed;
+    if (!isISODate(trimmed)) {
       return `\`${defaultValue.replace(/"/g, '\\"')}\``;
     }
   }
-
-  const trimmed = defaultValue?.trim() ?? '';
 
   // Empty values for non-string/object types
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
@@ -219,15 +249,7 @@ export function resolveStateDefault(
   // Handle booleans, numbers, arrays, objects as string literals
   if (
     type !== 'string' &&
-    (trimmed === 'null' ||
-      trimmed === 'undefined' ||
-      trimmed === 'true' ||
-      trimmed === 'false' ||
-      trimmed === '[]' ||
-      trimmed === '{}' ||
-      (!isNaN(Number(trimmed)) && trimmed !== '') ||
-      (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-      (trimmed.startsWith('{') && trimmed.endsWith('}')))
+    isReservedLiteral
   ) {
     return trimmed;
   }
@@ -391,6 +413,14 @@ export function resolveFunctionArgs(args: Arguments[]): string {
     .join(', ');
 }
 
+export function resolveArgNames(args: Arguments[]): string {
+  if (!args?.length) return '';
+  return args
+    .map((arg) => arg?.name)
+    .filter((name): name is string => typeof name === 'string' && name.trim() !== '')
+    .join(', ');
+}
+
 function resolveType(arg: Arguments): string {
   if (arg.isFunction) {
     const params = arg.functionParameters ? resolveFunctionArgs(arg.functionParameters) : '';
@@ -404,19 +434,20 @@ function resolveType(arg: Arguments): string {
 }
 
 export function resolveArrayElementRules(config: Layout): string {
-
-  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
-
-  return `...(${visibilityRules.map((it) => it.condition)[0]} ? [`
-
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
+  const condition = visibilityRules
+    .map((it) => it.condition)
+    .find((it) => typeof it === 'string' ? it.trim() !== '' && it.trim() !== 'undefined' : it !== undefined && it !== null);
+  if (!condition) return '';
+  return `...(${condition} ? [`;
 }
 
 export function checkRules(config: Layout): boolean {
-
-  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
-
-  return (config.rules && visibilityRules.length > 0) ?? false;
-
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
+  const condition = visibilityRules
+    .map((it) => it.condition)
+    .find((it) => typeof it === 'string' ? it.trim() !== '' && it.trim() !== 'undefined' : it !== undefined && it !== null);
+  return Boolean(condition);
 }
 
 export function extractTableColumns(children: Layout[]) {

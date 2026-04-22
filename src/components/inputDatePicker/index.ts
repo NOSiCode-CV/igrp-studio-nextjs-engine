@@ -8,7 +8,7 @@ import {
   inputDatePickerInteractionsMapping,
   inputDatePickerData, inputDatePickerStyle, inputDatePickerRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 import { DATE_PICKER_SINGLE } from '../datePickerSingle/index';
@@ -48,7 +48,7 @@ export default {
       }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

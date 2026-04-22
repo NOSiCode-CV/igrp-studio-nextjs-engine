@@ -1,0 +1,84 @@
+<IGRPFormList
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.label and not resourceConfig.data.label -%}
+  label={ `{{ resourceConfig.properties.label }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
+  description={ `{{ resourceConfig.properties.description }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.color and not resourceConfig.data.color -%}
+  color={ `{{ resourceConfig.properties.color }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.addButtonLabel and not resourceConfig.data.addButtonLabel -%}
+  addButtonLabel={ `{{ resourceConfig.properties.addButtonLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName -%}
+  iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.addButtonIconName -%}
+  addButtonIconName={ `{{ resourceConfig.properties.iconProperties.addButtonIconName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.addButtonLabel -%}
+  addButtonLabel={ `{{ resourceConfig.properties.iconProperties.addButtonLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.dot and not resourceConfig.data.dot -%}
+  dot={ {{ resourceConfig.properties.dot }} }
+  {% endif -%}
+  {% if resourceConfig.properties.allowEmpty and not resourceConfig.data.allowEmpty -%}
+  allowEmpty={ {{ resourceConfig.properties.allowEmpty }} }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
+  iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize -%}
+  iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.badgeValue and not resourceConfig.data.badgeValue -%}
+  badgeValue={ `{{ resourceConfig.properties.badgeValue }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.badgeClassName and not resourceConfig.data.badgeClassName -%}
+  badgeClassName={ `{{ resourceConfig.properties.badgeClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.labelClassName and not resourceConfig.data.labelClassName -%}
+  labelClassName={ `{{ resourceConfig.properties.labelClassName }}` }
+  {% endif -%}
+  renderItem={ (_: {% if resourceConfig.dataType %}typeof init{{ '' | capitalize: resourceConfig.dataType }}['{{ resourceConfig.tag }}'][0]{% else %}any{% endif %}, index: number) => (
+      <>
+        {% if resourceConfig.children -%}
+        {% for this in resourceConfig.children -%}
+        {{ this | indexedTag: resourceConfig.tag | render-layout: resourceConfig }}
+        {% endfor -%}
+        {% endif -%}
+      </>
+    )
+  }
+  {% if resourceConfig.properties.computeLabel and not resourceConfig.data.computeLabel -%}
+  computeLabel={
+    (item: {% if resourceConfig.dataType %}(typeof init{{ '' | capitalize: resourceConfig.dataType }})['{{ resourceConfig.tag }}'][0]{% else %}any{% endif %}, index: number) => `{{ resourceConfig.properties.computeLabel.code }}`
+  }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+>
+</IGRPFormList>

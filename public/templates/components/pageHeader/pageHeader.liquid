@@ -1,0 +1,76 @@
+<IGRPPageHeader
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
+  title={ `{{ resourceConfig.properties.title }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.description and not resourceConfig.data.description -%}
+  description={ `{{ resourceConfig.properties.description }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconBackButton -%}
+  iconBackButton={ `{{ resourceConfig.properties.iconProperties.iconBackButton }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.isSticky and not resourceConfig.data.isSticky -%}
+  isSticky={ {{ resourceConfig.properties.isSticky }} }
+  {% endif -%}
+  {% if resourceConfig.properties.showBackButton and not resourceConfig.data.showBackButton -%}
+  showBackButton={ {{ resourceConfig.properties.showBackButton }} }
+  {% endif -%}
+  {% if resourceConfig.properties.value and not resourceConfig.data.value -%}
+  value={ `{{ resourceConfig.properties.value }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.urlBackButton and not resourceConfig.data.urlBackButton -%}
+  urlBackButton={ `{{ '' | resolve-segment-path: resourceConfig.properties.urlBackButton, resourceConfig.properties.segments }}{% if resourceConfig.properties.params and not resourceConfig.data.params %}{{ '' | resolve-query-params: resourceConfig.properties.params }}{% endif %}` }
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonVariant and not resourceConfig.data.backButtonVariant -%}
+  backButtonVariant={ `{{ resourceConfig.properties.backButtonVariant }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonSize and not resourceConfig.data.backButtonSize -%}
+  backButtonSize={ `{{ resourceConfig.properties.backButtonSize }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonAriaLabel and not resourceConfig.data.backButtonAriaLabel -%}
+  backButtonAriaLabel={ `{{ resourceConfig.properties.backButtonAriaLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonShowText and not resourceConfig.data.backButtonShowText -%}
+  backButtonShowText={ {{ resourceConfig.properties.backButtonShowText }} }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonText and not resourceConfig.data.backButtonText -%}
+  backButtonText={ `{{ resourceConfig.properties.backButtonText }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonClassName and not resourceConfig.data.backButtonClassName -%}
+  backButtonClassName={ `{{ resourceConfig.properties.backButtonClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.backButtonUseBrowserBack and not resourceConfig.data.backButtonUseBrowserBack -%}
+  backButtonUseBrowserBack={ {{ resourceConfig.properties.backButtonUseBrowserBack }} }
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.properties.headlineClassName and not resourceConfig.data.headlineClassName -%}
+  headlineClassName={ `{{ resourceConfig.properties.headlineClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+>
+  <div className="flex items-center gap-2">
+    {% if resourceConfig.children -%}
+    {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+    {% endfor -%}
+    {% endif -%}
+  </div>
+</IGRPPageHeader>

@@ -7,7 +7,7 @@ import {
   horizontalBarChartData,
   horizontalBarChartRules, horizontalBarChartStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 
@@ -34,7 +34,7 @@ export default {
     ]);
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: HORIZONTAL_BAR_CHART }))
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

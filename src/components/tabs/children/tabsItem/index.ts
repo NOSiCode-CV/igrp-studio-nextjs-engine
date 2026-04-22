@@ -5,7 +5,7 @@ import {
   tabsItemChildProperties,
   tabsItemChildPropertiesMapping, tabsItemRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { TABS } from '../../index';
 
 export default {
@@ -25,7 +25,7 @@ export default {
     component.loadStates([]);
     component.getRules(tabsItemRules());
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

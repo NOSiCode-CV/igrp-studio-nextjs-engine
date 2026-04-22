@@ -8,7 +8,7 @@ import {
     tableRowSubcomponentRules
 
 } from './properties';
-import { Component, hbsRenderer } from "../../../index";
+import { Component, liquidRenderer } from "../../../index";
 import {TABLE} from '../../index'
 
 export default{
@@ -26,7 +26,7 @@ export default{
         component.getStyle(tableRowSubcomponentStyle());
         component.getRules(tableRowSubcomponentRules());
         component.loadStates([]);
-        component.setRenderer(hbsRenderer);
+        component.setRenderer(liquidRenderer);
 
     }
 }

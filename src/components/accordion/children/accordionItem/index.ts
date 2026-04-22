@@ -5,7 +5,7 @@ import {
   accordionItemChildProperties,
   accordionItemChildPropertiesMapping, accordionItemStyle, accordionItemRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { ACCORDION } from '../../index';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     ]);
     component.getStyle(accordionItemStyle())
     component.getRules(accordionItemRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

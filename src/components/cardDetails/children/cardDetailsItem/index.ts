@@ -5,7 +5,7 @@ import {
   cardDetailsItemChildProperties,
   cardDetailsItemChildPropertiesMapping, cardDetailsItemStyle, cardDetailsItemRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { CARD_DETAILS } from '../../index';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     ]);
     component.getStyle(cardDetailsItemStyle())
     component.getRules(cardDetailsItemRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

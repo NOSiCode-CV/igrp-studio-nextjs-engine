@@ -1,0 +1,41 @@
+z.config(z.locales.en());
+
+{% for this in resourceConfig.types -%}
+{% if this.definitionType and == -%}
+  const {{ '' | toCamelCase: this.name }} = {{ this.customInstanceName }};
+
+  type {{ '' | capitalize: this.name }}ZodType = typeof {{ '' | toCamelCase: this.name }};
+
+  const init{{ '' | capitalize: this.name }}: z.infer<{{ '' | capitalize: this.name }}ZodType> = {{ this.customInitInstanceName }}
+
+{% else -%}
+  {% if this.definitionType and == -%}
+  const {{ '' | toCamelCase: this.name }} = z.fromJsonSchema({{ this.customInstanceName }});
+
+  type {{ '' | capitalize: this.name }}ZodType = typeof {{ '' | toCamelCase: this.name }};
+
+  const init{{ '' | capitalize: this.name }}: z.infer<{{ '' | capitalize: this.name }}ZodType> = {{ this.customInitInstanceName }}
+
+  {% else -%}
+  {% if this.isEnum -%}
+  const {{ '' | toCamelCase: this.name }} = z.enum([{% for this in this.fields %}'{% if this.defaultValue %}{{ this.defaultValue }}{% else %}{{ this.name }}{% endif %}'{% if forloop.last %}{% else %}, {% endif %}{% endfor %}])
+
+  {% else -%}
+  const {{ '' | toCamelCase: this.name }} = z.object({
+  {% for this in this.fields -%}
+    {{ this.name }}: {{ '' | resolveZodTypes: this }}{% if forloop.last %}{% else %},{% endif %}
+  {% endfor -%}
+  })
+
+  type {{ '' | capitalize: this.name }}ZodType = typeof {{ '' | toCamelCase: this.name }};
+
+  const init{{ '' | capitalize: this.name }}: z.infer<{{ '' | capitalize: this.name }}ZodType> = {
+  {% for this in this.fields -%}
+    {{ this.name }}: {{ '' | resolveStateDefault: this.defaultValue, this.type, this.isList, this.fields }}{% if forloop.last %}{% else %},{% endif %}
+  {% endfor -%}
+  }
+
+{% endif -%}
+{% endif -%}
+{% endif -%}
+{% endfor -%}

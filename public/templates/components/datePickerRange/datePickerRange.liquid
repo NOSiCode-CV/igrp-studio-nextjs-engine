@@ -1,0 +1,82 @@
+<IGRPDatePickerRange
+  {% if resourceConfig.properties.placeholder and not resourceConfig.data.placeholder -%}
+  placeholder={ `{{ resourceConfig.properties.placeholder }}` }
+  {% endif -%}
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.error and not resourceConfig.data.error -%}
+  error={ `{{ resourceConfig.properties.error }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
+  disabled
+  {% endif -%}
+  {% if resourceConfig.properties.required and not resourceConfig.data.required -%}
+  required={ {{ resourceConfig.properties.required }} }
+  {% endif -%}
+  {% if resourceConfig.properties.label and not resourceConfig.data.label -%}
+  label={ `{{ resourceConfig.properties.label }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.dayButtonClassName and not resourceConfig.data.dayButtonClassName -%}
+  dayButtonClassName={ `{{ resourceConfig.properties.dayButtonClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.labelClassName and not resourceConfig.data.labelClassName -%}
+  labelClassName={ `{{ resourceConfig.properties.labelClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.helperText and not resourceConfig.data.helperText -%}
+  helperText={ `{{ resourceConfig.properties.helperText }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.startDate and not resourceConfig.data.startDate -%}
+  startDate={ new Date(`{{ resourceConfig.properties.startDate }}`) }
+  {% endif -%}
+  {% if resourceConfig.properties.endDate and not resourceConfig.data.endDate -%}
+  endDate={ new Date(`{{ resourceConfig.properties.endDate }}`) }
+  {% endif -%}
+  {% comment %}{% if resourceConfig.properties.showIcon and not resourceConfig.data.showIcon %}
+  showIcon={ {{ resourceConfig.properties.showIcon }} }
+  {% endif %}{% endcomment %}
+  {% if resourceConfig.properties.required and not resourceConfig.data.required -%}
+  required={ {{ resourceConfig.properties.required }} }
+  {% endif -%}
+  {% if resourceConfig.properties.labelClassName and not resourceConfig.data.labelClassName -%}
+  labelClassName={ `{{ resourceConfig.properties.labelClassName }}` }
+  {% endif -%}
+  {% comment %}{% if resourceConfig.properties.iconProperties.iconName %}
+  iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize -%}
+  iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName -%}
+  iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif %}{% endcomment %}
+  {% if resourceConfig.properties.iconProperties.iconPlacement -%}
+  iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.dateFormat and not resourceConfig.data.dateFormat -%}
+  dateFormat={ `{{ resourceConfig.properties.dateFormat }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.autofocus and not resourceConfig.data.autofocus -%}
+  autoFocus={ {{ resourceConfig.properties.autofocus }} }
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% if resourceConfig.properties.className and parentResourceConfig -%}
+  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  {% else -%}
+  {% if resourceConfig.properties.className and not parentResourceConfig -%}
+  className={ cn({{ '' | concat: "'", resourceConfig.properties.className, "',", '', '' }}) }
+  {% else -%}
+  {% if resourceConfig.properties.className and parentResourceConfig -%}
+  className={ cn({{ parentResourceConfig | addClassNameFromChildProperties: registry | concat: '', '' }}) }
+  {% endif -%}
+  {% endif -%}
+  {% endif -%}
+/>

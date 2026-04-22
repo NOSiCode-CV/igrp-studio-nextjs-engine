@@ -1,0 +1,40 @@
+{% if resourceConfig.useClient == false -%}
+{% else -%}
+'use client'
+{% endif -%}
+
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY iGRP STUDIO. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+
+{% comment %}Ignore temporarily just for better errors spot in development{% endcomment %}
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+{{ '' | resolve-imports: resourceConfig.components, registry, resourceConfig.pageName, basePath, resourceConfig }}
+
+{% if resourceConfig.forceDynamic -%}
+export const dynamic = 'force-dynamic'
+{% endif -%}
+
+{% assign pageArgsType = '' | resolveFunctionArgs: resourceConfig.args -%}
+{% assign pageArgNames = '' | resolveArgNames: resourceConfig.args -%}
+export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if pageArgsType != '' and pageArgNames != '' - %}{ params } : { params: Promise<{ {{ pageArgsType }} }> } {% endif %}) {
+
+  {% if pageArgsType != '' and pageArgNames != '' -%}
+  const { {{ pageArgNames }} } = use(params);
+  {% endif -%}
+
+{% if resourceConfig.components -%}
+
+  {% if resourceConfig.types -%}
+  {{ '' | resolve-types: resourceConfig, registry }}
+  {% endif -%}
+  {{ '' | resolve-states: resourceConfig.components, registry }}
+  {{ '' | resolve-references: resourceConfig.components, registry }}
+  {{ '' | resolve-code-blocks: resourceConfig.components, registry, resourceConfig }}
+
+  return (
+{{ '' | render-layout: resourceConfig.components }}
+  );
+{% endif -%}
+}
