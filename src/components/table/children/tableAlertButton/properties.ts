@@ -21,6 +21,7 @@ export function tableAlertButtonProperties() {
 export function tableAlertButtonPropertiesMapping() {
   return {
     ...buttonPropertiesMapping(),
+    iconClassName: 'iconClassName',
     ...commonPropertiesMapping(),
   };
 }

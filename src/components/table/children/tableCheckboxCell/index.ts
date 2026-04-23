@@ -4,6 +4,9 @@ import {
   tableCheckboxCellVariants,
   tableCheckboxCellChildProperties,
   tableCheckboxCellChildPropertiesMapping,
+  tableCheckboxCellInteractions,
+  tableCheckboxCellInteractionsMapping,
+  tableCheckboxCellRules,
 } from './properties';
 import { Component, liquidRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
@@ -24,6 +27,9 @@ export default {
     component.getPropertiesMapping(tableCheckboxCellPropertiesMapping());
     component.getChildProperties(tableCheckboxCellChildProperties());
     component.getChildPropertiesMapping(tableCheckboxCellChildPropertiesMapping());
+    component.getInteractions(tableCheckboxCellInteractions());
+    component.getInteractionsMapping(tableCheckboxCellInteractionsMapping());
+    component.getRules(tableCheckboxCellRules());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.CHILD_ELEMENT, { parent: TABLE, name: TABLE_CHECKBOX_CELL }))
 
     component.loadStates([]);
