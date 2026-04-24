@@ -343,7 +343,74 @@ export function getComponent(name: string): Component {
   return registry[name];
 }
 
-function componentAsObject(key: string, value: Component, isDefault?: boolean): ComponentRegisterConfig {
+function componentAsObject(
+  key: string,
+  value: Component | undefined,
+  isDefault?: boolean,
+  visited: Set<string> = new Set(),
+): ComponentRegisterConfig | undefined {
+  // A child/accepted-children entry can reference a component that is not in
+  // the registry (typo, not yet registered, or deprecated). Historically this
+  // crashed with "Cannot destructure property 'defaultValue' of 'value' as it
+  // is undefined". Return undefined so callers can filter the entry out and
+  // log a diagnostic instead of propagating the crash.
+  if (!value) {
+    console.warn(
+      `[nextjs-engine] componentAsObject: component "${key}" is not registered; skipping reference.`,
+    );
+    return undefined;
+  }
+
+  // Cycle guard. Component graphs legitimately contain cycles (e.g. Container
+  // ↔ Flex ↔ Container through childrenTypes / acceptedChildren). Without
+  // this check the recursion never terminates and we hit a RangeError. When
+  // we re-encounter a node higher in the call stack we emit a shallow stub
+  // with just the identity so the serialized tree stays finite but callers
+  // can still see which component was referenced.
+  if (visited.has(key)) {
+    return {
+      name: key,
+      imports: [],
+      defaultValue: isDefault ?? value.defaultValue,
+      allowTypes: value.allowTypes,
+      allowChildren: value.allowChildren,
+      deprecated: value.deprecated,
+      replacedBy: value.replacedBy,
+      group: value.group,
+      label: value.label,
+      customClassName: value.customClassName,
+      customComponentTag: value.customComponentTag,
+      variants: value.variants,
+      metadata: value.metadata,
+      childProperties: value.childProperties,
+      properties: value.properties,
+      propertiesMapping: {},
+      interactions: value.interactions,
+      interactionsMapping: value.interactionsMapping,
+      data: value.data,
+      dataMapping: value.dataMapping,
+      style: value.style,
+      styleMapping: value.styleMapping,
+      rules: value.rules,
+      rulesMapping: value.rulesMapping,
+      childPropertiesMapping: {},
+      // Cycle edge: do not recurse, just list names.
+      childrenTypes: [],
+      acceptedChildren: [],
+      defaultChildren: Array.from(value.defaultChildren),
+      states: Array.from(value.states),
+      renderer: value.renderer.name.includes('default')
+        ? 'default'
+        : value.renderer.name.includes('liquid')
+          ? 'liquid'
+          : 'default',
+      templatePath: value.templatePath,
+    };
+  }
+
+  const nextVisited = new Set(visited);
+  nextVisited.add(key);
+
   const { defaultValue } = value;
   return {
     name: key,
@@ -371,10 +438,12 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     rules: value.rules,
     rulesMapping: value.rulesMapping,
     childPropertiesMapping: {},
-    childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
-      registry[it.name], it.isDefault)),
-    acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
-      registry[it.name], it.isDefault)),
+    childrenTypes: Array.from(value.childrenTypes)
+      .map((it) => componentAsObject(it.name, registry[it.name], it.isDefault, nextVisited))
+      .filter((c): c is ComponentRegisterConfig => c !== undefined),
+    acceptedChildren: Array.from(value.acceptedChildren)
+      .map((it) => componentAsObject(it.name, registry[it.name], it.isDefault, nextVisited))
+      .filter((c): c is ComponentRegisterConfig => c !== undefined),
     defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
     renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
@@ -387,9 +456,8 @@ const hiddenComponents: string [] = [];
 export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry)
     .filter(([key, itValue]) => !(registry[itValue.parent] || hiddenComponents.includes(key)))
-    .map(([key, value]) => {
-      return componentAsObject(key, value)
-    });
+    .map(([key, value]) => componentAsObject(key, value))
+    .filter((c): c is ComponentRegisterConfig => c !== undefined);
 
   return { components: components }
 }
