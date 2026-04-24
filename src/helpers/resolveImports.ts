@@ -9,10 +9,21 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
 
   const imports = new Set<string>();
 
-  if (page?.useClient === true) {
+  // Align with the page/component/processStep .liquid templates, which emit
+  // the `'use client'` directive unless `useClient === false`. The same rule
+  // governs whether the React `use*` imports must be present: if the file is
+  // a client component (explicitly or by default when `useClient` is omitted),
+  // include them. Only skip when the caller explicitly opted out with `false`.
+  //
+  // Also honour `component?.useClient`: the component.liquid template passes
+  // `page` as undefined and the real config as `component`, so process steps
+  // and custom components were previously always missing these imports.
+  const useClient = page?.useClient ?? component?.useClient;
+  if (useClient !== false) {
     imports.add(`import { use, useState, useEffect, useRef } from 'react';`);
   }
-  
+
+
   imports.add(`import { cn, useIGRPMenuNavigation, useIGRPToast } from '@igrp/igrp-framework-react-design-system';`)
 
   /*if(isPage)
