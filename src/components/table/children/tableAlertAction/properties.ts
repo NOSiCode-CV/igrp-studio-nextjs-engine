@@ -22,6 +22,7 @@ export function tableAlertActionProperties() {
     labelConfirm: { type: 'string', required: false, default: 'Confirm' },
     classNameConfirm: { type: 'string', required: false },
     variantConfirm: { type: 'string', required: false, default: 'default', enum: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] },
+    iconClassName: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };
@@ -30,6 +31,7 @@ export function tableAlertActionProperties() {
 export function tableAlertActionPropertiesMapping() {
   return {
     ...actionPropertiesMapping(),
+    iconClassName: 'iconClassName',
     ...commonPropertiesMapping(),
   };
 }

@@ -6,7 +6,42 @@
       {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}{
         component: {{ '' | resolveComponent: this.componentName, registry }},
         props: {
-          {{ '' | render-layout: this, resourceConfig }}
+          {% if this.properties.labelTrigger %}labelTrigger: `{{ this.properties.labelTrigger }}`,{% endif %}
+          {% if this.properties.iconProperties.icon %}icon: `{{ this.properties.iconProperties.icon }}`,{% endif %}
+          {% if this.properties.iconProperties.iconName %}icon: `{{ this.properties.iconProperties.iconName }}`,{% endif %}
+          {% if this.properties.iconProperties.iconPlacement %}iconPlacement: `{{ this.properties.iconProperties.iconPlacement }}`,{% endif %}
+          {% if this.properties.iconProperties.iconClassName %}iconClassName: `{{ this.properties.iconProperties.iconClassName }}`,{% endif %}
+          {% if this.properties.href %}href: `{{ '' | resolve-segment-path: this.properties.href, this.properties.segments }}{% if this.properties.params %}{{ '' | resolve-query-params: this.properties.params }}{% endif %}`,{% endif %}
+          {% if this.properties.className %}className: `{{ this.properties.className }}`,{% endif %}
+          {% if this.properties.modalTitle %}modalTitle: `{{ this.properties.modalTitle }}`,{% endif %}
+          {% if this.properties.title %}title: `{{ this.properties.title }}`,{% endif %}
+          {% if this.properties.iconProperties.showIcon %}showIcon: {{ this.properties.iconProperties.showIcon }},{% endif %}
+          {% if this.properties.showIcon %}showIcon: {{ this.properties.showIcon }},{% endif %}
+          {% if this.properties.classNameItem %}classNameItem: `{{ this.properties.classNameItem }}`,{% endif %}
+          {% if this.properties.variant %}variant: `{{ this.properties.variant }}`,{% endif %}
+          {% if this.properties.action %}action: () => {{ this.properties.action }}(rowData),{% endif %}
+          {% if this.properties.showCancel %}showCancel: {{ this.properties.showCancel }},{% endif %}
+          {% if this.properties.labelCancel %}labelCancel: `{{ this.properties.labelCancel }}`,{% endif %}
+          {% if this.properties.classNameCancel %}classNameCancel: `{{ this.properties.classNameCancel }}`,{% endif %}
+          {% if this.properties.variantCancel %}variantCancel: `{{ this.properties.variantCancel }}`,{% endif %}
+          {% if this.properties.showConfirm %}showConfirm: {{ this.properties.showConfirm }},{% endif %}
+          {% if this.properties.labelConfirm %}labelConfirm: `{{ this.properties.labelConfirm }}`,{% endif %}
+          {% if this.properties.classNameConfirm %}classNameConfirm: `{{ this.properties.classNameConfirm }}`,{% endif %}
+          {% if this.properties.variantConfirm %}variantConfirm: `{{ this.properties.variantConfirm }}`,{% endif %}
+          {% if this.properties.actionConfirm %}onClickConfirm: () => {{ this.properties.actionConfirm }}(rowData),{% endif %}
+          {% if this.children -%}
+          children:
+          {% for child in this.children -%}
+          {{ '' | render-layout: child, this }}
+          {% endfor -%}
+          {% else -%}
+          {% if this.properties.content -%}
+          children: <>{{ this.properties.content }}</>
+          {% endif -%}
+          {% endif -%}
+          {% if this.interactions -%}
+          {{ '' | render-interactions: this.interactions, true }}
+          {% endif -%}
         }
       }{% if this | checkRules %}] : []){% endif %},
       {% endfor -%}
