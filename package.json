@@ -1,88 +1,89 @@
 {
-  "name": "@igrp/igrp-studio-nextjs-engine",
-  "version": "0.2.0-beta.6",
-  "description": "The NextJS engine application allows to create a new NextJS application",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "scripts": {
-    "test": "jest --coverage",
-    "build": "env-cmd -f .env.production tsc && vite build",
-    "deploy": "npm publish --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",
-    "release": "npm run build && npm run deploy",
-    "start": "tsc && vite"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@git.nosi.cv:igrp-3_0/nextjs-engine.git"
-  },
-  "keywords": [
-    "NextJS",
-    "Engine",
-    "Frontend",
-    "Wayvant",
-    "TypeScript",
-    "NOSi"
-  ],
-  "author": "NOSi E.P.E - Núcleo Operacional Para a Sociedade de Informação",
-  "license": "ISC",
-  "dependencies": {
-    "@prettier/sync": "^0.5.2",
-    "@types/adm-zip": "^0.5.7",
-    "@types/js-yaml": "^4.0.9",
-    "adm-zip": "^0.5.16",
-    "ajv": "^8.17.1",
-    "ajv-errors": "^3.0.0",
-    "ajv-formats": "^3.0.1",
-    "axios": "^1.11.0",
-    "extract-zip": "^2.0.1",
-    "fs-extra": "^11.2.0",
-    "js-beautify": "^1.15.4",
-    "js-yaml": "^4.1.0",
-    "jszip": "^3.10.1",
-    "liquidjs": "^10.25.0",
-    "original-fs": "^1.2.0",
-    "prettier": "^3.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-select": "^5.8.0",
-    "reactstrap": "^9.2.2",
-    "ts-loader": "^9.5.1"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^22.2.0",
-    "@types/react": "^18.3.4",
-    "@typescript-eslint/eslint-plugin": "^8.0.1",
-    "@typescript-eslint/parser": "^8.0.1",
-    "cross-env": "^7.0.3",
-    "env-cmd": "^10.1.0",
-    "eslint": "^9.9.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^9.1.0",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.4.6",
-    "vite": "^5.4.2",
-    "vite-plugin-dts": "^4.0.3"
-  },
-  "type": "commonjs",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./types": {
-      "import": "./dist/interfaces/types.d.ts"
-    },
-    "./components/*": {
-      "import": "./dist/components/*/index.es.js",
-      "require": "./dist/components/*/index.cjs.js",
-      "types": "./dist/components/*/index.d.ts"
-    }
-  }
+    "name":  "@igrp/igrp-studio-nextjs-engine",
+    "version":  "0.2.0-beta.6",
+    "description":  "The NextJS engine application allows to create a new NextJS application",
+    "main":  "dist/index.cjs.js",
+    "module":  "dist/index.es.js",
+    "types":  "dist/index.d.ts",
+    "files":  [
+                  "/dist"
+              ],
+    "scripts":  {
+                    "test":  "jest --coverage",
+                    "build":  "env-cmd -f .env.production tsc \u0026\u0026 vite build",
+                    "audit":  "powershell -ExecutionPolicy Bypass -File ./tools/audit-branch.ps1",
+                    "deploy":  "npm publish --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",
+                    "release":  "npm run build \u0026\u0026 npm run deploy",
+                    "start":  "tsc \u0026\u0026 vite"
+                },
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git@git.nosi.cv:igrp-3_0/nextjs-engine.git"
+                   },
+    "keywords":  [
+                     "NextJS",
+                     "Engine",
+                     "Frontend",
+                     "Wayvant",
+                     "TypeScript",
+                     "NOSi"
+                 ],
+    "author":  "NOSi E.P.E - Núcleo Operacional Para a Sociedade de Informação",
+    "license":  "ISC",
+    "dependencies":  {
+                         "@prettier/sync":  "^0.5.2",
+                         "@types/adm-zip":  "^0.5.7",
+                         "@types/js-yaml":  "^4.0.9",
+                         "adm-zip":  "^0.5.16",
+                         "ajv":  "^8.17.1",
+                         "ajv-errors":  "^3.0.0",
+                         "ajv-formats":  "^3.0.1",
+                         "axios":  "^1.11.0",
+                         "extract-zip":  "^2.0.1",
+                         "fs-extra":  "^11.2.0",
+                         "js-beautify":  "^1.15.4",
+                         "js-yaml":  "^4.1.0",
+                         "jszip":  "^3.10.1",
+                         "liquidjs":  "^10.25.0",
+                         "original-fs":  "^1.2.0",
+                         "prettier":  "^3.3.3",
+                         "react":  "^18.3.1",
+                         "react-dom":  "^18.3.1",
+                         "react-select":  "^5.8.0",
+                         "reactstrap":  "^9.2.2",
+                         "ts-loader":  "^9.5.1"
+                     },
+    "devDependencies":  {
+                            "@types/fs-extra":  "^11.0.4",
+                            "@types/jest":  "^29.5.12",
+                            "@types/node":  "^22.2.0",
+                            "@types/react":  "^18.3.4",
+                            "@typescript-eslint/eslint-plugin":  "^8.0.1",
+                            "@typescript-eslint/parser":  "^8.0.1",
+                            "cross-env":  "^7.0.3",
+                            "env-cmd":  "^10.1.0",
+                            "eslint":  "^9.9.0",
+                            "eslint-config-google":  "^0.14.0",
+                            "eslint-config-prettier":  "^9.1.0",
+                            "jest":  "^29.7.0",
+                            "ts-jest":  "^29.4.6",
+                            "vite":  "^5.4.2",
+                            "vite-plugin-dts":  "^4.0.3"
+                        },
+    "type":  "commonjs",
+    "exports":  {
+                    ".":  {
+                              "import":  "./dist/index.es.js",
+                              "require":  "./dist/index.cjs.js",
+                              "types":  "./dist/index.d.ts"
+                          },
+                    "./types":  {
+                                    "import":  "./dist/interfaces/types.d.ts"
+                                },
+                    "./components/*":  {
+                                           "import":  "./dist/components/*/index.es.js",
+                                           "require":  "./dist/components/*/index.cjs.js",
+                                           "types":  "./dist/components/*/index.d.ts"
+                                       }
+                }
 }

@@ -1,7 +1,7 @@
 z.config(z.locales.en());
 
 {% for this in resourceConfig.types -%}
-{% if this.definitionType and == -%}
+{% if this.definitionType == 'zod-object' -%}
   const {{ '' | toCamelCase: this.name }} = {{ this.customInstanceName }};
 
   type {{ '' | capitalize: this.name }}ZodType = typeof {{ '' | toCamelCase: this.name }};
@@ -9,7 +9,7 @@ z.config(z.locales.en());
   const init{{ '' | capitalize: this.name }}: z.infer<{{ '' | capitalize: this.name }}ZodType> = {{ this.customInitInstanceName }}
 
 {% else -%}
-  {% if this.definitionType and == -%}
+  {% if this.definitionType == 'json-schema' -%}
   const {{ '' | toCamelCase: this.name }} = z.fromJsonSchema({{ this.customInstanceName }});
 
   type {{ '' | capitalize: this.name }}ZodType = typeof {{ '' | toCamelCase: this.name }};
