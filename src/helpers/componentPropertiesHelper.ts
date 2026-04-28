@@ -61,8 +61,8 @@ export function addClassNameFromChildProperties(
         return '';
       }
       if (normalizedValue === undefined || normalizedValue === null || normalizedValue === '') return '';
-      return parentElement?.childPropertiesMapping[key]?.className !== undefined
-        ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${normalizedValue}',`
+      return parentElement?.childPropertiesMapping?.[key]?.className !== undefined
+        ? `'${parentElement.childPropertiesMapping?.[key]?.className ?? key}${normalizedValue}',`
         : ``;
     })
     .join('');
@@ -78,8 +78,8 @@ export function addClassNameFromProperties(
 
   return Object.entries(component.properties)
     .map(([key, value]) => {
-      return componentElement?.propertiesMapping[key]?.className !== undefined
-        ? `'${componentElement.propertiesMapping[key]?.className ?? key}${value}',`
+      return componentElement?.propertiesMapping?.[key]?.className !== undefined
+        ? `'${componentElement.propertiesMapping?.[key]?.className ?? key}${value}',`
         : ``;
     })
     .join('');

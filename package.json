@@ -9,7 +9,7 @@
                   "/dist"
               ],
     "scripts":  {
-                    "test":  "jest --coverage",
+                    "test":  "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage",
                     "build":  "env-cmd -f .env.production tsc \u0026\u0026 vite build",
                     "audit":  "powershell -ExecutionPolicy Bypass -File ./tools/audit-branch.ps1",
                     "deploy":  "npm publish --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",

@@ -12,8 +12,12 @@ import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
 import { Component } from '../components';
 import { TABLE } from '../components/table';
 
-export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
-  (await fs.readdir(directoryPath)).length === 0;
+export const checkIfDirectoryIsEmpty = async (directoryPath: string) => {
+  if (!(await fs.pathExists(directoryPath))) {
+    return true;
+  }
+  return (await fs.readdir(directoryPath)).length === 0;
+};
 
 export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
   const segments = context.resourceConfig.path.split('/').filter(Boolean);
