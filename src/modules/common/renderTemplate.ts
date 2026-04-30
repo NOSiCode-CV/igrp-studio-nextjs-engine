@@ -82,13 +82,7 @@ export const renderSyncTemplate = (templateName: string, context: any) => {
   const templatePath = path.join(getPaths().template, templateName);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
   const ast = engine.parse(templateContent);
-  const rendered = engine.renderSync(ast, context);
-
-  try {
-    return formatSync(rendered, PRETTIER_OPTIONS);
-  } catch {
-    return rendered;
-  }
+  return engine.renderSync(ast, context);
 };
 
 /**
