@@ -63,3 +63,5 @@ Thumbs.db
 # MacOS file attributs
 .AppleDouble
 .LSOverride
+# Audit workflow output
+audit-reports/
