@@ -21,7 +21,7 @@
     {% assign componentClassName = resourceConfig.properties.className -%}
   {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
   {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
-  className={ cn({{ '' | concat: "'", componentClassName, "',", parentChildClassNames, resourceConfig | addClassNameFromProperties: registry, resourceConfig.style | addClassNameFromStyle }}) }
+  className={ cn({% if componentClassName -%}'{{ componentClassName }}',{% endif -%}{{ parentChildClassNames }}{{ resourceConfig | addClassNameFromProperties: registry }}{{ resourceConfig.style | addClassNameFromStyle }}) }
   {% endif -%}
   {% comment %}loading={ {{ resourceConfig.tag }}Loading }{% endcomment %}
   {% if resourceConfig.interactions -%}
