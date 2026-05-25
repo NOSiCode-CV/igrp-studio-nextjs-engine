@@ -630,21 +630,26 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
           }
           if (value.formSubmit && value.type === 'formSubmit') {
             if (!value.formSubmit.targetForm) return;
+            // renderCode() runs Prettier on the snippet, which appends a
+            // trailing semicolon and newline (e.g. `form1Ref.current?.submit();\n`).
+            // We splice the result into the body of an arrow function
+            // expression, so the trailing `;` + newline break the JSX:
+            //   onClick={ () => form1Ref.current?.submit();
+            //   }
+            // Trim whitespace and a single trailing semicolon so the
+            // expression slots in cleanly as a single-statement lambda body.
+            const formCode = renderCode({
+              id: '',
+              name: `formReferenceUsage`,
+              properties: {
+                formTag: value.formSubmit.targetForm,
+              },
+            })
+              .trim()
+              .replace(/;$/, '');
             return isJson === true
-              ? `${key}: () => ${renderCode({
-                  id: '',
-                  name: `formReferenceUsage`,
-                  properties: {
-                    formTag: value.formSubmit.targetForm,
-                  },
-                })},`
-              : `${key}={ () => ${renderCode({
-                  id: '',
-                  name: `formReferenceUsage`,
-                  properties: {
-                    formTag: value.formSubmit.targetForm,
-                  },
-                })} }`;
+              ? `${key}: () => ${formCode},`
+              : `${key}={ () => ${formCode} }`;
           }
           if (value.navigate && value.type === 'navigate') {
             if (!value.navigate.path) return;
