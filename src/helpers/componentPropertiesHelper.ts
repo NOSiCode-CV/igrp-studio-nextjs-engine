@@ -38,6 +38,18 @@ export function addClassNameFromChildProperties(
   registry: Record<string, Component>,
 ): string {
   if (!parent) return '';
+  // Defensive: the filter wrapper drops empty/null/undefined inputs and
+  // shifts named args left, so when this filter is invoked as
+  //   parentResourceConfig | addClassNameFromChildProperties: registry
+  // and `parentResourceConfig` is undefined (e.g. components rendered via
+  // renderTableRow which calls renderLayout without a parent), the function
+  // is actually called as `addClassNameFromChildProperties(registry)` —
+  // `parent` is the whole registry object and `registry` is undefined. A
+  // real parent Layout always has a `componentName` string, so detect the
+  // misroute and bail out cleanly instead of crashing with
+  //   "Cannot read properties of undefined (reading 'undefined')"
+  // at `registry[parent.componentName]`.
+  if (!registry || typeof (parent as any).componentName !== 'string') return '';
   const parentElement = registry[parent.componentName];
   const sourcePropertiesCandidates = [
     parent.childProperties,
