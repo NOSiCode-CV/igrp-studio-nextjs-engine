@@ -53,7 +53,9 @@
   {% if resourceConfig.children and not resourceConfig.data.items -%}
   items={
       [
-      {% for this in resourceConfig.children | extractTabsItem -%}
+      {%- assign __extractTabsItem = resourceConfig.children | extractTabsItem -%}
+
+      {%- for this in __extractTabsItem -%}
         {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
         {
           {% if this.properties.value -%}

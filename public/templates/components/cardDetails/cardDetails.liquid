@@ -22,7 +22,9 @@
   {% endif -%}
   {% if resourceConfig.children and not resourceConfig.data.items -%}
   items={ [
-  {% for this in resourceConfig.children | extractCardDetailsItem -%}
+  {%- assign __extractCardDetailsItem = resourceConfig.children | extractCardDetailsItem -%}
+
+  {%- for this in __extractCardDetailsItem -%}
   {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
     {
     {% if this.data.label -%}

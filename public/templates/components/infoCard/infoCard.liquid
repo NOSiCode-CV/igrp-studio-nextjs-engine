@@ -29,7 +29,9 @@
   sections={
     [
     {% if resourceConfig.children -%}
-      {% for this in resourceConfig.children | extractInfoSection -%}
+      {%- assign __extractInfoSection = resourceConfig.children | extractInfoSection -%}
+
+      {%- for this in __extractInfoSection -%}
       {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
       {% if this.data.items -%}
       {
@@ -38,7 +40,9 @@
       {% else -%}
       {
         items: [
-        {% for this in this.children | extractInfoItem -%}
+        {%- assign __extractInfoItem = this.children | extractInfoItem -%}
+
+        {%- for this in __extractInfoItem -%}
         {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
           {
           {% if this.data.text -%}

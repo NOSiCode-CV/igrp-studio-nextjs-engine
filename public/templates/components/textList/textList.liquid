@@ -35,7 +35,9 @@
   items={
     [
     {% if resourceConfig.children -%}
-      {% for this in resourceConfig.children | extractTextListItems -%}
+      {%- assign __extractTextListItems = resourceConfig.children | extractTextListItems -%}
+
+      {%- for this in __extractTextListItems -%}
         {{ '' | render-text-list-item: this }},
       {% endfor -%}
     {% endif -%}

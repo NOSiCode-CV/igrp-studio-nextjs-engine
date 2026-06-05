@@ -37,7 +37,9 @@
   sections={
     [
     {% if resourceConfig.children -%}
-      {% for this in resourceConfig.children | extractMenuNavigationItems -%}
+      {%- assign __extractMenuNavigationItems = resourceConfig.children | extractMenuNavigationItems -%}
+
+      {%- for this in __extractMenuNavigationItems -%}
         {% if this | checkRules %}{{ '' | resolveArrayElementRules: this }}{% endif %}
         {
           id: "{{ this.properties.targetRef }}",

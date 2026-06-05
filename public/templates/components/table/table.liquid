@@ -50,7 +50,9 @@
   columns={
     [
     {% if resourceConfig.children -%}
-      {% for this in resourceConfig.children | extractTableColumns -%}
+      {%- assign __extractTableColumns = resourceConfig.children | extractTableColumns -%}
+
+      {%- for this in __extractTableColumns -%}
         {% for this in this.children -%}
         {% if this.componentName != 'tableHiddenCell' -%}
         {
@@ -71,7 +73,9 @@
   clientFilters={
     [
     {% if resourceConfig.children -%}
-      {% for this in resourceConfig.children | extractTableFilters -%}
+      {%- assign __extractTableFilters = resourceConfig.children | extractTableFilters -%}
+
+      {%- for this in __extractTableFilters -%}
         {% for child in this.children -%}
         {% if child.componentName contains 'Filter' -%}
         {

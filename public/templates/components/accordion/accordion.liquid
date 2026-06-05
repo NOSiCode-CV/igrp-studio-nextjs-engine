@@ -31,7 +31,9 @@
   {% endif -%}
   {% if resourceConfig.children -%}
   items={ [
-  {% for this in resourceConfig.children | extractAccordionItem -%}
+  {%- assign __extractAccordionItem = resourceConfig.children | extractAccordionItem -%}
+
+  {%- for this in __extractAccordionItem -%}
     {
     {% if this.data.title -%}
       title: {{ this.data.title.state.name }},
