@@ -7,8 +7,8 @@
   {% if resourceConfig.properties.labelFilter -%}
   labelFilter={ `{{ resourceConfig.properties.labelFilter }}` }
   {% endif -%}
-  {% if resourceConfig.properties.labelSearchFilter -%}
-  labelSearchFilter={ `{{ resourceConfig.properties.labelSearchFilter }}` }
+  {% if resourceConfig.properties.labelSearchField -%}
+  labelSearchField={ `{{ resourceConfig.properties.labelSearchField }}` }
   {% endif -%}
   {% if resourceConfig.properties.disabled and not resourceConfig.data.disabled -%}
   disabled

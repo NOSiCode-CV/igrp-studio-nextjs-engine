@@ -6,7 +6,7 @@ export function tableFacetedFilterProperties() {
     columnId: { type: 'string', required: true, default: '{{id}}' },
     placeholder: { type: 'string', required: false, default: 'Selecionar...' },
     labelFilter: { type: 'string', required: false, default: 'Filtrar por' },
-    labelSearchFilter: { type: 'string', required: false, default: 'Pesquisar...' },
+    labelSearchField: { type: 'string', required: false, default: 'Pesquisar...' },
     showFilter: { type: 'boolean', required: false, default: true },
     badgeClassName: { type: 'string', required: false },
     ...classProperties(),

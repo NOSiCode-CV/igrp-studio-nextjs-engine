@@ -1,10 +1,7 @@
 <IGRPDataTableFilterMinMax
   column={column}
-  {% if resourceConfig.properties.placeholderMin -%}
-  placeholderMin={ `{{ resourceConfig.properties.placeholderMin }}` }
-  {% endif -%}
-  {% if resourceConfig.properties.placeholderMax -%}
-  placeholderMax={ `{{ resourceConfig.properties.placeholderMax }}` }
+  {% if resourceConfig.properties.placeholder -%}
+  placeholder={ `{{ resourceConfig.properties.placeholder }}` }
   {% endif -%}
   {% if resourceConfig.interactions -%}
   {{ '' | render-interactions: resourceConfig.interactions }}
