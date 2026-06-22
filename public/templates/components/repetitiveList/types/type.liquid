@@ -1,7 +1,0 @@
-{% for this in resourceConfig.types -%}
-type {{ '' | capitalize: this.name }} = {
-  {% for this in this.fields -%}
-    {{ this.name }}: {{ this.type }};
-  {% endfor -%}
-}
-{% endfor -%}

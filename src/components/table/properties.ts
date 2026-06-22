@@ -23,6 +23,7 @@ export function tableProperties() {
     tableHeaderClassName: { type: 'string', required: false },
     tableBodyClassName: { type: 'string', required: false },
     paginationClassName: { type: 'string', required: false },
+    rowCount: { type: 'number', required: false },
     ...classProperties(),
     ...commonProperties()
   };

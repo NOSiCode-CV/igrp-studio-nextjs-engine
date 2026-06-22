@@ -81,11 +81,9 @@ import processStepModule, { PROCESS_STEP } from './processStep/index';
 import radarChartModule, { RADARCHART } from './radarchart';
 import radialBarChartModule, { RADIAL_BAR_CHART } from './radialbarchart';
 import radioModule, { RADIO } from './radio';
-import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
 import sectionModule, { SECTION } from './section';
 import selectModule, { SELECT } from './select';
 import separatorModule, { SEPARATOR } from './separator/index';
-//import sliderModule, { SLIDER } from './slider';
 import spanModule, { SPAN } from './span';
 import stackModule, { STACK } from './stack';
 import statsCardModule, { STATS_CARD } from './statsCard';
@@ -132,6 +130,34 @@ import textListItemContentModule, { TEXT_LIST_ITEM_CONTENT } from './textList/ch
 import textListSubItemModule, { TEXT_LIST_SUBITEMS } from './textList/children/textListSubItems/index';
 import verticalBarChartModule, { VERTICAL_BAR_CHART } from './verticalbarchart';
 import videoEmbedModule, { VIDEO_EMBED } from './videoEmbed'
+
+// New components synced from latest design-system dev
+import notificationModule, { NOTIFICATION } from './notification';
+import fieldDescriptionModule, { FIELD_DESCRIPTION } from './fieldDescription';
+import pageHeaderBackButtonModule, { PAGE_HEADER_BACK_BUTTON } from './pageHeaderBackButton';
+import dateTimeInputModule, { DATE_TIME_INPUT } from './dateTimeInput';
+import loadingSpinnerModule, { LOADING_SPINNER } from './loadingSpinner';
+import imageCropperModule, { IMAGE_CROPPER } from './imageCropper';
+import bannerModule, { BANNER } from './banner';
+import statsCardMiniModule, { STATS_CARD_MINI } from './statsCardMini';
+import statsCardTopBorderColoredModule, { STATS_CARD_TOP_BORDER_COLORED } from './statsCardTopBorderColored';
+import userAvatarModule, { USER_AVATAR } from './userAvatar';
+import menubarModule, { MENUBAR } from './menubar';
+import menubarMenuModule, { MENUBAR_MENU } from './menubar/children/menubarMenu';
+import menubarTriggerModule, { MENUBAR_TRIGGER } from './menubar/children/menubarTrigger';
+import menubarContentModule, { MENUBAR_CONTENT } from './menubar/children/menubarContent';
+import menubarGroupModule, { MENUBAR_GROUP } from './menubar/children/menubarGroup';
+import menubarSeparatorModule, { MENUBAR_SEPARATOR } from './menubar/children/menubarSeparator';
+import menubarLabelModule, { MENUBAR_LABEL } from './menubar/children/menubarLabel';
+import menubarItemModule, { MENUBAR_ITEM } from './menubar/children/menubarItem';
+import menubarShortcutModule, { MENUBAR_SHORTCUT } from './menubar/children/menubarShortcut';
+import menubarCheckboxItemModule, { MENUBAR_CHECKBOX_ITEM } from './menubar/children/menubarCheckboxItem';
+import menubarRadioGroupModule, { MENUBAR_RADIO_GROUP } from './menubar/children/menubarRadioGroup';
+import menubarRadioItemModule, { MENUBAR_RADIO_ITEM } from './menubar/children/menubarRadioItem';
+import menubarSubModule, { MENUBAR_SUB } from './menubar/children/menubarSub';
+import menubarSubTriggerModule, { MENUBAR_SUB_TRIGGER } from './menubar/children/menubarSubTrigger';
+import menubarSubContentModule, { MENUBAR_SUB_CONTENT } from './menubar/children/menubarSubContent';
+import menubarPortalModule, { MENUBAR_PORTAL } from './menubar/children/menubarPortal';
 
 export function registerAllComponents() {
   register(ACCORDION, accordionModule.register);
@@ -217,11 +243,9 @@ export function registerAllComponents() {
   register(RADARCHART, radarChartModule.register);
   register(RADIAL_BAR_CHART, radialBarChartModule.register);
   register(RADIO, radioModule.register);
-  register(REPETITIVE_LIST, repetitiveListModule.register);
   register(SECTION, sectionModule.register);
   register(SELECT, selectModule.register);
   register(SEPARATOR, separatorModule.register);
-  //register(SLIDER, sliderModule.register);
   register(SPAN, spanModule.register);
   //register(STACK, stackModule.register);
   register(STATS_CARD, statsCardModule.register);
@@ -230,6 +254,36 @@ export function registerAllComponents() {
   register(TABLE, tableModule.register);
   register(VERTICAL_BAR_CHART, verticalBarChartModule.register);
   register(VIDEO_EMBED, videoEmbedModule.register);
+
+  // New components synced from latest design-system dev
+  register(NOTIFICATION, notificationModule.register);
+  register(FIELD_DESCRIPTION, fieldDescriptionModule.register);
+  register(PAGE_HEADER_BACK_BUTTON, pageHeaderBackButtonModule.register);
+  register(DATE_TIME_INPUT, dateTimeInputModule.register);
+  register(LOADING_SPINNER, loadingSpinnerModule.register);
+  register(IMAGE_CROPPER, imageCropperModule.register);
+  register(BANNER, bannerModule.register);
+  register(STATS_CARD_MINI, statsCardMiniModule.register);
+  register(STATS_CARD_TOP_BORDER_COLORED, statsCardTopBorderColoredModule.register);
+  register(USER_AVATAR, userAvatarModule.register);
+
+  // Menubar family
+  register(MENUBAR, menubarModule.register);
+  register(MENUBAR_MENU, menubarMenuModule.register);
+  register(MENUBAR_TRIGGER, menubarTriggerModule.register);
+  register(MENUBAR_CONTENT, menubarContentModule.register);
+  register(MENUBAR_GROUP, menubarGroupModule.register);
+  register(MENUBAR_SEPARATOR, menubarSeparatorModule.register);
+  register(MENUBAR_LABEL, menubarLabelModule.register);
+  register(MENUBAR_ITEM, menubarItemModule.register);
+  register(MENUBAR_SHORTCUT, menubarShortcutModule.register);
+  register(MENUBAR_CHECKBOX_ITEM, menubarCheckboxItemModule.register);
+  register(MENUBAR_RADIO_GROUP, menubarRadioGroupModule.register);
+  register(MENUBAR_RADIO_ITEM, menubarRadioItemModule.register);
+  register(MENUBAR_SUB, menubarSubModule.register);
+  register(MENUBAR_SUB_TRIGGER, menubarSubTriggerModule.register);
+  register(MENUBAR_SUB_CONTENT, menubarSubContentModule.register);
+  register(MENUBAR_PORTAL, menubarPortalModule.register);
 
   // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);

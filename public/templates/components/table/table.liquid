@@ -42,6 +42,9 @@
   {% if resourceConfig.properties.pageSizePagination and not resourceConfig.data.pageSizePagination -%}
   pageSizePagination={ [{% for this in resourceConfig.properties.pageSizePagination %}{{ this }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}] }
   {% endif -%}
+  {% if resourceConfig.properties.rowCount and not resourceConfig.data.rowCount -%}
+  rowCount={ {{ resourceConfig.properties.rowCount }} }
+  {% endif -%}
     {% assign componentClassName = resourceConfig.properties.className -%}
   {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
   {% if componentClassName or parentChildClassNames or resourceConfig.style -%}

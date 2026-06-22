@@ -59,6 +59,12 @@
   {% if resourceConfig.properties.headlineClassName and not resourceConfig.data.headlineClassName -%}
   headlineClassName={ `{{ resourceConfig.properties.headlineClassName }}` }
   {% endif -%}
+  {% if resourceConfig.properties.headlineContentClassName and not resourceConfig.data.headlineContentClassName -%}
+  headlineContentClassName={ `{{ resourceConfig.properties.headlineContentClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.pageHeaderContentClassName and not resourceConfig.data.pageHeaderContentClassName -%}
+  pageHeaderContentClassName={ `{{ resourceConfig.properties.pageHeaderContentClassName }}` }
+  {% endif -%}
   {% if resourceConfig.properties.commonProperties.customProperties -%}
   {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
   {% endif -%}
