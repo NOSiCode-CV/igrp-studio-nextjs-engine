@@ -9,6 +9,8 @@ import {
 export function separatorProperties() {
   return {
     orientation: { type: 'string', required: true, enum: ['vertical', 'horizontal'], default: 'horizontal' },
+    decorative: { type: 'boolean', required: false, default: true },
+
     ...classProperties(),
     ...commonProperties(),
   };

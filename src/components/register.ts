@@ -159,6 +159,29 @@ import menubarSubTriggerModule, { MENUBAR_SUB_TRIGGER } from './menubar/children
 import menubarSubContentModule, { MENUBAR_SUB_CONTENT } from './menubar/children/menubarSubContent';
 import menubarPortalModule, { MENUBAR_PORTAL } from './menubar/children/menubarPortal';
 
+// Primitives + extra horizon synced from DS dev (round 2)
+import progressModule, { PROGRESS } from './progress';
+import skeletonModule, { SKELETON } from './skeleton';
+import spinnerModule, { SPINNER } from './spinner';
+import toggleModule, { TOGGLE } from './toggle';
+import aspectRatioModule, { ASPECT_RATIO } from './aspectRatio';
+import kbdModule, { KBD } from './kbd';
+import scrollAreaModule, { SCROLL_AREA } from './scrollArea';
+import tooltipModule, { TOOLTIP } from './tooltip';
+import hoverCardModule, { HOVER_CARD } from './hoverCard';
+import popoverModule, { POPOVER } from './popover';
+import sheetModule, { SHEET } from './sheet';
+import drawerModule, { DRAWER } from './drawer';
+import breadcrumbModule, { BREADCRUMB } from './breadcrumb';
+import paginationModule, { PAGINATION } from './pagination';
+import commandModule, { COMMAND } from './command';
+import emptyModule, { EMPTY } from './empty';
+import stepperUIModule, { STEPPER_UI } from './stepperUI';
+import inputOTPModule, { INPUT_OTP } from './inputOTP';
+import inputGroupModule, { INPUT_GROUP } from './inputGroup';
+import navigationMenuModule, { NAVIGATION_MENU } from './navigationMenu';
+import toasterModule, { TOASTER } from './toaster';
+
 export function registerAllComponents() {
   register(ACCORDION, accordionModule.register);
   register(ACCORDION_ITEM, accordionItemModule.register);
@@ -284,6 +307,29 @@ export function registerAllComponents() {
   register(MENUBAR_SUB_TRIGGER, menubarSubTriggerModule.register);
   register(MENUBAR_SUB_CONTENT, menubarSubContentModule.register);
   register(MENUBAR_PORTAL, menubarPortalModule.register);
+
+  // Primitives + extra horizon synced from DS dev (round 2)
+  register(PROGRESS, progressModule.register);
+  register(SKELETON, skeletonModule.register);
+  register(SPINNER, spinnerModule.register);
+  register(TOGGLE, toggleModule.register);
+  register(ASPECT_RATIO, aspectRatioModule.register);
+  register(KBD, kbdModule.register);
+  register(SCROLL_AREA, scrollAreaModule.register);
+  register(TOOLTIP, tooltipModule.register);
+  register(HOVER_CARD, hoverCardModule.register);
+  register(POPOVER, popoverModule.register);
+  register(SHEET, sheetModule.register);
+  register(DRAWER, drawerModule.register);
+  register(BREADCRUMB, breadcrumbModule.register);
+  register(PAGINATION, paginationModule.register);
+  register(COMMAND, commandModule.register);
+  register(EMPTY, emptyModule.register);
+  register(STEPPER_UI, stepperUIModule.register);
+  register(INPUT_OTP, inputOTPModule.register);
+  register(INPUT_GROUP, inputGroupModule.register);
+  register(NAVIGATION_MENU, navigationMenuModule.register);
+  register(TOASTER, toasterModule.register);
 
   // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);

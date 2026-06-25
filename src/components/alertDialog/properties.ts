@@ -25,7 +25,10 @@ export function alertDialogProperties() {
     actionLabel: { type: 'string', required: false, default: 'Confirm' },
     open: { type: 'boolean', required: false },
     actionProps: { type: 'object', required: false, properties: buttonProperties() },
-    cancelProps: { type: 'object', required: false, properties: buttonProperties() },
+    cancelProps: { type: 'object', required: false, properties: buttonProperties() },    showIcon: { type: 'boolean', required: false, default: true },
+    iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
+    iconPlacement: { type: 'string', required: false, enum: ['start', 'end'] },
+
     ...classProperties(),
     ...commonProperties(),
   };

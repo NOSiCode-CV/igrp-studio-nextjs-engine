@@ -22,7 +22,8 @@ export function badgeProperties() {
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
-    badgeClassName: { type: 'string', required: false },
+    badgeClassName: { type: 'string', required: false },    asChild: { type: 'boolean', required: false, default: false },
+
     ...classProperties(),
     ...commonProperties(),
   };

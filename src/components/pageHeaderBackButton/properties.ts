@@ -3,6 +3,14 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 export function pageHeaderBackButtonProperties() {
   return {
     href: { type: 'string', required: false, 'x-ui-widget': 'uri' },
+    iconName: { type: 'string', required: false, default: 'ArrowLeft', 'x-ui-widget': 'icon' },
+    variant: { type: 'string', required: false, default: 'ghost', enum: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] },
+    size: { type: 'string', required: false, default: 'icon', enum: ['default', 'sm', 'lg', 'icon'] },
+    ariaLabel: { type: 'string', required: false, default: 'Go back' },
+    showText: { type: 'boolean', required: false, default: false },
+    text: { type: 'string', required: false, default: 'Back' },
+    url: { type: 'string', required: false, 'x-ui-widget': 'uri' },
+    useBrowserBack: { type: 'boolean', required: false, default: false },
     ...classProperties(),
     ...commonProperties(),
   };

@@ -34,6 +34,9 @@ export function inputFileProperties() {
     maxSizeLabel: { type: 'string', required: false },
     maxFilesLabel: { type: 'string', required: false },
     rejectedAlertTitle: { type: 'string', required: false },
+    helperText: { type: 'string', required: false },
+    onFilesChange: { type: 'string', required: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

@@ -14,7 +14,11 @@ export function checkboxProperties() {
     label: { type: 'string', required: false, default: 'Check' },
     description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false },
+    message: { type: 'string', required: false },    helperText: { type: 'string', required: false },
+    labelClassName: { type: 'string', required: false },
+    error: { type: 'string', required: false },
+    required: { type: 'boolean', required: false, default: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

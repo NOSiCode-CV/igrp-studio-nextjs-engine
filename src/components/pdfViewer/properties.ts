@@ -23,6 +23,9 @@ export function pdfViewerProperties() {
     notFoundLabel: { type: 'string', required: false, default: 'Not Found' },
     loadErrorLabel: { type: 'string', required: false, default: 'Not Found' },
     loadTimeoutMs: { type: 'number', required: false, 'x-meta': { label: 'Load Timeout (ms)' } },
+    documents: { type: 'array', required: false, items: { type: 'object', properties: { id: { type: 'string' }, url: { type: 'string' }, name: { type: 'string' } } } },
+    defaultDocument: { type: 'string', required: false },
+
     ...classProperties(),
     ...commonProperties(),
   };

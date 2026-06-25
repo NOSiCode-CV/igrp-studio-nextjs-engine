@@ -17,6 +17,10 @@ export function dropdownProperties() {
     ...iconProperties(),
     disabled: { type: 'boolean', required: false, default: false },
     actionItem: { type: 'array', items: { type: 'object', items: { href: { type: 'string', 'x-ui-widget': 'uri' } } }, required: false },
+    asChild: { type: 'boolean', required: false, default: false },
+    align: { type: 'string', required: false, enum: ['start', 'center', 'end'] },
+    sideOffset: { type: 'number', required: false },
+
     ...classProperties(),
     ...commonProperties(),
   };

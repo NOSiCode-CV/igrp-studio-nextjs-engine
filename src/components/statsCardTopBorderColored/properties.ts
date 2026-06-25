@@ -5,6 +5,9 @@ export function statsCardTopBorderColoredProperties() {
     title: { type: 'string', required: false, default: 'Title' },
     value: { type: 'string', required: false },
     color: { type: 'string', required: false, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info'] },
+    cardVariant: { type: 'string', required: false, enum: ['default', 'soft', 'outline'] },
+    iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
+    iconClassName: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

@@ -23,6 +23,8 @@ export function radioGroupProperties() {
     disabled: { type: 'boolean', required: false, default: false },
     message: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
+    showIcon: { type: 'boolean', required: false, default: false },
+    iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

@@ -21,6 +21,8 @@ export function inputColorProperties() {
     showFormatValue: { type: 'boolean', required: false, default: true },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
+    formatOptions: { type: 'string', required: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

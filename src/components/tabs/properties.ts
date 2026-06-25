@@ -37,6 +37,9 @@ export function tabsProperties() {
         iconPlacement: { type: 'string', required: false, enum: ['start', 'end'], default: 'start' },
       },
     },
+    showScrollIndicators: { type: 'boolean', required: false, default: false },
+    scrollButtonClassName: { type: 'string', required: false },
+
     ...classProperties(),
     ...commonProperties()
   };

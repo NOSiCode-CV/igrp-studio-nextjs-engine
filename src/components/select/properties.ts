@@ -27,7 +27,8 @@ export function selectProperties() {
     showIcon: { type: 'boolean', required: false },
     /*iconProperties: {
       iconName: { type: 'string', required: false, default: "CornerDownRight" },
-    },*/
+    },*/    defaultValue: { type: 'string', required: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

@@ -9,6 +9,10 @@ import {
 export function modalDialogContentProperties() {
   return {
     size: { type: 'string', required: false, enum: ["sm", "md", "lg", "xl", "full"], default: "md" },
+    contentClassName: { type: 'string', required: false },
+    showCloseButton: { type: 'boolean', required: false, default: true },
+    showCloseButtonClassName: { type: 'string', required: false },
+
     ...classProperties(),
     ...commonProperties(),
   };
