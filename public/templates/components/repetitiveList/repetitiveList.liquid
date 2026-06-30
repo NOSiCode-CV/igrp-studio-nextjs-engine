@@ -1,0 +1,26 @@
+<IGRPRepetitiveComponent{{ '' | singleTypeFormatter: resourceConfig.dataType }}
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  keyExtractor={ ({% if resourceConfig.properties.variable %}{{ resourceConfig.properties.variable }}{% else %}item{% endif %}) => {% if resourceConfig.properties.dataKey %}{% if resourceConfig.properties.variable %}{{ resourceConfig.properties.variable }}{% else %}item{% endif %}.{{ resourceConfig.properties.dataKey }}{% else %}''{% endif %} }
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+>
+{ ({% if resourceConfig.properties.variable %}{{ resourceConfig.properties.variable }}{% else %}item{% endif %}) =>
+  <>
+  {% if resourceConfig.children and resourceConfig.children.size > 0 -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
+  </>
+}
+</IGRPRepetitiveComponent>

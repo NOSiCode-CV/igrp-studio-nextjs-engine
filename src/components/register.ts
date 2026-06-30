@@ -182,6 +182,9 @@ import inputGroupModule, { INPUT_GROUP } from './inputGroup';
 import navigationMenuModule, { NAVIGATION_MENU } from './navigationMenu';
 import toasterModule, { TOASTER } from './toaster';
 
+// Re-added after DS feat(7a6ad467): IGRPRepetitiveComponent is back
+import repetitiveListModule, { REPETITIVE_LIST } from './repetitiveList';
+
 export function registerAllComponents() {
   register(ACCORDION, accordionModule.register);
   register(ACCORDION_ITEM, accordionItemModule.register);
@@ -330,6 +333,7 @@ export function registerAllComponents() {
   register(INPUT_GROUP, inputGroupModule.register);
   register(NAVIGATION_MENU, navigationMenuModule.register);
   register(TOASTER, toasterModule.register);
+  register(REPETITIVE_LIST, repetitiveListModule.register);
 
   // Table Columns
   register(TABLE_TEXT_CELL, tableBadgeModule.register);
