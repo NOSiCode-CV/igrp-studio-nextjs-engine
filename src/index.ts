@@ -30,7 +30,14 @@ import { componentConfigValidate } from './schema/componentConfig';
 import { saveComponentConfig } from './modules/components/saveComponentConfig';
 import { pageComponentConfigValidate } from './schema/pageComponentConfig';
 import { generateComponent } from './modules/components/generateComponent';
-import { register, registryAsObject, liquidRenderer as componentLiquidRenderer } from './components';
+import {
+  register,
+  registryAsObject,
+  liquidRenderer as componentLiquidRenderer,
+  markBuiltInsRegistered,
+  clearComponents as clearComponentsInternal,
+  clearCustomComponents,
+} from './components';
 import { configurationAsObject, setConfiguration } from './config';
 import { processConfigValidate } from './schema/processConfig';
 import { saveProcessConfig } from './modules/process/saveProcessConfig';
@@ -367,10 +374,45 @@ export const deleteElement = async (config: DeleteConfig, basePath: string) => {
 export const initComponents = async () => {
   try {
     registerAllComponents();
+    // Snapshot the built-in keys so `resetComponents()` can later drop only
+    // the custom/app-registered ones without re-running heavy built-in setup.
+    markBuiltInsRegistered();
     console.log(`✅ Registered components`);
   } catch (error) {
     console.error(`❌ Failed to load components`, error);
   }
+};
+
+/**
+ * Drops every custom / app-registered component from the internal registry,
+ * leaving only the built-in engine components. Fast — does NOT re-run
+ * `registerAllComponents()`. Intended for isolating the registry per project
+ * (e.g. when the Studio IDE opens a new project):
+ *
+ * ```ts
+ * // on project switch
+ * engine.resetComponents();
+ * engine.registerComponents(currentProjectConfig);
+ * ```
+ *
+ * After this, `loadRegistry()` / `getComponent()` return only built-ins.
+ * A subsequent `registerComponents(config)` adds only that config's entries;
+ * no residue from previous projects remains.
+ *
+ * Preserves the exported `registry` reference so modules that already
+ * captured it stay valid.
+ */
+export const resetComponents = (): void => {
+  clearCustomComponents();
+};
+
+/**
+ * Nukes the entire registry — built-ins AND custom entries. Rare use case:
+ * you generally want `resetComponents()` instead. If you use this, you MUST
+ * call `initComponents()` again before any rendering.
+ */
+export const clearComponents = (): void => {
+  clearComponentsInternal();
 };
 
 export const initCodeSnippets = async () => {

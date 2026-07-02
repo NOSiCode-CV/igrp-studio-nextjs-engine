@@ -333,6 +333,15 @@ function initComponent(): Component {
 
 export let registry: Record<string, Component> = {};
 
+/**
+ * Snapshot of the built-in component keys — recorded by `markBuiltInsRegistered`
+ * once at the end of `initComponents`. Enables `resetComponents` to drop only
+ * the custom / app registrations without re-running the (heavy) built-in
+ * registration callbacks for the ~90+ engine components on every project
+ * switch.
+ */
+const builtInKeys = new Set<string>();
+
 export function register(name: string, registerFn: (component: Component) => void) {
   const componentInstance: Component = initComponent();
   registerFn(componentInstance);
@@ -341,6 +350,49 @@ export function register(name: string, registerFn: (component: Component) => voi
 
 export function getComponent(name: string): Component {
   return registry[name];
+}
+
+/**
+ * Called once at the end of `initComponents()` — after all built-in
+ * `registerAllComponents()` calls have run. Snapshots the registry keys so
+ * `resetComponents()` can later identify which entries are custom/app
+ * registrations and drop only those.
+ *
+ * Idempotent: re-calling snapshots the current registry state (only useful
+ * if the caller wants to re-baseline what counts as "built-in").
+ */
+export function markBuiltInsRegistered(): void {
+  builtInKeys.clear();
+  for (const key of Object.keys(registry)) builtInKeys.add(key);
+}
+
+/**
+ * Deletes every entry in the registry — built-ins AND custom/app.
+ * The registry object reference itself is preserved (mutating in place) so
+ * modules that already imported it keep the same object.
+ *
+ * After this the caller MUST call `initComponents()` again before rendering
+ * anything, or the internal registry will be empty.
+ */
+export function clearComponents(): void {
+  for (const key of Object.keys(registry)) delete registry[key];
+  builtInKeys.clear();
+}
+
+/**
+ * Drops only the custom / app-registered entries — the built-ins recorded
+ * by `markBuiltInsRegistered` stay. Fast and non-destructive: no built-in
+ * re-registration work is needed. Used to isolate the registry per project
+ * on project switch.
+ *
+ * If `markBuiltInsRegistered` was never called (e.g. `initComponents` never
+ * ran), this is a no-op — nothing is treated as built-in.
+ */
+export function clearCustomComponents(): void {
+  if (builtInKeys.size === 0) return;
+  for (const key of Object.keys(registry)) {
+    if (!builtInKeys.has(key)) delete registry[key];
+  }
 }
 
 function componentAsObject(
