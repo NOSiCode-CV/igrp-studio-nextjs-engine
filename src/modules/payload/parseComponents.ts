@@ -5,44 +5,148 @@ import { resolveExportedPath } from '../../utils/helpers';
 
 export function parseComponents(componentFilePath: string): ComponentDef[] {
   let content = fs.readFileSync(componentFilePath.endsWith('.tsx') ? componentFilePath : componentFilePath + 'x', 'utf-8');
-  const components: ComponentDef[] = [];
 
   // Remove all comment blocks first
   content = content.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
 
-  // Match function declarations
-  const functionRegex = /(?:export\s+default\s+|export\s+)?function\s+(\w+)\s*\(/g;
+  // Build a map of every character position → nesting depth of the surrounding
+  // curly braces (0 = module top-level, 1 = inside one function body, etc.).
+  // The scanner is string- and JSX-aware so `{` inside a string literal or a
+  // JSX expression container isn't confused with a real block boundary.
+  const depthAt = buildDepthMap(content);
+
+  const seen = new Set<string>();
+  const components: ComponentDef[] = [];
+
+  const push = (name: string, params: string) => {
+    // A React component's first (and typically only) argument is a destructured
+    // props object: `({ a, b }: Props)` or `({ a, b }: { ... })` or `(props: X)`.
+    // Event handlers / helpers like `(idx: number, patch: Partial<X>) => …`
+    // take positional args and are correctly rejected by parseComponentProps
+    // (returns props=[] with no argumentsInterface).
+    const { props, argumentsInterface } = parseComponentProps(params);
+    // Fixed: `[]` is truthy in JS, so `props || argumentsInterface` was always
+    // true and let non-components through. A real component either has parsed
+    // props (props.length > 0) or a props-type name (argumentsInterface).
+    if (props.length === 0 && !argumentsInterface) return;
+    if (seen.has(name)) return;
+    seen.add(name);
+    const allowChildren = detectChildrenProp(props);
+    components.push({
+      name,
+      path: resolveExportedPath(componentFilePath),
+      props,
+      argumentsInterface,
+      hooks: [],
+      children: [],
+      allowChildren,
+    });
+  };
+
+  // -- function declarations: `function Name(...)` at module top-level only --
+  const functionRegex = /(?:export\s+default\s+|export\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(/g;
   let functionMatch;
   while ((functionMatch = functionRegex.exec(content)) !== null) {
     const name = functionMatch[1];
+    // Only accept PascalCase names — React convention. `updateRow`, `useX`,
+    // `handleY` fall out. `SomeComponent` is kept.
+    if (!isPascalCase(name)) continue;
+    // Only top-level declarations. `depthAt[i]` is the depth immediately
+    // BEFORE the character at position i, so a top-level declaration starts
+    // at a position where depth === 0.
+    if (depthAt[functionMatch.index] !== 0) continue;
+
     const start = functionMatch.index + functionMatch[0].length - 1;
     const extracted = extractBalancedParams(content, start);
     if (!extracted) continue;
-
-    const { props, argumentsInterface } = parseComponentProps(extracted.params);
-    if (props || argumentsInterface) {
-      const allowChildren = detectChildrenProp(props);
-      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [], allowChildren });
-    }
+    push(name, extracted.params);
   }
 
-  // Match arrow functions
-  const arrowRegex = /(?:export\s+)?const\s+(\w+)\s*=\s*(?:async\s*)?\(/g;
+  // -- arrow / function-expression variables: `const Name = (…) =>` or
+  //    `const Name = function (…) {`. Same top-level + PascalCase filter. --
+  const arrowRegex = /(?:export\s+)?const\s+([A-Za-z_$][\w$]*)\s*(?::\s*[^=]+)?=\s*(?:async\s+)?(?:function\s*(?:[A-Za-z_$][\w$]*)?\s*)?\(/g;
   let arrowMatch;
   while ((arrowMatch = arrowRegex.exec(content)) !== null) {
     const name = arrowMatch[1];
+    if (!isPascalCase(name)) continue;
+    if (depthAt[arrowMatch.index] !== 0) continue;
+
     const start = arrowMatch.index + arrowMatch[0].length - 1;
     const extracted = extractBalancedParams(content, start);
     if (!extracted) continue;
-
-    const { props, argumentsInterface } = parseComponentProps(extracted.params);
-    if (props || argumentsInterface) {
-      const allowChildren = detectChildrenProp(props);
-      components.push({ name, path: resolveExportedPath(componentFilePath), props, argumentsInterface, hooks: [], children: [], allowChildren });
-    }
+    push(name, extracted.params);
   }
 
   return components;
+}
+
+/** React-component naming convention: starts with an uppercase ASCII letter. */
+function isPascalCase(name: string): boolean {
+  return /^[A-Z]/.test(name);
+}
+
+/**
+ * Returns an array where `depthAt[i]` is the curly-brace nesting depth just
+ * before the character at index `i`. Tokens INSIDE string literals, template
+ * literals (including `${…}` interpolations), and regex literals do not count
+ * toward depth. JSX braces `{expr}` are treated as regular JS braces, which is
+ * fine — a JSX return already puts us inside a function body (depth ≥ 1), so a
+ * spurious `{` inside JSX just further increments an already-non-zero depth
+ * and never mis-classifies a nested declaration as top-level.
+ */
+function buildDepthMap(content: string): Int16Array {
+  const n = content.length;
+  const depth = new Int16Array(n + 1);
+  let d = 0;
+  // template-literal state: 0 = not in string; 1 = single/double; 2 = template
+  // (needs to track ${...} balance).
+  let mode: 0 | 1 | 2 = 0;
+  let quote = '';
+  let templDollar = 0; // nesting of `${…}` interpolations inside a template
+  let inLineComment = false;
+  let inBlockComment = false;
+
+  for (let i = 0; i < n; i++) {
+    depth[i] = d;
+    const c = content[i];
+    const next = content[i + 1];
+
+    if (inLineComment) {
+      if (c === '\n') inLineComment = false;
+      continue;
+    }
+    if (inBlockComment) {
+      if (c === '*' && next === '/') { inBlockComment = false; i++; depth[i] = d; }
+      continue;
+    }
+
+    if (mode === 0) {
+      // top-level or code region
+      if (c === '/' && next === '/') { inLineComment = true; i++; depth[i] = d; continue; }
+      if (c === '/' && next === '*') { inBlockComment = true; i++; depth[i] = d; continue; }
+      if (c === '"' || c === "'") { mode = 1; quote = c; continue; }
+      if (c === '`') { mode = 2; templDollar = 0; continue; }
+      if (c === '{') d++;
+      else if (c === '}') d = Math.max(0, d - 1);
+    } else if (mode === 1) {
+      if (c === '\\') { i++; depth[i] = d; continue; }
+      if (c === quote) mode = 0;
+    } else if (mode === 2) {
+      if (c === '\\') { i++; depth[i] = d; continue; }
+      if (c === '`' && templDollar === 0) { mode = 0; continue; }
+      if (c === '$' && next === '{') {
+        templDollar++;
+        i++; depth[i] = d;
+        continue;
+      }
+      if (c === '}' && templDollar > 0) {
+        templDollar--;
+        continue;
+      }
+    }
+  }
+  depth[n] = d;
+  return depth;
 }
 
 function extractBalancedParams(str: string, startIndex: number): { params: string, endIndex: number } | null {
