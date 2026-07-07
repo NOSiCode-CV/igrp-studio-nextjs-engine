@@ -43,6 +43,10 @@ import {
   resolveSegmentPath,
   resolveStateDefault,
   resolveZodTypes, checkRules, extractAccordionItem, extractCardDetailsItem,
+  resolvePermissionAsyncModifier,
+  resolvePermissionAssertPrelude,
+  resolvePermissionGuardWrapperOpen,
+  resolvePermissionGuardWrapperClose,
 } from '../helpers/componentPropertiesHelper';
 import { resolveCodeBlocks } from '../helpers/resolveCodeBlocks';
 import { resolveServiceInterfaceMethods } from '../helpers/resolveServiceInterfaceMethods';
@@ -96,6 +100,10 @@ registerFilter("resolveFunctionArgs", resolveFunctionArgs);
 registerFilter("resolveArgNames", resolveArgNames);
 registerFilter("resolveArrayElementRules", resolveArrayElementRules);
 registerFilter("checkRules", checkRules);
+registerFilter("resolvePermissionAsyncModifier", resolvePermissionAsyncModifier);
+registerFilter("resolvePermissionAssertPrelude", resolvePermissionAssertPrelude);
+registerFilter("resolvePermissionGuardWrapperOpen", resolvePermissionGuardWrapperOpen);
+registerFilter("resolvePermissionGuardWrapperClose", resolvePermissionGuardWrapperClose);
 registerFilter("extractTableColumns", extractTableColumns);
 registerFilter("extractTableRowSubcomponent", extractTableRowSubcomponent);
 registerFilter("extractTableFilters", extractTableFilters);

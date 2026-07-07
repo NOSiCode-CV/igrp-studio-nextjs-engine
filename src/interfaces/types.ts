@@ -279,9 +279,66 @@ export interface Layout<S = any> extends IdentifiableElement{
   children?: Layout[];
 }
 
-export interface RuleDefinition {
+/**
+ * Legacy shape kept as-is: `{ type: 'visibility', condition: string }`.
+ * `RuleDefinition` is now a discriminated union — either the classic
+ * visibility rule OR a new permission rule (added in `0.2.0-beta.23`).
+ * Existing consumers that hand-wrote `{ type: 'visibility', ... }` keep
+ * working unchanged because that shape is one arm of the union.
+ */
+export type RuleDefinition = VisibilityRuleDefinition | PermissionRuleDefinition;
+
+export interface VisibilityRuleDefinition {
   type: 'visibility',
   condition: string
+}
+
+/**
+ * Gates a node by the current user's permissions, backed by
+ * `@igrp/framework-next` + `@igrp/framework-next-ui`. See the
+ * framework's Permissions guide for the underlying claims model.
+ *
+ * `permission` is ALWAYS an array — Studio surfaces it as a
+ * multi-select so single-vs-array complexity never leaks into the UI.
+ * A single-entry array is fine (`["delete_invoice"]`).
+ *
+ * `mode` matters only when multiple permissions are listed:
+ *   - `"all"` (default) — user must hold every listed permission.
+ *   - `"any"`           — user needs at least one.
+ *
+ * `action` selects the enforcement shape emitted into TSX:
+ *   - `"hide"`     (default) — wrap node in `<IGRPAuthorization>` with
+ *                              no fallback. Denied users see nothing.
+ *   - `"disable"`            — inject `disabled` (or `disabledProp`)
+ *                              onto the node, composed with any
+ *                              existing disabled binding via `||`.
+ *                              Requires `usePermissions()` in scope
+ *                              — the engine hoists it automatically.
+ *   - `"replace"`           — wrap node in `<IGRPAuthorization>` with
+ *                              `fallback` rendered from a sibling
+ *                              Layout subtree. Fallbacks are cosmetic:
+ *                              their state/data bindings are NOT hoisted
+ *                              into the parent component.
+ *   - `"assert"`            — server-side page/component/processStep
+ *                              gate. ONLY valid on the root of a page /
+ *                              component / processStep JSON. Non-root
+ *                              usage is downgraded to `"hide"` at
+ *                              codegen time with a console warning.
+ *
+ * `fallback` is a full Layout subtree — same shape as any other child
+ * — and is required when `action === "replace"`. Ignored otherwise.
+ *
+ * `disabledProp` overrides the prop name injected when `action ===
+ * "disable"`. Defaults to `"disabled"`; use `"readOnly"` for form
+ * inputs where the semantic is read-only rather than fully disabled.
+ */
+export interface PermissionRuleDefinition {
+  type: 'permission',
+  permission: string[],
+  mode?: 'all' | 'any',
+  action?: 'hide' | 'disable' | 'replace' | 'assert',
+  fallback?: Layout,
+  disabledProp?: string,
 }
 
 export interface LayoutProperties {

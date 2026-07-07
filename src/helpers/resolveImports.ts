@@ -189,5 +189,56 @@ export function resolveImports(config: Layout, registry: Record<string, Componen
     });
   }
 
+  // Permission-rule imports (added in 0.2.0-beta.23).
+  // Walk the whole tree collecting which permission actions the JSON author
+  // used, then add the corresponding imports. Fine-grained so we don't drag
+  // in `IGRPAuthorization` on pages that don't gate anything.
+  const permActions = collectPermissionActions(config);
+  const isClient = (page?.useClient ?? component?.useClient) !== false;
+
+  if (permActions.has('hide') || permActions.has('replace')) {
+    imports.add(`import { IGRPAuthorization } from '@igrp/framework-next-ui';`);
+  }
+  if (permActions.has('disable')) {
+    imports.add(`import { usePermissions } from '@igrp/framework-next-ui';`);
+  }
+  if (permActions.has('assert')) {
+    // Server file → real assert; client file → the guard wrapper.
+    if (!isClient) {
+      imports.add(`import { igrpAssertAuthorize } from '@igrp/framework-next';`);
+    } else {
+      imports.add(`import { IGRPGuardPage } from '@igrp/framework-next-ui';`);
+    }
+  }
+
   return Array.from(imports).join('\n');
+}
+
+/**
+ * Walks a Layout tree collecting the set of permission-rule `action`
+ * values in use. Used by the resolver above to decide which framework
+ * imports to add. Descends into `children[]` AND into `rules[].fallback`
+ * subtrees so a fallback that uses its own permission rule is also
+ * counted.
+ */
+function collectPermissionActions(root: Layout | undefined): Set<string> {
+  const acc = new Set<string>();
+  const walk = (node: Layout | undefined): void => {
+    if (!node) return;
+    if (node.rules) {
+      for (const rule of node.rules) {
+        if (rule.type !== 'permission') continue;
+        const action = (rule as any).action ?? 'hide';
+        acc.add(action);
+        // Fallback subtree can carry its own rules.
+        const fb = (rule as any).fallback as Layout | undefined;
+        if (fb) walk(fb);
+      }
+    }
+    if (Array.isArray(node.children)) {
+      for (const child of node.children) walk(child);
+    }
+  };
+  walk(root);
+  return acc;
 }

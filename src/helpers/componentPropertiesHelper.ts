@@ -462,6 +462,113 @@ export function checkRules(config: Layout): boolean {
   return Boolean(condition);
 }
 
+/**
+ * Root-level assert helpers — added in `0.2.0-beta.23`.
+ *
+ * A permission rule with `action: "assert"` on the ROOT layout of a
+ * page / component / processStep is emitted as either:
+ *   - a server-side `await igrpAssertAuthorize(...)` prelude at the top
+ *     of the exported function body (when the file is a server
+ *     component — `useClient === false`), which routes denies through
+ *     Next's `forbidden()` for a real 403; or
+ *   - a client-side `<IGRPGuardPage permission={...}>` wrapper around
+ *     the entire returned JSX (the default, since pages default to
+ *     `'use client'`), a cosmetic guard that unmounts the tree on deny.
+ *
+ * Non-root `assert` rules are silently downgraded to `hide` — the
+ * downgrade lives in `renderLayout`, which just skips `assert` when
+ * composing per-node wrappers. That leaves the root the only place any
+ * `assert` rule actually takes effect.
+ *
+ * The four helpers below are used by page.liquid / component.liquid to
+ * decorate the emitted function. Each returns `''` (empty string) when
+ * no assert rule is present, so the templates can inline-call them
+ * without conditionals.
+ */
+
+function collectRootAssertRules(config: Layout | undefined): Array<{
+  permission: string[];
+  mode?: 'all' | 'any';
+}> {
+  if (!config || !config.rules) return [];
+  const rules: Array<{ permission: string[]; mode?: 'all' | 'any' }> = [];
+  for (const rule of config.rules) {
+    if (rule.type !== 'permission') continue;
+    const action = (rule as any).action ?? 'hide';
+    if (action !== 'assert') continue;
+    rules.push({
+      permission: (rule as any).permission ?? [],
+      mode: (rule as any).mode,
+    });
+  }
+  return rules;
+}
+
+function formatPermissionArrayInline(permissions: string[]): string {
+  const escaped = permissions.map((p) => `'${p.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`);
+  return `[${escaped.join(', ')}]`;
+}
+
+/**
+ * Emits the `async` keyword modifier when the root has an assert rule
+ * AND the file is a server component. Server components with an assert
+ * MUST be `async` — `igrpAssertAuthorize` is an async function.
+ * Client components (default for pages) stay as regular functions and
+ * use the guard wrapper instead — no async needed.
+ */
+export function resolvePermissionAsyncModifier(root: Layout, useClient?: boolean): string {
+  if (useClient !== false) return ''; // client → no async, wrapper handles it
+  const rules = collectRootAssertRules(root);
+  return rules.length > 0 ? 'async ' : '';
+}
+
+/**
+ * Emits one `await igrpAssertAuthorize(...)` call per root assert rule,
+ * one per line. Empty when the file is a client component (default for
+ * pages — the wrapper handles it) or when no assert rules are present.
+ */
+export function resolvePermissionAssertPrelude(root: Layout, useClient?: boolean): string {
+  if (useClient !== false) return '';
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules
+    .map((rule) => {
+      const permArg = formatPermissionArrayInline(rule.permission);
+      const modeArg = rule.mode === 'any' ? `, { mode: 'any' }` : '';
+      return `  await igrpAssertAuthorize(${permArg}${modeArg});`;
+    })
+    .join('\n');
+}
+
+/**
+ * Emits the opening `<IGRPGuardPage permission={...}>` tag(s) for
+ * client-mode assert guards. Multiple assert rules stack as nested
+ * IGRPGuardPage elements — outer to inner in rule order.
+ */
+export function resolvePermissionGuardWrapperOpen(root: Layout, useClient?: boolean): string {
+  if (useClient === false) return ''; // server → prelude handles it
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules
+    .map((rule) => {
+      const permAttr = `permission={${formatPermissionArrayInline(rule.permission)}}`;
+      const modeAttr = rule.mode === 'any' ? ' mode="any"' : '';
+      return `<IGRPGuardPage ${permAttr}${modeAttr}>`;
+    })
+    .join('');
+}
+
+/**
+ * Companion closer for `resolvePermissionGuardWrapperOpen`. Emits
+ * exactly the same number of closing tags in reverse.
+ */
+export function resolvePermissionGuardWrapperClose(root: Layout, useClient?: boolean): string {
+  if (useClient === false) return '';
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules.map(() => '</IGRPGuardPage>').join('');
+}
+
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);
 }

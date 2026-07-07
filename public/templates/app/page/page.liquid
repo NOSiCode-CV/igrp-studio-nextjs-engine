@@ -18,7 +18,9 @@ export const dynamic = 'force-dynamic'
 
 {% assign pageArgsType = '' | resolveFunctionArgs: resourceConfig.args -%}
 {% assign pageArgNames = '' | resolveArgNames: resourceConfig.args -%}
-export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if pageArgsType != '' and pageArgNames != '' - %}{ params } : { params: Promise<{ {{ pageArgsType }} }> } {% endif %}) {
+export default {{ resourceConfig.components | resolvePermissionAsyncModifier: resourceConfig.useClient }}function Page{{ resourceConfig.pageName | toCamelCaseFromNatural | capitalize }}Component({% if pageArgsType != '' and pageArgNames != '' - %}{ params } : { params: Promise<{ {{ pageArgsType }} }> } {% endif %}) {
+
+{{ resourceConfig.components | resolvePermissionAssertPrelude: resourceConfig.useClient }}
 
   {% if pageArgsType != '' and pageArgNames != '' -%}
   const { {{ pageArgNames }} } = use(params);
@@ -34,7 +36,9 @@ export default function Page{{ resourceConfig.pageName | toCamelCaseFromNatural 
   {{ '' | resolve-code-blocks: resourceConfig.components, registry, resourceConfig }}
 
   return (
+{{ resourceConfig.components | resolvePermissionGuardWrapperOpen: resourceConfig.useClient }}
 {{ '' | render-layout: resourceConfig.components }}
+{{ resourceConfig.components | resolvePermissionGuardWrapperClose: resourceConfig.useClient }}
   );
 {% endif -%}
 }

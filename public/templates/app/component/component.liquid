@@ -12,7 +12,9 @@
 
 {{ '' | resolve-imports: resourceConfig.components, registry, resourceConfig.name, basePath, undefined, resourceConfig }}
 
-export default function {{ resourceConfig.name | toCamelCaseFromNatural | capitalize }}({% if resourceConfig.args - %}{ {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } : { {{ '' | resolveFunctionArgs: resourceConfig.args }} }{% endif %}) {
+export default {{ resourceConfig.components | resolvePermissionAsyncModifier: resourceConfig.useClient }}function {{ resourceConfig.name | toCamelCaseFromNatural | capitalize }}({% if resourceConfig.args - %}{ {% for this in resourceConfig.args %}{{ this.name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} } : { {{ '' | resolveFunctionArgs: resourceConfig.args }} }{% endif %}) {
+
+{{ resourceConfig.components | resolvePermissionAssertPrelude: resourceConfig.useClient }}
 
 {% if resourceConfig.type == 'processStep' -%}
   const { processKey, processInstanceId, userTaskInstanceId, onRegisterMethods, variables } = config;
@@ -28,7 +30,9 @@ export default function {{ resourceConfig.name | toCamelCaseFromNatural | capita
   {{ '' | resolve-code-blocks: resourceConfig.components, registry, undefined, resourceConfig }}
 
   return (
+{{ resourceConfig.components | resolvePermissionGuardWrapperOpen: resourceConfig.useClient }}
 {{ '' | render-layout: resourceConfig.components }}
+{{ resourceConfig.components | resolvePermissionGuardWrapperClose: resourceConfig.useClient }}
   );
 {% endif -%}
 }
