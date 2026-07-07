@@ -489,3 +489,32 @@ export function convertJsonSchemaToForm(schema: JsonSchema): IGRPComponent[] {
 }
 
 export const liquidRenderer = componentLiquidRenderer;
+
+// Custom-component registration helpers for headless consumers (CLI, CI,
+// scripts). Migrated from Studio's renderer so any caller can build the
+// same registry entries the desktop UI builds today. See:
+//   - convertComponentsToJSONSchema / …Interactions / …Rules → raw schema
+//   - buildComponentRegistry → composes ComponentRegisterConfig[] from
+//     `loadAppExports` output + optional `.igrpstudio/components/*.json`
+//     manifests.
+//   - registerAppComponents → one-liner: reads basePath, builds, calls
+//     registerComponents. Studio flow:
+//
+//       await engine.initComponents();
+//       await engine.registerAppComponents(basePath);
+//       await engine.newPage(pageConfig, basePath);
+export {
+  convertComponentsToJSONSchema,
+  convertComponentsToInteractionsJSONSchema,
+  convertComponentsToRulesJSONSchema,
+  getLabel,
+} from './helpers/registrySchemaHelpers';
+export {
+  buildComponentRegistry,
+  type AppComponentEntry,
+  type BuildComponentRegistryInput,
+} from './helpers/buildComponentRegistry';
+export {
+  registerAppComponents,
+  type RegisterAppComponentsOptions,
+} from './helpers/registerAppComponents';
