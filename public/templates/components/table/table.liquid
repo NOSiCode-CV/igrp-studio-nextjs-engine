@@ -83,7 +83,7 @@
         {% if child.componentName contains 'Filter' -%}
         {
           {% if child.properties.columnId %}columnId: `{{ child.properties.columnId }}`,{% endif %}
-          component: (column) => (
+          component: ({ column }) => (
           {{ '' | render-table-row: child, registry }}
           )
         },
