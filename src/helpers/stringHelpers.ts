@@ -23,9 +23,20 @@ export function toProps(context: any): string {
   return `{${JSON.stringify(context)}}`
 }
 
+/**
+ * Concatenates all arguments into a single string. Undefined/null entries
+ * are dropped so an unset optional filter argument doesn't produce the
+ * literal "undefined".
+ *
+ * Historical note: this used to do `strings.pop()` before joining, which
+ * silently dropped the LAST argument every call. That was the root cause
+ * of style-derived classes (e.g. `bg-[#33e651] bg-cover ...` produced by
+ * `addClassNameFromStyle`) never appearing in the emitted
+ * `className={cn(...)}` — default.liquid passes styleClassNames as the
+ * third argument to `concat`, so it was the one being dropped.
+ */
 export function concat(...strings: any[]): string {
-  strings.pop();
-  return strings.join('');
+  return strings.filter((s) => s !== undefined && s !== null).join('');
 }
 
 export function toCamelCaseFromNatural (str: string) {
