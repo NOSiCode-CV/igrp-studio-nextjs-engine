@@ -52,8 +52,10 @@ return str
 
 
 export function typeResolution(...data: any[]): string {
-  data.pop();
-  return `<${data.join(', ')}>`
+  // Same "options object" trap the `concat`/`and`/`or` helpers had —
+  // LiquidJS doesn't append a trailing arg, so the pop dropped a real
+  // type from the emitted generic parameter list.
+  return `<${data.filter((v) => v !== undefined && v !== null).join(', ')}>`
 }
 
 export function typeFormatter(type: string | undefined): string {
