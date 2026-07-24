@@ -228,9 +228,16 @@ export function resolveStateDefault(
   fields?: ElementField[],
 ): string {
 
-  // Helper to check ISO date format
+  // Helper to check ISO date format. Accepts both the full ISO datetime
+  // (`YYYY-MM-DDTHH:mm:ss[.fff]Z`) and the date-only short form (`YYYY-MM-DD`)
+  // that Studio's date picker widget emits. Without the short form, props
+  // like `date`, `defaultMonth`, `startMonth`, `endMonth`, `disableBefore`,
+  // `disableAfter` on components that render via `default.liquid`
+  // (inputDatePickerSingle, datePickerMultiple, all calendar* variants) were
+  // emitted as bare strings instead of `new Date(...)` constructions and
+  // failed at runtime because the DS components expect real Date instances.
   const isISODate = (val: string) => {
-    const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
+    const isoRegex = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z)?$/;
     return isoRegex.test(val);
   };
 
