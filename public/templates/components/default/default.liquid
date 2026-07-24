@@ -7,8 +7,9 @@
   data-section-id={ '{{ resourceConfig.tag }}' }
   {% endif -%}
   {% assign classNameProperty = '' | resolveClassNameProperty: resourceConfig, registry -%}
+  {% assign propertiesSchema = resourceConfig.componentName | resolvePropertiesSchema: registry -%}
   {% if resourceConfig.properties -%}
-  {{ '' | render-properties: resourceConfig.properties, resourceConfig.data, classNameProperty }}
+  {{ '' | render-properties: resourceConfig.properties, resourceConfig.data, classNameProperty, false, propertiesSchema }}
   {% endif -%}
   {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
   {% if parentResourceConfig and parentResourceConfig.childProperties and parentResourceConfig.childProperties.className and not parentChildClassNames -%}

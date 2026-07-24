@@ -37,6 +37,7 @@ import {
   renderData,
   renderInteractions,
   renderProperties, replaceId, replaceType, replaceValue, resolveClassNameProperty,
+  resolvePropertiesSchema,
   resolveComponent,
   resolveFirstType, resolveFunctionArgs, resolveArgNames,
   resolveQueryParams, resolveArrayElementRules,
@@ -124,6 +125,7 @@ registerFilter("replaceId", replaceId);
 registerFilter("replaceType", replaceType);
 registerFilter("replaceValue", replaceValue);
 registerFilter("resolveClassNameProperty", resolveClassNameProperty);
+registerFilter("resolvePropertiesSchema", resolvePropertiesSchema);
 registerFilter("render-properties", renderProperties);
 registerFilter("render-interactions", renderInteractions);
 registerFilter("render-data", renderData);

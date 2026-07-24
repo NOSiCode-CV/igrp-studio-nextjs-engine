@@ -228,19 +228,6 @@ export function resolveStateDefault(
   fields?: ElementField[],
 ): string {
 
-  // Helper to check ISO date format. Accepts both the full ISO datetime
-  // (`YYYY-MM-DDTHH:mm:ss[.fff]Z`) and the date-only short form (`YYYY-MM-DD`)
-  // that Studio's date picker widget emits. Without the short form, props
-  // like `date`, `defaultMonth`, `startMonth`, `endMonth`, `disableBefore`,
-  // `disableAfter` on components that render via `default.liquid`
-  // (inputDatePickerSingle, datePickerMultiple, all calendar* variants) were
-  // emitted as bare strings instead of `new Date(...)` constructions and
-  // failed at runtime because the DS components expect real Date instances.
-  const isISODate = (val: string) => {
-    const isoRegex = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z)?$/;
-    return isoRegex.test(val);
-  };
-
   const trimmed = defaultValue?.trim() ?? '';
   const isReservedLiteral = (
     trimmed === 'null' ||
@@ -254,12 +241,26 @@ export function resolveStateDefault(
     (trimmed.startsWith('{') && trimmed.endsWith('}'))
   );
 
+  // Schema-driven Date handling. The previous logic auto-wrapped any value
+  // matching an ISO-date shape in `new Date(...)`, which false-positived on
+  // string-typed props whose text just happened to look like a date
+  // (e.g. a `label` reading "2026-01-10"). Now we wrap iff the caller told
+  // us the schema type is `date` — regardless of value shape. Empty
+  // date defaults become `undefined` rather than `new Date("")` (which
+  // would produce Invalid Date at runtime).
+  if (type === 'date') {
+    if (trimmed === '') return 'undefined';
+    return `new Date(\`${trimmed}\`)`;
+  }
+
+  // String: always emit as a template literal (unless empty/undefined or a
+  // reserved literal like `null`/`true`/etc). We no longer fall through to
+  // Date-wrap when the string happens to look like an ISO date — that was
+  // the regression source; string props must render as strings.
   if (type === 'string') {
     if (defaultValue === undefined) return 'undefined';
     if (isReservedLiteral) return trimmed;
-    if (!isISODate(trimmed)) {
-      return `\`${defaultValue.replace(/"/g, '\\"')}\``;
-    }
+    return `\`${defaultValue.replace(/"/g, '\\"')}\``;
   }
 
   // Empty values for non-string/object types
@@ -271,11 +272,6 @@ export function resolveStateDefault(
     isReservedLiteral
   ) {
     return trimmed;
-  }
-
-  // Handle ISO date strings
-  if (isISODate(trimmed)) {
-    return `new Date("${trimmed}")`;
   }
 
   // Handle object with nested fields
@@ -695,11 +691,49 @@ export function resolveClassNameProperty(component: Layout, registry: Record<str
   return element.classNamePropertyTag ?? 'className'
 }
 
+/**
+ * Liquid-side accessor for a component's declared property schema
+ * (`registry[componentName].properties`). Used by `default.liquid` to hand
+ * the schema to `render-properties`, which then routes each prop through
+ * `resolveStateDefault` with the schema-declared type (e.g. `'date'`)
+ * instead of the value's runtime `typeof` — the disambiguation that
+ * prevents a string label reading "2026-01-10" from being wrapped as
+ * `new Date(...)`.
+ */
+export function resolvePropertiesSchema(
+  componentName: string | Layout,
+  registry: Record<string, Component>,
+): Record<string, any> | undefined {
+  const name = typeof componentName === 'string' ? componentName : componentName?.componentName;
+  if (!name || !registry) return undefined;
+  return registry[name]?.properties;
+}
+
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
-  classKey?: string, isJson?: boolean
+  classKey?: string, isJson?: boolean,
+  /**
+   * Optional per-key schema (typically `registry[componentName].properties`)
+   * used to disambiguate wrap behavior. When available we consult
+   * `propertiesSchema[key].type` (and nested `properties[k].type` for the
+   * `iconProperties`/`commonProperties` groups) to pick the type argument
+   * for `resolveStateDefault` — so a prop declared `type: 'date'` wraps as
+   * `new Date(...)` regardless of value shape, and a prop declared
+   * `type: 'string'` stays a template literal even when its value happens
+   * to look like an ISO date. Falls back to `typeof value` when the schema
+   * is absent (customProperties consumers, direct callers).
+   */
+  propertiesSchema?: Record<string, any>,
 ) {
+  // Pick the effective type for a given (schemaEntry, value) pair. Prefer
+  // schema type when known; otherwise runtime type. Empty/nullish values
+  // fall through to `undefined` so resolveStateDefault emits `'undefined'`.
+  const pickType = (schemaEntry: any, v: any): string | undefined => {
+    if (schemaEntry?.type) return schemaEntry.type as string;
+    return v !== undefined && v !== null ? typeof v : undefined;
+  };
+
   return customProperties
     ? Object.entries(customProperties)
         .map(([key, value]) => {
@@ -721,14 +755,27 @@ export function renderProperties(
             !Array.isArray(value) &&
             ['iconProperties', 'commonProperties'].includes(key)
           ) {
+            const nestedSchema = propertiesSchema?.[key]?.properties;
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))}` : `${k}={ ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))} }`;
+                const effectiveType = pickType(nestedSchema?.[k], v);
+                const rendered = resolveStateDefault(
+                  `${typeof v === 'object' ? JSON.stringify(v) : v}`,
+                  effectiveType,
+                  Array.isArray(v),
+                );
+                return isJson === true ? `${k}: ${rendered}` : `${k}={ ${rendered} }`;
               })
               .join('\n');
           } else {
-            return isJson === true? `${key}: ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))}` : `${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
+            const effectiveType = pickType(propertiesSchema?.[key], value);
+            const rendered = resolveStateDefault(
+              `${typeof value === 'object' ? JSON.stringify(value) : value}`,
+              effectiveType,
+              Array.isArray(value),
+            );
+            return isJson === true ? `${key}: ${rendered}` : `${key}={ ${rendered} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')
