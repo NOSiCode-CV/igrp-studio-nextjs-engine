@@ -60,6 +60,10 @@ import { componentRegistrationValidate } from './schema/componentRegisterConfig'
 import { codeSnippetsRegistrationValidate } from './schema/codeRegisterConfig';
 import { codeRegistryAsObject, register as registerCode } from './code_snippets/index';
 import { engineConfigurationRegistrationValidate } from './schema/engineConfigurationRegisterConfig';
+import { savePermission as savePermissionInternal } from './modules/permissions/savePermission';
+import { deletePermission as deletePermissionInternal } from './modules/permissions/deletePermission';
+import { getPermissions as getPermissionsInternal } from './modules/permissions/getPermissions';
+import { PermissionConfig, PermissionsFile } from './interfaces/types';
 
 
 export function getPaths(version?: string): PathConfig {
@@ -518,3 +522,21 @@ export {
   registerAppComponents,
   type RegisterAppComponentsOptions,
 } from './helpers/registerAppComponents';
+
+/**
+ * Public entry points for the permissions catalog (`.igrpstudio/permissions.json`).
+ *
+ * - `savePermission(config, basePath)` — inserts new, or updates in place
+ *   when an entry with the same `id` exists. Validates the config first;
+ *   AJV errors propagate unchanged.
+ * - `deletePermission(id, basePath)` — removes the entry, throwing if the
+ *   id is not present.
+ * - `getPermissions(basePath)` — returns a shallow copy of the current
+ *   catalog (empty array when the file does not exist).
+ *
+ * See `src/modules/permissions/` for behavior details.
+ */
+export const savePermission = savePermissionInternal;
+export const deletePermission = deletePermissionInternal;
+export const getPermissions = getPermissionsInternal;
+export type { PermissionConfig, PermissionsFile };

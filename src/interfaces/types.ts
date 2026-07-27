@@ -898,3 +898,24 @@ export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
 export type RestartTypes = (typeof RESTART_TYPES)[number];
 export type DefinitionType = (typeof DEFINITION_TYPES)[number];
+
+/**
+ * One entry in the app's permission catalog. `name` follows the framework's
+ * fail-closed convention (bare suffix resolved against the active org;
+ * `dept.suffix` for cross-department references). `enabled: false` keeps
+ * the entry in the catalog so its history is preserved, but signals
+ * downstream tooling to treat it as inactive.
+ */
+export interface PermissionConfig extends IdentifiableElement {
+  name: string;
+  label?: string;
+  description?: string;
+  enabled: boolean;
+}
+
+/**
+ * On-disk shape of `.igrpstudio/permissions.json`.
+ */
+export interface PermissionsFile {
+  permissions: PermissionConfig[];
+}

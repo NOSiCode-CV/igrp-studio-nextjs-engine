@@ -266,6 +266,7 @@ export const DIRECTORIES = {
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   IGRPSTUDIO_PROCESS: '.igrpstudio/process',
+  IGRPSTUDIO_PERMISSIONS_FILE: '.igrpstudio/permissions.json',
   KUBERNETES: 'k8s',
   TYPES: 'types',
   COMPONENTS: 'src/app/(igrp)/(generated)/components',
@@ -285,7 +286,9 @@ export const ERROR_MESSAGE = {
   INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the component details and try again',
   INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
   INVALID_PROCESS_STEP_CONFIG: 'The provided process step configuration is invalid. Please verify the process step details and try again',
-  INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
+  INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again',
+  INVALID_PERMISSION_CONFIG: 'The provided permission configuration is invalid. Please verify the permission details and try again',
+  PERMISSION_NOT_FOUND: (id: string) => `Permission with id '${id}' does not exist!`
 };
 
 
