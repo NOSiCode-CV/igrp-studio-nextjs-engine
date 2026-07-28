@@ -835,13 +835,23 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
     : ``;
 }
 
-export function renderData(data: Record<string, any>, component?: Layout) {
+export function renderData(data: Record<string, any>, component?: Layout, skipKeys?: string) {
+  // `content` has always been skipped because the surrounding templates
+  // render it separately (as text children, not as a prop). `skipKeys`
+  // (comma-separated) lets a specific template exclude additional keys —
+  // used by table cells where a "primary" data key (e.g. `value`) is
+  // consumed elsewhere and shouldn't also be emitted as a JSX prop.
+  const skip = new Set<string>(['content']);
+  if (skipKeys) {
+    skipKeys.split(',').map((s) => s.trim()).filter(Boolean).forEach((k) => skip.add(k));
+  }
   return data
     ? Object.entries(data)
         .map(([key, value]) => {
-          if(key === 'content') return ''
+          if(skip.has(key)) return ''
           return `${key}={ ${replaceId(value.state?.name, component) ?? value.value?.code ?? 'undefined'} }`;
         })
+        .filter((s) => s !== '')
         .join('\n')
     : ``;
 }

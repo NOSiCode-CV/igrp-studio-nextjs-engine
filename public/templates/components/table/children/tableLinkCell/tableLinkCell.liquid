@@ -1,30 +1,33 @@
 return <IGRPDataTableCellLink
   {% if resourceConfig.properties.href -%}
-  href={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
+  href={ {% if resourceConfig.data.value.code -%}{{ resourceConfig.data.value.code }}{%- elsif resourceConfig.data.value.state.name -%}{{ resourceConfig.data.value.state.name }}{%- else -%}row.getValue('{{ resourceConfig.tag }}'){%- endif %} }
   {% endif -%}
-  {% if resourceConfig.properties.target -%}
+  {% if resourceConfig.properties.target and not resourceConfig.data.target -%}
   target={ `{{ resourceConfig.properties.target }}` }
   {% endif -%}
-  {% if resourceConfig.properties.color -%}
+  {% if resourceConfig.properties.color and not resourceConfig.data.color -%}
   color={ `{{ resourceConfig.properties.color }}` }
   {% endif -%}
-  {% if resourceConfig.properties.iconProperties.showIcon -%}
+  {% if resourceConfig.properties.iconProperties.showIcon and not resourceConfig.data.showIcon -%}
   showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
   {% endif -%}
-  {% if resourceConfig.properties.iconProperties.iconName -%}
+  {% if resourceConfig.properties.iconProperties.iconName and not resourceConfig.data.iconName -%}
   iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
   {% endif -%}
-  {% if resourceConfig.properties.iconProperties.iconSize -%}
+  {% if resourceConfig.properties.iconProperties.iconSize and not resourceConfig.data.iconSize -%}
   iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
   {% endif -%}
-  {% if resourceConfig.properties.iconProperties.iconPlacement -%}
+  {% if resourceConfig.properties.iconProperties.iconPlacement and not resourceConfig.data.iconPlacement -%}
   iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
   {% endif -%}
-  {% if resourceConfig.properties.iconProperties.iconClassName -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName and not resourceConfig.data.iconClassName -%}
   iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
   {% endif -%}
-  {% if resourceConfig.properties.variant -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
   variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig, 'value' }}
   {% endif -%}
 >
     {% if resourceConfig.content -%}
