@@ -28,20 +28,20 @@ return <IGRPDataTableCellLink
   {% endif -%}
 >
     {% if resourceConfig.content -%}
-    { row.getValue('{{ resourceConfig.tag }}Desc') || `{{ resourceConfig.content }}` }
+    { row.original.{{ resourceConfig.tag }}Desc || `{{ resourceConfig.content }}` }
     {% else -%}
     {% if resourceConfig.properties.content and not resourceConfig.data.content -%}
-    { row.getValue('{{ resourceConfig.tag }}Desc') || `{{ resourceConfig.properties.content }}` }
+    { row.original.{{ resourceConfig.tag }}Desc || `{{ resourceConfig.properties.content }}` }
     {% else -%}
     {% if not resourceConfig.properties.content and resourceConfig.data.content -%}
-    { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}Desc') || {{ resourceConfig.data.content.state.name }}{% endif %} }
+    { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}row.original.{{ resourceConfig.tag }}Desc || {{ resourceConfig.data.content.state.name }}{% endif %} }
     {% else -%}
     {% if resourceConfig.children and resourceConfig.children.size > 0 -%}
     {% for child in resourceConfig.children -%}
     {{ '' | render-layout: child, resourceConfig }}
     {% endfor -%}
     {% else -%}
-    { row.getValue('{{ resourceConfig.tag }}Desc') || '' }
+    { row.original.{{ resourceConfig.tag }}Desc || '' }
     {% endif -%}
     {% endif -%}
     {% endif -%}
