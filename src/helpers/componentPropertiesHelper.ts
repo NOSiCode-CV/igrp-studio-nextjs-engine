@@ -692,6 +692,32 @@ export function resolveClassNameProperty(component: Layout, registry: Record<str
 }
 
 /**
+ * Serializes a plain object of scalar values into a JS/JSX object-literal
+ * expression like `{ key1: 'val1', key2: 42, key3: true }`. Used by
+ * templates that emit a whole object as a single JSX prop — e.g.
+ * `dateOptions={{ … }}` on IGRPDataTableCellDate. Booleans and numbers
+ * stay literal; strings are backtick-quoted so template-literal escapes
+ * don't clash with `${…}` interpolation elsewhere in the emitted TSX.
+ * Undefined/null/empty-string entries are dropped so an author who left
+ * a form field blank doesn't emit `year: ''`.
+ *
+ * Returns an empty string when the input has no usable entries — the
+ * caller's `{% if … -%}` guard then skips emitting the whole prop.
+ */
+export function renderJSXObjectLiteral(obj: Record<string, any> | undefined): string {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return '';
+  const entries = Object.entries(obj)
+    .filter(([, v]) => v !== undefined && v !== null && v !== '')
+    .map(([k, v]) => {
+      if (typeof v === 'boolean' || typeof v === 'number') return `${k}: ${v}`;
+      const s = String(v).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+      return `${k}: \`${s}\``;
+    });
+  if (entries.length === 0) return '';
+  return `{ ${entries.join(', ')} }`;
+}
+
+/**
  * Liquid-side accessor for a component's declared property schema
  * (`registry[componentName].properties`). Used by `default.liquid` to hand
  * the schema to `render-properties`, which then routes each prop through
