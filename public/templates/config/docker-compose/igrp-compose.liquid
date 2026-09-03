@@ -43,6 +43,25 @@ services:
           memory: 700m
     extra_hosts:
       {{ wsSlug }}-igrp: host-gateway
+    # Boot sequence: poll the UI route through the shared gateway until it
+    # answers, then hand off to Next.js. The first successful hit wakes the
+    # app enough for the framework to run its Access Management sync (menus,
+    # resources, routes) so admins see the app in AM without a manual page
+    # visit. `stdin_open: true` keeps the shell attached so wget's status
+    # messages stream to `docker compose logs`.
+    command:
+      - sh
+      - -c
+      - |
+        (
+          until wget -q -O /dev/null "http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}"; do
+            echo "Waiting for {{ appName }} UI route..."
+            sleep 5
+          done
+          echo "{{ appName }} UI route called for Access Management sync."
+        ) &
+        exec node app/server.js
+    stdin_open: true
     environment:
       # ── Authentication (IGRP Auth via OIDC) ─────────────────────────
       - AUTH_PROVIDER=${AUTH_PROVIDER:-igrp-auth}
@@ -53,12 +72,13 @@ services:
       - IGRP_AUTH_ISSUER=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
       - IGRP_AUTH_SCOPES=${IGRP_AUTH_SCOPES:-openid email}
       # ── NextAuth ───────────────────────────────────────────────────
-      # NEXTAUTH_URL must include `/api/auth`; if the app is served under a
-      # basePath it must include that too. Left as an override so a Studio
-      # user can point the container at whichever host it will be reached on.
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      # Reached through the shared nginx gateway at the /apps/<name> mount
+      # so browser callbacks (needs `/api/auth`) and server-to-server calls
+      # (bare base URL) both resolve to the same origin. Overridable from
+      # `.igrp.<name>.env` if a project ever needs to hit a different host.
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}/api/auth}
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NEXTAUTH_URL_INTERNAL=${NEXTAUTH_URL_INTERNAL}
+      - NEXTAUTH_URL_INTERNAL=${NEXTAUTH_URL_INTERNAL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}}
       # ── IGRP framework ─────────────────────────────────────────────
       - IGRP_ACCESS_MANAGEMENT_API=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
       # App identity: server-only IGRP_APP_CODE + client-readable copy the
@@ -76,7 +96,7 @@ services:
       - IGRP_M2M_CLIENT_ID=${IGRP_M2M_CLIENT_ID}
       - IGRP_M2M_CLIENT_SECRET=${IGRP_M2M_CLIENT_SECRET}
       # ── Next.js public surface (safe to expose to the browser) ─────
-      - NEXT_IGRP_APP_CENTER_URL=${NEXT_IGRP_APP_CENTER_URL}
+      - NEXT_IGRP_APP_CENTER_URL=${NEXT_IGRP_APP_CENTER_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}}
       - NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH}
       - NEXT_PUBLIC_IGRP_APP_HOME_SLUG=${NEXT_PUBLIC_IGRP_APP_HOME_SLUG}
       - NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}
