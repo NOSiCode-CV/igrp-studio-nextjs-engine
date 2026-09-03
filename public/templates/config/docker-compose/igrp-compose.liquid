@@ -35,8 +35,6 @@ services:
     env_file:
       - ./.igrp.{{ appName }}.env
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     deploy:
       resources:
         limits:
