@@ -23,6 +23,12 @@ const appConfigSchema: JSONSchemaType<AppConfig> = {
       errorMessage:
         'The workspace id attribute must be a valid string.',
     },
+    workspaceSlug: {
+      type: 'string',
+      nullable: true,
+      errorMessage:
+        'The workspace slug attribute must be a valid string if provided.',
+    },
     type: {
       type: 'string', 
       const: 'nextjs',

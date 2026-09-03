@@ -11,6 +11,14 @@ interface IdentifiableElement {
 export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
   workspaceId: string;
+  /**
+   * URL-friendly workspace identifier used to build the docker-compose
+   * `name`, the shared docker network name, `extra_hosts` entries, and
+   * the gateway paths for cross-service URLs. Optional so pre-workspace
+   * apps still validate; the compose template falls back to the literal
+   * `workspace` when it is not provided.
+   */
+  workspaceSlug?: string;
   name: string;
   description?: string;
   displayName?: string;

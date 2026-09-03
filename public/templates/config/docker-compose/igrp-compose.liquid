@@ -1,0 +1,91 @@
+{%- comment -%}
+Frontend (NextJS) docker-compose for a project inside an iGRP workspace.
+
+Mirrors the backend template pattern shipped by @igrp/studio/workspace but
+adapted for the Next.js runtime:
+  * no local database prepare step (the backend owns its DB)
+  * exposes the app on port 3000
+  * env-vars derived from `shared/frontend/nextjs/.env.example`
+  * joins the same shared workspace docker network by name and points AM /
+    NextAuth callbacks at the shared nginx gateway path
+
+Emitted as `igrp-compose-<name>.yaml` in the project root by `newApp`.
+
+The context object shape is `{ baseConfig: AppConfig, basePath: string, … }`.
+When `baseConfig.workspaceSlug` is absent (pre-workspace apps) the literal
+`workspace` is used so the file stays syntactically valid.
+{%- endcomment -%}
+{%- if baseConfig.workspaceSlug -%}
+{% assign wsSlug = baseConfig.workspaceSlug -%}
+{% else -%}
+{% assign wsSlug = 'workspace' -%}
+{% endif -%}
+{% assign appName = baseConfig.name | toLowerCase -%}
+name: "{{ wsSlug }}-{{ appName }}-igrp"
+
+networks:
+  default:
+    name: {{ wsSlug }}-igrp_default
+    external: true
+
+services:
+  {{ appName }}:
+    build: .
+    container_name: {{ appName }}
+    env_file:
+      - ./.igrp.{{ appName }}.env
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    extra_hosts:
+      {{ wsSlug }}-igrp: host-gateway
+    environment:
+      # ── Authentication (IGRP Auth via OIDC) ─────────────────────────
+      - AUTH_PROVIDER=${AUTH_PROVIDER:-igrp-auth}
+      - IGRP_AUTH_CLIENT_ID=${IGRP_AUTH_CLIENT_ID}
+      - IGRP_AUTH_CLIENT_SECRET=${IGRP_AUTH_CLIENT_SECRET}
+      # Issuer is resolved through the shared nginx gateway so PKCE
+      # callbacks land on the same host the browser used to reach the app.
+      - IGRP_AUTH_ISSUER=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
+      - IGRP_AUTH_SCOPES=${IGRP_AUTH_SCOPES:-openid email}
+      # ── NextAuth ───────────────────────────────────────────────────
+      # NEXTAUTH_URL must include `/api/auth`; if the app is served under a
+      # basePath it must include that too. Left as an override so a Studio
+      # user can point the container at whichever host it will be reached on.
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL_INTERNAL=${NEXTAUTH_URL_INTERNAL}
+      # ── IGRP framework ─────────────────────────────────────────────
+      - IGRP_ACCESS_MANAGEMENT_API=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
+      # App identity: server-only IGRP_APP_CODE + client-readable copy the
+      # logout / teardown screens render before the session bootstrap.
+      - IGRP_APP_CODE={{ appName }}
+      - NEXT_PUBLIC_IGRP_APP_CODE={{ appName }}
+      - IGRP_PREVIEW_MODE=${IGRP_PREVIEW_MODE:-false}
+      - IGRP_SYNC_ACCESS=${IGRP_SYNC_ACCESS:-true}
+      - IGRP_SYNC_ON_CODE_MENUS=${IGRP_SYNC_ON_CODE_MENUS:-false}
+      - IGRP_SYNC_ON_CODE_MENU_ROLES=${IGRP_SYNC_ON_CODE_MENU_ROLES:-true}
+      # ── Access Management M2M (client_credentials) ─────────────────
+      # Service identity forwarded as X-Machine-Service-ID; credentials
+      # authenticate the AM sync calls scheduled after each response.
+      - IGRP_SERVICE_ID={{ appName }}
+      - IGRP_M2M_CLIENT_ID=${IGRP_M2M_CLIENT_ID}
+      - IGRP_M2M_CLIENT_SECRET=${IGRP_M2M_CLIENT_SECRET}
+      # ── Next.js public surface (safe to expose to the browser) ─────
+      - NEXT_IGRP_APP_CENTER_URL=${NEXT_IGRP_APP_CENTER_URL}
+      - NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH}
+      - NEXT_PUBLIC_IGRP_APP_HOME_SLUG=${NEXT_PUBLIC_IGRP_APP_HOME_SLUG}
+      - NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}
+      - NEXT_PUBLIC_IGRP_PROFILE_URL=${NEXT_PUBLIC_IGRP_PROFILE_URL}
+      - NEXT_PUBLIC_IGRP_NOTIFICATION_URL=${NEXT_PUBLIC_IGRP_NOTIFICATION_URL}
+      - NEXT_PUBLIC_IGRP_SETTINGS_URL=${NEXT_PUBLIC_IGRP_SETTINGS_URL}
+    labels:
+      type: "web"
+      is_project: true
+      logging: "promtail"
+      workspace.slug: "{% if baseConfig.workspaceSlug %}{{ baseConfig.workspaceSlug }}{% endif %}"
+      workspace.id: "{% if baseConfig.workspaceId %}{{ baseConfig.workspaceId }}{% endif %}"

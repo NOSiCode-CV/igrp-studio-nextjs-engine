@@ -46,6 +46,13 @@ export const COMMON_FILES = {
   DEPLOYMENT: 'deployment.yaml',
   INGRESS: 'ingress.yaml',
   SERVICE_K8S: 'service.yaml',
+  /**
+   * `{{name}}` is expanded with the lower-cased app name at write time
+   * (see saveBaseAppFiles.ts) so a project called `Bibliotheque` lands
+   * as `igrp-compose-bibliotheque.yaml` in the project root — matching
+   * the workspace-side naming used by the backend template.
+   */
+  IGRP_COMPOSE_PROJECT: 'igrp-compose-{{name}}.yaml',
 };
 
 export const EXTENSIONS = {
@@ -68,6 +75,7 @@ export const TEMPLATES = {
   CONFIG_INGRESS: 'config/k8s/ingressyaml.liquid',
   CONFIG_SERVICE: 'config/k8s/serviceyaml.liquid',
   CONFIG_GITLAB_CI_CD: 'config/gitlab-ci.yml.liquid',
+  CONFIG_IGRP_COMPOSE: 'config/docker-compose/igrp-compose.liquid',
   ELEMENT: 'components/{{name}}/{{name}}.liquid',
   DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.liquid',
   DEFAULT_CODE_SNIPPETS: 'code_snippets/default/default.liquid',
