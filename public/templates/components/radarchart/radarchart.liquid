@@ -78,8 +78,8 @@
   {% if resourceConfig.properties.radiusAxisAngle and not resourceConfig.data.radiusAxisAngle -%}
   radiusAxisAngle={ {{ resourceConfig.properties.radiusAxisAngle }} }
   {% endif -%}
-  {% if resourceConfig.properties.customAngleAsisTick and not resourceConfig.data.customAngleAsisTick -%}
-  customAngleAsisTick={ {{ '' | json: resourceConfig.properties.customAngleAsisTick }} }
+  {% if resourceConfig.properties.customAngleAxisTick and not resourceConfig.data.customAngleAxisTick -%}
+  customAngleAxisTick={ {{ '' | json: resourceConfig.properties.customAngleAxisTick }} }
   {% endif -%}
   {% if resourceConfig.properties.showGridLines and not resourceConfig.data.showGridLines -%}
   showGridLines={ {{ resourceConfig.properties.showGridLines }} }

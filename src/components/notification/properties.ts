@@ -3,8 +3,6 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 export function notificationProperties() {
   return {
     variant: { type: 'string', required: false, default: 'info', enum: ['info', 'success', 'warning', 'destructive'] },
-    title: { type: 'string', required: false, default: 'Notification' },
-    description: { type: 'string', required: false },
     showIcon: { type: 'boolean', required: false, default: true },
     iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },
     content: { type: 'string', required: false },
@@ -12,7 +10,6 @@ export function notificationProperties() {
     showLink: { type: 'boolean', required: false, default: false },
     lableLink: { type: 'string', required: false },
     actionLink: { type: 'string', required: false, 'x-ui-widget': 'uri' },
-    border: { type: 'boolean', required: false, default: false },
     ...classProperties(),
     ...commonProperties(),
   };

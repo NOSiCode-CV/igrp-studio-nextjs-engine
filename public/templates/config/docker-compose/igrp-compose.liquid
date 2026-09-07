@@ -1,20 +1,3 @@
-{%- comment -%}
-Frontend (NextJS) docker-compose for a project inside an iGRP workspace.
-
-Mirrors the backend template pattern shipped by @igrp/studio/workspace but
-adapted for the Next.js runtime:
-  * no local database prepare step (the backend owns its DB)
-  * exposes the app on port 3000
-  * env-vars derived from `shared/frontend/nextjs/.env.example`
-  * joins the same shared workspace docker network by name and points AM /
-    NextAuth callbacks at the shared nginx gateway path
-
-Emitted as `igrp-compose-<name>.yaml` in the project root by `newApp`.
-
-The context object shape is `{ baseConfig: AppConfig, basePath: string, … }`.
-When `baseConfig.workspaceSlug` is absent (pre-workspace apps) the literal
-`workspace` is used so the file stays syntactically valid.
-{%- endcomment -%}
 {%- if baseConfig.workspaceSlug -%}
 {% assign wsSlug = baseConfig.workspaceSlug -%}
 {% else -%}
@@ -41,12 +24,6 @@ services:
           memory: 700m
     extra_hosts:
       {{ wsSlug }}-igrp: host-gateway
-    # Boot sequence: poll the UI route through the shared gateway until it
-    # answers, then hand off to Next.js. The first successful hit wakes the
-    # app enough for the framework to run its Access Management sync (menus,
-    # resources, routes) so admins see the app in AM without a manual page
-    # visit. `stdin_open: true` keeps the shell attached so wget's status
-    # messages stream to `docker compose logs`.
     command:
       - sh
       - -c
@@ -61,39 +38,24 @@ services:
         exec node app/server.js
     stdin_open: true
     environment:
-      # ── Authentication (IGRP Auth via OIDC) ─────────────────────────
       - AUTH_PROVIDER=${AUTH_PROVIDER:-igrp-auth}
       - IGRP_AUTH_CLIENT_ID=${IGRP_AUTH_CLIENT_ID}
       - IGRP_AUTH_CLIENT_SECRET=${IGRP_AUTH_CLIENT_SECRET}
-      # Issuer is resolved through the shared nginx gateway so PKCE
-      # callbacks land on the same host the browser used to reach the app.
       - IGRP_AUTH_ISSUER=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
       - IGRP_AUTH_SCOPES=${IGRP_AUTH_SCOPES:-openid email}
-      # ── NextAuth ───────────────────────────────────────────────────
-      # Reached through the shared nginx gateway at the /apps/<name> mount
-      # so browser callbacks (needs `/api/auth`) and server-to-server calls
-      # (bare base URL) both resolve to the same origin. Overridable from
-      # `.igrp.<name>.env` if a project ever needs to hit a different host.
       - NEXTAUTH_URL=${NEXTAUTH_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}/api/auth}
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - NEXTAUTH_URL_INTERNAL=${NEXTAUTH_URL_INTERNAL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}}
-      # ── IGRP framework ─────────────────────────────────────────────
       - IGRP_ACCESS_MANAGEMENT_API=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
-      # App identity: server-only IGRP_APP_CODE + client-readable copy the
-      # logout / teardown screens render before the session bootstrap.
       - IGRP_APP_CODE={{ appName }}
       - NEXT_PUBLIC_IGRP_APP_CODE={{ appName }}
       - IGRP_PREVIEW_MODE=${IGRP_PREVIEW_MODE:-false}
       - IGRP_SYNC_ACCESS=${IGRP_SYNC_ACCESS:-true}
       - IGRP_SYNC_ON_CODE_MENUS=${IGRP_SYNC_ON_CODE_MENUS:-false}
       - IGRP_SYNC_ON_CODE_MENU_ROLES=${IGRP_SYNC_ON_CODE_MENU_ROLES:-true}
-      # ── Access Management M2M (client_credentials) ─────────────────
-      # Service identity forwarded as X-Machine-Service-ID; credentials
-      # authenticate the AM sync calls scheduled after each response.
       - IGRP_SERVICE_ID={{ appName }}
       - IGRP_M2M_CLIENT_ID=${IGRP_M2M_CLIENT_ID}
       - IGRP_M2M_CLIENT_SECRET=${IGRP_M2M_CLIENT_SECRET}
-      # ── Next.js public surface (safe to expose to the browser) ─────
       - NEXT_IGRP_APP_CENTER_URL=${NEXT_IGRP_APP_CENTER_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}}
       - NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH}
       - NEXT_PUBLIC_IGRP_APP_HOME_SLUG=${NEXT_PUBLIC_IGRP_APP_HOME_SLUG}

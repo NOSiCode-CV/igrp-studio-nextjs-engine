@@ -13,6 +13,7 @@ export function statusBannerProperties() {
     badgeColor: { type: 'string', required: true, default: 'secondary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     badgeVariant: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
     badgeText: { type: 'string', required: false, default: 'Status Banner' },
+    name: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

@@ -7,6 +7,7 @@ import {
   commonPropertiesMapping,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function tableProperties() {
   return {
@@ -19,10 +20,16 @@ export function tableProperties() {
     pageSizePagination: { type: 'array', items: { type: 'number' }, 'x-ui-widget': 'chips', required: false },
     toggleLabel: { type: 'string', required: false },
     toggleOptionsLabel: { type: 'string', required: false },
+    /** DS beta.140+ — label for the "Clear filters" button in client-filter mode. */
+    clientClearLabel: { type: 'string', required: false },
+    /** DS beta.140+ — message rendered inside the table when no rows match. */
+    notFoundLabel: { type: 'string', required: false },
     tableClassName: { type: 'string', required: false },
     tableHeaderClassName: { type: 'string', required: false },
     tableBodyClassName: { type: 'string', required: false },
     paginationClassName: { type: 'string', required: false },
+    /** DS beta.141+ — CSS classes applied to the filter wrapper. */
+    filterClassName: { type: 'string', required: false },
     rowCount: { type: 'number', required: false },
     ...classProperties(),
     ...commonProperties()
@@ -61,6 +68,27 @@ export function tableData() {
           defaultValue: '[]',
         }, true
       ), required: true },
+  };
+}
+
+function baseFnVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false },
+    },
+  };
+}
+
+export function tableInteractions() {
+  return {
+    onFiltersCleared: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_FILTERS_CLEARED, undefined, baseFnVisibility()), required: false },
+    onQueryChange: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_VALUE, INTERACTIONS_TYPES.ON_QUERY_CHANGE, undefined, baseFnVisibility()), required: false },
   };
 }
 

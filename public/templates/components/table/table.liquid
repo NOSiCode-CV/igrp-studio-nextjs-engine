@@ -27,6 +27,12 @@
   {% if resourceConfig.properties.toggleOptionsLabel and not resourceConfig.data.toggleOptionsLabel -%}
   toggleOptionsLabel={ `{{ resourceConfig.properties.toggleOptionsLabel }}` }
   {% endif -%}
+  {% if resourceConfig.properties.clientClearLabel and not resourceConfig.data.clientClearLabel -%}
+  clientClearLabel={ `{{ resourceConfig.properties.clientClearLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.notFoundLabel and not resourceConfig.data.notFoundLabel -%}
+  notFoundLabel={ `{{ resourceConfig.properties.notFoundLabel }}` }
+  {% endif -%}
   {% if resourceConfig.properties.tableClassName and not resourceConfig.data.tableClassName -%}
   tableClassName={ `{{ resourceConfig.properties.tableClassName }}` }
   {% endif -%}
@@ -38,6 +44,9 @@
   {% endif -%}
   {% if resourceConfig.properties.paginationClassName and not resourceConfig.data.paginationClassName -%}
   paginationClassName={ `{{ resourceConfig.properties.paginationClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.filterClassName and not resourceConfig.data.filterClassName -%}
+  filterClassName={ `{{ resourceConfig.properties.filterClassName }}` }
   {% endif -%}
   {% if resourceConfig.properties.pageSizePagination and not resourceConfig.data.pageSizePagination -%}
   pageSizePagination={ [{% for this in resourceConfig.properties.pageSizePagination %}{{ this }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}] }

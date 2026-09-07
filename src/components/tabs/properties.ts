@@ -39,6 +39,7 @@ export function tabsProperties() {
     },
     showScrollIndicators: { type: 'boolean', required: false, default: false },
     scrollButtonClassName: { type: 'string', required: false },
+    name: { type: 'string', required: false },
 
     ...classProperties(),
     ...commonProperties()

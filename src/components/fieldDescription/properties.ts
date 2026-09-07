@@ -2,7 +2,8 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 
 export function fieldDescriptionProperties() {
   return {
-    content: { type: 'string', required: false },
+    helperText: { type: 'string', required: false },
+    error: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

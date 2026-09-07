@@ -3,7 +3,7 @@ import {
   formListProperties,
   formListVariants,
   formListChildProperties,
-  formListChildPropertiesMapping, formListRules, formListStyle, formListData,
+  formListChildPropertiesMapping, formListInteractions, formListRules, formListStyle, formListData,
 } from './properties';
 import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
@@ -21,6 +21,7 @@ export default {
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: FORM_LIST }))
     component.getProperties(formListProperties());
     component.getPropertiesMapping(formListPropertiesMapping());
+    component.getInteractions(formListInteractions());
     component.getChildProperties(formListChildProperties());
     component.getChildPropertiesMapping(formListChildPropertiesMapping());
     component.getRules(formListRules())

@@ -12,9 +12,8 @@ import { InteractionFieldVisibility } from '../../interfaces/types';
 export function checkboxProperties() {
   return {
     label: { type: 'string', required: false, default: 'Check' },
-    description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
-    message: { type: 'string', required: false },    helperText: { type: 'string', required: false },
+    helperText: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
     error: { type: 'string', required: false },
     required: { type: 'boolean', required: false, default: false },
@@ -28,9 +27,7 @@ export function checkboxProperties() {
 export function checkboxPropertiesMapping() {
   return {
     label: 'label',
-    description: 'description',
     disabled: 'disabled',
-    message: 'message',
     ...commonPropertiesMapping(),
   };
 }

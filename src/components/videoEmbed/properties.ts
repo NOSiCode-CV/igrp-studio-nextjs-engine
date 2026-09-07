@@ -22,7 +22,9 @@ export function videoEmbedProperties() {
     muted: { type: 'boolean', required: false, 'x-meta': { label: 'Muted?'} },
     controls: { type: 'boolean', required: false, 'x-meta': { label: 'Controls?'} },
     loop: { type: 'boolean', required: false, 'x-meta': { label: 'Loop?'} },
-    start: { type: 'number', required: false, default: 0 },    allowFeatures: { type: 'string', required: false },
+    start: { type: 'number', required: false, default: 0 },
+    autoplay: { type: 'boolean', required: false, 'x-meta': { label: 'Autoplay?' } },
+    name: { type: 'string', required: false },
     width: { type: 'number', required: false },
     height: { type: 'number', required: false },
 

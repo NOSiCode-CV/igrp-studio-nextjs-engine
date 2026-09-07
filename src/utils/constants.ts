@@ -179,6 +179,9 @@ export const INTERACTIONS_TYPES = {
   ON_END_TIME: "On End Time",
   ON_COPY_SUCCESS: "On Copy Success",
   ON_COPY_ERROR: "On Copy Error",
+  ON_FILTERS_CLEARED: "On filters cleared",
+  ON_QUERY_CHANGE: "On query change",
+  ON_ITEM_REMOVE: "On item remove",
 
   // Values
   CHECKED: "Checked",

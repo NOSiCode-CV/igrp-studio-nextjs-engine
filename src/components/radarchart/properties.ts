@@ -79,7 +79,7 @@ export function radarChartProperties() {
       }
     },
     radiusAxisAngle: { type: 'number', required: false },
-    customAngleAsisTick: { type: 'object', required: false },
+    customAngleAxisTick: { type: 'object', required: false },
     showGridLines: { type: 'boolean', required: false },
     showRadiusLines: { type: 'boolean', required: false },
     gridFilled: { type: 'boolean', required: false },

@@ -44,6 +44,8 @@ export function pieChartProperties() {
     },
     nameKey: { type: 'string', required: true, default: "value" },
     categoryKey: { type: 'string', required: true, default: "value" },
+    centerLabel: { type: 'string', required: false },
+    interactive: { type: 'boolean', required: false },
     title: { type: 'string', required: false },
     description: { type: 'string', required: false },
     showGrid: { type: 'boolean', required: false },

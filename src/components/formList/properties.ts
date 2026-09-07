@@ -1,11 +1,13 @@
 import {
   baseData,
+  baseInteraction,
   baseRules,
   baseStyle, classProperties,
   commonProperties,
   commonPropertiesMapping,
 } from '../default/properties';
 import { INTERACTIONS_DEFAULTS, INTERACTIONS_TYPES } from '../../utils/constants';
+import { InteractionFieldVisibility } from '../../interfaces/types';
 
 export function formListProperties() {
   return {
@@ -85,8 +87,22 @@ export function formListData() {
   };
 }
 
+function onItemRemoveVisibility(): InteractionFieldVisibility {
+  return {
+    fnName: { visible: true },
+    actionName: { visible: false },
+    fnCustomSet: { visible: true },
+    fnCustomCode: {
+      imports: { visible: false },
+      states: { visible: false },
+      fnCode: { visible: false },
+      actionCode: { visible: false },
+    },
+  };
+}
+
 export function formListInteractions() {
   return {
-
+    onItemRemove: { ...baseInteraction(INTERACTIONS_DEFAULTS.FUNCTION_WITH_ITEM_INDEX, INTERACTIONS_TYPES.ON_ITEM_REMOVE, undefined, onItemRemoveVisibility()), required: false },
   };
 }

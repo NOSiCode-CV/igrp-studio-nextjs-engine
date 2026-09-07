@@ -21,7 +21,8 @@ export function radioGroupProperties() {
     size: { type: 'string', required: false, enum: ["sm", "md", "lg"], default: "md" },
     required: { type: 'boolean', required: false, default: false },
     disabled: { type: 'boolean', required: false, default: false },
-    message: { type: 'string', required: false },
+    /** @deprecated in DS but still accepted — options grid column count. */
+    gridSize: { type: 'string', required: false, enum: ['1', '2', '3', '4'] },
     labelClassName: { type: 'string', required: false },
     showIcon: { type: 'boolean', required: false, default: false },
     iconName: { type: 'string', required: false, 'x-ui-widget': 'icon' },

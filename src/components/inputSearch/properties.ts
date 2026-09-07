@@ -30,6 +30,10 @@ export function inputSearchProperties() {
     required: { type: 'boolean', required: true, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Required'} },
     submitButtonLabel: { type: 'string', required: false, default: 'Search', 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Label'} },
     submitButtonClassName: { type: 'string', required: false, 'x-ui-widget': 'text', 'x-meta': { label: 'Submit Button Class Name'} },
+    submitVariant: { type: 'string', required: false, 'x-meta': { label: 'Submit Button Variant' } },
+    isDebounce: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Debounce Input?' } },
+    debounceMs: { type: 'number', required: false, 'x-meta': { label: 'Debounce Delay (ms)' } },
+    loading: { type: 'boolean', required: false, default: false, 'x-ui-widget': 'switch', 'x-meta': { label: 'Loading' } },
     error: { type: 'string', required: false },
 
     ...classProperties(),

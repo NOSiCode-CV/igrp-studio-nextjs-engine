@@ -3,9 +3,8 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 export function imageCropperProperties() {
   return {
     variant: { type: 'string', required: false, default: 'default', enum: ['default', 'circle', 'square'] },
-    image: { type: 'string', required: false },
-    cropShape: { type: 'string', required: false, enum: ['rect', 'round'] },
-    aspect: { type: 'number', required: false },
+    src: { type: 'string', required: false },
+    cropLabel: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

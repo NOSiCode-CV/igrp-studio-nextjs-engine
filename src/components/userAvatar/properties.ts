@@ -2,13 +2,11 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 
 export function userAvatarProperties() {
   return {
-    user: { type: 'object', required: false, properties: { name: { type: 'string' },
-    email: { type: 'string' }, avatar: { type: 'string' } } },
-    size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
     image: { type: 'string', required: false },
     alt: { type: 'string', required: false },
     fallbackContent: { type: 'string', required: false, default: 'U' },
     fallbackClass: { type: 'string', required: false },
+    name: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

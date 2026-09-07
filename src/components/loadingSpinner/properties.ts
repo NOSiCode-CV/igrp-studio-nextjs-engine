@@ -2,7 +2,6 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 
 export function loadingSpinnerProperties() {
   return {
-    size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg'] },
     label: { type: 'string', required: false, default: 'Loading…' },
     parentClassName: { type: 'string', required: false },
     ...classProperties(),

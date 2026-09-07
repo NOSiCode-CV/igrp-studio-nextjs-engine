@@ -2,7 +2,6 @@ import { baseRules, baseStyle, classProperties, commonProperties, commonProperti
 
 export function pageHeaderBackButtonProperties() {
   return {
-    href: { type: 'string', required: false, 'x-ui-widget': 'uri' },
     iconName: { type: 'string', required: false, default: 'ArrowLeft', 'x-ui-widget': 'icon' },
     variant: { type: 'string', required: false, default: 'ghost', enum: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] },
     size: { type: 'string', required: false, default: 'icon', enum: ['default', 'sm', 'lg', 'icon'] },

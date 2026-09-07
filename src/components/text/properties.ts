@@ -19,6 +19,9 @@ export function textProperties() {
     animate: { type: 'boolean', default: false, required: false},
     truncate: { type: 'boolean', default: false, required: false},
     maxLines: { type: 'number', default: 3, required: false },
+    highlight: { type: 'array', items: { type: 'string' }, 'x-ui-widget': 'chips', required: false },
+    as: { type: 'string', required: false, enum: ['p', 'span', 'div'] },
+    name: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };

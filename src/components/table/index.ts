@@ -3,7 +3,7 @@ import {
   tableProperties,
   tableVariants,
   tableChildProperties,
-  tableChildPropertiesMapping, tableInteractionsMapping, tableData, tableStyle, tableRules,
+  tableChildPropertiesMapping, tableInteractions, tableInteractionsMapping, tableData, tableStyle, tableRules,
 } from './properties';
 import { Component, liquidRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
@@ -26,6 +26,8 @@ export default {
     component.setAllowTypes(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
+    component.getInteractions(tableInteractions());
+    component.getInteractionsMapping(tableInteractionsMapping());
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
     component.getData(tableData());

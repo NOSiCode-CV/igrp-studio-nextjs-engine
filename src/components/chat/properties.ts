@@ -10,6 +10,7 @@ export function chatProperties() {
   return {
     apiEndpoint: { type: 'string', required: true, default: 'https://api.igrp.cv/chat' },
     labelDescription: { type: 'string', required: false, default: 'Chat' },
+    name: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };
