@@ -5,7 +5,7 @@ import {
   menuNavigationsItemChildProperties,
   menuNavigationsItemChildPropertiesMapping, menuNavigationsItemRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { MENU_NAVIGATION } from '../../index';
 
 export default {
@@ -24,7 +24,7 @@ export default {
     component.loadStates([]);
     component.getRules(menuNavigationsItemRules());
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

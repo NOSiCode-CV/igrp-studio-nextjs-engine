@@ -5,7 +5,7 @@ import {
   statusBannerChildProperties,
   statusBannerChildPropertiesMapping, statusBannerInteractions, statusBannerInteractionsMapping, statusBannerStyle, statusBannerRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 
 export default {
   register(component: Component) {
@@ -27,7 +27,7 @@ export default {
     ]);
     component.getStyle(statusBannerStyle())
     component.getRules(statusBannerRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

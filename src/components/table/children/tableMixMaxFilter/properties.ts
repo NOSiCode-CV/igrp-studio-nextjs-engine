@@ -3,8 +3,7 @@ import { classProperties, commonProperties, commonPropertiesMapping } from '../.
 export function tableMinMaxFilterProperties() {
   return {
     columnId: { type: 'string', required: true, default: '{{id}}' },
-    placeholderMin: { type: 'string', required: false, default: 'Min' },
-    placeholderMax: { type: 'string', required: false, default: 'Max' },
+    placeholder: { type: 'string', required: false, default: 'Min' },
     ...classProperties(),
     ...commonProperties(),
   };

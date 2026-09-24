@@ -23,6 +23,11 @@ export function videoEmbedProperties() {
     controls: { type: 'boolean', required: false, 'x-meta': { label: 'Controls?'} },
     loop: { type: 'boolean', required: false, 'x-meta': { label: 'Loop?'} },
     start: { type: 'number', required: false, default: 0 },
+    autoplay: { type: 'boolean', required: false, 'x-meta': { label: 'Autoplay?' } },
+    name: { type: 'string', required: false },
+    width: { type: 'number', required: false },
+    height: { type: 'number', required: false },
+
     ...classProperties(),
     ...commonProperties(),
   };

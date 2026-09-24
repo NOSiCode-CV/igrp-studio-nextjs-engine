@@ -10,7 +10,7 @@ import {
   infoSectionRules,
   infoSectionData,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { INFO_CARD } from '../../index';
 import { INFO_ITEM } from '../infoItem/index';
 
@@ -45,7 +45,7 @@ export default {
       { name: INFO_ITEM, isDefault: true }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

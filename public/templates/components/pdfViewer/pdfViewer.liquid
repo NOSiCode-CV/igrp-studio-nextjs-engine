@@ -1,0 +1,61 @@
+<IGRPPdfViewer
+  {% if resourceConfig.tag -%}
+  id={ `{{ resourceConfig.tag }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.generateReference -%}
+  ref={ getSectionRef('{{ resourceConfig.tag }}') }
+  data-section-id={ '{{ resourceConfig.tag }}' }
+  {% endif -%}
+  document={
+    {
+      id: {% if resourceConfig.properties.document.id %}{{ resourceConfig.properties.document.id }}{% else %}1{% endif %},
+      title: `{{ resourceConfig.properties.document.title }}`,
+      description: `{{ resourceConfig.properties.document.description }}`,
+      author: `{{ resourceConfig.properties.document.author }}`,
+      date: `{{ resourceConfig.properties.document.date }}`,
+      fileUrl: `{{ resourceConfig.properties.document.fileUrl }}`,
+    }
+  }
+  {% if resourceConfig.properties.displayMode and not resourceConfig.data.displayMode -%}
+  displayMode={ `{{ resourceConfig.properties.displayMode }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.viewerPreference and not resourceConfig.data.viewerPreference -%}
+  viewerPreference={ `{{ resourceConfig.properties.viewerPreference }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.labelButtonCancel and not resourceConfig.data.labelButtonCancel -%}
+  labelButtonCancel={ `{{ resourceConfig.properties.labelButtonCancel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.labelButtonNewTab and not resourceConfig.data.labelButtonNewTab -%}
+  labelButtonNewTab={ `{{ resourceConfig.properties.labelButtonNewTab }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.inlineHeight and not resourceConfig.data.inlineHeight -%}
+  inlineHeight={ `{{ resourceConfig.properties.inlineHeight }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.notFoundLabel and not resourceConfig.data.notFoundLabel -%}
+  notFoundLabel={ `{{ resourceConfig.properties.notFoundLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.loadErrorLabel and not resourceConfig.data.loadErrorLabel -%}
+  loadErrorLabel={ `{{ resourceConfig.properties.loadErrorLabel }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.loadTimeoutMs and not resourceConfig.data.loadTimeoutMs -%}
+  loadTimeoutMs={ {{ resourceConfig.properties.loadTimeoutMs }} }
+  {% endif -%}
+  {% if resourceConfig.properties.name and not resourceConfig.data.name -%}
+  name={ `{{ resourceConfig.properties.name }}` }
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+  {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({% if componentClassName -%}'{{ componentClassName }}',{% endif -%}{{ parentChildClassNames }}{{ resourceConfig | addClassNameFromProperties: registry }}{{ resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.properties.commonProperties.customProperties -%}
+  {{ '' | render-properties: resourceConfig.properties.commonProperties.customProperties }}
+  {% endif -%}
+>
+</IGRPPdfViewer>

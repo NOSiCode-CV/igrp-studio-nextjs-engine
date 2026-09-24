@@ -104,7 +104,7 @@ export function radialBarChartProperties() {
       properties: {
         show: {
           type: 'boolean',
-          required: true,
+          required: false,
         },
         value: {
           type: 'string',

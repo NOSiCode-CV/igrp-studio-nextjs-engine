@@ -8,7 +8,7 @@ import {
   cardDetailsRules,
   cardDetailsData,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 import { CARD_DETAILS_ITEM } from './children/cardDetailsItem/index';
@@ -41,7 +41,7 @@ export default {
       { name: CARD_DETAILS_ITEM, isDefault: true }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

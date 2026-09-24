@@ -5,7 +5,7 @@ import {
   formInteractions,
   formInteractionsMapping, formData, formStyle, formRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { GRID } from '../grid';
 import { HEADLINE } from '../headline';
 import { replaceTemplate } from '../../utils/helpers';
@@ -59,7 +59,7 @@ export default {
       },
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

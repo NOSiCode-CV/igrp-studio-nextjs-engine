@@ -8,7 +8,7 @@ import {
   infoCardRules,
   infoCardData,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 import { INFO_SECTION } from './children/infoSection/index';
@@ -41,7 +41,7 @@ export default {
       { name: INFO_SECTION, isDefault: true }
     ]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

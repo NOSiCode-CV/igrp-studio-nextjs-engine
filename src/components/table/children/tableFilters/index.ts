@@ -5,7 +5,7 @@ import {
   tableFiltersChildProperties,
   tableFiltersChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { TABLE } from '../../index';
 import { TABLE_DATE_FILTER } from '../tableDateFilter';
 import { TABLE_DROPDOWN_FILTER } from '../tableDropdownFilter';
@@ -44,7 +44,7 @@ export default {
       ...component.childrenTypes
     ])
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

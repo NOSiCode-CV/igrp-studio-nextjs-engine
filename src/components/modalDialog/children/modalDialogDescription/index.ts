@@ -5,7 +5,7 @@ import {
   modalDialogDescriptionChildProperties,
   modalDialogDescriptionChildPropertiesMapping, modalDialogDescriptionStyle, modalDialogDescriptionRules,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { MODAL_DIALOG } from '../../index';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     component.getRules(modalDialogDescriptionRules())
     component.loadStates([]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

@@ -1,2 +1,0 @@
-const [{{replaceId resourceConfig.name resourceConfig.component}}, set{{replaceId (capitalize resourceConfig.name) resourceConfig.component}}] = useState{{#if resourceConfig.type}}<{{{replaceType resourceConfig.type resourceConfig.component resourceConfig.isArray}}}{{#if resourceConfig.isOptional}} | undefined{{/if}}>{{/if}}({{{replaceValue (resolveStateDefault
-  resourceConfig.defaultValue (replaceType resourceConfig.type resourceConfig.component)) resourceConfig.component}}});

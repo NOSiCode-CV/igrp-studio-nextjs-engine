@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test*)",
+      "Bash(npm run test*)",
+      "Bash(npm run build*)",
+      "Bash(npx tsc*)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(git for-each-ref*)",
+      "Bash(git ls-files*)",
+      "Bash(git rev-parse*)",
+      "Bash(git show*)",
+      "Bash(git checkout *)",
+      "PowerShell(& powershell.exe -ExecutionPolicy Bypass -File .\\\\tools\\\\audit-branch.ps1 -NoTests)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.production)",
+      "Read(**/.env.local)"
+    ]
+  }
+}

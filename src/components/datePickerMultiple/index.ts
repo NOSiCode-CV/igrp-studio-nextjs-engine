@@ -8,7 +8,7 @@ import {
   datePickerMultipleInteractionsMapping,
   datePickerMultipleData, datePickerMultipleStyle, datePickerMultipleRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { replaceTemplate } from '../../utils/helpers';
 import { TEMPLATES } from '../../utils/constants';
 
@@ -30,7 +30,7 @@ export default {
     component.getStyle(datePickerMultipleStyle())
     component.getRules(datePickerMultipleRules())
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

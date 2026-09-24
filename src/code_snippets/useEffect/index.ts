@@ -1,4 +1,4 @@
-import { CodeSnippets, hbsRenderer } from '../index';
+import { CodeSnippets, liquidRenderer } from '../index';
 import { useEffectDefaultProperties, useEffectProperties } from './properties';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     codeSnippet.loadDescription("Code snippet to handle events on the page.");
     codeSnippet.getProperties(useEffectProperties());
     codeSnippet.getDefaultProperties(useEffectDefaultProperties());
-    codeSnippet.setRenderer(hbsRenderer);
+    codeSnippet.setRenderer(liquidRenderer);
   }
 
 };

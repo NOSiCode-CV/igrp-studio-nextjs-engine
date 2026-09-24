@@ -15,7 +15,7 @@ export function tableLinkCellProperties() {
     content: { type: 'string', required: false },
     href: { type: 'string', required: false, default: 'https://www.igrp.cv/', 'x-ui-widget': 'uri' },
     target: { type: 'string', required: false, enum: ['_self', '_blank', '_parent', '_top'], default: '_self' },
-    color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
+    color: { type: 'string', required: true, default: 'secondary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     ...iconProperties(),
     variant: {type: 'string', required: true, enum: ['outline', 'solid', 'soft'], default: 'solid'},
     rel: { type: 'string', required: false },
@@ -64,6 +64,41 @@ function onClickInteractionFieldVisibility(): InteractionFieldVisibility {
 
 export function tableLinkCellInteractions() {
   return {
-    onClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK, undefined, onClickInteractionFieldVisibility()), required: false },
+    onClick: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_CLICK,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: true,
+    },
+    onMouseOver: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_HOVER,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
+    onMouseDown: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_DOWN,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
+    onMouseLeave: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_LEAVE,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
   };
 }

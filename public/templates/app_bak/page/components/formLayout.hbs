@@ -1,9 +1,0 @@
-const {{capitalize this.id}}Props: IGRP_{{this.componentName}}.Props<I{{capitalize this.id}}Fields> = {
-  service: service?.{{toLowerCase this.id}},
-  fields: {
-    {{#each this.fields}}
-    {{this.config.name}}: {{{json this}}}{{#if @last}}{{else}},{{/if}}
-    {{/each}}
-  },
-  config: {{{json this.config}}}
-};

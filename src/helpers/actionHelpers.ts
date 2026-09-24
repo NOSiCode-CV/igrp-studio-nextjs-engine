@@ -1,5 +1,5 @@
 export function targetHelper (action: any) {
-  return new Handlebars.SafeString(`values={cell.row.original}`);
+  return `values={cell.row.original}`;
 }
 
 export function importActionsType (components: any) {

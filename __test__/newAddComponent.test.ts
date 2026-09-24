@@ -1,4 +1,4 @@
-import { initComponents, newComponent } from '../src';
+import { initComponents, newComponent, setEngineConfiguration } from '../src';
 import { ComponentConfig } from '../src/interfaces/types';
 import { OUTPUT_TEST } from '../src/utils/testPath';
 
@@ -6,12 +6,19 @@ export const OUTPUT_DIR = OUTPUT_TEST;
 
 const componentConfig: ComponentConfig = {
   id: 'e34RfF3',
+  scope: 'app',
   type: 'component',
   name: 'AddTodo',
   pagePath: 'addtodo',
   args: [
     {
-      name: '{ onAdd }',
+      id: 'onAdd',
+      name: 'onAdd',
+      isState: false,
+      isList: false,
+      isOptional: true,
+      isInterface: true,
+      isFunction: true,
       type: 'AddTodoProps',
     },
   ],
@@ -115,6 +122,7 @@ const componentConfig: ComponentConfig = {
 };
 
 beforeAll(async () => {
+  setEngineConfiguration({ environment: 'development' });
   await initComponents();
 });
 

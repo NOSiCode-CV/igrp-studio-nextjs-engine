@@ -3,13 +3,14 @@ import {
   tableProperties,
   tableVariants,
   tableChildProperties,
-  tableChildPropertiesMapping, tableInteractionsMapping, tableData, tableStyle, tableRules,
+  tableChildPropertiesMapping, tableInteractions, tableInteractionsMapping, tableData, tableStyle, tableRules,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { TABLE_COLUMNS } from './children/tableColumns';
 import { TABLE_FILTERS } from './children/tableFilters';
 import { TEMPLATES } from '../../utils/constants';
 import { replaceTemplate } from '../../utils/helpers';
+import { TABLE_ROW_SUBCOMPONENT } from './children/tableRowSubcomponent';
 
 export default {
   register(component: Component) {
@@ -19,23 +20,25 @@ export default {
 
     component.loadComponentClass('IGRPDataTable')
     component.loadVariants(tableVariants());
-    component.loadChildrenMax(2)
+    component.loadChildrenMax(3)
     component.loadGroup('dataDisplay')
     component.loadLabel('Table')
     component.setAllowTypes(true)
     component.getProperties(tableProperties());
     component.getPropertiesMapping(tablePropertiesMapping());
+    component.getInteractions(tableInteractions());
+    component.getInteractionsMapping(tableInteractionsMapping());
     component.getChildProperties(tableChildProperties());
     component.getChildPropertiesMapping(tableChildPropertiesMapping());
     component.getData(tableData());
     component.loadTemplatePath(replaceTemplate(TEMPLATES.ELEMENT, { name: TABLE }))
 
     component.loadChildrenTypes([
-      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }, {name: TABLE_ROW_SUBCOMPONENT, isDefault: false}
     ]);
 
     component.loadAcceptedChildren([
-      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }
+      { name: TABLE_COLUMNS, isDefault: true }, { name: TABLE_FILTERS, isDefault: true }, {name: TABLE_ROW_SUBCOMPONENT, isDefault: false}
     ])
 
     component.loadStates([
@@ -56,7 +59,7 @@ export default {
 
     component.getStyle(tableStyle())
     component.getRules(tableRules())
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

@@ -1,4 +1,4 @@
-import { CodeSnippets, hbsRenderer } from '../index';
+import { CodeSnippets, liquidRenderer } from '../index';
 import { toastErrorDefaultProperties, toastErrorProperties } from './properties';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     codeSnippet.loadDescription("Code snippet to trigger a error toast.");
     codeSnippet.getProperties(toastErrorProperties());
     codeSnippet.getDefaultProperties(toastErrorDefaultProperties());
-    codeSnippet.setRenderer(hbsRenderer);
+    codeSnippet.setRenderer(liquidRenderer);
   }
 
 };

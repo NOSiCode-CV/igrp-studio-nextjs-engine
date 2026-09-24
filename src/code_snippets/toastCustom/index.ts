@@ -1,4 +1,4 @@
-import { CodeSnippets, hbsRenderer } from '../index';
+import { CodeSnippets, liquidRenderer } from '../index';
 import { toastCustomDefaultProperties, toastCustomProperties } from './properties';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     codeSnippet.loadDescription("Code snippet to trigger a custom toast.");
     codeSnippet.getProperties(toastCustomProperties());
     codeSnippet.getDefaultProperties(toastCustomDefaultProperties());
-    codeSnippet.setRenderer(hbsRenderer);
+    codeSnippet.setRenderer(liquidRenderer);
   }
 
 };

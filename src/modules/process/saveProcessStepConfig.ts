@@ -6,6 +6,25 @@ import { saveProcessConfig } from './saveProcessConfig';
 import { loadProcessConfig, loadProcessStepConfig } from '../../utils/helpers';
 import { generateProcessStep } from './generateProcessStep';
 
+const writeProcessStepConfig = async (processStepConfig: ProcessStepConfig, basePath: string) => {
+  const outputPath = path.join(
+    basePath,
+    DIRECTORIES.IGRPSTUDIO_PROCESS,
+    processStepConfig.processKey,
+    `${processStepConfig.key}${EXTENSIONS.JSON}`,
+  );
+
+  await saveToFile(
+    JSON.stringify(processStepConfig),
+    outputPath,
+    true,
+    DIRECTORIES.IGRPSTUDIO_PROCESS,
+    processStepConfig.id,
+    basePath,
+    EXTENSIONS.JSON,
+  );
+};
+
 /**
  * Saves the process configuration to a JSON file in the specified directory.
  *
@@ -23,44 +42,32 @@ export const saveProcessStepConfig = async (
   processStepConfig: ProcessStepConfig,
   basePath: string,
 ) => {
-  const processStepConfigOutputPath = path.join(
-    basePath,
-    DIRECTORIES.IGRPSTUDIO_PROCESS,
-    processStepConfig.processKey,
-    `${processStepConfig.key}${EXTENSIONS.JSON}`,
-  );
-
-  await saveToFile(
-    JSON.stringify(processStepConfig),
-    processStepConfigOutputPath,
-    true,
-    DIRECTORIES.IGRPSTUDIO_PROCESS,
-    processStepConfig.id,
-    basePath,
-    EXTENSIONS.JSON,
-  );
+  await writeProcessStepConfig(processStepConfig, basePath);
 
   // Update process version if necessary:
   const process = await loadProcessConfig(basePath, processStepConfig.processKey);
 
   if (!process) throw Error(ERROR_MESSAGE.INVALID_PROCESS_CONFIG);
 
-  if (processStepConfig.processVersion != process.processVersion) {
-    process.steps
-      ?.filter((step) => step.name != processStepConfig.name)
-      .forEach(async (step) => {
-        const config = await loadProcessStepConfig(basePath, step.key, process);
-        config.processVersion = processStepConfig.processVersion;
-        console.log("Editando : ", config)
-        await saveProcessStepConfig(config, basePath);
+  if (processStepConfig.processVersion !== process.processVersion) {
+    await Promise.all(
+      (process.steps ?? [])
+        .filter((step) => step.name !== processStepConfig.name)
+        .map(async (step) => {
+          const config = await loadProcessStepConfig(basePath, step.key, process);
+          if (!config) return;
 
-        const context: RenderContext<ProcessStepConfig, ProcessStepConfig> = {
-          resourceConfig: processStepConfig,
-          basePath: basePath,
-        };
+          config.processVersion = processStepConfig.processVersion;
+          await writeProcessStepConfig(config, basePath);
 
-        await generateProcessStep(context);
-      });
+          const context: RenderContext<ProcessStepConfig, ProcessStepConfig> = {
+            resourceConfig: config,
+            basePath,
+          };
+
+          await generateProcessStep(context);
+        }),
+    );
   }
 
   process.processVersion = processStepConfig.processVersion;
@@ -71,7 +78,11 @@ export const saveProcessStepConfig = async (
   const stepExists = process.steps.some((step) => step.name === processStepConfig.name);
 
   if (!stepExists) {
-    process.steps.push({ id: processStepConfig.id, name: processStepConfig.name, key: processStepConfig.key });
+    process.steps.push({
+      id: processStepConfig.id,
+      name: processStepConfig.name,
+      key: processStepConfig.key,
+    });
   }
 
   await saveProcessConfig(process, basePath);

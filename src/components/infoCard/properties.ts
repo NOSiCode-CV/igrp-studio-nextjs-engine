@@ -15,6 +15,8 @@ export function infoCardProperties() {
     variantSection: { type: 'string', required: false, default: 'outline', enum: ['solid', 'outline', 'soft'] },
     orientation: { type: 'string', required: false, default: 'vertical', enum: ['horizontal', 'vertical'] },
     titleClassName: { type: 'string', required: false },
+    contentClassName: { type: 'string', required: false },
+
     ...classProperties(),
     ...commonProperties()
   };

@@ -29,6 +29,8 @@ export function alertProperties() {
       },
       required: false
     },
+    alignment: { type: 'string', required: false, enum: ['start', 'center', 'end'] },
+
     ...classProperties(),
     ...commonProperties(),
   };

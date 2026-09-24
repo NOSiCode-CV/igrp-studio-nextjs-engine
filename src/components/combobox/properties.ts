@@ -34,6 +34,8 @@ export function comboboxProperties() {
     },
     selectClassName: { type: 'string', required: false },
     labelClassName: { type: 'string', required: false },
+    defaultValue: { type: 'string', required: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

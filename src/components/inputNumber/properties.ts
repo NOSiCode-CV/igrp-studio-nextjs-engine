@@ -24,6 +24,8 @@ export function inputNumberProperties() {
     step: { type: 'number', required: false, default: 1 },
     disabled: { type: 'boolean', required: false, default: false },
     required: { type: 'boolean', required: true, default: false },
+    error: { type: 'string', required: false },
+
     ...classProperties(),
     ...dataCommonProperties(),
     ...commonProperties(),

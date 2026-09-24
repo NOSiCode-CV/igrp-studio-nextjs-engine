@@ -15,7 +15,6 @@ export function switchProperties() {
     helperText: { type: 'string', required: false },
     required: { type: 'boolean', required: false },
     error: { type: 'string', required: false },
-    description: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false },
     labelClassName: { type: 'string', required: false },
     ...classProperties(),

@@ -1,19 +1,11 @@
 import { FilterType, TransformType } from '../interfaces/types';
 
-export const PARTIALS = [
-  'workspace/igrp-docker-services.hbs',
-  'workspace/mysql-docker-service.hbs',
-  'workspace/oracle-docker-service.hbs',
-  'workspace/postgres-docker-service.hbs',
-  'workspace/observability-docker-volumes.hbs',
-  'workspace/observability-docker-env.hbs',
-  'workspace/observability-env.hbs',
+export const PARTIALS: string[] = [
 ];
 
 export const PATTERNS = {
   VALID_NAME_CONVENTIONAL: "^[a-zA-Z_]+$",
   VALID_APP_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
-  VALID_WORKSPACE_NAME_CONVENTIONAL: "^[a-zA-Z-]+$",
   VALID_ALPHA_NUMERIC_CONVENTIONAL: "^[\\p{L}\\p{N}_ ]+$",
   WITHOUT_HYPHEN_AND_SPECIAL_CHARACTERS: "^[A-Za-z0-9_]+$",
   PATH_SLASH_VALIDATION_PATTERN: '^[A-Za-z][A-Za-z0-9_/ ]*$',
@@ -41,7 +33,6 @@ export const COMMON_FILES = {
   JSON_IGRP_APP_LOGIC: 'igrp-app-logic.json',
   JSON_IGRP_APP_LOGIC_CREDENTIALS: 'igrp-app-logic-credentials.json',
   JSON_IGRP_APP_LOGIC_WORKFLOWS: 'igrp-app-logic-workflows.json',
-  WORKSPACE: 'workspace.json',
   BASE_APP: 'baseApp.json',
   PAGES_META: 'pagesMeta.json',
   COMPONENTS_META: 'componentsMeta.json',
@@ -55,6 +46,13 @@ export const COMMON_FILES = {
   DEPLOYMENT: 'deployment.yaml',
   INGRESS: 'ingress.yaml',
   SERVICE_K8S: 'service.yaml',
+  /**
+   * `{{name}}` is expanded with the lower-cased app name at write time
+   * (see saveBaseAppFiles.ts) so a project called `Bibliotheque` lands
+   * as `igrp-compose-bibliotheque.yaml` in the project root — matching
+   * the workspace-side naming used by the backend template.
+   */
+  IGRP_COMPOSE_PROJECT: 'igrp-compose-{{name}}.yaml',
 };
 
 export const EXTENSIONS = {
@@ -63,47 +61,35 @@ export const EXTENSIONS = {
 }
 
 export const TEMPLATES = {
-  WELCOME_PAGE: 'config/page.hbs',
-  CONFIG_LAYOUT: 'config/layout.hbs',
-  CONFIG_PACKGE_JSON: 'config/package.json.hbs',
-  PAGE: 'app/page/page.hbs',
-  EXPORTS_FILE: 'app/igrp.config.ts.hbs',
-  COMPONENT: 'app/component/component.hbs',
-  ACTION: 'app/page/actions/action.hbs',
-  SERVICE: 'app/page/service.hbs',
-  MAIN_LAYOUT: 'app/layouts/mainlayout.hbs',
-  MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.hbs',
-  CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.hbs',
-  CONFIG_INGRESS: 'config/k8s/ingressyaml.hbs',
-  CONFIG_SERVICE: 'config/k8s/serviceyaml.hbs',
-  CONFIG_GITLAB_CI_CD: 'config/gitlab-ci.yml.hbs',
-  ELEMENT: 'components/{{name}}/{{name}}.hbs',
-  DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.hbs',
-  DEFAULT_CODE_SNIPPETS: 'code_snippets/default/default.hbs',
-  DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.hbs',
-  CODE_SNIPPETS: 'code_snippets/{{name}}/{{name}}.hbs',
-  DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.hbs',
-  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.hbs',
-  TYPE_ELEMENT: 'components/{{element}}/types/type.hbs',
-  DEFAULT_FUNCTION: 'components/default/functions/function.hbs',
-  DEFAULT_STATE: 'components/default/states/state.hbs',
-  DEFAULT_REFERENCE: 'components/default/references/reference.hbs',
-  DEFAULT_NAVIGATE: 'components/default/navigation/navigate.hbs',
-  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.hbs',
-  UNREGISTERED_SERVICE: 'docker_services/default/unregisteredService.hbs',
-  UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.hbs',
-  AM_IGRP_ENV: 'workspace/am-igrp-env.hbs',
-  UM_IGRP_ENV: 'workspace/um-igrp-env.hbs',
-  UI_IGRP_ENV: 'workspace/ui-igrp-env.hbs',
-  IAM_IGRP_ENV: 'workspace/iam-igrp-env.hbs',
-  FILE_IGRP_ENV: 'workspace/file-igrp-env.hbs',
-  AL_IGRP_ENV: 'workspace/al-igrp-env.hbs',
-  IGRP_ENV: 'workspace/igrp-env.hbs',
-  IGRP_AUTH_JSON: 'docker_services/keycloak/volumes/igrp-realm.json.hbs',
-  IGRP_NGINX: 'workspace/nginx.conf.hbs',
-  IGRP_REDIS: 'workspace/redis.conf.hbs',
-  SERVICE_ENV: 'workspace/service-env.hbs',
-  WORKSPACE_COMPOSE: 'workspace/docker-compose-workspace.hbs',
+  WELCOME_PAGE: 'config/page.liquid',
+  CONFIG_LAYOUT: 'config/layout.liquid',
+  CONFIG_PACKGE_JSON: 'config/package.json.liquid',
+  PAGE: 'app/page/page.liquid',
+  EXPORTS_FILE: 'app/igrp.config.ts.liquid',
+  COMPONENT: 'app/component/component.liquid',
+  ACTION: 'app/page/actions/action.liquid',
+  SERVICE: 'app/page/service.liquid',
+  MAIN_LAYOUT: 'app/layouts/mainlayout.liquid',
+  MAIN_LAYOUT_CSS: 'app/layouts/mainlayoutcss.liquid',
+  CONFIG_DEPLOYMENT: 'config/k8s/deploymentyaml.liquid',
+  CONFIG_INGRESS: 'config/k8s/ingressyaml.liquid',
+  CONFIG_SERVICE: 'config/k8s/serviceyaml.liquid',
+  CONFIG_GITLAB_CI_CD: 'config/gitlab-ci.yml.liquid',
+  CONFIG_IGRP_COMPOSE: 'config/docker-compose/igrp-compose.liquid',
+  ELEMENT: 'components/{{name}}/{{name}}.liquid',
+  DEFAULT_DOCKER_SERVICE: 'docker_services/default/default.liquid',
+  DEFAULT_CODE_SNIPPETS: 'code_snippets/default/default.liquid',
+  DOCKER_SERVICE: 'docker_services/{{name}}/{{name}}.liquid',
+  CODE_SNIPPETS: 'code_snippets/{{name}}/{{name}}.liquid',
+  DOCKER_SERVICE_VOLUME: 'docker_services/{{name}}/volumes/{{volume}}.liquid',
+  CHILD_ELEMENT: 'components/{{parent}}/children/{{name}}/{{name}}.liquid',
+  TYPE_ELEMENT: 'components/{{element}}/types/type.liquid',
+  DEFAULT_FUNCTION: 'components/default/functions/function.liquid',
+  DEFAULT_STATE: 'components/default/states/state.liquid',
+  DEFAULT_REFERENCE: 'components/default/references/reference.liquid',
+  DEFAULT_NAVIGATE: 'components/default/navigation/navigate.liquid',
+  UNREGISTERED_COMPONENT: 'components/default/unregisteredComponent.liquid',
+  UNREGISTERED_CODE: 'code_snippets/default/unregisteredCode.liquid',
 };
 
 export const ENVIRONMENT_FILES = {
@@ -124,7 +110,6 @@ export const SRC_CONFIG_FILES = {
   DOCKERIGNORE: 'dockerignore_template',
   DOCKERFILE: 'dockerfile_template',
   GITIGNORE: 'gitignore_template',
-  WORKSPACE_GITIGNORE: 'workspace_gitignore_template',
   README: 'README.md',
   NEXTCONFIG: 'next.config.mjs',
   NEXTENV: 'nextenv_template',
@@ -162,6 +147,9 @@ export const INTERACTIONS_TYPES = {
 
   // Events
   ON_CLICK: 'Mouse click (tap)',
+  ON_ENTER: 'Mouse enter',
+  ON_DOWN: 'Mouse down',
+  ON_LEAVE: 'Mouse leave',
   ON_NEXT_CLICK: 'On next click (tap)',
   ON_CLICK_CONFIRM: "Confirm Mouse click (tap)",
   ON_CLICK_BACK_BUTTON: "Back Button Mouse click (tap)",
@@ -191,6 +179,9 @@ export const INTERACTIONS_TYPES = {
   ON_END_TIME: "On End Time",
   ON_COPY_SUCCESS: "On Copy Success",
   ON_COPY_ERROR: "On Copy Error",
+  ON_FILTERS_CLEARED: "On filters cleared",
+  ON_QUERY_CHANGE: "On query change",
+  ON_ITEM_REMOVE: "On item remove",
 
   // Values
   CHECKED: "Checked",
@@ -230,7 +221,7 @@ export const INTERACTIONS_DEFAULTS = {
   EMPTY_OBJECT: '{}',
 }
 
-export const PACKAGE_JSON = {template: 'config/package.json.hbs', output: 'package.json'}
+export const PACKAGE_JSON = {template: 'config/package.json.liquid', output: 'package.json'}
 
 export const DIRECTORIES = {
   APP: 'src/app',
@@ -286,6 +277,7 @@ export const DIRECTORIES = {
   IGRPSTUDIO_PAGES: '.igrpstudio/pages',
   IGRPSTUDIO_COMPONENTS: '.igrpstudio/components',
   IGRPSTUDIO_PROCESS: '.igrpstudio/process',
+  IGRPSTUDIO_PERMISSIONS_FILE: '.igrpstudio/permissions.json',
   KUBERNETES: 'k8s',
   TYPES: 'types',
   COMPONENTS: 'src/app/(igrp)/(generated)/components',
@@ -299,15 +291,15 @@ export const ERROR_MESSAGE = {
   EMPTY_CONTEXT: 'Provide a valid context. The context must not be empty.',
   INVALID_APP_CONFIG:
     'The provided APP configuration is invalid. Please verify the APP details and try again.',
-  INVALID_WORKSPACE_CONFIG:
-    'The provided workspace configuration is invalid. Please verify the workspace details and try again.',
   INVALID_OUTPUT_PATH: 'The provided output path is invalid or does not exist.',
   TEMPLATE_NAME_REQUIRED: 'The name of the template must be provided.',
   INVALID_PAGE_CONFIG: 'The provided page configuration is invalid. Please verify the page details and try again',
   INVALID_COMPONENT_CONFIG: 'The provided component configuration is invalid. Please verify the component details and try again',
   INVALID_PROCESS_CONFIG: 'The provided process configuration is invalid. Please verify the process details and try again',
   INVALID_PROCESS_STEP_CONFIG: 'The provided process step configuration is invalid. Please verify the process step details and try again',
-  INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again'
+  INVALID_ACTION_CONFIG: 'The provided action configuration is invalid. Please verify the page details and try again',
+  INVALID_PERMISSION_CONFIG: 'The provided permission configuration is invalid. Please verify the permission details and try again',
+  PERMISSION_NOT_FOUND: (id: string) => `Permission with id '${id}' does not exist!`
 };
 
 

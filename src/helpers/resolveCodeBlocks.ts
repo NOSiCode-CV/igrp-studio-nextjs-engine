@@ -60,6 +60,12 @@ export function resolveCodeBlocks(
       codeBlock += '\n' + `const { getSectionRef } = useIGRPMenuNavigation();` + '\n';
     }
 
+    // Permission `disable` action needs `can(...)` in scope. Hoist once
+    // at the top so `renderLayout` can splice `!can('perm')` into any
+    // `disabled` binding without re-emitting the hook per usage.
+    if (hasDisablePermissionAction(page.components)) {
+      codeBlock += '\n' + `const { can } = usePermissions();` + '\n';
+    }
   }
 
   if(isLayout(component?.components)) {
@@ -76,6 +82,9 @@ export function resolveCodeBlocks(
       codeBlock += '\n' + `const { getSectionRef } = useIGRPMenuNavigation();` + '\n';
     }
 
+    if (hasDisablePermissionAction(component.components)) {
+      codeBlock += '\n' + `const { can } = usePermissions();` + '\n';
+    }
   }
 
   if (page?.functions) {
@@ -224,4 +233,26 @@ function hasMenuNavigationInteraction(layout: Layout): boolean {
 
   // Recursive case: check children
   return (layout.children || []).some((child) => hasMenuNavigationInteraction(child));
+}
+
+/**
+ * True when the tree contains at least one permission rule with
+ * `action: "disable"`. Used to decide whether to hoist
+ * `const { can } = usePermissions();` at the top of the emitted
+ * component body. Walks `children[]` AND descends into
+ * `rules[].fallback` subtrees (fallbacks can carry their own permission
+ * rules — cosmetic but still valid).
+ */
+function hasDisablePermissionAction(layout: Layout): boolean {
+  if (!layout) return false;
+  if (layout.rules) {
+    for (const rule of layout.rules) {
+      if (rule.type !== 'permission') continue;
+      const action = (rule as any).action ?? 'hide';
+      if (action === 'disable') return true;
+      const fallback = (rule as any).fallback as Layout | undefined;
+      if (fallback && hasDisablePermissionAction(fallback)) return true;
+    }
+  }
+  return (layout.children || []).some((child) => hasDisablePermissionAction(child));
 }
