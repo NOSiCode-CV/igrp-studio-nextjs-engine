@@ -65,14 +65,21 @@ export function addClassNameFromChildProperties(
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         const valueAsObject = value as Record<string, any>;
         if (valueAsObject.default !== undefined) normalizedValue = valueAsObject.default;
-        else if (valueAsObject.value?.code !== undefined) normalizedValue = valueAsObject.value.code;
-        else if (valueAsObject.state?.name !== undefined) normalizedValue = valueAsObject.state.name;
+        else if (valueAsObject.value?.code !== undefined)
+          normalizedValue = valueAsObject.value.code;
+        else if (valueAsObject.state?.name !== undefined)
+          normalizedValue = valueAsObject.state.name;
         else if (valueAsObject.value !== undefined) normalizedValue = valueAsObject.value;
       }
-      if (typeof normalizedValue !== 'string' && typeof normalizedValue !== 'number' && typeof normalizedValue !== 'boolean') {
+      if (
+        typeof normalizedValue !== 'string' &&
+        typeof normalizedValue !== 'number' &&
+        typeof normalizedValue !== 'boolean'
+      ) {
         return '';
       }
-      if (normalizedValue === undefined || normalizedValue === null || normalizedValue === '') return '';
+      if (normalizedValue === undefined || normalizedValue === null || normalizedValue === '')
+        return '';
       return parentElement?.childPropertiesMapping?.[key]?.className !== undefined
         ? `'${parentElement.childPropertiesMapping?.[key]?.className ?? key}${normalizedValue}',`
         : ``;
@@ -154,7 +161,7 @@ export function resolveQueryParams(params: Segment[]): string {
       // Build the replacement value
       const replacement = seg.tag
         ? `\${${seg.context === 'column' ? 'row.original.' : ''}${seg.tag}}`
-        : seg.value ?? '';
+        : (seg.value ?? '');
 
       return `${seg.name}=${replacement}`;
     })
@@ -197,7 +204,9 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
       replacement = parts.join('/');
     } else {
       const g = group[0];
-      replacement = g.tag ? `\${${ g.context === 'column' ?  'row.original.' : '' }${g.tag}}` : (g.value ?? '');
+      replacement = g.tag
+        ? `\${${g.context === 'column' ? 'row.original.' : ''}${g.tag}}`
+        : (g.value ?? '');
     }
 
     finalPath = finalPath.replace(name, replacement);
@@ -227,9 +236,8 @@ export function resolveStateDefault(
   isList?: boolean,
   fields?: ElementField[],
 ): string {
-
   const trimmed = defaultValue?.trim() ?? '';
-  const isReservedLiteral = (
+  const isReservedLiteral =
     trimmed === 'null' ||
     trimmed === 'undefined' ||
     trimmed === 'true' ||
@@ -238,8 +246,7 @@ export function resolveStateDefault(
     trimmed === '{}' ||
     (!isNaN(Number(trimmed)) && trimmed !== '') ||
     (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-    (trimmed.startsWith('{') && trimmed.endsWith('}'))
-  );
+    (trimmed.startsWith('{') && trimmed.endsWith('}'));
 
   // Schema-driven Date handling. The previous logic auto-wrapped any value
   // matching an ISO-date shape in `new Date(...)`, which false-positived on
@@ -267,10 +274,7 @@ export function resolveStateDefault(
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
 
   // Handle booleans, numbers, arrays, objects as string literals
-  if (
-    type !== 'string' &&
-    isReservedLiteral
-  ) {
+  if (type !== 'string' && isReservedLiteral) {
     return trimmed;
   }
 
@@ -417,7 +421,9 @@ export function resolveZodTypes(field?: ElementField): string {
   return zodType;
 }
 
-export function resolveFunctionArgs(args: Arguments[]): string {
+export function resolveFunctionArgs(args?: Arguments[]): string {
+  if (!args?.length) return '';
+
   return args
     .map((arg) => {
       const name = arg.isState ? `set${capitalize(arg.name)}` : arg.name;
@@ -452,7 +458,11 @@ export function resolveArrayElementRules(config: Layout): string {
   const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
   const condition = visibilityRules
     .map((it) => it.condition)
-    .find((it) => typeof it === 'string' ? it.trim() !== '' && it.trim() !== 'undefined' : it !== undefined && it !== null);
+    .find((it) =>
+      typeof it === 'string'
+        ? it.trim() !== '' && it.trim() !== 'undefined'
+        : it !== undefined && it !== null,
+    );
   if (!condition) return '';
   return `...(${condition} ? [`;
 }
@@ -461,7 +471,11 @@ export function checkRules(config: Layout): boolean {
   const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
   const condition = visibilityRules
     .map((it) => it.condition)
-    .find((it) => typeof it === 'string' ? it.trim() !== '' && it.trim() !== 'undefined' : it !== undefined && it !== null);
+    .find((it) =>
+      typeof it === 'string'
+        ? it.trim() !== '' && it.trim() !== 'undefined'
+        : it !== undefined && it !== null,
+    );
   return Boolean(condition);
 }
 
@@ -667,28 +681,31 @@ export function replaceId(name: string, component?: any) {
   if (!component || !name) return name;
 
   const tag = component.tag;
-  const finalTag = tag.includes('${index}')
-    ? tag.substring(tag.lastIndexOf('.') + 1)
-    : tag;
+  const finalTag = tag.includes('${index}') ? tag.substring(tag.lastIndexOf('.') + 1) : tag;
 
   return replaceTemplate(name, { id: finalTag });
 }
 
 export function replaceType(type: string, component?: any, isArray?: boolean) {
-  if(!component || !type) return normalizeAnyType(isArray? `Array<${type}>` : type);
-  const finalType = component.dataType ? capitalize(component.dataType) : 'any'
-  return normalizeAnyType(replaceTemplate(type, { type: isArray? `Array<${finalType}>` : finalType }));
+  if (!component || !type) return normalizeAnyType(isArray ? `Array<${type}>` : type);
+  const finalType = component.dataType ? capitalize(component.dataType) : 'any';
+  return normalizeAnyType(
+    replaceTemplate(type, { type: isArray ? `Array<${finalType}>` : finalType }),
+  );
 }
 
 export function replaceValue(value: string, component?: any) {
-  if(!component || !value) return value;
-  return replaceTemplate(value, { value: component.properties?.value ?? '', type: component.dataType ? capitalize(component.dataType) : 'any' })
+  if (!component || !value) return value;
+  return replaceTemplate(value, {
+    value: component.properties?.value ?? '',
+    type: component.dataType ? capitalize(component.dataType) : 'any',
+  });
 }
 
 export function resolveClassNameProperty(component: Layout, registry: Record<string, Component>) {
   const element = registry[component.componentName];
-  if(!element) return 'className'
-  return element.classNamePropertyTag ?? 'className'
+  if (!element) return 'className';
+  return element.classNamePropertyTag ?? 'className';
 }
 
 /**
@@ -738,7 +755,8 @@ export function resolvePropertiesSchema(
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
-  classKey?: string, isJson?: boolean,
+  classKey?: string,
+  isJson?: boolean,
   /**
    * Optional per-key schema (typically `registry[componentName].properties`)
    * used to disambiguate wrap behavior. When available we consult
@@ -770,7 +788,7 @@ export function renderProperties(
               'name',
               'customProperties',
               'generateReference',
-              classKey
+              classKey,
             ].includes(key)
           )
             return;
@@ -805,7 +823,7 @@ export function renderProperties(
           }
         })
         .filter((it) => it !== undefined && it !== '')
-        .join(isJson === true? ',\n' : '\n')
+        .join(isJson === true ? ',\n' : '\n')
     : ``;
 }
 
@@ -846,9 +864,7 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
             })
               .trim()
               .replace(/;$/, '');
-            return isJson === true
-              ? `${key}: () => ${formCode},`
-              : `${key}={ () => ${formCode} }`;
+            return isJson === true ? `${key}: () => ${formCode},` : `${key}={ () => ${formCode} }`;
           }
           if (value.navigate && value.type === 'navigate') {
             if (!value.navigate.path) return;
@@ -869,12 +885,16 @@ export function renderData(data: Record<string, any>, component?: Layout, skipKe
   // consumed elsewhere and shouldn't also be emitted as a JSX prop.
   const skip = new Set<string>(['content']);
   if (skipKeys) {
-    skipKeys.split(',').map((s) => s.trim()).filter(Boolean).forEach((k) => skip.add(k));
+    skipKeys
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .forEach((k) => skip.add(k));
   }
   return data
     ? Object.entries(data)
         .map(([key, value]) => {
-          if(skip.has(key)) return ''
+          if (skip.has(key)) return '';
           return `${key}={ ${replaceId(value.state?.name, component) ?? value.value?.code ?? 'undefined'} }`;
         })
         .filter((s) => s !== '')
@@ -883,12 +903,9 @@ export function renderData(data: Record<string, any>, component?: Layout, skipKe
 }
 
 function normalizeAnyType(t: string) {
+  if (t === undefined) return undefined;
 
-  if(t === undefined) return undefined;
-
-  if(t.includes('anyZodType'))
-    return t.replace('anyZodType', 'any')
+  if (t.includes('anyZodType')) return t.replace('anyZodType', 'any');
 
   return t;
-
 }
