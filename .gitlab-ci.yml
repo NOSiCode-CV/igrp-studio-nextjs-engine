@@ -30,6 +30,10 @@ build_packagedev:
   stage: build
   only:
     - master
+  before_script:
+    - test -n "$SONATYPE_USERNAME" || { echo "SONATYPE_USERNAME CI variable is required"; exit 1; }
+    - test -n "$SONATYPE_PASSWORD" || { echo "SONATYPE_PASSWORD CI variable is required"; exit 1; }
+    - printf '@igrp:registry=https://sonatype.nosi.cv/repository/igrp/\n//sonatype.nosi.cv/repository/igrp/:username=%s\n//sonatype.nosi.cv/repository/igrp/:_password=%s\n' "$SONATYPE_USERNAME" "$SONATYPE_PASSWORD" > "$HOME/.npmrc"
   script:
     - npm install
     - npm run build
