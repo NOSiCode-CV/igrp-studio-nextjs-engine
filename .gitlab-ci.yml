@@ -33,4 +33,4 @@ build_packagedev:
   script:
     - npm install
     - npm run build
-    - npm publish --registry=https://sonatype.nosi.cv/repository/igrp/
+    - npm run deploy
