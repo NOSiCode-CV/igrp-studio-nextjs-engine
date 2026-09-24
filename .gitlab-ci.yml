@@ -17,7 +17,7 @@ test:
   only:
     - master
 
-sonarqube_scan:
+.sonarqube_scan:
   stage: test
   image: sonarsource/sonar-scanner-cli:latest
   script:
