@@ -1,27 +1,42 @@
 import { deleteElement } from '../src';
-import { DeleteConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../src/utils/testPath';
-
-export const OUTPUT_DIR = OUTPUT_TEST;
-
-describe('Generic page deletion', () => {
-    it('should delete a element', async () => {
-        const element: DeleteConfig = {
-          name: "registros",
-          type: 'page'
-        };
-
-        await deleteElement(element, OUTPUT_DIR)
-    });
-});
+import type { ComponentConfig, DeleteConfig } from '../src/interfaces/types';
+import fs from 'fs-extra';
+import os from 'os';
+import path from 'path';
 
 describe('Generic component deletion', () => {
-  it('should delete a element', async () => {
+  let outputDir: string;
+
+  beforeEach(async () => {
+    outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'nextjs-engine-delete-'));
+  });
+
+  afterEach(async () => {
+    await fs.remove(outputDir);
+  });
+
+  it('deletes the component source and configuration files', async () => {
+    const component: ComponentConfig = {
+      id: 'cardComponent1',
+      type: 'component',
+      name: 'card',
+      scope: 'app',
+      components: {},
+    };
+    const componentConfigPath = path.join(outputDir, '.igrpstudio', 'components', 'card.json');
+    const componentSourcePath = path.join(outputDir, 'src', 'components', 'card.tsx');
+    await fs.outputJson(componentConfigPath, component);
+    await fs.outputFile(componentSourcePath, 'export default function Card() {}');
+
     const element: DeleteConfig = {
-      name: "card",
-      type: 'component'
+      id: component.id,
+      name: component.name,
+      type: 'component',
     };
 
-    await deleteElement(element, OUTPUT_DIR)
+    await deleteElement(element, outputDir);
+
+    expect(await fs.pathExists(componentConfigPath)).toBe(false);
+    expect(await fs.pathExists(componentSourcePath)).toBe(false);
   });
 });

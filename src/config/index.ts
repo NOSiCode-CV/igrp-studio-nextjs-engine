@@ -3,15 +3,15 @@ import { EngineConfigurationSettings } from '../interfaces/types';
 export type EngineConfiguration = {
   environment?: string;
   setEnvironment: (env?: string) => void;
-}
+};
 
-function initConfiguration() : EngineConfiguration {
+function initConfiguration(): EngineConfiguration {
   return {
     environment: undefined,
     setEnvironment(env?: string) {
-      this.environment = env
-    }
-  }
+      this.environment = env;
+    },
+  };
 }
 
 export let config: Record<string, EngineConfiguration> = {};
@@ -24,6 +24,6 @@ export function setConfiguration(registerFn: (config: EngineConfiguration) => vo
 
 export function configurationAsObject(name?: string): EngineConfigurationSettings {
   return {
-    environment: config[name ?? 'default'].environment,
-  }
+    environment: config[name ?? 'default']?.environment ?? 'development',
+  };
 }
