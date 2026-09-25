@@ -17,7 +17,6 @@ export function buttonProperties() {
     iconClassName: { type: 'string', required: false },
     loading: { type: 'boolean', required: false, default: false },
     loadingText: { type: 'string', required: false },
-    asChild: { type: 'boolean', required: false, default: false },
     type: { type: 'string', required: false, default: 'button', enum: ['button', 'submit', 'reset'] },
     ariaLabel: { type: 'string', required: false },
     disabled: { type: 'boolean', required: false, default: false },
