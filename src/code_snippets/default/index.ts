@@ -1,4 +1,4 @@
-import { CodeSnippets, customRenderer, defaultRenderer, hbsRenderer } from '../index';
+import { CodeSnippets, customRenderer, defaultRenderer, liquidRenderer } from '../index';
 import { CodeSnippetsRegisterConfig } from '../../interfaces/types';
 
 export default {
@@ -14,7 +14,7 @@ export default {
     codeSnippet.getDefaultProperties(config.defaultProperties);
     codeSnippet.getProperties(config.properties);
     codeSnippet.getPropertiesMapping(config.propertiesMapping);
-    codeSnippet.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'hbs' ? hbsRenderer : customRenderer);
+    codeSnippet.setRenderer(config.renderer === 'default' ? defaultRenderer : config.renderer === 'liquid' ? liquidRenderer : customRenderer);
 
   }
 };

@@ -1,0 +1,7 @@
+return <IGRPDataTableCellTooltip
+  text={ {% if resourceConfig.data.value.code %}{{ resourceConfig.data.value.code }}{% else %}row.getValue('{{ resourceConfig.tag }}'){% endif %} }
+  {% if resourceConfig.properties.maxChars %}maxChars={ {{ resourceConfig.properties.maxChars }} }{% endif %}
+  {% if resourceConfig.properties.side %}side={ `{{ resourceConfig.properties.side }}` }{% endif %}
+  {% if resourceConfig.properties.align %}align={ `{{ resourceConfig.properties.align }}` }{% endif %}
+>
+</IGRPDataTableCellTooltip>

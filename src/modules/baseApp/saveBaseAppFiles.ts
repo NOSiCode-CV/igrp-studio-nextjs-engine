@@ -14,7 +14,7 @@ import {
 } from '../../utils/constants';
 import { appConfigValidate } from '../../schema/baseApp';
 import { getPaths } from '../../index';
-import { loadProjectConfig } from '../../utils/helpers';
+import { loadProjectConfig, replaceTemplate } from '../../utils/helpers';
 
 export type BASE_CONFIG_FILES = { src: string; dest: string }[];
 export type BASE_API_FILES = { output: string; template: string; name: string }[];
@@ -39,13 +39,23 @@ const generateBaseAppFiles = (context: RenderContext): BASE_API_FILES => {
   const mainPath = path.join(context.basePath, DIRECTORIES.APP);
   const kubernetesPath = path.join(context.basePath, 'k8s');
 
+  // Project-scoped docker-compose. Landed alongside the extracted app so
+  // `docker compose -f igrp-compose-<name>.yaml up` works from the project
+  // root with no extra flags. The `{{name}}` placeholder in the filename
+  // resolves to the lower-cased app name — same convention the workspace-
+  // side backend template uses (igrp-compose-bibliotheque.yaml, …).
+  const composeFileName = replaceTemplate(COMMON_FILES.IGRP_COMPOSE_PROJECT, {
+    name: (context.baseConfig?.name ?? 'app').toLowerCase(),
+  });
+
   return [
     { output: mainPath, template: TEMPLATES.EXPORTS_FILE, name: COMMON_FILES.EXPORTS_FILE },
     { output: kubernetesPath, template: TEMPLATES.CONFIG_DEPLOYMENT, name: COMMON_FILES.DEPLOYMENT},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_INGRESS, name: COMMON_FILES.INGRESS},
     { output: kubernetesPath, template: TEMPLATES.CONFIG_SERVICE, name: COMMON_FILES.SERVICE_K8S},
     //{ output: kubernetesPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML},
-    { output: mainPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML}
+    { output: mainPath, template: TEMPLATES.CONFIG_GITLAB_CI_CD, name: DST_CONFIG_FILES.GITLABCIYAML},
+    { output: context.basePath, template: TEMPLATES.CONFIG_IGRP_COMPOSE, name: composeFileName },
   ];
 };
 

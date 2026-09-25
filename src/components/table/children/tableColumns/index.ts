@@ -5,7 +5,7 @@ import {
   tableColumnsChildProperties,
   tableColumnsChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { TABLE } from '../../index';
 import { TABLE_EXPANDER_CELL } from '../tableExpanderCell';
 import { TABLE_TEXT_CELL } from '../tableTextCell';
@@ -60,7 +60,7 @@ export default {
       { name: TABLE_HIDDEN_CELL, isDefault: false },
     ])
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

@@ -14,8 +14,6 @@ export function alertDialogProperties() {
     variant: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     title: { type: 'string', required: false, default: 'Alert Dialog' },
     description: { type: 'string', required: false, default: 'A alert dialog' },
-    type: { type: 'string', required: false, enum: ['default', 'alert', 'confirm', 'delete', 'info', 'success', 'warning', 'alert'], default: 'default' },
-    size: { type: 'string', required: false, enum: ['sm', 'md', 'lg', 'xl', 'full'], default: 'md' },
     titleClassName: { type: 'string', required: false },
     descriptionClassName: { type: 'string', required: false },
     showCancel: { type: 'boolean', required: false, default: true },
@@ -26,6 +24,7 @@ export function alertDialogProperties() {
     open: { type: 'boolean', required: false },
     actionProps: { type: 'object', required: false, properties: buttonProperties() },
     cancelProps: { type: 'object', required: false, properties: buttonProperties() },
+
     ...classProperties(),
     ...commonProperties(),
   };

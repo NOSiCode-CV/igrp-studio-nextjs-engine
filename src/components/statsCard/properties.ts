@@ -17,7 +17,9 @@ export function statsCardProperties() {
     showIconBorder: { type: 'boolean', required: false, default: false },
     title: { type: 'string', required: false, default: 'Stat Card' },
     titleSize: { type: 'string', required: false, default: 'sm', enum: ['base', 'xs', 'sm', 'lg', 'xl'] },
+    titleColored: { type: 'boolean', required: false, default: false },
     valueSize: { type: 'string', required: false, default: '2xl', enum: ['base', 'sm', 'lg', 'xl', '2xl', '3xl', '4xl'] },
+    valueColored: { type: 'boolean', required: false, default: false },
     iconProperties: {
       type: 'object',
       properties: {
@@ -31,7 +33,6 @@ export function statsCardProperties() {
     itemPlacement: { type: 'string', required: true, default: 'start', enum: ['start', 'end' ] },
     image: { type: 'string', required: false },
     imageAlt: { type: 'string', required: false },
-    cardClassName: { type: 'string', required: false },
     titleClassName: { type: 'string', required: false },
     valueClassName: { type: 'string', required: false },
     ...classProperties(),
@@ -67,14 +68,49 @@ function onClickInteractionFieldVisibility(): InteractionFieldVisibility {
       imports: { visible: true },
       states: { visible: false },
       fnCode: { visible: false },
-      actionCode: { visible: false }
+      actionCode: { visible: false },
     },
-  }
+  };
 }
 
 export function statsCardInteractions() {
   return {
-    onClick: { ...baseInteraction(INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT, INTERACTIONS_TYPES.ON_CLICK, undefined, onClickInteractionFieldVisibility()), required: true },
+    onClick: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_CLICK,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: true,
+    },
+    onMouseOver: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_HOVER,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
+    onMouseDown: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_DOWN,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
+    onMouseLeave: {
+      ...baseInteraction(
+        INTERACTIONS_DEFAULTS.ON_CLICK_NO_EVENT,
+        INTERACTIONS_TYPES.ON_LEAVE,
+        undefined,
+        onClickInteractionFieldVisibility(),
+      ),
+      required: false,
+    },
   };
 }
 

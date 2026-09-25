@@ -1,0 +1,11 @@
+const rowData = row.original;
+
+return (
+<IGRPDataTableRowAction>
+  {% if resourceConfig.children -%}
+  {% for child in resourceConfig.children -%}
+  {{ '' | render-layout: child, resourceConfig }}
+  {% endfor -%}
+  {% endif -%}
+</IGRPDataTableRowAction>
+);

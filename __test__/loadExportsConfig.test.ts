@@ -1,22 +1,36 @@
-import { initComponents, loadAppExports } from '../src';
-import { OUTPUT_TAXPAYER_TEST, OUTPUT_TEST2 } from '../src/utils/testPath';
-
-//export const WORKSPACE_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss";
-//export const OUTPUT_DIR = WORKSPACE_DIR + "\\projects\\inss-sisgb-core-cadastro-frontend";
-
-//export const OUTPUT_DIR = "C:\\Users\\marcelo.monteiro\\IdeaProjects\\inss-sisgb-core-cadastro-frontend"
-export const OUTPUT_DIR = OUTPUT_TEST2
+import fs from 'fs-extra';
+import os from 'os';
+import path from 'path';
+import { loadExportsConfig } from '../src/modules/payload/loadExportsConfig';
 
 describe('Load Exports', () => {
+  let outputDir: string;
 
   beforeAll(async () => {
-    await initComponents();
+    outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'nextjs-engine-exports-'));
   });
 
-  test('Get exports', async () => {
-     console.log(JSON.stringify(await loadAppExports(OUTPUT_DIR), null, 2));
-    //console.log((await loadAppExports(OUTPUT_DIR)).actions.map((action) => action.args));
-    //console.log((await loadAppExports(OUTPUT_DIR)).types.map((type) => type.fields));
+  afterAll(async () => {
+    await fs.remove(outputDir);
   });
 
+  test('extracts all configured export groups', async () => {
+    const configPath = path.join(outputDir, 'igrp.config.ts');
+    await fs.writeFile(
+      configPath,
+      `export default {
+        types: ['types/user', 'types/role'],
+        actions: ['actions/save'],
+        functions: ['functions/format'],
+        components: ['components/card'],
+      };`,
+    );
+
+    expect(loadExportsConfig(configPath)).toEqual({
+      types: ['types/user', 'types/role'],
+      actions: ['actions/save'],
+      functions: ['functions/format'],
+      components: ['components/card'],
+    });
+  });
 });

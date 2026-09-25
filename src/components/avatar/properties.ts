@@ -32,6 +32,8 @@ export function avatarProperties() {
     badgeNumber: { type: 'string', required: false, default: '6' },
     rounded: { type: 'string', required: false, default: 'full', enum: ['none', 'sm', 'lg', 'xl', '2xl', '3xl', '4xl', 'full'] },
     fallbackClassName: { type: 'string', required: false },
+    iconClassName: { type: 'string', required: false },
+
     ...classProperties(),
     ...commonProperties(),
   };

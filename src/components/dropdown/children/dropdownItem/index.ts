@@ -9,7 +9,7 @@ import {
   dropdownItemRules,
   dropdownItemStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { TEMPLATES } from '../../../../utils/constants';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { DROPDOWN } from '../../index';
@@ -41,7 +41,7 @@ export default {
       ]
     )
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

@@ -11,6 +11,14 @@ interface IdentifiableElement {
 export interface AppConfig extends IdentifiableElement, VersionableElement {
   type: 'nextjs';
   workspaceId: string;
+  /**
+   * URL-friendly workspace identifier used to build the docker-compose
+   * `name`, the shared docker network name, `extra_hosts` entries, and
+   * the gateway paths for cross-service URLs. Optional so pre-workspace
+   * apps still validate; the compose template falls back to the literal
+   * `workspace` when it is not provided.
+   */
+  workspaceSlug?: string;
   name: string;
   description?: string;
   displayName?: string;
@@ -97,6 +105,7 @@ export interface ProcessConfig extends IdentifiableElement, VersionableElement {
 
 export interface ProcessStepConfig extends IdentifiableElement, VersionableElement, ProcessArtifact {
   type: 'processStep';
+  useClient?: boolean;
   key: string;
   name: string;
   description?: string;
@@ -278,9 +287,66 @@ export interface Layout<S = any> extends IdentifiableElement{
   children?: Layout[];
 }
 
-export interface RuleDefinition {
+/**
+ * Legacy shape kept as-is: `{ type: 'visibility', condition: string }`.
+ * `RuleDefinition` is now a discriminated union — either the classic
+ * visibility rule OR a new permission rule (added in `0.2.0-beta.23`).
+ * Existing consumers that hand-wrote `{ type: 'visibility', ... }` keep
+ * working unchanged because that shape is one arm of the union.
+ */
+export type RuleDefinition = VisibilityRuleDefinition | PermissionRuleDefinition;
+
+export interface VisibilityRuleDefinition {
   type: 'visibility',
   condition: string
+}
+
+/**
+ * Gates a node by the current user's permissions, backed by
+ * `@igrp/framework-next` + `@igrp/framework-next-ui`. See the
+ * framework's Permissions guide for the underlying claims model.
+ *
+ * `permission` is ALWAYS an array — Studio surfaces it as a
+ * multi-select so single-vs-array complexity never leaks into the UI.
+ * A single-entry array is fine (`["delete_invoice"]`).
+ *
+ * `mode` matters only when multiple permissions are listed:
+ *   - `"all"` (default) — user must hold every listed permission.
+ *   - `"any"`           — user needs at least one.
+ *
+ * `action` selects the enforcement shape emitted into TSX:
+ *   - `"hide"`     (default) — wrap node in `<IGRPAuthorization>` with
+ *                              no fallback. Denied users see nothing.
+ *   - `"disable"`            — inject `disabled` (or `disabledProp`)
+ *                              onto the node, composed with any
+ *                              existing disabled binding via `||`.
+ *                              Requires `usePermissions()` in scope
+ *                              — the engine hoists it automatically.
+ *   - `"replace"`           — wrap node in `<IGRPAuthorization>` with
+ *                              `fallback` rendered from a sibling
+ *                              Layout subtree. Fallbacks are cosmetic:
+ *                              their state/data bindings are NOT hoisted
+ *                              into the parent component.
+ *   - `"assert"`            — server-side page/component/processStep
+ *                              gate. ONLY valid on the root of a page /
+ *                              component / processStep JSON. Non-root
+ *                              usage is downgraded to `"hide"` at
+ *                              codegen time with a console warning.
+ *
+ * `fallback` is a full Layout subtree — same shape as any other child
+ * — and is required when `action === "replace"`. Ignored otherwise.
+ *
+ * `disabledProp` overrides the prop name injected when `action ===
+ * "disable"`. Defaults to `"disabled"`; use `"readOnly"` for form
+ * inputs where the semantic is read-only rather than fully disabled.
+ */
+export interface PermissionRuleDefinition {
+  type: 'permission',
+  permission: string[],
+  mode?: 'all' | 'any',
+  action?: 'hide' | 'disable' | 'replace' | 'assert',
+  fallback?: Layout,
+  disabledProp?: string,
 }
 
 export interface LayoutProperties {
@@ -372,51 +438,38 @@ export interface ComponentRegistrationConfig extends VersionableElement {
   components: ComponentRegisterConfig[]
 }
 
-export interface DockerServiceRegistrationConfig extends VersionableElement {
-  services: DockerServiceRegisterConfig[]
-}
-
-export interface DockerServiceRegisterConfig extends VersionableElement {
-  name: string,
-  label: string,
-  custom?: string,
-  properties: Record<string, any>,
-  propertiesMapping: Record<string, any>,
-  renderer: 'default' | 'hbs' | 'custom',
-  templatePath?: string
-}
-
 export interface ComponentRegisterConfig extends VersionableElement {
-  name: string,
-  imports: string[],
-  defaultValue: boolean,
-  allowTypes: boolean,
-  deprecated?: boolean,
-  replacedBy?: string,
-  group: string,
-  label: string,
-  customClassName?: string,
-  customComponentTag?: string,
-  variants: Record<string, any>,
-  metadata: Record<string, any>,
-  properties: Record<string, any>,
-  propertiesMapping: Record<string, any>,
-  interactions: Record<string, any>,
-  interactionsMapping: Record<string, any>,
-  data: Record<string, any>,
-  dataMapping: Record<string, any>,
-  style: Record<string, any>,
-  styleMapping: Record<string, any>,
-  rules: Record<string, any>,
-  rulesMapping: Record<string, any>,
-  childProperties?: Record<string, any>,
-  childPropertiesMapping?: Record<string, any>,
-  states: RegisterState[],
-  childrenTypes: ComponentRegisterConfig[],
-  acceptedChildren: ComponentRegisterConfig[],
-  defaultChildren: DefaultChildComponent[],
-  renderer: 'default' | 'hbs' | 'custom' | 'none',
-  templatePath?: string
+  name: string;
+  imports: string[];
+  defaultValue: boolean;
+  allowTypes: boolean;
+  allowChildren?: boolean;
+  deprecated?: boolean;
+  replacedBy?: string;
+  group: string;
+  label: string;
+  customClassName?: string;
+  customComponentTag?: string;
+  variants: Record<string, any>;
+  metadata: Record<string, any>;
+  properties: Record<string, any>;
+  propertiesMapping: Record<string, any>;
+  interactions: Record<string, any>;
+  interactionsMapping: Record<string, any>;
+  data: Record<string, any>;
+  dataMapping: Record<string, any>;
+  style: Record<string, any>;
+  styleMapping: Record<string, any>;
+  rules: Record<string, any>;
+  rulesMapping: Record<string, any>;
+  childProperties?: Record<string, any>;
+  childPropertiesMapping?: Record<string, any>;
+  states: RegisterState[];
+  childrenTypes: ComponentRegisterConfig[];
+  acceptedChildren: ComponentRegisterConfig[];
+  defaultChildren: DefaultChildComponent[];
+  renderer: 'default' | 'liquid' | 'custom' | 'none';
+  templatePath?: string;
 }
 
 export interface Visibility {
@@ -668,207 +721,11 @@ export interface RouteSegment {
 type SpacingValues = Record<Side, SpacingValue>;
 export type SpacingState = Record<SpacingType, SpacingValues>;
 
-// Workspace API
-
-export interface ProjectWorkspace extends IdentifiableElement {
-  config: any,
-  service?: WorkspaceService
-}
-
-export interface ServiceWorkspace extends IdentifiableElement {
-  service: WorkspaceService
-}
-
-// Workspace
-
-export interface WorkspaceConfig extends IdentifiableElement, VersionableElement {
-  name: string;
-  slug: string;
-  description?: string;
-  projects?: any[];
-}
-
-export interface WorkspaceProjectsConfig extends IdentifiableElement {
-  workspace: string,
-  projects: WorkspaceProject[],
-  services: WorkspaceService[]
-}
-
-export interface WorkspaceProject {
-  config: any,
-  containerName?: string,
-  basePath: string,
-  environments: Environment[],
-  ports: Port,
-  dependsOn: Dependency[],
-}
-
-export interface WorkspaceService extends IdentifiableElement {
-  name: string,
-  properties: DockerContainer
-}
-
-export interface ProjectDataSource {
-  imageVersion?: string,
-  containerName?: string,
-  dbUser?: string,
-  dbPassword: string,
-  dbName: string,
-  dbSid?: string,
-  dbHostName?: string,
-  ports: Port,
-  volumes: Volume
-}
-
-export interface Volume {
-  name: string,
-  path: string,
-  driver: string
-}
-
-export interface VolumeFile {
-  context: any
-  template: string,
-}
-
-export interface Dependency {
-  service: string
-  condition?: string
-}
-
-export interface Profile {
-  profile: string
-}
-
-export interface Port {
-  internal: number,
-  external: number,
-  reference?: number
-}
-
-export interface Host {
-  hostname: string,
-  ip: string
-}
-
-export interface Expose {
-  port: number,
-}
-
-export interface Network {
-  network: string,
-}
-
-export interface Storage {
-  storage: string,
-}
-
-export interface Secret {
-  secret: string,
-}
-
-export interface Environment {
-  key: string,
-  value: string
-}
-
-export interface EnvironmentFile {
-  file: string,
-}
-
-export interface DockerServiceConfig {
-  config: string
-}
-
-export interface DockerServiceInstruction {
-  instruction: string
-}
-
-export interface DockerServiceResourceLimit {
-  cpus?: string,
-  memory?: string
-}
-
-export interface DockerServiceHealthcheck {
-  test?: DockerServiceInstruction[],
-  interval?: string,
-  timeout?: string,
-  retries?: number,
-  start_period?: string
-}
-
-export interface DockerServiceResources {
-  limits?: DockerServiceResourceLimit,
-  reservations?: DockerServiceResourceLimit,
-}
-
-export interface ResourceLimits {
-  replicas?: number,
-  restart_policy?: RestartTypes,
-  resources?: DockerServiceResources
-}
-
-export interface DockerServiceLoggingOptions {
-  max_size?: string,
-  max_file?: string
-}
-
-export interface DockerServiceLogging {
-  driver?: 'json-file' | 'syslog' | 'fluentd',
-  options?: DockerServiceLoggingOptions
-}
-
-export interface DockerServiceUserLimitsMemLock {
-  soft?: number,
-  hard?: number
-}
-
-export interface DockerServiceUserLimits {
-  memlock: DockerServiceUserLimitsMemLock;
-}
-
-export interface DockerContainer {
-  image: string,
-  build?: string,
-  container_name?: string,
-  restart?: RestartTypes,
-  dependsOn?: Dependency[],
-  extends?: string,
-  hostname?: string,
-  profiles?: Profile[],
-  ports?: Port[],
-  expose?: Expose[],
-  networks?: Network[],
-  domainname?: string,
-  environments?: Environment[],
-  env_file?: EnvironmentFile[],
-  extra_hosts?: Host[],
-  labels?: Environment[],
-  volumes?: Volume[],
-  tmpfs?: Storage[],
-  secret?: Secret[],
-  configs?: DockerServiceConfig[],
-  command?: DockerServiceInstruction[],
-  entrypoint?: DockerServiceInstruction[],
-  deploy?: ResourceLimits,
-  healthcheck?: DockerServiceHealthcheck,
-  logging?: DockerServiceLogging,
-  ulimits?: DockerServiceUserLimits,
-  ipc?: string,
-  pid?: string,
-  runtime?: string,
-  init?: boolean,
-  stdin_open?: boolean,
-  stop_signal?: string
-  shm_size?: string
-}
-
 // Paths
 export interface PathConfig {
   configs: string,
   template: string,
   baseApp: string,
-  baseWorkspace: string,
   componentPartials: string,
   genericPartials: string,
 }
@@ -971,6 +828,7 @@ export interface ComponentDef {
   }[];
   hooks: string[]; // Names of hooks used
   children: string[]; // Names of child components used
+  allowChildren?: boolean;
 }
 
 export type ConfigTag = 'FORM' | 'TABLE' | 'CHART';
@@ -1010,6 +868,7 @@ export interface CodeSnippetConfig extends IdentifiableElement {
 }
 
 export interface CodeSnippetsRegisterConfig extends VersionableElement {
+  renderer: 'default' | 'liquid' | 'custom';
   name: string;
   title: string;
   description: string;
@@ -1017,7 +876,6 @@ export interface CodeSnippetsRegisterConfig extends VersionableElement {
   defaultProperties: Record<string, any>;
   properties: Record<string, any>;
   propertiesMapping: Record<string, any>;
-  renderer: 'default' | 'hbs' | 'custom';
   templatePath?: string;
   imports: string[];
   states: string[];
@@ -1048,3 +906,24 @@ export type ComponentNames = (typeof COMPONENTS_NAMES)[number];
 export type ConfigTypes = (typeof CONFIG_TYPES)[number];
 export type RestartTypes = (typeof RESTART_TYPES)[number];
 export type DefinitionType = (typeof DEFINITION_TYPES)[number];
+
+/**
+ * One entry in the app's permission catalog. `name` follows the framework's
+ * fail-closed convention (bare suffix resolved against the active org;
+ * `dept.suffix` for cross-department references). `enabled: false` keeps
+ * the entry in the catalog so its history is preserved, but signals
+ * downstream tooling to treat it as inactive.
+ */
+export interface PermissionConfig extends IdentifiableElement {
+  name: string;
+  label?: string;
+  description?: string;
+  enabled: boolean;
+}
+
+/**
+ * On-disk shape of `.igrpstudio/permissions.json`.
+ */
+export interface PermissionsFile {
+  permissions: PermissionConfig[];
+}

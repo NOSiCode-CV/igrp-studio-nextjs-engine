@@ -1,0 +1,312 @@
+{
+  "repo": {
+    "name": "nextjs-engine",
+    "description": "Branch audit workflow config for generator, template, and test-risk analysis.",
+    "root_markers": [
+      "package.json",
+      "public/templates",
+      "src",
+      "__test__"
+    ]
+  },
+  "defaults": {
+    "base_branch": "master",
+    "report_root": "audit-reports",
+    "run_tests": true,
+    "scan_artifacts": true,
+    "commit_log_count": 10,
+    "exclude_path_globs": [
+      "__test__/output/**",
+      "audit-reports/**"
+    ],
+    "jest_args": [
+      "--no-coverage",
+      "--runInBand"
+    ],
+    "fail_on_test_command_error": false,
+    "stale_rule_days": 90
+  },
+  "base_branch_rules": [
+    {
+      "name": "component-rendering-bugs-vs-dev-package",
+      "branch_glob": "fix/component-rendering-bugs",
+      "base_branch": "origin/dev-package",
+      "priority": 300,
+      "reason": "This branch was cut from dev-package; comparing to local dev-package risks staleness, so prefer the fetched remote-tracking ref. Run 'git fetch' before auditing."
+    },
+    {
+      "name": "fix-branches-default-to-master",
+      "branch_glob": "fix/*",
+      "base_branch": "master",
+      "priority": 100,
+      "reason": "Fix branches are usually compared against master."
+    },
+    {
+      "name": "feature-branches-default-to-dev-package",
+      "branch_glob": "feat/*",
+      "base_branch": "dev-package",
+      "priority": 90,
+      "reason": "Feature work may branch from dev-package."
+    },
+    {
+      "name": "dev-package-explicit",
+      "branch_glob": "dev-package",
+      "base_branch": "master",
+      "priority": 200,
+      "reason": "dev-package should be audited relative to master."
+    }
+  ],
+  "classification_rules": [
+    {
+      "name": "table-component-templates",
+      "path_glob": "public/templates/components/table/**",
+      "category": "generator_template",
+      "risk_hint": "high",
+      "reason": "Changes affect generated table code."
+    },
+    {
+      "name": "page-templates",
+      "path_glob": "public/templates/app/page/**",
+      "category": "generated_page_pipeline",
+      "risk_hint": "high",
+      "reason": "Changes affect page generation."
+    },
+    {
+      "name": "shared-helpers",
+      "path_glob": "src/helpers/**",
+      "category": "shared_helper",
+      "risk_hint": "high",
+      "reason": "Shared helpers can affect multiple generation paths."
+    },
+    {
+      "name": "shared-rendering-utils",
+      "path_glob": "src/utils/**",
+      "category": "shared_rendering",
+      "risk_hint": "medium",
+      "reason": "Shared rendering utilities may affect multiple components."
+    },
+    {
+      "name": "page-modules",
+      "path_glob": "src/modules/page/**",
+      "category": "generated_page_pipeline",
+      "risk_hint": "high",
+      "reason": "Page module changes affect generation flow."
+    },
+    {
+      "name": "tests",
+      "path_glob": "__test__/**",
+      "category": "test_only",
+      "risk_hint": "low",
+      "reason": "Changes touch tests directly."
+    },
+    {
+      "name": "audit-workflow",
+      "path_glob": "tools/**",
+      "category": "workflow_tooling",
+      "risk_hint": "low",
+      "reason": "Changes affect the repo-local audit workflow."
+    },
+    {
+      "name": "audit-docs",
+      "path_glob": "docs/audit-workflow/**",
+      "category": "workflow_docs",
+      "risk_hint": "low",
+      "reason": "Changes affect audit workflow documentation."
+    }
+  ],
+  "test_mapping_rules": [
+    {
+      "name": "table-template-tests",
+      "match_any_paths": [
+        "public/templates/components/table/**",
+        "src/components/table/**"
+      ],
+      "tests": [
+        "__test__/newTablePage.test.ts",
+        "__test__/taxPayerManagement/newTaxPayerListPage.test.ts"
+      ],
+      "reason": "Table template and component changes should be checked through table generation tests.",
+      "priority": 100,
+      "run_mode": "jest-file"
+    },
+    {
+      "name": "page-generation-tests",
+      "match_any_paths": [
+        "public/templates/app/page/**",
+        "src/modules/page/**",
+        "src/helpers/componentPropertiesHelper.ts"
+      ],
+      "tests": [
+        "__test__/newTablePage.test.ts"
+      ],
+      "reason": "Page generation and shared page helper changes should be checked with page generation tests.",
+      "priority": 120,
+      "run_mode": "jest-file"
+    }
+  ],
+  "artifact_rules": [
+    {
+      "name": "test-output-folder",
+      "path_glob": "__test__/output/**",
+      "file_globs": [
+        "**/*.tsx",
+        "**/*.ts",
+        "**/*.json"
+      ],
+      "category": "test_output",
+      "reason": "Generated test outputs are useful for inspection."
+    },
+    {
+      "name": "generated-app-pages",
+      "path_glob": "generatedFromZip*/src/app/**",
+      "file_globs": [
+        "**/page.tsx",
+        "**/*.tsx"
+      ],
+      "category": "generated_page",
+      "reason": "Generated page artifacts should be scanned for output regressions."
+    },
+    {
+      "name": "source-liquid-templates",
+      "path_glob": "public/templates/**",
+      "file_globs": [
+        "**/*.liquid"
+      ],
+      "category": "source_template",
+      "reason": "Source Liquid templates should be syntax-checked since a malformed tag will break code generation at runtime."
+    }
+  ],
+  "red_flag_rules": [
+    {
+      "id": "broken-use-client-wrapper",
+      "name": "Broken use client wrapper",
+      "pattern": "\\('use client'",
+      "pattern_type": "regex",
+      "applies_to": [
+        "generated_tsx"
+      ],
+      "severity": "high",
+      "description": "Generated TSX contains malformed wrapper around the use client directive.",
+      "suggested_category": "generated_output_syntax"
+    },
+    {
+      "id": "empty-conditional-render",
+      "name": "Empty conditional render artifact",
+      "pattern": "&& \\(\\)",
+      "pattern_type": "regex",
+      "applies_to": [
+        "generated_tsx"
+      ],
+      "severity": "high",
+      "description": "Generated TSX contains an empty conditional render body.",
+      "suggested_category": "generator_template"
+    },
+    {
+      "id": "empty-props-object",
+      "name": "Suspicious empty props object",
+      "pattern": "props:\\s*\\{\\s*\\}",
+      "pattern_type": "regex",
+      "applies_to": [
+        "generated_tsx"
+      ],
+      "severity": "medium",
+      "description": "Generated dropdown/menu items may have rendered with empty props.",
+      "suggested_category": "generator_template"
+    },
+    {
+      "id": "runtime-cannot-read-properties",
+      "name": "Cannot read properties runtime failure",
+      "pattern": "Cannot read properties",
+      "pattern_type": "literal",
+      "applies_to": [
+        "test_log",
+        "summary_log"
+      ],
+      "severity": "high",
+      "description": "Execution failed due to a missing or undefined value.",
+      "suggested_category": "shared_helper"
+    },
+    {
+      "id": "handlebars-leak",
+      "name": "Handlebars syntax leaked into output",
+      "pattern": "{{#if",
+      "pattern_type": "literal",
+      "applies_to": [
+        "generated_tsx",
+        "liquid_output"
+      ],
+      "severity": "high",
+      "description": "Handlebars syntax appeared in generated output where it should have been resolved.",
+      "suggested_category": "generator_template"
+    },
+    {
+      "id": "malformed-liquid-conditional",
+      "name": "Malformed Liquid conditional expression",
+      "pattern": "\\{%[^%]*\\b(and|or)\\s+(==|!=|<|>|<=|>=)",
+      "pattern_type": "regex",
+      "applies_to": [
+        "liquid_output"
+      ],
+      "severity": "high",
+      "description": "Liquid tag contains a logical operator (and/or) directly followed by a comparison operator with no left operand - the template will fail at render time.",
+      "suggested_category": "generator_template"
+    }
+  ],
+  "known_issue_rules": [
+    {
+      "id": "prettier-jest-vm-modules",
+      "name": "Prettier dynamic import under Jest VM constraints",
+      "match_in": [
+        "test_log"
+      ],
+      "pattern": "A dynamic import callback was invoked without --experimental-vm-modules",
+      "pattern_type": "literal",
+      "description": "Known Jest/runtime issue when renderTemplate imports Prettier in this environment.",
+      "known_since": "fix/component-rendering-bugs investigation",
+      "status": "investigating",
+      "last_verified": "2026-04-27",
+      "notes": "Should be reported but not mistaken for a branch-specific template regression."
+    },
+    {
+      "id": "resolve-function-args-undefined",
+      "name": "resolveFunctionArgs called with undefined args",
+      "match_in": [
+        "test_log"
+      ],
+      "pattern": "Cannot read properties of undefined (reading 'map')",
+      "pattern_type": "literal",
+      "description": "Known helper failure triggered when page templates call resolveFunctionArgs without guarding missing args.",
+      "known_since": "LiquidJS page template investigation",
+      "status": "investigating",
+      "last_verified": "2026-04-27",
+      "notes": "Latent helper weakness existed earlier; current crash path appears exposed by LiquidJS page template behavior."
+    }
+  ],
+  "reporting": {
+    "include_changed_files": true,
+    "include_rule_matches": true,
+    "include_raw_test_command": true,
+    "max_commits_shown": 10,
+    "max_flagged_files_shown": 20,
+    "summary_sections": [
+      "branch",
+      "base",
+      "recent_commits",
+      "changed_files",
+      "classifications",
+      "tests_run",
+      "failures_observed",
+      "artifacts_found",
+      "red_flags",
+      "known_issue_matches",
+      "manual_review"
+    ],
+    "manual_review_checklist": [
+      "Inspect the highest-risk changed templates or helpers.",
+      "Inspect generated page/component output for malformed TSX.",
+      "Compare failures against known pre-existing issue patterns.",
+      "Confirm whether the branch fixes its intended bug.",
+      "Identify which failures are blockers versus follow-up work."
+    ]
+  }
+}

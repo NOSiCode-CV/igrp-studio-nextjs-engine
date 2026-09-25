@@ -1,8 +1,8 @@
 import { initComponents, newProcess, setEngineConfiguration } from '../src';
 import { ProcessConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../src/utils/testPath';
-
-export const OUTPUT_DIR = OUTPUT_TEST;
+import fs from 'fs-extra';
+import os from 'os';
+import path from 'path';
 
 const processConfig: ProcessConfig = {
   id: 'process_1',
@@ -15,18 +15,37 @@ const processConfig: ProcessConfig = {
     {
       id: 'process_step_1',
       name: 'pedido',
-      key: 'Pedido.v1'
-    }
-  ]
+      key: 'Pedido.v1',
+    },
+  ],
 };
 
 beforeAll(async () => {
   await initComponents();
-  setEngineConfiguration({ environment: 'development' })
+  setEngineConfiguration({ environment: 'development' });
 });
 
 describe('Process module', () => {
+  let outputDir: string;
+
+  beforeEach(async () => {
+    outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'nextjs-engine-process-'));
+  });
+
+  afterEach(async () => {
+    await fs.remove(outputDir);
+  });
+
   it('should save the process configuration file', async () => {
-    await newProcess(processConfig, OUTPUT_DIR);
+    await newProcess(processConfig, outputDir);
+
+    const configPath = path.join(
+      outputDir,
+      '.igrpstudio',
+      'process',
+      processConfig.name,
+      `${processConfig.name}.json`,
+    );
+    expect(await fs.readJson(configPath)).toEqual(processConfig);
   });
 });

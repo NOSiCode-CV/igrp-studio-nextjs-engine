@@ -17,7 +17,7 @@ bower_components/
 
 # Environment variables
 .env
-.npmrc
+.npmrc.local
 
 # Build directories
 dist/
@@ -63,3 +63,5 @@ Thumbs.db
 # MacOS file attributs
 .AppleDouble
 .LSOverride
+# Audit workflow output
+audit-reports/

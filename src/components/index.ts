@@ -12,7 +12,7 @@ import { renderLayout } from '../utils/renderLayout';
 import { layoutStyleToClasses } from '../helpers/layoutStyleToClasses';
 import { spacingToClasses } from '../helpers/spacingToClasses';
 import { sizeToClasses } from '../helpers/sizeToClasses';
-import { renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
+import { addClassNameFromChildProperties, renderInteractions, resolveStateDefault } from '../helpers/componentPropertiesHelper';
 import { typographyStyleToClasses } from '../helpers/typographyStyleToClasses';
 import { bordersStyleToClasses } from '../helpers/bordersStyleToClasses';
 import { positionStyleToClasses } from '../helpers/positionStyleToClasses';
@@ -47,6 +47,7 @@ export type Component = {
   defaultValue: boolean;
   noClassName: boolean;
   allowTypes: boolean;
+  allowChildren?: boolean;
   forceStateLoad: boolean;
   forceReferenceLoad: boolean;
   deprecated?: boolean;
@@ -70,6 +71,7 @@ export type Component = {
   loadDefault:(defaultValue: boolean) => void;
   setNoClassName:(value: boolean) => void;
   setAllowTypes:(value: boolean) => void;
+  setAllowChildren:(value: boolean) => void;
   setForceStateLoad:(value: boolean) => void;
   setForceReferenceLoad:(value: boolean) => void;
   setDeprecated:(value: boolean) => void;
@@ -138,6 +140,7 @@ function initComponent(): Component {
     defaultValue: false,
     noClassName: false,
     allowTypes: false,
+    allowChildren: undefined,
     forceStateLoad: false,
     forceReferenceLoad: false,
     deprecated: false,
@@ -177,6 +180,10 @@ function initComponent(): Component {
 
     setAllowTypes(value: boolean) {
       this.allowTypes = value
+    },
+
+    setAllowChildren(value: boolean) {
+      this.allowChildren = value
     },
 
     setForceStateLoad(value: boolean) {
@@ -326,6 +333,15 @@ function initComponent(): Component {
 
 export let registry: Record<string, Component> = {};
 
+/**
+ * Snapshot of the built-in component keys — recorded by `markBuiltInsRegistered`
+ * once at the end of `initComponents`. Enables `resetComponents` to drop only
+ * the custom / app registrations without re-running the (heavy) built-in
+ * registration callbacks for the ~90+ engine components on every project
+ * switch.
+ */
+const builtInKeys = new Set<string>();
+
 export function register(name: string, registerFn: (component: Component) => void) {
   const componentInstance: Component = initComponent();
   registerFn(componentInstance);
@@ -336,13 +352,124 @@ export function getComponent(name: string): Component {
   return registry[name];
 }
 
-function componentAsObject(key: string, value: Component, isDefault?: boolean): ComponentRegisterConfig {
+/**
+ * Called once at the end of `initComponents()` — after all built-in
+ * `registerAllComponents()` calls have run. Snapshots the registry keys so
+ * `resetComponents()` can later identify which entries are custom/app
+ * registrations and drop only those.
+ *
+ * Idempotent: re-calling snapshots the current registry state (only useful
+ * if the caller wants to re-baseline what counts as "built-in").
+ */
+export function markBuiltInsRegistered(): void {
+  builtInKeys.clear();
+  for (const key of Object.keys(registry)) builtInKeys.add(key);
+}
+
+/**
+ * Deletes every entry in the registry — built-ins AND custom/app.
+ * The registry object reference itself is preserved (mutating in place) so
+ * modules that already imported it keep the same object.
+ *
+ * After this the caller MUST call `initComponents()` again before rendering
+ * anything, or the internal registry will be empty.
+ */
+export function clearComponents(): void {
+  for (const key of Object.keys(registry)) delete registry[key];
+  builtInKeys.clear();
+}
+
+/**
+ * Drops only the custom / app-registered entries — the built-ins recorded
+ * by `markBuiltInsRegistered` stay. Fast and non-destructive: no built-in
+ * re-registration work is needed. Used to isolate the registry per project
+ * on project switch.
+ *
+ * If `markBuiltInsRegistered` was never called (e.g. `initComponents` never
+ * ran), this is a no-op — nothing is treated as built-in.
+ */
+export function clearCustomComponents(): void {
+  if (builtInKeys.size === 0) return;
+  for (const key of Object.keys(registry)) {
+    if (!builtInKeys.has(key)) delete registry[key];
+  }
+}
+
+function componentAsObject(
+  key: string,
+  value: Component | undefined,
+  isDefault?: boolean,
+  visited: Set<string> = new Set(),
+): ComponentRegisterConfig | undefined {
+  // A child/accepted-children entry can reference a component that is not in
+  // the registry (typo, not yet registered, or deprecated). Historically this
+  // crashed with "Cannot destructure property 'defaultValue' of 'value' as it
+  // is undefined". Return undefined so callers can filter the entry out and
+  // log a diagnostic instead of propagating the crash.
+  if (!value) {
+    console.warn(
+      `[nextjs-engine] componentAsObject: component "${key}" is not registered; skipping reference.`,
+    );
+    return undefined;
+  }
+
+  // Cycle guard. Component graphs legitimately contain cycles (e.g. Container
+  // ↔ Flex ↔ Container through childrenTypes / acceptedChildren). Without
+  // this check the recursion never terminates and we hit a RangeError. When
+  // we re-encounter a node higher in the call stack we emit a shallow stub
+  // with just the identity so the serialized tree stays finite but callers
+  // can still see which component was referenced.
+  if (visited.has(key)) {
+    return {
+      name: key,
+      imports: [],
+      defaultValue: isDefault ?? value.defaultValue,
+      allowTypes: value.allowTypes,
+      allowChildren: value.allowChildren,
+      deprecated: value.deprecated,
+      replacedBy: value.replacedBy,
+      group: value.group,
+      label: value.label,
+      customClassName: value.customClassName,
+      customComponentTag: value.customComponentTag,
+      variants: value.variants,
+      metadata: value.metadata,
+      childProperties: value.childProperties,
+      properties: value.properties,
+      propertiesMapping: {},
+      interactions: value.interactions,
+      interactionsMapping: value.interactionsMapping,
+      data: value.data,
+      dataMapping: value.dataMapping,
+      style: value.style,
+      styleMapping: value.styleMapping,
+      rules: value.rules,
+      rulesMapping: value.rulesMapping,
+      childPropertiesMapping: {},
+      // Cycle edge: do not recurse, just list names.
+      childrenTypes: [],
+      acceptedChildren: [],
+      defaultChildren: Array.from(value.defaultChildren),
+      states: Array.from(value.states),
+      renderer: value.renderer.name.includes('default')
+        ? 'default'
+        : value.renderer.name.includes('liquid')
+          ? 'liquid'
+          : 'default',
+      templatePath: value.templatePath,
+    };
+  }
+
+  const nextVisited = new Set(visited);
+  nextVisited.add(key);
+
   const { defaultValue } = value;
   return {
     name: key,
     imports: [],
     defaultValue: isDefault ?? defaultValue,
     allowTypes: value.allowTypes,
+    allowChildren: value.allowChildren,
     deprecated: value.deprecated,
     replacedBy: value.replacedBy,
     group: value.group,
@@ -363,13 +490,15 @@ function componentAsObject(key: string, value: Component, isDefault?: boolean): 
     rules: value.rules,
     rulesMapping: value.rulesMapping,
     childPropertiesMapping: {},
-    childrenTypes: Array.from(value.childrenTypes).map((it) => componentAsObject(it.name,
-      registry[it.name], it.isDefault)),
-    acceptedChildren: Array.from(value.acceptedChildren).map((it) => componentAsObject(it.name,
-      registry[it.name], it.isDefault)),
+    childrenTypes: Array.from(value.childrenTypes)
+      .map((it) => componentAsObject(it.name, registry[it.name], it.isDefault, nextVisited))
+      .filter((c): c is ComponentRegisterConfig => c !== undefined),
+    acceptedChildren: Array.from(value.acceptedChildren)
+      .map((it) => componentAsObject(it.name, registry[it.name], it.isDefault, nextVisited))
+      .filter((c): c is ComponentRegisterConfig => c !== undefined),
     defaultChildren: Array.from(value.defaultChildren),
     states: Array.from(value.states),
-    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
     templatePath: value.templatePath
   }
 }
@@ -379,9 +508,8 @@ const hiddenComponents: string [] = [];
 export function registryAsObject(): ComponentRegistrationConfig {
   const components: ComponentRegisterConfig[] = Object.entries(registry)
     .filter(([key, itValue]) => !(registry[itValue.parent] || hiddenComponents.includes(key)))
-    .map(([key, value]) => {
-      return componentAsObject(key, value)
-    });
+    .map(([key, value]) => componentAsObject(key, value))
+    .filter((c): c is ComponentRegisterConfig => c !== undefined);
 
   return { components: components }
 }
@@ -486,14 +614,9 @@ export function defaultRenderer (component: Layout, parentComponent?: Layout, el
         .join('')
       : ``;
 
-    childClassNames = childCommon
-      ? Object.entries(childCommon)
-        .map(([key, value]) => {
-          return parentElement?.childPropertiesMapping[key]?.className
-            ? ` ${parentElement.childPropertiesMapping[key]?.className ?? key}${value}`
-            : ``;
-        })
-        .join('')
+    const inheritedChildClassNames = addClassNameFromChildProperties(parentComponent, registry);
+    childClassNames = inheritedChildClassNames
+      ? inheritedChildClassNames.replace(/'/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim()
       : ``;
 
   }
@@ -615,7 +738,7 @@ export function customRenderer (component: Layout, parentComponent?: Layout, ele
   return () => str
 }
 
-export function hbsRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
+export function liquidRenderer (component: Layout, parentComponent?: Layout, element?: Component, __?: Component): ((component: Layout, parentComponent?: Layout) => string) {
   //const name = component.componentName
   return () => renderSyncTemplate((element?.templatePath)? element.templatePath : replaceTemplate(TEMPLATES.ELEMENT, { name: 'default' /*name*/ }), {
     resourceConfig: component,

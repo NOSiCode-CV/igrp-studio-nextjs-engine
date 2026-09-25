@@ -34,7 +34,7 @@ describe('Register Custom Components', () => {
         rulesMapping: {},
         defaultChildren: [],
         defaultValue: false,
-        renderer: 'hbs',
+        renderer: 'liquid',
       },
 
       {

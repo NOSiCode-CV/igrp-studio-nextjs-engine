@@ -20,6 +20,8 @@ export function pageHeaderProperties() {
       default: 'h3',
     },
     headlineClassName: { type: 'string', required: false },
+    headlineContentClassName: { type: 'string', required: false },
+    pageHeaderContentClassName: { type: 'string', required: false },
     isSticky: { type: 'boolean', required: false },
     showBackButton: { type: 'boolean', required: false, default: false },
     urlBackButton: { type: 'string', required: false, default: '', 'x-ui-widget': 'uri' },

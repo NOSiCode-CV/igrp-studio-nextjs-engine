@@ -1,0 +1,71 @@
+{%- if baseConfig.workspaceSlug -%}
+{% assign wsSlug = baseConfig.workspaceSlug -%}
+{% else -%}
+{% assign wsSlug = 'workspace' -%}
+{% endif -%}
+{% assign appName = baseConfig.name | toLowerCase -%}
+name: "{{ wsSlug }}-{{ appName }}-igrp"
+
+networks:
+  default:
+    name: {{ wsSlug }}-igrp_default
+    external: true
+
+services:
+  {{ appName }}:
+    build: .
+    container_name: {{ appName }}
+    env_file:
+      - ./.igrp.{{ appName }}.env
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    extra_hosts:
+      {{ wsSlug }}-igrp: host-gateway
+    command:
+      - sh
+      - -c
+      - |
+        (
+          until wget -q -O /dev/null "http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}"; do
+            echo "Waiting for {{ appName }} UI route..."
+            sleep 5
+          done
+          echo "{{ appName }} UI route called for Access Management sync."
+        ) &
+        exec node app/server.js
+    stdin_open: true
+    environment:
+      - AUTH_PROVIDER=${AUTH_PROVIDER:-igrp-auth}
+      - IGRP_AUTH_CLIENT_ID=${IGRP_AUTH_CLIENT_ID}
+      - IGRP_AUTH_CLIENT_SECRET=${IGRP_AUTH_CLIENT_SECRET}
+      - IGRP_AUTH_ISSUER=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
+      - IGRP_AUTH_SCOPES=${IGRP_AUTH_SCOPES:-openid email}
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}/api/auth}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL_INTERNAL=${NEXTAUTH_URL_INTERNAL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}/apps/{{ appName }}}
+      - IGRP_ACCESS_MANAGEMENT_API=http://${DOCKER_IP}:${NGINX_HTTP_PORT}/gateway-api/{{ wsSlug }}-access-management
+      - IGRP_APP_CODE={{ appName }}
+      - NEXT_PUBLIC_IGRP_APP_CODE={{ appName }}
+      - IGRP_PREVIEW_MODE=${IGRP_PREVIEW_MODE:-false}
+      - IGRP_SYNC_ACCESS=${IGRP_SYNC_ACCESS:-true}
+      - IGRP_SYNC_ON_CODE_MENUS=${IGRP_SYNC_ON_CODE_MENUS:-false}
+      - IGRP_SYNC_ON_CODE_MENU_ROLES=${IGRP_SYNC_ON_CODE_MENU_ROLES:-true}
+      - IGRP_SERVICE_ID={{ appName }}
+      - IGRP_M2M_CLIENT_ID=${IGRP_M2M_CLIENT_ID}
+      - IGRP_M2M_CLIENT_SECRET=${IGRP_M2M_CLIENT_SECRET}
+      - NEXT_IGRP_APP_CENTER_URL=${NEXT_IGRP_APP_CENTER_URL:-http://${DOCKER_IP}:${NGINX_HTTP_PORT}}
+      - NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH}
+      - NEXT_PUBLIC_IGRP_APP_HOME_SLUG=${NEXT_PUBLIC_IGRP_APP_HOME_SLUG}
+      - NEXT_PUBLIC_ALLOWED_DOMAINS=${NEXT_PUBLIC_ALLOWED_DOMAINS}
+      - NEXT_PUBLIC_IGRP_PROFILE_URL=${NEXT_PUBLIC_IGRP_PROFILE_URL}
+      - NEXT_PUBLIC_IGRP_NOTIFICATION_URL=${NEXT_PUBLIC_IGRP_NOTIFICATION_URL}
+      - NEXT_PUBLIC_IGRP_SETTINGS_URL=${NEXT_PUBLIC_IGRP_SETTINGS_URL:-https://${DOCKER_IP}:${NGINX_HTTP_PORT}/settings}
+    labels:
+      type: "web"
+      is_project: true
+      logging: "promtail"
+      workspace.slug: "{% if baseConfig.workspaceSlug %}{{ baseConfig.workspaceSlug }}{% endif %}"
+      workspace.id: "{% if baseConfig.workspaceId %}{{ baseConfig.workspaceId }}{% endif %}"

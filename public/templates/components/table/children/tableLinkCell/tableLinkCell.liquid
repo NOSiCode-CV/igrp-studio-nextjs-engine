@@ -1,0 +1,52 @@
+return <IGRPDataTableCellLink
+  {% if resourceConfig.properties.href -%}
+  href={ {% if resourceConfig.data.value.code -%}{{ resourceConfig.data.value.code }}{%- elsif resourceConfig.data.value.state.name -%}{{ resourceConfig.data.value.state.name }}{%- else -%}row.getValue('{{ resourceConfig.tag }}'){%- endif %} }
+  {% endif -%}
+  {% if resourceConfig.properties.target and not resourceConfig.data.target -%}
+  target={ `{{ resourceConfig.properties.target }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.color and not resourceConfig.data.color -%}
+  color={ `{{ resourceConfig.properties.color }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.showIcon and not resourceConfig.data.showIcon -%}
+  showIcon={ {{ resourceConfig.properties.iconProperties.showIcon }} }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconName and not resourceConfig.data.iconName -%}
+  iconName={ `{{ resourceConfig.properties.iconProperties.iconName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconSize and not resourceConfig.data.iconSize -%}
+  iconSize={ `{{ resourceConfig.properties.iconProperties.iconSize }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconPlacement and not resourceConfig.data.iconPlacement -%}
+  iconPlacement={ `{{ resourceConfig.properties.iconProperties.iconPlacement }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.iconProperties.iconClassName and not resourceConfig.data.iconClassName -%}
+  iconClassName={ `{{ resourceConfig.properties.iconProperties.iconClassName }}` }
+  {% endif -%}
+  {% if resourceConfig.properties.variant and not resourceConfig.data.variant -%}
+  variant={ `{{ resourceConfig.properties.variant }}` }
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig, 'value' }}
+  {% endif -%}
+>
+    {% if resourceConfig.content -%}
+    { row.original.{{ resourceConfig.tag }}Desc || `{{ resourceConfig.content }}` }
+    {% else -%}
+    {% if resourceConfig.properties.content and not resourceConfig.data.content -%}
+    { row.original.{{ resourceConfig.tag }}Desc || `{{ resourceConfig.properties.content }}` }
+    {% else -%}
+    {% if not resourceConfig.properties.content and resourceConfig.data.content -%}
+    { {% if resourceConfig.data.content.value %}{{ resourceConfig.data.content.value.code }}{% else %}row.original.{{ resourceConfig.tag }}Desc || {{ resourceConfig.data.content.state.name }}{% endif %} }
+    {% else -%}
+    {% if resourceConfig.children and resourceConfig.children.size > 0 -%}
+    {% for child in resourceConfig.children -%}
+    {{ '' | render-layout: child, resourceConfig }}
+    {% endfor -%}
+    {% else -%}
+    { row.original.{{ resourceConfig.tag }}Desc || '' }
+    {% endif -%}
+    {% endif -%}
+    {% endif -%}
+    {% endif -%}
+</IGRPDataTableCellLink>

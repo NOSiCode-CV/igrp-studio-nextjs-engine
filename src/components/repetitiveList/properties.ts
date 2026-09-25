@@ -13,6 +13,7 @@ export function repetitiveListProperties() {
     items: { type: 'string', required: false },
     variable: { type: 'string', required: false, default: 'item' },
     dataKey: { type: 'string', required: true, default: 'id' },
+    name: { type: 'string', required: false },
     ...classProperties(),
     ...commonProperties(),
   };
@@ -33,31 +34,32 @@ export function repetitiveListChildPropertiesMapping() {
 }
 
 export function repetitiveListVariants() {
-  return {
-  };
+  return {};
 }
 
 export function repetitiveListStyle() {
-  return {
-    ...baseStyle()
-  }
+  return { ...baseStyle() };
 }
 
 export function repetitiveListRules() {
-  return {
-    ...baseRules()
-  }
+  return { ...baseRules() };
 }
 
 export function repetitiveListData() {
   return {
-    items: { ...baseData(undefined, INTERACTIONS_TYPES.ITEMS,
+    items: {
+      ...baseData(
+        undefined,
+        INTERACTIONS_TYPES.ITEMS,
         {
           id: '',
           name: 'repetitiveList{{id}}',
           type: '{{type}}[]',
           defaultValue: '[]',
-        }, true
-      ), required: true },
+        },
+        true,
+      ),
+      required: true,
+    },
   };
 }

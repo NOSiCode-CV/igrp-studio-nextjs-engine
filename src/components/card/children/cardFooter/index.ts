@@ -5,7 +5,7 @@ import {
   cardFooterChildProperties,
   cardFooterChildPropertiesMapping, cardFooterRules, cardFooterStyle,
 } from './properties';
-import { Component, hbsRenderer } from '../../../index';
+import { Component, liquidRenderer } from '../../../index';
 import { CARD } from '../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
@@ -29,7 +29,7 @@ export default {
     component.getStyle(cardFooterStyle())
     component.loadStates([]);
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 

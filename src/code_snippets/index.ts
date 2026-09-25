@@ -139,7 +139,7 @@ function codeSnippetsAsObject(key: string, value: CodeSnippets): CodeSnippetsReg
     defaultProperties: {},
     properties: {},
     propertiesMapping: {},
-    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('hbs')? 'hbs' : 'default',
+    renderer: value.renderer.name.includes('default')? 'default' : value.renderer.name.includes('liquid')? 'liquid' : 'default',
     templatePath: value.templatePath
   }
 }
@@ -189,7 +189,7 @@ export function customRenderer(
 
 }
 
-export function hbsRenderer(
+export function liquidRenderer(
   codeSnippets: CodeSnippetConfig,
   element?: CodeSnippets
 ): (codeSnippets: CodeSnippetConfig) => string {

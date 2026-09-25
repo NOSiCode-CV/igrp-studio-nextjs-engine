@@ -1,11 +1,38 @@
-import { initComponents, newProcessStep, registerComponents, setEngineConfiguration } from '../src';
-import { ProcessStepConfig } from '../src/interfaces/types';
-import { OUTPUT_TEST } from '../src/utils/testPath';
+import {
+  initComponents,
+  newProcess,
+  newProcessStep,
+  registerComponents,
+  setEngineConfiguration,
+} from '../src';
+import { ProcessConfig, ProcessStepConfig } from '../src/interfaces/types';
 import { badgeLayout } from './newBadgePage.test';
-import { baseData, baseInteraction, baseRules, baseStyle } from '../src/components/default/properties';
+import {
+  baseData,
+  baseInteraction,
+  baseRules,
+  baseStyle,
+} from '../src/components/default/properties';
 import { INTERACTIONS_DEFAULTS } from '../src/utils/constants';
+import fs from 'fs-extra';
+import os from 'os';
+import path from 'path';
 
-export const OUTPUT_DIR = OUTPUT_TEST;
+const processConfig: ProcessConfig = {
+  id: 'process_1',
+  version: '0.1.0-beta',
+  type: 'process',
+  name: 'inscricao',
+  processKey: 'inscricao',
+  processVersion: 'v1',
+  steps: [
+    {
+      id: 'process_step_1',
+      name: 'pedido',
+      key: 'Pedido.v1',
+    },
+  ],
+};
 
 const processStepConfig: ProcessStepConfig = {
   id: 'process_step_2',
@@ -86,12 +113,12 @@ const processStepConfig: ProcessStepConfig = {
         data: {
           content: {
             value: {
-              code: 'generateSample()'
-            }
-          }
-        }
+              code: 'generateSample()',
+            },
+          },
+        },
       },
-      badgeLayout
+      badgeLayout,
     ],
     tag: 'pedido',
     data: {},
@@ -105,12 +132,14 @@ const processStepConfig: ProcessStepConfig = {
 
 beforeAll(async () => {
   await initComponents();
-  setEngineConfiguration({ environment: 'development' })
+  setEngineConfiguration({ environment: 'development' });
   registerComponents({
     components: [
       {
         name: 'DeclaracaoForm',
-        imports: [`import Declaracaoform from '@/app/(igrp)/(generated)/declaracoes/components/declaracaoform'`],
+        imports: [
+          `import Declaracaoform from '@/app/(igrp)/(generated)/declaracoes/components/declaracaoform'`,
+        ],
         group: 'custom',
         label: 'DeclaracaoForm',
         customComponentTag: 'Declaracaoform',
@@ -156,7 +185,33 @@ beforeAll(async () => {
 });
 
 describe('Process Step module', () => {
+  let outputDir: string;
+
+  beforeEach(async () => {
+    outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'nextjs-engine-process-step-'));
+    await newProcess(processConfig, outputDir);
+  });
+
+  afterEach(async () => {
+    await fs.remove(outputDir);
+  });
+
   it('should save the process step configuration file', async () => {
-    await newProcessStep(processStepConfig, OUTPUT_DIR);
+    await newProcessStep(processStepConfig, outputDir);
+
+    const processPath = path.join(
+      outputDir,
+      '.igrpstudio',
+      'process',
+      processConfig.name,
+      `${processConfig.name}.json`,
+    );
+    const savedProcess = await fs.readJson(processPath);
+    expect(savedProcess.processVersion).toBe(processStepConfig.processVersion);
+    expect(savedProcess.steps).toContainEqual({
+      id: processStepConfig.id,
+      name: processStepConfig.name,
+      key: processStepConfig.key,
+    });
   });
 });

@@ -44,6 +44,8 @@ export function pieChartProperties() {
     },
     nameKey: { type: 'string', required: true, default: "value" },
     categoryKey: { type: 'string', required: true, default: "value" },
+    centerLabel: { type: 'string', required: false },
+    interactive: { type: 'boolean', required: false },
     title: { type: 'string', required: false },
     description: { type: 'string', required: false },
     showGrid: { type: 'boolean', required: false },
@@ -71,7 +73,14 @@ export function pieChartProperties() {
         }
       }
     },
-    valueDomain: { type: 'array', required: true, items: { type: 'object' } },
+    valueDomain: { 
+      type: 'object', 
+      required: true, 
+      properties: {
+        min: { type: 'number', default: 0 },
+        max: { type: 'number', default: 0 }
+      }
+    },
     gridColor: { type: 'string', required: false },
     backgroundColor: { type: 'string', required: false },
     axisColor: { type: 'string', required: false },

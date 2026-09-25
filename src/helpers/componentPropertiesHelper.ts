@@ -31,19 +31,57 @@ import { INFO_ITEM } from '../components/infoCard/children/infoItem/index';
 import { INFO_SECTION } from '../components/infoCard/children/infoSection/index';
 import { CARD_DETAILS_ITEM } from '../components/cardDetails/children/cardDetailsItem/index';
 import { ACCORDION_ITEM } from '../components/accordion/children/accordionItem/index';
+import { TABLE_ROW_SUBCOMPONENT } from '../components/table/children/tableRowSubcomponent';
 
 export function addClassNameFromChildProperties(
-  parent: Layout,
+  parent: Layout | undefined,
   registry: Record<string, Component>,
 ): string {
-  if (!parent.childProperties) return '';
-
+  if (!parent) return '';
+  // Defensive: the filter wrapper drops empty/null/undefined inputs and
+  // shifts named args left, so when this filter is invoked as
+  //   parentResourceConfig | addClassNameFromChildProperties: registry
+  // and `parentResourceConfig` is undefined (e.g. components rendered via
+  // renderTableRow which calls renderLayout without a parent), the function
+  // is actually called as `addClassNameFromChildProperties(registry)` —
+  // `parent` is the whole registry object and `registry` is undefined. A
+  // real parent Layout always has a `componentName` string, so detect the
+  // misroute and bail out cleanly instead of crashing with
+  //   "Cannot read properties of undefined (reading 'undefined')"
+  // at `registry[parent.componentName]`.
+  if (!registry || typeof (parent as any).componentName !== 'string') return '';
   const parentElement = registry[parent.componentName];
+  const sourcePropertiesCandidates = [
+    parent.childProperties,
+    (parent as Record<string, any>)?.properties?.childProperties,
+    parentElement?.childProperties,
+  ].filter((candidate) => candidate && Object.keys(candidate).length > 0);
+  const sourceProperties = sourcePropertiesCandidates[0] as Record<string, any> | undefined;
+  if (!sourceProperties) return '';
 
-  return Object.entries(parent.childProperties)
+  return Object.entries(sourceProperties)
     .map(([key, value]) => {
-      return parentElement?.childPropertiesMapping[key]?.className !== undefined
-        ? `'${parentElement.childPropertiesMapping[key]?.className ?? key}${value}',`
+      let normalizedValue = value;
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        const valueAsObject = value as Record<string, any>;
+        if (valueAsObject.default !== undefined) normalizedValue = valueAsObject.default;
+        else if (valueAsObject.value?.code !== undefined)
+          normalizedValue = valueAsObject.value.code;
+        else if (valueAsObject.state?.name !== undefined)
+          normalizedValue = valueAsObject.state.name;
+        else if (valueAsObject.value !== undefined) normalizedValue = valueAsObject.value;
+      }
+      if (
+        typeof normalizedValue !== 'string' &&
+        typeof normalizedValue !== 'number' &&
+        typeof normalizedValue !== 'boolean'
+      ) {
+        return '';
+      }
+      if (normalizedValue === undefined || normalizedValue === null || normalizedValue === '')
+        return '';
+      return parentElement?.childPropertiesMapping?.[key]?.className !== undefined
+        ? `'${parentElement.childPropertiesMapping?.[key]?.className ?? key}${normalizedValue}',`
         : ``;
     })
     .join('');
@@ -59,8 +97,8 @@ export function addClassNameFromProperties(
 
   return Object.entries(component.properties)
     .map(([key, value]) => {
-      return componentElement?.propertiesMapping[key]?.className !== undefined
-        ? `'${componentElement.propertiesMapping[key]?.className ?? key}${value}',`
+      return componentElement?.propertiesMapping?.[key]?.className !== undefined
+        ? `'${componentElement.propertiesMapping?.[key]?.className ?? key}${value}',`
         : ``;
     })
     .join('');
@@ -123,7 +161,7 @@ export function resolveQueryParams(params: Segment[]): string {
       // Build the replacement value
       const replacement = seg.tag
         ? `\${${seg.context === 'column' ? 'row.original.' : ''}${seg.tag}}`
-        : seg.value ?? '';
+        : (seg.value ?? '');
 
       return `${seg.name}=${replacement}`;
     })
@@ -166,7 +204,9 @@ export function resolveSegmentPath(path: string, segments?: Segment[]) {
       replacement = parts.join('/');
     } else {
       const g = group[0];
-      replacement = g.tag ? `\${${ g.context === 'column' ?  'row.original.' : '' }${g.tag}}` : (g.value ?? '');
+      replacement = g.tag
+        ? `\${${g.context === 'column' ? 'row.original.' : ''}${g.tag}}`
+        : (g.value ?? '');
     }
 
     finalPath = finalPath.replace(name, replacement);
@@ -196,44 +236,46 @@ export function resolveStateDefault(
   isList?: boolean,
   fields?: ElementField[],
 ): string {
+  const trimmed = defaultValue?.trim() ?? '';
+  const isReservedLiteral =
+    trimmed === 'null' ||
+    trimmed === 'undefined' ||
+    trimmed === 'true' ||
+    trimmed === 'false' ||
+    trimmed === '[]' ||
+    trimmed === '{}' ||
+    (!isNaN(Number(trimmed)) && trimmed !== '') ||
+    (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
+    (trimmed.startsWith('{') && trimmed.endsWith('}'));
 
-  // Helper to check ISO date format
-  const isISODate = (val: string) => {
-    const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/;
-    return isoRegex.test(val);
-  };
-
-  if (type === 'string') {
-    if (defaultValue === undefined) return 'undefined';
-    if(!isISODate(defaultValue.trim())) {
-      return `\`${defaultValue.replace(/"/g, '\\"')}\``;
-    }
+  // Schema-driven Date handling. The previous logic auto-wrapped any value
+  // matching an ISO-date shape in `new Date(...)`, which false-positived on
+  // string-typed props whose text just happened to look like a date
+  // (e.g. a `label` reading "2026-01-10"). Now we wrap iff the caller told
+  // us the schema type is `date` — regardless of value shape. Empty
+  // date defaults become `undefined` rather than `new Date("")` (which
+  // would produce Invalid Date at runtime).
+  if (type === 'date') {
+    if (trimmed === '') return 'undefined';
+    return `new Date(\`${trimmed}\`)`;
   }
 
-  const trimmed = defaultValue?.trim() ?? '';
+  // String: always emit as a template literal (unless empty/undefined or a
+  // reserved literal like `null`/`true`/etc). We no longer fall through to
+  // Date-wrap when the string happens to look like an ISO date — that was
+  // the regression source; string props must render as strings.
+  if (type === 'string') {
+    if (defaultValue === undefined) return 'undefined';
+    if (isReservedLiteral) return trimmed;
+    return `\`${defaultValue.replace(/"/g, '\\"')}\``;
+  }
 
   // Empty values for non-string/object types
   if (trimmed === '' && !['string', 'object'].includes(type ?? '')) return 'undefined';
 
   // Handle booleans, numbers, arrays, objects as string literals
-  if (
-    type !== 'string' &&
-    (trimmed === 'null' ||
-      trimmed === 'undefined' ||
-      trimmed === 'true' ||
-      trimmed === 'false' ||
-      trimmed === '[]' ||
-      trimmed === '{}' ||
-      (!isNaN(Number(trimmed)) && trimmed !== '') ||
-      (trimmed.startsWith('[') && trimmed.endsWith(']')) ||
-      (trimmed.startsWith('{') && trimmed.endsWith('}')))
-  ) {
+  if (type !== 'string' && isReservedLiteral) {
     return trimmed;
-  }
-
-  // Handle ISO date strings
-  if (isISODate(trimmed)) {
-    return `new Date("${trimmed}")`;
   }
 
   // Handle object with nested fields
@@ -379,7 +421,9 @@ export function resolveZodTypes(field?: ElementField): string {
   return zodType;
 }
 
-export function resolveFunctionArgs(args: Arguments[]): string {
+export function resolveFunctionArgs(args?: Arguments[]): string {
+  if (!args?.length) return '';
+
   return args
     .map((arg) => {
       const name = arg.isState ? `set${capitalize(arg.name)}` : arg.name;
@@ -387,6 +431,14 @@ export function resolveFunctionArgs(args: Arguments[]): string {
       const type = resolveType(arg);
       return `${name}${optional}: ${type}`;
     })
+    .join(', ');
+}
+
+export function resolveArgNames(args: Arguments[]): string {
+  if (!args?.length) return '';
+  return args
+    .map((arg) => arg?.name)
+    .filter((name): name is string => typeof name === 'string' && name.trim() !== '')
     .join(', ');
 }
 
@@ -403,23 +455,143 @@ function resolveType(arg: Arguments): string {
 }
 
 export function resolveArrayElementRules(config: Layout): string {
-
-  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
-
-  return `...(${visibilityRules.map((it) => it.condition)[0]} ? [`
-
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
+  const condition = visibilityRules
+    .map((it) => it.condition)
+    .find((it) =>
+      typeof it === 'string'
+        ? it.trim() !== '' && it.trim() !== 'undefined'
+        : it !== undefined && it !== null,
+    );
+  if (!condition) return '';
+  return `...(${condition} ? [`;
 }
 
 export function checkRules(config: Layout): boolean {
+  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? [];
+  const condition = visibilityRules
+    .map((it) => it.condition)
+    .find((it) =>
+      typeof it === 'string'
+        ? it.trim() !== '' && it.trim() !== 'undefined'
+        : it !== undefined && it !== null,
+    );
+  return Boolean(condition);
+}
 
-  const visibilityRules = config.rules?.filter((it) => it.type === 'visibility') ?? []
+/**
+ * Root-level assert helpers — added in `0.2.0-beta.23`.
+ *
+ * A permission rule with `action: "assert"` on the ROOT layout of a
+ * page / component / processStep is emitted as either:
+ *   - a server-side `await igrpAssertAuthorize(...)` prelude at the top
+ *     of the exported function body (when the file is a server
+ *     component — `useClient === false`), which routes denies through
+ *     Next's `forbidden()` for a real 403; or
+ *   - a client-side `<IGRPGuardPage permission={...}>` wrapper around
+ *     the entire returned JSX (the default, since pages default to
+ *     `'use client'`), a cosmetic guard that unmounts the tree on deny.
+ *
+ * Non-root `assert` rules are silently downgraded to `hide` — the
+ * downgrade lives in `renderLayout`, which just skips `assert` when
+ * composing per-node wrappers. That leaves the root the only place any
+ * `assert` rule actually takes effect.
+ *
+ * The four helpers below are used by page.liquid / component.liquid to
+ * decorate the emitted function. Each returns `''` (empty string) when
+ * no assert rule is present, so the templates can inline-call them
+ * without conditionals.
+ */
 
-  return (config.rules && visibilityRules.length > 0) ?? false;
+function collectRootAssertRules(config: Layout | undefined): Array<{
+  permission: string[];
+  mode?: 'all' | 'any';
+}> {
+  if (!config || !config.rules) return [];
+  const rules: Array<{ permission: string[]; mode?: 'all' | 'any' }> = [];
+  for (const rule of config.rules) {
+    if (rule.type !== 'permission') continue;
+    const action = (rule as any).action ?? 'hide';
+    if (action !== 'assert') continue;
+    rules.push({
+      permission: (rule as any).permission ?? [],
+      mode: (rule as any).mode,
+    });
+  }
+  return rules;
+}
 
+function formatPermissionArrayInline(permissions: string[]): string {
+  const escaped = permissions.map((p) => `'${p.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`);
+  return `[${escaped.join(', ')}]`;
+}
+
+/**
+ * Emits the `async` keyword modifier when the root has an assert rule
+ * AND the file is a server component. Server components with an assert
+ * MUST be `async` — `igrpAssertAuthorize` is an async function.
+ * Client components (default for pages) stay as regular functions and
+ * use the guard wrapper instead — no async needed.
+ */
+export function resolvePermissionAsyncModifier(root: Layout, useClient?: boolean): string {
+  if (useClient !== false) return ''; // client → no async, wrapper handles it
+  const rules = collectRootAssertRules(root);
+  return rules.length > 0 ? 'async ' : '';
+}
+
+/**
+ * Emits one `await igrpAssertAuthorize(...)` call per root assert rule,
+ * one per line. Empty when the file is a client component (default for
+ * pages — the wrapper handles it) or when no assert rules are present.
+ */
+export function resolvePermissionAssertPrelude(root: Layout, useClient?: boolean): string {
+  if (useClient !== false) return '';
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules
+    .map((rule) => {
+      const permArg = formatPermissionArrayInline(rule.permission);
+      const modeArg = rule.mode === 'any' ? `, { mode: 'any' }` : '';
+      return `  await igrpAssertAuthorize(${permArg}${modeArg});`;
+    })
+    .join('\n');
+}
+
+/**
+ * Emits the opening `<IGRPGuardPage permission={...}>` tag(s) for
+ * client-mode assert guards. Multiple assert rules stack as nested
+ * IGRPGuardPage elements — outer to inner in rule order.
+ */
+export function resolvePermissionGuardWrapperOpen(root: Layout, useClient?: boolean): string {
+  if (useClient === false) return ''; // server → prelude handles it
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules
+    .map((rule) => {
+      const permAttr = `permission={${formatPermissionArrayInline(rule.permission)}}`;
+      const modeAttr = rule.mode === 'any' ? ' mode="any"' : '';
+      return `<IGRPGuardPage ${permAttr}${modeAttr}>`;
+    })
+    .join('');
+}
+
+/**
+ * Companion closer for `resolvePermissionGuardWrapperOpen`. Emits
+ * exactly the same number of closing tags in reverse.
+ */
+export function resolvePermissionGuardWrapperClose(root: Layout, useClient?: boolean): string {
+  if (useClient === false) return '';
+  const rules = collectRootAssertRules(root);
+  if (rules.length === 0) return '';
+  return rules.map(() => '</IGRPGuardPage>').join('');
 }
 
 export function extractTableColumns(children: Layout[]) {
   return children.filter((it) => it.componentName === TABLE_COLUMNS);
+}
+
+export function extractTableRowSubcomponent(children: Layout[]) {
+  return children.find((it) => it.componentName === TABLE_ROW_SUBCOMPONENT);
 }
 
 export function extractTableFilters(children: Layout[]) {
@@ -509,35 +681,103 @@ export function replaceId(name: string, component?: any) {
   if (!component || !name) return name;
 
   const tag = component.tag;
-  const finalTag = tag.includes('${index}')
-    ? tag.substring(tag.lastIndexOf('.') + 1)
-    : tag;
+  const finalTag = tag.includes('${index}') ? tag.substring(tag.lastIndexOf('.') + 1) : tag;
 
   return replaceTemplate(name, { id: finalTag });
 }
 
 export function replaceType(type: string, component?: any, isArray?: boolean) {
-  if(!component || !type) return normalizeAnyType(isArray? `Array<${type}>` : type);
-  const finalType = component.dataType ? capitalize(component.dataType) : 'any'
-  return normalizeAnyType(replaceTemplate(type, { type: isArray? `Array<${finalType}>` : finalType }));
+  if (!component || !type) return normalizeAnyType(isArray ? `Array<${type}>` : type);
+  const finalType = component.dataType ? capitalize(component.dataType) : 'any';
+  return normalizeAnyType(
+    replaceTemplate(type, { type: isArray ? `Array<${finalType}>` : finalType }),
+  );
 }
 
 export function replaceValue(value: string, component?: any) {
-  if(!component || !value) return value;
-  return replaceTemplate(value, { value: component.properties?.value ?? '', type: component.dataType ? capitalize(component.dataType) : 'any' })
+  if (!component || !value) return value;
+  return replaceTemplate(value, {
+    value: component.properties?.value ?? '',
+    type: component.dataType ? capitalize(component.dataType) : 'any',
+  });
 }
 
 export function resolveClassNameProperty(component: Layout, registry: Record<string, Component>) {
   const element = registry[component.componentName];
-  if(!element) return 'className'
-  return element.classNamePropertyTag ?? 'className'
+  if (!element) return 'className';
+  return element.classNamePropertyTag ?? 'className';
+}
+
+/**
+ * Serializes a plain object of scalar values into a JS/JSX object-literal
+ * expression like `{ key1: 'val1', key2: 42, key3: true }`. Used by
+ * templates that emit a whole object as a single JSX prop — e.g.
+ * `dateOptions={{ … }}` on IGRPDataTableCellDate. Booleans and numbers
+ * stay literal; strings are backtick-quoted so template-literal escapes
+ * don't clash with `${…}` interpolation elsewhere in the emitted TSX.
+ * Undefined/null/empty-string entries are dropped so an author who left
+ * a form field blank doesn't emit `year: ''`.
+ *
+ * Returns an empty string when the input has no usable entries — the
+ * caller's `{% if … -%}` guard then skips emitting the whole prop.
+ */
+export function renderJSXObjectLiteral(obj: Record<string, any> | undefined): string {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return '';
+  const entries = Object.entries(obj)
+    .filter(([, v]) => v !== undefined && v !== null && v !== '')
+    .map(([k, v]) => {
+      if (typeof v === 'boolean' || typeof v === 'number') return `${k}: ${v}`;
+      const s = String(v).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+      return `${k}: \`${s}\``;
+    });
+  if (entries.length === 0) return '';
+  return `{ ${entries.join(', ')} }`;
+}
+
+/**
+ * Liquid-side accessor for a component's declared property schema
+ * (`registry[componentName].properties`). Used by `default.liquid` to hand
+ * the schema to `render-properties`, which then routes each prop through
+ * `resolveStateDefault` with the schema-declared type (e.g. `'date'`)
+ * instead of the value's runtime `typeof` — the disambiguation that
+ * prevents a string label reading "2026-01-10" from being wrapped as
+ * `new Date(...)`.
+ */
+export function resolvePropertiesSchema(
+  componentName: string | Layout,
+  registry: Record<string, Component>,
+): Record<string, any> | undefined {
+  const name = typeof componentName === 'string' ? componentName : componentName?.componentName;
+  if (!name || !registry) return undefined;
+  return registry[name]?.properties;
 }
 
 export function renderProperties(
   customProperties: Record<string, any>,
   dataProperties?: Record<string, any>,
-  classKey?: string, isJson?: boolean
+  classKey?: string,
+  isJson?: boolean,
+  /**
+   * Optional per-key schema (typically `registry[componentName].properties`)
+   * used to disambiguate wrap behavior. When available we consult
+   * `propertiesSchema[key].type` (and nested `properties[k].type` for the
+   * `iconProperties`/`commonProperties` groups) to pick the type argument
+   * for `resolveStateDefault` — so a prop declared `type: 'date'` wraps as
+   * `new Date(...)` regardless of value shape, and a prop declared
+   * `type: 'string'` stays a template literal even when its value happens
+   * to look like an ISO date. Falls back to `typeof value` when the schema
+   * is absent (customProperties consumers, direct callers).
+   */
+  propertiesSchema?: Record<string, any>,
 ) {
+  // Pick the effective type for a given (schemaEntry, value) pair. Prefer
+  // schema type when known; otherwise runtime type. Empty/nullish values
+  // fall through to `undefined` so resolveStateDefault emits `'undefined'`.
+  const pickType = (schemaEntry: any, v: any): string | undefined => {
+    if (schemaEntry?.type) return schemaEntry.type as string;
+    return v !== undefined && v !== null ? typeof v : undefined;
+  };
+
   return customProperties
     ? Object.entries(customProperties)
         .map(([key, value]) => {
@@ -548,7 +788,7 @@ export function renderProperties(
               'name',
               'customProperties',
               'generateReference',
-              classKey
+              classKey,
             ].includes(key)
           )
             return;
@@ -559,18 +799,31 @@ export function renderProperties(
             !Array.isArray(value) &&
             ['iconProperties', 'commonProperties'].includes(key)
           ) {
+            const nestedSchema = propertiesSchema?.[key]?.properties;
             return Object.entries(value)
               .map(([k, v]) => {
                 if (k === 'customProperties' || k === 'generateReference') return '';
-                return isJson === true? `${k}: ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))}` : `${k}={ ${resolveStateDefault(`${typeof v === 'object'? JSON.stringify(v) : v}`, `${v? typeof v : undefined}`, Array.isArray(v))} }`;
+                const effectiveType = pickType(nestedSchema?.[k], v);
+                const rendered = resolveStateDefault(
+                  `${typeof v === 'object' ? JSON.stringify(v) : v}`,
+                  effectiveType,
+                  Array.isArray(v),
+                );
+                return isJson === true ? `${k}: ${rendered}` : `${k}={ ${rendered} }`;
               })
               .join('\n');
           } else {
-            return isJson === true? `${key}: ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))}` : `${key}={ ${resolveStateDefault(`${typeof value === 'object'? JSON.stringify(value) : value}`, `${value? typeof value : undefined}`, Array.isArray(value))} }`;
+            const effectiveType = pickType(propertiesSchema?.[key], value);
+            const rendered = resolveStateDefault(
+              `${typeof value === 'object' ? JSON.stringify(value) : value}`,
+              effectiveType,
+              Array.isArray(value),
+            );
+            return isJson === true ? `${key}: ${rendered}` : `${key}={ ${rendered} }`;
           }
         })
         .filter((it) => it !== undefined && it !== '')
-        .join(isJson === true? ',\n' : '\n')
+        .join(isJson === true ? ',\n' : '\n')
     : ``;
 }
 
@@ -594,21 +847,24 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
           }
           if (value.formSubmit && value.type === 'formSubmit') {
             if (!value.formSubmit.targetForm) return;
-            return isJson === true
-              ? `${key}: () => ${renderCode({
-                  id: '',
-                  name: `formReferenceUsage`,
-                  properties: {
-                    formTag: value.formSubmit.targetForm,
-                  },
-                })},`
-              : `${key}={ () => ${renderCode({
-                  id: '',
-                  name: `formReferenceUsage`,
-                  properties: {
-                    formTag: value.formSubmit.targetForm,
-                  },
-                })} }`;
+            // renderCode() runs Prettier on the snippet, which appends a
+            // trailing semicolon and newline (e.g. `form1Ref.current?.submit();\n`).
+            // We splice the result into the body of an arrow function
+            // expression, so the trailing `;` + newline break the JSX:
+            //   onClick={ () => form1Ref.current?.submit();
+            //   }
+            // Trim whitespace and a single trailing semicolon so the
+            // expression slots in cleanly as a single-statement lambda body.
+            const formCode = renderCode({
+              id: '',
+              name: `formReferenceUsage`,
+              properties: {
+                formTag: value.formSubmit.targetForm,
+              },
+            })
+              .trim()
+              .replace(/;$/, '');
+            return isJson === true ? `${key}: () => ${formCode},` : `${key}={ () => ${formCode} }`;
           }
           if (value.navigate && value.type === 'navigate') {
             if (!value.navigate.path) return;
@@ -621,24 +877,35 @@ export function renderInteractions(interactions: Record<string, any>, isJson?: b
     : ``;
 }
 
-export function renderData(data: Record<string, any>, component?: Layout) {
+export function renderData(data: Record<string, any>, component?: Layout, skipKeys?: string) {
+  // `content` has always been skipped because the surrounding templates
+  // render it separately (as text children, not as a prop). `skipKeys`
+  // (comma-separated) lets a specific template exclude additional keys —
+  // used by table cells where a "primary" data key (e.g. `value`) is
+  // consumed elsewhere and shouldn't also be emitted as a JSX prop.
+  const skip = new Set<string>(['content']);
+  if (skipKeys) {
+    skipKeys
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .forEach((k) => skip.add(k));
+  }
   return data
     ? Object.entries(data)
         .map(([key, value]) => {
-          if(key === 'content') return ''
+          if (skip.has(key)) return '';
           return `${key}={ ${replaceId(value.state?.name, component) ?? value.value?.code ?? 'undefined'} }`;
         })
+        .filter((s) => s !== '')
         .join('\n')
     : ``;
 }
 
 function normalizeAnyType(t: string) {
+  if (t === undefined) return undefined;
 
-  if(t === undefined) return undefined;
-
-  if(t.includes('anyZodType'))
-    return t.replace('anyZodType', 'any')
+  if (t.includes('anyZodType')) return t.replace('anyZodType', 'any');
 
   return t;
-
 }

@@ -2,19 +2,22 @@ import fs from 'fs-extra';
 import {
   ActionConfig,
   ComponentConfig,
-  Layout,
   PageConfig,
   ProcessConfig, ProcessStepConfig,
   RenderContext,
-  WorkspaceProjectsConfig,
+  Layout,
 } from '../interfaces/types';
 import path from 'path';
 import { COMMON_FILES, DIRECTORIES, EXTENSIONS } from './constants';
 import { Component } from '../components';
 import { TABLE } from '../components/table';
 
-export const checkIfDirectoryIsEmpty = async (directoryPath: string) =>
-  (await fs.readdir(directoryPath)).length === 0;
+export const checkIfDirectoryIsEmpty = async (directoryPath: string) => {
+  if (!(await fs.pathExists(directoryPath))) {
+    return true;
+  }
+  return (await fs.readdir(directoryPath)).length === 0;
+};
 
 export const getPageDir = (context: RenderContext<PageConfig, PageConfig>) => {
   const segments = context.resourceConfig.path.split('/').filter(Boolean);
@@ -160,15 +163,6 @@ export const loadProjectConfig = async function <T>(basePath: string): Promise<T
   return await Promise.all<T>(files);
 };
 
-export const loadWorkspaceConfig = async (basePath: string) => {
-  const workspaces = await loadConfig<WorkspaceProjectsConfig>(
-    path.join(basePath, DIRECTORIES.IGRPSTUDIO),
-  );
-
-  if (workspaces.length > 0) return workspaces[0];
-  else throw Error(`Could not find any workspace configuration file on path: ${basePath}`);
-};
-
 export const loadPageConfig = async (basePath: string, id: string) => {
   const pages = await loadConfig<PageConfig>(
     path.join(basePath, DIRECTORIES.IGRPSTUDIO, DIRECTORIES.PAGES),
@@ -289,7 +283,7 @@ export function extractComponentData(
     dataType: layout.dataType,
   });
   if (layout.children) {
-    layout.children.forEach((child) => extractComponentData(child, components, registry, layout));
+    layout.children.forEach((child: Layout) => extractComponentData(child, components, registry, layout));
   }
 }
 

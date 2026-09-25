@@ -5,7 +5,7 @@ import {
   tableHiddenCellChildProperties,
   tableHiddenCellChildPropertiesMapping,
 } from './properties';
-import { Component, hbsRenderer, noRenderer } from '../../../index';
+import { Component, liquidRenderer, noRenderer } from '../../../index';
 import { replaceTemplate } from '../../../../utils/helpers';
 import { TEMPLATES } from '../../../../utils/constants';
 import { TABLE } from '../../index';

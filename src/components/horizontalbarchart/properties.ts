@@ -34,6 +34,8 @@ export function horizontalBarChartProperties() {
     showGrid: { type: 'boolean', required: false },
     showTooltip: { type: 'boolean', required: false },
     hideAxis: { type: 'boolean', required: false },
+    /** DS-only knob for horizontal-bar: opts INTO drawing the X axis (default off). Composes with `hideAxis`/`hideXAxis`. */
+    showXAxis: { type: 'boolean', required: false, default: false },
     hideXAxis: { type: 'boolean', required: false },
     hideYAxis: { type: 'boolean', required: false },
     stacked: { type: 'boolean', required: false },

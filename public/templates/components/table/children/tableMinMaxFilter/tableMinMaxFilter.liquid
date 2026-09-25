@@ -1,0 +1,17 @@
+<IGRPDataTableFilterMinMax
+  column={column}
+  {% if resourceConfig.properties.placeholder -%}
+  placeholder={ `{{ resourceConfig.properties.placeholder }}` }
+  {% endif -%}
+  {% if resourceConfig.interactions -%}
+  {{ '' | render-interactions: resourceConfig.interactions }}
+  {% endif -%}
+  {% if resourceConfig.data -%}
+  {{ '' | render-data: resourceConfig.data, resourceConfig }}
+  {% endif -%}
+    {% assign componentClassName = resourceConfig.properties.className -%}
+  {% assign parentChildClassNames = parentResourceConfig | addClassNameFromChildProperties: registry -%}
+  {% if componentClassName or parentChildClassNames or resourceConfig.style -%}
+  className={ cn({% if componentClassName -%}'{{ componentClassName }}',{% endif -%}{{ parentChildClassNames }}{{ resourceConfig | addClassNameFromProperties: registry }}{{ resourceConfig.style | addClassNameFromStyle }}) }
+  {% endif -%}
+/>

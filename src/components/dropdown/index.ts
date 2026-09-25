@@ -5,7 +5,7 @@ import {
   dropdownChildProperties,
   dropdownChildPropertiesMapping, dropdownRules, dropdownStyle, dropdownData,
 } from './properties';
-import { Component, hbsRenderer } from '../index';
+import { Component, liquidRenderer } from '../index';
 import { DROPDOWN_ITEM } from './children/dropdownItem';
 
 export default {
@@ -32,7 +32,7 @@ export default {
 
     component.getStyle(dropdownStyle())
 
-    component.setRenderer(hbsRenderer);
+    component.setRenderer(liquidRenderer);
   },
 };
 
