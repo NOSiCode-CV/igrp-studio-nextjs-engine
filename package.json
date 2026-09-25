@@ -12,7 +12,9 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage --runInBand",
     "build": "env-cmd -f .env.production tsc && vite build",
     "deploy": "npm publish --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",
+    "deploy:local": "npm publish --userconfig=.npmrc.local --registry=https://sonatype.nosi.cv/repository/igrp/ --tag latest",
     "release": "npm run build && npm run deploy",
+    "release:local": "npm run build && npm run deploy:local",
     "start": "tsc && vite"
   },
   "repository": {
