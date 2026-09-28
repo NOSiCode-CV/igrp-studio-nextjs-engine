@@ -16,6 +16,7 @@ export function inputColorProperties() {
     error: { type: 'string', required: false },
     defaultValue: { type: 'string', required: false, default: '#000000' },
     helperText: { type: 'string', required: false, default: '' },
+    invalidValueMessage: { type: 'string', required: false },
     format: { type: 'string', required: false, default: 'hex', enum: ['hex', 'rgb', 'hsl'] },
     defaultFormat: { type: 'string', required: false, default: 'hex', enum: ['hex', 'rgb', 'hsl'] },
     showFormatValue: { type: 'boolean', required: false, default: true },
