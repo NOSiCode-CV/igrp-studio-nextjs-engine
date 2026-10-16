@@ -22,7 +22,7 @@ export function avatarProperties() {
       }
     },
     src: { type: 'string', required: false, 'x-meta': { label: 'Source'}  },
-    size: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'] },
+    scale: { type: 'string', required: false, default: 'md', enum: ['sm', 'md', 'lg', 'xl'], 'x-meta': { label: 'Scale' } },
     alt: { type: 'string', required: false, 'x-meta': { label: 'Alternative'}  },
     fallback: { type: 'string', required: false },
     hasStatus: { type: 'boolean', required: false },

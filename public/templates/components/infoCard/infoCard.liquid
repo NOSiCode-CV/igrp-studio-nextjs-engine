@@ -15,6 +15,9 @@
   {% if resourceConfig.properties.titleClassName and not resourceConfig.data.titleClassName -%}
   titleClassName={ `{{ resourceConfig.properties.titleClassName }}` }
   {% endif -%}
+  {% if resourceConfig.properties.columns and not resourceConfig.data.columns -%}
+  columns={ {{ resourceConfig.properties.columns }} }
+  {% endif -%}
   {% if resourceConfig.properties.title and not resourceConfig.data.title -%}
   title={ `{{ resourceConfig.properties.title }}` }
   {% endif -%}

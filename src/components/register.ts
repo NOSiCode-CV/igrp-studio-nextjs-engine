@@ -62,6 +62,7 @@ import inputUrlModule, { INPUT_URL } from './inputUrl';
 import labelModule, { LABEL } from './label';
 import lineChartModule, { LINECHART } from './linechart';
 import menuNavigationModule, { MENU_NAVIGATION } from './menuNavigation/index';
+import multiSelectModule, { MULTI_SELECT } from './multiSelect';
 import menuNavigationItemModule, { MENU_NAVIGATION_ITEM } from './menuNavigation/children/menuNavigationItem/index';
 import modalDialogModule, { MODAL_DIALOG } from './modalDialog/index';
 import modalDialogContentModule, { MODAL_DIALOG_CONTENT } from './modalDialog/children/modalDialogContent/index';
@@ -250,6 +251,7 @@ export function registerAllComponents() {
   register(LABEL, labelModule.register);
   register(LINECHART, lineChartModule.register);
   register(MENU_NAVIGATION, menuNavigationModule.register);
+  register(MULTI_SELECT, multiSelectModule.register);
   register(MENU_NAVIGATION_ITEM, menuNavigationItemModule.register);
   register(MODAL_DIALOG, modalDialogModule.register);
   register(MODAL_DIALOG_CONTENT, modalDialogContentModule.register);

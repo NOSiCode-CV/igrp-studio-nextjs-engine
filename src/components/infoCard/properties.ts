@@ -18,6 +18,7 @@ export function infoCardProperties() {
     contentClassName: { type: 'string', required: false },
 
     ...classProperties(),
+    columns: { type: 'number', required: false, default: 1, enum: [1, 2, 3] },
     ...commonProperties()
   };
 }
