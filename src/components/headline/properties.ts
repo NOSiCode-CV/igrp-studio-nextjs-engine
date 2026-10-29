@@ -12,8 +12,6 @@ export function headlineProperties() {
     title: { type: 'string', required: true, default: 'Page Title' },
     description: { type: 'string', required: false, default: 'Page Description' },
     variant: { type: 'string', required: false, enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], default: 'h3' },
-    roleColor: { type: 'string', required: false, default: 'solid', enum: ['solid', 'outline', 'soft'] },
-    color: { type: 'string', required: true, default: 'primary', enum: ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'indigo' ] },
     /** DS beta.140+ — CSS classes for the headline content wrapper (title + description). */
     headlineContentClassName: { type: 'string', required: false },
     ...iconProperties(),

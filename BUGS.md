@@ -19,6 +19,7 @@ Keep entries short. The point is the pattern, not a novel.
 | # | Date | Reporter | What was wrong | Where | Root cause | Fix commit | Lesson |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 2026-04-27 | audit (`malformed-liquid-conditional` rule) | Liquid `{% if %}` tag lost both its operand and string literal: `{% if x and == -%}` would throw `ParseError` at render time | `public/templates/components/form/types/type.liquid` lines 4 and 12 | Template authoring slip during refactor — two `if` conditions had their right-hand operand and the comparison literal dropped, leaving `and ==` with nothing to compare | `2e8383e` on `origin/dev-package` | Liquid syntax isn't validated by `tsc` or `npm run build` — only caught after we added a red-flag rule that scans source templates. CI needs a render-time or syntax-check step on `.liquid` files before merge |
+| 2 | 2026-10-29 | Studio user | Headline offered deprecated color settings and generated `roleColor` on a DOM element, triggering a React warning | `src/components/headline`, `src/modules/converters/jsonSchemaToForm.ts`; design-system `typography/headline.tsx` | Engine metadata retained ignored DS props and the DS forwarded them to its wrapper | Pending | Remove deprecated authoring fields, filter saved props during regeneration, and consume deprecated runtime props without forwarding them |
 
 ## Patterns I'm watching for
 
