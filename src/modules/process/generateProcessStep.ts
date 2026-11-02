@@ -1,3 +1,4 @@
+import { withDerivedFormSchemas } from '../../helpers/deriveFormSchemas';
 import { getProcessStepDir, replaceTemplate } from '../../utils/helpers';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
@@ -26,6 +27,6 @@ export const generateProcessStep = async (context: RenderContext<ProcessStepConf
 const renderProcess = async (context: RenderContext<ProcessStepConfig, ProcessStepConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_PROCESS_STEP_CONFIG;
 
-  return await renderTemplate(TEMPLATES.COMPONENT, context );
+  return await renderTemplate(TEMPLATES.COMPONENT, { ...context, resourceConfig: withDerivedFormSchemas(context.resourceConfig) });
 
 };

@@ -1,3 +1,4 @@
+import { withDerivedFormSchemas } from '../../helpers/deriveFormSchemas';
 import { getComponentDir } from '../../utils/helpers';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
@@ -23,5 +24,5 @@ export const generateComponent = async (context: RenderContext<ComponentConfig, 
 const renderComponent = async (context: RenderContext<ComponentConfig, ComponentConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_COMPONENT_CONFIG;
 
-  return await renderTemplate(TEMPLATES.COMPONENT, context);
+  return await renderTemplate(TEMPLATES.COMPONENT, { ...context, resourceConfig: withDerivedFormSchemas(context.resourceConfig) });
 };

@@ -13,6 +13,7 @@ export function radioGroupProperties() {
   return {
     value: { type: 'string', required: false },
     label: { type: 'string', required: false },
+    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true }, color: { type: 'string', required: false } }, 'x-ui-widget': 'list' },
     dir: { type: 'string', required: false, enum: ['ltr', 'rtl'], default: 'ltr' },
     orientation: { type: 'string', required: false, enum: ['horizontal', 'vertical'], default: 'vertical' },
     helperText: { type: 'string', required: false, default: '' },

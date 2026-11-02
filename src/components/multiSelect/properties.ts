@@ -12,6 +12,7 @@ export function multiSelectProperties() {
   return {
     label: { type: 'string', required: false, default: 'Multi Select' },
     name: { type: 'string', required: false },
+    options: { type: 'array', items: { value: { type: 'string', required: true }, label: { type: 'string', required: true }, color: { type: 'string', required: false } }, 'x-ui-widget': 'list' },
     placeholder: { type: 'string', required: false, default: 'Select…' },
     helperText: { type: 'string', required: false },
     errorText: { type: 'string', required: false },

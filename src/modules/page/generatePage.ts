@@ -1,3 +1,4 @@
+import { withDerivedFormSchemas } from '../../helpers/deriveFormSchemas';
 import { getPageDir, loadConfig, loadPageConfig, loadPagesConfig } from '../../utils/helpers';
 import { saveToFile } from '../common/saveToFile';
 import { renderTemplate } from '../common/renderTemplate';
@@ -42,7 +43,7 @@ export const generatePage = async (context: RenderContext<PageConfig, PageConfig
 const renderPage = async (context: RenderContext<PageConfig, PageConfig>) => {
   if (!context.resourceConfig) throw ERROR_MESSAGE.INVALID_PAGE_CONFIG;
 
-  return await renderTemplate(TEMPLATES.PAGE, context);
+  return await renderTemplate(TEMPLATES.PAGE, { ...context, resourceConfig: withDerivedFormSchemas(context.resourceConfig) });
 };
 
 export function isLayout(obj: any): obj is Layout {

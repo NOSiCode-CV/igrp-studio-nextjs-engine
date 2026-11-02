@@ -48,7 +48,8 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             }
 
             if(imp.required) {
-              stateDefinitions.add(renderState(imp.state, component));
+              const state = /Options$/.test(imp.state.name) ? withStaticOptions(imp.state, component) : imp.state;
+              stateDefinitions.add(renderState(state, component));
             }
           }
         );
@@ -100,7 +101,7 @@ export function resolveStates(config: Layout, registry: Record<string, Component
   // Define Table states
   if(dataConfigs) {
     dataConfigs.forEach((c) => {
-      Object.entries(c.data!).forEach(([_, value]) => {
+      Object.entries(c.data!).forEach(([key, value]) => {
 
         if(value.state?.generate) {
           const defaultValue = isBool(c.componentName)
@@ -124,7 +125,8 @@ export function resolveStates(config: Layout, registry: Record<string, Component
             value.state.type = 'any'
           }
 
-          stateDefinitions.add(renderState(value.state, c));
+          const state = key === 'options' ? withStaticOptions(value.state, c) : value.state;
+          stateDefinitions.add(renderState(state, c));
         }
 
       })
@@ -133,6 +135,39 @@ export function resolveStates(config: Layout, registry: Record<string, Component
 
   return Array.from(stateDefinitions).join('\n  ');
 }
+
+const OPTION_KEYS = ['label', 'value', 'color', 'status', 'icon', 'group', 'description', 'image', 'flag', 'disabled', 'badge'];
+
+const isEmptyArrayDefault = (value: unknown): boolean =>
+  value === undefined || value === null || String(value).replace(/\s/g, '') === '' || String(value).replace(/\s/g, '') === '[]';
+
+/**
+ * Static options typed in the Properties panel (`properties.options`) become
+ * the initial value of the generated options state. Only applies while the
+ * state default is still the empty `[]` placeholder, so an explicit default
+ * or a bound data source is never overridden. Keys are whitelisted to
+ * `IGRPOptionsProps` because TS excess-property checks reject unknown keys in
+ * the `useState<IGRPOptionsProps[]>(…)` literal.
+ */
+const withStaticOptions = (state: State, component: { properties?: Record<string, any> }): State => {
+  const options = component.properties?.options;
+  if (!Array.isArray(options) || options.length === 0 || !isEmptyArrayDefault(state.defaultValue)) return state;
+
+  const literal = options
+    .filter((o) => o && o.value !== undefined && o.value !== null && o.value !== '')
+    .map((o) => {
+      const clean: Record<string, unknown> = {};
+      OPTION_KEYS.forEach((k) => {
+        if (o[k] === undefined || o[k] === null || o[k] === '') return;
+        clean[k] = k === 'label' || k === 'value' ? String(o[k]) : o[k];
+      });
+      if (clean.label === undefined) clean.label = clean.value;
+      return clean;
+    });
+
+  if (literal.length === 0) return state;
+  return { ...state, defaultValue: JSON.stringify(literal) };
+};
 
 const isBool = (name: string) => {
   return name === 'button'
