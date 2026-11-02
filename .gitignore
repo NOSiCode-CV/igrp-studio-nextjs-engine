@@ -17,7 +17,8 @@ bower_components/
 
 # Environment variables
 .env
-.npmrc
+
+# Publish credentials live here (registry + auth); the committed .npmrc has registry only.
 .npmrc.local
 
 # Build directories

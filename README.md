@@ -14,10 +14,24 @@ npm install @igrp/igrp-studio-nextjs-engine:latest
 
 ## Publishing
 
-```bash
-npm run build
-npm run deploy
+The committed `.npmrc` only points the `@igrp` scope at the iGRP Sonatype
+registry — it holds no credentials. Publishing auth lives in `.npmrc.local`,
+which is gitignored. Create it once:
+
+```ini
+@igrp:registry=https://sonatype.nosi.cv/repository/igrp/
+//sonatype.nosi.cv/repository/igrp/:username=<your-sonatype-user>
+//sonatype.nosi.cv/repository/igrp/:_password=<base64-of-your-sonatype-password>
 ```
+
+Then build and publish:
+
+```bash
+npm run release
+```
+
+CI uses `npm run deploy` instead: the pipeline writes the credentials to
+`$HOME/.npmrc` from the `SONATYPE_USERNAME` / `SONATYPE_PASSWORD` variables.
 
 ## Project Structure
 
